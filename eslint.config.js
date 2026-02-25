@@ -41,6 +41,7 @@ export default [
         FileReader: 'readonly',
         HTMLInputElement: 'readonly',
         HTMLElement: 'readonly',
+        HTMLCanvasElement: 'readonly',
         KeyboardEvent: 'readonly',
         Event: 'readonly',
       },

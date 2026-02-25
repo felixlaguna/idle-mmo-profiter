@@ -2,6 +2,9 @@
 import { ref, computed } from 'vue'
 import type { PotionProfitResult } from '../calculators/potionCalculator'
 import EditableValue from './EditableValue.vue'
+import { useHeatmap } from '../composables/useHeatmap'
+
+const { getHeatmapStyle } = useHeatmap()
 
 const props = defineProps<{
   potions: PotionProfitResult[]
@@ -115,6 +118,22 @@ const getSortIcon = (key: SortKey): string => {
   return sortOrder.value === 'asc' ? '↑' : '↓'
 }
 
+// Calculate profit range for heatmap
+const profitRange = computed(() => {
+  const profits = props.potions.map(p => p.profit)
+  const profitHours = props.potions.map(p => p.profitPerHour)
+  return {
+    profit: {
+      min: Math.min(...profits),
+      max: Math.max(...profits),
+    },
+    profitPerHour: {
+      min: Math.min(...profitHours),
+      max: Math.max(...profitHours),
+    }
+  }
+})
+
 // Calculate total material cost
 const getMaterialCost = (potion: PotionProfitResult): number => {
   return potion.totalCost - potion.vialCost
@@ -195,10 +214,16 @@ const handleMarketPriceUpdate = (potionName: string, value: number) => {
                   @update:model-value="(value) => handleMarketPriceUpdate(potion.name, value)"
                 />
               </td>
-              <td class="text-right" :class="{ profit: potion.profit > 0, loss: potion.profit < 0 }">
+              <td
+                class="text-right"
+                :style="getHeatmapStyle(potion.profit, profitRange.profit.min, profitRange.profit.max)"
+              >
                 {{ formatNumber(potion.profit) }}
               </td>
-              <td class="text-right profit-hr" :class="{ profit: potion.profitPerHour > 0, loss: potion.profitPerHour < 0 }">
+              <td
+                class="text-right profit-hr"
+                :style="getHeatmapStyle(potion.profitPerHour, profitRange.profitPerHour.min, profitRange.profitPerHour.max)"
+              >
                 {{ formatNumber(potion.profitPerHour) }}
               </td>
             </tr>

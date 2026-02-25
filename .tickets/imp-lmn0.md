@@ -1,6 +1,6 @@
 ---
 id: imp-lmn0
-status: open
+status: closed
 deps: [imp-o111]
 links: []
 created: 2026-02-25T18:34:24Z
@@ -24,3 +24,9 @@ Create src/charts/dungeonChart.ts:
 
 Dungeon comparison chart renders correctly for all 18 dungeons
 
+
+## Notes
+
+**2026-02-25T19:22:10Z**
+
+DungeonChart component created with gradient coloring from low to high profit. Added detailed tooltips showing time, cost, and profit metrics. Integrated into Charts tab. Build successful.

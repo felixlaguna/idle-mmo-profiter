@@ -1,6 +1,6 @@
 ---
 id: imp-vj8g
-status: open
+status: closed
 deps: [imp-5r5u]
 links: []
 created: 2026-02-25T18:31:20Z
@@ -27,3 +27,40 @@ Charts should:
 - Have tooltips showing exact values
 - Be exportable as images (nice to have)
 
+
+## Notes
+
+**2026-02-25T19:26:56Z**
+
+Epic 6 complete: Charts & Visualizations fully implemented.
+
+Files created:
+- src/components/charts/ProfitBarChart.vue - Horizontal bar chart showing profit/hr comparison for all activities (top 15 with option to show all)
+- src/components/charts/DungeonChart.vue - Horizontal bar chart for dungeon profits with gradient coloring
+- src/components/charts/RevenueBreakdown.vue - Doughnut chart showing revenue breakdown by category (dungeons, potions, resources)
+- src/components/charts/PriceHistoryChart.vue - Line chart placeholder for future price history API integration
+- src/composables/useHeatmap.ts - Utility composable for heatmap color calculations
+
+Files modified:
+- src/App.vue - Added Charts tab with chart components in responsive grid layout
+- src/components/ProfitRankingTable.vue - Added heatmap coloring to profit cells
+- src/components/DungeonTable.vue - Added heatmap coloring to profit cells
+- src/components/PotionTable.vue - Added heatmap coloring to profit cells
+- src/components/ResourceTable.vue - Added heatmap coloring to profit cells
+- eslint.config.js - Added HTMLCanvasElement to globals
+
+Charts features:
+- All charts use dark theme matching project colors
+- Responsive design with proper mobile support
+- Interactive tooltips with detailed information
+- Reactive updates when data changes
+- Color-coded by activity type (purple=dungeons, green=potions, blue=resources)
+
+Heatmap features:
+- Red for negative profits
+- Yellow for low/break-even profits
+- Light to deep green gradient for positive profits
+- Applied to all profit columns in all tables
+
+Build status: SUCCESS
+Lint status: PASSED

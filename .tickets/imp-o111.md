@@ -1,6 +1,6 @@
 ---
 id: imp-o111
-status: open
+status: closed
 deps: []
 links: []
 created: 2026-02-25T18:34:24Z
@@ -28,3 +28,13 @@ Create src/charts/profitChart.ts:
 
 Bar chart renders with correct data, dark theme, responsive
 
+
+## Notes
+
+**2026-02-25T19:19:19Z**
+
+Installed chart.js and vue-chartjs packages. Starting implementation of ProfitBarChart component.
+
+**2026-02-25T19:20:58Z**
+
+ProfitBarChart component created and integrated into App.vue. Added Charts tab with horizontal bar chart showing profit/hr comparison. Chart uses Chart.js with dark theme colors matching project style. Build successful.

@@ -2,6 +2,9 @@
 import { ref, computed } from 'vue'
 import type { DungeonProfitResult } from '../calculators/dungeonCalculator'
 import EditableValue from './EditableValue.vue'
+import { useHeatmap } from '../composables/useHeatmap'
+
+const { getHeatmapStyle } = useHeatmap()
 
 const props = defineProps<{
   dungeons: DungeonProfitResult[]
@@ -128,6 +131,22 @@ const handleRunCostUpdate = (dungeonName: string, value: number) => {
 const handleTimeUpdate = (dungeonName: string, value: number) => {
   emit('update:timeSeconds', dungeonName, value)
 }
+
+// Calculate profit range for heatmap
+const profitRange = computed(() => {
+  const profitHours = props.dungeons.map(d => d.profitPerHour)
+  const totalProfits = props.dungeons.map(d => d.totalProfit)
+  return {
+    profitPerHour: {
+      min: Math.min(...profitHours),
+      max: Math.max(...profitHours),
+    },
+    totalProfit: {
+      min: Math.min(...totalProfits),
+      max: Math.max(...totalProfits),
+    }
+  }
+})
 </script>
 
 <template>
@@ -188,10 +207,16 @@ const handleTimeUpdate = (dungeonName: string, value: number) => {
                 />
               </td>
               <td class="text-right">{{ formatNumber(getTotalExpectedValue(dungeon)) }}</td>
-              <td class="text-right" :class="{ profit: dungeon.totalProfit > 0, loss: dungeon.totalProfit < 0 }">
+              <td
+                class="text-right"
+                :style="getHeatmapStyle(dungeon.totalProfit, profitRange.totalProfit.min, profitRange.totalProfit.max)"
+              >
                 {{ formatNumber(dungeon.totalProfit) }}
               </td>
-              <td class="text-right profit-hr" :class="{ profit: dungeon.profitPerHour > 0, loss: dungeon.profitPerHour < 0 }">
+              <td
+                class="text-right profit-hr"
+                :style="getHeatmapStyle(dungeon.profitPerHour, profitRange.profitPerHour.min, profitRange.profitPerHour.max)"
+              >
                 {{ formatNumber(dungeon.profitPerHour) }}
               </td>
             </tr>

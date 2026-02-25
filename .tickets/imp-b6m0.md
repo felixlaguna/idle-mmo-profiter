@@ -1,6 +1,6 @@
 ---
 id: imp-b6m0
-status: open
+status: closed
 deps: [imp-o111]
 links: []
 created: 2026-02-25T18:34:24Z
@@ -25,3 +25,9 @@ Create src/charts/heatmap.ts:
 
 All profit columns have heatmap coloring, visually clear gradient from bad to good
 
+
+## Notes
+
+**2026-02-25T19:26:45Z**
+
+Created useHeatmap composable with functions to calculate heatmap colors based on profit values. Applied heatmap styling to all table components (ProfitRankingTable, DungeonTable, PotionTable, ResourceTable). Colors range from red (negative) to yellow (low) to light/medium/deep green (high profit). Updated ESLint config to include HTMLCanvasElement. All tests passing, build and lint successful.

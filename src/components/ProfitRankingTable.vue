@@ -2,6 +2,9 @@
 import { ref, computed } from 'vue'
 import type { RankedActivity } from '../calculators/profitRanker'
 import type { ActivityType } from '../types'
+import { useHeatmap } from '../composables/useHeatmap'
+
+const { getHeatmapStyle } = useHeatmap()
 
 const props = defineProps<{
   activities: RankedActivity[]
@@ -125,6 +128,15 @@ const getSortIcon = (key: SortKey): string => {
   if (sortKey.value !== key) return '↕'
   return sortOrder.value === 'asc' ? '↑' : '↓'
 }
+
+// Calculate min/max profit for heatmap
+const profitRange = computed(() => {
+  const profits = filteredAndSortedActivities.value.map(a => a.profitPerHour)
+  return {
+    min: Math.min(...profits),
+    max: Math.max(...profits),
+  }
+})
 </script>
 
 <template>
@@ -198,7 +210,10 @@ const getSortIcon = (key: SortKey): string => {
                 {{ activity.activityType }}
               </span>
             </td>
-            <td class="text-right profit-cell">
+            <td
+              class="text-right profit-cell"
+              :style="getHeatmapStyle(activity.profitPerHour, profitRange.min, profitRange.max)"
+            >
               {{ formatNumber(activity.profitPerHour) }}
             </td>
             <td class="text-right">{{ formatNumber(activity.profitPerAction) }}</td>

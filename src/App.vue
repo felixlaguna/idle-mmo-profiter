@@ -11,10 +11,14 @@ import ProfitRankingTable from './components/ProfitRankingTable.vue'
 import DungeonTable from './components/DungeonTable.vue'
 import PotionTable from './components/PotionTable.vue'
 import ResourceTable from './components/ResourceTable.vue'
+import ProfitBarChart from './components/charts/ProfitBarChart.vue'
+import DungeonChart from './components/charts/DungeonChart.vue'
+import RevenueBreakdown from './components/charts/RevenueBreakdown.vue'
+import PriceHistoryChart from './components/charts/PriceHistoryChart.vue'
 import type { MagicFindSettings } from './types'
 
 // Current tab state
-type Tab = 'all' | 'dungeons' | 'potions' | 'resources'
+type Tab = 'all' | 'dungeons' | 'potions' | 'resources' | 'charts'
 const currentTab = ref<Tab>('all')
 
 // Settings modal state
@@ -208,6 +212,13 @@ const getTypeBadgeClass = (type: string): string => {
           >
             Resources
           </button>
+          <button
+            class="tab-button"
+            :class="{ active: currentTab === 'charts' }"
+            @click="currentTab = 'charts'"
+          >
+            Charts
+          </button>
         </nav>
 
         <!-- Tab Content -->
@@ -223,6 +234,14 @@ const getTypeBadgeClass = (type: string): string => {
           </div>
           <div v-if="currentTab === 'resources'">
             <ResourceTable :resources="resourceProfits" />
+          </div>
+          <div v-if="currentTab === 'charts'" class="charts-section">
+            <ProfitBarChart :activities="rankedActivities" />
+            <div class="charts-grid">
+              <DungeonChart :dungeons="dungeonProfits" />
+              <RevenueBreakdown :activities="rankedActivities" />
+            </div>
+            <PriceHistoryChart />
           </div>
         </div>
       </div>
@@ -544,6 +563,25 @@ const getTypeBadgeClass = (type: string): string => {
   background-color: var(--bg-tertiary);
   color: var(--text-primary);
   border-color: var(--danger);
+}
+
+/* Charts Section */
+.charts-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Responsive Design */

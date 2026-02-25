@@ -2,6 +2,9 @@
 import { ref, computed } from 'vue'
 import type { ResourceProfitResult } from '../calculators/resourceCalculator'
 import EditableValue from './EditableValue.vue'
+import { useHeatmap } from '../composables/useHeatmap'
+
+const { getHeatmapStyle } = useHeatmap()
 
 const props = defineProps<{
   resources: ResourceProfitResult[]
@@ -99,6 +102,27 @@ const getSortIcon = (key: SortKey): string => {
   return sortOrder.value === 'asc' ? '↑' : '↓'
 }
 
+// Calculate profit range for heatmap
+const profitRange = computed(() => {
+  const profitHours = props.resources.map(r => r.bestProfitPerHour)
+  const vendorProfits = props.resources.map(r => r.vendorProfit)
+  const marketProfits = props.resources.map(r => r.marketProfit)
+  return {
+    profitPerHour: {
+      min: Math.min(...profitHours),
+      max: Math.max(...profitHours),
+    },
+    vendorProfit: {
+      min: Math.min(...vendorProfits),
+      max: Math.max(...vendorProfits),
+    },
+    marketProfit: {
+      min: Math.min(...marketProfits),
+      max: Math.max(...marketProfits),
+    }
+  }
+})
+
 // Handle inline editing
 const handleCostUpdate = (resourceName: string, value: number) => {
   emit('update:cost', resourceName, value)
@@ -189,7 +213,10 @@ const handleMarketPriceUpdate = (resourceName: string, value: number) => {
                 {{ resource.bestMethod === 'vendor' ? 'Vendor' : 'Market' }}
               </span>
             </td>
-            <td class="text-right profit-hr" :class="{ profit: resource.bestProfitPerHour > 0, loss: resource.bestProfitPerHour < 0 }">
+            <td
+              class="text-right profit-hr"
+              :style="getHeatmapStyle(resource.bestProfitPerHour, profitRange.profitPerHour.min, profitRange.profitPerHour.max)"
+            >
               {{ formatNumber(resource.bestProfitPerHour) }}
             </td>
           </tr>

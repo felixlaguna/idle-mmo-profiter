@@ -1,6 +1,6 @@
 ---
 id: imp-4jzm
-status: open
+status: closed
 deps: [imp-o111]
 links: []
 created: 2026-02-25T18:34:24Z
@@ -30,3 +30,9 @@ Create two additional charts:
 
 Pie chart renders with correct proportions, line chart works with mock/real data
 
+
+## Notes
+
+**2026-02-25T19:23:55Z**
+
+Created RevenueBreakdown and PriceHistoryChart components. RevenueBreakdown shows doughnut chart with profit distribution by category (dungeons, potions, resources). PriceHistoryChart shows placeholder for future API integration with line chart. Both integrated into Charts tab with responsive grid layout. Build successful.
