@@ -54,12 +54,26 @@ export interface PotionCraft {
   currentPrice: number
 }
 
+export interface ResourceInput {
+  /** Resource name from the Market tab */
+  resourceName: string
+  /** Quantity of this resource needed */
+  quantity: number
+  /** If true, use market price; if false, use gathering cost */
+  useMarketPrice: boolean
+}
+
 export interface ResourceGather {
   name: string
   timeSeconds: number
-  cost: number
+  /** Base gathering cost (e.g., fishing rod, pickaxe wear) */
+  baseCost: number
+  /** Input resources required (e.g., Coal for cooking) */
+  inputs?: ResourceInput[]
   vendorValue: number
   marketPrice: number
+  /** Computed cost (baseCost + sum of input costs) - calculated dynamically */
+  cost?: number
 }
 
 // Settings and configuration

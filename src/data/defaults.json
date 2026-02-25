@@ -3880,84 +3880,141 @@
     {
       "name": "Coal",
       "timeSeconds": 8.3,
-      "cost": 0,
+      "baseCost": 0,
       "vendorValue": 1,
       "marketPrice": 6
     },
     {
       "name": "Stingray",
       "timeSeconds": 28.6,
-      "cost": 16,
+      "baseCost": 16,
       "vendorValue": 26,
       "marketPrice": 38
     },
     {
       "name": "Cooked Stingray",
       "timeSeconds": 33.3,
-      "cost": 44,
+      "baseCost": 0,
+      "inputs": [
+        {
+          "resourceName": "Stingray",
+          "quantity": 1,
+          "useMarketPrice": true
+        },
+        {
+          "resourceName": "Coal",
+          "quantity": 1,
+          "useMarketPrice": true
+        }
+      ],
       "vendorValue": 65,
       "marketPrice": 67
     },
     {
       "name": "Cooked Stingray full",
       "timeSeconds": 61.9,
-      "cost": 22,
+      "baseCost": 16,
+      "inputs": [
+        {
+          "resourceName": "Coal",
+          "quantity": 1,
+          "useMarketPrice": true
+        }
+      ],
       "vendorValue": 65,
       "marketPrice": 67
     },
     {
       "name": "White shark",
       "timeSeconds": 32.1,
-      "cost": 25,
+      "baseCost": 25,
       "vendorValue": 41,
       "marketPrice": 56
     },
     {
       "name": "Cooked White Shark",
       "timeSeconds": 45.8,
-      "cost": 62,
+      "baseCost": 0,
+      "inputs": [
+        {
+          "resourceName": "White shark",
+          "quantity": 1,
+          "useMarketPrice": true
+        },
+        {
+          "resourceName": "Coal",
+          "quantity": 1,
+          "useMarketPrice": true
+        }
+      ],
       "vendorValue": 92,
       "marketPrice": 105
     },
     {
       "name": "Cooked White Shark full",
       "timeSeconds": 77.9,
-      "cost": 31,
+      "baseCost": 25,
+      "inputs": [
+        {
+          "resourceName": "Coal",
+          "quantity": 1,
+          "useMarketPrice": true
+        }
+      ],
       "vendorValue": 92,
       "marketPrice": 105
     },
     {
       "name": "Cooked White Shark full + coal",
       "timeSeconds": 86.2,
-      "cost": 25,
+      "baseCost": 25,
       "vendorValue": 92,
       "marketPrice": 105
     },
     {
       "name": "Mystic Ore",
       "timeSeconds": 37.9,
-      "cost": 0,
+      "baseCost": 0,
       "vendorValue": 20,
       "marketPrice": 24
     },
     {
       "name": "Mystic Bar",
       "timeSeconds": 50,
-      "cost": 30,
+      "baseCost": 0,
+      "inputs": [
+        {
+          "resourceName": "Mystic Ore",
+          "quantity": 1,
+          "useMarketPrice": true
+        },
+        {
+          "resourceName": "Coal",
+          "quantity": 1,
+          "useMarketPrice": true
+        }
+      ],
       "vendorValue": 59,
       "marketPrice": 67
     },
     {
       "name": "Mystic Bar full",
       "timeSeconds": 87.9,
-      "cost": 6,
+      "baseCost": 0,
+      "inputs": [
+        {
+          "resourceName": "Coal",
+          "quantity": 1,
+          "useMarketPrice": true
+        }
+      ],
       "vendorValue": 59,
       "marketPrice": 67
     },
     {
       "name": "Mystic Bar full + coal",
       "timeSeconds": 96.2,
-      "cost": 0,
+      "baseCost": 0,
       "vendorValue": 59,
       "marketPrice": 67
     }

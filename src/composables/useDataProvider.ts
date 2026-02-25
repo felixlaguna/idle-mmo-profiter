@@ -181,18 +181,55 @@ function createDataProvider() {
   })
 
   /**
-   * ResourceGathering with market prices updated from overrides
+   * ResourceGathering with market prices and costs updated from overrides
    * This ensures that when a user edits a resource price in the Market tab,
-   * it flows through to the resource gathering calculations
+   * it flows through to the resource gathering calculations.
+   *
+   * Cost is computed as: baseCost + sum of input costs
+   * where input cost = quantity * (useMarketPrice ? marketPrice : baseCost)
    */
   const resourceGathering = computed(() => {
+    // First pass: create a map to store all resources
+    const resourceMap = new Map<string, typeof defaults.value.resourceGathering[0]>()
+    defaults.value.resourceGathering.forEach((gather) => {
+      resourceMap.set(gather.name, gather)
+    })
+
+    // Second pass: compute costs with resolved dependencies
     return defaults.value.resourceGathering.map((gather) => {
       // Update market price from resource price overrides
       const updatedPrice = resourcePriceMap.value.get(gather.name) ?? gather.marketPrice
 
+      // Compute cost dynamically from inputs
+      let computedCost = gather.baseCost
+
+      if (gather.inputs && gather.inputs.length > 0) {
+        for (const input of gather.inputs) {
+          const inputResource = resourceMap.get(input.resourceName)
+
+          if (!inputResource) {
+            console.warn(`Resource input not found: ${input.resourceName}`)
+            continue
+          }
+
+          // Get the input price (either market price or base cost)
+          let inputPrice: number
+          if (input.useMarketPrice) {
+            // Use market price from overrides or default
+            inputPrice = resourcePriceMap.value.get(input.resourceName) ?? inputResource.marketPrice
+          } else {
+            // Use base cost (for nested resources)
+            inputPrice = inputResource.baseCost
+          }
+
+          computedCost += input.quantity * inputPrice
+        }
+      }
+
       return {
         ...gather,
         marketPrice: updatedPrice,
+        cost: computedCost,
       }
     })
   })

@@ -35,13 +35,16 @@ export function calculateResourceProfits(
   taxRate: number
 ): ResourceProfitResult[] {
   const results: ResourceProfitResult[] = resources.map(resource => {
+    // Get cost (should always be computed by data provider, but fallback to baseCost)
+    const cost = resource.cost ?? resource.baseCost
+
     // Vendor profit
-    const vendorProfit = resource.vendorValue - resource.cost
+    const vendorProfit = resource.vendorValue - cost
     const vendorProfitPerHour = vendorProfit / (resource.timeSeconds / 3600)
 
     // Market profit (after tax)
     const marketAfterTax = resource.marketPrice * (1 - taxRate)
-    const marketProfit = marketAfterTax - resource.cost
+    const marketProfit = marketAfterTax - cost
     const marketProfitPerHour = marketProfit / (resource.timeSeconds / 3600)
 
     // Determine best method
@@ -52,7 +55,7 @@ export function calculateResourceProfits(
     return {
       name: resource.name,
       timeSeconds: resource.timeSeconds,
-      cost: resource.cost,
+      cost,
       vendorValue: resource.vendorValue,
       marketPrice: resource.marketPrice,
       vendorProfit,
