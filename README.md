@@ -22,9 +22,37 @@ A comprehensive profit calculator for IdleMMO that helps players optimize their 
 
 ### Prerequisites
 
-- Node.js 18+ and npm
+- **Node.js 18+ and npm** (for local development)
+- **Docker and Docker Compose** (for containerized development)
 
-### Installation
+### Quick Start with Docker (Recommended)
+
+```bash
+# Start all services (app + Cloudflare tunnel)
+make up
+
+# View logs
+make logs
+
+# Stop services
+make down
+
+# Show application URLs
+make url
+```
+
+The app will be available at:
+- Local: http://localhost:5173
+- Cloudflare Tunnel: https://your-tunnel-url (if configured)
+
+#### Cloudflare Tunnel Setup (Optional)
+
+1. Copy `.env.example` to `.env`
+2. Get your Cloudflare Tunnel token from https://one.dash.cloudflare.com/
+3. Add the token to `.env`: `CLOUDFLARE_TUNNEL_TOKEN=your-token-here`
+4. Run `make up` to start with HTTPS access
+
+### Local Development (Without Docker)
 
 ```bash
 # Install dependencies
@@ -41,6 +69,22 @@ npm run preview
 ```
 
 ### Development Commands
+
+#### Docker Commands
+
+```bash
+make help       # Show all available commands
+make up         # Start services
+make down       # Stop services
+make restart    # Restart services
+make logs       # View logs (follow mode)
+make build      # Rebuild Docker images
+make dev        # Start only app (no tunnel)
+make install    # Install npm dependencies in container
+make clean      # Clean node_modules and dist
+```
+
+#### Local Commands
 
 ```bash
 # Run linter
