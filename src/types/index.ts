@@ -16,6 +16,7 @@ export interface Resource {
   id: string
   name: string
   marketPrice: number
+  vendorValue: number
 }
 
 export interface Recipe {

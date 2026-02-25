@@ -231,7 +231,7 @@ const overrideStats = computed(() => dataProvider.getOverrideStats())
             <tr v-for="material in filteredMaterials" :key="material.id">
               <td class="col-name">{{ material.name }}</td>
               <td class="col-vendor">
-                <span class="vendor-value">{{ material.price.toLocaleString() }} gold</span>
+                <span class="vendor-value">N/A</span>
               </td>
               <td class="col-market">
                 <EditableValue
@@ -335,7 +335,7 @@ const overrideStats = computed(() => dataProvider.getOverrideStats())
             <tr v-for="resource in filteredResources" :key="resource.id">
               <td class="col-name">{{ resource.name }}</td>
               <td class="col-vendor">
-                <span class="vendor-value">N/A</span>
+                <span class="vendor-value">{{ resource.vendorValue.toLocaleString() }} gold</span>
               </td>
               <td class="col-market">
                 <EditableValue
