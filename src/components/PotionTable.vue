@@ -156,7 +156,7 @@ const handleMarketPriceUpdate = (potionName: string, value: number) => {
 <template>
   <div class="potion-table">
     <div class="table-container">
-      <table class="main-table">
+      <table class="main-table mobile-card-layout" role="grid" aria-label="Potion crafting profitability">
         <thead>
           <tr>
             <th class="expand-col"></th>
@@ -187,27 +187,29 @@ const handleMarketPriceUpdate = (potionName: string, value: number) => {
           <template v-for="potion in sortedPotions" :key="potion.name">
             <!-- Main Row -->
             <tr class="main-row" :class="{ expanded: isExpanded(potion.name) }">
-              <td class="expand-col">
+              <td class="expand-col" data-label="">
                 <button
                   class="expand-button"
                   :class="{ expanded: isExpanded(potion.name) }"
                   :title="isExpanded(potion.name) ? 'Collapse' : 'Expand'"
+                  :aria-label="`${isExpanded(potion.name) ? 'Collapse' : 'Expand'} ${potion.name} details`"
+                  :aria-expanded="isExpanded(potion.name)"
                   @click="toggleRow(potion.name)"
                 >
                   {{ isExpanded(potion.name) ? '▼' : '▶' }}
                 </button>
               </td>
-              <td class="name-cell">{{ potion.name }}</td>
-              <td class="text-right">{{ formatNumber(getMaterialCost(potion)) }}</td>
-              <td class="text-right">
+              <td class="name-cell" data-label="Potion">{{ potion.name }}</td>
+              <td class="text-right" data-label="Material Cost">{{ formatNumber(getMaterialCost(potion)) }}</td>
+              <td class="text-right" data-label="Vial Cost">
                 <EditableValue
                   :model-value="potion.vialCost"
                   :default-value="potion.vialCost"
                   @update:model-value="(value) => handleVialCostUpdate(potion.name, value)"
                 />
               </td>
-              <td class="text-right">{{ formatNumber(potion.totalCost) }}</td>
-              <td class="text-right">
+              <td class="text-right" data-label="Total Cost">{{ formatNumber(potion.totalCost) }}</td>
+              <td class="text-right" data-label="Market Price">
                 <EditableValue
                   :model-value="potion.currentPrice"
                   :default-value="potion.currentPrice"
@@ -216,12 +218,14 @@ const handleMarketPriceUpdate = (potionName: string, value: number) => {
               </td>
               <td
                 class="text-right"
+                data-label="Profit"
                 :style="getHeatmapStyle(potion.profit, profitRange.profit.min, profitRange.profit.max)"
               >
                 {{ formatNumber(potion.profit) }}
               </td>
               <td
                 class="text-right profit-hr"
+                data-label="Profit/hr"
                 :style="getHeatmapStyle(potion.profitPerHour, profitRange.profitPerHour.min, profitRange.profitPerHour.max)"
               >
                 {{ formatNumber(potion.profitPerHour) }}

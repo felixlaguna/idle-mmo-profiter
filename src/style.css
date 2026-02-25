@@ -113,3 +113,58 @@ th {
 tr:hover {
   background-color: var(--bg-secondary);
 }
+
+/* Responsive Breakpoints */
+/* Desktop: 1024px+ (default layout) */
+/* Tablet: 768px-1023px (slightly condensed) */
+/* Mobile: <768px (card layout) */
+
+/* Mobile Table Card Layout */
+@media (max-width: 767px) {
+  /* Hide table headers on mobile */
+  .mobile-card-layout thead {
+    display: none;
+  }
+
+  /* Convert table rows to cards */
+  .mobile-card-layout tbody tr {
+    display: block;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background-color: var(--bg-secondary);
+  }
+
+  .mobile-card-layout tbody tr:hover {
+    background-color: var(--bg-tertiary);
+  }
+
+  /* Stack table cells vertically */
+  .mobile-card-layout td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .mobile-card-layout td:last-child {
+    border-bottom: none;
+  }
+
+  /* Add labels before values on mobile */
+  .mobile-card-layout td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Right-align values on mobile */
+  .mobile-card-layout td > * {
+    text-align: right;
+  }
+}

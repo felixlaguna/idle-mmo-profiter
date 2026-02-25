@@ -1,6 +1,6 @@
 ---
 id: imp-xfsz
-status: open
+status: closed
 deps: [imp-c5jm]
 links: []
 created: 2026-02-25T18:34:51Z
@@ -39,3 +39,22 @@ Toast notifications:
 
 All edge cases handled gracefully with helpful UI feedback
 
+
+## Notes
+
+**2026-02-25T19:31:04Z**
+
+Starting implementation of loading states, error handling, and empty states. Will create reusable components and integrate them throughout the app.
+
+**2026-02-25T19:33:51Z**
+
+Completed loading states, error handling, and empty states:
+- Created Toast notification component with auto-dismiss
+- Created useToast composable for managing notifications
+- Created EmptyState component for no-data scenarios
+- Created LoadingSpinner component (ready for future use)
+- Created ErrorBoundary component for catching runtime errors
+- Integrated Toast notifications into settings save/export/import
+- Added EmptyState to ProfitRankingTable
+- Updated all alerts to use toast notifications
+- Added ARIA labels to tables for accessibility (role=grid, aria-label)

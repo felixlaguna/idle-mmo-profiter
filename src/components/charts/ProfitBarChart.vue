@@ -184,7 +184,7 @@ watch(showAll, () => {
         {{ showAll ? 'Show Less' : `Show All (${activities.length})` }}
       </button>
     </div>
-    <div class="chart-container">
+    <div class="chart-container" role="img" aria-label="Bar chart showing profit per hour for different activities">
       <canvas ref="chartCanvas"></canvas>
     </div>
   </div>

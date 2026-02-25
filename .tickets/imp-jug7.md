@@ -1,6 +1,6 @@
 ---
 id: imp-jug7
-status: open
+status: closed
 deps: []
 links: []
 created: 2026-02-25T18:27:55Z

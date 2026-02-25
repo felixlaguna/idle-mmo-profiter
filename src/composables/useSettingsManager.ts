@@ -1,10 +1,13 @@
 import { getAllStorageKeys, getRawStorage, setRawStorage, removeStorage } from './useStorage'
+import { useToast } from './useToast'
 
 export interface ExportedSettings {
   version: string
   exportDate: string
   data: Record<string, string>
 }
+
+const { success, error: errorToast } = useToast()
 
 /**
  * Exports all localStorage settings as a JSON file
@@ -35,6 +38,7 @@ export function exportSettings(): void {
   link.click()
   document.body.removeChild(link)
   URL.revokeObjectURL(url)
+  success('Settings exported successfully')
 }
 
 /**
@@ -60,19 +64,19 @@ export function importSettings(file: File): Promise<void> {
           setRawStorage(key, value)
         })
 
-        alert('Settings imported successfully! Refreshing page...')
+        success('Settings imported successfully! Refreshing page...', 2000)
         // Refresh page to apply new settings
-        window.location.reload()
+        setTimeout(() => window.location.reload(), 2000)
         resolve()
       } catch (error) {
         const message = error instanceof Error ? error.message : 'Unknown error'
-        alert(`Failed to import settings: ${message}`)
+        errorToast(`Failed to import settings: ${message}`, 5000)
         reject(error)
       }
     }
 
     reader.onerror = () => {
-      alert('Failed to read file')
+      errorToast('Failed to read file', 5000)
       reject(new Error('Failed to read file'))
     }
 
@@ -101,8 +105,8 @@ export function resetToDefaults(): void {
     }
   })
 
-  alert('Settings reset to defaults! Refreshing page...')
-  window.location.reload()
+  success('Settings reset to defaults! Refreshing page...', 2000)
+  setTimeout(() => window.location.reload(), 2000)
 }
 
 /**
@@ -120,6 +124,6 @@ export function resetAll(): void {
   const keys = getAllStorageKeys()
   keys.forEach((key) => removeStorage(key))
 
-  alert('All settings cleared! Refreshing page...')
-  window.location.reload()
+  success('All settings cleared! Refreshing page...', 2000)
+  setTimeout(() => window.location.reload(), 2000)
 }

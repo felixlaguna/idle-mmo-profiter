@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted, defineAsyncComponent } from 'vue'
 import { useDataProvider } from './composables/useDataProvider'
 import { useProfitRanking } from './composables/useProfitRanking'
 import { useStorage } from './composables/useStorage'
@@ -11,11 +11,17 @@ import ProfitRankingTable from './components/ProfitRankingTable.vue'
 import DungeonTable from './components/DungeonTable.vue'
 import PotionTable from './components/PotionTable.vue'
 import ResourceTable from './components/ResourceTable.vue'
-import ProfitBarChart from './components/charts/ProfitBarChart.vue'
-import DungeonChart from './components/charts/DungeonChart.vue'
-import RevenueBreakdown from './components/charts/RevenueBreakdown.vue'
-import PriceHistoryChart from './components/charts/PriceHistoryChart.vue'
+import Toast from './components/Toast.vue'
+import ErrorBoundary from './components/ErrorBoundary.vue'
+import LoadingSpinner from './components/LoadingSpinner.vue'
+import { useToast } from './composables/useToast'
 import type { MagicFindSettings } from './types'
+
+// Lazy load chart components for better performance
+const ProfitBarChart = defineAsyncComponent(() => import('./components/charts/ProfitBarChart.vue'))
+const DungeonChart = defineAsyncComponent(() => import('./components/charts/DungeonChart.vue'))
+const RevenueBreakdown = defineAsyncComponent(() => import('./components/charts/RevenueBreakdown.vue'))
+const PriceHistoryChart = defineAsyncComponent(() => import('./components/charts/PriceHistoryChart.vue'))
 
 // Current tab state
 type Tab = 'all' | 'dungeons' | 'potions' | 'resources' | 'charts'
@@ -23,6 +29,33 @@ const currentTab = ref<Tab>('all')
 
 // Settings modal state
 const showSettings = ref(false)
+// eslint-disable-next-line no-undef
+const modalCloseButtonRef = ref<HTMLButtonElement | null>(null)
+
+// Toast notifications
+const { toasts, dismissToast } = useToast()
+
+// Track previous focus for modal
+let previousFocus: HTMLElement | null = null
+
+// Open settings and manage focus
+const openSettings = () => {
+  previousFocus = document.activeElement as HTMLElement
+  showSettings.value = true
+  // Focus modal close button on next tick
+  setTimeout(() => {
+    modalCloseButtonRef.value?.focus()
+  }, 100)
+}
+
+// Close settings and restore focus
+const closeSettings = () => {
+  showSettings.value = false
+  // Restore focus to settings button
+  setTimeout(() => {
+    previousFocus?.focus()
+  }, 100)
+}
 
 // Get data from data provider
 const dataProvider = useDataProvider()
@@ -113,6 +146,23 @@ const getTypeBadgeClass = (type: string): string => {
       return ''
   }
 }
+
+// Handle keyboard shortcuts
+const handleKeydown = (e: KeyboardEvent) => {
+  // Escape closes settings modal
+  if (e.key === 'Escape' && showSettings.value) {
+    closeSettings()
+  }
+}
+
+// Add/remove event listeners
+onMounted(() => {
+  window.addEventListener('keydown', handleKeydown)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeydown)
+})
 </script>
 
 <template>
@@ -123,7 +173,12 @@ const getTypeBadgeClass = (type: string): string => {
         <h1 class="app-title">IdleMMO Profit Calculator</h1>
         <div class="header-actions">
           <span class="last-update">{{ lastUpdateText }}</span>
-          <button class="btn-settings" title="Settings" @click="showSettings = true">
+          <button
+            class="btn-settings"
+            title="Settings"
+            aria-label="Open settings"
+            @click="openSettings"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -183,10 +238,13 @@ const getTypeBadgeClass = (type: string): string => {
         </section>
 
         <!-- Tab Navigation -->
-        <nav class="tab-navigation">
+        <nav class="tab-navigation" role="tablist" aria-label="Activity categories">
           <button
             class="tab-button"
             :class="{ active: currentTab === 'all' }"
+            role="tab"
+            :aria-selected="currentTab === 'all'"
+            :tabindex="currentTab === 'all' ? 0 : -1"
             @click="currentTab = 'all'"
           >
             All Activities
@@ -194,6 +252,9 @@ const getTypeBadgeClass = (type: string): string => {
           <button
             class="tab-button"
             :class="{ active: currentTab === 'dungeons' }"
+            role="tab"
+            :aria-selected="currentTab === 'dungeons'"
+            :tabindex="currentTab === 'dungeons' ? 0 : -1"
             @click="currentTab = 'dungeons'"
           >
             Dungeons
@@ -201,6 +262,9 @@ const getTypeBadgeClass = (type: string): string => {
           <button
             class="tab-button"
             :class="{ active: currentTab === 'potions' }"
+            role="tab"
+            :aria-selected="currentTab === 'potions'"
+            :tabindex="currentTab === 'potions' ? 0 : -1"
             @click="currentTab = 'potions'"
           >
             Potions
@@ -208,6 +272,9 @@ const getTypeBadgeClass = (type: string): string => {
           <button
             class="tab-button"
             :class="{ active: currentTab === 'resources' }"
+            role="tab"
+            :aria-selected="currentTab === 'resources'"
+            :tabindex="currentTab === 'resources' ? 0 : -1"
             @click="currentTab = 'resources'"
           >
             Resources
@@ -215,6 +282,9 @@ const getTypeBadgeClass = (type: string): string => {
           <button
             class="tab-button"
             :class="{ active: currentTab === 'charts' }"
+            role="tab"
+            :aria-selected="currentTab === 'charts'"
+            :tabindex="currentTab === 'charts' ? 0 : -1"
             @click="currentTab = 'charts'"
           >
             Charts
@@ -223,35 +293,78 @@ const getTypeBadgeClass = (type: string): string => {
 
         <!-- Tab Content -->
         <div class="tab-content">
-          <div v-if="currentTab === 'all'">
-            <ProfitRankingTable :activities="rankedActivities" />
-          </div>
-          <div v-if="currentTab === 'dungeons'">
-            <DungeonTable :dungeons="dungeonProfits" />
-          </div>
-          <div v-if="currentTab === 'potions'">
-            <PotionTable :potions="potionProfits" />
-          </div>
-          <div v-if="currentTab === 'resources'">
-            <ResourceTable :resources="resourceProfits" />
-          </div>
-          <div v-if="currentTab === 'charts'" class="charts-section">
-            <ProfitBarChart :activities="rankedActivities" />
-            <div class="charts-grid">
-              <DungeonChart :dungeons="dungeonProfits" />
-              <RevenueBreakdown :activities="rankedActivities" />
+          <ErrorBoundary>
+            <div v-if="currentTab === 'all'">
+              <ProfitRankingTable :activities="rankedActivities" />
             </div>
-            <PriceHistoryChart />
-          </div>
+            <div v-if="currentTab === 'dungeons'">
+              <DungeonTable :dungeons="dungeonProfits" />
+            </div>
+            <div v-if="currentTab === 'potions'">
+              <PotionTable :potions="potionProfits" />
+            </div>
+            <div v-if="currentTab === 'resources'">
+              <ResourceTable :resources="resourceProfits" />
+            </div>
+            <div v-if="currentTab === 'charts'" class="charts-section">
+              <Suspense>
+                <template #default>
+                  <ProfitBarChart :activities="rankedActivities" />
+                </template>
+                <template #fallback>
+                  <LoadingSpinner message="Loading chart..." />
+                </template>
+              </Suspense>
+              <div class="charts-grid">
+                <Suspense>
+                  <template #default>
+                    <DungeonChart :dungeons="dungeonProfits" />
+                  </template>
+                  <template #fallback>
+                    <LoadingSpinner message="Loading chart..." />
+                  </template>
+                </Suspense>
+                <Suspense>
+                  <template #default>
+                    <RevenueBreakdown :activities="rankedActivities" />
+                  </template>
+                  <template #fallback>
+                    <LoadingSpinner message="Loading chart..." />
+                  </template>
+                </Suspense>
+              </div>
+              <Suspense>
+                <template #default>
+                  <PriceHistoryChart />
+                </template>
+                <template #fallback>
+                  <LoadingSpinner message="Loading chart..." />
+                </template>
+              </Suspense>
+            </div>
+          </ErrorBoundary>
         </div>
       </div>
     </main>
 
     <!-- Settings Modal -->
-    <div v-if="showSettings" class="modal-overlay" @click.self="showSettings = false">
+    <div
+      v-if="showSettings"
+      class="modal-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="settings-title"
+      @click.self="closeSettings"
+    >
       <div class="modal-content">
         <div class="modal-header">
-          <button class="btn-close" title="Close" @click="showSettings = false">
+          <button
+            ref="modalCloseButtonRef"
+            class="btn-close"
+            title="Close"
+            aria-label="Close settings"
+            @click="closeSettings"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -271,6 +384,9 @@ const getTypeBadgeClass = (type: string): string => {
         <SettingsPanel />
       </div>
     </div>
+
+    <!-- Toast Notifications -->
+    <Toast :messages="toasts" @dismiss="dismissToast" />
   </div>
 </template>
 
@@ -459,6 +575,23 @@ const getTypeBadgeClass = (type: string): string => {
   gap: 0.5rem;
   margin-bottom: 1.5rem;
   border-bottom: 2px solid var(--border-color);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) transparent;
+}
+
+.tab-navigation::-webkit-scrollbar {
+  height: 4px;
+}
+
+.tab-navigation::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tab-navigation::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 2px;
 }
 
 .tab-button {
@@ -472,6 +605,8 @@ const getTypeBadgeClass = (type: string): string => {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .tab-button:hover {
@@ -596,8 +731,17 @@ const getTypeBadgeClass = (type: string): string => {
     align-items: flex-start;
   }
 
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
   .app-title {
     font-size: 1.25rem;
+  }
+
+  .app-main {
+    padding: 1rem;
   }
 
   .hero-section {
@@ -612,17 +756,21 @@ const getTypeBadgeClass = (type: string): string => {
     font-size: 2rem;
   }
 
-  .tab-navigation {
-    overflow-x: auto;
+  .hero-details {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
   .modal-overlay {
     padding: 0;
+    align-items: flex-end;
   }
 
   .modal-content {
-    max-height: 100vh;
-    border-radius: 0;
+    max-height: 90vh;
+    border-radius: 1rem 1rem 0 0;
+    width: 100%;
+    max-width: 100%;
   }
 }
 </style>

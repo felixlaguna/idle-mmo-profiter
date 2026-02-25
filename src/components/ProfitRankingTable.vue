@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import type { RankedActivity } from '../calculators/profitRanker'
 import type { ActivityType } from '../types'
 import { useHeatmap } from '../composables/useHeatmap'
+import EmptyState from './EmptyState.vue'
 
 const { getHeatmapStyle } = useHeatmap()
 
@@ -147,6 +148,8 @@ const profitRange = computed(() => {
       <button
         class="filter-button"
         :class="{ active: filterDungeons, 'badge-dungeon': filterDungeons }"
+        :aria-pressed="filterDungeons"
+        aria-label="Toggle dungeon activities"
         @click="filterDungeons = !filterDungeons"
       >
         Dungeons
@@ -154,6 +157,8 @@ const profitRange = computed(() => {
       <button
         class="filter-button"
         :class="{ active: filterPotions, 'badge-potion': filterPotions }"
+        :aria-pressed="filterPotions"
+        aria-label="Toggle potion activities"
         @click="filterPotions = !filterPotions"
       >
         Potions
@@ -161,6 +166,8 @@ const profitRange = computed(() => {
       <button
         class="filter-button"
         :class="{ active: filterResources, 'badge-resource': filterResources }"
+        :aria-pressed="filterResources"
+        aria-label="Toggle resource activities"
         @click="filterResources = !filterResources"
       >
         Resources
@@ -169,7 +176,7 @@ const profitRange = computed(() => {
 
     <!-- Table -->
     <div class="table-container">
-      <table class="ranking-table">
+      <table class="ranking-table mobile-card-layout" role="grid" aria-label="Activity profit rankings">
         <thead>
           <tr>
             <th class="sortable" @click="toggleSort('rank')">
@@ -199,33 +206,37 @@ const profitRange = computed(() => {
             :key="activity.name"
             :class="{ 'is-top-rank': activity.rank === 1 }"
           >
-            <td class="rank-cell">
+            <td class="rank-cell" data-label="Rank">
               <span class="rank-number" :class="{ 'rank-first': activity.rank === 1 }">
                 {{ activity.rank }}
               </span>
             </td>
-            <td class="name-cell">{{ activity.name }}</td>
-            <td>
+            <td class="name-cell" data-label="Activity">{{ activity.name }}</td>
+            <td data-label="Type">
               <span class="type-badge" :class="getTypeBadgeClass(activity.activityType)">
                 {{ activity.activityType }}
               </span>
             </td>
             <td
               class="text-right profit-cell"
+              data-label="Profit/hr"
               :style="getHeatmapStyle(activity.profitPerHour, profitRange.min, profitRange.max)"
             >
               {{ formatNumber(activity.profitPerHour) }}
             </td>
-            <td class="text-right">{{ formatNumber(activity.profitPerAction) }}</td>
-            <td class="text-right">{{ formatTime(activity.timePerAction) }}</td>
-            <td class="text-right">{{ formatNumber(activity.cost) }}</td>
+            <td class="text-right" data-label="Profit/action">{{ formatNumber(activity.profitPerAction) }}</td>
+            <td class="text-right" data-label="Time">{{ formatTime(activity.timePerAction) }}</td>
+            <td class="text-right" data-label="Cost">{{ formatNumber(activity.cost) }}</td>
           </tr>
         </tbody>
       </table>
 
-      <div v-if="filteredAndSortedActivities.length === 0" class="empty-state">
-        <p>No activities match the current filters.</p>
-      </div>
+      <EmptyState
+        v-if="filteredAndSortedActivities.length === 0"
+        icon="🔍"
+        title="No activities found"
+        description="Try adjusting your filters to see more results."
+      />
     </div>
   </div>
 </template>
@@ -423,17 +434,6 @@ const profitRange = computed(() => {
 .profit-cell {
   font-weight: 600;
   color: var(--success);
-}
-
-/* Empty State */
-.empty-state {
-  padding: 3rem;
-  text-align: center;
-}
-
-.empty-state p {
-  color: var(--text-secondary);
-  font-size: 1rem;
 }
 
 /* Responsive */

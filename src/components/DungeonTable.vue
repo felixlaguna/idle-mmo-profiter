@@ -152,7 +152,7 @@ const profitRange = computed(() => {
 <template>
   <div class="dungeon-table">
     <div class="table-container">
-      <table class="main-table">
+      <table class="main-table mobile-card-layout" role="grid" aria-label="Dungeon profitability">
         <thead>
           <tr>
             <th class="expand-col"></th>
@@ -180,25 +180,27 @@ const profitRange = computed(() => {
           <template v-for="dungeon in sortedDungeons" :key="dungeon.name">
             <!-- Main Row -->
             <tr class="main-row" :class="{ expanded: isExpanded(dungeon.name) }">
-              <td class="expand-col">
+              <td class="expand-col" data-label="">
                 <button
                   class="expand-button"
                   :class="{ expanded: isExpanded(dungeon.name) }"
                   :title="isExpanded(dungeon.name) ? 'Collapse' : 'Expand'"
+                  :aria-label="`${isExpanded(dungeon.name) ? 'Collapse' : 'Expand'} ${dungeon.name} details`"
+                  :aria-expanded="isExpanded(dungeon.name)"
                   @click="toggleRow(dungeon.name)"
                 >
                   {{ isExpanded(dungeon.name) ? '▼' : '▶' }}
                 </button>
               </td>
-              <td class="name-cell">{{ dungeon.name }}</td>
-              <td class="text-right">
+              <td class="name-cell" data-label="Dungeon">{{ dungeon.name }}</td>
+              <td class="text-right" data-label="Run Cost">
                 <EditableValue
                   :model-value="dungeon.runCost"
                   :default-value="dungeon.runCost"
                   @update:model-value="(value) => handleRunCostUpdate(dungeon.name, value)"
                 />
               </td>
-              <td class="text-right">
+              <td class="text-right" data-label="Time">
                 <EditableValue
                   :model-value="dungeon.timeSeconds"
                   :default-value="dungeon.timeSeconds"
@@ -206,15 +208,17 @@ const profitRange = computed(() => {
                   @update:model-value="(value) => handleTimeUpdate(dungeon.name, value)"
                 />
               </td>
-              <td class="text-right">{{ formatNumber(getTotalExpectedValue(dungeon)) }}</td>
+              <td class="text-right" data-label="Expected Value">{{ formatNumber(getTotalExpectedValue(dungeon)) }}</td>
               <td
                 class="text-right"
+                data-label="Profit"
                 :style="getHeatmapStyle(dungeon.totalProfit, profitRange.totalProfit.min, profitRange.totalProfit.max)"
               >
                 {{ formatNumber(dungeon.totalProfit) }}
               </td>
               <td
                 class="text-right profit-hr"
+                data-label="Profit/hr"
                 :style="getHeatmapStyle(dungeon.profitPerHour, profitRange.profitPerHour.min, profitRange.profitPerHour.max)"
               >
                 {{ formatNumber(dungeon.profitPerHour) }}

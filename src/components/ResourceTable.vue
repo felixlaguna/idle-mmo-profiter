@@ -144,7 +144,7 @@ const handleMarketPriceUpdate = (resourceName: string, value: number) => {
 <template>
   <div class="resource-table">
     <div class="table-container">
-      <table class="main-table">
+      <table class="main-table mobile-card-layout" role="grid" aria-label="Resource gathering profitability">
         <thead>
           <tr>
             <th class="sortable" @click="toggleSort('name')">
@@ -172,8 +172,8 @@ const handleMarketPriceUpdate = (resourceName: string, value: number) => {
         </thead>
         <tbody>
           <tr v-for="resource in sortedResources" :key="resource.name">
-            <td class="name-cell">{{ resource.name }}</td>
-            <td class="text-right">
+            <td class="name-cell" data-label="Resource">{{ resource.name }}</td>
+            <td class="text-right" data-label="Time">
               <EditableValue
                 :model-value="resource.timeSeconds"
                 :default-value="resource.timeSeconds"
@@ -181,28 +181,28 @@ const handleMarketPriceUpdate = (resourceName: string, value: number) => {
                 @update:model-value="(value) => handleTimeUpdate(resource.name, value)"
               />
             </td>
-            <td class="text-right">
+            <td class="text-right" data-label="Cost">
               <EditableValue
                 :model-value="resource.cost"
                 :default-value="resource.cost"
                 @update:model-value="(value) => handleCostUpdate(resource.name, value)"
               />
             </td>
-            <td class="text-right">
+            <td class="text-right" data-label="Vendor Price">
               <EditableValue
                 :model-value="resource.vendorValue"
                 :default-value="resource.vendorValue"
                 @update:model-value="(value) => handleVendorValueUpdate(resource.name, value)"
               />
             </td>
-            <td class="text-right">
+            <td class="text-right" data-label="Market Price">
               <EditableValue
                 :model-value="resource.marketPrice"
                 :default-value="resource.marketPrice"
                 @update:model-value="(value) => handleMarketPriceUpdate(resource.name, value)"
               />
             </td>
-            <td>
+            <td data-label="Best Method">
               <span
                 class="method-badge"
                 :class="{
@@ -215,6 +215,7 @@ const handleMarketPriceUpdate = (resourceName: string, value: number) => {
             </td>
             <td
               class="text-right profit-hr"
+              data-label="Profit/hr"
               :style="getHeatmapStyle(resource.bestProfitPerHour, profitRange.profitPerHour.min, profitRange.profitPerHour.max)"
             >
               {{ formatNumber(resource.bestProfitPerHour) }}

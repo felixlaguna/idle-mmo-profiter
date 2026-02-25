@@ -66,7 +66,7 @@ const handleResetAll = () => {
 
 <template>
   <div class="settings-panel">
-    <h2 class="panel-title">Settings</h2>
+    <h2 id="settings-title" class="panel-title">Settings</h2>
 
     <!-- API Key Section -->
     <section class="settings-section">
