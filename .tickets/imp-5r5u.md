@@ -1,6 +1,6 @@
 ---
 id: imp-5r5u
-status: open
+status: closed
 deps: [imp-64ql, imp-90r5]
 links: []
 created: 2026-02-25T18:31:13Z
@@ -27,3 +27,41 @@ Key views:
 UI framework: Vanilla CSS with CSS Grid/Flexbox (or Tailwind if preferred - lightweight).
 Tables should use inline editing (click cell to edit, save to localStorage).
 
+
+## Notes
+
+**2026-02-25T19:17:48Z**
+
+Epic 5: UI - Dashboard & Data Tables COMPLETE
+
+All components implemented and integrated:
+
+## Files Created:
+- /home/felix/idle-mmo-profiter/src/components/ProfitRankingTable.vue - Unified profit ranking table
+- /home/felix/idle-mmo-profiter/src/components/DungeonTable.vue - Dungeon detail table with expandable drop breakdowns
+- /home/felix/idle-mmo-profiter/src/components/PotionTable.vue - Potion crafting table with material breakdowns
+- /home/felix/idle-mmo-profiter/src/components/ResourceTable.vue - Resource gathering table with vendor vs market comparison
+
+## Files Modified:
+- /home/felix/idle-mmo-profiter/src/App.vue - Main app layout with hero section, tab navigation, and settings modal
+
+## Features:
+1. Top bar with app title, last update time, and settings gear icon
+2. Hero section showing the best action with large profit/hr display
+3. Tab navigation for All Activities, Dungeons, Potions, Resources
+4. Profit ranking table with sortable columns and type filters
+5. Dungeon table with expandable rows showing drop breakdowns and inline editing
+6. Potion table with material breakdowns and inline editing
+7. Resource table with vendor vs market comparison
+8. Settings modal integration with reactive recalculations
+9. Dark theme using CSS variables
+10. Fully responsive design
+
+## Quality:
+- Build: PASSED (npm run build)
+- Lint: PASSED (npm run lint)
+- All TypeScript errors resolved
+- All components properly integrated and wired up
+- Reactive data flow working correctly
+
+The app is fully functional end-to-end!

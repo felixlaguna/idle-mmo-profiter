@@ -1,0 +1,446 @@
+<script setup lang="ts">
+import { ref, computed } from 'vue'
+import type { RankedActivity } from '../calculators/profitRanker'
+import type { ActivityType } from '../types'
+
+const props = defineProps<{
+  activities: RankedActivity[]
+}>()
+
+// Sort configuration
+type SortKey = 'rank' | 'name' | 'profitPerHour' | 'profitPerAction' | 'timePerAction' | 'cost'
+type SortOrder = 'asc' | 'desc'
+
+const sortKey = ref<SortKey>('rank')
+const sortOrder = ref<SortOrder>('asc')
+
+// Filter configuration
+const filterDungeons = ref(true)
+const filterPotions = ref(true)
+const filterResources = ref(true)
+
+// Get filtered and sorted activities
+const filteredAndSortedActivities = computed(() => {
+  // First, filter by type
+  let filtered = props.activities.filter((activity) => {
+    if (activity.activityType === 'dungeon' && !filterDungeons.value) return false
+    if (activity.activityType === 'potion' && !filterPotions.value) return false
+    if (activity.activityType === 'resource' && !filterResources.value) return false
+    return true
+  })
+
+  // Then, sort
+  filtered.sort((a, b) => {
+    let aValue: number | string
+    let bValue: number | string
+
+    switch (sortKey.value) {
+      case 'rank':
+        aValue = a.rank
+        bValue = b.rank
+        break
+      case 'name':
+        aValue = a.name
+        bValue = b.name
+        break
+      case 'profitPerHour':
+        aValue = a.profitPerHour
+        bValue = b.profitPerHour
+        break
+      case 'profitPerAction':
+        aValue = a.profitPerAction
+        bValue = b.profitPerAction
+        break
+      case 'timePerAction':
+        aValue = a.timePerAction
+        bValue = b.timePerAction
+        break
+      case 'cost':
+        aValue = a.cost
+        bValue = b.cost
+        break
+      default:
+        aValue = a.rank
+        bValue = b.rank
+    }
+
+    if (typeof aValue === 'string' && typeof bValue === 'string') {
+      return sortOrder.value === 'asc'
+        ? aValue.localeCompare(bValue)
+        : bValue.localeCompare(aValue)
+    }
+
+    return sortOrder.value === 'asc'
+      ? (aValue as number) - (bValue as number)
+      : (bValue as number) - (aValue as number)
+  })
+
+  return filtered
+})
+
+// Toggle sort
+const toggleSort = (key: SortKey) => {
+  if (sortKey.value === key) {
+    sortOrder.value = sortOrder.value === 'asc' ? 'desc' : 'asc'
+  } else {
+    sortKey.value = key
+    sortOrder.value = key === 'rank' ? 'asc' : 'desc'
+  }
+}
+
+// Format numbers
+const formatNumber = (num: number): string => {
+  return Math.round(num).toLocaleString()
+}
+
+// Format time
+const formatTime = (seconds: number): string => {
+  if (seconds < 60) {
+    return `${Math.round(seconds)}s`
+  }
+  const minutes = Math.floor(seconds / 60)
+  const remainingSeconds = Math.round(seconds % 60)
+  if (remainingSeconds === 0) {
+    return `${minutes}m`
+  }
+  return `${minutes}m ${remainingSeconds}s`
+}
+
+// Get type badge class
+const getTypeBadgeClass = (type: ActivityType): string => {
+  switch (type) {
+    case 'dungeon':
+      return 'badge-dungeon'
+    case 'potion':
+      return 'badge-potion'
+    case 'resource':
+      return 'badge-resource'
+    default:
+      return ''
+  }
+}
+
+// Get sort icon
+const getSortIcon = (key: SortKey): string => {
+  if (sortKey.value !== key) return '↕'
+  return sortOrder.value === 'asc' ? '↑' : '↓'
+}
+</script>
+
+<template>
+  <div class="profit-ranking-table">
+    <!-- Filter Controls -->
+    <div class="filter-controls">
+      <span class="filter-label">Show:</span>
+      <button
+        class="filter-button"
+        :class="{ active: filterDungeons, 'badge-dungeon': filterDungeons }"
+        @click="filterDungeons = !filterDungeons"
+      >
+        Dungeons
+      </button>
+      <button
+        class="filter-button"
+        :class="{ active: filterPotions, 'badge-potion': filterPotions }"
+        @click="filterPotions = !filterPotions"
+      >
+        Potions
+      </button>
+      <button
+        class="filter-button"
+        :class="{ active: filterResources, 'badge-resource': filterResources }"
+        @click="filterResources = !filterResources"
+      >
+        Resources
+      </button>
+    </div>
+
+    <!-- Table -->
+    <div class="table-container">
+      <table class="ranking-table">
+        <thead>
+          <tr>
+            <th class="sortable" @click="toggleSort('rank')">
+              Rank {{ getSortIcon('rank') }}
+            </th>
+            <th class="sortable" @click="toggleSort('name')">
+              Activity Name {{ getSortIcon('name') }}
+            </th>
+            <th>Type</th>
+            <th class="sortable text-right" @click="toggleSort('profitPerHour')">
+              Profit/hr {{ getSortIcon('profitPerHour') }}
+            </th>
+            <th class="sortable text-right" @click="toggleSort('profitPerAction')">
+              Profit/action {{ getSortIcon('profitPerAction') }}
+            </th>
+            <th class="sortable text-right" @click="toggleSort('timePerAction')">
+              Time {{ getSortIcon('timePerAction') }}
+            </th>
+            <th class="sortable text-right" @click="toggleSort('cost')">
+              Cost {{ getSortIcon('cost') }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            v-for="activity in filteredAndSortedActivities"
+            :key="activity.name"
+            :class="{ 'is-top-rank': activity.rank === 1 }"
+          >
+            <td class="rank-cell">
+              <span class="rank-number" :class="{ 'rank-first': activity.rank === 1 }">
+                {{ activity.rank }}
+              </span>
+            </td>
+            <td class="name-cell">{{ activity.name }}</td>
+            <td>
+              <span class="type-badge" :class="getTypeBadgeClass(activity.activityType)">
+                {{ activity.activityType }}
+              </span>
+            </td>
+            <td class="text-right profit-cell">
+              {{ formatNumber(activity.profitPerHour) }}
+            </td>
+            <td class="text-right">{{ formatNumber(activity.profitPerAction) }}</td>
+            <td class="text-right">{{ formatTime(activity.timePerAction) }}</td>
+            <td class="text-right">{{ formatNumber(activity.cost) }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div v-if="filteredAndSortedActivities.length === 0" class="empty-state">
+        <p>No activities match the current filters.</p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.profit-ranking-table {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Filter Controls */
+.filter-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+}
+
+.filter-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.filter-button {
+  padding: 0.5rem 1rem;
+  background-color: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: capitalize;
+}
+
+.filter-button:hover {
+  background-color: var(--bg-primary);
+}
+
+.filter-button.active.badge-dungeon {
+  background-color: rgba(168, 85, 247, 0.2);
+  color: #c084fc;
+  border-color: rgba(168, 85, 247, 0.4);
+}
+
+.filter-button.active.badge-potion {
+  background-color: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
+  border-color: rgba(34, 197, 94, 0.4);
+}
+
+.filter-button.active.badge-resource {
+  background-color: rgba(59, 130, 246, 0.2);
+  color: #60a5fa;
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+/* Table Container */
+.table-container {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.ranking-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ranking-table thead {
+  background-color: var(--bg-tertiary);
+  border-bottom: 2px solid var(--border-color);
+}
+
+.ranking-table th {
+  padding: 1rem;
+  text-align: left;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ranking-table th.sortable {
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s;
+}
+
+.ranking-table th.sortable:hover {
+  color: var(--text-primary);
+}
+
+.ranking-table th.text-right {
+  text-align: right;
+}
+
+.ranking-table tbody tr {
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.2s;
+}
+
+.ranking-table tbody tr:hover {
+  background-color: var(--bg-tertiary);
+}
+
+.ranking-table tbody tr.is-top-rank {
+  background-color: rgba(245, 158, 11, 0.1);
+  border: 2px solid rgba(245, 158, 11, 0.3);
+}
+
+.ranking-table tbody tr.is-top-rank:hover {
+  background-color: rgba(245, 158, 11, 0.15);
+}
+
+.ranking-table td {
+  padding: 1rem;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* Rank Cell */
+.rank-cell {
+  font-weight: 600;
+}
+
+.rank-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 0.5rem;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+}
+
+.rank-number.rank-first {
+  background-color: rgba(245, 158, 11, 0.2);
+  color: var(--warning);
+  border-color: rgba(245, 158, 11, 0.4);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* Name Cell */
+.name-cell {
+  font-weight: 500;
+}
+
+/* Type Badge */
+.type-badge {
+  display: inline-block;
+  padding: 0.25rem 0.625rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.badge-dungeon {
+  background-color: rgba(168, 85, 247, 0.2);
+  color: #c084fc;
+  border: 1px solid rgba(168, 85, 247, 0.4);
+}
+
+.badge-potion {
+  background-color: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.4);
+}
+
+.badge-resource {
+  background-color: rgba(59, 130, 246, 0.2);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+/* Profit Cell */
+.profit-cell {
+  font-weight: 600;
+  color: var(--success);
+}
+
+/* Empty State */
+.empty-state {
+  padding: 3rem;
+  text-align: center;
+}
+
+.empty-state p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .table-container {
+    overflow-x: auto;
+  }
+
+  .ranking-table {
+    min-width: 800px;
+  }
+}
+
+@media (max-width: 640px) {
+  .filter-controls {
+    flex-wrap: wrap;
+  }
+
+  .ranking-table th,
+  .ranking-table td {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.75rem;
+  }
+}
+</style>

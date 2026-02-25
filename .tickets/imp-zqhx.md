@@ -1,6 +1,6 @@
 ---
 id: imp-zqhx
-status: open
+status: closed
 deps: []
 links: []
 created: 2026-02-25T18:34:04Z
@@ -32,3 +32,15 @@ Create the main app layout:
 
 Layout renders with dark theme, navigation works between sections
 
+
+## Notes
+
+**2026-02-25T19:11:27Z**
+
+App layout shell complete:
+- Top bar with app title, last update time, and settings gear icon
+- Hero section showing the best action with profit/hr and details
+- Tab navigation for All Activities, Dungeons, Potions, Resources
+- Settings modal integration with SettingsPanel component
+- Dark theme using CSS variables
+- Reactive data integration using useDataProvider and useProfitRanking

@@ -1,6 +1,6 @@
 ---
 id: imp-d6fm
-status: open
+status: closed
 deps: [imp-zqhx]
 links: []
 created: 2026-02-25T18:34:04Z
@@ -43,3 +43,17 @@ Sections:
 
 Settings panel allows full configuration, API key management, import/export
 
+
+## Notes
+
+**2026-02-25T19:17:29Z**
+
+Settings panel integration complete:
+- Settings panel already integrated as a modal in App.vue
+- Gear icon in top bar opens/closes the settings modal
+- MF settings changes automatically recalculate all profits in real-time (using reactive refs)
+- Modal overlay with click-outside-to-close functionality
+- Close button in modal header
+- Settings panel uses existing SettingsPanel.vue component
+- All settings (MF, tax rate, API key) are reactive and persist to localStorage
+- Build and lint both pass successfully

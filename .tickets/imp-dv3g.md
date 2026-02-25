@@ -1,6 +1,6 @@
 ---
 id: imp-dv3g
-status: open
+status: closed
 deps: [imp-zqhx]
 links: []
 created: 2026-02-25T18:34:04Z
@@ -26,3 +26,16 @@ Create resource gathering detail view:
 
 All resource activities displayed, chains calculate correctly, vendor/market comparison clear
 
+
+## Notes
+
+**2026-02-25T19:16:35Z**
+
+Resource gathering table complete:
+- Created ResourceTable.vue component
+- Shows all resource gathering activities with: Resource, Time, Cost, Vendor Price, Market Price, Best Method, Profit/hr
+- Best Method column shows Vendor or Market with appropriate styling
+- Inline editing for prices, costs, time using EditableValue
+- Color-coded profit (green for positive, red for negative)
+- Sort by any column
+- Integrated into App.vue 'Resources' tab

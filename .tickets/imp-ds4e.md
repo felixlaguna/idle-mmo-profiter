@@ -1,6 +1,6 @@
 ---
 id: imp-ds4e
-status: open
+status: closed
 deps: [imp-zqhx]
 links: []
 created: 2026-02-25T18:34:04Z
@@ -29,3 +29,18 @@ Create the main profit ranking table:
 
 Table shows all activities ranked, sortable, filterable, editable inline
 
+
+## Notes
+
+**2026-02-25T19:12:34Z**
+
+Unified profit ranking table complete:
+- Created ProfitRankingTable.vue component
+- Shows all activities ranked by profit/hr
+- Columns: Rank, Activity Name, Type, Profit/hr, Profit/action, Time, Cost
+- Color-coded type badges (purple for dungeons, green for potions, blue for resources)
+- Sortable columns (click header to sort)
+- Filter buttons to show/hide activity types
+- Highlighted #1 row with gold accent
+- Numbers formatted with commas
+- Integrated into App.vue 'All Activities' tab

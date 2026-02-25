@@ -1,0 +1,470 @@
+<script setup lang="ts">
+import { ref, computed } from 'vue'
+import type { DungeonProfitResult } from '../calculators/dungeonCalculator'
+import EditableValue from './EditableValue.vue'
+
+const props = defineProps<{
+  dungeons: DungeonProfitResult[]
+}>()
+
+// Emit events for editing values
+const emit = defineEmits<{
+  (e: 'update:runCost', dungeonName: string, value: number): void
+  (e: 'update:timeSeconds', dungeonName: string, value: number): void
+}>()
+
+// Expanded rows tracking
+const expandedRows = ref<Set<string>>(new Set())
+
+// Sort configuration
+type SortKey = 'name' | 'runCost' | 'timeSeconds' | 'expectedValue' | 'totalProfit' | 'profitPerHour'
+type SortOrder = 'asc' | 'desc'
+
+const sortKey = ref<SortKey>('profitPerHour')
+const sortOrder = ref<SortOrder>('desc')
+
+// Computed sorted dungeons
+const sortedDungeons = computed(() => {
+  const dungeons = [...props.dungeons]
+
+  dungeons.sort((a, b) => {
+    let aValue: number | string
+    let bValue: number | string
+
+    switch (sortKey.value) {
+      case 'name':
+        aValue = a.name
+        bValue = b.name
+        break
+      case 'runCost':
+        aValue = a.runCost
+        bValue = b.runCost
+        break
+      case 'timeSeconds':
+        aValue = a.timeSeconds
+        bValue = b.timeSeconds
+        break
+      case 'expectedValue':
+        aValue = a.drops.reduce((sum, drop) => sum + drop.expectedValue, 0)
+        bValue = b.drops.reduce((sum, drop) => sum + drop.expectedValue, 0)
+        break
+      case 'totalProfit':
+        aValue = a.totalProfit
+        bValue = b.totalProfit
+        break
+      case 'profitPerHour':
+        aValue = a.profitPerHour
+        bValue = b.profitPerHour
+        break
+      default:
+        aValue = a.profitPerHour
+        bValue = b.profitPerHour
+    }
+
+    if (typeof aValue === 'string' && typeof bValue === 'string') {
+      return sortOrder.value === 'asc'
+        ? aValue.localeCompare(bValue)
+        : bValue.localeCompare(aValue)
+    }
+
+    return sortOrder.value === 'asc'
+      ? (aValue as number) - (bValue as number)
+      : (bValue as number) - (aValue as number)
+  })
+
+  return dungeons
+})
+
+// Toggle row expansion
+const toggleRow = (dungeonName: string) => {
+  if (expandedRows.value.has(dungeonName)) {
+    expandedRows.value.delete(dungeonName)
+  } else {
+    expandedRows.value.add(dungeonName)
+  }
+}
+
+// Check if row is expanded
+const isExpanded = (dungeonName: string): boolean => {
+  return expandedRows.value.has(dungeonName)
+}
+
+// Toggle sort
+const toggleSort = (key: SortKey) => {
+  if (sortKey.value === key) {
+    sortOrder.value = sortOrder.value === 'asc' ? 'desc' : 'asc'
+  } else {
+    sortKey.value = key
+    sortOrder.value = 'desc'
+  }
+}
+
+// Format numbers
+const formatNumber = (num: number): string => {
+  return Math.round(num).toLocaleString()
+}
+
+// Format percentage
+const formatPercent = (value: number): string => {
+  return `${(value * 100).toFixed(2)}%`
+}
+
+// Get sort icon
+const getSortIcon = (key: SortKey): string => {
+  if (sortKey.value !== key) return '↕'
+  return sortOrder.value === 'asc' ? '↑' : '↓'
+}
+
+// Calculate total expected value for a dungeon
+const getTotalExpectedValue = (dungeon: DungeonProfitResult): number => {
+  return dungeon.drops.reduce((sum, drop) => sum + drop.expectedValue, 0)
+}
+
+// Handle inline editing
+const handleRunCostUpdate = (dungeonName: string, value: number) => {
+  emit('update:runCost', dungeonName, value)
+}
+
+const handleTimeUpdate = (dungeonName: string, value: number) => {
+  emit('update:timeSeconds', dungeonName, value)
+}
+</script>
+
+<template>
+  <div class="dungeon-table">
+    <div class="table-container">
+      <table class="main-table">
+        <thead>
+          <tr>
+            <th class="expand-col"></th>
+            <th class="sortable" @click="toggleSort('name')">
+              Dungeon Name {{ getSortIcon('name') }}
+            </th>
+            <th class="sortable text-right" @click="toggleSort('runCost')">
+              Run Cost {{ getSortIcon('runCost') }}
+            </th>
+            <th class="sortable text-right" @click="toggleSort('timeSeconds')">
+              Time {{ getSortIcon('timeSeconds') }}
+            </th>
+            <th class="sortable text-right" @click="toggleSort('expectedValue')">
+              Expected Value {{ getSortIcon('expectedValue') }}
+            </th>
+            <th class="sortable text-right" @click="toggleSort('totalProfit')">
+              Profit {{ getSortIcon('totalProfit') }}
+            </th>
+            <th class="sortable text-right" @click="toggleSort('profitPerHour')">
+              Profit/hr {{ getSortIcon('profitPerHour') }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <template v-for="dungeon in sortedDungeons" :key="dungeon.name">
+            <!-- Main Row -->
+            <tr class="main-row" :class="{ expanded: isExpanded(dungeon.name) }">
+              <td class="expand-col">
+                <button
+                  class="expand-button"
+                  :class="{ expanded: isExpanded(dungeon.name) }"
+                  :title="isExpanded(dungeon.name) ? 'Collapse' : 'Expand'"
+                  @click="toggleRow(dungeon.name)"
+                >
+                  {{ isExpanded(dungeon.name) ? '▼' : '▶' }}
+                </button>
+              </td>
+              <td class="name-cell">{{ dungeon.name }}</td>
+              <td class="text-right">
+                <EditableValue
+                  :model-value="dungeon.runCost"
+                  :default-value="dungeon.runCost"
+                  @update:model-value="(value) => handleRunCostUpdate(dungeon.name, value)"
+                />
+              </td>
+              <td class="text-right">
+                <EditableValue
+                  :model-value="dungeon.timeSeconds"
+                  :default-value="dungeon.timeSeconds"
+                  suffix="s"
+                  @update:model-value="(value) => handleTimeUpdate(dungeon.name, value)"
+                />
+              </td>
+              <td class="text-right">{{ formatNumber(getTotalExpectedValue(dungeon)) }}</td>
+              <td class="text-right" :class="{ profit: dungeon.totalProfit > 0, loss: dungeon.totalProfit < 0 }">
+                {{ formatNumber(dungeon.totalProfit) }}
+              </td>
+              <td class="text-right profit-hr" :class="{ profit: dungeon.profitPerHour > 0, loss: dungeon.profitPerHour < 0 }">
+                {{ formatNumber(dungeon.profitPerHour) }}
+              </td>
+            </tr>
+
+            <!-- Expanded Row: Drop Breakdown -->
+            <tr v-if="isExpanded(dungeon.name)" class="expanded-row">
+              <td colspan="7" class="expanded-content">
+                <div class="drop-breakdown">
+                  <h4 class="breakdown-title">Drop Breakdown</h4>
+                  <table class="drop-table">
+                    <thead>
+                      <tr>
+                        <th>Item Name</th>
+                        <th class="text-right">Price</th>
+                        <th class="text-right">Chance</th>
+                        <th class="text-right">MF-Adjusted Value</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="drop in dungeon.drops" :key="drop.recipeName">
+                        <td>{{ drop.recipeName }}</td>
+                        <td class="text-right">{{ formatNumber(drop.price) }}</td>
+                        <td class="text-right">{{ formatPercent(drop.chance) }}</td>
+                        <td class="text-right expected-value">{{ formatNumber(drop.expectedValue) }}</td>
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                      <tr class="total-row">
+                        <td colspan="3" class="text-right total-label">Total Expected Value:</td>
+                        <td class="text-right total-value">{{ formatNumber(getTotalExpectedValue(dungeon)) }}</td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.dungeon-table {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Table Container */
+.table-container {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.main-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.main-table thead {
+  background-color: var(--bg-tertiary);
+  border-bottom: 2px solid var(--border-color);
+}
+
+.main-table th {
+  padding: 1rem;
+  text-align: left;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.main-table th.sortable {
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s;
+}
+
+.main-table th.sortable:hover {
+  color: var(--text-primary);
+}
+
+.main-table th.text-right {
+  text-align: right;
+}
+
+.main-table tbody tr.main-row {
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.2s;
+}
+
+.main-table tbody tr.main-row:hover {
+  background-color: var(--bg-tertiary);
+}
+
+.main-table tbody tr.main-row.expanded {
+  background-color: var(--bg-tertiary);
+}
+
+.main-table td {
+  padding: 1rem;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* Expand Column */
+.expand-col {
+  width: 3rem;
+}
+
+.expand-button {
+  padding: 0.25rem 0.5rem;
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.75rem;
+}
+
+.expand-button:hover {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
+}
+
+.expand-button.expanded {
+  background-color: var(--accent-primary);
+  color: white;
+  border-color: var(--accent-primary);
+}
+
+/* Name Cell */
+.name-cell {
+  font-weight: 500;
+}
+
+/* Profit Cells */
+.profit {
+  color: var(--success);
+  font-weight: 600;
+}
+
+.loss {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.profit-hr {
+  font-weight: 700;
+}
+
+/* Expanded Row */
+.expanded-row {
+  background-color: var(--bg-primary);
+}
+
+.expanded-content {
+  padding: 0 !important;
+}
+
+.drop-breakdown {
+  padding: 1.5rem;
+  border-top: 2px solid var(--border-color);
+}
+
+.breakdown-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+/* Drop Table */
+.drop-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  overflow: hidden;
+}
+
+.drop-table thead {
+  background-color: var(--bg-tertiary);
+}
+
+.drop-table th {
+  padding: 0.75rem;
+  text-align: left;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.drop-table th.text-right {
+  text-align: right;
+}
+
+.drop-table tbody tr {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.drop-table tbody tr:hover {
+  background-color: var(--bg-tertiary);
+}
+
+.drop-table td {
+  padding: 0.75rem;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+}
+
+.expected-value {
+  font-weight: 600;
+  color: var(--text-accent);
+}
+
+/* Drop Table Footer */
+.drop-table tfoot {
+  background-color: var(--bg-tertiary);
+  border-top: 2px solid var(--border-color);
+}
+
+.total-row {
+  font-weight: 600;
+}
+
+.total-label {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.total-value {
+  color: var(--warning);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .table-container {
+    overflow-x: auto;
+  }
+
+  .main-table {
+    min-width: 900px;
+  }
+}
+
+@media (max-width: 640px) {
+  .main-table th,
+  .main-table td {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .drop-breakdown {
+    padding: 1rem;
+  }
+}
+</style>

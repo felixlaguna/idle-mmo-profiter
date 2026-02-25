@@ -1,6 +1,6 @@
 ---
 id: imp-zuxx
-status: open
+status: closed
 deps: [imp-zqhx]
 links: []
 created: 2026-02-25T18:34:04Z
@@ -29,3 +29,16 @@ Create dungeon-specific detail view:
 
 All 18 dungeons displayed with expandable drops, MF editing recalculates in real-time
 
+
+## Notes
+
+**2026-02-25T19:13:59Z**
+
+Dungeon detail table complete:
+- Created DungeonTable.vue component
+- Shows all 18 dungeons with: Name, Run Cost, Time, Expected Value, Profit, Profit/hr
+- Expandable rows showing drop breakdown (item name, price, chance, MF-adjusted value)
+- Inline editing for run cost and time using EditableValue component
+- Sort by any column
+- Color-coded profit (green for positive, red for negative)
+- Integrated into App.vue 'Dungeons' tab
