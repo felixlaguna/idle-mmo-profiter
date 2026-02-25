@@ -209,6 +209,15 @@ for (let i = 1; i < profitData.length; i++) {
     vendorValue: typeof vendorValue === 'number' ? vendorValue : parseFloat(vendorValue),
     marketPrice: typeof marketValue === 'number' ? marketValue : parseFloat(marketValue),
   })
+
+  // Add vendor values to resources array (only for basic resources, not combined activities)
+  const resourceName = name.toString().trim()
+  if (!resourceName.toLowerCase().includes('full') && !resourceName.toLowerCase().includes('+')) {
+    const resource = resources.find((r) => r.name === resourceName)
+    if (resource && vendorValue !== null) {
+      resource.vendorValue = typeof vendorValue === 'number' ? vendorValue : parseFloat(vendorValue)
+    }
+  }
 }
 
 // Create the final defaults object

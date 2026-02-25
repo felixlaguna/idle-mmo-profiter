@@ -92,37 +92,44 @@
     {
       "id": "res-1",
       "name": "Coal",
-      "marketPrice": 6
+      "marketPrice": 6,
+      "vendorValue": 1
     },
     {
       "id": "res-2",
       "name": "Stingray",
-      "marketPrice": 38
+      "marketPrice": 38,
+      "vendorValue": 26
     },
     {
       "id": "res-3",
       "name": "Cooked Stingray",
-      "marketPrice": 67
+      "marketPrice": 67,
+      "vendorValue": 65
     },
     {
       "id": "res-4",
       "name": "White shark",
-      "marketPrice": 56
+      "marketPrice": 56,
+      "vendorValue": 41
     },
     {
       "id": "res-5",
       "name": "Cooked White Shark",
-      "marketPrice": 105
+      "marketPrice": 105,
+      "vendorValue": 92
     },
     {
       "id": "res-6",
       "name": "Mystic Ore",
-      "marketPrice": 24
+      "marketPrice": 24,
+      "vendorValue": 20
     },
     {
       "id": "res-7",
       "name": "Mystic Bar",
-      "marketPrice": 67
+      "marketPrice": 67,
+      "vendorValue": 59
     }
   ],
   "recipes": [
