@@ -17,6 +17,33 @@ export default [
         parser: parserTypeScript,
         sourceType: 'module',
       },
+      globals: {
+        // Browser globals
+        window: 'readonly',
+        document: 'readonly',
+        console: 'readonly',
+        localStorage: 'readonly',
+        setTimeout: 'readonly',
+        setInterval: 'readonly',
+        clearTimeout: 'readonly',
+        clearInterval: 'readonly',
+        fetch: 'readonly',
+        alert: 'readonly',
+        confirm: 'readonly',
+        // Browser types
+        Headers: 'readonly',
+        RequestInit: 'readonly',
+        Response: 'readonly',
+        DOMException: 'readonly',
+        Blob: 'readonly',
+        URL: 'readonly',
+        File: 'readonly',
+        FileReader: 'readonly',
+        HTMLInputElement: 'readonly',
+        HTMLElement: 'readonly',
+        KeyboardEvent: 'readonly',
+        Event: 'readonly',
+      },
     },
     plugins: {
       '@typescript-eslint': pluginTypeScript,
@@ -24,6 +51,7 @@ export default [
     rules: {
       ...pluginTypeScript.configs.recommended.rules,
       'vue/multi-word-component-names': 'off',
+      'preserve-caught-error': 'off',
     },
   },
   {
