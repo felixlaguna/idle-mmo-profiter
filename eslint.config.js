@@ -44,6 +44,8 @@ export default [
         HTMLCanvasElement: 'readonly',
         KeyboardEvent: 'readonly',
         Event: 'readonly',
+        // Node globals (for vite.config.ts)
+        process: 'readonly',
       },
     },
     plugins: {

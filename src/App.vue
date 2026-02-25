@@ -11,6 +11,7 @@ import ProfitRankingTable from './components/ProfitRankingTable.vue'
 import DungeonTable from './components/DungeonTable.vue'
 import PotionTable from './components/PotionTable.vue'
 import ResourceTable from './components/ResourceTable.vue'
+import MarketTable from './components/MarketTable.vue'
 import Toast from './components/Toast.vue'
 import ErrorBoundary from './components/ErrorBoundary.vue'
 import LoadingSpinner from './components/LoadingSpinner.vue'
@@ -24,7 +25,7 @@ const RevenueBreakdown = defineAsyncComponent(() => import('./components/charts/
 const PriceHistoryChart = defineAsyncComponent(() => import('./components/charts/PriceHistoryChart.vue'))
 
 // Current tab state
-type Tab = 'all' | 'dungeons' | 'potions' | 'resources' | 'charts'
+type Tab = 'all' | 'dungeons' | 'potions' | 'resources' | 'market' | 'charts'
 const currentTab = ref<Tab>('all')
 
 // Settings modal state
@@ -59,6 +60,9 @@ const closeSettings = () => {
 
 // Get data from data provider
 const dataProvider = useDataProvider()
+
+// Get override stats for Market tab badge
+const overrideStats = computed(() => dataProvider.getOverrideStats())
 
 // Get settings from storage
 const magicFind = useStorage<MagicFindSettings>('magicFind', {
@@ -281,6 +285,17 @@ onUnmounted(() => {
           </button>
           <button
             class="tab-button"
+            :class="{ active: currentTab === 'market' }"
+            role="tab"
+            :aria-selected="currentTab === 'market'"
+            :tabindex="currentTab === 'market' ? 0 : -1"
+            @click="currentTab = 'market'"
+          >
+            Market
+            <span v-if="overrideStats.total > 0" class="tab-badge">{{ overrideStats.total }}</span>
+          </button>
+          <button
+            class="tab-button"
             :class="{ active: currentTab === 'charts' }"
             role="tab"
             :aria-selected="currentTab === 'charts'"
@@ -305,6 +320,9 @@ onUnmounted(() => {
             </div>
             <div v-if="currentTab === 'resources'">
               <ResourceTable :resources="resourceProfits" />
+            </div>
+            <div v-if="currentTab === 'market'">
+              <MarketTable />
             </div>
             <div v-if="currentTab === 'charts'" class="charts-section">
               <Suspense>
@@ -617,6 +635,22 @@ onUnmounted(() => {
 .tab-button.active {
   color: var(--accent-primary);
   border-bottom-color: var(--accent-primary);
+}
+
+.tab-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding: 0 0.375rem;
+  margin-left: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background-color: rgba(59, 130, 246, 0.2);
+  color: var(--accent-primary);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  border-radius: 0.75rem;
 }
 
 /* Tab Content */

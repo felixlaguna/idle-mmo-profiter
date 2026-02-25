@@ -55,12 +55,14 @@ function saveUserOverrides(overrides: UserOverrides): void {
   }
 }
 
+// Singleton instance - created once and shared across all calls
+let dataProviderInstance: ReturnType<typeof createDataProvider> | null = null
+
 /**
- * Data provider composable
- *
- * Returns reactive data with three-tier fallback system
+ * Create data provider instance
+ * This is called once and the result is cached
  */
-export function useDataProvider() {
+function createDataProvider() {
   // Load default data (cast to DefaultData type)
   const defaults = ref(defaultData as DefaultData)
 
@@ -123,10 +125,77 @@ export function useDataProvider() {
   })
 
   const dungeons = computed(() => defaults.value.dungeons)
-  const potionCrafts = computed(() => defaults.value.potionCrafts)
-  const resourceGathering = computed(() => defaults.value.resourceGathering)
   const magicFindDefaults = computed(() => defaults.value.magicFindDefaults)
   const marketTaxRate = computed(() => defaults.value.marketTaxRate)
+
+  /**
+   * Create lookup maps for material, potion, and resource prices
+   * These allow us to apply overrides to activity data
+   */
+  const materialPriceMap = computed(() => {
+    const map = new Map<string, number>()
+    materials.value.forEach((mat) => {
+      map.set(mat.name, mat.price)
+    })
+    return map
+  })
+
+  const potionPriceMap = computed(() => {
+    const map = new Map<string, number>()
+    potions.value.forEach((pot) => {
+      map.set(pot.name, pot.price)
+    })
+    return map
+  })
+
+  const resourcePriceMap = computed(() => {
+    const map = new Map<string, number>()
+    resources.value.forEach((res) => {
+      map.set(res.name, res.marketPrice)
+    })
+    return map
+  })
+
+  /**
+   * PotionCrafts with material prices and potion prices updated from overrides
+   * This ensures that when a user edits a material price in the Market tab,
+   * it flows through to the potion craft calculations
+   */
+  const potionCrafts = computed(() => {
+    return defaults.value.potionCrafts.map((craft) => {
+      // Update material unit costs from material price overrides
+      const updatedMaterials = craft.materials.map((mat) => ({
+        ...mat,
+        unitCost: materialPriceMap.value.get(mat.name) ?? mat.unitCost,
+      }))
+
+      // Update current price from potion price overrides
+      const updatedPrice = potionPriceMap.value.get(craft.name) ?? craft.currentPrice
+
+      return {
+        ...craft,
+        materials: updatedMaterials,
+        currentPrice: updatedPrice,
+      }
+    })
+  })
+
+  /**
+   * ResourceGathering with market prices updated from overrides
+   * This ensures that when a user edits a resource price in the Market tab,
+   * it flows through to the resource gathering calculations
+   */
+  const resourceGathering = computed(() => {
+    return defaults.value.resourceGathering.map((gather) => {
+      // Update market price from resource price overrides
+      const updatedPrice = resourcePriceMap.value.get(gather.name) ?? gather.marketPrice
+
+      return {
+        ...gather,
+        marketPrice: updatedPrice,
+      }
+    })
+  })
 
   /**
    * Update a single material price
@@ -284,4 +353,17 @@ export function useDataProvider() {
     reloadOverrides,
     getOverrideStats,
   }
+}
+
+/**
+ * Data provider composable (singleton)
+ *
+ * Returns the same reactive data instance on every call.
+ * This ensures all components share the same reactive state.
+ */
+export function useDataProvider() {
+  if (!dataProviderInstance) {
+    dataProviderInstance = createDataProvider()
+  }
+  return dataProviderInstance
 }
