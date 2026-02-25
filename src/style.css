@@ -121,18 +121,18 @@ tr:hover {
 
 /* Mobile Table Card Layout */
 @media (max-width: 767px) {
-  /* Hide table headers on mobile */
+  /* Hide table headers on mobile - IMPORTANT! */
   .mobile-card-layout thead {
-    display: none;
+    display: none !important;
   }
 
-  /* Convert table rows to cards */
+  /* Convert table rows to cards - more compact */
   .mobile-card-layout tbody tr {
     display: block;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     border: 1px solid var(--border-color);
-    border-radius: 0.5rem;
-    padding: 1rem;
+    border-radius: 0.375rem;
+    padding: 0.625rem;
     background-color: var(--bg-secondary);
   }
 
@@ -140,26 +140,64 @@ tr:hover {
     background-color: var(--bg-tertiary);
   }
 
-  /* Stack table cells vertically */
+  /* Stack table cells vertically - compact layout */
   .mobile-card-layout td {
-    display: block;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.25rem 0;
+    border-bottom: none;
     text-align: right;
+    line-height: 1.4;
   }
 
   .mobile-card-layout td:last-child {
     border-bottom: none;
   }
 
-  /* Add labels before values on mobile */
+  /* Add labels before values on mobile - left side, muted */
   .mobile-card-layout td::before {
     content: attr(data-label);
-    font-weight: 600;
+    font-weight: 500;
     color: var(--text-secondary);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    float: left;
+    text-align: left;
+    flex-shrink: 0;
+    margin-right: 0.5rem;
+  }
+
+  /* Make activity name more prominent */
+  .mobile-card-layout td.name-cell {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  /* Make profit/hr stand out */
+  .mobile-card-layout td.profit-hr,
+  .mobile-card-layout td[data-label="Profit/hr"] {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--success);
+    padding-top: 0.375rem;
+    margin-top: 0.25rem;
+    border-top: 1px solid var(--border-color);
+  }
+
+  /* De-emphasize less important fields */
+  .mobile-card-layout td.rank-cell,
+  .mobile-card-layout td[data-label="Time"],
+  .mobile-card-layout td[data-label="Cost"],
+  .mobile-card-layout td[data-label="Rank"] {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+  }
+
+  /* Hide expand buttons on mobile to save space */
+  .mobile-card-layout td.expand-col {
+    display: none;
   }
 }
