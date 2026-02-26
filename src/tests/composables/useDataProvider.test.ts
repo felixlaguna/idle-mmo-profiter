@@ -1,9 +1,11 @@
 /**
- * Tests for useDataProvider composable - Refresh Exclusion Methods
+ * Tests for useDataProvider composable - Refresh Exclusion Methods and Export Functionality
  */
 
 import { describe, it, expect, beforeEach } from 'vitest'
 import { useDataProvider } from '../../composables/useDataProvider'
+import type { DefaultData } from '../../types'
+import defaultData from '../../data/defaults.json'
 
 // Mock localStorage for data provider
 const localStorageMock = (() => {
@@ -376,6 +378,278 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
       const expectedExcluded = dataProvider.materials.value.length + 1 + 0 + 2 // materials + potions[0] + resources + recipes[0,1]
 
       expect(overallStats.totalExcluded).toBe(expectedExcluded)
+    })
+  })
+
+  describe('exportAsDefaultsJson', () => {
+    beforeEach(() => {
+      localStorage.clear()
+      const dataProvider = useDataProvider()
+      dataProvider.clearAllOverrides()
+    })
+
+    it('should export valid JSON string', () => {
+      const dataProvider = useDataProvider()
+      const jsonString = dataProvider.exportAsDefaultsJson()
+
+      expect(typeof jsonString).toBe('string')
+      expect(() => JSON.parse(jsonString)).not.toThrow()
+    })
+
+    it('should export data matching DefaultData schema with no overrides', () => {
+      const dataProvider = useDataProvider()
+      const jsonString = dataProvider.exportAsDefaultsJson()
+      const exported = JSON.parse(jsonString) as DefaultData
+
+      // Check all required top-level keys exist
+      expect(exported.materials).toBeDefined()
+      expect(exported.potions).toBeDefined()
+      expect(exported.resources).toBeDefined()
+      expect(exported.recipes).toBeDefined()
+      expect(exported.dungeons).toBeDefined()
+      expect(exported.potionCrafts).toBeDefined()
+      expect(exported.resourceGathering).toBeDefined()
+      expect(exported.magicFindDefaults).toBeDefined()
+      expect(exported.marketTaxRate).toBeDefined()
+
+      // Check array lengths match defaults
+      expect(exported.materials.length).toBe(dataProvider.materials.value.length)
+      expect(exported.potions.length).toBe(dataProvider.potions.value.length)
+      expect(exported.resources.length).toBe(dataProvider.resources.value.length)
+      expect(exported.recipes.length).toBe(dataProvider.recipes.value.length)
+    })
+
+    it('should reflect material price overrides in export', () => {
+      const dataProvider = useDataProvider()
+      const firstMaterial = dataProvider.materials.value[0]
+      const newPrice = 999
+
+      dataProvider.updateMaterialPrice(firstMaterial.id, newPrice)
+
+      const jsonString = dataProvider.exportAsDefaultsJson()
+      const exported = JSON.parse(jsonString) as DefaultData
+
+      const exportedMaterial = exported.materials.find((m) => m.id === firstMaterial.id)
+      expect(exportedMaterial?.price).toBe(newPrice)
+    })
+
+    it('should reflect hashedId overrides in export', () => {
+      const dataProvider = useDataProvider()
+      const firstMaterial = dataProvider.materials.value[0]
+      const newHashedId = 'test-hashed-id-123'
+
+      dataProvider.updateHashedId('materials', firstMaterial.id, newHashedId)
+
+      const jsonString = dataProvider.exportAsDefaultsJson()
+      const exported = JSON.parse(jsonString) as DefaultData
+
+      const exportedMaterial = exported.materials.find((m) => m.id === firstMaterial.id)
+      expect(exportedMaterial?.hashedId).toBe(newHashedId)
+    })
+
+    it('should reflect vendorValue overrides in export', () => {
+      const dataProvider = useDataProvider()
+      const firstMaterial = dataProvider.materials.value[0]
+      const newVendorValue = 555
+
+      dataProvider.updateVendorValue('materials', firstMaterial.id, newVendorValue)
+
+      const jsonString = dataProvider.exportAsDefaultsJson()
+      const exported = JSON.parse(jsonString) as DefaultData
+
+      const exportedMaterial = exported.materials.find((m) => m.id === firstMaterial.id)
+      expect(exportedMaterial?.vendorValue).toBe(newVendorValue)
+    })
+
+    it('should flow material price overrides to potionCraft unitCost', () => {
+      const dataProvider = useDataProvider()
+
+      // Find a potion craft and its materials
+      const firstCraft = dataProvider.potionCrafts.value[0]
+      const craftMaterialName = firstCraft.materials[0].name
+
+      // Find the material in the materials array
+      const material = dataProvider.materials.value.find((m) => m.name === craftMaterialName)
+      expect(material).toBeDefined()
+
+      const newPrice = 888
+      dataProvider.updateMaterialPrice(material!.id, newPrice)
+
+      const jsonString = dataProvider.exportAsDefaultsJson()
+      const exported = JSON.parse(jsonString) as DefaultData
+
+      const exportedCraft = exported.potionCrafts.find((c) => c.name === firstCraft.name)
+      const exportedMaterial = exportedCraft?.materials.find((m) => m.name === craftMaterialName)
+
+      expect(exportedMaterial?.unitCost).toBe(newPrice)
+    })
+
+    it('should strip computed cost field from resourceGathering', () => {
+      const dataProvider = useDataProvider()
+
+      const jsonString = dataProvider.exportAsDefaultsJson()
+      const exported = JSON.parse(jsonString) as DefaultData
+
+      // Check that no resourceGathering item has a 'cost' field
+      exported.resourceGathering.forEach((gather) => {
+        expect(gather).not.toHaveProperty('cost')
+        // But should have baseCost
+        expect(gather.baseCost).toBeDefined()
+      })
+    })
+
+    it('should preserve resourceGathering inputs when they exist', () => {
+      const dataProvider = useDataProvider()
+
+      const jsonString = dataProvider.exportAsDefaultsJson()
+      const exported = JSON.parse(jsonString) as DefaultData
+
+      // Find a resource with inputs in the original data
+      const resourceWithInputs = (defaultData as DefaultData).resourceGathering.find(
+        (r) => r.inputs && r.inputs.length > 0
+      )
+
+      expect(resourceWithInputs).toBeDefined()
+
+      // Find the same resource in exported data
+      const exportedResource = exported.resourceGathering.find(
+        (r) => r.name === resourceWithInputs!.name
+      )
+
+      expect(exportedResource?.inputs).toBeDefined()
+      expect(exportedResource?.inputs?.length).toBe(resourceWithInputs!.inputs!.length)
+    })
+
+    it('should reflect multiple category overrides simultaneously', () => {
+      const dataProvider = useDataProvider()
+
+      const material = dataProvider.materials.value[0]
+      const potion = dataProvider.potions.value[0]
+      const resource = dataProvider.resources.value[0]
+      const recipe = dataProvider.recipes.value[0]
+
+      const materialPrice = 111
+      const potionPrice = 222
+      const resourcePrice = 333
+      const recipePrice = 444
+
+      dataProvider.updateMaterialPrice(material.id, materialPrice)
+      dataProvider.updatePotionPrice(potion.id, potionPrice)
+      dataProvider.updateResourcePrice(resource.id, resourcePrice)
+      dataProvider.updateRecipe(recipe.id, { price: recipePrice })
+
+      const jsonString = dataProvider.exportAsDefaultsJson()
+      const exported = JSON.parse(jsonString) as DefaultData
+
+      expect(exported.materials.find((m) => m.id === material.id)?.price).toBe(materialPrice)
+      expect(exported.potions.find((p) => p.id === potion.id)?.price).toBe(potionPrice)
+      expect(exported.resources.find((r) => r.id === resource.id)?.marketPrice).toBe(resourcePrice)
+      expect(exported.recipes.find((r) => r.id === recipe.id)?.price).toBe(recipePrice)
+    })
+
+    it('should round-trip correctly: export -> parse -> matches schema', () => {
+      const dataProvider = useDataProvider()
+
+      // Set some overrides
+      const material = dataProvider.materials.value[0]
+      dataProvider.updateMaterialPrice(material.id, 777)
+      dataProvider.updateHashedId('materials', material.id, 'test-hash')
+
+      const jsonString = dataProvider.exportAsDefaultsJson()
+      const exported = JSON.parse(jsonString) as DefaultData
+
+      // Verify it matches the DefaultData interface structure
+      expect(typeof exported.materials).toBe('object')
+      expect(Array.isArray(exported.materials)).toBe(true)
+      expect(typeof exported.potions).toBe('object')
+      expect(Array.isArray(exported.potions)).toBe(true)
+      expect(typeof exported.resources).toBe('object')
+      expect(Array.isArray(exported.resources)).toBe(true)
+      expect(typeof exported.recipes).toBe('object')
+      expect(Array.isArray(exported.recipes)).toBe(true)
+      expect(typeof exported.dungeons).toBe('object')
+      expect(Array.isArray(exported.dungeons)).toBe(true)
+      expect(typeof exported.potionCrafts).toBe('object')
+      expect(Array.isArray(exported.potionCrafts)).toBe(true)
+      expect(typeof exported.resourceGathering).toBe('object')
+      expect(Array.isArray(exported.resourceGathering)).toBe(true)
+      expect(typeof exported.magicFindDefaults).toBe('object')
+      expect(typeof exported.marketTaxRate).toBe('number')
+    })
+
+    it('should preserve empty hashedId as empty string', () => {
+      const dataProvider = useDataProvider()
+
+      // Clear all overrides and reload to ensure clean state
+      dataProvider.clearAllOverrides()
+      dataProvider.reloadOverrides()
+
+      const jsonString = dataProvider.exportAsDefaultsJson()
+      const exported = JSON.parse(jsonString) as DefaultData
+
+      // Find a material that hasn't been modified in any previous test
+      // Use the last material as it's less likely to have been used
+      const materialWithoutHashedId = exported.materials[exported.materials.length - 1]
+
+      expect(materialWithoutHashedId).toBeDefined()
+      expect(materialWithoutHashedId?.hashedId).toBe('')
+    })
+
+    it('should preserve vendorValue as 0 when not overridden', () => {
+      const dataProvider = useDataProvider()
+
+      const jsonString = dataProvider.exportAsDefaultsJson()
+      const exported = JSON.parse(jsonString) as DefaultData
+
+      // Find a material without a vendorValue override
+      const materialWithoutVendorValue = exported.materials.find(
+        (m) => !dataProvider.hasOverride('materials', m.id)
+      )
+
+      expect(materialWithoutVendorValue).toBeDefined()
+      // Should be 0 or the default value from defaults.json
+      expect(typeof materialWithoutVendorValue?.vendorValue).toBe('number')
+    })
+
+    it('should flow resource price overrides to resourceGathering marketPrice', () => {
+      const dataProvider = useDataProvider()
+
+      const firstResource = dataProvider.resources.value[0]
+      const newMarketPrice = 777
+
+      dataProvider.updateResourcePrice(firstResource.id, newMarketPrice)
+
+      const jsonString = dataProvider.exportAsDefaultsJson()
+      const exported = JSON.parse(jsonString) as DefaultData
+
+      // Find the same resource in resourceGathering
+      const gatherResource = exported.resourceGathering.find((r) => r.name === firstResource.name)
+
+      if (gatherResource) {
+        expect(gatherResource.marketPrice).toBe(newMarketPrice)
+      }
+    })
+
+    it('should handle recipe with optional value field correctly', () => {
+      const dataProvider = useDataProvider()
+
+      const jsonString = dataProvider.exportAsDefaultsJson()
+      const exported = JSON.parse(jsonString) as DefaultData
+
+      // Find recipes with and without value field in original data
+      const originalWithValue = (defaultData as DefaultData).recipes.find((r) => r.value !== undefined)
+      const originalWithoutValue = (defaultData as DefaultData).recipes.find((r) => r.value === undefined)
+
+      if (originalWithValue) {
+        const exportedWithValue = exported.recipes.find((r) => r.id === originalWithValue.id)
+        expect(exportedWithValue?.value).toBeDefined()
+      }
+
+      if (originalWithoutValue) {
+        const exportedWithoutValue = exported.recipes.find((r) => r.id === originalWithoutValue.id)
+        // value field should either be undefined or not present
+        expect(exportedWithoutValue?.value === undefined || !('value' in exportedWithoutValue)).toBe(true)
+      }
     })
   })
 })

@@ -3,2977 +3,2977 @@
     {
       "id": "mat-1",
       "name": "Moose antler",
-      "price": 125,
-      "hashedId": "",
-      "vendorValue": 0
+      "price": 114.1,
+      "hashedId": "dgBq1boWYek4QkJ3rXaD",
+      "vendorValue": 35
     },
     {
       "id": "mat-2",
       "name": "Minotaur Hide",
-      "price": 413,
-      "hashedId": "",
-      "vendorValue": 0
+      "price": 378.9,
+      "hashedId": "Rv5g4z1dQnEGLqy32jpG",
+      "vendorValue": 44
     },
     {
       "id": "mat-3",
       "name": "Black Bear Pelt",
-      "price": 82,
-      "hashedId": "",
-      "vendorValue": 0
+      "price": 99.3,
+      "hashedId": "ElzPeorXNVlxLaW0kv53",
+      "vendorValue": 36
     },
     {
       "id": "mat-4",
       "name": "Orb of elemental",
-      "price": 105,
-      "hashedId": "",
-      "vendorValue": 0
+      "price": 89.8,
+      "hashedId": "ElzPeorXNVvxNaW0kv53",
+      "vendorValue": 25
     },
     {
       "id": "mat-5",
       "name": "Elk Antler",
-      "price": 335,
-      "hashedId": "",
-      "vendorValue": 0
+      "price": 395.5,
+      "hashedId": "O2xMjGdBN5MqN9P1nyrv",
+      "vendorValue": 25
     },
     {
       "id": "mat-6",
       "name": "Enigmatic Stone",
-      "price": 50,
-      "hashedId": "",
-      "vendorValue": 0
+      "price": 69,
+      "hashedId": "njoPWKDkLXeAQ06ZOX79",
+      "vendorValue": 25
     },
     {
       "id": "mat-7",
       "name": "Lions teeth",
-      "price": 160,
-      "hashedId": "",
-      "vendorValue": 0
+      "price": 246,
+      "hashedId": "Ro31P7kZL6r6LveGxXOy",
+      "vendorValue": 27
     },
     {
       "id": "mat-8",
       "name": "Wolf pelt",
-      "price": 96,
-      "hashedId": "",
-      "vendorValue": 0
+      "price": 102.7,
+      "hashedId": "ZjlPA8v9NMybNEyMe2Oa",
+      "vendorValue": 37
     },
     {
       "id": "mat-9",
       "name": "Goblin totem",
-      "price": 37,
-      "hashedId": "",
-      "vendorValue": 0
+      "price": 31.5,
+      "hashedId": "P1vlVrzjLrgwQao8mGKM",
+      "vendorValue": 5
     },
     {
       "id": "mat-10",
       "name": "Harpy wing",
-      "price": 14,
-      "hashedId": "",
+      "price": 9.6,
+      "hashedId": "3ZvrGV8RQpGwL2wgA5jD",
       "vendorValue": 0
     },
     {
       "id": "mat-11",
       "name": "Air elemental",
-      "price": 290,
-      "hashedId": "",
-      "vendorValue": 0
+      "price": 292.2,
+      "hashedId": "Ro31P7kZL6m6YveGxXOy",
+      "vendorValue": 115
     }
   ],
   "potions": [
     {
       "id": "pot-1",
       "name": "Wraithbane",
-      "price": 11600,
-      "hashedId": "",
-      "vendorValue": 0
+      "price": 11894.6,
+      "hashedId": "P1vlVrzjLryRYao8mGKM",
+      "vendorValue": 2500
     },
     {
       "id": "pot-2",
       "name": "Thunderfury",
-      "price": 5500,
-      "hashedId": "",
-      "vendorValue": 0
+      "price": 5250,
+      "hashedId": "Z6aDoyRnLybkQpV5AGXm",
+      "vendorValue": 2500
     },
     {
       "id": "pot-3",
       "name": "Gourmet",
-      "price": 7150,
-      "hashedId": "",
-      "vendorValue": 0
+      "price": 7580,
+      "hashedId": "bAB1E9poQqrkNnakeJj5",
+      "vendorValue": 2500
     },
     {
       "id": "pot-4",
       "name": "Dungeon master",
-      "price": 2291,
-      "hashedId": "",
-      "vendorValue": 0
+      "price": 2298.6,
+      "hashedId": "j98bO5w1QP0jQ3xkREVJ",
+      "vendorValue": 500
     },
     {
       "id": "pot-5",
       "name": "Frenzy",
-      "price": 3100,
-      "hashedId": "",
-      "vendorValue": 0
+      "price": 3112,
+      "hashedId": "brz9RZnWN7VaQKAp0Mdl",
+      "vendorValue": 2500
     },
     {
       "id": "pot-6",
       "name": "Cosmic",
-      "price": 5900,
-      "hashedId": "",
-      "vendorValue": 0
+      "price": 34506.9,
+      "hashedId": "93R0qXalLljjNAbn8DBg",
+      "vendorValue": 20000
     }
   ],
   "resources": [
     {
       "id": "res-1",
       "name": "Coal",
-      "marketPrice": 6,
+      "marketPrice": 5.6,
       "vendorValue": 1,
-      "hashedId": ""
+      "hashedId": "7eA59WrBQRXJYzb62qKv"
     },
     {
       "id": "res-2",
       "name": "Stingray",
-      "marketPrice": 38,
-      "vendorValue": 26,
-      "hashedId": ""
+      "marketPrice": 35.7,
+      "vendorValue": 22,
+      "hashedId": "oaJydnOmQW2LbgRe5ME6"
     },
     {
       "id": "res-3",
       "name": "Cooked Stingray",
-      "marketPrice": 67,
-      "vendorValue": 65,
-      "hashedId": ""
+      "marketPrice": 66.9,
+      "vendorValue": 55,
+      "hashedId": "6leApVoENk1RL7nRPy2D"
     },
     {
       "id": "res-4",
       "name": "Great White Shark",
-      "marketPrice": 56,
-      "vendorValue": 41,
-      "hashedId": ""
+      "marketPrice": 47.5,
+      "vendorValue": 77,
+      "hashedId": "ZqEegBydNw7NkA59J61b"
     },
     {
       "id": "res-5",
       "name": "Cooked Great White Shark",
-      "marketPrice": 105,
+      "marketPrice": 107,
       "vendorValue": 92,
-      "hashedId": ""
+      "hashedId": "Rv5g4z1dQnk9Nqy32jpG"
     },
     {
       "id": "res-6",
       "name": "Mystic Ore",
-      "marketPrice": 24,
-      "vendorValue": 20,
-      "hashedId": ""
+      "marketPrice": 23.5,
+      "vendorValue": 17,
+      "hashedId": "0kK49j1VN9yNq6B2doap"
     },
     {
       "id": "res-7",
       "name": "Mystic Bar",
-      "marketPrice": 67,
-      "vendorValue": 59,
-      "hashedId": ""
+      "marketPrice": 64.5,
+      "vendorValue": 50,
+      "hashedId": "dgBq1boWYegrQkJ3rXaD"
     }
   ],
   "recipes": [
     {
       "id": "rec-1",
       "name": "Improved Fishing Rod Recipe",
-      "price": 300,
+      "price": 260.1,
       "chance": 0.05,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "JZdg5V3PQo4vNEyWq0zl",
+      "vendorValue": 10
     },
     {
       "id": "rec-2",
       "name": "Improved Pickaxe Recipe",
-      "price": 1600,
+      "price": 1428,
       "chance": 0.05,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "XjEaOeBkLa3ONlGwxVPq",
+      "vendorValue": 10
     },
     {
       "id": "rec-3",
       "name": "Improved Felling axe Recipe",
-      "price": 250,
+      "price": 480,
       "chance": 0.05,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "mK5jqPopYG38YrOzDRGV",
+      "vendorValue": 10
     },
     {
       "id": "rec-4",
       "name": "Herculean Strength Elixir Recipe",
-      "price": 28,
+      "price": 21.2,
       "chance": 0.05,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "BPjze3x2Q3ogQR85vgZV",
+      "vendorValue": 10
     },
     {
       "id": "rec-5",
       "name": "Bastion Elixir Recipe",
-      "price": 19,
+      "price": 15.6,
       "chance": 0.05,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "XjEaOeBkLakMNlGwxVPq",
+      "vendorValue": 10
     },
     {
       "id": "rec-6",
       "name": "Galeforce Speed Elixir Recipe",
-      "price": 29,
+      "price": 23.8,
       "chance": 0.05,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "njoPWKDkLXBxN06ZOX79",
+      "vendorValue": 10
     },
     {
       "id": "rec-7",
       "name": "Falcon's Grace Elixir Recipe",
-      "price": 17,
+      "price": 15.2,
       "chance": 0.05,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "B2WEpv54Nm6xYj1xJrXk",
+      "vendorValue": 10
     },
     {
       "id": "rec-8",
       "name": "Rivertamer Recipe",
-      "price": 650,
+      "price": 673.5,
       "chance": 0.05,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "JVM29l7kQZ3MN80q6WDG",
+      "vendorValue": 10
     },
     {
       "id": "rec-9",
       "name": "Veinseeker Recipe",
-      "price": 6200,
+      "price": 5957.3,
       "chance": 0.05,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "njoPWKDkLX3VY06ZOX79",
+      "vendorValue": 10
     },
     {
       "id": "rec-10",
       "name": "Timberfall Talon Recipe",
-      "price": 850,
+      "price": 898.2,
       "chance": 0.05,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "3ZvrGV8RQp5BN2wgA5jD",
+      "vendorValue": 10
     },
     {
       "id": "rec-11",
       "name": "Protection Potion Recipe",
-      "price": 145,
+      "price": 99.2,
       "chance": 0.051,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "RVrBKlPdNdpVNWG8xJe9",
+      "vendorValue": 35
     },
     {
       "id": "rec-12",
       "name": "Felling Essence Recipe",
-      "price": 44,
+      "price": 55.9,
       "chance": 0.051,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "6leApVoENkVRQ7nRPy2D",
+      "vendorValue": 35
     },
     {
       "id": "rec-13",
       "name": "Oreseeker Essence Crystal Recipe",
-      "price": 64,
+      "price": 100.6,
       "chance": 0.051,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "doyA279pNz20NKRDEWm8",
+      "vendorValue": 35
     },
     {
       "id": "rec-14",
       "name": "Attack Power Potion Recipe",
-      "price": 42,
+      "price": 70.8,
       "chance": 0.051,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "j98bO5w1QPmjN3xkREVJ",
+      "vendorValue": 35
     },
     {
       "id": "rec-15",
       "name": "Titan Power Brew Recipe",
-      "price": 78,
+      "price": 66.2,
       "chance": 0.051,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "EWGwnXPlY1xyNJqekZ2R",
+      "vendorValue": 35
     },
     {
       "id": "rec-16",
       "name": "Vortex Brew Recipe",
-      "price": 135,
+      "price": 160.2,
       "chance": 0.045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "ElzPeorXNV4jLaW0kv53",
+      "vendorValue": 100
     },
     {
       "id": "rec-17",
       "name": "Seasong's Lure Recipe",
-      "price": 2900,
+      "price": 3599.5,
       "chance": 0.05,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "93R0qXalLlMdQAbn8DBg",
+      "vendorValue": 10
     },
     {
       "id": "rec-18",
       "name": "Ironbite Recipe",
-      "price": 14000,
+      "price": 16514.4,
       "chance": 0.05,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "B2WEpv54NmrKYj1xJrXk",
+      "vendorValue": 10
     },
     {
       "id": "rec-19",
       "name": "Wildwood Chopper Recipe",
-      "price": 1690,
+      "price": 2200,
       "chance": 0.05,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "dgBq1boWYeerYkJ3rXaD",
+      "vendorValue": 10
     },
     {
       "id": "rec-20",
       "name": "Fortified Protection Recipe",
-      "price": 228,
+      "price": 62.9,
       "chance": 0.0455,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "Rv5g4z1dQnp9Yqy32jpG",
+      "vendorValue": 35
     },
     {
       "id": "rec-21",
       "name": "Quickstep Essence Recipe",
-      "price": 94,
+      "price": 81.9,
       "chance": 0.0455,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "mK5jqPopYGKOYrOzDRGV",
+      "vendorValue": 35
     },
     {
       "id": "rec-22",
       "name": "Precision Essence Recipe",
-      "price": 88,
+      "price": 72.1,
       "chance": 0.0455,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "3ZvrGV8RQpMyN2wgA5jD",
+      "vendorValue": 35
     },
     {
       "id": "rec-23",
       "name": "Merfolk Essence Recipe",
-      "price": 555,
+      "price": 683.2,
       "chance": 0.0455,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "dgBq1boWYeZ0LkJ3rXaD",
+      "vendorValue": 35
     },
     {
       "id": "rec-24",
       "name": "Molten Core Tonic Recipe",
-      "price": 500,
+      "price": 487.5,
       "chance": 0.042,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "7eA59WrBQRqpLzb62qKv",
+      "vendorValue": 100
     },
     {
       "id": "rec-25",
       "name": "Spicefinder Essence Crystal Recipe",
-      "price": 404,
+      "price": 691.9,
       "chance": 0.035,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "XyeZRGx9YjPKQB80gWlP",
+      "vendorValue": 100
     },
     {
       "id": "rec-26",
       "name": "Bulwark Brew Recipe",
-      "price": 295,
+      "price": 260.8,
       "chance": 0.035,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "Ro31P7kZL67AQveGxXOy",
+      "vendorValue": 100
     },
     {
       "id": "rec-27",
       "name": "Bladeburst Elixir Recipe",
-      "price": 199,
+      "price": 170.7,
       "chance": 0.035,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "brz9RZnWN7qaLKAp0Mdl",
+      "vendorValue": 100
     },
     {
       "id": "rec-28",
       "name": "Ironclad Tonic Recipe",
-      "price": 244,
+      "price": 222.9,
       "chance": 0.035,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "bAB1E9poQq8kLnakeJj5",
+      "vendorValue": 100
     },
     {
       "id": "rec-29",
       "name": "Moonshimmer Hook Recipe",
-      "price": 15000,
+      "price": 10114.8,
       "chance": 0.05,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "1rZXlwg5Yv2GYk9joDmG",
+      "vendorValue": 35
     },
     {
       "id": "rec-30",
       "name": "Boulder Breaker Recipe",
-      "price": 33000,
+      "price": 31239.2,
       "chance": 0.05,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "RVrBKlPdNd3yQWG8xJe9",
+      "vendorValue": 35
     },
     {
       "id": "rec-31",
       "name": "Leafblade Recipe",
-      "price": 5998,
+      "price": 5214.9,
       "chance": 0.05,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "7eA59WrBQR3JNzb62qKv",
+      "vendorValue": 35
     },
     {
       "id": "rec-32",
       "name": "Impenetrable Essence Recipe",
-      "price": 117,
+      "price": 117.2,
       "chance": 0.0468,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "ZjlPA8v9NMRXYEyMe2Oa",
+      "vendorValue": 100
     },
     {
       "id": "rec-33",
       "name": "Windrider Essence Recipe",
-      "price": 119,
+      "price": 125.5,
       "chance": 0.0468,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "P1vlVrzjLr8RNao8mGKM",
+      "vendorValue": 100
     },
     {
       "id": "rec-34",
       "name": "Acrobatic's Essence Recipe",
-      "price": 130,
+      "price": 116.8,
       "chance": 0.0468,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "Z6aDoyRnLy8kYpV5AGXm",
+      "vendorValue": 100
     },
     {
       "id": "rec-35",
       "name": "Strike Essence Recipe",
-      "price": 137,
+      "price": 116.3,
       "chance": 0.0468,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "27gw0k38L4jxNWevJxyK",
+      "vendorValue": 100
     },
     {
       "id": "rec-36",
       "name": "Yggdrasil Nectar Recipe",
-      "price": 120,
+      "price": 126.7,
       "chance": 0.0468,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "O2xMjGdBN56MY9P1nyrv",
+      "vendorValue": 100
     },
     {
       "id": "rec-37",
       "name": "Earthcore Infusion Recipe",
-      "price": 549,
+      "price": 228.1,
       "chance": 0.026,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "dgBq1boWYeZmLkJ3rXaD",
+      "vendorValue": 10
     },
     {
       "id": "rec-38",
       "name": "Shadowbane Recipe",
-      "price": 1444,
+      "price": 1713.8,
       "chance": 0.02,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "lrx463VdQgGAQ5w1zWKP",
+      "vendorValue": 250
     },
     {
       "id": "rec-39",
       "name": "Soulrender Recipe",
-      "price": 1690,
+      "price": 2709.2,
       "chance": 0.019,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "y7Do6jgkY0zpQ8BAdKX0",
+      "vendorValue": 300
     },
     {
       "id": "rec-40",
       "name": "Shadowstrike Recipe",
-      "price": 599,
+      "price": 1191.7,
       "chance": 0.02,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "6leApVoENkXoY7nRPy2D",
+      "vendorValue": 250
     },
     {
       "id": "rec-41",
       "name": "Venomfang Recipe",
-      "price": 590,
+      "price": 836.1,
       "chance": 0.019,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "doyA279pNzDjLKRDEWm8",
+      "vendorValue": 300
     },
     {
       "id": "rec-42",
       "name": "Whisperwind Bow Recipe",
-      "price": 890,
+      "price": 2837.8,
       "chance": 0.02,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "gGZ2J71yYKd4LMmjbown",
+      "vendorValue": 250
     },
     {
       "id": "rec-43",
       "name": "Stormcaster Recipe",
-      "price": 900,
+      "price": 1179.6,
       "chance": 0.019,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "yav4OK1wNEzxYZP7rzJb",
+      "vendorValue": 300
     },
     {
       "id": "rec-44",
       "name": "Radiant Crest Recipe",
-      "price": 1499,
+      "price": 1238.7,
       "chance": 0.02,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "3ZvrGV8RQpw8L2wgA5jD",
+      "vendorValue": 250
     },
     {
       "id": "rec-45",
       "name": "Shadow Helm Recipe",
-      "price": 1300,
+      "price": 1180.6,
       "chance": 0.019,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "dgBq1boWYeA9YkJ3rXaD",
+      "vendorValue": 300
     },
     {
       "id": "rec-46",
       "name": "Ironclad Gauntlets Recipe",
-      "price": 1800,
+      "price": 2839.2,
       "chance": 0.02,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "lrx463VdQggxQ5w1zWKP",
+      "vendorValue": 250
     },
     {
       "id": "rec-47",
       "name": "Stormguard Plate Recipe",
-      "price": 899,
+      "price": 2754.2,
       "chance": 0.02,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "6leApVoENkA2L7nRPy2D",
+      "vendorValue": 250
     },
     {
       "id": "rec-48",
       "name": "Dragonheart Plate Recipe",
-      "price": 2888,
+      "price": 2658.2,
       "chance": 0.019,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "doyA279pNzGxYKRDEWm8",
+      "vendorValue": 300
     },
     {
       "id": "rec-49",
       "name": "Stormstrider Greaves Recipe",
-      "price": 3150,
+      "price": 3095.8,
       "chance": 0.02,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "gGZ2J71yYKapQMmjbown",
+      "vendorValue": 250
     },
     {
       "id": "rec-50",
       "name": "Shadowstep Greaves Recipe",
-      "price": 3700,
+      "price": 3599.7,
       "chance": 0.019,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "yav4OK1wNEvzYZP7rzJb",
+      "vendorValue": 300
     },
     {
       "id": "rec-51",
       "name": "Swiftwind Boots Recipe",
-      "price": 1199,
+      "price": 2597.8,
       "chance": 0.02,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "3ZvrGV8RQpzmY2wgA5jD",
+      "vendorValue": 250
     },
     {
       "id": "rec-52",
       "name": "Aegis of the Seraph Recipe",
-      "price": 12999,
+      "price": 14053.2,
       "chance": 0.02,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "lrx463VdQgwaQ5w1zWKP",
+      "vendorValue": 250
     },
     {
       "id": "rec-53",
       "name": "Stormguard Shield Recipe",
-      "price": 14000,
+      "price": 14704.8,
       "chance": 0.019,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "y7Do6jgkY0EKL8BAdKX0",
+      "vendorValue": 300
     },
     {
       "id": "rec-54",
       "name": "Riverbend Infusion Recipe",
-      "price": 8898,
+      "price": 7398.4,
       "chance": 0.0168,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "7eA59WrBQRqyLzb62qKv",
+      "vendorValue": 10
     },
     {
       "id": "rec-55",
       "name": "Tampering Essence Recipe",
-      "price": 11500,
+      "price": 9429.8,
       "chance": 0.0168,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "ElzPeorXNV4pLaW0kv53",
+      "vendorValue": 10
     },
     {
       "id": "rec-56",
       "name": "Riverbend Infusion Recipe (Untradable)",
       "price": 0,
       "chance": 0.0532,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "oaJydnOmQWDdNbgRe5ME",
+      "vendorValue": 10
     },
     {
       "id": "rec-57",
       "name": "Tampering Essence Recipe (Untradable)",
       "price": 0,
       "chance": 0.0532,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "ZqEegBydNwWzNkA59J61",
+      "vendorValue": 10
     },
     {
       "id": "rec-58",
       "name": "Frostbite Recipe",
-      "price": 850,
+      "price": 4130.1,
       "chance": 0.018,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "3yE1A84kYOqxQl6XeVKp",
+      "vendorValue": 350
     },
     {
       "id": "rec-59",
       "name": "Stormbringer Recipe",
-      "price": 1095,
+      "price": 1230.5,
       "chance": 0.016,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "DBngxedVYJREYX64wW8o",
+      "vendorValue": 400
     },
     {
       "id": "rec-60",
       "name": "Bloodletter Recipe",
-      "price": 650,
+      "price": 765,
       "chance": 0.018,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "j98bO5w1QPwEL3xkREVJ",
+      "vendorValue": 350
     },
     {
       "id": "rec-61",
       "name": "Whisperblade Recipe",
-      "price": 500,
+      "price": 1682.2,
       "chance": 0.016,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "EWGwnXPlY178QJqekZ2R",
+      "vendorValue": 400
     },
     {
       "id": "rec-62",
       "name": "Shadow Shot Recipe",
-      "price": 799,
+      "price": 1124.4,
       "chance": 0.018,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "oaJydnOmQWEaYbgRe5ME",
+      "vendorValue": 350
     },
     {
       "id": "rec-63",
       "name": "Frostbite Shot Recipe",
-      "price": 1000,
+      "price": 2525,
       "chance": 0.016,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "ZqEegBydNwvoQkA59J61",
+      "vendorValue": 400
     },
     {
       "id": "rec-64",
       "name": "Frostguard Visage Recipe",
-      "price": 690,
+      "price": 786.5,
       "chance": 0.018,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "7eA59WrBQRErLzb62qKv",
+      "vendorValue": 350
     },
     {
       "id": "rec-65",
       "name": "Sentinel's Gaze Recipe",
-      "price": 1000,
+      "price": 1250.4,
       "chance": 0.016,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "ElzPeorXNVZ3NaW0kv53",
+      "vendorValue": 400
     },
     {
       "id": "rec-66",
       "name": "Dragonfire Grasp Recipe",
-      "price": 2000,
+      "price": 3669.9,
       "chance": 0.018,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "y7Do6jgkY07BN8BAdKX0",
+      "vendorValue": 300
     },
     {
       "id": "rec-67",
       "name": "Shadowstrike Grips Recipe",
-      "price": 999,
+      "price": 1092.8,
       "chance": 0.018,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "3yE1A84kYOdDLl6XeVKp",
+      "vendorValue": 350
     },
     {
       "id": "rec-68",
       "name": "Frostbite Gauntlets Recipe",
-      "price": 2499,
+      "price": 2738.8,
       "chance": 0.016,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "DBngxedVYJJqYX64wW8o",
+      "vendorValue": 400
     },
     {
       "id": "rec-69",
       "name": "Shadowcloak Vestments Recipe",
-      "price": 1900,
+      "price": 2609.9,
       "chance": 0.018,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "j98bO5w1QP2BY3xkREVJ",
+      "vendorValue": 350
     },
     {
       "id": "rec-70",
       "name": "Frostbite Plate Recipe",
-      "price": 1425,
+      "price": 2794,
       "chance": 0.016,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "EWGwnXPlY1qAYJqekZ2R",
+      "vendorValue": 400
     },
     {
       "id": "rec-71",
       "name": "Frostbite Legguards Recipe",
-      "price": 900,
+      "price": 2714.5,
       "chance": 0.018,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "oaJydnOmQWodQbgRe5ME",
+      "vendorValue": 350
     },
     {
       "id": "rec-72",
       "name": "Sentinel's Resolve Recipe",
-      "price": 950,
+      "price": 845,
       "chance": 0.016,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "ZqEegBydNwzzQkA59J61",
+      "vendorValue": 400
     },
     {
       "id": "rec-73",
       "name": "Shadowstep Footwear Recipe",
-      "price": 3999,
+      "price": 2011.9,
       "chance": 0.018,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "dgBq1boWYe8wNkJ3rXaD",
+      "vendorValue": 300
     },
     {
       "id": "rec-74",
       "name": "Soulward Barrier Recipe",
-      "price": 13000,
+      "price": 9439.9,
       "chance": 0.018,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "3yE1A84kYOa6Ql6XeVKp",
+      "vendorValue": 350
     },
     {
       "id": "rec-75",
       "name": "Hydra's Coil Recipe",
-      "price": 78000,
+      "price": 75313.8,
       "chance": 0.04,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "q9pwa0kxLBZRLgVj136l",
+      "vendorValue": 35
     },
     {
       "id": "rec-76",
       "name": "Earthshaker Recipe",
-      "price": 112000,
+      "price": 103999.7,
       "chance": 0.04,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "6leApVoENkqZL7nRPy2D",
+      "vendorValue": 35
     },
     {
       "id": "rec-77",
       "name": "Grove Cleaver Recipe",
-      "price": 42500,
+      "price": 42826.5,
       "chance": 0.04,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "ElzPeorXNV3BYaW0kv53",
+      "vendorValue": 35
     },
     {
       "id": "rec-78",
       "name": "Shieldbearer's Infusion Recipe",
-      "price": 2893,
+      "price": 2294.2,
       "chance": 0.0168,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "XyeZRGx9YjP2QB80gWlP",
+      "vendorValue": 10
     },
     {
       "id": "rec-79",
       "name": "Unyielding Fortitude Recipe",
-      "price": 1500,
+      "price": 1810.1,
       "chance": 0.0168,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "Ro31P7kZL675QveGxXOy",
+      "vendorValue": 10
     },
     {
       "id": "rec-80",
       "name": "Shieldbearer's Infusion Recipe (Untradable)",
       "price": 0,
       "chance": 0.0532,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "3Zbym56qLxwyYBRp7Eek",
+      "vendorValue": 10
     },
     {
       "id": "rec-81",
       "name": "Unyielding Fortitude Recipe (Untradable)",
       "price": 0,
       "chance": 0.0532,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "oZwey82VNArMYD0dXM3g",
+      "vendorValue": 10
     },
     {
       "id": "rec-82",
       "name": "Doomblade Recipe",
-      "price": 8500,
+      "price": 3196.6,
       "chance": 0.015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "jGXBy7a4Lbg1Q0Pw6Vdg",
+      "vendorValue": 450
     },
     {
       "id": "rec-83",
       "name": "Serpentstrike Recipe",
-      "price": 1280,
+      "price": 1328.8,
       "chance": 0.013,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "BRn3x72JQ2qXLzOMok41",
+      "vendorValue": 500
     },
     {
       "id": "rec-84",
       "name": "Serpent's Kiss Recipe",
-      "price": 895,
+      "price": 964.4,
       "chance": 0.015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "Rv5g4z1dQnXKYqy32jpG",
+      "vendorValue": 450
     },
     {
       "id": "rec-85",
       "name": "Moonshadow Recipe",
-      "price": 1200,
+      "price": 1199.6,
       "chance": 0.013,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "mK5jqPopYG2KNrOzDRGV",
+      "vendorValue": 500
     },
     {
       "id": "rec-86",
       "name": "Serpent's Arrow Recipe",
-      "price": 795,
+      "price": 1249.1,
       "chance": 0.015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "3Zbym56qLxb1NBRp7Eek",
+      "vendorValue": 450
     },
     {
       "id": "rec-87",
       "name": "Viper Recipe",
-      "price": 1300,
+      "price": 1105,
       "chance": 0.013,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "oZwey82VNAdPQD0dXM3g",
+      "vendorValue": 500
     },
     {
       "id": "rec-88",
       "name": "Celestial Crown Recipe",
-      "price": 3450,
+      "price": 3978.7,
       "chance": 0.015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "XyeZRGx9Yj2nYB80gWlP",
+      "vendorValue": 450
     },
     {
       "id": "rec-89",
       "name": "Emberfire Helm Recipe",
-      "price": 2800,
+      "price": 2825,
       "chance": 0.013,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "Ro31P7kZL6MJYveGxXOy",
+      "vendorValue": 500
     },
     {
       "id": "rec-90",
       "name": "Titan's Embrace Recipe",
-      "price": 3000,
+      "price": 2273.8,
       "chance": 0.015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "jGXBy7a4LbM4Y0Pw6Vdg",
+      "vendorValue": 450
     },
     {
       "id": "rec-91",
       "name": "Celestial Touch Gloves Recipe",
-      "price": 3799,
+      "price": 6858.6,
       "chance": 0.013,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "BRn3x72JQ2MJLzOMok41",
+      "vendorValue": 500
     },
     {
       "id": "rec-92",
       "name": "Sentinel's Embrace Recipe",
-      "price": 997,
+      "price": 1824.8,
       "chance": 0.015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "Rv5g4z1dQnm6Lqy32jpG",
+      "vendorValue": 450
     },
     {
       "id": "rec-93",
       "name": "Celestial Striders Recipe",
-      "price": 8000,
+      "price": 5570.4,
       "chance": 0.015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "3Zbym56qLxzyNBRp7Eek",
+      "vendorValue": 450
     },
     {
       "id": "rec-94",
       "name": "Frostbite Walkers Recipe",
-      "price": 2999,
+      "price": 3749.7,
       "chance": 0.015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "7eA59WrBQRKjNzb62qKv",
+      "vendorValue": 350
     },
     {
       "id": "rec-95",
       "name": "Guardian's Stride Recipe",
-      "price": 2288,
+      "price": 3465.6,
       "chance": 0.015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "ElzPeorXNVK8YaW0kv53",
+      "vendorValue": 400
     },
     {
       "id": "rec-96",
       "name": "Flamebreaker Buckler Recipe",
-      "price": 22500,
+      "price": 13659.8,
       "chance": 0.015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "DBngxedVYJa0NX64wW8o",
+      "vendorValue": 400
     },
     {
       "id": "rec-97",
       "name": "Shadowbound Ward Recipe",
-      "price": 15800,
+      "price": 14000,
       "chance": 0.015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "jGXBy7a4LbP7N0Pw6Vdg",
+      "vendorValue": 450
     },
     {
       "id": "rec-98",
       "name": "Stoneheart Solution Recipe",
-      "price": 6000,
+      "price": 6246.3,
       "chance": 0.012,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "brz9RZnWN7qDLKAp0Mdl",
+      "vendorValue": 10
     },
     {
       "id": "rec-99",
       "name": "Lightning Sprint Recipe",
-      "price": 30000,
+      "price": 29383,
       "chance": 0.012,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "bAB1E9poQq8VLnakeJj5",
+      "vendorValue": 10
     },
     {
       "id": "rec-100",
       "name": "Stoneheart Solution Recipe (Untradable)",
       "price": 0,
       "chance": 0.038,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "JZdg5V3PQog1QEyWq0zl",
+      "vendorValue": 10
     },
     {
       "id": "rec-101",
       "name": "Lightning Sprint Recipe (Untradable)",
       "price": 0,
       "chance": 0.038,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "JVM29l7kQZaKL80q6WDG",
+      "vendorValue": 10
     },
     {
       "id": "rec-102",
       "name": "Celestial Edge Recipe",
-      "price": 2500,
+      "price": 2720,
       "chance": 0.012,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "gGZ2J71yYKp4LMmjbown",
+      "vendorValue": 550
     },
     {
       "id": "rec-103",
       "name": "Bloodmoon Sword Recipe",
-      "price": 1995,
+      "price": 2348.5,
       "chance": 0.011,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "yav4OK1wNEmxNZP7rzJb",
+      "vendorValue": 600
     },
     {
       "id": "rec-104",
       "name": "Quickstrike Recipe",
-      "price": 850,
+      "price": 4474.6,
       "chance": 0.011,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "3ZvrGV8RQpX8Q2wgA5jD",
+      "vendorValue": 550
     },
     {
       "id": "rec-105",
       "name": "Runeblade Dagger Recipe",
-      "price": 800,
+      "price": 901.8,
       "chance": 0.011,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "dgBq1boWYeX9NkJ3rXaD",
+      "vendorValue": 600
     },
     {
       "id": "rec-106",
       "name": "Moonshot Recipe",
-      "price": 650,
+      "price": 1166.3,
       "chance": 0.011,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "JZdg5V3PQobyLEyWq0zl",
+      "vendorValue": 550
     },
     {
       "id": "rec-107",
       "name": "Stormsong Recipe",
-      "price": 795,
+      "price": 1046.3,
       "chance": 0.011,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "JVM29l7kQZDmY80q6WDG",
+      "vendorValue": 600
     },
     {
       "id": "rec-108",
       "name": "Thunder Helm Recipe",
-      "price": 899,
+      "price": 1090,
       "chance": 0.011,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "brz9RZnWN7r9QKAp0Mdl",
+      "vendorValue": 550
     },
     {
       "id": "rec-109",
       "name": "Emberfist Recipe",
-      "price": 998,
+      "price": 1199.1,
       "chance": 0.011,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "gGZ2J71yYKEpQMmjbown",
+      "vendorValue": 550
     },
     {
       "id": "rec-110",
       "name": "Celestial Radiance Recipe",
-      "price": 3495,
+      "price": 4274.7,
       "chance": 0.012,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "mK5jqPopYGgeYrOzDRGV",
+      "vendorValue": 500
     },
     {
       "id": "rec-111",
       "name": "Ironbark Cuirass Recipe",
-      "price": 1949,
+      "price": 2528.9,
       "chance": 0.011,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "3ZvrGV8RQpAmN2wgA5jD",
+      "vendorValue": 550
     },
     {
       "id": "rec-112",
       "name": "Emberfoot Greaves Recipe",
-      "price": 999,
+      "price": 7603.4,
       "chance": 0.012,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "oZwey82VNAEMND0dXM3g",
+      "vendorValue": 500
     },
     {
       "id": "rec-113",
       "name": "Thunderclash Greaves Recipe",
-      "price": 7499,
+      "price": 6060.6,
       "chance": 0.011,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "JZdg5V3PQoz1LEyWq0zl",
+      "vendorValue": 550
     },
     {
       "id": "rec-114",
       "name": "Celestial Ascenders Recipe",
-      "price": 1899,
+      "price": 6078.9,
       "chance": 0.012,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "XyeZRGx9YjZ1YB80gWlP",
+      "vendorValue": 450
     },
     {
       "id": "rec-115",
       "name": "Emberfoot Boots Recipe",
-      "price": 3000,
+      "price": 5777,
       "chance": 0.011,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "Ro31P7kZL6EoYveGxXOy",
+      "vendorValue": 500
     },
     {
       "id": "rec-116",
       "name": "Frostbite Guard Recipe",
-      "price": 10000,
+      "price": 12449.8,
       "chance": 0.012,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "BRn3x72JQ2xrYzOMok41",
+      "vendorValue": 500
     },
     {
       "id": "rec-117",
       "name": "Sentinel's Bulwark Recipe",
-      "price": 12500,
+      "price": 9928.4,
       "chance": 0.011,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "gGZ2J71yYK9xQMmjbown",
+      "vendorValue": 550
     },
     {
       "id": "rec-118",
       "name": "Ocean's Whisper Recipe",
-      "price": 580000,
+      "price": 572300,
       "chance": 0.012,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "zvjoJW96Y8JXQ3RaAylw",
+      "vendorValue": 100
     },
     {
       "id": "rec-119",
       "name": "Stone Splinter Recipe",
-      "price": 504999,
+      "price": 530800,
       "chance": 0.012,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "doyA279pNzw5YKRDEWm8",
+      "vendorValue": 100
     },
     {
       "id": "rec-120",
       "name": "Branchbane Hatchet Recipe",
-      "price": 220000,
+      "price": 299449.9,
       "chance": 0.012,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "XyeZRGx9Yj7PLB80gWlP",
+      "vendorValue": 100
     },
     {
       "id": "rec-121",
       "name": "Twinstrike Elixir Recipe",
-      "price": 1400,
+      "price": 1244.1,
       "chance": 0.012,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "ZjlPA8v9NMRnYEyMe2Oa",
+      "vendorValue": 10
     },
     {
       "id": "rec-122",
       "name": "Frenzy Potion Recipe",
-      "price": 1997,
+      "price": 1449.1,
       "chance": 0.012,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "P1vlVrzjLr89Nao8mGKM",
+      "vendorValue": 10
     },
     {
       "id": "rec-123",
       "name": "Twinstrike Elixir Recipe (Untradable)",
       "price": 0,
       "chance": 0.038,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "93R0qXalLly5QAbn8DBg",
+      "vendorValue": 10
     },
     {
       "id": "rec-124",
       "name": "Frenzy Potion Recipe (Untradable)",
       "price": 0,
       "chance": 0.038,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "1rZXlwg5YvEaNk9joDmG",
+      "vendorValue": 10
     },
     {
       "id": "rec-125",
       "name": "Whisperwind Sword Recipe",
-      "price": 4348,
+      "price": 4339.1,
       "chance": 0.0075,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "oaJydnOmQWRaLbgRe5ME",
+      "vendorValue": 650
     },
     {
       "id": "rec-126",
       "name": "Voidslayer Recipe",
-      "price": 7800,
+      "price": 10782.1,
       "chance": 0.007,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "ZqEegBydNwdoYkA59J61",
+      "vendorValue": 700
     },
     {
       "id": "rec-127",
       "name": "Shadowfang Recipe",
-      "price": 17890,
+      "price": 3467.7,
       "chance": 0.0075,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "7eA59WrBQRArLzb62qKv",
+      "vendorValue": 650
     },
     {
       "id": "rec-128",
       "name": "Emberheart Recipe",
-      "price": 1998,
+      "price": 3063.7,
       "chance": 0.0075,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "93R0qXalLl2xNAbn8DBg",
+      "vendorValue": 650
     },
     {
       "id": "rec-129",
       "name": "Otto's Mask Recipe",
-      "price": 4999,
+      "price": 7564.8,
       "chance": 0.01,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "bAB1E9poQqx0LnakeJj5",
+      "vendorValue": 600
     },
     {
       "id": "rec-130",
       "name": "Shadowbane Visor Recipe",
-      "price": 14500,
+      "price": 17999.9,
       "chance": 0.0075,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "ZjlPA8v9NMEpNEyMe2Oa",
+      "vendorValue": 650
     },
     {
       "id": "rec-131",
       "name": "Thunderclap Recipe",
-      "price": 4799,
+      "price": 7874.9,
       "chance": 0.01,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "yav4OK1wNE4zQZP7rzJb",
+      "vendorValue": 600
     },
     {
       "id": "rec-132",
       "name": "Soulgrasp Recipe",
-      "price": 2900,
+      "price": 5759.3,
       "chance": 0.0075,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "oaJydnOmQWddNbgRe5ME",
+      "vendorValue": 650
     },
     {
       "id": "rec-133",
       "name": "Flameguard Plate Recipe",
-      "price": 12998,
+      "price": 15100,
       "chance": 0.01,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "dgBq1boWYe4wNkJ3rXaD",
+      "vendorValue": 600
     },
     {
       "id": "rec-134",
       "name": "Stormbreaker Mail Recipe",
-      "price": 7000,
+      "price": 10439.7,
       "chance": 0.0075,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "7eA59WrBQR2jQzb62qKv",
+      "vendorValue": 650
     },
     {
       "id": "rec-135",
       "name": "Soulforge Legplates Recipe",
-      "price": 2000,
+      "price": 4899.9,
       "chance": 0.01,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "JVM29l7kQZXKY80q6WDG",
+      "vendorValue": 600
     },
     {
       "id": "rec-136",
       "name": "Shadowbane Greaves Recipe",
-      "price": 4000,
+      "price": 4059.8,
       "chance": 0.0075,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "93R0qXalLlZ5NAbn8DBg",
+      "vendorValue": 650
     },
     {
       "id": "rec-137",
       "name": "Thunderstrike Steps Recipe",
-      "price": 4500,
+      "price": 5873.2,
       "chance": 0.01,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "brz9RZnWN7EeLKAp0Mdl",
+      "vendorValue": 550
     },
     {
       "id": "rec-138",
       "name": "Soulwalkers Recipe",
-      "price": 3899,
+      "price": 4589.7,
       "chance": 0.0075,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "bAB1E9poQqVENnakeJj5",
+      "vendorValue": 600
     },
     {
       "id": "rec-139",
       "name": "Celestial Aegis Recipe",
-      "price": 17000,
+      "price": 17234.5,
       "chance": 0.01,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "yav4OK1wNEaWNZP7rzJb",
+      "vendorValue": 600
     },
     {
       "id": "rec-140",
       "name": "Thunderstrike Barrier Recipe",
-      "price": 17000,
+      "price": 15549.7,
       "chance": 0.007,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "oaJydnOmQWx9NbgRe5ME",
+      "vendorValue": 650
     },
     {
       "id": "rec-141",
       "name": "Dragonblood Tonic Recipe",
-      "price": 205000,
+      "price": 209000,
       "chance": 0.006,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "27gw0k38L4jwNWevJxyK",
+      "vendorValue": 10
     },
     {
       "id": "rec-142",
       "name": "Gourmet Essence Recipe",
-      "price": 413000,
+      "price": 420127.5,
       "chance": 0.006,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "Z6aDoyRnLy8MYpV5AGXm",
+      "vendorValue": 10
     },
     {
       "id": "rec-143",
       "name": "Dragonblood Tonic Recipe (Untradable)",
       "price": 0,
       "chance": 0.019,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "zvjoJW96Y8nOQ3RaAylw",
+      "vendorValue": 10
     },
     {
       "id": "rec-144",
       "name": "Gourmet Essence Recipe (Untradable)",
       "price": 0,
       "chance": 0.019,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "q9pwa0kxLBy8YgVj136l",
+      "vendorValue": 10
     },
     {
       "id": "rec-145",
       "name": "Sunfire Recipe",
-      "price": 12800,
+      "price": 12004.7,
       "chance": 0.006,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "3Zbym56qLxG1YBRp7Eek",
+      "vendorValue": 750
     },
     {
       "id": "rec-146",
       "name": "Flamebrand Recipe",
-      "price": 4999,
+      "price": 1922.3,
       "chance": 0.007,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "ElzPeorXNVp3LaW0kv53",
+      "vendorValue": 700
     },
     {
       "id": "rec-147",
       "name": "Soulshard Recipe",
-      "price": 19500,
+      "price": 6583.2,
       "chance": 0.006,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "XyeZRGx9YjXnQB80gWlP",
+      "vendorValue": 750
     },
     {
       "id": "rec-148",
       "name": "Piercer Recipe",
-      "price": 2400,
+      "price": 4468.2,
       "chance": 0.007,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "1rZXlwg5YvbkYk9joDmG",
+      "vendorValue": 700
     },
     {
       "id": "rec-149",
       "name": "Sunseeker Recipe",
-      "price": 15000,
+      "price": 14799.8,
       "chance": 0.006,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "q9pwa0kxLBdVNgVj136l",
+      "vendorValue": 750
     },
     {
       "id": "rec-150",
       "name": "Windborne Casque Recipe",
-      "price": 4000,
+      "price": 4210,
       "chance": 0.007,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "P1vlVrzjLrdbNao8mGKM",
+      "vendorValue": 700
     },
     {
       "id": "rec-151",
       "name": "Stormbreaker Helm Recipe",
-      "price": 18499,
+      "price": 20799.8,
       "chance": 0.006,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "Z6aDoyRnLylJYpV5AGXm",
+      "vendorValue": 750
     },
     {
       "id": "rec-152",
       "name": "Shadowstep Gauntlets Recipe",
-      "price": 4999,
+      "price": 4675.8,
       "chance": 0.007,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "ZqEegBydNwpzYkA59J61",
+      "vendorValue": 700
     },
     {
       "id": "rec-153",
       "name": "Sentinel's Gauntlets Recipe",
-      "price": 8500,
+      "price": 8276.8,
       "chance": 0.006,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "3Zbym56qLxAyQBRp7Eek",
+      "vendorValue": 750
     },
     {
       "id": "rec-154",
       "name": "Shadeweave Raiment Recipe",
-      "price": 19500,
+      "price": 26049.9,
       "chance": 0.007,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "ElzPeorXNVd8LaW0kv53",
+      "vendorValue": 700
     },
     {
       "id": "rec-155",
       "name": "Crystalheart Plate Recipe",
-      "price": 24000,
+      "price": 63198.4,
       "chance": 0.006,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "XyeZRGx9YjJ1YB80gWlP",
+      "vendorValue": 750
     },
     {
       "id": "rec-156",
       "name": "Windrider Greaves Recipe",
-      "price": 15000,
+      "price": 16049,
       "chance": 0.007,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "1rZXlwg5Yv1aNk9joDmG",
+      "vendorValue": 700
     },
     {
       "id": "rec-157",
       "name": "Stormbreaker Treads Recipe",
-      "price": 19450,
+      "price": 32349.9,
       "chance": 0.006,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "q9pwa0kxLBE8YgVj136l",
+      "vendorValue": 750
     },
     {
       "id": "rec-158",
       "name": "Shadowbane Footguards Recipe",
-      "price": 14999,
+      "price": 16239.8,
       "chance": 0.007,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "ZjlPA8v9NMxmQEyMe2Oa",
+      "vendorValue": 650
     },
     {
       "id": "rec-159",
       "name": "Windrider Striders Recipe",
-      "price": 14999,
+      "price": 17210.3,
       "chance": 0.006,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "P1vlVrzjLrjZLao8mGKM",
+      "vendorValue": 700
     },
     {
       "id": "rec-160",
       "name": "Essenceweave Shield Recipe",
-      "price": 10996,
+      "price": 9869.5,
       "chance": 0.007,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "ZqEegBydNwrmQkA59J61",
+      "vendorValue": 700
     },
     {
       "id": "rec-161",
       "name": "Wraithbane Essence Recipe",
-      "price": 1000000,
+      "price": 1213888.8,
       "chance": 0.0042,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "O2xMjGdBN56PY9P1nyrv",
+      "vendorValue": 10
     },
     {
       "id": "rec-162",
       "name": "Thunderfury Brew Recipe",
-      "price": 465000,
+      "price": 575600,
       "chance": 0.0042,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "lrx463VdQg84N5w1zWKP",
+      "vendorValue": 10
     },
     {
       "id": "rec-163",
       "name": "Wraithbane Essence Recipe (Untradable)",
       "price": 0,
       "chance": 0.0133,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "PjVDJez3LD5JQKWO08Ga",
+      "vendorValue": 10
     },
     {
       "id": "rec-164",
       "name": "Thunderfury Brew Recipe (Untradable)",
       "price": 0,
       "chance": 0.0133,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "0kK49j1VN9erNq6B2doa",
+      "vendorValue": 10
     },
     {
       "id": "rec-165",
       "name": "Thunderstrike Recipe",
-      "price": 38000,
+      "price": 46725.2,
       "chance": 0.0055,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "oZwey82VNA9PND0dXM3g",
+      "vendorValue": 800
     },
     {
       "id": "rec-166",
       "name": "Nightfall Sword Recipe",
-      "price": 38700,
+      "price": 33069.9,
       "chance": 0.0045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "JZdg5V3PQoPyNEyWq0zl",
+      "vendorValue": 850
     },
     {
       "id": "rec-167",
       "name": "Night's Whisper Recipe",
-      "price": 2999,
+      "price": 10008.5,
       "chance": 0.0055,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "Ro31P7kZL64JNveGxXOy",
+      "vendorValue": 800
     },
     {
       "id": "rec-168",
       "name": "Eclipse Recipe",
-      "price": 4400,
+      "price": 20309.6,
       "chance": 0.0045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "brz9RZnWN759LKAp0Mdl",
+      "vendorValue": 850
     },
     {
       "id": "rec-169",
       "name": "Thundershot Recipe",
-      "price": 25000,
+      "price": 44699.9,
       "chance": 0.0055,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "zvjoJW96Y8yzL3RaAylw",
+      "vendorValue": 800
     },
     {
       "id": "rec-170",
       "name": "Nightshade Bow Recipe",
-      "price": 70000,
+      "price": 78768.9,
       "chance": 0.0045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "PjVDJez3LDkwYKWO08Ga",
+      "vendorValue": 850
     },
     {
       "id": "rec-171",
       "name": "Voidwalker Cowl Recipe",
-      "price": 38000,
+      "price": 38505.5,
       "chance": 0.0055,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "27gw0k38L47EYWevJxyK",
+      "vendorValue": 800
     },
     {
       "id": "rec-172",
       "name": "Lunar Radiance Recipe",
-      "price": 40000,
+      "price": 45899.9,
       "chance": 0.0045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "O2xMjGdBN5qnN9P1nyrv",
+      "vendorValue": 850
     },
     {
       "id": "rec-173",
       "name": "Flameguard Gauntlets Recipe",
-      "price": 28000,
+      "price": 33600,
       "chance": 0.0055,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "oZwey82VNAqMND0dXM3g",
+      "vendorValue": 800
     },
     {
       "id": "rec-174",
       "name": "Stormbreaker Gauntlets Recipe",
-      "price": 55000,
+      "price": 56305.3,
       "chance": 0.0045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "JZdg5V3PQoA1YEyWq0zl",
+      "vendorValue": 850
     },
     {
       "id": "rec-175",
       "name": "Serpent Scale Recipe",
-      "price": 118000,
+      "price": 143642,
       "chance": 0.0055,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "Ro31P7kZL6aoYveGxXOy",
+      "vendorValue": 800
     },
     {
       "id": "rec-176",
       "name": "Phoenix Soulplate Recipe",
-      "price": 175000,
+      "price": 218500,
       "chance": 0.0045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "brz9RZnWN7DeYKAp0Mdl",
+      "vendorValue": 850
     },
     {
       "id": "rec-177",
       "name": "Voidwalker Striders Recipe",
-      "price": 55000,
+      "price": 70055.2,
       "chance": 0.0055,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "zvjoJW96Y8dOY3RaAylw",
+      "vendorValue": 800
     },
     {
       "id": "rec-178",
       "name": "Stormbreaker Boots Recipe",
-      "price": 44000,
+      "price": 39737.7,
       "chance": 0.0055,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "Z6aDoyRnLy4oYpV5AGXm",
+      "vendorValue": 750
     },
     {
       "id": "rec-179",
       "name": "Moonshadow Guard Recipe",
-      "price": 15000,
+      "price": 12578.8,
       "chance": 0.0055,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "3Zbym56qLxyEQBRp7Eek",
+      "vendorValue": 750
     },
     {
       "id": "rec-180",
       "name": "Ashenfire Ward Recipe",
-      "price": 20000,
+      "price": 19099.8,
       "chance": 0.0055,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "oZwey82VNAX2QD0dXM3g",
+      "vendorValue": 800
     },
     {
       "id": "rec-181",
       "name": "Cosmic Tear Recipe",
-      "price": 1300000,
+      "price": 1166666.6666666667,
       "chance": 0.0021,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "y7Do6jgkY0lqY8BAdKX0",
+      "vendorValue": 10
     },
     {
       "id": "rec-182",
       "name": "Elixir of Life Recipe",
-      "price": 1000000,
+      "price": 1583333.3333333333,
       "chance": 0.00105,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "3yE1A84kYOjBNl6XeVKp",
+      "vendorValue": 2000
     },
     {
       "id": "rec-183",
       "name": "Cosmic Tear Recipe (Untradable)",
       "price": 0,
       "chance": 0.00645,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "BPjze3x2Q3deNR85vgZV",
+      "vendorValue": 10
     },
     {
       "id": "rec-184",
       "name": "Elixir of Life Recipe (Untradable)",
       "price": 0,
       "chance": 0.0054,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "XjEaOeBkLa1ALlGwxVPq",
+      "vendorValue": 2000
     },
     {
       "id": "rec-185",
       "name": "Dawnbreaker Sword Recipe",
-      "price": 27999,
+      "price": 32949.5,
       "chance": 0.0045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "JVM29l7kQZ6mQ80q6WDG",
+      "vendorValue": 900
     },
     {
       "id": "rec-186",
       "name": "Runeblade Sword Recipe",
-      "price": 399999,
+      "price": 437197.8,
       "chance": 0.0017,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "PjVDJez3LDwwYKWO08Ga",
+      "vendorValue": 1200
     },
     {
       "id": "rec-187",
       "name": "Duskblade Recipe",
-      "price": 1800,
+      "price": 3804.5,
       "chance": 0.0045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "bAB1E9poQqn0NnakeJj5",
+      "vendorValue": 900
     },
     {
       "id": "rec-188",
       "name": "Silent Reaper Recipe",
-      "price": 95000,
+      "price": 77394.8,
       "chance": 0.0017,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "O2xMjGdBN5ynN9P1nyrv",
+      "vendorValue": 1200
     },
     {
       "id": "rec-189",
       "name": "Dawnbreaker Bow Recipe",
-      "price": 68000,
+      "price": 61566.5,
       "chance": 0.0045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "0kK49j1VN944Qq6B2doa",
+      "vendorValue": 900
     },
     {
       "id": "rec-190",
       "name": "Silverthorn Bow Recipe",
-      "price": 730000,
+      "price": 973599.6,
       "chance": 0.0017,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "RVrBKlPdNd2aLWG8xJe9",
+      "vendorValue": 1200
     },
     {
       "id": "rec-191",
       "name": "Ashenfire Crown Recipe",
-      "price": 66666,
+      "price": 50122,
       "chance": 0.0045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "dgBq1boWYeAwYkJ3rXaD",
+      "vendorValue": 900
     },
     {
       "id": "rec-192",
       "name": "Nightshade Mask Recipe",
-      "price": 162999,
+      "price": 167299.7,
       "chance": 0.0017,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "brz9RZnWN7geNKAp0Mdl",
+      "vendorValue": 1200
     },
     {
       "id": "rec-193",
       "name": "Voidrend Gauntlets Recipe",
-      "price": 40000,
+      "price": 34438.2,
       "chance": 0.0045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "JVM29l7kQZ2KQ80q6WDG",
+      "vendorValue": 900
     },
     {
       "id": "rec-194",
       "name": "Windrider Recipe",
-      "price": 280000,
+      "price": 294349.8,
       "chance": 0.0017,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "PjVDJez3LDyJQKWO08Ga",
+      "vendorValue": 1200
     },
     {
       "id": "rec-195",
       "name": "Echosteel Breastplate Recipe",
-      "price": 640000,
+      "price": 425556.3,
       "chance": 0.0017,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "O2xMjGdBN5D2Q9P1nyrv",
+      "vendorValue": 1200
     },
     {
       "id": "rec-196",
       "name": "Lunarweave Leggings Recipe",
-      "price": 54000,
+      "price": 60699.9,
       "chance": 0.0045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "PjVDJez3LDPJLKWO08Ga",
+      "vendorValue": 850
     },
     {
       "id": "rec-197",
       "name": "Nightshade Greaves Recipe",
-      "price": 190000,
+      "price": 244689.9,
       "chance": 0.0017,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "RVrBKlPdNdZzLWG8xJe9",
+      "vendorValue": 1200
     },
     {
       "id": "rec-198",
       "name": "Voidstep Boots Recipe",
-      "price": 22900,
+      "price": 22824.9,
       "chance": 0.0045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "27gw0k38L4z9NWevJxyK",
+      "vendorValue": 800
     },
     {
       "id": "rec-199",
       "name": "Nightshade Boots Recipe",
-      "price": 850000,
+      "price": 816999.8,
       "chance": 0.0017,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "brz9RZnWN7EGLKAp0Mdl",
+      "vendorValue": 1200
     },
     {
       "id": "rec-200",
       "name": "Runebound Bulwark Recipe",
-      "price": 10000,
+      "price": 9278.5,
       "chance": 0.0045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "JZdg5V3PQoerYEyWq0zl",
+      "vendorValue": 850
     },
     {
       "id": "rec-201",
       "name": "Shadewalker Bulwark Recipe",
-      "price": 80000,
+      "price": 59750,
       "chance": 0.0017,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "PjVDJez3LDamQKWO08Ga",
+      "vendorValue": 1200
     },
     {
       "id": "rec-202",
       "name": "Rune-etched Reeler Recipe",
-      "price": 1950000,
+      "price": 1924999.9,
       "chance": 0.0045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "PjVDJez3LDvoNKWO08Ga",
+      "vendorValue": 100
     },
     {
       "id": "rec-203",
       "name": "Corestrike Recipe",
-      "price": 1895000,
+      "price": 1637998.9,
       "chance": 0.0045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "j98bO5w1QP3PL3xkREVJ",
+      "vendorValue": 100
     },
     {
       "id": "rec-204",
       "name": "Silvan Splitter Recipe",
-      "price": 900000,
+      "price": 882888.9,
       "chance": 0.0045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "Ro31P7kZL60jNveGxXOy",
+      "vendorValue": 100
     },
     {
       "id": "rec-205",
       "name": "Potion of the Gods Recipe",
-      "price": 2300000,
+      "price": 1757999.9,
       "chance": 0.00105,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "DBngxedVYJZZYX64wW8o",
+      "vendorValue": 2000
     },
     {
       "id": "rec-206",
       "name": "Eternal Feast Tonic Recipe",
-      "price": 310000,
+      "price": 288400,
       "chance": 0.00105,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "jGXBy7a4Lbx9N0Pw6Vdg",
+      "vendorValue": 2000
     },
     {
       "id": "rec-207",
       "name": "Potion of the Gods Recipe (Untradable)",
       "price": 0,
       "chance": 0.00645,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "njoPWKDkLX93Q06ZOX79",
+      "vendorValue": 2000
     },
     {
       "id": "rec-208",
       "name": "Eternal Feast Tonic Recipe (Untradable)",
       "price": 0,
       "chance": 0.00645,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "B2WEpv54Nm4nQj1xJrXk",
+      "vendorValue": 2000
     },
     {
       "id": "rec-209",
       "name": "Starshard Recipe",
-      "price": 110000,
+      "price": 101042.2,
       "chance": 0.0045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "1rZXlwg5YvxkQk9joDmG",
+      "vendorValue": 1000
     },
     {
       "id": "rec-210",
       "name": "Phoenix Requiem Recipe",
-      "price": 1190000,
+      "price": 1246666.1666666667,
       "chance": 0.0015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "0kK49j1VN904Qq6B2doa",
+      "vendorValue": 1300
     },
     {
       "id": "rec-211",
       "name": "Ghostwalker Recipe",
-      "price": 7900,
+      "price": 12999.9,
       "chance": 0.0045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "P1vlVrzjLrabYao8mGKM",
+      "vendorValue": 1000
     },
     {
       "id": "rec-212",
       "name": "Silvermist Recipe",
-      "price": 100000,
+      "price": 249666.55555555556,
       "chance": 0.0015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "lrx463VdQgkAQ5w1zWKP",
+      "vendorValue": 1300
     },
     {
       "id": "rec-213",
       "name": "Starshower Recipe",
-      "price": 150000,
+      "price": 226500,
       "chance": 0.0045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "XjEaOeBkLaGZNlGwxVPq",
+      "vendorValue": 1000
     },
     {
       "id": "rec-214",
       "name": "Bloodmoon Bow Recipe",
-      "price": 2500000,
+      "price": 2233333.3333333335,
       "chance": 0.0015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "6leApVoENkboQ7nRPy2D",
+      "vendorValue": 1300
     },
     {
       "id": "rec-215",
       "name": "Verdant Guardian Helm Recipe",
-      "price": 180000,
+      "price": 168342.2,
       "chance": 0.0045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "ElzPeorXNVZ8NaW0kv53",
+      "vendorValue": 1000
     },
     {
       "id": "rec-216",
       "name": "Glimmersteel Helm Recipe",
-      "price": 300000,
+      "price": 411871.3,
       "chance": 0.0015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "bAB1E9poQq1EQnakeJj5",
+      "vendorValue": 1300
     },
     {
       "id": "rec-217",
       "name": "Lunarweave Gloves Recipe",
-      "price": 120000,
+      "price": 120466.5,
       "chance": 0.0045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "93R0qXalLlA5QAbn8DBg",
+      "vendorValue": 950
     },
     {
       "id": "rec-218",
       "name": "Bloodforged Gauntlets Recipe",
-      "price": 250000,
+      "price": 302112.1,
       "chance": 0.0045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "1rZXlwg5YvAaNk9joDmG",
+      "vendorValue": 1000
     },
     {
       "id": "rec-219",
       "name": "Grasps of Protection Recipe",
-      "price": 515000,
+      "price": 490624.875,
       "chance": 0.0015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "0kK49j1VN9OrLq6B2doa",
+      "vendorValue": 1300
     },
     {
       "id": "rec-220",
       "name": "Guardian's Valor Recipe",
-      "price": 360000,
+      "price": 292000,
       "chance": 0.0045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "ZjlPA8v9NMKmLEyMe2Oa",
+      "vendorValue": 950
     },
     {
       "id": "rec-221",
       "name": "Verdant Chainmail Recipe",
-      "price": 600000,
+      "price": 700999.9,
       "chance": 0.0015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "lrx463VdQgZxL5w1zWKP",
+      "vendorValue": 1300
     },
     {
       "id": "rec-222",
       "name": "Runebound Shinplates Recipe",
-      "price": 100000,
+      "price": 101149.9,
       "chance": 0.0045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "BPjze3x2Q3DeNR85vgZV",
+      "vendorValue": 950
     },
     {
       "id": "rec-223",
       "name": "Glimmersteel Pathguards Recipe",
-      "price": 550000,
+      "price": 763888.8888888889,
       "chance": 0.0015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "6leApVoENkZ2Q7nRPy2D",
+      "vendorValue": 1300
     },
     {
       "id": "rec-224",
       "name": "Ashenfire Boots Recipe",
-      "price": 80000,
+      "price": 77299.9,
       "chance": 0.0045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "dgBq1boWYe1lYkJ3rXaD",
+      "vendorValue": 900
     },
     {
       "id": "rec-225",
       "name": "Glimmersteel Boots Recipe",
-      "price": 1000000,
+      "price": 945000,
       "chance": 0.0015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "bAB1E9poQqVnNnakeJj5",
+      "vendorValue": 1300
     },
     {
       "id": "rec-226",
       "name": "Bloodbane Barrier Recipe",
-      "price": 14500,
+      "price": 14559.9,
       "chance": 0.0045,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "93R0qXalLlmrQAbn8DBg",
+      "vendorValue": 950
     },
     {
       "id": "rec-227",
       "name": "Stormbringer Buckler Recipe",
-      "price": 200000,
+      "price": 405000,
       "chance": 0.0015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "0kK49j1VN9anNq6B2doa",
+      "vendorValue": 1300
     },
     {
       "id": "rec-228",
       "name": "Divine Nectar Recipe",
-      "price": 600000,
+      "price": 516999.8,
       "chance": 0.00105,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "BRn3x72JQ2R7QzOMok41",
+      "vendorValue": 2000
     },
     {
       "id": "rec-229",
       "name": "Fallen Star Essence Recipe",
       "price": 2000000,
-      "value": null,
       "chance": 0.00105,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "gGZ2J71yYKl3LMmjbown",
+      "vendorValue": 2000,
+      "value": null
     },
     {
       "id": "rec-230",
       "name": "Divine Nectar Recipe (Untradable)",
       "price": 0,
       "chance": 0.00645,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "RVrBKlPdNdRzLWG8xJe9",
+      "vendorValue": 2000
     },
     {
       "id": "rec-231",
       "name": "Fallen Star Essence Recipe (Untradable)",
       "price": 0,
       "chance": 0.00645,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "6leApVoENkr2Q7nRPy2D",
+      "vendorValue": 2000
     },
     {
       "id": "rec-232",
       "name": "Grimslayer Recipe",
-      "price": 800000,
+      "price": 827500,
       "chance": 0.004,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "zvjoJW96Y8gzN3RaAylw",
+      "vendorValue": 1100
     },
     {
       "id": "rec-233",
       "name": "Death's Embrace Recipe",
-      "price": 2100000,
+      "price": 2330555.3,
       "chance": 0.0013,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "BPjze3x2Q3MrYR85vgZV",
+      "vendorValue": 1400
     },
     {
       "id": "rec-234",
       "name": "Nightfall Dagger Recipe",
-      "price": 700000,
+      "price": 1368299.5555555555,
       "chance": 0.0013,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "y7Do6jgkY06pQ8BAdKX0",
+      "vendorValue": 1400
     },
     {
       "id": "rec-235",
       "name": "Fury Recipe",
-      "price": 480000,
+      "price": 578899.9,
       "chance": 0.004,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "njoPWKDkLXoXY06ZOX79",
+      "vendorValue": 1050
     },
     {
       "id": "rec-236",
       "name": "Death's Touch Recipe",
-      "price": 1950000,
+      "price": 2427777.6666666665,
       "chance": 0.0013,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "doyA279pNzmjQKRDEWm8",
+      "vendorValue": 1400
     },
     {
       "id": "rec-237",
       "name": "Bloodforged Helm Recipe",
-      "price": 425000,
+      "price": 395900,
       "chance": 0.004,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "XyeZRGx9Yj21YB80gWlP",
+      "vendorValue": 1050
     },
     {
       "id": "rec-238",
       "name": "Soul Recipe",
-      "price": 1820000,
+      "price": 2070000,
       "chance": 0.0013,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "ZjlPA8v9NM2mYEyMe2Oa",
+      "vendorValue": 1400
     },
     {
       "id": "rec-239",
       "name": "Phoenixclaw Gauntlets Recipe",
-      "price": 350000,
+      "price": 298400,
       "chance": 0.004,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "q9pwa0kxLBM8YgVj136l",
+      "vendorValue": 1050
     },
     {
       "id": "rec-240",
       "name": "Gloves of the Protector Recipe",
-      "price": 1200000,
+      "price": 1089935.5555555555,
       "chance": 0.0013,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "BPjze3x2Q3reLR85vgZV",
+      "vendorValue": 1400
     },
     {
       "id": "rec-241",
       "name": "Dreadbane Armor Recipe",
-      "price": 650000,
+      "price": 625188.9,
       "chance": 0.004,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "Z6aDoyRnLyzoQpV5AGXm",
+      "vendorValue": 1050
     },
     {
       "id": "rec-242",
       "name": "Ashenplate Cuirass Recipe",
-      "price": 1000000,
+      "price": 1099999.75,
       "chance": 0.0013,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "y7Do6jgkY0DBY8BAdKX0",
+      "vendorValue": 1400
     },
     {
       "id": "rec-243",
       "name": "Phoenix Greaves Recipe",
-      "price": 1000000,
+      "price": 918500,
       "chance": 0.004,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "B2WEpv54NmznYj1xJrXk",
+      "vendorValue": 1100
     },
     {
       "id": "rec-244",
       "name": "Soulshield Legplates Recipe",
-      "price": 1300000,
+      "price": 1524999.75,
       "chance": 0.0013,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "doyA279pNzzxNKRDEWm8",
+      "vendorValue": 1400
     },
     {
       "id": "rec-245",
       "name": "Verdant Boots Recipe",
-      "price": 139000,
+      "price": 161199.8,
       "chance": 0.004,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "ElzPeorXNVx7LaW0kv53",
+      "vendorValue": 1000
     },
     {
       "id": "rec-246",
       "name": "Soulshield Treads Recipe",
-      "price": 1500000,
+      "price": 1750000,
       "chance": 0.0013,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "ZjlPA8v9NMxEQEyMe2Oa",
+      "vendorValue": 1400
     },
     {
       "id": "rec-247",
       "name": "Phoenixguard Shield Recipe",
-      "price": 125000,
+      "price": 150299.9,
       "chance": 0.004,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "q9pwa0kxLBz6LgVj136l",
+      "vendorValue": 1050
     },
     {
       "id": "rec-248",
       "name": "Ironbark Protector Recipe",
-      "price": 300000,
+      "price": 317344.3,
       "chance": 0.0013,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "BPjze3x2Q3m5YR85vgZV",
+      "vendorValue": 1400
     },
     {
       "id": "rec-249",
       "name": "Arboreal Ender Recipe",
-      "price": 4000000,
+      "price": 4039999.6,
       "chance": 0.0013,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "brz9RZnWN7O4NKAp0Mdl",
+      "vendorValue": 10
     },
     {
       "id": "rec-250",
       "name": "Cosmic Nectar Recipe",
-      "price": 930000,
+      "price": 753600,
       "chance": 0.0012,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "JVM29l7kQZOwN80q6WDG",
+      "vendorValue": 2000
     },
     {
       "id": "rec-251",
       "name": "Guardian's Soul Recipe",
-      "price": 500000,
+      "price": 455999.9,
       "chance": 0.0012,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "93R0qXalLlPkLAbn8DBg",
+      "vendorValue": 2000
     },
     {
       "id": "rec-252",
       "name": "Cosmic Nectar Recipe (Untradable)",
       "price": 0,
       "chance": 0.0038,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "dgBq1boWYeVwLkJ3rXaD",
+      "vendorValue": 2000
     },
     {
       "id": "rec-253",
       "name": "Guardian's Soul Recipe (Untradable)",
       "price": 0,
       "chance": 0.0038,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "7eA59WrBQRZjQzb62qKv",
+      "vendorValue": 2000
     },
     {
       "id": "rec-254",
       "name": "Silverthorn Sword Recipe",
-      "price": 3500000,
+      "price": 3583332.5,
       "chance": 0.001,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "XjEaOeBkLa5ZLlGwxVPq",
+      "vendorValue": 1500
     },
     {
       "id": "rec-255",
       "name": "Starglitter Recipe",
-      "price": 300000,
+      "price": 247399.9,
       "chance": 0.003,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "27gw0k38L4rENWevJxyK",
+      "vendorValue": 1100
     },
     {
       "id": "rec-256",
       "name": "Widow's Kiss Recipe",
-      "price": 1000000,
+      "price": 1230000,
       "chance": 0.001,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "3yE1A84kYOwxYl6XeVKp",
+      "vendorValue": 1500
     },
     {
       "id": "rec-257",
       "name": "Grimwood Recipe",
-      "price": 1000000,
+      "price": 1464107.142857143,
       "chance": 0.003,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "B2WEpv54NmK0Lj1xJrXk",
+      "vendorValue": 1100
     },
     {
       "id": "rec-258",
       "name": "Soulstring Recipe",
       "price": 1000000,
-      "value": null,
       "chance": 0.001,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "j98bO5w1QPaEN3xkREVJ",
+      "vendorValue": 1500,
+      "value": null
     },
     {
       "id": "rec-259",
       "name": "Phoenix Crown Recipe",
-      "price": 1150000,
+      "price": 1104899.9,
       "chance": 0.003,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "Ro31P7kZL65oYveGxXOy",
+      "vendorValue": 1100
     },
     {
       "id": "rec-260",
       "name": "Whispersong Recipe",
       "price": 3000000,
-      "value": null,
       "chance": 0.001,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "P1vlVrzjLrAZYao8mGKM",
+      "vendorValue": 1500,
+      "value": null
     },
     {
       "id": "rec-261",
       "name": "Nightshade Grips Recipe",
-      "price": 1250000,
+      "price": 1194000,
       "chance": 0.003,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "zvjoJW96Y80OY3RaAylw",
+      "vendorValue": 1100
     },
     {
       "id": "rec-262",
       "name": "Sacred Grasp Recipe",
       "price": 850000,
-      "value": null,
       "chance": 0.001,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "XjEaOeBkLaqALlGwxVPq",
+      "vendorValue": 1500,
+      "value": null
     },
     {
       "id": "rec-263",
       "name": "Soulguard Armor Recipe",
-      "price": 1000000,
-      "value": null,
+      "price": 4400000,
       "chance": 0.001,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "3yE1A84kYOADQl6XeVKp",
+      "vendorValue": 1500,
+      "value": null
     },
     {
       "id": "rec-264",
       "name": "Whisperstep Greaves Recipe",
       "price": 1000000,
-      "value": null,
       "chance": 0.001,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "j98bO5w1QPdBQ3xkREVJ",
+      "vendorValue": 1500,
+      "value": null
     },
     {
       "id": "rec-265",
       "name": "Whisperwind Boots Recipe",
       "price": 1000000,
-      "value": null,
       "chance": 0.001,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "P1vlVrzjLrjALao8mGKM",
+      "vendorValue": 1500,
+      "value": null
     },
     {
       "id": "rec-266",
       "name": "Soulshield of Redemption Recipe",
-      "price": 1275000,
+      "price": 1325000,
       "chance": 0.001,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "XjEaOeBkLavKQlGwxVPq",
+      "vendorValue": 1500
     },
     {
       "id": "rec-267",
       "name": "Kraken's Grasp Recipe",
-      "price": 5000000,
+      "price": 4650000,
       "chance": 0.001,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "0kK49j1VN9bAYq6B2doa",
+      "vendorValue": 10
     },
     {
       "id": "rec-268",
       "name": "Phoenix Ashes Recipe",
-      "price": 800000,
+      "price": 972499.75,
       "chance": 0.00096,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "1rZXlwg5Yv8VQk9joDmG",
+      "vendorValue": 2000
     },
     {
       "id": "rec-269",
       "name": "Omnipotent Might Infusion Recipe",
-      "price": 480000,
+      "price": 476666.6666666667,
       "chance": 0.00096,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "q9pwa0kxLB2lLgVj136l",
+      "vendorValue": 2000
     },
     {
       "id": "rec-270",
       "name": "Phoenix Ashes Recipe (Untradable)",
       "price": 0,
       "chance": 0.00304,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "ElzPeorXNV88LaW0kv53",
+      "vendorValue": 2000
     },
     {
       "id": "rec-271",
       "name": "Omnipotent Might Infusion Recipe (Untradable)",
       "price": 0,
       "chance": 0.00304,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "XyeZRGx9YjM1NB80gWlP",
+      "vendorValue": 2000
     },
     {
       "id": "rec-272",
       "name": "Emberfang Recipe",
-      "price": 60000,
+      "price": 99799.9,
       "chance": 0.0025,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "93R0qXalLlXxLAbn8DBg",
+      "vendorValue": 950
     },
     {
       "id": "rec-273",
       "name": "Bloodthirst Recipe",
-      "price": 1000000,
-      "value": null,
+      "price": 6750000,
       "chance": 0.0008,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "njoPWKDkLXVXN06ZOX79",
+      "vendorValue": 1600,
+      "value": null
     },
     {
       "id": "rec-274",
       "name": "Bloodthorn Recipe",
-      "price": 8650,
+      "price": 135800,
       "chance": 0.0025,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "ZjlPA8v9NMwpLEyMe2Oa",
+      "vendorValue": 950
     },
     {
       "id": "rec-275",
       "name": "Fatebreaker Recipe",
-      "price": 2500000,
+      "price": 4200000,
       "chance": 0.0008,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "DBngxedVYJmENX64wW8o",
+      "vendorValue": 1600
     },
     {
       "id": "rec-276",
       "name": "Ashenwind Recipe",
-      "price": 100000,
+      "price": 98242.2,
       "chance": 0.0025,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "BPjze3x2Q36rLR85vgZV",
+      "vendorValue": 950
     },
     {
       "id": "rec-277",
       "name": "Archdemon Recipe",
       "price": 1000000,
-      "value": null,
       "chance": 0.0008,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "EWGwnXPlY1V8LJqekZ2R",
+      "vendorValue": 1600,
+      "value": null
     },
     {
       "id": "rec-278",
       "name": "Runebound Helm Recipe",
-      "price": 140000,
+      "price": 135299.9,
       "chance": 0.0025,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "7eA59WrBQREjLzb62qKv",
+      "vendorValue": 950
     },
     {
       "id": "rec-279",
       "name": "Balthazar's Head Recipe",
       "price": 1000000,
-      "value": null,
       "chance": 0.0008,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "Z6aDoyRnLydoYpV5AGXm",
+      "vendorValue": 1600,
+      "value": null
     },
     {
       "id": "rec-280",
       "name": "Warfists Recipe",
       "price": 5000000,
-      "value": null,
       "chance": 0.0008,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "njoPWKDkLXD3L06ZOX79",
+      "vendorValue": 1600,
+      "value": null
     },
     {
       "id": "rec-281",
       "name": "Bloodforged Harness Recipe",
-      "price": 250000,
+      "price": 300333.3,
       "chance": 0.0025,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "bAB1E9poQqzENnakeJj5",
+      "vendorValue": 900
     },
     {
       "id": "rec-282",
       "name": "Windrider Harness Recipe",
-      "price": 1000000,
-      "value": null,
+      "price": 4000000,
       "chance": 0.0008,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "DBngxedVYJpqQX64wW8o",
+      "vendorValue": 1600,
+      "value": null
     },
     {
       "id": "rec-283",
       "name": "Ashenfire Greaves Recipe",
-      "price": 100000,
+      "price": 99455.3,
       "chance": 0.0025,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "0kK49j1VN9DrQq6B2doa",
+      "vendorValue": 900
     },
     {
       "id": "rec-284",
       "name": "Twilight Veilguards Recipe",
-      "price": 4000000,
-      "value": null,
+      "price": 2800000,
       "chance": 0.0008,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "EWGwnXPlY1DANJqekZ2R",
+      "vendorValue": 1600,
+      "value": null
     },
     {
       "id": "rec-285",
       "name": "Lunarweave Boots Recipe",
-      "price": 85000,
+      "price": 81799.9,
       "chance": 0.0025,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "O2xMjGdBN5E2N9P1nyrv",
+      "vendorValue": 850
     },
     {
       "id": "rec-286",
       "name": "Twilight Veilwalkers Recipe",
-      "price": 2500000,
+      "price": 2466666.3333333335,
       "chance": 0.0008,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "Z6aDoyRnLy4zYpV5AGXm",
+      "vendorValue": 1600
     },
     {
       "id": "rec-287",
       "name": "Verdant Sentinel Recipe",
-      "price": 62000,
+      "price": 54549.9,
       "chance": 0.0025,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "JVM29l7kQZxeY80q6WDG",
+      "vendorValue": 900
     },
     {
       "id": "rec-288",
       "name": "Deathgate Recipe",
       "price": 2000000,
       "chance": 0.0008,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "njoPWKDkLXX9L06ZOX79",
+      "vendorValue": 1600
     },
     {
       "id": "rec-289",
       "name": "Boulder's Bane Recipe",
       "price": 7500000,
       "chance": 0.0008,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "EWGwnXPlY1rwLJqekZ2R",
+      "vendorValue": 10
     },
     {
       "id": "rec-290",
       "name": "Sun's Light Recipe",
-      "price": 4200000,
-      "value": null,
+      "price": 5166666.333333333,
       "chance": 0.00042,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "yav4OK1wNEWwLZP7rzJb",
+      "vendorValue": 2000,
+      "value": null
     },
     {
       "id": "rec-291",
       "name": "Essence of a Kraken Recipe",
       "price": 1350000,
-      "value": null,
       "chance": 0.00042,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "oaJydnOmQW5zYbgRe5ME",
+      "vendorValue": 2000,
+      "value": null
     },
     {
       "id": "rec-292",
       "name": "Cosmic Barrier Recipe",
-      "price": 900000,
-      "value": null,
+      "price": 575000,
       "chance": 0.00042,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "zvjoJW96Y8MKL3RaAylw",
+      "vendorValue": 2000,
+      "value": null
     },
     {
       "id": "rec-293",
       "name": "Flash Velocity Infusion Recipe",
-      "price": 600000,
+      "price": 463503,
       "chance": 0.00042,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "PjVDJez3LDE5QKWO08Ga",
+      "vendorValue": 2000
     },
     {
       "id": "rec-294",
       "name": "Sun's Light Recipe (Untradable)",
       "price": 0,
       "chance": 0.00133,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "doyA279pNzAxQKRDEWm8",
+      "vendorValue": 2000
     },
     {
       "id": "rec-295",
       "name": "Essence of a Kraken Recipe (Untradable)",
       "price": 0,
       "chance": 0.00133,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "j98bO5w1QPABN3xkREVJ",
+      "vendorValue": 2000
     },
     {
       "id": "rec-296",
       "name": "Cosmic Barrier Recipe (Untradable)",
       "price": 0,
       "chance": 0.00133,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "Ro31P7kZL6xoNveGxXOy",
+      "vendorValue": 2000
     },
     {
       "id": "rec-297",
       "name": "Flash Velocity Infusion Recipe (Untradable)",
       "price": 0,
       "chance": 0.00133,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "brz9RZnWN7oeNKAp0Mdl",
+      "vendorValue": 2000
     },
     {
       "id": "rec-298",
       "name": "Tempest's Fury Recipe",
-      "price": 250000,
+      "price": 440000,
       "chance": 0.0025,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "q9pwa0kxLB3VQgVj136l",
+      "vendorValue": 1050
     },
     {
       "id": "rec-299",
       "name": "Everflame Recipe",
       "price": 1000000,
-      "value": null,
       "chance": 0.0004,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "B2WEpv54NmX0Qj1xJrXk",
+      "vendorValue": 1700,
+      "value": null
     },
     {
       "id": "rec-300",
       "name": "Emberstrike Recipe",
-      "price": 30000,
+      "price": 62400,
       "chance": 0.0025,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "Z6aDoyRnLymJLpV5AGXm",
+      "vendorValue": 1050
     },
     {
       "id": "rec-301",
       "name": "Dreadspike Recipe",
       "price": 1000000,
-      "value": null,
       "chance": 0.0004,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "jGXBy7a4Lb21L0Pw6Vdg",
+      "vendorValue": 1700,
+      "value": null
     },
     {
       "id": "rec-302",
       "name": "Sting Recipe",
       "price": 4500000,
-      "value": null,
       "chance": 0.0004,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "Rv5g4z1dQnbKQqy32jpG",
+      "vendorValue": 1700,
+      "value": null
     },
     {
       "id": "rec-303",
       "name": "Thunder Recipe",
-      "price": 1000000,
-      "value": null,
+      "price": 8110333,
       "chance": 0.0004,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "27gw0k38L4y9QWevJxyK",
+      "vendorValue": 1700,
+      "value": null
     },
     {
       "id": "rec-304",
       "name": "Nature's Grip Recipe",
       "price": 1000000,
-      "value": null,
       "chance": 0.0004,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "B2WEpv54NmAnNj1xJrXk",
+      "vendorValue": 1700,
+      "value": null
     },
     {
       "id": "rec-305",
       "name": "Starfire Plate Recipe",
-      "price": 450000,
+      "price": 452500,
       "chance": 0.0025,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "P1vlVrzjLrzZLao8mGKM",
+      "vendorValue": 1000
     },
     {
       "id": "rec-306",
       "name": "Twilight Recipe",
-      "price": 1000000,
-      "value": null,
+      "price": 8696969,
       "chance": 0.0004,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "jGXBy7a4LbZ4L0Pw6Vdg",
+      "vendorValue": 1700,
+      "value": null
     },
     {
       "id": "rec-307",
       "name": "Verdant Greaves Recipe",
-      "price": 225000,
+      "price": 259000,
       "chance": 0.0025,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "XjEaOeBkLaZAQlGwxVPq",
+      "vendorValue": 1000
     },
     {
       "id": "rec-308",
       "name": "Stormbringer Greaves Recipe",
       "price": 1000000,
-      "value": null,
       "chance": 0.0004,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "Rv5g4z1dQnz6Qqy32jpG",
+      "vendorValue": 1700,
+      "value": null
     },
     {
       "id": "rec-309",
       "name": "Runebound Footwraps Recipe",
-      "price": 88000,
+      "price": 117899.7,
       "chance": 0.0025,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "7eA59WrBQRx6Yzb62qKv",
+      "vendorValue": 950
     },
     {
       "id": "rec-310",
       "name": "Stormbringer Striders Recipe",
       "price": 1000000,
-      "value": null,
       "chance": 0.0004,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "27gw0k38L4zzNWevJxyK",
+      "vendorValue": 1700,
+      "value": null
     },
     {
       "id": "rec-311",
       "name": "Twilight Sanctum Recipe",
-      "price": 60000,
+      "price": 62642.2,
       "chance": 0.0025,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "1rZXlwg5YvM9Nk9joDmG",
+      "vendorValue": 1000
     },
     {
       "id": "rec-312",
       "name": "Brute Recipe",
       "price": 1000000,
-      "value": null,
       "chance": 0.0004,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "B2WEpv54NmwjLj1xJrXk",
+      "vendorValue": 1700,
+      "value": null
     },
     {
       "id": "rec-313",
       "name": "Aqua Reaper",
       "price": 1000000,
-      "value": null,
       "chance": 0.0004,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "brz9RZnWN76DQKAp0Mdl",
+      "vendorValue": 1000,
+      "value": null
     },
     {
       "id": "rec-314",
       "name": "Neptune's Soul Recipe",
-      "price": 800000,
+      "price": 709999.8,
       "chance": 0.00042,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "ZqEegBydNwa8LkA59J61",
+      "vendorValue": 2000
     },
     {
       "id": "rec-315",
       "name": "Magma Vein Infusion Recipe",
       "price": 570000,
       "chance": 0.00042,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "3Zbym56qLx8WLBRp7Eek",
+      "vendorValue": 2000
     },
     {
       "id": "rec-316",
       "name": "Cosmic Finesse Tonic Recipe",
-      "price": 395000,
+      "price": 363333,
       "chance": 0.00042,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "0kK49j1VN9rBYq6B2doa",
+      "vendorValue": 2000
     },
     {
       "id": "rec-317",
       "name": "Neptune's Soul Recipe (Untradable)",
       "price": 0,
       "chance": 0.00156,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "EWGwnXPlY1XANJqekZ2R",
+      "vendorValue": 2000
     },
     {
       "id": "rec-318",
       "name": "Magma Vein Infusion Recipe (Untradable)",
       "price": 0,
       "chance": 0.00156,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "Rv5g4z1dQn56Lqy32jpG",
+      "vendorValue": 2000
     },
     {
       "id": "rec-319",
       "name": "Cosmic Finesse Tonic Recipe (Untradable)",
       "price": 0,
       "chance": 0.00162,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "bAB1E9poQq5EQnakeJj5",
+      "vendorValue": 2000
     },
     {
       "id": "rec-320",
       "name": "Excalibur Recipe",
       "price": 10000000,
-      "value": null,
       "chance": 0.00005,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "RVrBKlPdNdXaNWG8xJe9",
+      "vendorValue": 2000,
+      "value": null
     },
     {
       "id": "rec-321",
       "name": "Moonlance Recipe",
       "price": 10000000,
-      "value": null,
       "chance": 0.00015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "BRn3x72JQ2jXQzOMok41",
+      "vendorValue": 2000,
+      "value": null
     },
     {
       "id": "rec-322",
       "name": "Divinity Recipe",
       "price": 10000000,
-      "value": null,
       "chance": 0.00015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "mK5jqPopYGdKLrOzDRGV",
+      "vendorValue": 2000,
+      "value": null
     },
     {
       "id": "rec-323",
       "name": "Fortune Recipe",
       "price": 10000000,
-      "value": null,
       "chance": 0.00015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "O2xMjGdBN542Q9P1nyrv",
+      "vendorValue": 2000,
+      "value": null
     },
     {
       "id": "rec-324",
       "name": "Fists of Fury Recipe",
       "price": 10000000,
-      "value": null,
       "chance": 0.00015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "RVrBKlPdNdyzYWG8xJe9",
+      "vendorValue": 200,
+      "value": null
     },
     {
       "id": "rec-325",
       "name": "Moonshadow Vestment Recipe",
-      "price": 1440000,
+      "price": 1255000,
       "chance": 0.0025,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "27gw0k38L4D9LWevJxyK",
+      "vendorValue": 1100
     },
     {
       "id": "rec-326",
       "name": "Corruption Recipe",
       "price": 10000000,
-      "value": null,
       "chance": 0.00005,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "BRn3x72JQ2DJYzOMok41",
+      "vendorValue": 2000,
+      "value": null
     },
     {
       "id": "rec-327",
       "name": "Bloodforged Legguards Recipe",
-      "price": 400000,
+      "price": 332123.1,
       "chance": 0.0025,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "njoPWKDkLXW3Y06ZOX79",
+      "vendorValue": 1050
     },
     {
       "id": "rec-328",
       "name": "Dirella's Protection Recipe",
       "price": 10000000,
-      "value": null,
       "chance": 0.00015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "mK5jqPopYGmeQrOzDRGV",
+      "vendorValue": 2000,
+      "value": null
     },
     {
       "id": "rec-329",
       "name": "Bloodforged Boots Recipe",
-      "price": 200000,
+      "price": 190876.4,
       "chance": 0.0025,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "XyeZRGx9YjwDLB80gWlP",
+      "vendorValue": 1050
     },
     {
       "id": "rec-330",
       "name": "Phoenix Boots Recipe",
-      "price": 580000,
+      "price": 582490,
       "chance": 0.0025,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "Ro31P7kZL6EmYveGxXOy",
+      "vendorValue": 1100
     },
     {
       "id": "rec-331",
       "name": "Fatebreaker Footguards Recipe",
       "price": 10000000,
-      "value": null,
       "chance": 0.00015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "O2xMjGdBN5E3N9P1nyrv",
+      "vendorValue": 2000,
+      "value": null
     },
     {
       "id": "rec-332",
       "name": "Glimmersteel Ward Recipe",
-      "price": 250000,
+      "price": 281050,
       "chance": 0.0025,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "zvjoJW96Y8EoL3RaAylw",
+      "vendorValue": 1100
     },
     {
       "id": "rec-333",
       "name": "Colossus Recipe",
       "price": 10000000,
-      "value": null,
       "chance": 0.00015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "RVrBKlPdNd6mLWG8xJe9",
+      "vendorValue": 2000,
+      "value": null
     },
     {
       "id": "rec-334",
       "name": "Earth Destroyer Recipe",
       "price": 10000000,
-      "value": null,
       "chance": 0.00015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "Rv5g4z1dQnyoLqy32jpG",
+      "vendorValue": 2000,
+      "value": null
     },
     {
       "id": "rec-335",
       "name": "Forest Reaver Recipe",
       "price": 10000000,
-      "value": null,
       "chance": 0.00015,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "bAB1E9poQqggYnakeJj5",
+      "vendorValue": 2000,
+      "value": null
     },
     {
       "id": "rec-336",
       "name": "Titans Essence Recipe",
-      "price": 888888,
+      "price": 894444,
       "chance": 0.00025,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "oZwey82VNAb0YD0dXM3g",
+      "vendorValue": 2000
     },
     {
       "id": "rec-337",
       "name": "Mjolnir's Elixir Recipe",
       "price": 1350000,
-      "value": null,
       "chance": 0.00025,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "JZdg5V3PQo80NEyWq0zl",
+      "vendorValue": 2000,
+      "value": null
     },
     {
       "id": "rec-338",
       "name": "Dragon's Essence Recipe",
-      "price": 2400000,
-      "value": null,
+      "price": 5000,
       "chance": 0.00025,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "BPjze3x2Q3epYR85vgZV",
+      "vendorValue": 2000,
+      "value": null
     },
     {
       "id": "rec-339",
       "name": "Titanwood Crystal Recipe",
-      "price": 2100000,
-      "value": null,
+      "price": 672499.25,
       "chance": 0.00025,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "XjEaOeBkLaXJYlGwxVPq",
+      "vendorValue": 2000,
+      "value": null
     },
     {
       "id": "rec-340",
       "name": "Primordial Timber Crystal Recipe",
-      "price": 1980000,
-      "value": null,
+      "price": 1250000,
       "chance": 0.00025,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "njoPWKDkLXaqQ06ZOX79",
+      "vendorValue": 2000,
+      "value": null
     },
     {
       "id": "rec-341",
       "name": "Titans Essence Recipe (Untradable)",
       "price": 0,
       "chance": 0.00075,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "mK5jqPopYGOeYrOzDRGV",
+      "vendorValue": 2000
     },
     {
       "id": "rec-342",
       "name": "Mjolnir's Elixir Recipe (Untradable)",
       "price": 0,
       "chance": 0.00075,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "3ZvrGV8RQp0mQ2wgA5jD",
+      "vendorValue": 2000
     },
     {
       "id": "rec-343",
       "name": "Dragon's Essence Recipe (Untradable)",
       "price": 0,
       "chance": 0.00075,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "ZjlPA8v9NMZmYEyMe2Oa",
+      "vendorValue": 2000
     },
     {
       "id": "rec-344",
       "name": "Titanwood Crystal Recipe (Untradable)",
       "price": 0,
       "chance": 0.00075,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "P1vlVrzjLr0ZNao8mGKM",
+      "vendorValue": 2000
     },
     {
       "id": "rec-345",
       "name": "Primordial Timber Crystal Recipe (Untradable)",
       "price": 0,
       "chance": 0.00075,
-      "hashedId": "",
-      "vendorValue": 0
+      "hashedId": "Z6aDoyRnLyvoQpV5AGXm",
+      "vendorValue": 2000
     }
   ],
   "dungeons": [
@@ -4510,16 +4510,16 @@
         {
           "name": "Moose antler",
           "quantity": 15,
-          "unitCost": 125
+          "unitCost": 114.1
         },
         {
           "name": "Minotaur Hide",
           "quantity": 20,
-          "unitCost": 413
+          "unitCost": 378.9
         }
       ],
       "vialCost": 500,
-      "currentPrice": 11600
+      "currentPrice": 11894.6
     },
     {
       "name": "Thunderfury",
@@ -4528,16 +4528,16 @@
         {
           "name": "Black Bear Pelt",
           "quantity": 25,
-          "unitCost": 82
+          "unitCost": 99.3
         },
         {
           "name": "Orb of elemental",
           "quantity": 20,
-          "unitCost": 105
+          "unitCost": 89.8
         }
       ],
       "vialCost": 500,
-      "currentPrice": 5500
+      "currentPrice": 5250
     },
     {
       "name": "Gourmet",
@@ -4546,16 +4546,16 @@
         {
           "name": "Elk Antler",
           "quantity": 15,
-          "unitCost": 335
+          "unitCost": 395.5
         },
         {
           "name": "Enigmatic Stone",
           "quantity": 12,
-          "unitCost": 50
+          "unitCost": 69
         }
       ],
       "vialCost": 500,
-      "currentPrice": 7150
+      "currentPrice": 7580
     },
     {
       "name": "Dungeon master",
@@ -4564,11 +4564,11 @@
         {
           "name": "Lions teeth",
           "quantity": 11,
-          "unitCost": 160
+          "unitCost": 246
         }
       ],
       "vialCost": 200,
-      "currentPrice": 2291
+      "currentPrice": 2298.6
     },
     {
       "name": "Frenzy",
@@ -4577,16 +4577,16 @@
         {
           "name": "Wolf pelt",
           "quantity": 14,
-          "unitCost": 96
+          "unitCost": 102.7
         },
         {
           "name": "Goblin totem",
           "quantity": 60,
-          "unitCost": 37
+          "unitCost": 31.5
         }
       ],
       "vialCost": 500,
-      "currentPrice": 3100
+      "currentPrice": 3112
     },
     {
       "name": "Cosmic",
@@ -4595,16 +4595,16 @@
         {
           "name": "Harpy wing",
           "quantity": 40,
-          "unitCost": 14
+          "unitCost": 9.6
         },
         {
           "name": "Air elemental",
           "quantity": 12,
-          "unitCost": 290
+          "unitCost": 292.2
         }
       ],
       "vialCost": 500,
-      "currentPrice": 5900
+      "currentPrice": 34506.9
     }
   ],
   "resourceGathering": [
@@ -4613,19 +4613,21 @@
       "timeSeconds": 8.3,
       "baseCost": 0,
       "vendorValue": 1,
-      "marketPrice": 6
+      "marketPrice": 5.6
     },
     {
       "name": "Stingray",
       "timeSeconds": 28.6,
       "baseCost": 16,
       "vendorValue": 26,
-      "marketPrice": 38
+      "marketPrice": 35.7
     },
     {
       "name": "Cooked Stingray",
       "timeSeconds": 33.3,
       "baseCost": 0,
+      "vendorValue": 65,
+      "marketPrice": 66.9,
       "inputs": [
         {
           "resourceName": "Stingray",
@@ -4637,35 +4639,35 @@
           "quantity": 1,
           "useMarketPrice": true
         }
-      ],
-      "vendorValue": 65,
-      "marketPrice": 67
+      ]
     },
     {
       "name": "Cooked Stingray full",
       "timeSeconds": 61.9,
       "baseCost": 16,
+      "vendorValue": 65,
+      "marketPrice": 67,
       "inputs": [
         {
           "resourceName": "Coal",
           "quantity": 1,
           "useMarketPrice": true
         }
-      ],
-      "vendorValue": 65,
-      "marketPrice": 67
+      ]
     },
     {
       "name": "Great White Shark",
       "timeSeconds": 32.1,
       "baseCost": 25,
       "vendorValue": 41,
-      "marketPrice": 56
+      "marketPrice": 47.5
     },
     {
       "name": "Cooked Great White Shark",
       "timeSeconds": 45.8,
       "baseCost": 0,
+      "vendorValue": 92,
+      "marketPrice": 107,
       "inputs": [
         {
           "resourceName": "Great White Shark",
@@ -4677,23 +4679,21 @@
           "quantity": 1,
           "useMarketPrice": true
         }
-      ],
-      "vendorValue": 92,
-      "marketPrice": 105
+      ]
     },
     {
       "name": "Cooked Great White Shark full",
       "timeSeconds": 77.9,
       "baseCost": 25,
+      "vendorValue": 92,
+      "marketPrice": 105,
       "inputs": [
         {
           "resourceName": "Coal",
           "quantity": 1,
           "useMarketPrice": true
         }
-      ],
-      "vendorValue": 92,
-      "marketPrice": 105
+      ]
     },
     {
       "name": "Cooked Great White Shark full + coal",
@@ -4707,12 +4707,14 @@
       "timeSeconds": 37.9,
       "baseCost": 0,
       "vendorValue": 20,
-      "marketPrice": 24
+      "marketPrice": 23.5
     },
     {
       "name": "Mystic Bar",
       "timeSeconds": 50,
       "baseCost": 0,
+      "vendorValue": 59,
+      "marketPrice": 64.5,
       "inputs": [
         {
           "resourceName": "Mystic Ore",
@@ -4724,23 +4726,21 @@
           "quantity": 1,
           "useMarketPrice": true
         }
-      ],
-      "vendorValue": 59,
-      "marketPrice": 67
+      ]
     },
     {
       "name": "Mystic Bar full",
       "timeSeconds": 87.9,
       "baseCost": 0,
+      "vendorValue": 59,
+      "marketPrice": 67,
       "inputs": [
         {
           "resourceName": "Coal",
           "quantity": 1,
           "useMarketPrice": true
         }
-      ],
-      "vendorValue": 59,
-      "marketPrice": 67
+      ]
     },
     {
       "name": "Mystic Bar full + coal",

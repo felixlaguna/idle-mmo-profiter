@@ -7,6 +7,8 @@ import {
   resetToDefaults,
   resetAll,
 } from '../composables/useSettingsManager'
+import { useDataProvider } from '../composables/useDataProvider'
+import { useToast } from '../composables/useToast'
 import ApiKeyInput from './ApiKeyInput.vue'
 import EditableValue from './EditableValue.vue'
 import type { MagicFindSettings } from '../types'
@@ -35,8 +37,26 @@ const updateTaxRate = (newPercent: number) => {
 
 const fileInput = ref<HTMLInputElement | null>(null)
 
+// Initialize data provider and toast
+const dataProvider = useDataProvider()
+const { success } = useToast()
+
 const handleExport = () => {
   exportSettings()
+}
+
+const handleExportDefaultsJson = () => {
+  const jsonString = dataProvider.exportAsDefaultsJson()
+  const blob = new Blob([jsonString], { type: 'application/json' })
+  const url = URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.href = url
+  link.download = 'defaults.json'
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+  URL.revokeObjectURL(url)
+  success('defaults.json exported successfully')
 }
 
 const handleImportClick = () => {
@@ -123,6 +143,9 @@ const handleResetAll = () => {
         </button>
         <button class="btn-secondary" @click="handleImportClick">
           📤 Import Settings
+        </button>
+        <button class="btn-secondary" @click="handleExportDefaultsJson">
+          💾 Export defaults.json
         </button>
         <input
           ref="fileInput"

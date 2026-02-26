@@ -10,7 +10,7 @@
  */
 
 import { ref, computed } from 'vue'
-import type { DefaultData } from '../types'
+import type { DefaultData, Recipe } from '../types'
 import defaultData from '../data/defaults.json'
 
 // Storage keys
@@ -571,6 +571,94 @@ function createDataProvider() {
     }
   }
 
+  /**
+   * Export current data as a defaults.json compatible JSON string
+   *
+   * This creates a complete DefaultData object with all user overrides merged in,
+   * producing a drop-in replacement for src/data/defaults.json
+   */
+  function exportAsDefaultsJson(): string {
+    // Build the complete data object with user overrides applied
+    // Use computed arrays which already have overrides merged
+    const exportData: DefaultData = {
+      materials: materials.value.map(mat => ({
+        id: mat.id,
+        name: mat.name,
+        price: mat.price,
+        hashedId: mat.hashedId || '',
+        vendorValue: mat.vendorValue || 0,
+      })),
+      potions: potions.value.map(pot => ({
+        id: pot.id,
+        name: pot.name,
+        price: pot.price,
+        hashedId: pot.hashedId || '',
+        vendorValue: pot.vendorValue || 0,
+      })),
+      resources: resources.value.map(res => ({
+        id: res.id,
+        name: res.name,
+        marketPrice: res.marketPrice,
+        vendorValue: res.vendorValue,
+        hashedId: res.hashedId || '',
+      })),
+      recipes: recipes.value.map(recipe => {
+        const exported: Recipe = {
+          id: recipe.id,
+          name: recipe.name,
+          price: recipe.price,
+          chance: recipe.chance,
+          hashedId: recipe.hashedId || '',
+          vendorValue: recipe.vendorValue || 0,
+        }
+        // Only include value if it exists in the original
+        if (recipe.value !== undefined) {
+          exported.value = recipe.value
+        }
+        return exported
+      }),
+      dungeons: dungeons.value,
+      potionCrafts: potionCrafts.value.map(craft => ({
+        name: craft.name,
+        timeSeconds: craft.timeSeconds,
+        materials: craft.materials.map(mat => ({
+          name: mat.name,
+          quantity: mat.quantity,
+          unitCost: mat.unitCost,
+        })),
+        vialCost: craft.vialCost,
+        currentPrice: craft.currentPrice,
+      })),
+      resourceGathering: resourceGathering.value.map(gather => {
+        // Strip the computed 'cost' field - it doesn't exist in defaults.json
+        const exported: {
+          name: string
+          timeSeconds: number
+          baseCost: number
+          inputs?: typeof gather.inputs
+          vendorValue: number
+          marketPrice: number
+        } = {
+          name: gather.name,
+          timeSeconds: gather.timeSeconds,
+          baseCost: gather.baseCost,
+          vendorValue: gather.vendorValue,
+          marketPrice: gather.marketPrice,
+        }
+        // Only include inputs if they exist
+        if (gather.inputs && gather.inputs.length > 0) {
+          exported.inputs = gather.inputs
+        }
+        return exported
+      }),
+      magicFindDefaults: magicFindDefaults.value,
+      marketTaxRate: marketTaxRate.value,
+    }
+
+    // Return pretty-printed JSON with 2-space indentation
+    return JSON.stringify(exportData, null, 2)
+  }
+
   return {
     // Reactive data
     materials,
@@ -606,6 +694,9 @@ function createDataProvider() {
     isRefreshExcluded,
     setAllRefreshExcluded,
     getExclusionStats,
+
+    // Export methods
+    exportAsDefaultsJson,
   }
 }
 
