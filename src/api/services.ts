@@ -18,32 +18,24 @@ import type { AuthCheckResponse } from '../types'
  */
 
 export interface ItemSearchResult {
-  hashed_item_id: string
-  item_id: number
+  hashed_id: string
   name: string
   description: string
+  image_url: string
   type: string
-  image: string
-  item_tier: number
-  item_category: string
+  quality: string
+  vendor_price: number | null
 }
 
 export interface ItemSearchResponse {
-  data: ItemSearchResult[]
-  links: {
-    first: string
-    last: string
-    prev: string | null
-    next: string | null
-  }
-  meta: {
+  items: ItemSearchResult[]
+  pagination: {
     current_page: number
-    from: number
     last_page: number
-    path: string
     per_page: number
-    to: number
     total: number
+    from: number
+    to: number
   }
 }
 
@@ -71,45 +63,41 @@ export interface ItemRecipe {
 }
 
 export interface ItemDetails {
-  hashed_item_id: string
-  item_id: number
+  hashed_id: string
   name: string
-  description: string
-  type: string
-  image: string
-  item_tier: number
-  item_category: string
-  tradeable: boolean
-  sellable: boolean
-  level_required: number
-  skill: string | null
-  price: number
+  vendor_price: number
+  is_tradeable: boolean
+  max_tier: number
+  description?: string
+  type?: string
+  image?: string
   recipes?: ItemRecipe[]
 }
 
 export interface MarketHistoryEntry {
-  id: number
-  price: number
-  quantity: number
-  type: 'buy' | 'sell'
-  created_at: string
-  updated_at: string
+  date: string
+  total_sold: number
+  average_price: number
 }
 
-export interface MarketListing {
-  id: number
-  character_id: number
-  character_name: string
-  price: number
+export interface LatestSoldEntry {
+  item: {
+    hashed_id: string
+    name: string
+    image_url: string
+  }
+  tier: number
   quantity: number
-  created_at: string
-  updated_at: string
+  price_per_item: number
+  total_price: number
+  sold_at: string
 }
 
 export interface MarketHistoryResponse {
-  history: MarketHistoryEntry[]
-  buy_orders: MarketListing[]
-  sell_orders: MarketListing[]
+  history_data: MarketHistoryEntry[]
+  latest_sold: LatestSoldEntry[]
+  type: string
+  endpoint_updates_at: string
 }
 
 /**
@@ -117,28 +105,22 @@ export interface MarketHistoryResponse {
  */
 
 const EMPTY_SEARCH_RESPONSE: ItemSearchResponse = {
-  data: [],
-  links: {
-    first: '',
-    last: '',
-    prev: null,
-    next: null,
-  },
-  meta: {
+  items: [],
+  pagination: {
     current_page: 1,
-    from: 0,
     last_page: 1,
-    path: '',
-    per_page: 25,
-    to: 0,
+    per_page: 20,
     total: 0,
+    from: 0,
+    to: 0,
   },
 }
 
 const EMPTY_MARKET_HISTORY: MarketHistoryResponse = {
-  history: [],
-  buy_orders: [],
-  sell_orders: [],
+  history_data: [],
+  latest_sold: [],
+  type: 'listings',
+  endpoint_updates_at: new Date().toISOString(),
 }
 
 /**
@@ -176,7 +158,9 @@ export async function searchItems(
   }
 
   // Cache miss - make API request
-  console.log(`Cache miss for item search: ${query || type || 'all'} (page ${page}), fetching from API`)
+  console.log(
+    `Cache miss for item search: ${query || type || 'all'} (page ${page}), fetching from API`
+  )
 
   try {
     const data = await apiClient.get<ItemSearchResponse>('/item/search', params)
@@ -197,9 +181,7 @@ export async function searchItems(
  * @param hashedItemId - The hashed item ID
  * @returns Detailed item information including recipes, stats, and vendor price
  */
-export async function inspectItem(
-  hashedItemId: string
-): Promise<ItemDetails | null> {
+export async function inspectItem(hashedItemId: string): Promise<ItemDetails | null> {
   // Check if API key is configured
   if (!apiClient.isConfigured()) {
     console.log('API key not configured, cannot inspect item')
@@ -220,9 +202,10 @@ export async function inspectItem(
   console.log(`Cache miss for item details: ${hashedItemId}, fetching from API`)
 
   try {
-    const data = await apiClient.get<ItemDetails>(
-      `/item/${hashedItemId}/inspect`
-    )
+    const response = await apiClient.get<{ item: ItemDetails }>(`/item/${hashedItemId}/inspect`)
+
+    // Extract the item from the wrapped response
+    const data = response.item
 
     // Cache the result
     set(cacheKey, data)
@@ -237,9 +220,7 @@ export async function inspectItem(
 /**
  * Alias for inspectItem - kept for backwards compatibility
  */
-export async function getItemDetails(
-  hashedItemId: string
-): Promise<ItemDetails | null> {
+export async function getItemDetails(hashedItemId: string): Promise<ItemDetails | null> {
   return inspectItem(hashedItemId)
 }
 
@@ -253,8 +234,8 @@ export async function getItemDetails(
  */
 export async function getMarketHistory(
   hashedItemId: string,
-  tier?: number,
-  type?: 'listings' | 'orders'
+  tier: number = 0,
+  type: 'listings' | 'orders' = 'listings'
 ): Promise<MarketHistoryResponse> {
   // Check if API key is configured
   if (!apiClient.isConfigured()) {
@@ -262,16 +243,11 @@ export async function getMarketHistory(
     return EMPTY_MARKET_HISTORY
   }
 
-  // Build params object (only include defined params)
-  const params: Record<string, string | number> = {}
-  if (tier !== undefined) params.tier = tier
-  if (type) params.type = type
+  // Both tier and type are required by the API
+  const params: Record<string, string | number> = { tier, type }
 
   // Build cache key from URL + params
-  const cacheKey = generateCacheKey(
-    `/item/${hashedItemId}/market-history`,
-    Object.keys(params).length > 0 ? params : undefined
-  )
+  const cacheKey = generateCacheKey(`/item/${hashedItemId}/market-history`, params)
 
   // Check cache first
   const cached = get<MarketHistoryResponse>(cacheKey)
@@ -286,7 +262,7 @@ export async function getMarketHistory(
   try {
     const data = await apiClient.get<MarketHistoryResponse>(
       `/item/${hashedItemId}/market-history`,
-      Object.keys(params).length > 0 ? params : undefined
+      params
     )
 
     // Cache the result (TTL automatically inferred as 1 hour for market-history)
@@ -300,11 +276,12 @@ export async function getMarketHistory(
 }
 
 /**
- * Get the current best buy and sell prices from market data
+ * Get the average price from latest sold items
+ * This replaces the old buy/sell order system with actual sale data
  *
  * @param hashedItemId - The hashed item ID
  * @param tier - Optional item tier filter
- * @returns Object with best buy and sell prices, or null if no data
+ * @returns Average price from latest sales, or null if no data
  */
 export async function getMarketPrices(
   hashedItemId: string,
@@ -312,23 +289,19 @@ export async function getMarketPrices(
 ): Promise<{ buyPrice: number | null; sellPrice: number | null }> {
   const marketData = await getMarketHistory(hashedItemId, tier)
 
-  // Get lowest sell order (what you can buy at)
-  const buyPrice =
-    marketData.sell_orders.length > 0
-      ? Math.min(...marketData.sell_orders.map((order) => order.price))
+  // Calculate average from latest sold items
+  const averagePrice =
+    marketData.latest_sold.length > 0
+      ? marketData.latest_sold.reduce((sum, entry) => sum + entry.price_per_item, 0) /
+        marketData.latest_sold.length
       : null
 
-  // Get highest buy order (what you can sell at)
-  const sellPrice =
-    marketData.buy_orders.length > 0
-      ? Math.max(...marketData.buy_orders.map((order) => order.price))
-      : null
-
-  return { buyPrice, sellPrice }
+  // Return as both buy and sell price (same value since we only have sale data)
+  return { buyPrice: averagePrice, sellPrice: averagePrice }
 }
 
 /**
- * Get average market price from recent history
+ * Get average market price from recent sales
  *
  * @param hashedItemId - The hashed item ID
  * @param limit - Number of recent transactions to average (default: 10)
@@ -342,14 +315,14 @@ export async function getAverageMarketPrice(
 ): Promise<number | null> {
   const marketData = await getMarketHistory(hashedItemId, tier)
 
-  if (marketData.history.length === 0) {
+  if (marketData.latest_sold.length === 0) {
     return null
   }
 
-  // Get most recent transactions
-  const recentTransactions = marketData.history
+  // Get most recent transactions (up to limit)
+  const recentTransactions = marketData.latest_sold
     .slice(0, limit)
-    .map((entry) => entry.price)
+    .map((entry) => entry.price_per_item)
 
   if (recentTransactions.length === 0) {
     return null

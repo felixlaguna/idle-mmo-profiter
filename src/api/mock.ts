@@ -140,55 +140,37 @@ export class MockProvider implements DataProvider {
 
     if (material) {
       return {
-        hashed_item_id: material.id,
-        item_id: 0, // Unknown for default data
+        hashed_id: material.id,
         name: material.name,
+        vendor_price: material.price,
+        is_tradeable: true,
+        max_tier: 5,
         description: `Material: ${material.name}`,
         type: 'material',
-        image: '',
-        item_tier: 0,
-        item_category: 'material',
-        tradeable: true,
-        sellable: true,
-        level_required: 0,
-        skill: null,
-        price: material.price,
       }
     }
 
     if (potion) {
       return {
-        hashed_item_id: potion.id,
-        item_id: 0,
+        hashed_id: potion.id,
         name: potion.name,
+        vendor_price: potion.price,
+        is_tradeable: true,
+        max_tier: 5,
         description: `Potion: ${potion.name}`,
         type: 'potion',
-        image: '',
-        item_tier: 0,
-        item_category: 'potion',
-        tradeable: true,
-        sellable: true,
-        level_required: 0,
-        skill: null,
-        price: potion.price,
       }
     }
 
     if (resource) {
       return {
-        hashed_item_id: resource.id,
-        item_id: 0,
+        hashed_id: resource.id,
         name: resource.name,
+        vendor_price: resource.marketPrice,
+        is_tradeable: true,
+        max_tier: 5,
         description: `Resource: ${resource.name}`,
         type: 'resource',
-        image: '',
-        item_tier: 0,
-        item_category: 'resource',
-        tradeable: true,
-        sellable: true,
-        level_required: 0,
-        skill: null,
-        price: resource.marketPrice,
       }
     }
 
@@ -225,39 +207,32 @@ export class MockProvider implements DataProvider {
     const paginatedItems = filtered.slice(start, end)
 
     return {
-      data: paginatedItems.map((item) => ({
-        hashed_item_id: item.id,
-        item_id: 0,
+      items: paginatedItems.map((item) => ({
+        hashed_id: item.id,
         name: item.name,
         description: `${item.type}: ${item.name}`,
+        image_url: '',
         type: item.type,
-        image: '',
-        item_tier: 0,
-        item_category: item.type,
+        quality: 'COMMON',
+        vendor_price: 0,
       })),
-      links: {
-        first: '',
-        last: '',
-        prev: page > 1 ? `page=${page - 1}` : null,
-        next: end < filtered.length ? `page=${page + 1}` : null,
-      },
-      meta: {
+      pagination: {
         current_page: page,
-        from: start + 1,
         last_page: Math.ceil(filtered.length / perPage),
-        path: '/item/search',
         per_page: perPage,
-        to: Math.min(end, filtered.length),
         total: filtered.length,
+        from: start + 1,
+        to: Math.min(end, filtered.length),
       },
     }
   }
 
   async getMarketHistory(): Promise<MarketHistoryResponse> {
     return {
-      history: [],
-      buy_orders: [],
-      sell_orders: [],
+      history_data: [],
+      latest_sold: [],
+      type: 'listings',
+      endpoint_updates_at: new Date().toISOString(),
     }
   }
 
@@ -340,15 +315,15 @@ export class ApiProvider implements DataProvider {
 
     // First, search for the item to get its hashed ID
     const searchResults = await searchItems(name)
-    if (!searchResults.data || searchResults.data.length === 0) {
+    if (!searchResults.items || searchResults.items.length === 0) {
       // Fall back to defaults
       const mockProvider = new MockProvider()
       return mockProvider.getItemDetails(name)
     }
 
     // Find exact match
-    const item = searchResults.data.find(
-      (i) => i.name.toLowerCase() === name.toLowerCase()
+    const item = searchResults.items.find(
+      (i: { name: string }) => i.name.toLowerCase() === name.toLowerCase()
     )
 
     if (!item) {
@@ -358,7 +333,7 @@ export class ApiProvider implements DataProvider {
     }
 
     // Get detailed item info
-    return getItemDetails(item.hashed_item_id)
+    return getItemDetails(item.hashed_id)
   }
 
   async searchItems(query?: string, type?: string, page = 1): Promise<ItemSearchResponse> {

@@ -22,10 +22,29 @@ const USER_OVERRIDES_KEY = `${STORAGE_PREFIX}user-overrides`
  * Users can manually override any value in the default data
  */
 interface UserOverrides {
-  materials?: Record<string, { price?: number }>
-  potions?: Record<string, { price?: number }>
-  resources?: Record<string, { marketPrice?: number }>
-  recipes?: Record<string, { price?: number; chance?: number; value?: number }>
+  materials?: Record<
+    string,
+    { price?: number; refreshExcluded?: boolean; hashedId?: string; vendorValue?: number }
+  >
+  potions?: Record<
+    string,
+    { price?: number; refreshExcluded?: boolean; hashedId?: string; vendorValue?: number }
+  >
+  resources?: Record<
+    string,
+    { marketPrice?: number; refreshExcluded?: boolean; hashedId?: string; vendorValue?: number }
+  >
+  recipes?: Record<
+    string,
+    {
+      price?: number
+      chance?: number
+      value?: number
+      refreshExcluded?: boolean
+      hashedId?: string
+      vendorValue?: number
+    }
+  >
 }
 
 /**
@@ -97,31 +116,19 @@ function createDataProvider() {
    * Merged data with user overrides applied
    */
   const materials = computed(() => {
-    return applyOverrides(
-      defaults.value.materials,
-      userOverrides.value.materials
-    )
+    return applyOverrides(defaults.value.materials, userOverrides.value.materials)
   })
 
   const potions = computed(() => {
-    return applyOverrides(
-      defaults.value.potions,
-      userOverrides.value.potions
-    )
+    return applyOverrides(defaults.value.potions, userOverrides.value.potions)
   })
 
   const resources = computed(() => {
-    return applyOverrides(
-      defaults.value.resources,
-      userOverrides.value.resources
-    )
+    return applyOverrides(defaults.value.resources, userOverrides.value.resources)
   })
 
   const recipes = computed(() => {
-    return applyOverrides(
-      defaults.value.recipes,
-      userOverrides.value.recipes
-    )
+    return applyOverrides(defaults.value.recipes, userOverrides.value.recipes)
   })
 
   const dungeons = computed(() => defaults.value.dungeons)
@@ -190,7 +197,7 @@ function createDataProvider() {
    */
   const resourceGathering = computed(() => {
     // First pass: create a map to store all resources
-    const resourceMap = new Map<string, typeof defaults.value.resourceGathering[0]>()
+    const resourceMap = new Map<string, (typeof defaults.value.resourceGathering)[0]>()
     defaults.value.resourceGathering.forEach((gather) => {
       resourceMap.set(gather.name, gather)
     })
@@ -244,7 +251,7 @@ function createDataProvider() {
       overrides.materials = {}
     }
 
-    overrides.materials[id] = { price }
+    overrides.materials[id] = { ...overrides.materials[id], price }
     userOverrides.value = overrides
     saveUserOverrides(overrides)
   }
@@ -259,7 +266,7 @@ function createDataProvider() {
       overrides.potions = {}
     }
 
-    overrides.potions[id] = { price }
+    overrides.potions[id] = { ...overrides.potions[id], price }
     userOverrides.value = overrides
     saveUserOverrides(overrides)
   }
@@ -274,7 +281,7 @@ function createDataProvider() {
       overrides.resources = {}
     }
 
-    overrides.resources[id] = { marketPrice }
+    overrides.resources[id] = { ...overrides.resources[id], marketPrice }
     userOverrides.value = overrides
     saveUserOverrides(overrides)
   }
@@ -318,13 +325,55 @@ function createDataProvider() {
   }
 
   /**
+   * Update hashedId for an item — persisted to localStorage via user overrides
+   */
+  function updateHashedId(
+    category: 'materials' | 'potions' | 'resources' | 'recipes',
+    id: string,
+    hashedId: string
+  ): void {
+    // Update in-memory defaults
+    const item = defaults.value[category].find((item: { id: string }) => item.id === id)
+    if (item) {
+      ;(item as { hashedId?: string }).hashedId = hashedId
+    }
+    // Persist to localStorage via user overrides
+    const overrides = { ...userOverrides.value }
+    if (!overrides[category]) {
+      overrides[category] = {} as Record<string, never>
+    }
+    const categoryOverrides = overrides[category]!
+    categoryOverrides[id] = { ...categoryOverrides[id], hashedId }
+    userOverrides.value = overrides
+    saveUserOverrides(overrides)
+  }
+
+  /**
+   * Update vendorValue for an item — persisted to localStorage via user overrides
+   */
+  function updateVendorValue(
+    category: 'materials' | 'potions' | 'resources' | 'recipes',
+    id: string,
+    vendorValue: number
+  ): void {
+    const overrides = { ...userOverrides.value }
+    if (!overrides[category]) {
+      overrides[category] = {} as Record<string, never>
+    }
+    const categoryOverrides = overrides[category]!
+    categoryOverrides[id] = { ...categoryOverrides[id], vendorValue }
+    userOverrides.value = overrides
+    saveUserOverrides(overrides)
+  }
+
+  /**
    * Check if an item has user overrides
    */
   function hasOverride(
     category: 'materials' | 'potions' | 'resources' | 'recipes',
     id: string
   ): boolean {
-    return !!(userOverrides.value[category]?.[id])
+    return !!userOverrides.value[category]?.[id]
   }
 
   /**
@@ -362,6 +411,166 @@ function createDataProvider() {
     return { ...stats, total }
   }
 
+  /**
+   * Set refresh exclusion state for a single item
+   */
+  function setRefreshExcluded(
+    category: 'materials' | 'potions' | 'resources' | 'recipes',
+    id: string,
+    excluded: boolean
+  ): void {
+    const overrides = { ...userOverrides.value }
+
+    if (!overrides[category]) {
+      overrides[category] = {}
+    }
+
+    if (!overrides[category]![id]) {
+      overrides[category]![id] = {}
+    }
+
+    overrides[category]![id].refreshExcluded = excluded
+    userOverrides.value = overrides
+    saveUserOverrides(overrides)
+  }
+
+  /**
+   * Check if an item is excluded from refresh
+   */
+  function isRefreshExcluded(
+    category: 'materials' | 'potions' | 'resources' | 'recipes',
+    id: string
+  ): boolean {
+    return userOverrides.value[category]?.[id]?.refreshExcluded ?? false
+  }
+
+  /**
+   * Bulk set refresh exclusion for all items in a category
+   */
+  function setAllRefreshExcluded(
+    category: 'materials' | 'potions' | 'resources' | 'recipes',
+    excluded: boolean
+  ): void {
+    const overrides = { ...userOverrides.value }
+
+    if (!overrides[category]) {
+      overrides[category] = {}
+    }
+
+    // Get all items from the category
+    let itemIds: string[] = []
+    switch (category) {
+      case 'materials':
+        itemIds = defaults.value.materials.map((item) => item.id)
+        break
+      case 'potions':
+        itemIds = defaults.value.potions.map((item) => item.id)
+        break
+      case 'resources':
+        itemIds = defaults.value.resources.map((item) => item.id)
+        break
+      case 'recipes':
+        itemIds = defaults.value.recipes.map((item) => item.id)
+        break
+    }
+
+    // Set exclusion state for all items
+    itemIds.forEach((id) => {
+      if (!overrides[category]![id]) {
+        overrides[category]![id] = {}
+      }
+      overrides[category]![id].refreshExcluded = excluded
+    })
+
+    userOverrides.value = overrides
+    saveUserOverrides(overrides)
+  }
+
+  /**
+   * Get exclusion statistics for a specific category or all categories
+   */
+  function getExclusionStats(category?: 'materials' | 'potions' | 'resources' | 'recipes') {
+    if (category) {
+      // Stats for a specific category
+      let totalItems = 0
+      switch (category) {
+        case 'materials':
+          totalItems = defaults.value.materials.length
+          break
+        case 'potions':
+          totalItems = defaults.value.potions.length
+          break
+        case 'resources':
+          totalItems = defaults.value.resources.length
+          break
+        case 'recipes':
+          totalItems = defaults.value.recipes.length
+          break
+      }
+
+      const excluded = Object.values(userOverrides.value[category] || {}).filter(
+        (override) => override.refreshExcluded === true
+      ).length
+
+      return {
+        total: totalItems,
+        excluded,
+        included: totalItems - excluded,
+      }
+    }
+
+    // Stats for all categories
+    const materialsTotal = defaults.value.materials.length
+    const potionsTotal = defaults.value.potions.length
+    const resourcesTotal = defaults.value.resources.length
+    const recipesTotal = defaults.value.recipes.length
+
+    const materialsExcluded = Object.values(userOverrides.value.materials || {}).filter(
+      (override) => override.refreshExcluded === true
+    ).length
+
+    const potionsExcluded = Object.values(userOverrides.value.potions || {}).filter(
+      (override) => override.refreshExcluded === true
+    ).length
+
+    const resourcesExcluded = Object.values(userOverrides.value.resources || {}).filter(
+      (override) => override.refreshExcluded === true
+    ).length
+
+    const recipesExcluded = Object.values(userOverrides.value.recipes || {}).filter(
+      (override) => override.refreshExcluded === true
+    ).length
+
+    const totalItems = materialsTotal + potionsTotal + resourcesTotal + recipesTotal
+    const totalExcluded = materialsExcluded + potionsExcluded + resourcesExcluded + recipesExcluded
+
+    return {
+      materials: {
+        total: materialsTotal,
+        excluded: materialsExcluded,
+        included: materialsTotal - materialsExcluded,
+      },
+      potions: {
+        total: potionsTotal,
+        excluded: potionsExcluded,
+        included: potionsTotal - potionsExcluded,
+      },
+      resources: {
+        total: resourcesTotal,
+        excluded: resourcesExcluded,
+        included: resourcesTotal - resourcesExcluded,
+      },
+      recipes: {
+        total: recipesTotal,
+        excluded: recipesExcluded,
+        included: recipesTotal - recipesExcluded,
+      },
+      total: totalItems,
+      totalExcluded,
+      totalIncluded: totalItems - totalExcluded,
+    }
+  }
+
   return {
     // Reactive data
     materials,
@@ -379,6 +588,8 @@ function createDataProvider() {
     updatePotionPrice,
     updateResourcePrice,
     updateRecipe,
+    updateHashedId,
+    updateVendorValue,
 
     // Clear methods
     clearCategoryOverrides,
@@ -389,6 +600,12 @@ function createDataProvider() {
     importFromApiCache,
     reloadOverrides,
     getOverrideStats,
+
+    // Refresh exclusion methods
+    setRefreshExcluded,
+    isRefreshExcluded,
+    setAllRefreshExcluded,
+    getExclusionStats,
   }
 }
 

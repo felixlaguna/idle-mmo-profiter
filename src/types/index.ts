@@ -4,12 +4,16 @@ export interface Material {
   id: string
   name: string
   price: number
+  hashedId?: string
+  vendorValue?: number
 }
 
 export interface Potion {
   id: string
   name: string
   price: number
+  hashedId?: string
+  vendorValue?: number
 }
 
 export interface Resource {
@@ -17,6 +21,7 @@ export interface Resource {
   name: string
   marketPrice: number
   vendorValue: number
+  hashedId?: string
 }
 
 export interface Recipe {
@@ -25,6 +30,8 @@ export interface Recipe {
   price: number
   chance: number
   value?: number
+  hashedId?: string
+  vendorValue?: number
 }
 
 export interface DungeonDrop {

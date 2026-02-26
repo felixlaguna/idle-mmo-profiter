@@ -107,7 +107,7 @@ describe('ApiKeyInput', () => {
     await new Promise((resolve) => setTimeout(resolve, 10))
 
     expect(global.fetch).toHaveBeenCalledWith(
-      'https://api.idle-mmo.com/v1/auth/check',
+      '/api/v1/auth/check',
       expect.objectContaining({
         method: 'GET',
         headers: expect.objectContaining({

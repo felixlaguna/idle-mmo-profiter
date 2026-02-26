@@ -71,14 +71,14 @@ describe('MockProvider', () => {
 
   it('should search items by query', async () => {
     const results = await provider.searchItems('Moose')
-    expect(results.data.length).toBeGreaterThan(0)
-    expect(results.data[0].name).toContain('Moose')
+    expect(results.items.length).toBeGreaterThan(0)
+    expect(results.items[0].name).toContain('Moose')
   })
 
   it('should search items by type', async () => {
     const results = await provider.searchItems(undefined, 'material')
-    expect(results.data.length).toBeGreaterThan(0)
-    results.data.forEach((item) => {
+    expect(results.items.length).toBeGreaterThan(0)
+    results.items.forEach((item) => {
       expect(item.type).toBe('material')
     })
   })
@@ -87,20 +87,20 @@ describe('MockProvider', () => {
     const page1 = await provider.searchItems()
     const page2 = await provider.searchItems(undefined, undefined, 2)
 
-    expect(page1.meta.current_page).toBe(1)
-    expect(page2.meta.current_page).toBe(2)
+    expect(page1.pagination.current_page).toBe(1)
+    expect(page2.pagination.current_page).toBe(2)
 
     // Pages should have different data (if enough items)
-    if (page1.meta.total > 25) {
-      expect(page1.data[0].name).not.toBe(page2.data[0].name)
+    if (page1.pagination.total > 25) {
+      expect(page1.items[0].name).not.toBe(page2.items[0].name)
     }
   })
 
   it('should return empty market history', async () => {
     const history = await provider.getMarketHistory('any-id')
-    expect(history.history).toEqual([])
-    expect(history.buy_orders).toEqual([])
-    expect(history.sell_orders).toEqual([])
+    expect(history.history_data).toEqual([])
+    expect(history.latest_sold).toEqual([])
+    expect(history.type).toBe('listings')
   })
 
   it('should return null market prices', async () => {
@@ -154,8 +154,8 @@ describe('ApiProvider', () => {
     // When no API key, services return empty results
     const results = await provider.searchItems('test')
     expect(results).toBeDefined()
-    expect(results.data).toBeDefined()
-    expect(Array.isArray(results.data)).toBe(true)
+    expect(results.items).toBeDefined()
+    expect(Array.isArray(results.items)).toBe(true)
   })
 })
 

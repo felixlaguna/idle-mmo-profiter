@@ -42,7 +42,7 @@ export type {
   ItemRecipe,
   ItemDetails,
   MarketHistoryEntry,
-  MarketListing,
+  LatestSoldEntry,
   MarketHistoryResponse,
 } from './services'
 
