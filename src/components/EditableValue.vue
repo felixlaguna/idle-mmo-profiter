@@ -213,4 +213,23 @@ input[type='number']::-webkit-inner-spin-button {
 input[type='number'] {
   -moz-appearance: textfield;
 }
+
+/* Mobile optimizations - reduce size in card layout */
+@media (max-width: 767px) {
+  .editable-value {
+    padding: 0;
+    gap: 0.25rem;
+    max-width: 100%;
+    justify-content: flex-end;
+  }
+
+  .value {
+    font-size: 0.75rem;
+  }
+
+  .edit-input {
+    width: 6rem;
+    font-size: 0.75rem;
+  }
+}
 </style>

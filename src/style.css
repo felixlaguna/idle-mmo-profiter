@@ -121,14 +121,35 @@ tr:hover {
 
 /* Mobile Table Card Layout */
 @media (max-width: 767px) {
+  /* Prevent horizontal scroll on mobile */
+  body {
+    overflow-x: hidden;
+  }
+
   /* Hide table headers on mobile - IMPORTANT! */
   .mobile-card-layout thead {
     display: none !important;
   }
 
+  /* Ensure table itself doesn't force horizontal scroll */
+  .mobile-card-layout {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: visible;
+  }
+
+  .mobile-card-layout tbody {
+    display: block;
+    width: 100%;
+  }
+
   /* Convert table rows to cards - more compact */
   .mobile-card-layout tbody tr {
     display: block;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     margin-bottom: 0.5rem;
     border: 1px solid var(--border-color);
     border-radius: 0.375rem;
@@ -149,6 +170,10 @@ tr:hover {
     border-bottom: none;
     text-align: right;
     line-height: 1.4;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
   }
 
   .mobile-card-layout td:last-child {
@@ -166,6 +191,16 @@ tr:hover {
     text-align: left;
     flex-shrink: 0;
     margin-right: 0.5rem;
+    min-width: fit-content;
+    display: inline-block;
+  }
+
+  /* Value portion of the cell */
+  .mobile-card-layout td > * {
+    text-align: right;
+    flex-shrink: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   /* Make activity name more prominent */

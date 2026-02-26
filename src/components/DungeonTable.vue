@@ -485,6 +485,21 @@ const profitRange = computed(() => {
   }
 }
 
+/* Mobile card layout overrides */
+@media (max-width: 767px) {
+  .table-container {
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .main-table {
+    min-width: 0 !important;
+    width: 100%;
+  }
+}
+
 @media (max-width: 640px) {
   .main-table th,
   .main-table td {
