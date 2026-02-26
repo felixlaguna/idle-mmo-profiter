@@ -1,46 +1,85 @@
 /**
- * Response caching layer for API data
+ * API Response Caching Layer
  *
- * Caches API responses in localStorage with TTL (Time To Live):
- * - Item data: 24 hours TTL (static data changes rarely)
- * - Market prices: 1 hour TTL (dynamic data needs fresher updates)
+ * Implements a cache-first strategy for API responses with TTL-based expiration.
+ * Caches are stored in localStorage with automatic quota management.
  *
  * Features:
- * - Automatic cache invalidation based on TTL
- * - Storage quota management (evict oldest entries when full)
- * - Namespaced keys with prefix 'idlemmo-cache:'
+ * - Cache key generation from URL + sorted query parameters
+ * - Configurable TTL per endpoint
+ * - Automatic eviction of oldest entries when quota is exceeded
+ * - Cache metadata includes URL, timestamps, and expiration info
+ * - Methods for cache retrieval, storage, invalidation, and inspection
  */
 
 const CACHE_PREFIX = 'idlemmo-cache:'
-const ITEM_DATA_TTL_MS = 24 * 60 * 60 * 1000 // 24 hours
-const MARKET_DATA_TTL_MS = 60 * 60 * 1000 // 1 hour
 
+// Default TTL values (in milliseconds)
+const DEFAULT_TTL = {
+  'item/search': 24 * 60 * 60 * 1000, // 24 hours
+  'item/inspect': 24 * 60 * 60 * 1000, // 24 hours
+  'item/market-history': 60 * 60 * 1000, // 1 hour
+}
+
+/**
+ * Cache entry structure with metadata
+ */
 interface CacheEntry<T> {
   data: T
-  timestamp: number
-  ttl: number
+  cachedAt: number // Unix timestamp (ms) when data was cached
+  expiresAt: number // Unix timestamp (ms) when cache expires
+  url: string // Original URL this cache entry is for
 }
 
 /**
- * Cache key types for different data categories
+ * Generate a cache key from URL and query parameters
+ *
+ * @param url - The API endpoint URL
+ * @param params - Optional query parameters
+ * @returns Cache key string
  */
-export enum CacheKeyType {
-  ITEM_SEARCH = 'item-search',
-  ITEM_DETAILS = 'item-details',
-  MARKET_HISTORY = 'market-history',
+export function generateCacheKey(
+  url: string,
+  params?: Record<string, string | number>
+): string {
+  // Sort params alphabetically for consistent keys
+  const sortedParams = params
+    ? Object.keys(params)
+        .sort()
+        .map((key) => `${key}=${params[key]}`)
+        .join('&')
+    : ''
+
+  // Hash the URL + params combination
+  const keyBase = sortedParams ? `${url}?${sortedParams}` : url
+  return `${CACHE_PREFIX}${keyBase}`
 }
 
 /**
- * Build a cache key from type and identifier
+ * Determine TTL based on URL endpoint
+ *
+ * @param url - The API endpoint URL
+ * @returns TTL in milliseconds
  */
-export function buildCacheKey(keyType: CacheKeyType, identifier: string): string {
-  return `${CACHE_PREFIX}${keyType}:${identifier}`
+function getTTLForUrl(url: string): number {
+  if (url.includes('item/search')) {
+    return DEFAULT_TTL['item/search']
+  } else if (url.includes('/inspect')) {
+    return DEFAULT_TTL['item/inspect']
+  } else if (url.includes('market-history')) {
+    return DEFAULT_TTL['item/market-history']
+  }
+  // Default to item search TTL for unknown endpoints
+  return DEFAULT_TTL['item/search']
 }
 
 /**
- * Get data from cache if it exists and is valid
+ * Get data from cache if it exists and is not expired
+ *
+ * @param key - Cache key
+ * @returns Cached data if valid, null otherwise
  */
-export function getCached<T>(key: string): T | null {
+export function get<T>(key: string): T | null {
   try {
     const cached = localStorage.getItem(key)
     if (!cached) {
@@ -50,8 +89,8 @@ export function getCached<T>(key: string): T | null {
     const entry: CacheEntry<T> = JSON.parse(cached)
     const now = Date.now()
 
-    // Check if cache entry is still valid
-    if (now - entry.timestamp > entry.ttl) {
+    // Check if cache entry has expired
+    if (now >= entry.expiresAt) {
       // Cache expired, remove it
       localStorage.removeItem(key)
       return null
@@ -66,31 +105,29 @@ export function getCached<T>(key: string): T | null {
 
 /**
  * Store data in cache with TTL
+ *
+ * @param key - Cache key
+ * @param data - Data to cache
+ * @param ttlMs - Time to live in milliseconds (optional, will be inferred from URL if not provided)
  */
-export function setCache<T>(key: string, data: T, ttl?: number): void {
-  // Determine TTL - use provided value or infer from key type
-  let cacheTTL = ttl
+export function set<T>(key: string, data: T, ttlMs?: number): void {
+  const now = Date.now()
 
-  if (!cacheTTL) {
-    // Try to infer TTL from key
-    if (key.includes(CacheKeyType.ITEM_SEARCH) || key.includes(CacheKeyType.ITEM_DETAILS)) {
-      cacheTTL = ITEM_DATA_TTL_MS
-    } else if (key.includes(CacheKeyType.MARKET_HISTORY)) {
-      cacheTTL = MARKET_DATA_TTL_MS
-    } else {
-      cacheTTL = ITEM_DATA_TTL_MS // Default to item data TTL
-    }
-  }
+  // Extract URL from cache key (remove prefix)
+  const url = key.substring(CACHE_PREFIX.length)
+
+  // Determine TTL - use provided value or infer from URL
+  const ttl = ttlMs ?? getTTLForUrl(url)
 
   const entry: CacheEntry<T> = {
     data,
-    timestamp: Date.now(),
-    ttl: cacheTTL,
+    cachedAt: now,
+    expiresAt: now + ttl,
+    url,
   }
 
-  const serialized = JSON.stringify(entry)
-
   try {
+    const serialized = JSON.stringify(entry)
     localStorage.setItem(key, serialized)
   } catch (error) {
     // Handle quota exceeded error by evicting oldest entries
@@ -99,10 +136,11 @@ export function setCache<T>(key: string, data: T, ttl?: number): void {
       (error.name === 'QuotaExceededError' || error.name === 'NS_ERROR_DOM_QUOTA_REACHED')
     ) {
       console.warn('LocalStorage quota exceeded, evicting oldest cache entries')
-      evictOldestCacheEntries(5) // Evict 5 oldest entries
+      evictOldestEntries(5) // Evict 5 oldest entries
 
       // Try again after eviction
       try {
+        const serialized = JSON.stringify(entry)
         localStorage.setItem(key, serialized)
       } catch (retryError) {
         console.error('Failed to cache data even after eviction:', retryError)
@@ -114,28 +152,22 @@ export function setCache<T>(key: string, data: T, ttl?: number): void {
 }
 
 /**
- * Check if a cache entry exists and is valid
+ * Remove a specific cache entry
+ *
+ * @param key - Cache key to invalidate
  */
-export function isCacheValid(key: string): boolean {
+export function invalidate(key: string): void {
   try {
-    const cached = localStorage.getItem(key)
-    if (!cached) {
-      return false
-    }
-
-    const entry: CacheEntry<unknown> = JSON.parse(cached)
-    const now = Date.now()
-
-    return now - entry.timestamp <= entry.ttl
-  } catch {
-    return false
+    localStorage.removeItem(key)
+  } catch (error) {
+    console.error(`Failed to invalidate cache key ${key}:`, error)
   }
 }
 
 /**
- * Clear all cache entries (only those with our prefix)
+ * Clear all cache entries
  */
-export function clearCache(): void {
+export function invalidateAll(): void {
   try {
     const keysToRemove: string[] = []
 
@@ -157,6 +189,68 @@ export function clearCache(): void {
 }
 
 /**
+ * Get the age of a cached entry in milliseconds
+ *
+ * @param key - Cache key
+ * @returns Age in milliseconds, or null if cache entry doesn't exist
+ */
+export function getAge(key: string): number | null {
+  try {
+    const cached = localStorage.getItem(key)
+    if (!cached) {
+      return null
+    }
+
+    const entry: CacheEntry<unknown> = JSON.parse(cached)
+    const now = Date.now()
+
+    return now - entry.cachedAt
+  } catch (error) {
+    console.warn(`Failed to get age for cache key ${key}:`, error)
+    return null
+  }
+}
+
+/**
+ * Evict the oldest N cache entries to free up space
+ *
+ * @param count - Number of entries to evict
+ */
+function evictOldestEntries(count: number): void {
+  try {
+    const cacheEntries: Array<{ key: string; cachedAt: number }> = []
+
+    // Collect all cache entries with timestamps
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i)
+      if (key && key.startsWith(CACHE_PREFIX)) {
+        try {
+          const cached = localStorage.getItem(key)
+          if (cached) {
+            const entry: CacheEntry<unknown> = JSON.parse(cached)
+            cacheEntries.push({ key, cachedAt: entry.cachedAt })
+          }
+        } catch {
+          // If we can't parse it, it's corrupted - remove it
+          cacheEntries.push({ key, cachedAt: 0 })
+        }
+      }
+    }
+
+    // Sort by cachedAt timestamp (oldest first)
+    cacheEntries.sort((a, b) => a.cachedAt - b.cachedAt)
+
+    // Remove the oldest N entries
+    const toRemove = cacheEntries.slice(0, count)
+    toRemove.forEach(({ key }) => localStorage.removeItem(key))
+
+    console.log(`Evicted ${toRemove.length} oldest cache entries`)
+  } catch (error) {
+    console.error('Failed to evict cache entries:', error)
+  }
+}
+
+/**
  * Clear expired cache entries
  */
 export function clearExpiredCache(): void {
@@ -172,7 +266,7 @@ export function clearExpiredCache(): void {
           const cached = localStorage.getItem(key)
           if (cached) {
             const entry: CacheEntry<unknown> = JSON.parse(cached)
-            if (now - entry.timestamp > entry.ttl) {
+            if (now >= entry.expiresAt) {
               keysToRemove.push(key)
             }
           }
@@ -195,44 +289,9 @@ export function clearExpiredCache(): void {
 }
 
 /**
- * Evict the oldest N cache entries to free up space
- */
-function evictOldestCacheEntries(count: number): void {
-  try {
-    const cacheEntries: Array<{ key: string; timestamp: number }> = []
-
-    // Collect all cache entries with timestamps
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i)
-      if (key && key.startsWith(CACHE_PREFIX)) {
-        try {
-          const cached = localStorage.getItem(key)
-          if (cached) {
-            const entry: CacheEntry<unknown> = JSON.parse(cached)
-            cacheEntries.push({ key, timestamp: entry.timestamp })
-          }
-        } catch {
-          // If we can't parse it, we'll remove it anyway
-          cacheEntries.push({ key, timestamp: 0 })
-        }
-      }
-    }
-
-    // Sort by timestamp (oldest first)
-    cacheEntries.sort((a, b) => a.timestamp - b.timestamp)
-
-    // Remove the oldest N entries
-    const toRemove = cacheEntries.slice(0, count)
-    toRemove.forEach(({ key }) => localStorage.removeItem(key))
-
-    console.log(`Evicted ${toRemove.length} oldest cache entries`)
-  } catch (error) {
-    console.error('Failed to evict cache entries:', error)
-  }
-}
-
-/**
- * Get cache statistics (useful for debugging)
+ * Get cache statistics (useful for debugging/monitoring)
+ *
+ * @returns Cache statistics object
  */
 export function getCacheStats(): {
   totalEntries: number
@@ -257,7 +316,7 @@ export function getCacheStats(): {
 
           try {
             const entry: CacheEntry<unknown> = JSON.parse(cached)
-            if (now - entry.timestamp <= entry.ttl) {
+            if (now < entry.expiresAt) {
               validEntries++
             } else {
               expiredEntries++

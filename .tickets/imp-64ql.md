@@ -24,3 +24,39 @@ Key features:
 - Reset to default / Reset to API values buttons
 - Import/Export settings as JSON
 
+
+## Notes
+
+**2026-02-26T08:42:18Z**
+
+imp-760v COMPLETE - localStorage persistence manager implemented
+
+Files created:
+- /home/felix/idle-mmo-profiter/src/storage/persistence.ts (StorageManager class)
+- /home/felix/idle-mmo-profiter/src/storage/persistence.test.ts (41 comprehensive tests)
+- /home/felix/idle-mmo-profiter/src/storage/index.ts (module exports)
+- /home/felix/idle-mmo-profiter/src/tests/setup.ts (test configuration)
+
+Configuration updates:
+- Updated vite.config.ts with test configuration
+- Updated package.json with test scripts (test, test:ui, test:run)
+- Installed Vitest + testing dependencies
+
+Implementation details:
+- StorageManager class with all required methods
+- Namespaced keys: 'immo-profit:settings', 'immo-profit:overrides'
+- Merge strategy support (default < API < user overrides)
+- Migration support with version number
+- Export/import functionality for user data backup
+- Comprehensive error handling (quota exceeded, invalid JSON)
+- Type-safe with TypeScript
+- Singleton instance available (storageManager)
+
+Test results: 41/41 tests passing
+Build status: SUCCESS (no TypeScript errors)
+
+All acceptance criteria met:
+✓ User data persists across page reloads
+✓ Export/import works
+✓ All methods implemented per specification
+✓ Full test coverage

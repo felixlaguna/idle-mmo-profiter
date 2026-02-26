@@ -2,18 +2,16 @@
  * API service methods for IdleMMO items and market data
  *
  * All methods:
- * 1. Check cache first
- * 2. If cache miss, make API request through rate-limited client
- * 3. Cache the response before returning
+ * 1. Check if API key is configured (if not, return default data)
+ * 2. Check cache first
+ * 3. If cache miss, make API request through rate-limited client
+ * 4. Cache the response before returning
+ * 5. If API request fails, fall back to default data
  */
 
 import { apiClient } from './client'
-import {
-  getCached,
-  setCache,
-  buildCacheKey,
-  CacheKeyType,
-} from './cache'
+import { get, set, generateCacheKey } from './cache'
+import type { AuthCheckResponse } from '../types'
 
 /**
  * API response types based on IdleMMO API documentation
@@ -115,66 +113,104 @@ export interface MarketHistoryResponse {
 }
 
 /**
+ * Default/empty responses when API is not configured or fails
+ */
+
+const EMPTY_SEARCH_RESPONSE: ItemSearchResponse = {
+  data: [],
+  links: {
+    first: '',
+    last: '',
+    prev: null,
+    next: null,
+  },
+  meta: {
+    current_page: 1,
+    from: 0,
+    last_page: 1,
+    path: '',
+    per_page: 25,
+    to: 0,
+    total: 0,
+  },
+}
+
+const EMPTY_MARKET_HISTORY: MarketHistoryResponse = {
+  history: [],
+  buy_orders: [],
+  sell_orders: [],
+}
+
+/**
  * Search for items by name or type
  *
- * @param query - Search query (item name or type)
+ * @param query - Optional search query (item name)
+ * @param type - Optional item type filter
  * @param page - Page number (default: 1)
  * @returns Item search results with pagination
  */
 export async function searchItems(
-  query: string,
+  query?: string,
+  type?: string,
   page = 1
 ): Promise<ItemSearchResponse> {
-  // Build cache key
-  const cacheKey = buildCacheKey(
-    CacheKeyType.ITEM_SEARCH,
-    `${query}-page${page}`
-  )
+  // Check if API key is configured
+  if (!apiClient.isConfigured()) {
+    console.log('API key not configured, returning empty search results')
+    return EMPTY_SEARCH_RESPONSE
+  }
+
+  // Build params object (only include defined params)
+  const params: Record<string, string | number> = { page }
+  if (query) params.query = query
+  if (type) params.type = type
+
+  // Build cache key from URL + params
+  const cacheKey = generateCacheKey('/item/search', params)
 
   // Check cache first
-  const cached = getCached<ItemSearchResponse>(cacheKey)
+  const cached = get<ItemSearchResponse>(cacheKey)
   if (cached) {
-    console.log(`Cache hit for item search: ${query} (page ${page})`)
+    console.log(`Cache hit for item search: ${query || type || 'all'} (page ${page})`)
     return cached
   }
 
   // Cache miss - make API request
-  console.log(`Cache miss for item search: ${query} (page ${page}), fetching from API`)
+  console.log(`Cache miss for item search: ${query || type || 'all'} (page ${page}), fetching from API`)
 
   try {
-    const url = `/item/search?query=${encodeURIComponent(query)}&page=${page}`
-    const response = await apiClient.get(url)
-
-    if (!response.ok) {
-      throw new Error(`API request failed: ${response.status} ${response.statusText}`)
-    }
-
-    const data: ItemSearchResponse = await response.json()
+    const data = await apiClient.get<ItemSearchResponse>('/item/search', params)
 
     // Cache the result
-    setCache(cacheKey, data)
+    set(cacheKey, data)
 
     return data
   } catch (error) {
-    console.error('Failed to search items:', error)
-    throw error
+    console.error('Failed to search items, returning empty results:', error)
+    return EMPTY_SEARCH_RESPONSE
   }
 }
 
 /**
- * Get detailed information about a specific item
+ * Get detailed information about a specific item (inspect endpoint)
  *
  * @param hashedItemId - The hashed item ID
- * @returns Detailed item information including recipes
+ * @returns Detailed item information including recipes, stats, and vendor price
  */
-export async function getItemDetails(
+export async function inspectItem(
   hashedItemId: string
-): Promise<ItemDetails> {
-  // Build cache key
-  const cacheKey = buildCacheKey(CacheKeyType.ITEM_DETAILS, hashedItemId)
+): Promise<ItemDetails | null> {
+  // Check if API key is configured
+  if (!apiClient.isConfigured()) {
+    console.log('API key not configured, cannot inspect item')
+    return null
+  }
+
+  // Build cache key from URL
+  const cacheKey = generateCacheKey(`/item/${hashedItemId}/inspect`)
 
   // Check cache first
-  const cached = getCached<ItemDetails>(cacheKey)
+  const cached = get<ItemDetails>(cacheKey)
   if (cached) {
     console.log(`Cache hit for item details: ${hashedItemId}`)
     return cached
@@ -184,39 +220,61 @@ export async function getItemDetails(
   console.log(`Cache miss for item details: ${hashedItemId}, fetching from API`)
 
   try {
-    const url = `/item/${hashedItemId}/inspect`
-    const response = await apiClient.get(url)
-
-    if (!response.ok) {
-      throw new Error(`API request failed: ${response.status} ${response.statusText}`)
-    }
-
-    const data: ItemDetails = await response.json()
+    const data = await apiClient.get<ItemDetails>(
+      `/item/${hashedItemId}/inspect`
+    )
 
     // Cache the result
-    setCache(cacheKey, data)
+    set(cacheKey, data)
 
     return data
   } catch (error) {
-    console.error('Failed to get item details:', error)
-    throw error
+    console.error('Failed to inspect item, returning null:', error)
+    return null
   }
+}
+
+/**
+ * Alias for inspectItem - kept for backwards compatibility
+ */
+export async function getItemDetails(
+  hashedItemId: string
+): Promise<ItemDetails | null> {
+  return inspectItem(hashedItemId)
 }
 
 /**
  * Get market history and current listings for an item
  *
  * @param hashedItemId - The hashed item ID
+ * @param tier - Optional item tier filter
+ * @param type - Optional listing type filter ('listings' or 'orders')
  * @returns Market history, buy orders, and sell orders
  */
 export async function getMarketHistory(
-  hashedItemId: string
+  hashedItemId: string,
+  tier?: number,
+  type?: 'listings' | 'orders'
 ): Promise<MarketHistoryResponse> {
-  // Build cache key
-  const cacheKey = buildCacheKey(CacheKeyType.MARKET_HISTORY, hashedItemId)
+  // Check if API key is configured
+  if (!apiClient.isConfigured()) {
+    console.log('API key not configured, returning empty market history')
+    return EMPTY_MARKET_HISTORY
+  }
+
+  // Build params object (only include defined params)
+  const params: Record<string, string | number> = {}
+  if (tier !== undefined) params.tier = tier
+  if (type) params.type = type
+
+  // Build cache key from URL + params
+  const cacheKey = generateCacheKey(
+    `/item/${hashedItemId}/market-history`,
+    Object.keys(params).length > 0 ? params : undefined
+  )
 
   // Check cache first
-  const cached = getCached<MarketHistoryResponse>(cacheKey)
+  const cached = get<MarketHistoryResponse>(cacheKey)
   if (cached) {
     console.log(`Cache hit for market history: ${hashedItemId}`)
     return cached
@@ -226,22 +284,18 @@ export async function getMarketHistory(
   console.log(`Cache miss for market history: ${hashedItemId}, fetching from API`)
 
   try {
-    const url = `/item/${hashedItemId}/market-history`
-    const response = await apiClient.get(url)
+    const data = await apiClient.get<MarketHistoryResponse>(
+      `/item/${hashedItemId}/market-history`,
+      Object.keys(params).length > 0 ? params : undefined
+    )
 
-    if (!response.ok) {
-      throw new Error(`API request failed: ${response.status} ${response.statusText}`)
-    }
-
-    const data: MarketHistoryResponse = await response.json()
-
-    // Cache the result (with shorter TTL for market data)
-    setCache(cacheKey, data)
+    // Cache the result (TTL automatically inferred as 1 hour for market-history)
+    set(cacheKey, data)
 
     return data
   } catch (error) {
-    console.error('Failed to get market history:', error)
-    throw error
+    console.error('Failed to get market history, returning empty data:', error)
+    return EMPTY_MARKET_HISTORY
   }
 }
 
@@ -249,31 +303,28 @@ export async function getMarketHistory(
  * Get the current best buy and sell prices from market data
  *
  * @param hashedItemId - The hashed item ID
+ * @param tier - Optional item tier filter
  * @returns Object with best buy and sell prices, or null if no data
  */
 export async function getMarketPrices(
-  hashedItemId: string
+  hashedItemId: string,
+  tier?: number
 ): Promise<{ buyPrice: number | null; sellPrice: number | null }> {
-  try {
-    const marketData = await getMarketHistory(hashedItemId)
+  const marketData = await getMarketHistory(hashedItemId, tier)
 
-    // Get lowest sell order (what you can buy at)
-    const buyPrice =
-      marketData.sell_orders.length > 0
-        ? Math.min(...marketData.sell_orders.map((order) => order.price))
-        : null
+  // Get lowest sell order (what you can buy at)
+  const buyPrice =
+    marketData.sell_orders.length > 0
+      ? Math.min(...marketData.sell_orders.map((order) => order.price))
+      : null
 
-    // Get highest buy order (what you can sell at)
-    const sellPrice =
-      marketData.buy_orders.length > 0
-        ? Math.max(...marketData.buy_orders.map((order) => order.price))
-        : null
+  // Get highest buy order (what you can sell at)
+  const sellPrice =
+    marketData.buy_orders.length > 0
+      ? Math.max(...marketData.buy_orders.map((order) => order.price))
+      : null
 
-    return { buyPrice, sellPrice }
-  } catch (error) {
-    console.error('Failed to get market prices:', error)
-    return { buyPrice: null, sellPrice: null }
-  }
+  return { buyPrice, sellPrice }
 }
 
 /**
@@ -281,35 +332,32 @@ export async function getMarketPrices(
  *
  * @param hashedItemId - The hashed item ID
  * @param limit - Number of recent transactions to average (default: 10)
+ * @param tier - Optional item tier filter
  * @returns Average price or null if no data
  */
 export async function getAverageMarketPrice(
   hashedItemId: string,
-  limit = 10
+  limit = 10,
+  tier?: number
 ): Promise<number | null> {
-  try {
-    const marketData = await getMarketHistory(hashedItemId)
+  const marketData = await getMarketHistory(hashedItemId, tier)
 
-    if (marketData.history.length === 0) {
-      return null
-    }
-
-    // Get most recent transactions
-    const recentTransactions = marketData.history
-      .slice(0, limit)
-      .map((entry) => entry.price)
-
-    if (recentTransactions.length === 0) {
-      return null
-    }
-
-    // Calculate average
-    const sum = recentTransactions.reduce((acc, price) => acc + price, 0)
-    return sum / recentTransactions.length
-  } catch (error) {
-    console.error('Failed to get average market price:', error)
+  if (marketData.history.length === 0) {
     return null
   }
+
+  // Get most recent transactions
+  const recentTransactions = marketData.history
+    .slice(0, limit)
+    .map((entry) => entry.price)
+
+  if (recentTransactions.length === 0) {
+    return null
+  }
+
+  // Calculate average
+  const sum = recentTransactions.reduce((acc, price) => acc + price, 0)
+  return sum / recentTransactions.length
 }
 
 /**
@@ -317,21 +365,18 @@ export async function getAverageMarketPrice(
  * Uses the client's queue to automatically rate-limit requests
  *
  * @param queries - Array of search queries
+ * @param type - Optional item type filter
  * @returns Array of search results
  */
 export async function batchSearchItems(
-  queries: string[]
+  queries: string[],
+  type?: string
 ): Promise<ItemSearchResponse[]> {
   console.log(`Batch searching ${queries.length} items`)
 
-  const promises = queries.map((query) => searchItems(query, 1))
+  const promises = queries.map((query) => searchItems(query, type))
 
-  try {
-    return await Promise.all(promises)
-  } catch (error) {
-    console.error('Batch search failed:', error)
-    throw error
-  }
+  return await Promise.all(promises)
 }
 
 /**
@@ -339,19 +384,53 @@ export async function batchSearchItems(
  * Uses the client's queue to automatically rate-limit requests
  *
  * @param hashedItemIds - Array of hashed item IDs
- * @returns Array of item details
+ * @returns Array of item details (null entries for failed requests)
  */
 export async function batchGetItemDetails(
   hashedItemIds: string[]
-): Promise<ItemDetails[]> {
+): Promise<(ItemDetails | null)[]> {
   console.log(`Batch fetching details for ${hashedItemIds.length} items`)
 
   const promises = hashedItemIds.map((id) => getItemDetails(id))
 
+  return await Promise.all(promises)
+}
+
+/**
+ * Check authentication status and get API key information
+ *
+ * @returns API key information including name, scopes, and rate limit
+ * @returns null if API key is not configured or authentication fails
+ */
+export async function checkAuth(): Promise<AuthCheckResponse | null> {
+  // Check if API key is configured
+  if (!apiClient.isConfigured()) {
+    console.log('API key not configured, cannot check auth')
+    return null
+  }
+
+  // Build cache key
+  const cacheKey = generateCacheKey('/auth/check')
+
+  // Check cache first (with short TTL for auth checks)
+  const cached = get<AuthCheckResponse>(cacheKey)
+  if (cached) {
+    console.log('Cache hit for auth check')
+    return cached
+  }
+
+  // Cache miss - make API request
+  console.log('Cache miss for auth check, fetching from API')
+
   try {
-    return await Promise.all(promises)
+    const data = await apiClient.get<AuthCheckResponse>('/auth/check')
+
+    // Cache the result (5 minute TTL for auth info)
+    set(cacheKey, data, 5 * 60 * 1000)
+
+    return data
   } catch (error) {
-    console.error('Batch get item details failed:', error)
-    throw error
+    console.error('Failed to check auth, returning null:', error)
+    return null
   }
 }

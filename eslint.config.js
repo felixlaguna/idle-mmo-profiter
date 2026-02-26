@@ -37,6 +37,7 @@ export default [
         DOMException: 'readonly',
         Blob: 'readonly',
         URL: 'readonly',
+        URLSearchParams: 'readonly',
         File: 'readonly',
         FileReader: 'readonly',
         HTMLInputElement: 'readonly',

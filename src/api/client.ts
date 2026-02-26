@@ -6,14 +6,51 @@
  * - Request queue with sliding window rate limiter
  * - Automatic retry on 429 (Too Many Requests) with exponential backoff
  * - Respect for X-RateLimit-Remaining and X-RateLimit-Reset headers
+ * - Request deduplication (same URL returns same promise)
  * - No requests made if API key is not set
  */
 
-const BASE_URL = 'https://api.idle-mmo.com/v1'
+import { storageManager } from '../storage/persistence'
+
+// Use proxy in development, configurable in production
+// In dev: Vite proxy at /api forwards to https://api.idle-mmo.com
+// In prod: Can be configured via VITE_API_BASE_URL env var
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api/v1'
 const MAX_REQUESTS_PER_MINUTE = 20
 const WINDOW_SIZE_MS = 60000 // 1 minute in milliseconds
 const MAX_RETRIES = 3
-const INITIAL_BACKOFF_MS = 1000
+const INITIAL_BACKOFF_MS = 5000 // 5 seconds
+const MAX_BACKOFF_MS = 120000 // 120 seconds (2 minutes)
+const RATE_LIMIT_THRESHOLD = 3 // Pause queue if remaining < this
+
+// Custom Error Types
+export class RateLimitError extends Error {
+  constructor(message: string) {
+    super(message)
+    this.name = 'RateLimitError'
+  }
+}
+
+export class AuthError extends Error {
+  constructor(message: string) {
+    super(message)
+    this.name = 'AuthError'
+  }
+}
+
+export class NotFoundError extends Error {
+  constructor(message: string) {
+    super(message)
+    this.name = 'NotFoundError'
+  }
+}
+
+export class NetworkError extends Error {
+  constructor(message: string) {
+    super(message)
+    this.name = 'NetworkError'
+  }
+}
 
 interface QueuedRequest {
   url: string
@@ -26,6 +63,7 @@ interface QueuedRequest {
 interface RateLimitInfo {
   remaining: number | null
   reset: number | null // Unix timestamp
+  limit: number | null
 }
 
 class RateLimitedApiClient {
@@ -35,20 +73,33 @@ class RateLimitedApiClient {
   private rateLimitInfo: RateLimitInfo = {
     remaining: null,
     reset: null,
+    limit: null,
   }
+  // Request deduplication: track in-flight requests by URL
+  // Maps URL to Promise of parsed JSON data
+  private inFlightRequests = new Map<string, Promise<unknown>>()
 
   /**
    * Get API key from localStorage
    */
   private getApiKey(): string | null {
-    try {
-      const settings = localStorage.getItem('idlemmo-settings')
-      if (!settings) return null
-      const parsed = JSON.parse(settings)
-      return parsed.apiKey || null
-    } catch {
-      return null
-    }
+    const settings = storageManager.getSettings()
+    return settings.apiKey
+  }
+
+  /**
+   * Check if API client is configured with a valid API key
+   */
+  public isConfigured(): boolean {
+    const apiKey = this.getApiKey()
+    return apiKey !== null && apiKey.length > 0
+  }
+
+  /**
+   * Get current rate limit status
+   */
+  public getRateLimitStatus(): RateLimitInfo {
+    return { ...this.rateLimitInfo }
   }
 
   /**
@@ -62,6 +113,14 @@ class RateLimitedApiClient {
       (timestamp) => now - timestamp < WINDOW_SIZE_MS
     )
 
+    // If we have rate limit info from headers, check threshold
+    if (
+      this.rateLimitInfo.remaining !== null &&
+      this.rateLimitInfo.remaining < RATE_LIMIT_THRESHOLD
+    ) {
+      return false
+    }
+
     // Check if we're under the rate limit
     return this.requestTimestamps.length < MAX_REQUESTS_PER_MINUTE
   }
@@ -70,12 +129,12 @@ class RateLimitedApiClient {
    * Get time to wait before next request is allowed (in ms)
    */
   private getWaitTime(): number {
-    if (this.requestTimestamps.length === 0) {
-      return 0
-    }
-
-    // If we have rate limit reset info from headers, use it
-    if (this.rateLimitInfo.reset && this.rateLimitInfo.remaining === 0) {
+    // If we have rate limit reset info from headers and we're at/near limit, use it
+    if (
+      this.rateLimitInfo.reset &&
+      this.rateLimitInfo.remaining !== null &&
+      this.rateLimitInfo.remaining < RATE_LIMIT_THRESHOLD
+    ) {
       const resetTime = this.rateLimitInfo.reset * 1000 // Convert to ms
       const now = Date.now()
       if (resetTime > now) {
@@ -84,6 +143,10 @@ class RateLimitedApiClient {
     }
 
     // Otherwise, calculate based on sliding window
+    if (this.requestTimestamps.length === 0) {
+      return 0
+    }
+
     const now = Date.now()
     const oldestTimestamp = this.requestTimestamps[0]
     const timeSinceOldest = now - oldestTimestamp
@@ -101,6 +164,7 @@ class RateLimitedApiClient {
   private updateRateLimitInfo(response: Response): void {
     const remaining = response.headers.get('X-RateLimit-Remaining')
     const reset = response.headers.get('X-RateLimit-Reset')
+    const limit = response.headers.get('X-RateLimit-Limit')
 
     if (remaining !== null) {
       this.rateLimitInfo.remaining = parseInt(remaining, 10)
@@ -108,6 +172,10 @@ class RateLimitedApiClient {
 
     if (reset !== null) {
       this.rateLimitInfo.reset = parseInt(reset, 10)
+    }
+
+    if (limit !== null) {
+      this.rateLimitInfo.limit = parseInt(limit, 10)
     }
   }
 
@@ -122,7 +190,7 @@ class RateLimitedApiClient {
     const apiKey = this.getApiKey()
 
     if (!apiKey) {
-      throw new Error('API key not configured')
+      throw new AuthError('API key not configured')
     }
 
     // Build full URL
@@ -132,7 +200,7 @@ class RateLimitedApiClient {
     const headers = new Headers(options.headers)
     headers.set('Authorization', `Bearer ${apiKey}`)
     headers.set('Accept', 'application/json')
-    headers.set('User-Agent', 'idle-mmo-profiter/1.0')
+    headers.set('User-Agent', 'IdleMMO-ProfitCalc/1.0')
 
     const requestOptions: RequestInit = {
       ...options,
@@ -145,10 +213,24 @@ class RateLimitedApiClient {
       // Update rate limit info from headers
       this.updateRateLimitInfo(response)
 
+      // Handle 401/403 (Authentication/Authorization errors)
+      if (response.status === 401 || response.status === 403) {
+        throw new AuthError(`Authentication failed: ${response.statusText}`)
+      }
+
+      // Handle 404 (Not Found)
+      if (response.status === 404) {
+        throw new NotFoundError(`Resource not found: ${url}`)
+      }
+
       // Handle 429 (Too Many Requests) with exponential backoff
       if (response.status === 429) {
         if (retryCount < MAX_RETRIES) {
-          const backoffTime = INITIAL_BACKOFF_MS * Math.pow(2, retryCount)
+          // Exponential backoff: 5s, 10s, 20s (capped at 120s)
+          const backoffTime = Math.min(
+            INITIAL_BACKOFF_MS * Math.pow(2, retryCount),
+            MAX_BACKOFF_MS
+          )
 
           // Also check if we have reset time from headers
           const waitTime = Math.max(backoffTime, this.getWaitTime())
@@ -162,8 +244,13 @@ class RateLimitedApiClient {
           // Retry the request
           return this.makeRequest(url, options, retryCount + 1)
         } else {
-          throw new Error('Rate limit exceeded, max retries reached')
+          throw new RateLimitError('Rate limit exceeded, max retries reached')
         }
+      }
+
+      // Handle other HTTP errors
+      if (!response.ok) {
+        throw new NetworkError(`HTTP error ${response.status}: ${response.statusText}`)
       }
 
       // Record successful request timestamp
@@ -171,10 +258,22 @@ class RateLimitedApiClient {
 
       return response
     } catch (error) {
-      if (error instanceof Error) {
+      // Re-throw our custom errors
+      if (
+        error instanceof RateLimitError ||
+        error instanceof AuthError ||
+        error instanceof NotFoundError ||
+        error instanceof NetworkError
+      ) {
         throw error
       }
-      throw new Error('Network request failed')
+
+      // Wrap other errors as NetworkError
+      if (error instanceof Error) {
+        throw new NetworkError(`Network request failed: ${error.message}`)
+      }
+
+      throw new NetworkError('Network request failed: Unknown error')
     }
   }
 
@@ -218,15 +317,15 @@ class RateLimitedApiClient {
   /**
    * Queue a request and return a promise that resolves when the request completes
    */
-  public request(url: string, options: RequestInit = {}): Promise<Response> {
-    return new Promise((resolve, reject) => {
-      // Check if API key is set
-      const apiKey = this.getApiKey()
-      if (!apiKey) {
-        reject(new Error('API key not configured'))
-        return
-      }
+  private request(url: string, options: RequestInit = {}): Promise<Response> {
+    // Check if API key is set
+    const apiKey = this.getApiKey()
+    if (!apiKey) {
+      return Promise.reject(new AuthError('API key not configured'))
+    }
 
+    // Create new promise for this request
+    const requestPromise = new Promise<Response>((resolve, reject) => {
       // Add request to queue
       this.requestQueue.push({
         url,
@@ -239,26 +338,57 @@ class RateLimitedApiClient {
       // Start processing queue
       this.processQueue()
     })
+
+    return requestPromise
   }
 
   /**
-   * Helper method for GET requests
+   * Helper method for GET requests with query parameters
    */
-  public async get(url: string): Promise<Response> {
-    return this.request(url, { method: 'GET' })
+  public async get<T>(path: string, params?: Record<string, string | number>): Promise<T> {
+    // Build URL with query parameters
+    let url = path
+    if (params && Object.keys(params).length > 0) {
+      const searchParams = new URLSearchParams()
+      Object.entries(params).forEach(([key, value]) => {
+        searchParams.append(key, String(value))
+      })
+      url = `${path}?${searchParams.toString()}`
+    }
+
+    // Request deduplication: if same URL is already in-flight, return existing promise
+    const existingRequest = this.inFlightRequests.get(url)
+    if (existingRequest) {
+      console.log(`Deduplicating request for ${url}`)
+      return existingRequest as Promise<T>
+    }
+
+    // Create promise that fetches and parses JSON
+    const dataPromise = this.request(url, { method: 'GET' }).then(response => response.json() as Promise<T>)
+
+    // Track in-flight request
+    this.inFlightRequests.set(url, dataPromise)
+
+    // Clean up after request completes (success or failure)
+    dataPromise.finally(() => {
+      this.inFlightRequests.delete(url)
+    })
+
+    return dataPromise
   }
 
   /**
    * Helper method for POST requests
    */
-  public async post(url: string, body?: unknown): Promise<Response> {
-    return this.request(url, {
+  public async post<T>(path: string, body?: unknown): Promise<T> {
+    const response = await this.request(path, {
       method: 'POST',
       body: body ? JSON.stringify(body) : undefined,
       headers: {
         'Content-Type': 'application/json',
       },
     })
+    return response.json() as Promise<T>
   }
 
   /**
@@ -269,22 +399,24 @@ class RateLimitedApiClient {
   }
 
   /**
-   * Get current rate limit info
+   * Get number of in-flight requests
    */
-  public getRateLimitInfo(): RateLimitInfo {
-    return { ...this.rateLimitInfo }
+  public getInFlightCount(): number {
+    return this.inFlightRequests.size
   }
 
   /**
    * Clear the request queue (useful for testing or emergency stop)
    */
   public clearQueue(): void {
-    this.requestQueue.forEach((req) =>
-      req.reject(new Error('Request queue cleared'))
-    )
+    this.requestQueue.forEach((req) => req.reject(new NetworkError('Request queue cleared')))
     this.requestQueue = []
+    this.inFlightRequests.clear()
   }
 }
 
 // Export singleton instance
 export const apiClient = new RateLimitedApiClient()
+
+// Also export the class for testing
+export { RateLimitedApiClient as ApiClient }

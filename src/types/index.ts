@@ -104,6 +104,28 @@ export interface ProfitResult {
   cost: number
 }
 
+// API Authentication types
+
+export interface ApiKeyInfo {
+  name: string
+  rate_limit: number
+  expires_at: string
+  scopes: string[] | null
+}
+
+export interface AuthCheckResponse {
+  authenticated: boolean
+  user: {
+    id: number
+  }
+  character: {
+    id: number
+    hashed_id: string
+    name: string
+  }
+  api_key: ApiKeyInfo
+}
+
 // Default data structure (matches defaults.json)
 
 export interface DefaultData {

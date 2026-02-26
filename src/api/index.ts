@@ -5,29 +5,34 @@
  */
 
 // Client
-export { apiClient } from './client'
+export { apiClient, ApiClient } from './client'
+
+// Error types
+export { RateLimitError, AuthError, NotFoundError, NetworkError } from './client'
 
 // Cache
 export {
-  getCached,
-  setCache,
-  isCacheValid,
-  clearCache,
+  get,
+  set,
+  invalidate,
+  invalidateAll,
+  getAge,
   clearExpiredCache,
   getCacheStats,
-  buildCacheKey,
-  CacheKeyType,
+  generateCacheKey,
 } from './cache'
 
 // Services
 export {
   searchItems,
+  inspectItem,
   getItemDetails,
   getMarketHistory,
   getMarketPrices,
   getAverageMarketPrice,
   batchSearchItems,
   batchGetItemDetails,
+  checkAuth,
 } from './services'
 
 // Types
@@ -40,3 +45,15 @@ export type {
   MarketListing,
   MarketHistoryResponse,
 } from './services'
+
+// Mock data provider
+export {
+  MockProvider,
+  ApiProvider,
+  createDataProvider,
+  getDataProvider,
+  resetDataProvider,
+  getDataProviderStatus,
+  type DataProvider,
+  type DataProviderStatus,
+} from './mock'
