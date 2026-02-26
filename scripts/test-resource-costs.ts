@@ -43,10 +43,10 @@ const expectedDefaults = {
   Stingray: 16,
   'Cooked Stingray': 44,
   'Cooked Stingray full': 22,
-  'White shark': 25,
-  'Cooked White Shark': 62,
-  'Cooked White Shark full': 31,
-  'Cooked White Shark full + coal': 25,
+  'Great White Shark': 25,
+  'Cooked Great White Shark': 62,
+  'Cooked Great White Shark full': 31,
+  'Cooked Great White Shark full + coal': 25,
   'Mystic Ore': 0,
   'Mystic Bar': 30,
   'Mystic Bar full': 6,
@@ -76,10 +76,10 @@ const expectedWithCoal10 = {
   Stingray: 16,
   'Cooked Stingray': 48, // Stingray (38) + Coal (10) = 48
   'Cooked Stingray full': 26, // Base (16) + Coal (10) = 26
-  'White shark': 25,
-  'Cooked White Shark': 66, // White shark (56) + Coal (10) = 66
-  'Cooked White Shark full': 35, // Base (25) + Coal (10) = 35
-  'Cooked White Shark full + coal': 25,
+  'Great White Shark': 25,
+  'Cooked Great White Shark': 66, // Great White Shark (56) + Coal (10) = 66
+  'Cooked Great White Shark full': 35, // Base (25) + Coal (10) = 35
+  'Cooked Great White Shark full + coal': 25,
   'Mystic Ore': 0,
   'Mystic Bar': 34, // Mystic Ore (24) + Coal (10) = 34
   'Mystic Bar full': 10, // Base (0) + Coal (10) = 10
@@ -109,10 +109,10 @@ const expectedWithStingray50 = {
   Stingray: 16,
   'Cooked Stingray': 56, // Stingray (50) + Coal (6) = 56
   'Cooked Stingray full': 22, // Base (16) + Coal (6) = 22 (unchanged)
-  'White shark': 25,
-  'Cooked White Shark': 62,
-  'Cooked White Shark full': 31,
-  'Cooked White Shark full + coal': 25,
+  'Great White Shark': 25,
+  'Cooked Great White Shark': 62,
+  'Cooked Great White Shark full': 31,
+  'Cooked Great White Shark full + coal': 25,
   'Mystic Ore': 0,
   'Mystic Bar': 30,
   'Mystic Bar full': 6,

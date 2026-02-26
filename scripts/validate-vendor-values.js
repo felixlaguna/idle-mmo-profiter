@@ -10,8 +10,8 @@ const expectedVendorValues = {
   Coal: 1.0,
   Stingray: 26.0,
   'Cooked Stingray': 65.0,
-  'White shark': 41.0,
-  'Cooked White Shark': 92.0,
+  'Great White Shark': 41.0,
+  'Cooked Great White Shark': 92.0,
   'Mystic Ore': 20.0,
   'Mystic Bar': 59.0,
 }

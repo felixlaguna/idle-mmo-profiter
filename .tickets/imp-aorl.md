@@ -45,8 +45,8 @@ Validation: All 7 resources now have correct vendor values matching the Excel so
 - Coal: 1
 - Stingray: 26
 - Cooked Stingray: 65
-- White shark: 41
-- Cooked White Shark: 92
+- Great White Shark: 41
+- Cooked Great White Shark: 92
 - Mystic Ore: 20
 - Mystic Bar: 59
 

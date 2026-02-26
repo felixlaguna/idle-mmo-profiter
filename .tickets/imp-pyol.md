@@ -22,7 +22,7 @@ Investigation complete. Root cause identified:
 
 Excel formulas show costs are COMPUTED from market prices:
 - Row 4 (Cooked Stingray): Cost = G3+G2 (Stingray market + Coal market) = 38+6 = 44
-- Row 7 (Cooked White Shark): Cost = G6+G2 (White shark market + Coal market) = 56+6 = 62
+- Row 7 (Cooked Great White Shark): Cost = G6+G2 (Great White Shark market + Coal market) = 56+6 = 62
 - Row 11 (Mystic Bar): Cost = G10+G2 (Mystic Ore market + Coal market) = 24+6 = 30
 
 But in defaults.json, these costs are HARDCODED numbers (44, 62, 30).
@@ -63,7 +63,7 @@ Fix implemented successfully:
    - Changed 'cost' to 'baseCost' for all 12 resources
    - Added 'inputs' arrays for:
      * Cooked Stingray: Stingray market + Coal market
-     * Cooked White Shark: White shark market + Coal market
+     * Cooked Great White Shark: Great White Shark market + Coal market
      * Mystic Bar: Mystic Ore market + Coal market
      * And their 'full' variants
 
@@ -118,7 +118,7 @@ FILES CREATED:
 VERIFICATION:
 Example - When Coal market price changes from 6 to 10:
 - Cooked Stingray: 44 → 48 (Stingray 38 + Coal 10)
-- Cooked White Shark: 62 → 66 (White shark 56 + Coal 10)
+- Cooked Great White Shark: 62 → 66 (Great White Shark 56 + Coal 10)
 - Mystic Bar: 30 → 34 (Mystic Ore 24 + Coal 10)
 
 All costs now reference market prices as single source of truth.

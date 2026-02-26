@@ -31,7 +31,7 @@ Three profit calculation categories (from the Excel):
    - Benefit/h = benefit / (craft_time / 3600)
 
 3. RESOURCE GATHERING PROFIT (Profit sheet):
-   - Resources: Coal, Stingray, White Shark, Mystic Ore, etc.
+   - Resources: Coal, Stingray, Great White Shark, Mystic Ore, etc.
    - Each has: gather time, cost, vendor value, market value
    - Vendor benefit = vendor_value - cost
    - Market benefit = (market_price - 12% tax) - cost

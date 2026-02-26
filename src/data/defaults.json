@@ -146,14 +146,14 @@
     },
     {
       "id": "res-4",
-      "name": "White shark",
+      "name": "Great White Shark",
       "marketPrice": 56,
       "vendorValue": 41,
       "hashedId": ""
     },
     {
       "id": "res-5",
-      "name": "Cooked White Shark",
+      "name": "Cooked Great White Shark",
       "marketPrice": 105,
       "vendorValue": 92,
       "hashedId": ""
@@ -4656,19 +4656,19 @@
       "marketPrice": 67
     },
     {
-      "name": "White shark",
+      "name": "Great White Shark",
       "timeSeconds": 32.1,
       "baseCost": 25,
       "vendorValue": 41,
       "marketPrice": 56
     },
     {
-      "name": "Cooked White Shark",
+      "name": "Cooked Great White Shark",
       "timeSeconds": 45.8,
       "baseCost": 0,
       "inputs": [
         {
-          "resourceName": "White shark",
+          "resourceName": "Great White Shark",
           "quantity": 1,
           "useMarketPrice": true
         },
@@ -4682,7 +4682,7 @@
       "marketPrice": 105
     },
     {
-      "name": "Cooked White Shark full",
+      "name": "Cooked Great White Shark full",
       "timeSeconds": 77.9,
       "baseCost": 25,
       "inputs": [
@@ -4696,7 +4696,7 @@
       "marketPrice": 105
     },
     {
-      "name": "Cooked White Shark full + coal",
+      "name": "Cooked Great White Shark full + coal",
       "timeSeconds": 86.2,
       "baseCost": 25,
       "vendorValue": 92,
