@@ -14,7 +14,7 @@ import type { DefaultData, Recipe } from '../types'
 import defaultData from '../data/defaults.json'
 
 // Storage keys
-const STORAGE_PREFIX = 'idlemmo-'
+const STORAGE_PREFIX = 'idlemmo:'
 const USER_OVERRIDES_KEY = `${STORAGE_PREFIX}user-overrides`
 
 /**
@@ -82,6 +82,26 @@ let dataProviderInstance: ReturnType<typeof createDataProvider> | null = null
  * This is called once and the result is cached
  */
 function createDataProvider() {
+  // One-time migration: Move data from old prefix to new prefix
+  // Old key: 'idlemmo-user-overrides'
+  // New key: 'idlemmo:user-overrides'
+  const oldKey = 'idlemmo-user-overrides'
+  const newKey = 'idlemmo:user-overrides'
+
+  try {
+    const oldData = localStorage.getItem(oldKey)
+    const newData = localStorage.getItem(newKey)
+
+    // Only migrate if old key exists and new key does NOT exist
+    if (oldData && !newData) {
+      localStorage.setItem(newKey, oldData)
+      localStorage.removeItem(oldKey)
+      console.log('Migrated user overrides from old storage key to new storage key')
+    }
+  } catch (error) {
+    console.error('Failed to migrate user overrides:', error)
+  }
+
   // Load default data (cast to DefaultData type)
   const defaults = ref(defaultData as DefaultData)
 

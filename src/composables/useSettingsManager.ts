@@ -105,6 +105,9 @@ export function resetToDefaults(): void {
     }
   })
 
+  // Explicitly clear data provider overrides (belt-and-suspenders)
+  removeStorage('user-overrides')
+
   success('Settings reset to defaults! Refreshing page...', 2000)
   setTimeout(() => window.location.reload(), 2000)
 }
@@ -123,6 +126,9 @@ export function resetAll(): void {
 
   const keys = getAllStorageKeys()
   keys.forEach((key) => removeStorage(key))
+
+  // Explicitly clear data provider overrides (belt-and-suspenders)
+  removeStorage('user-overrides')
 
   success('All settings cleared! Refreshing page...', 2000)
   setTimeout(() => window.location.reload(), 2000)
