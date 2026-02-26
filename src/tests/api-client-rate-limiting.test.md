@@ -277,8 +277,11 @@ Rate-limited API client for IdleMMO API with the following features:
 - ✅ Queue pauses automatically
 - ✅ Remaining requests wait until reset time
 - ✅ No 429 errors occur (we pause before hitting limit)
+- ✅ Wait time is always > 0 (never "waiting 0ms")
 
 **Note:** This test is difficult to run manually. It's more important to verify the code logic is correct.
+
+**Bug Fix Note (2026-02-26):** Previous versions had a bug where stale rate limit headers could cause an infinite loop showing "waiting 0ms" repeatedly. This was fixed by clearing stale rate limit info when the reset time has passed. See Test 13 for the specific regression test.
 
 ---
 
@@ -367,7 +370,51 @@ Rate-limited API client for IdleMMO API with the following features:
 
 ---
 
-## Test 13: Clear Queue
+## Test 13: Rate Limit Reset Recovery (Regression Test)
+
+**Goal:** Verify the client recovers from rate limiting when the reset time has passed (bug fix regression test)
+
+**Bug Description:** In previous versions, if the API returned rate limit headers with `X-RateLimit-Remaining: 0` and a reset timestamp that had already passed (stale data), the client would enter an infinite loop showing "Rate limit reached, waiting 0ms" repeatedly and never make progress.
+
+**Root Cause:**
+1. `canMakeRequest()` blocked requests when `remaining < 3` but never checked if the reset time had elapsed
+2. `getWaitTime()` returned 0 when the reset time had passed
+3. `processQueue()` would loop instantly with `setTimeout(resolve, 0)`
+
+**Fix:**
+1. PRIMARY: `canMakeRequest()` now checks if reset time has elapsed and clears stale rate limit info
+2. SAFETY NET: `processQueue()` enforces minimum 1000ms wait to prevent busy loops
+3. DEFENSE IN DEPTH: `getWaitTime()` also clears stale state for consistency
+
+**Setup:** This requires simulating stale rate limit headers. Best tested via automated unit tests.
+
+**Steps (Manual Testing):**
+1. Make requests until rate limit threshold is reached (`remaining < 3`)
+2. Wait for the rate limit reset period to actually elapse (check reset timestamp)
+3. Make another request
+4. Watch console output
+
+**Expected Results:**
+- ✅ After reset period elapses, the next request proceeds successfully
+- ✅ Console does NOT show "Rate limit reached, waiting 0ms" repeatedly
+- ✅ If any wait is shown, it's always ≥ 1000ms (never 0ms)
+- ✅ No infinite loop or browser freeze
+- ✅ Requests eventually complete successfully
+
+**How to Verify Fix:**
+The fix is primarily verified through automated unit tests in `src/tests/api/client.rate-limit.test.ts`:
+- Test: "should clear stale rate limit info when reset time has passed"
+- Test: "should still block requests when reset time has not passed"
+- Test: "should apply minimum 1000ms wait floor when canMakeRequest blocks"
+
+**Date Fixed:** 2026-02-26
+**Related Files:**
+- `src/api/client.ts` (lines 108-142, 147-163, 314-319)
+- `src/tests/api/client.rate-limit.test.ts` (automated regression tests)
+
+---
+
+## Test 14: Clear Queue
 
 **Goal:** Verify clearQueue() method works
 
@@ -397,7 +444,7 @@ Rate-limited API client for IdleMMO API with the following features:
 
 ---
 
-## Test 14: Integration with Services
+## Test 15: Integration with Services
 
 **Goal:** Verify API client works with service layer (cache + API)
 

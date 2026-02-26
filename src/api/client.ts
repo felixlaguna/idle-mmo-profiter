@@ -118,7 +118,23 @@ class RateLimitedApiClient {
       this.rateLimitInfo.remaining !== null &&
       this.rateLimitInfo.remaining < RATE_LIMIT_THRESHOLD
     ) {
-      return false
+      // PRIMARY FIX: Check if the reset time has already passed
+      // If so, clear the stale rate limit info and proceed to sliding window check
+      if (this.rateLimitInfo.reset !== null) {
+        const resetTime = this.rateLimitInfo.reset * 1000 // Convert to ms
+        if (resetTime <= now) {
+          // Reset time has passed, clear stale rate limit data
+          this.rateLimitInfo.remaining = null
+          this.rateLimitInfo.reset = null
+          // Fall through to sliding window check below
+        } else {
+          // Reset time hasn't passed yet, block the request
+          return false
+        }
+      } else {
+        // No reset time available, block the request
+        return false
+      }
     }
 
     // Check if we're under the rate limit
@@ -139,6 +155,11 @@ class RateLimitedApiClient {
       const now = Date.now()
       if (resetTime > now) {
         return resetTime - now
+      } else {
+        // DEFENSE IN DEPTH: Reset time has passed, clear stale rate limit data
+        this.rateLimitInfo.remaining = null
+        this.rateLimitInfo.reset = null
+        // Fall through to sliding window calculation
       }
     }
 
@@ -291,8 +312,10 @@ class RateLimitedApiClient {
       // Check if we can make a request
       if (!this.canMakeRequest()) {
         const waitTime = this.getWaitTime()
-        console.log(`Rate limit reached, waiting ${waitTime}ms before next request`)
-        await new Promise((resolve) => setTimeout(resolve, waitTime))
+        // SAFETY NET: Enforce minimum wait of 1000ms to prevent busy loops
+        const actualWaitTime = Math.max(waitTime, 1000)
+        console.log(`Rate limit reached, waiting ${actualWaitTime}ms before next request`)
+        await new Promise((resolve) => setTimeout(resolve, actualWaitTime))
         continue
       }
 
