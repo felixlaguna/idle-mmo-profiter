@@ -5,6 +5,7 @@ import { useMarketRefresh } from '../composables/useMarketRefresh'
 import { storageManager } from '../storage/persistence'
 import { useToast } from '../composables/useToast'
 import EditableValue from './EditableValue.vue'
+import HashedIdModal from './HashedIdModal.vue'
 import type { RefreshCategory } from '../composables/useMarketRefresh'
 
 const dataProvider = useDataProvider()
@@ -33,6 +34,15 @@ const itemRefreshLoading = ref<Record<string, boolean>>({})
 
 // Show refresh estimate modal
 const showRefreshEstimate = ref(false)
+
+// Hashed ID modal state
+const hashedIdModalVisible = ref(false)
+const hashedIdModalItem = ref<{
+  itemName: string
+  itemId: string
+  category: 'materials' | 'potions' | 'resources' | 'recipes'
+  currentHashedId: string
+} | null>(null)
 
 // Get default values for reset functionality
 const getDefaultMaterialPrice = (id: string): number => {
@@ -274,6 +284,39 @@ const getCategoryExclusionState = (category: RefreshCategory): 'all' | 'none' | 
   if (stats.excluded === stats.total) return 'all'
   return 'mixed'
 }
+
+// Hashed ID modal functions
+const openHashedIdModal = (
+  category: 'materials' | 'potions' | 'resources' | 'recipes',
+  item: { id: string; name: string; hashedId?: string }
+) => {
+  hashedIdModalItem.value = {
+    itemName: item.name,
+    itemId: item.id,
+    category,
+    currentHashedId: item.hashedId || '',
+  }
+  hashedIdModalVisible.value = true
+}
+
+const saveHashedId = (newHashedId: string) => {
+  if (!hashedIdModalItem.value) return
+
+  const { category, itemId, itemName, currentHashedId } = hashedIdModalItem.value
+
+  // Update via dataProvider
+  dataProvider.updateHashedId(category, itemId, newHashedId)
+
+  // Show toast notification
+  if (newHashedId === '' && currentHashedId === '') {
+    // No-op: both empty, don't show toast (this shouldn't happen due to modal logic)
+    return
+  } else if (newHashedId === '') {
+    showToast(`Cleared hashed ID for ${itemName}`, 'info')
+  } else {
+    showToast(`Updated hashed ID for ${itemName}`, 'success')
+  }
+}
 </script>
 
 <template>
@@ -411,6 +454,17 @@ const getCategoryExclusionState = (category: RefreshCategory): 'all' | 'none' | 
       </div>
     </div>
 
+    <!-- Hashed ID Modal -->
+    <HashedIdModal
+      v-if="hashedIdModalItem"
+      v-model:visible="hashedIdModalVisible"
+      :item-name="hashedIdModalItem.itemName"
+      :item-id="hashedIdModalItem.itemId"
+      :category="hashedIdModalItem.category"
+      :current-hashed-id="hashedIdModalItem.currentHashedId"
+      @save="saveHashedId"
+    />
+
     <!-- Empty State -->
     <div v-if="!hasResults" class="empty-state">
       <div class="empty-icon">🔍</div>
@@ -509,12 +563,36 @@ const getCategoryExclusionState = (category: RefreshCategory): 'all' | 'none' | 
                 />
               </td>
               <td class="col-actions">
-                <button
-                  class="btn-refresh-item"
-                  :disabled="!hasApiKey || itemRefreshLoading[`materials-${material.id}`]"
-                  :title="hasApiKey ? 'Refresh this item from API' : 'API key required'"
-                  @click="refreshItem('materials', material.id)"
-                >
+                <div class="actions-wrapper">
+                  <button
+                    class="btn-hashed-id"
+                    :class="{ missing: !material.hashedId }"
+                    title="View/edit hashed ID"
+                    @click="openHashedIdModal('materials', material)"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <line x1="4" y1="9" x2="20" y2="9"></line>
+                      <line x1="4" y1="15" x2="20" y2="15"></line>
+                      <line x1="10" y1="3" x2="8" y2="21"></line>
+                      <line x1="16" y1="3" x2="14" y2="21"></line>
+                    </svg>
+                  </button>
+                  <button
+                    class="btn-refresh-item"
+                    :disabled="!hasApiKey || itemRefreshLoading[`materials-${material.id}`]"
+                    :title="hasApiKey ? 'Refresh this item from API' : 'API key required'"
+                    @click="refreshItem('materials', material.id)"
+                  >
                   <span
                     v-if="itemRefreshLoading[`materials-${material.id}`]"
                     class="spinner-small"
@@ -535,6 +613,7 @@ const getCategoryExclusionState = (category: RefreshCategory): 'all' | 'none' | 
                     <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
                   </svg>
                 </button>
+                </div>
               </td>
             </tr>
           </tbody>
@@ -631,6 +710,30 @@ const getCategoryExclusionState = (category: RefreshCategory): 'all' | 'none' | 
                 />
               </td>
               <td class="col-actions">
+                <div class="actions-wrapper">
+                  <button
+                    class="btn-hashed-id"
+                  :class="{ missing: !potion.hashedId }"
+                  title="View/edit hashed ID"
+                  @click="openHashedIdModal('potions', potion)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <line x1="4" y1="9" x2="20" y2="9"></line>
+                    <line x1="4" y1="15" x2="20" y2="15"></line>
+                    <line x1="10" y1="3" x2="8" y2="21"></line>
+                    <line x1="16" y1="3" x2="14" y2="21"></line>
+                  </svg>
+                </button>
                 <button
                   class="btn-refresh-item"
                   :disabled="!hasApiKey || itemRefreshLoading[`potions-${potion.id}`]"
@@ -657,6 +760,7 @@ const getCategoryExclusionState = (category: RefreshCategory): 'all' | 'none' | 
                     <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
                   </svg>
                 </button>
+                </div>
               </td>
             </tr>
           </tbody>
@@ -751,6 +855,30 @@ const getCategoryExclusionState = (category: RefreshCategory): 'all' | 'none' | 
                 />
               </td>
               <td class="col-actions">
+                <div class="actions-wrapper">
+                  <button
+                    class="btn-hashed-id"
+                  :class="{ missing: !resource.hashedId }"
+                  title="View/edit hashed ID"
+                  @click="openHashedIdModal('resources', resource)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <line x1="4" y1="9" x2="20" y2="9"></line>
+                    <line x1="4" y1="15" x2="20" y2="15"></line>
+                    <line x1="10" y1="3" x2="8" y2="21"></line>
+                    <line x1="16" y1="3" x2="14" y2="21"></line>
+                  </svg>
+                </button>
                 <button
                   class="btn-refresh-item"
                   :disabled="!hasApiKey || itemRefreshLoading[`resources-${resource.id}`]"
@@ -777,6 +905,7 @@ const getCategoryExclusionState = (category: RefreshCategory): 'all' | 'none' | 
                     <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
                   </svg>
                 </button>
+                </div>
               </td>
             </tr>
           </tbody>
@@ -873,6 +1002,30 @@ const getCategoryExclusionState = (category: RefreshCategory): 'all' | 'none' | 
                 />
               </td>
               <td class="col-actions">
+                <div class="actions-wrapper">
+                  <button
+                    class="btn-hashed-id"
+                  :class="{ missing: !recipe.hashedId }"
+                  title="View/edit hashed ID"
+                  @click="openHashedIdModal('recipes', recipe)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <line x1="4" y1="9" x2="20" y2="9"></line>
+                    <line x1="4" y1="15" x2="20" y2="15"></line>
+                    <line x1="10" y1="3" x2="8" y2="21"></line>
+                    <line x1="16" y1="3" x2="14" y2="21"></line>
+                  </svg>
+                </button>
                 <button
                   class="btn-refresh-item"
                   :disabled="!hasApiKey || itemRefreshLoading[`recipes-${recipe.id}`]"
@@ -899,6 +1052,7 @@ const getCategoryExclusionState = (category: RefreshCategory): 'all' | 'none' | 
                     <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
                   </svg>
                 </button>
+                </div>
               </td>
             </tr>
           </tbody>
@@ -1454,8 +1608,15 @@ const getCategoryExclusionState = (category: RefreshCategory): 'all' | 'none' | 
 }
 
 .col-actions {
-  width: 60px;
+  width: 100px;
   text-align: center;
+}
+
+.actions-wrapper {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  justify-content: center;
 }
 
 .vendor-value {
@@ -1466,7 +1627,7 @@ const getCategoryExclusionState = (category: RefreshCategory): 'all' | 'none' | 
   padding: 0.375rem;
   background-color: transparent;
   color: var(--accent-primary);
-  border: 1px solid var(--border-color);
+  border: none;
   border-radius: 0.375rem;
   cursor: pointer;
   transition: all 0.2s;
@@ -1477,12 +1638,39 @@ const getCategoryExclusionState = (category: RefreshCategory): 'all' | 'none' | 
 
 .btn-refresh-item:hover:not(:disabled) {
   background-color: var(--bg-tertiary);
-  border-color: var(--accent-primary);
+  color: var(--accent-primary);
 }
 
 .btn-refresh-item:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.btn-hashed-id {
+  padding: 0.375rem;
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-hashed-id:hover {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.btn-hashed-id.missing {
+  color: var(--warning);
+}
+
+.btn-hashed-id.missing:hover {
+  background-color: rgba(245, 158, 11, 0.1);
+  color: var(--warning);
 }
 
 /* Responsive Design */
@@ -1538,6 +1726,20 @@ const getCategoryExclusionState = (category: RefreshCategory): 'all' | 'none' | 
 
   .modal-actions {
     flex-direction: column;
+  }
+
+  .col-actions {
+    width: 80px;
+  }
+
+  .actions-wrapper {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .btn-hashed-id,
+  .btn-refresh-item {
+    width: 100%;
   }
 }
 </style>
