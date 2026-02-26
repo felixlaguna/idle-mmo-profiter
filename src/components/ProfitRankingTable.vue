@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import type { RankedActivity } from '../calculators/profitRanker'
 import type { ActivityType } from '../types'
 import { useHeatmap } from '../composables/useHeatmap'
+import { useActivityFilters } from '../composables/useActivityFilters'
 import EmptyState from './EmptyState.vue'
 
 const { getHeatmapStyle } = useHeatmap()
@@ -18,20 +19,13 @@ type SortOrder = 'asc' | 'desc'
 const sortKey = ref<SortKey>('rank')
 const sortOrder = ref<SortOrder>('asc')
 
-// Filter configuration
-const filterDungeons = ref(true)
-const filterPotions = ref(true)
-const filterResources = ref(true)
+// Use shared filter state (with localStorage persistence)
+const { filterDungeons, filterPotions, filterResources, getFilteredAndRerankedActivities } = useActivityFilters()
 
 // Get filtered and sorted activities
 const filteredAndSortedActivities = computed(() => {
-  // First, filter by type
-  let filtered = props.activities.filter((activity) => {
-    if (activity.activityType === 'dungeon' && !filterDungeons.value) return false
-    if (activity.activityType === 'potion' && !filterPotions.value) return false
-    if (activity.activityType === 'resource' && !filterResources.value) return false
-    return true
-  })
+  // First, filter by type and re-rank
+  let filtered = getFilteredAndRerankedActivities(props.activities)
 
   // Then, sort
   filtered.sort((a, b) => {

@@ -3,9 +3,11 @@ import { ref, computed, onMounted, onUnmounted, defineAsyncComponent } from 'vue
 import { useDataProvider } from './composables/useDataProvider'
 import { useProfitRanking } from './composables/useProfitRanking'
 import { useStorage } from './composables/useStorage'
+import { useActivityFilters } from './composables/useActivityFilters'
 import { calculateDungeonProfits } from './calculators/dungeonCalculator'
 import { calculatePotionProfits } from './calculators/potionCalculator'
 import { calculateResourceProfits } from './calculators/resourceCalculator'
+import { getBestAction } from './calculators/profitRanker'
 import SettingsPanel from './components/SettingsPanel.vue'
 import ProfitRankingTable from './components/ProfitRankingTable.vue'
 import DungeonTable from './components/DungeonTable.vue'
@@ -74,13 +76,22 @@ const magicFind = useStorage<MagicFindSettings>('magicFind', {
 const marketTaxRate = useStorage<number>('marketTaxRate', 0.12)
 
 // Calculate profit rankings
-const { rankedActivities, bestAction } = useProfitRanking({
+const { rankedActivities } = useProfitRanking({
   dungeons: dataProvider.dungeons,
   recipes: dataProvider.recipes,
   potionCrafts: dataProvider.potionCrafts,
   resourceGathering: dataProvider.resourceGathering,
   magicFind: computed(() => magicFind.value),
   taxRate: computed(() => marketTaxRate.value),
+})
+
+// Use shared filter state to get filtered best action
+const { getFilteredAndRerankedActivities } = useActivityFilters()
+
+// Best action should reflect current filters
+const bestAction = computed(() => {
+  const filteredActivities = getFilteredAndRerankedActivities(rankedActivities.value)
+  return getBestAction(filteredActivities)
 })
 
 // Calculate dungeon profits for dungeon table
