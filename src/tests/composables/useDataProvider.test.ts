@@ -60,13 +60,13 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
       expect(dataProvider.isRefreshExcluded('materials', firstMaterial.id)).toBe(true)
     })
 
-    it('should set exclusion state for a potion', () => {
+    it('should set exclusion state for a recipe', () => {
       const dataProvider = useDataProvider()
-      const firstPotion = dataProvider.potions.value[0]
+      const firstRecipe = dataProvider.recipes.value[0]
 
-      dataProvider.setRefreshExcluded('potions', firstPotion.id, true)
+      dataProvider.setRefreshExcluded('recipes', firstRecipe.id, true)
 
-      expect(dataProvider.isRefreshExcluded('potions', firstPotion.id)).toBe(true)
+      expect(dataProvider.isRefreshExcluded('recipes', firstRecipe.id)).toBe(true)
     })
 
     it('should set exclusion state for a resource', () => {
@@ -197,9 +197,9 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
 
       dataProvider.setAllRefreshExcluded('materials', true)
 
-      // Check that potions are still included
-      const firstPotion = dataProvider.potions.value[0]
-      expect(dataProvider.isRefreshExcluded('potions', firstPotion.id)).toBe(false)
+      // Check that recipes are still included
+      const firstRecipe = dataProvider.recipes.value[0]
+      expect(dataProvider.isRefreshExcluded('recipes', firstRecipe.id)).toBe(false)
     })
 
     it('should persist bulk exclusion in localStorage', () => {
@@ -472,13 +472,12 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
 
       // Set different exclusion patterns for each category
       dataProvider.setAllRefreshExcluded('materials', true)
-      dataProvider.setRefreshExcluded('potions', dataProvider.potions.value[0].id, true)
       dataProvider.setAllRefreshExcluded('resources', false)
       dataProvider.setRefreshExcluded('recipes', dataProvider.recipes.value[0].id, true)
       dataProvider.setRefreshExcluded('recipes', dataProvider.recipes.value[1].id, true)
 
       const overallStats = dataProvider.getExclusionStats()
-      const expectedExcluded = dataProvider.materials.value.length + 1 + 0 + 2 // materials + potions[0] + resources + recipes[0,1]
+      const expectedExcluded = dataProvider.materials.value.length + 0 + 0 + 2 // materials + potions(empty) + resources + recipes[0,1]
 
       expect(overallStats.totalExcluded).toBe(expectedExcluded)
     })
@@ -567,7 +566,14 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
     it('should flow material price overrides to potionCraft unitCost', () => {
       const dataProvider = useDataProvider()
 
-      // Find a potion craft and its materials
+      // Add a potionCraft first (defaults are now empty)
+      dataProvider.addPotionCraft({
+        name: 'Test Potion',
+        timeSeconds: 60,
+        materials: [{ name: 'Moose antler', quantity: 5, unitCost: 100 }],
+        currentPrice: 1000
+      })
+
       const firstCraft = dataProvider.potionCrafts.value[0]
       const craftMaterialName = firstCraft.materials[0].name
 
@@ -627,17 +633,14 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
       const dataProvider = useDataProvider()
 
       const material = dataProvider.materials.value[0]
-      const potion = dataProvider.potions.value[0]
       const resource = dataProvider.resources.value[0]
       const recipe = dataProvider.recipes.value[0]
 
       const materialPrice = 111
-      const potionPrice = 222
       const resourcePrice = 333
       const recipePrice = 444
 
       dataProvider.updateMaterialPrice(material.id, materialPrice)
-      dataProvider.updatePotionPrice(potion.id, potionPrice)
       dataProvider.updateResourcePrice(resource.id, resourcePrice)
       dataProvider.updateRecipe(recipe.id, { price: recipePrice })
 
@@ -645,7 +648,6 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
       const exported = JSON.parse(jsonString) as DefaultData
 
       expect(exported.materials.find((m) => m.id === material.id)?.price).toBe(materialPrice)
-      expect(exported.potions.find((p) => p.id === potion.id)?.price).toBe(potionPrice)
       expect(exported.resources.find((r) => r.id === resource.id)?.marketPrice).toBe(resourcePrice)
       expect(exported.recipes.find((r) => r.id === recipe.id)?.price).toBe(recipePrice)
     })
@@ -680,7 +682,7 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
       expect(typeof exported.marketTaxRate).toBe('number')
     })
 
-    it('should preserve empty hashedId as empty string', () => {
+    it('should preserve hashedId in export', () => {
       const dataProvider = useDataProvider()
 
       // Clear all overrides and reload to ensure clean state
@@ -690,12 +692,10 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
       const jsonString = dataProvider.exportAsDefaultsJson()
       const exported = JSON.parse(jsonString) as DefaultData
 
-      // Find a material that hasn't been modified in any previous test
-      // Use the last material as it's less likely to have been used
-      const materialWithoutHashedId = exported.materials[exported.materials.length - 1]
-
-      expect(materialWithoutHashedId).toBeDefined()
-      expect(materialWithoutHashedId?.hashedId).toBe('')
+      // Every exported material should have a hashedId field (string)
+      exported.materials.forEach((mat) => {
+        expect(typeof mat.hashedId).toBe('string')
+      })
     })
 
     it('should preserve vendorValue as 0 when not overridden', () => {

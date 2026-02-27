@@ -40,6 +40,8 @@ export type {
   ItemSearchResult,
   ItemSearchResponse,
   ItemRecipe,
+  ItemRecipeMaterial,
+  ItemRecipeResult,
   ItemDetails,
   MarketHistoryEntry,
   LatestSoldEntry,

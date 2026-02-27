@@ -32,6 +32,11 @@ export interface Recipe {
   value?: number
   hashedId?: string
   vendorValue?: number
+  uses?: number
+  producesItemName?: string
+  producesItemHashedId?: string
+  tradableCounterpartId?: string
+  isUntradable?: boolean
 }
 
 export interface DungeonDrop {
@@ -57,8 +62,11 @@ export interface PotionCraft {
   name: string
   timeSeconds: number
   materials: PotionMaterial[]
-  vialCost: number
   currentPrice: number
+  recipeId?: string
+  untradableRecipeId?: string
+  recipeName?: string
+  recipeUses?: number
 }
 
 export interface ResourceInput {

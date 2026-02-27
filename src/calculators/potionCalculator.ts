@@ -1,4 +1,4 @@
-import type { PotionCraft } from '../types'
+import type { PotionCraft, Recipe } from '../types'
 
 export interface PotionMaterialResult {
   name: string
@@ -11,19 +11,25 @@ export interface PotionProfitResult {
   name: string
   craftTimeSeconds: number
   materials: PotionMaterialResult[]
-  vialCost: number
   totalCost: number
   minSellPrice: number
   currentPrice: number
   profit: number
   profitPerHour: number
+  hasRecipeCost: boolean
+  profitWithRecipeCost?: number
+  profitPerHourWithRecipeCost?: number
+  recipeCostPerCraft?: number
+  recipeUses?: number
+  tradableRecipePrice?: number
+  tradableRecipeName?: string
 }
 
 /**
  * Calculates profit for all potion crafts based on material costs and market prices.
  *
  * Formula:
- * - total_cost = SUM(mat_qty * mat_price) + vial_cost
+ * - total_cost = SUM(mat_qty * mat_price)
  * - min_sell_price = total_cost + (total_cost * taxRate)
  * - profit = current_price - min_sell_price
  * - profit_per_hour = profit / (craft_time / 3600)
@@ -36,14 +42,57 @@ export interface PotionProfitResult {
  * However, based on the epic description and Excel logic, it seems the min_sell_price
  * already includes the tax, so we calculate: profit = current_price - min_sell_price
  *
+ * Dual Profitability (Phase 3):
+ * For potions that have an untradable recipe with limited uses, compute two
+ * profitabilities so the user can compare:
+ * 1. Profit WITHOUT recipe cost (using the free untradable recipe from dungeon drops)
+ * 2. Profit WITH recipe cost (buying the tradable version, amortized over uses)
+ *
+ * Recipe cost comparison is shown when:
+ * - An untradable recipe alternative exists for the potion, AND
+ * - The recipe has limited uses (uses > 0), AND
+ * - A tradable recipe also exists (so there's a buyable alternative to compare)
+ *
+ * Formula with recipe cost:
+ * - recipe_cost_per_craft = tradable_recipe_price / recipe_uses
+ * - profit_with_recipe = profit_without_recipe - recipe_cost_per_craft
+ * - profit_per_hour_with_recipe = profit_with_recipe / (craft_time / 3600)
+ *
  * @param potionCrafts - Array of potion crafts with materials and market prices
  * @param taxRate - Market tax rate (e.g., 0.12 for 12%)
+ * @param recipes - Optional array of recipes for dual profitability calculation
  * @returns Array of potion profit results sorted by profit per hour descending
  */
 export function calculatePotionProfits(
   potionCrafts: PotionCraft[],
-  taxRate: number
+  taxRate: number,
+  recipes?: Recipe[]
 ): PotionProfitResult[] {
+  // Create a map of potion names to tradable recipes (if recipes provided)
+  const potionRecipeMap = new Map<string, Recipe>()
+  // Create a set of potion names that have untradable recipe alternatives
+  const potionsWithUntradableRecipe = new Set<string>()
+
+  if (recipes) {
+    recipes.forEach(recipe => {
+      if (!recipe.producesItemName) return
+
+      // Track which potions have untradable recipes
+      if (recipe.isUntradable) {
+        potionsWithUntradableRecipe.add(recipe.producesItemName)
+      }
+
+      // Only consider tradable recipes that produce potions
+      if (!recipe.isUntradable && recipe.price > 0) {
+        // If multiple recipes produce the same potion, use the cheapest one
+        const existingRecipe = potionRecipeMap.get(recipe.producesItemName)
+        if (!existingRecipe || recipe.price < existingRecipe.price) {
+          potionRecipeMap.set(recipe.producesItemName, recipe)
+        }
+      }
+    })
+  }
+
   const results: PotionProfitResult[] = potionCrafts.map(potion => {
     // Calculate material costs
     const materialResults: PotionMaterialResult[] = potion.materials.map(mat => ({
@@ -59,8 +108,8 @@ export function calculatePotionProfits(
       0
     )
 
-    // Total cost including vial
-    const totalCost = totalMaterialCost + potion.vialCost
+    // Total cost
+    const totalCost = totalMaterialCost
 
     // Minimum sell price to break even after tax
     // If we sell at minSellPrice, after tax we get: minSellPrice * (1 - taxRate)
@@ -77,17 +126,47 @@ export function calculatePotionProfits(
     // Profit per hour
     const profitPerHour = profit / (potion.timeSeconds / 3600)
 
-    return {
+    // Check if this potion has a tradable recipe
+    const tradableRecipe = potionRecipeMap.get(potion.name)
+    // Check if this potion has an untradable recipe alternative
+    const hasUntradableAlternative = potionsWithUntradableRecipe.has(potion.name)
+
+    // Base result
+    const result: PotionProfitResult = {
       name: potion.name,
       craftTimeSeconds: potion.timeSeconds,
       materials: materialResults,
-      vialCost: potion.vialCost,
       totalCost,
       minSellPrice,
       currentPrice: potion.currentPrice,
       profit,
-      profitPerHour
+      profitPerHour,
+      hasRecipeCost: false
     }
+
+    // Show dual profitability when:
+    // 1. An untradable recipe exists (free from dungeon drops), AND
+    // 2. The recipe has limited uses (uses > 0), AND
+    // 3. A tradable recipe also exists (buyable alternative to compare against)
+    if (tradableRecipe && tradableRecipe.uses && tradableRecipe.uses > 0 && hasUntradableAlternative) {
+      const recipeCostPerCraft = tradableRecipe.price / tradableRecipe.uses
+      const profitWithRecipeCost = profit - recipeCostPerCraft
+      const profitPerHourWithRecipeCost = profitWithRecipeCost / (potion.timeSeconds / 3600)
+
+      result.hasRecipeCost = true
+      // Main profit/profitPerHour become the recipe-cost-adjusted values
+      result.profit = profitWithRecipeCost
+      result.profitPerHour = profitPerHourWithRecipeCost
+      // Store the without-recipe values for the tooltip
+      result.profitWithRecipeCost = profit
+      result.profitPerHourWithRecipeCost = profitPerHour
+      result.recipeCostPerCraft = recipeCostPerCraft
+      result.recipeUses = tradableRecipe.uses
+      result.tradableRecipePrice = tradableRecipe.price
+      result.tradableRecipeName = tradableRecipe.name
+    }
+
+    return result
   })
 
   // Sort by profit per hour descending

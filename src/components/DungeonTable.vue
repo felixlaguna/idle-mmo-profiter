@@ -147,6 +147,11 @@ const profitRange = computed(() => {
     }
   }
 })
+
+// Check if a recipe is untradable (has computed price)
+const isUntradableRecipe = (recipeName: string): boolean => {
+  return recipeName.includes('(Untradable)')
+}
 </script>
 
 <template>
@@ -242,7 +247,13 @@ const profitRange = computed(() => {
                     <tbody>
                       <tr v-for="drop in dungeon.drops" :key="drop.recipeName">
                         <td>{{ drop.recipeName }}</td>
-                        <td class="text-right">{{ formatNumber(drop.price) }}</td>
+                        <td class="text-right">
+                          <span v-if="isUntradableRecipe(drop.recipeName)" class="computed-price">
+                            {{ formatNumber(drop.price) }}
+                            <span class="computed-indicator" title="Price computed from potion profitability">ⓒ</span>
+                          </span>
+                          <span v-else>{{ formatNumber(drop.price) }}</span>
+                        </td>
                         <td class="text-right">{{ formatPercent(drop.chance) }}</td>
                         <td class="text-right expected-value">{{ formatNumber(drop.expectedValue) }}</td>
                       </tr>
@@ -510,5 +521,25 @@ const profitRange = computed(() => {
   .drop-breakdown {
     padding: 1rem;
   }
+}
+
+/* Computed Price Indicator */
+.computed-price {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.computed-indicator {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: var(--accent-primary);
+  cursor: help;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.computed-indicator:hover {
+  opacity: 1;
 }
 </style>

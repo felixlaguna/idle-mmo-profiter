@@ -69,6 +69,19 @@ interface SearchResponse {
   }
 }
 
+interface InspectRecipe {
+  recipe_id: number
+  recipe_hashed_id: string
+  name: string
+  uses?: number
+  max_uses?: number
+  ingredients?: Array<{
+    hashed_item_id: string
+    name: string
+    quantity: number
+  }>
+}
+
 interface InspectResponse {
   item: {
     hashed_id: string
@@ -76,6 +89,7 @@ interface InspectResponse {
     vendor_price: number
     is_tradeable: boolean
     max_tier: number
+    recipes?: InspectRecipe[]
   }
   endpoint_updates_at: string
 }
@@ -151,8 +165,8 @@ async function searchItem(name: string, apiKey: string): Promise<string | null> 
   }
 }
 
-// Get item details including vendor value
-async function inspectItem(hashedId: string, apiKey: string): Promise<number | null> {
+// Get item details including vendor value and recipe data
+async function inspectItem(hashedId: string, apiKey: string): Promise<InspectResponse['item'] | null> {
   const url = `${API_BASE_URL}/item/${hashedId}/inspect`
 
   try {
@@ -170,7 +184,7 @@ async function inspectItem(hashedId: string, apiKey: string): Promise<number | n
     }
 
     const data: InspectResponse = await response.json()
-    return data.item.vendor_price || 0
+    return data.item
   } catch (error) {
     console.error(`  ✗ Error inspecting ${hashedId}:`, error)
     return null
@@ -204,22 +218,40 @@ async function processItem(
     await delay(REQUEST_DELAY_MS) // Rate limit delay after search
   }
 
-  // Get vendor value
-  const vendorValue = await inspectItem(hashedId, apiKey)
+  // Get item details (vendor value, recipes, uses, etc.)
+  const itemDetails = await inspectItem(hashedId, apiKey)
   await delay(REQUEST_DELAY_MS) // Rate limit delay after inspect
 
-  if (vendorValue === null) {
-    console.error(`  ✗ Skipping ${item.name}: could not get vendor value`)
+  if (itemDetails === null) {
+    console.error(`  ✗ Skipping ${item.name}: could not get item details`)
     return item
   }
 
-  console.log(`  ✓ Updated: hashedId=${hashedId}, vendorValue=${vendorValue}`)
-
-  return {
+  const vendorValue = itemDetails.vendor_price || 0
+  const result: Item = {
     ...item,
     hashedId,
     vendorValue,
   }
+
+  // For recipe items, extract uses from the inspect response
+  // The inspect response may include recipe details with uses/max_uses
+  if (itemDetails.recipes && itemDetails.recipes.length > 0) {
+    const recipe = itemDetails.recipes[0]
+    if (recipe.uses !== undefined && recipe.uses !== null) {
+      ;(result as Record<string, unknown>).uses = recipe.uses
+      console.log(`  ✓ Updated: hashedId=${hashedId}, vendorValue=${vendorValue}, uses=${recipe.uses}`)
+    } else if (recipe.max_uses !== undefined && recipe.max_uses !== null) {
+      ;(result as Record<string, unknown>).uses = recipe.max_uses
+      console.log(`  ✓ Updated: hashedId=${hashedId}, vendorValue=${vendorValue}, uses=${recipe.max_uses}`)
+    } else {
+      console.log(`  ✓ Updated: hashedId=${hashedId}, vendorValue=${vendorValue} (no uses in response)`)
+    }
+  } else {
+    console.log(`  ✓ Updated: hashedId=${hashedId}, vendorValue=${vendorValue}`)
+  }
+
+  return result
 }
 
 // Main function

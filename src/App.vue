@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, defineAsyncComponent } from 'vue'
 import { useDataProvider } from './composables/useDataProvider'
+import { useRecipePricing } from './composables/useRecipePricing'
 import { useProfitRanking } from './composables/useProfitRanking'
 import { useStorage } from './composables/useStorage'
 import { useActivityFilters } from './composables/useActivityFilters'
@@ -75,10 +76,17 @@ const magicFind = useStorage<MagicFindSettings>('magicFind', {
 })
 const marketTaxRate = useStorage<number>('marketTaxRate', 0.12)
 
+// Compute recipe prices with untradable recipe pricing
+const { recipesWithComputedPrices } = useRecipePricing(
+  dataProvider.recipes,
+  dataProvider.potionCrafts,
+  marketTaxRate
+)
+
 // Calculate profit rankings
 const { rankedActivities } = useProfitRanking({
   dungeons: dataProvider.dungeons,
-  recipes: dataProvider.recipes,
+  recipes: recipesWithComputedPrices,
   potionCrafts: dataProvider.potionCrafts,
   resourceGathering: dataProvider.resourceGathering,
   magicFind: computed(() => magicFind.value),
@@ -98,7 +106,7 @@ const bestAction = computed(() => {
 const dungeonProfits = computed(() => {
   return calculateDungeonProfits(
     dataProvider.dungeons.value,
-    dataProvider.recipes.value,
+    recipesWithComputedPrices.value,
     magicFind.value
   )
 })
@@ -107,7 +115,8 @@ const dungeonProfits = computed(() => {
 const potionProfits = computed(() => {
   return calculatePotionProfits(
     dataProvider.potionCrafts.value,
-    marketTaxRate.value
+    marketTaxRate.value,
+    dataProvider.recipes.value
   )
 })
 
@@ -118,6 +127,16 @@ const resourceProfits = computed(() => {
     marketTaxRate.value
   )
 })
+
+// Remove a potion craft entry
+const removePotionCraft = (potionName: string) => {
+  dataProvider.removePotionCraft(potionName)
+}
+
+// Update a potion craft time
+const updatePotionCraftTime = (potionName: string, value: number) => {
+  dataProvider.updatePotionCraftTime(potionName, value)
+}
 
 // Last update time (placeholder - will be updated when API is integrated)
 const lastUpdateTime = ref<Date | null>(null)
@@ -327,7 +346,11 @@ onUnmounted(() => {
               <DungeonTable :dungeons="dungeonProfits" />
             </div>
             <div v-if="currentTab === 'potions'">
-              <PotionTable :potions="potionProfits" />
+              <PotionTable
+                :potions="potionProfits"
+                @update:craft-time="updatePotionCraftTime"
+                @delete:potion="removePotionCraft"
+              />
             </div>
             <div v-if="currentTab === 'resources'">
               <ResourceTable :resources="resourceProfits" />

@@ -65,7 +65,7 @@ export function useProfitRanking(options: UseProfitRankingOptions): UseProfitRan
 
     // Calculate profits for each category
     const dungeonResults = calculateDungeonProfits(currentDungeons, currentRecipes, currentMagicFind)
-    const potionResults = calculatePotionProfits(currentPotionCrafts, currentTaxRate)
+    const potionResults = calculatePotionProfits(currentPotionCrafts, currentTaxRate, currentRecipes)
     const resourceResults = calculateResourceProfits(currentResourceGathering, currentTaxRate)
 
     // Rank all activities

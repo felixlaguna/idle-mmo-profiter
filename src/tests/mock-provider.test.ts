@@ -51,17 +51,13 @@ describe('MockProvider', () => {
     expect(material?.name).toBe('Moose antler')
     expect(material?.type).toBe('material')
 
-    // Test finding a potion
-    const potion = await provider.getItemDetails('Wraithbane')
-    expect(potion).not.toBe(null)
-    expect(potion?.name).toBe('Wraithbane')
-    expect(potion?.type).toBe('potion')
-
     // Test finding a resource
     const resource = await provider.getItemDetails('Coal')
     expect(resource).not.toBe(null)
     expect(resource?.name).toBe('Coal')
     expect(resource?.type).toBe('resource')
+
+    // Potions are now dynamically added, so potions array is empty in defaults
   })
 
   it('should return null for non-existent items', async () => {

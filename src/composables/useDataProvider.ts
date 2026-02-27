@@ -16,6 +16,7 @@ import defaultData from '../data/defaults.json'
 // Storage keys
 const STORAGE_PREFIX = 'idlemmo:'
 const USER_OVERRIDES_KEY = `${STORAGE_PREFIX}user-overrides`
+const POTION_CRAFTS_KEY = `${STORAGE_PREFIX}potion-crafts`
 
 /**
  * User overrides structure
@@ -43,6 +44,11 @@ interface UserOverrides {
       refreshExcluded?: boolean
       hashedId?: string
       vendorValue?: number
+      uses?: number
+      producesItemName?: string
+      producesItemHashedId?: string
+      isUntradable?: boolean
+      tradableCounterpartId?: string
     }
   >
 }
@@ -71,6 +77,34 @@ function saveUserOverrides(overrides: UserOverrides): void {
     localStorage.setItem(USER_OVERRIDES_KEY, JSON.stringify(overrides))
   } catch (error) {
     console.error('Failed to save user overrides:', error)
+  }
+}
+
+/**
+ * Save potionCrafts to localStorage
+ */
+function savePotionCrafts(potionCrafts: DefaultData['potionCrafts']): void {
+  try {
+    localStorage.setItem(POTION_CRAFTS_KEY, JSON.stringify(potionCrafts))
+  } catch (error) {
+    console.error('Failed to save potion crafts:', error)
+  }
+}
+
+/**
+ * Load potionCrafts from localStorage, merging with defaults
+ */
+function loadPotionCrafts(defaultCrafts: DefaultData['potionCrafts']): DefaultData['potionCrafts'] {
+  try {
+    const stored = localStorage.getItem(POTION_CRAFTS_KEY)
+    if (!stored) return defaultCrafts
+
+    const savedCrafts = JSON.parse(stored) as DefaultData['potionCrafts']
+    // Use saved crafts as the source of truth (includes additions, removals, time edits)
+    return savedCrafts
+  } catch (error) {
+    console.error('Failed to load potion crafts:', error)
+    return defaultCrafts
   }
 }
 
@@ -103,7 +137,10 @@ function createDataProvider() {
   }
 
   // Load default data (cast to DefaultData type)
-  const defaults = ref(defaultData as DefaultData)
+  const loadedDefaults = defaultData as DefaultData
+  // Restore persisted potionCrafts (includes user additions/removals/edits)
+  loadedDefaults.potionCrafts = loadPotionCrafts(loadedDefaults.potionCrafts)
+  const defaults = ref(loadedDefaults)
 
   // Load user overrides
   const userOverrides = ref<UserOverrides>(getUserOverrides())
@@ -592,6 +629,102 @@ function createDataProvider() {
   }
 
   /**
+   * Add a new PotionCraft entry to the defaults
+   */
+  function addPotionCraft(potionCraft: {
+    name: string
+    timeSeconds: number
+    materials: Array<{ name: string; quantity: number; unitCost: number }>
+    currentPrice: number
+  }): void {
+    defaults.value.potionCrafts.push(potionCraft)
+    defaults.value = { ...defaults.value }
+    savePotionCrafts(defaults.value.potionCrafts)
+  }
+
+  /**
+   * Add a new Material entry to the defaults (if it doesn't already exist)
+   */
+  function addMaterial(material: { name: string; price: number; hashedId?: string; vendorValue?: number }): string {
+    const existing = materials.value.find((m) => m.name === material.name)
+    if (existing) return existing.id
+
+    const id = `mat-auto-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`
+    defaults.value.materials.push({
+      id,
+      name: material.name,
+      price: material.price,
+      hashedId: material.hashedId || '',
+      vendorValue: material.vendorValue || 0,
+    })
+    defaults.value = { ...defaults.value }
+    return id
+  }
+
+  /**
+   * Add a new Potion entry to the defaults (if it doesn't already exist)
+   */
+  function addPotion(potion: { name: string; price: number; hashedId?: string; vendorValue?: number }): string {
+    const existing = potions.value.find((p) => p.name === potion.name)
+    if (existing) return existing.id
+
+    const id = `pot-auto-${Date.now()}`
+    defaults.value.potions.push({
+      id,
+      name: potion.name,
+      price: potion.price,
+      hashedId: potion.hashedId || '',
+      vendorValue: potion.vendorValue || 0,
+    })
+    defaults.value = { ...defaults.value }
+    return id
+  }
+
+  /**
+   * Update a PotionCraft's craft time by potion name
+   */
+  function updatePotionCraftTime(potionName: string, timeSeconds: number): void {
+    const craft = defaults.value.potionCrafts.find((c) => c.name === potionName)
+    if (craft) {
+      craft.timeSeconds = timeSeconds
+      defaults.value = { ...defaults.value }
+      savePotionCrafts(defaults.value.potionCrafts)
+    }
+  }
+
+  /**
+   * Remove a PotionCraft entry by name
+   */
+  function removePotionCraft(name: string): void {
+    defaults.value.potionCrafts = defaults.value.potionCrafts.filter(
+      (craft) => craft.name !== name
+    )
+    defaults.value = { ...defaults.value }
+    savePotionCrafts(defaults.value.potionCrafts)
+  }
+
+  /**
+   * Update a recipe's structural fields in defaults (uses, producesItemName, etc.)
+   * Persisted to localStorage via user overrides so they survive refresh.
+   */
+  function updateRecipeDefaults(id: string, data: Partial<Recipe>): void {
+    const recipe = defaults.value.recipes.find((r) => r.id === id)
+    if (recipe) {
+      Object.assign(recipe, data)
+      defaults.value = { ...defaults.value }
+
+      // Persist structural fields to user overrides
+      const overrides = { ...userOverrides.value }
+      if (!overrides.recipes) {
+        overrides.recipes = {}
+      }
+      overrides.recipes[id] = { ...overrides.recipes[id], ...data }
+      userOverrides.value = overrides
+      saveUserOverrides(overrides)
+    }
+  }
+
+  /**
    * Export current data as a defaults.json compatible JSON string
    *
    * This creates a complete DefaultData object with all user overrides merged in,
@@ -631,10 +764,12 @@ function createDataProvider() {
           hashedId: recipe.hashedId || '',
           vendorValue: recipe.vendorValue || 0,
         }
-        // Only include value if it exists in the original
-        if (recipe.value !== undefined) {
-          exported.value = recipe.value
-        }
+        if (recipe.value !== undefined) exported.value = recipe.value
+        if (recipe.uses !== undefined) exported.uses = recipe.uses
+        if (recipe.producesItemName) exported.producesItemName = recipe.producesItemName
+        if (recipe.producesItemHashedId) exported.producesItemHashedId = recipe.producesItemHashedId
+        if (recipe.isUntradable !== undefined) exported.isUntradable = recipe.isUntradable
+        if (recipe.tradableCounterpartId) exported.tradableCounterpartId = recipe.tradableCounterpartId
         return exported
       }),
       dungeons: dungeons.value,
@@ -646,7 +781,6 @@ function createDataProvider() {
           quantity: mat.quantity,
           unitCost: mat.unitCost,
         })),
-        vialCost: craft.vialCost,
         currentPrice: craft.currentPrice,
       })),
       resourceGathering: resourceGathering.value.map(gather => {
@@ -717,6 +851,14 @@ function createDataProvider() {
 
     // Export methods
     exportAsDefaultsJson,
+
+    // Potion craft methods
+    addPotionCraft,
+    updatePotionCraftTime,
+    removePotionCraft,
+    addMaterial,
+    addPotion,
+    updateRecipeDefaults,
   }
 }
 

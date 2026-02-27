@@ -78,50 +78,7 @@
       "vendorValue": 115
     }
   ],
-  "potions": [
-    {
-      "id": "pot-1",
-      "name": "Wraithbane",
-      "price": 11894.6,
-      "hashedId": "P1vlVrzjLryRYao8mGKM",
-      "vendorValue": 2500
-    },
-    {
-      "id": "pot-2",
-      "name": "Thunderfury",
-      "price": 5250,
-      "hashedId": "Z6aDoyRnLybkQpV5AGXm",
-      "vendorValue": 2500
-    },
-    {
-      "id": "pot-3",
-      "name": "Gourmet",
-      "price": 7580,
-      "hashedId": "bAB1E9poQqrkNnakeJj5",
-      "vendorValue": 2500
-    },
-    {
-      "id": "pot-4",
-      "name": "Dungeon master",
-      "price": 2298.6,
-      "hashedId": "j98bO5w1QP0jQ3xkREVJ",
-      "vendorValue": 500
-    },
-    {
-      "id": "pot-5",
-      "name": "Frenzy",
-      "price": 3112,
-      "hashedId": "brz9RZnWN7VaQKAp0Mdl",
-      "vendorValue": 2500
-    },
-    {
-      "id": "pot-6",
-      "name": "Cosmic",
-      "price": 34506.9,
-      "hashedId": "93R0qXalLljjNAbn8DBg",
-      "vendorValue": 20000
-    }
-  ],
+  "potions": [],
   "resources": [
     {
       "id": "res-1",
@@ -620,7 +577,9 @@
       "price": 0,
       "chance": 0.0532,
       "hashedId": "oaJydnOmQWDdNbgRe5ME",
-      "vendorValue": 10
+      "vendorValue": 10,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-54"
     },
     {
       "id": "rec-57",
@@ -628,7 +587,9 @@
       "price": 0,
       "chance": 0.0532,
       "hashedId": "ZqEegBydNwWzNkA59J61",
-      "vendorValue": 10
+      "vendorValue": 10,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-55"
     },
     {
       "id": "rec-58",
@@ -812,7 +773,9 @@
       "price": 0,
       "chance": 0.0532,
       "hashedId": "3Zbym56qLxwyYBRp7Eek",
-      "vendorValue": 10
+      "vendorValue": 10,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-78"
     },
     {
       "id": "rec-81",
@@ -820,7 +783,9 @@
       "price": 0,
       "chance": 0.0532,
       "hashedId": "oZwey82VNArMYD0dXM3g",
-      "vendorValue": 10
+      "vendorValue": 10,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-79"
     },
     {
       "id": "rec-82",
@@ -972,7 +937,9 @@
       "price": 0,
       "chance": 0.038,
       "hashedId": "JZdg5V3PQog1QEyWq0zl",
-      "vendorValue": 10
+      "vendorValue": 10,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-98"
     },
     {
       "id": "rec-101",
@@ -980,7 +947,9 @@
       "price": 0,
       "chance": 0.038,
       "hashedId": "JVM29l7kQZaKL80q6WDG",
-      "vendorValue": 10
+      "vendorValue": 10,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-99"
     },
     {
       "id": "rec-102",
@@ -1156,7 +1125,9 @@
       "price": 0,
       "chance": 0.038,
       "hashedId": "93R0qXalLly5QAbn8DBg",
-      "vendorValue": 10
+      "vendorValue": 10,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-121"
     },
     {
       "id": "rec-124",
@@ -1164,7 +1135,9 @@
       "price": 0,
       "chance": 0.038,
       "hashedId": "1rZXlwg5YvEaNk9joDmG",
-      "vendorValue": 10
+      "vendorValue": 10,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-122"
     },
     {
       "id": "rec-125",
@@ -1316,7 +1289,9 @@
       "price": 0,
       "chance": 0.019,
       "hashedId": "zvjoJW96Y8nOQ3RaAylw",
-      "vendorValue": 10
+      "vendorValue": 10,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-141"
     },
     {
       "id": "rec-144",
@@ -1324,7 +1299,9 @@
       "price": 0,
       "chance": 0.019,
       "hashedId": "q9pwa0kxLBy8YgVj136l",
-      "vendorValue": 10
+      "vendorValue": 10,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-142"
     },
     {
       "id": "rec-145",
@@ -1476,7 +1453,9 @@
       "price": 0,
       "chance": 0.0133,
       "hashedId": "PjVDJez3LD5JQKWO08Ga",
-      "vendorValue": 10
+      "vendorValue": 10,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-161"
     },
     {
       "id": "rec-164",
@@ -1484,7 +1463,9 @@
       "price": 0,
       "chance": 0.0133,
       "hashedId": "0kK49j1VN9erNq6B2doa",
-      "vendorValue": 10
+      "vendorValue": 10,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-162"
     },
     {
       "id": "rec-165",
@@ -1636,7 +1617,9 @@
       "price": 0,
       "chance": 0.00645,
       "hashedId": "BPjze3x2Q3deNR85vgZV",
-      "vendorValue": 10
+      "vendorValue": 10,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-181"
     },
     {
       "id": "rec-184",
@@ -1644,7 +1627,9 @@
       "price": 0,
       "chance": 0.0054,
       "hashedId": "XjEaOeBkLa1ALlGwxVPq",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-182"
     },
     {
       "id": "rec-185",
@@ -1828,7 +1813,9 @@
       "price": 0,
       "chance": 0.00645,
       "hashedId": "njoPWKDkLX93Q06ZOX79",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-205"
     },
     {
       "id": "rec-208",
@@ -1836,7 +1823,9 @@
       "price": 0,
       "chance": 0.00645,
       "hashedId": "B2WEpv54Nm4nQj1xJrXk",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-206"
     },
     {
       "id": "rec-209",
@@ -2013,7 +2002,9 @@
       "price": 0,
       "chance": 0.00645,
       "hashedId": "RVrBKlPdNdRzLWG8xJe9",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-228"
     },
     {
       "id": "rec-231",
@@ -2021,7 +2012,9 @@
       "price": 0,
       "chance": 0.00645,
       "hashedId": "6leApVoENkr2Q7nRPy2D",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-229"
     },
     {
       "id": "rec-232",
@@ -2189,7 +2182,9 @@
       "price": 0,
       "chance": 0.0038,
       "hashedId": "dgBq1boWYeVwLkJ3rXaD",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-250"
     },
     {
       "id": "rec-253",
@@ -2197,7 +2192,9 @@
       "price": 0,
       "chance": 0.0038,
       "hashedId": "7eA59WrBQRZjQzb62qKv",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-251"
     },
     {
       "id": "rec-254",
@@ -2339,7 +2336,9 @@
       "price": 0,
       "chance": 0.00304,
       "hashedId": "ElzPeorXNV88LaW0kv53",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-268"
     },
     {
       "id": "rec-271",
@@ -2347,7 +2346,9 @@
       "price": 0,
       "chance": 0.00304,
       "hashedId": "XyeZRGx9YjM1NB80gWlP",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-269"
     },
     {
       "id": "rec-272",
@@ -2540,7 +2541,9 @@
       "price": 0,
       "chance": 0.00133,
       "hashedId": "doyA279pNzAxQKRDEWm8",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-290"
     },
     {
       "id": "rec-295",
@@ -2548,7 +2551,9 @@
       "price": 0,
       "chance": 0.00133,
       "hashedId": "j98bO5w1QPABN3xkREVJ",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-291"
     },
     {
       "id": "rec-296",
@@ -2556,7 +2561,9 @@
       "price": 0,
       "chance": 0.00133,
       "hashedId": "Ro31P7kZL6xoNveGxXOy",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-292"
     },
     {
       "id": "rec-297",
@@ -2564,7 +2571,9 @@
       "price": 0,
       "chance": 0.00133,
       "hashedId": "brz9RZnWN7oeNKAp0Mdl",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-293"
     },
     {
       "id": "rec-298",
@@ -2734,7 +2743,9 @@
       "price": 0,
       "chance": 0.00156,
       "hashedId": "EWGwnXPlY1XANJqekZ2R",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-314"
     },
     {
       "id": "rec-318",
@@ -2742,7 +2753,9 @@
       "price": 0,
       "chance": 0.00156,
       "hashedId": "Rv5g4z1dQn56Lqy32jpG",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-315"
     },
     {
       "id": "rec-319",
@@ -2750,7 +2763,9 @@
       "price": 0,
       "chance": 0.00162,
       "hashedId": "bAB1E9poQq5EQnakeJj5",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-316"
     },
     {
       "id": "rec-320",
@@ -2941,7 +2956,9 @@
       "price": 0,
       "chance": 0.00075,
       "hashedId": "mK5jqPopYGOeYrOzDRGV",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-336"
     },
     {
       "id": "rec-342",
@@ -2949,7 +2966,9 @@
       "price": 0,
       "chance": 0.00075,
       "hashedId": "3ZvrGV8RQp0mQ2wgA5jD",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-337"
     },
     {
       "id": "rec-343",
@@ -2957,7 +2976,9 @@
       "price": 0,
       "chance": 0.00075,
       "hashedId": "ZjlPA8v9NMZmYEyMe2Oa",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-338"
     },
     {
       "id": "rec-344",
@@ -2965,7 +2986,9 @@
       "price": 0,
       "chance": 0.00075,
       "hashedId": "P1vlVrzjLr0ZNao8mGKM",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-339"
     },
     {
       "id": "rec-345",
@@ -2973,7 +2996,9 @@
       "price": 0,
       "chance": 0.00075,
       "hashedId": "Z6aDoyRnLyvoQpV5AGXm",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "isUntradable": true,
+      "tradableCounterpartId": "rec-340"
     }
   ],
   "dungeons": [
@@ -4502,111 +4527,7 @@
       ]
     }
   ],
-  "potionCrafts": [
-    {
-      "name": "Wraithbane",
-      "timeSeconds": 1090.9,
-      "materials": [
-        {
-          "name": "Moose antler",
-          "quantity": 15,
-          "unitCost": 114.1
-        },
-        {
-          "name": "Minotaur Hide",
-          "quantity": 20,
-          "unitCost": 378.9
-        }
-      ],
-      "vialCost": 500,
-      "currentPrice": 11894.6
-    },
-    {
-      "name": "Thunderfury",
-      "timeSeconds": 1090.9,
-      "materials": [
-        {
-          "name": "Black Bear Pelt",
-          "quantity": 25,
-          "unitCost": 99.3
-        },
-        {
-          "name": "Orb of elemental",
-          "quantity": 20,
-          "unitCost": 89.8
-        }
-      ],
-      "vialCost": 500,
-      "currentPrice": 5250
-    },
-    {
-      "name": "Gourmet",
-      "timeSeconds": 1090.9,
-      "materials": [
-        {
-          "name": "Elk Antler",
-          "quantity": 15,
-          "unitCost": 395.5
-        },
-        {
-          "name": "Enigmatic Stone",
-          "quantity": 12,
-          "unitCost": 69
-        }
-      ],
-      "vialCost": 500,
-      "currentPrice": 7580
-    },
-    {
-      "name": "Dungeon master",
-      "timeSeconds": 818.2,
-      "materials": [
-        {
-          "name": "Lions teeth",
-          "quantity": 11,
-          "unitCost": 246
-        }
-      ],
-      "vialCost": 200,
-      "currentPrice": 2298.6
-    },
-    {
-      "name": "Frenzy",
-      "timeSeconds": 1090.9,
-      "materials": [
-        {
-          "name": "Wolf pelt",
-          "quantity": 14,
-          "unitCost": 102.7
-        },
-        {
-          "name": "Goblin totem",
-          "quantity": 60,
-          "unitCost": 31.5
-        }
-      ],
-      "vialCost": 500,
-      "currentPrice": 3112
-    },
-    {
-      "name": "Cosmic",
-      "timeSeconds": 1090.9,
-      "materials": [
-        {
-          "name": "Harpy wing",
-          "quantity": 40,
-          "unitCost": 9.6
-        },
-        {
-          "name": "Air elemental",
-          "quantity": 12,
-          "unitCost": 292.2
-        }
-      ],
-      "vialCost": 500,
-      "currentPrice": 34506.9
-    }
-  ],
+  "potionCrafts": [],
   "resourceGathering": [
     {
       "name": "Coal",

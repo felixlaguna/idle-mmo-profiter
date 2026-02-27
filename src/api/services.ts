@@ -39,27 +39,24 @@ export interface ItemSearchResponse {
   }
 }
 
+export interface ItemRecipeMaterial {
+  hashed_item_id: string
+  item_name: string
+  quantity: number
+}
+
+export interface ItemRecipeResult {
+  hashed_item_id: string
+  item_name: string
+}
+
 export interface ItemRecipe {
-  recipe_id: number
-  recipe_hashed_id: string
-  name: string
-  description: string
-  image: string
-  tags: string[]
-  success_rate: number
-  tradeable: boolean
-  sellable: boolean
-  level_required: number
   skill: string
-  experience_awarded: number
-  crafting_time: number
-  ingredients: Array<{
-    hashed_item_id: string
-    item_id: number
-    name: string
-    quantity: number
-    image: string
-  }>
+  level_required: number
+  max_uses: number | null
+  experience: number
+  materials: ItemRecipeMaterial[]
+  result: ItemRecipeResult | null
 }
 
 export interface ItemDetails {
@@ -71,7 +68,7 @@ export interface ItemDetails {
   description?: string
   type?: string
   image?: string
-  recipes?: ItemRecipe[]
+  recipe?: ItemRecipe | null
 }
 
 export interface MarketHistoryEntry {

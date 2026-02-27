@@ -8,6 +8,23 @@ import EditableValue from './EditableValue.vue'
 import HashedIdModal from './HashedIdModal.vue'
 import type { RefreshCategory } from '../composables/useMarketRefresh'
 
+// Vendor-sold items (vials, crystals) with their buy prices from NPC shops.
+// These items are not tradable on the market, so we use known buy prices.
+const VENDOR_BUY_PRICES: Record<string, number> = {
+  '3Zbym56qLx61NBRp7Eek': 5,    // Cheap Vial
+  'BRn3x72JQ2OrNzOMok41': 5,    // Cheap Crystal
+  'oZwey82VNAnPYD0dXM3g': 10,   // Tarnished Vial
+  'gGZ2J71yYKwxYMmjbown': 10,   // Tarnished Crystal
+  'JZdg5V3PQoXyNEyWq0zl': 50,  // Gleaming Vial
+  'yav4OK1wNEyWNZP7rzJb': 50,   // Gleaming Crystal
+  'JVM29l7kQZ0mY80q6WDG': 200,  // Elemental Vial
+  'oaJydnOmQWV9LbgRe5ME': 200,  // Elemental Crystal
+  '93R0qXalLl9xQAbn8DBg': 500,  // Eldritch Vial
+  'ZqEegBydNwAmLkA59J61': 500,   // Eldritch Crystal
+  '1rZXlwg5YvVkYk9joDmG': 2500, // Arcane Vial
+  '3Zbym56qLxZENBRp7Eek': 2500, // Arcane Crystal
+}
+
 const dataProvider = useDataProvider()
 const marketRefresh = useMarketRefresh()
 const { showToast } = useToast()
@@ -283,6 +300,223 @@ const getCategoryExclusionState = (category: RefreshCategory): 'all' | 'none' | 
   if (stats.excluded === 0) return 'none'
   if (stats.excluded === stats.total) return 'all'
   return 'mixed'
+}
+
+// Check if a recipe produces a potion that's not yet tracked
+const isUntrackedPotionRecipe = (recipeName: string, producesItemName?: string): boolean => {
+  // Determine what potion this recipe produces
+  const potionName = producesItemName || inferPotionName(recipeName)
+  if (!potionName) return false
+
+  // Check if the potion is already tracked in potionCrafts
+  const isTracked = dataProvider.potionCrafts.value.some(
+    (craft) => craft.name === potionName
+  )
+
+  return !isTracked
+}
+
+// Infer potion name from recipe name by stripping "Recipe" and "(Untradable)" suffixes
+const inferPotionName = (recipeName: string): string | null => {
+  const cleaned = recipeName
+    .replace(/\s*\(Untradable\)\s*/i, '')
+    .replace(/\s*Recipe\s*$/i, '')
+    .trim()
+  return cleaned || null
+}
+
+// Get default crafting time in seconds based on recipe level
+const getCraftTimeForLevel = (level: number): number => {
+  if (level <= 6) return 132.7
+  if (level <= 17) return 309.7
+  if (level <= 25) return 584.1
+  if (level <= 52) return 796.5
+  if (level <= 85) return 1061.9
+  return 1327.4
+}
+
+// Loading state for adding recipes
+const addRecipeLoading = ref<Record<string, boolean>>({})
+
+// Add an untracked potion recipe to potionCrafts
+// Recursively adds missing materials and fetches market prices from the API
+const addUntrackedPotion = async (recipe: {
+  id: string
+  name: string
+  hashedId?: string
+  producesItemName?: string
+}) => {
+  const potionName = recipe.producesItemName || inferPotionName(recipe.name)
+  if (!potionName) {
+    showToast('Cannot determine which potion this recipe produces.', 'error')
+    return
+  }
+
+  if (!recipe.hashedId) {
+    showToast('Recipe is missing a hashed ID. Please set it first.', 'error')
+    return
+  }
+
+  // Set loading state
+  addRecipeLoading.value[recipe.id] = true
+
+  try {
+    const { inspectItem, searchItems, getAverageMarketPrice } = await import('../api/services')
+
+    // Step 1: Inspect the recipe item to get materials and crafting info
+    const recipeDetails = await inspectItem(recipe.hashedId)
+
+    if (!recipeDetails?.recipe) {
+      showToast(`No recipe details found for "${recipe.name}". Check the browser console.`, 'error')
+      console.error('[AddPotion] Full inspect response:', JSON.stringify(recipeDetails, null, 2))
+      return
+    }
+
+    const recipeData = recipeDetails.recipe
+
+    // Step 2: For each material, ensure it exists in data with a market price
+    const materials: Array<{ name: string; quantity: number; unitCost: number }> = []
+
+    for (const mat of recipeData.materials) {
+      let material = dataProvider.materials.value.find((m) => m.name === mat.item_name)
+
+      if (!material) {
+        // Material doesn't exist — add it with hashed ID from the recipe, fetch its market price
+        console.log(`[AddPotion] Material "${mat.item_name}" not found, fetching from API...`)
+
+        let price = 0
+        let vendorValue = 0
+        if (mat.hashed_item_id) {
+          // Check if this is a known vendor item (vials, crystals) with a fixed buy price
+          const vendorBuyPrice = VENDOR_BUY_PRICES[mat.hashed_item_id]
+          if (vendorBuyPrice) {
+            price = vendorBuyPrice
+            vendorValue = vendorBuyPrice
+            console.log(`[AddPotion] Using known vendor buy price for "${mat.item_name}": ${price}`)
+          } else {
+            const avgPrice = await getAverageMarketPrice(mat.hashed_item_id)
+            price = avgPrice ?? 0
+            console.log(`[AddPotion] Fetched market price for "${mat.item_name}": ${price}`)
+          }
+        }
+
+        dataProvider.addMaterial({
+          name: mat.item_name,
+          price,
+          hashedId: mat.hashed_item_id || '',
+          vendorValue,
+        })
+        material = { id: '', name: mat.item_name, price, hashedId: mat.hashed_item_id }
+      } else if (material.price === 0 && material.hashedId) {
+        // Material exists but has no price — check vendor buy prices first, then market
+        console.log(`[AddPotion] Material "${material.name}" has price 0, fetching...`)
+        const vendorBuyPrice = VENDOR_BUY_PRICES[material.hashedId]
+        if (vendorBuyPrice) {
+          dataProvider.updateMaterialPrice(material.id, vendorBuyPrice)
+          material = { ...material, price: vendorBuyPrice }
+          console.log(`[AddPotion] Using known vendor buy price for "${material.name}": ${vendorBuyPrice}`)
+        } else {
+          const avgPrice = await getAverageMarketPrice(material.hashedId)
+          if (avgPrice && avgPrice > 0) {
+            dataProvider.updateMaterialPrice(material.id, avgPrice)
+            material = { ...material, price: avgPrice }
+            console.log(`[AddPotion] Updated market price for "${material.name}": ${avgPrice}`)
+          }
+        }
+      }
+
+      materials.push({
+        name: mat.item_name,
+        quantity: mat.quantity,
+        unitCost: material.price,
+      })
+    }
+
+    // Step 3: Get or fetch the potion's market price
+    // Use the result item from the recipe if available
+    let potionPrice = 0
+    const existingPotion = dataProvider.potions.value.find((p) => p.name === potionName)
+
+    if (existingPotion) {
+      potionPrice = existingPotion.price
+    } else {
+      // Potion not in data — use recipe result hashed ID or search by name
+      const potionHashedId = recipeData.result?.hashed_item_id
+      console.log(`[AddPotion] Potion "${potionName}" not in data, fetching price...`)
+
+      if (potionHashedId) {
+        const avgPrice = await getAverageMarketPrice(potionHashedId)
+        potionPrice = avgPrice ?? 0
+        console.log(`[AddPotion] Fetched potion price for "${potionName}": ${potionPrice}`)
+
+        dataProvider.addPotion({
+          name: potionName,
+          price: potionPrice,
+          hashedId: potionHashedId,
+        })
+      } else {
+        // Fallback: search by name
+        const searchResult = await searchItems(potionName)
+        const potionItem = searchResult.items.find(
+          (item) => item.name.toLowerCase() === potionName.toLowerCase()
+        ) || searchResult.items[0]
+
+        if (potionItem) {
+          const avgPrice = await getAverageMarketPrice(potionItem.hashed_id)
+          potionPrice = avgPrice ?? 0
+
+          dataProvider.addPotion({
+            name: potionName,
+            price: potionPrice,
+            hashedId: potionItem.hashed_id,
+            vendorValue: potionItem.vendor_price ?? 0,
+          })
+        }
+      }
+    }
+
+    // Step 4: Update this recipe and its counterpart with uses and producesItemName
+    const maxUses = recipeData.max_uses ?? undefined
+    const recipeUpdate = {
+      producesItemName: potionName,
+      ...(maxUses !== undefined && maxUses !== null ? { uses: maxUses } : {}),
+    }
+
+    // Update the clicked recipe
+    dataProvider.updateRecipeDefaults(recipe.id, recipeUpdate)
+
+    // Find and update the counterpart (tradable↔untradable)
+    const baseName = recipe.name.replace(/\s*\(Untradable\)\s*/i, '')
+    const counterparts = dataProvider.recipes.value.filter(
+      (r) => r.id !== recipe.id && r.name.replace(/\s*\(Untradable\)\s*/i, '') === baseName
+    )
+    for (const counterpart of counterparts) {
+      dataProvider.updateRecipeDefaults(counterpart.id, recipeUpdate)
+    }
+
+    console.log(`[AddPotion] Updated recipe "${recipe.name}" and ${counterparts.length} counterpart(s) with uses=${maxUses}, producesItemName="${potionName}"`)
+
+    // Step 5: Create the PotionCraft entry
+    const craftTime = getCraftTimeForLevel(recipeData.level_required)
+    const potionCraft = {
+      name: potionName,
+      timeSeconds: craftTime,
+      materials,
+      currentPrice: potionPrice,
+    }
+
+    dataProvider.addPotionCraft(potionCraft)
+
+    showToast(
+      `Added "${potionName}" with ${materials.length} materials! Check the Potions tab.`,
+      'success'
+    )
+  } catch (error) {
+    console.error('Failed to add potion:', error)
+    showToast('Failed to add potion. Check browser console for details.', 'error')
+  } finally {
+    addRecipeLoading.value[recipe.id] = false
+  }
 }
 
 // Hashed ID modal functions
@@ -987,7 +1221,16 @@ const saveHashedId = (newHashedId: string) => {
                   @change="toggleExclusion('recipes', recipe.id)"
                 />
               </td>
-              <td class="col-name">{{ recipe.name }}</td>
+              <td class="col-name">
+                <span>{{ recipe.name }}</span>
+                <span
+                  v-if="isUntrackedPotionRecipe(recipe.name, recipe.producesItemName)"
+                  class="untracked-badge"
+                  title="This recipe produces a potion that's not yet tracked"
+                >
+                  Untracked Potion
+                </span>
+              </td>
               <td class="col-vendor">
                 <span class="vendor-value">
                   {{ recipe.vendorValue ? `${recipe.vendorValue.toLocaleString()} gold` : 'N/A' }}
@@ -1003,6 +1246,31 @@ const saveHashedId = (newHashedId: string) => {
               </td>
               <td class="col-actions">
                 <div class="actions-wrapper">
+                  <button
+                    v-if="isUntrackedPotionRecipe(recipe.name, recipe.producesItemName)"
+                    class="btn-add-recipe"
+                    :title="hasApiKey ? 'Add this potion to tracked potions' : 'API key required to add potion'"
+                    :disabled="!hasApiKey || addRecipeLoading[recipe.id]"
+                    @click="addUntrackedPotion(recipe)"
+                  >
+                    <span v-if="addRecipeLoading[recipe.id]">...</span>
+                    <svg
+                      v-else
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="12" y1="8" x2="12" y2="16"></line>
+                      <line x1="8" y1="12" x2="16" y2="12"></line>
+                    </svg>
+                  </button>
                   <button
                     class="btn-hashed-id"
                   :class="{ missing: !recipe.hashedId }"
@@ -1671,6 +1939,38 @@ const saveHashedId = (newHashedId: string) => {
 .btn-hashed-id.missing:hover {
   background-color: rgba(245, 158, 11, 0.1);
   color: var(--warning);
+}
+
+.btn-add-recipe {
+  padding: 0.375rem;
+  background-color: transparent;
+  color: var(--success);
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-add-recipe:hover {
+  background-color: var(--bg-tertiary);
+  color: var(--success);
+}
+
+.untracked-badge {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.125rem 0.375rem;
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--success);
+  border: 1px solid var(--success);
+  border-radius: 0.25rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 /* Responsive Design */
