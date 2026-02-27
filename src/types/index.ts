@@ -67,6 +67,7 @@ export interface PotionCraft {
   untradableRecipeId?: string
   recipeName?: string
   recipeUses?: number
+  skill?: 'alchemy' | 'forging'
 }
 
 export interface ResourceInput {

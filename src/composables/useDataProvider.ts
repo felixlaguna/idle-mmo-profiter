@@ -636,6 +636,7 @@ function createDataProvider() {
     timeSeconds: number
     materials: Array<{ name: string; quantity: number; unitCost: number }>
     currentPrice: number
+    skill?: 'alchemy' | 'forging'
   }): void {
     defaults.value.potionCrafts.push(potionCraft)
     defaults.value = { ...defaults.value }
@@ -775,6 +776,7 @@ function createDataProvider() {
       dungeons: dungeons.value,
       potionCrafts: potionCrafts.value.map(craft => ({
         name: craft.name,
+        skill: craft.skill,
         timeSeconds: craft.timeSeconds,
         materials: craft.materials.map(mat => ({
           name: mat.name,

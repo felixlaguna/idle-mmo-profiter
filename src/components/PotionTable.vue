@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import type { PotionProfitResult } from '../calculators/potionCalculator'
 import EditableValue from './EditableValue.vue'
+import EmptyState from './EmptyState.vue'
 import { useHeatmap } from '../composables/useHeatmap'
 
 const { getHeatmapStyle } = useHeatmap()
@@ -20,6 +21,10 @@ const emit = defineEmits<{
 
 // Expanded rows tracking
 const expandedRows = ref<Set<string>>(new Set())
+
+// Sub-tab configuration
+type PotionSubTab = 'alchemy' | 'forging'
+const activeSubTab = ref<PotionSubTab>('alchemy')
 
 // Sort configuration
 type SortKey = 'name' | 'totalCost' | 'currentPrice' | 'profit' | 'profitPerHour'
@@ -76,6 +81,11 @@ const sortedPotions = computed(() => {
   return potions
 })
 
+// Filter potions by active sub-tab
+const filteredPotions = computed(() => {
+  return sortedPotions.value.filter(p => p.skill === activeSubTab.value)
+})
+
 // Toggle row expansion
 const toggleRow = (potionName: string) => {
   if (expandedRows.value.has(potionName)) {
@@ -125,8 +135,16 @@ const onTooltipHover = (event: MouseEvent) => {
 
 // Calculate profit range for heatmap
 const profitRange = computed(() => {
-  const profits = props.potions.map(p => p.profit)
-  const profitHours = props.potions.map(p => p.profitPerHour)
+  // Guard against empty array: Math.min/max of empty array returns Infinity/-Infinity
+  if (filteredPotions.value.length === 0) {
+    return {
+      profit: { min: 0, max: 0 },
+      profitPerHour: { min: 0, max: 0 }
+    }
+  }
+
+  const profits = filteredPotions.value.map(p => p.profit)
+  const profitHours = filteredPotions.value.map(p => p.profitPerHour)
   return {
     profit: {
       min: Math.min(...profits),
@@ -164,8 +182,34 @@ const formatTime = (seconds: number): string => {
 
 <template>
   <div class="potion-table">
+    <!-- Sub-tab navigation -->
+    <div class="sub-tab-navigation">
+      <button
+        class="sub-tab-button"
+        :class="{ active: activeSubTab === 'alchemy' }"
+        @click="activeSubTab = 'alchemy'"
+      >
+        Alchemy
+      </button>
+      <button
+        class="sub-tab-button"
+        :class="{ active: activeSubTab === 'forging' }"
+        @click="activeSubTab = 'forging'"
+      >
+        Forging
+      </button>
+    </div>
+
     <div class="table-container">
-      <table class="main-table mobile-card-layout" role="grid" aria-label="Potion crafting profitability">
+      <!-- Empty state when no potions match the active sub-tab -->
+      <EmptyState
+        v-if="filteredPotions.length === 0"
+        icon="🧪"
+        title="No potions found"
+        description="No potions match this category yet. Add potions from the Market tab."
+      />
+
+      <table v-else class="main-table mobile-card-layout" role="grid" aria-label="Potion crafting profitability">
         <thead>
           <tr>
             <th class="expand-col"></th>
@@ -187,7 +231,7 @@ const formatTime = (seconds: number): string => {
           </tr>
         </thead>
         <tbody>
-          <template v-for="potion in sortedPotions" :key="potion.name">
+          <template v-for="potion in filteredPotions" :key="potion.name">
             <!-- Main Row -->
             <tr class="main-row" :class="{ expanded: isExpanded(potion.name) }">
               <td class="expand-col" data-label="">
@@ -405,6 +449,41 @@ const formatTime = (seconds: number): string => {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+/* Sub-tab Navigation */
+.sub-tab-navigation {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.sub-tab-button {
+  padding: 0.5rem 1rem;
+  background-color: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: capitalize;
+}
+
+.sub-tab-button:hover {
+  background-color: var(--bg-primary);
+}
+
+.sub-tab-button.active {
+  background-color: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
+  border-color: rgba(34, 197, 94, 0.4);
 }
 
 /* Table Container */

@@ -1,10 +1,29 @@
-import type { PotionCraft, Recipe } from '../types'
+import type { PotionCraft, Recipe, PotionMaterial } from '../types'
 
 export interface PotionMaterialResult {
   name: string
   quantity: number
   unitCost: number
   totalCost: number
+}
+
+/**
+ * Infer crafting skill from material names using a heuristic.
+ *
+ * Game crafting recipes use vendor-sold containers:
+ * - Alchemy potions: Cheap Vial, Tarnished Vial, Gleaming Vial, Cheap Crystal, Tarnished Crystal, Gleaming Crystal, etc.
+ * - Forging items: Everything else (no Vial or Crystal ingredients)
+ *
+ * @param materials - Array of potion materials
+ * @returns 'alchemy' if any material ends with 'Vial' or 'Crystal', 'forging' otherwise
+ */
+function inferSkillFromMaterials(materials: PotionMaterial[]): 'alchemy' | 'forging' {
+  for (const material of materials) {
+    if (material.name.endsWith('Vial') || material.name.endsWith('Crystal')) {
+      return 'alchemy'
+    }
+  }
+  return 'forging'
 }
 
 export interface PotionProfitResult {
@@ -23,6 +42,7 @@ export interface PotionProfitResult {
   recipeUses?: number
   tradableRecipePrice?: number
   tradableRecipeName?: string
+  skill?: 'alchemy' | 'forging'
 }
 
 /**
@@ -131,7 +151,8 @@ export function calculatePotionProfits(
       currentPrice: potion.currentPrice,
       profit,
       profitPerHour,
-      hasRecipeCost: false
+      hasRecipeCost: false,
+      skill: potion.skill || inferSkillFromMaterials(potion.materials)
     }
 
     // Show dual profitability when:

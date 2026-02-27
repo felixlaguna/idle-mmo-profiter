@@ -188,4 +188,92 @@ describe('calculatePotionProfits', () => {
       expect(result.profitPerHour).toBeCloseTo(expectedProfitPerHour, 2)
     })
   })
+
+  describe('skill inference', () => {
+    it('should pass through skill from PotionCraft when present', () => {
+      const potionCraft: PotionCraft = {
+        name: 'Alchemy Potion',
+        timeSeconds: 1000,
+        materials: [
+          { name: 'Rare Herb', quantity: 10, unitCost: 100 }
+        ],
+        currentPrice: 5000,
+        skill: 'alchemy'
+      }
+
+      const results = calculatePotionProfits([potionCraft], mockTaxRate, [])
+
+      expect(results).toHaveLength(1)
+      expect(results[0].skill).toBe('alchemy')
+    })
+
+    it('should infer alchemy from Vial material name', () => {
+      const potionCraft: PotionCraft = {
+        name: 'Mystery Potion',
+        timeSeconds: 1000,
+        materials: [
+          { name: 'Gleaming Vial', quantity: 1, unitCost: 100 },
+          { name: 'Rare Herb', quantity: 10, unitCost: 50 }
+        ],
+        currentPrice: 5000
+      }
+
+      const results = calculatePotionProfits([potionCraft], mockTaxRate, [])
+
+      expect(results).toHaveLength(1)
+      expect(results[0].skill).toBe('alchemy')
+    })
+
+    it('should infer alchemy from Crystal material name', () => {
+      const potionCraft: PotionCraft = {
+        name: 'Crystal Potion',
+        timeSeconds: 1000,
+        materials: [
+          { name: 'Elemental Crystal', quantity: 1, unitCost: 200 },
+          { name: 'Metal Bar', quantity: 5, unitCost: 100 }
+        ],
+        currentPrice: 8000
+      }
+
+      const results = calculatePotionProfits([potionCraft], mockTaxRate, [])
+
+      expect(results).toHaveLength(1)
+      expect(results[0].skill).toBe('alchemy')
+    })
+
+    it('should default to forging when no Vial or Crystal in materials', () => {
+      const potionCraft: PotionCraft = {
+        name: 'Forged Item',
+        timeSeconds: 1000,
+        materials: [
+          { name: 'Moose antler', quantity: 15, unitCost: 100 },
+          { name: 'Minotaur Hide', quantity: 20, unitCost: 200 }
+        ],
+        currentPrice: 10000
+      }
+
+      const results = calculatePotionProfits([potionCraft], mockTaxRate, [])
+
+      expect(results).toHaveLength(1)
+      expect(results[0].skill).toBe('forging')
+    })
+
+    it('should prefer explicit skill over inferred skill', () => {
+      const potionCraft: PotionCraft = {
+        name: 'Edge Case Potion',
+        timeSeconds: 1000,
+        materials: [
+          { name: 'Gleaming Vial', quantity: 1, unitCost: 100 },
+          { name: 'Rare Material', quantity: 5, unitCost: 50 }
+        ],
+        currentPrice: 5000,
+        skill: 'forging' // Explicit skill differs from what would be inferred
+      }
+
+      const results = calculatePotionProfits([potionCraft], mockTaxRate, [])
+
+      expect(results).toHaveLength(1)
+      expect(results[0].skill).toBe('forging') // Should use explicit skill, not inferred 'alchemy'
+    })
+  })
 })

@@ -501,11 +501,16 @@ const addUntrackedPotion = async (recipe: {
 
     // Step 5: Create the PotionCraft entry
     const craftTime = getCraftTimeForLevel(recipeData.level_required)
+    const skill: 'alchemy' | 'forging' | undefined =
+      recipeData.skill === 'alchemy' ? 'alchemy' :
+      recipeData.skill === 'forging' ? 'forging' :
+      undefined
     const potionCraft = {
       name: potionName,
       timeSeconds: craftTime,
       materials,
       currentPrice: potionPrice,
+      skill,
     }
 
     dataProvider.addPotionCraft(potionCraft)
