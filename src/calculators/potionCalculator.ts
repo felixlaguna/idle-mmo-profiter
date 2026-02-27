@@ -42,16 +42,15 @@ export interface PotionProfitResult {
  * However, based on the epic description and Excel logic, it seems the min_sell_price
  * already includes the tax, so we calculate: profit = current_price - min_sell_price
  *
- * Dual Profitability (Phase 3):
- * For potions that have an untradable recipe with limited uses, compute two
+ * Dual Profitability:
+ * For potions that have a tradable recipe with limited uses, compute two
  * profitabilities so the user can compare:
- * 1. Profit WITHOUT recipe cost (using the free untradable recipe from dungeon drops)
- * 2. Profit WITH recipe cost (buying the tradable version, amortized over uses)
+ * 1. Profit WITHOUT recipe cost (crafting without buying the recipe)
+ * 2. Profit WITH recipe cost (buying the tradable recipe, amortized over uses)
  *
  * Recipe cost comparison is shown when:
- * - An untradable recipe alternative exists for the potion, AND
- * - The recipe has limited uses (uses > 0), AND
- * - A tradable recipe also exists (so there's a buyable alternative to compare)
+ * - A tradable recipe exists for the potion, AND
+ * - The recipe has limited uses (uses > 0)
  *
  * Formula with recipe cost:
  * - recipe_cost_per_craft = tradable_recipe_price / recipe_uses
@@ -70,17 +69,10 @@ export function calculatePotionProfits(
 ): PotionProfitResult[] {
   // Create a map of potion names to tradable recipes (if recipes provided)
   const potionRecipeMap = new Map<string, Recipe>()
-  // Create a set of potion names that have untradable recipe alternatives
-  const potionsWithUntradableRecipe = new Set<string>()
 
   if (recipes) {
     recipes.forEach(recipe => {
       if (!recipe.producesItemName) return
-
-      // Track which potions have untradable recipes
-      if (recipe.isUntradable) {
-        potionsWithUntradableRecipe.add(recipe.producesItemName)
-      }
 
       // Only consider tradable recipes that produce potions
       if (!recipe.isUntradable && recipe.price > 0) {
@@ -128,8 +120,6 @@ export function calculatePotionProfits(
 
     // Check if this potion has a tradable recipe
     const tradableRecipe = potionRecipeMap.get(potion.name)
-    // Check if this potion has an untradable recipe alternative
-    const hasUntradableAlternative = potionsWithUntradableRecipe.has(potion.name)
 
     // Base result
     const result: PotionProfitResult = {
@@ -145,10 +135,9 @@ export function calculatePotionProfits(
     }
 
     // Show dual profitability when:
-    // 1. An untradable recipe exists (free from dungeon drops), AND
-    // 2. The recipe has limited uses (uses > 0), AND
-    // 3. A tradable recipe also exists (buyable alternative to compare against)
-    if (tradableRecipe && tradableRecipe.uses && tradableRecipe.uses > 0 && hasUntradableAlternative) {
+    // 1. A tradable recipe exists for this potion, AND
+    // 2. The recipe has limited uses (uses > 0)
+    if (tradableRecipe && tradableRecipe.uses && tradableRecipe.uses > 0) {
       const recipeCostPerCraft = tradableRecipe.price / tradableRecipe.uses
       const profitWithRecipeCost = profit - recipeCostPerCraft
       const profitPerHourWithRecipeCost = profitWithRecipeCost / (potion.timeSeconds / 3600)

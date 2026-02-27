@@ -3,9 +3,9 @@
  * These tests verify that recipe costs are only applied when appropriate
  *
  * Dual profitability is shown when:
- * 1. An untradable recipe exists (free from dungeon drops), AND
- * 2. A tradable recipe also exists with limited uses (uses > 0)
- * This lets the user compare: free untradable recipe vs buying the tradable version
+ * 1. A tradable recipe exists for the potion, AND
+ * 2. The recipe has limited uses (uses > 0)
+ * This lets the user compare: profit with vs without recipe cost
  */
 
 import { describe, it, expect } from 'vitest'
@@ -62,8 +62,8 @@ describe('calculatePotionProfits', () => {
       expect(result.recipeCostPerCraft).toBe(1213888.8 / 10)
     })
 
-    it('should NOT apply recipe cost when potion has ONLY tradable recipe (no untradable alternative)', () => {
-      // No untradable alternative means no dual profitability comparison needed
+    it('should apply recipe cost when potion has tradable recipe with uses > 0 (even without untradable alternative)', () => {
+      // Any potion with a tradable recipe with limited uses shows dual profitability
       const potionCraft: PotionCraft = {
         name: 'Exclusive Elixir',
         timeSeconds: 1000,
@@ -84,6 +84,40 @@ describe('calculatePotionProfits', () => {
           isUntradable: false
         }
         // Note: NO untradable version exists
+      ]
+
+      const results = calculatePotionProfits([potionCraft], mockTaxRate, recipes)
+
+      expect(results).toHaveLength(1)
+      const result = results[0]
+
+      expect(result.hasRecipeCost).toBe(true)
+      expect(result.profitWithRecipeCost).toBeDefined()
+      expect(result.profitPerHourWithRecipeCost).toBeDefined()
+      expect(result.recipeCostPerCraft).toBe(10000 / 10)
+    })
+
+    it('should NOT apply recipe cost when tradable recipe has uses = 0', () => {
+      // uses=0 means unlimited/untracked uses, no dual profitability needed
+      const potionCraft: PotionCraft = {
+        name: 'Unlimited Potion',
+        timeSeconds: 1000,
+        materials: [
+          { name: 'Common Herb', quantity: 5, unitCost: 50 }
+        ],
+        currentPrice: 3000
+      }
+
+      const recipes: Recipe[] = [
+        {
+          id: 'rec-998',
+          name: 'Unlimited Potion Recipe',
+          price: 5000,
+          chance: 0.05,
+          uses: 0, // Unlimited uses
+          producesItemName: 'Unlimited Potion',
+          isUntradable: false
+        }
       ]
 
       const results = calculatePotionProfits([potionCraft], mockTaxRate, recipes)
