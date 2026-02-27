@@ -1,9 +1,9 @@
 import { computed, type ComputedRef } from 'vue'
-import type { Dungeon, Recipe, PotionCraft, ResourceGather, MagicFindSettings } from '../types'
+import type { Dungeon, Recipe, CraftableRecipe, ResourceGather, MagicFindSettings } from '../types'
 import type { RankedActivity } from '../calculators/profitRanker'
 import {
   calculateDungeonProfits,
-  calculatePotionProfits,
+  calculateCraftableProfits,
   calculateResourceProfits,
   rankAllActivities,
   getBestAction
@@ -12,7 +12,7 @@ import {
 export interface UseProfitRankingOptions {
   dungeons: ComputedRef<Dungeon[]> | Dungeon[]
   recipes: ComputedRef<Recipe[]> | Recipe[]
-  potionCrafts: ComputedRef<PotionCraft[]> | PotionCraft[]
+  craftableRecipes: ComputedRef<CraftableRecipe[]> | CraftableRecipe[]
   resourceGathering: ComputedRef<ResourceGather[]> | ResourceGather[]
   magicFind: ComputedRef<MagicFindSettings> | MagicFindSettings
   taxRate: ComputedRef<number> | number
@@ -37,7 +37,7 @@ export function useProfitRanking(options: UseProfitRankingOptions): UseProfitRan
   const {
     dungeons,
     recipes,
-    potionCrafts,
+    craftableRecipes,
     resourceGathering,
     magicFind,
     taxRate,
@@ -57,7 +57,7 @@ export function useProfitRanking(options: UseProfitRankingOptions): UseProfitRan
     // Get current values
     const currentDungeons = unwrap(dungeons)
     const currentRecipes = unwrap(recipes)
-    const currentPotionCrafts = unwrap(potionCrafts)
+    const currentCraftableRecipes = unwrap(craftableRecipes)
     const currentResourceGathering = unwrap(resourceGathering)
     const currentMagicFind = unwrap(magicFind)
     const currentTaxRate = unwrap(taxRate)
@@ -65,13 +65,13 @@ export function useProfitRanking(options: UseProfitRankingOptions): UseProfitRan
 
     // Calculate profits for each category
     const dungeonResults = calculateDungeonProfits(currentDungeons, currentRecipes, currentMagicFind)
-    const potionResults = calculatePotionProfits(currentPotionCrafts, currentTaxRate, currentRecipes)
+    const craftableResults = calculateCraftableProfits(currentCraftableRecipes, currentTaxRate, currentRecipes)
     const resourceResults = calculateResourceProfits(currentResourceGathering, currentTaxRate)
 
     // Rank all activities
     return rankAllActivities(
       dungeonResults,
-      potionResults,
+      craftableResults,
       resourceResults,
       currentIncludeNegative
     )

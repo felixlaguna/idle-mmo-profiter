@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Script to add new fields to recipes and potionCrafts in defaults.json
+ * Script to add new fields to recipes and craftableRecipes in defaults.json
  *
  * Adds to Recipe:
  * - uses: number (default 10 for all recipes)
@@ -10,7 +10,7 @@
  * - producesItemName: string (to be populated by Phase 7 script)
  * - producesItemHashedId: string (to be populated by Phase 7 script)
  *
- * Adds to PotionCraft:
+ * Adds to CraftableRecipe:
  * - recipeId: string (to be populated manually or via script)
  * - untradableRecipeId: string (to be populated manually or via script)
  * - recipeName: string (to be populated manually or via script)
@@ -58,10 +58,10 @@ data.recipes = data.recipes.map(recipe => {
   return updated
 })
 
-// Update potionCrafts (for now, just ensure the new fields exist but are empty)
+// Update craftableRecipes (for now, just ensure the new fields exist but are empty)
 // These will be populated manually or via a future script
-data.potionCrafts = data.potionCrafts.map(potion => {
-  const updated = { ...potion }
+data.craftableRecipes = data.craftableRecipes.map(craftable => {
+  const updated = { ...craftable }
   // Fields are optional, so we don't need to add them if they don't exist
   return updated
 })

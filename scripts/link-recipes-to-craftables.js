@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Script to link recipes to the potions they produce
+ * Script to link recipes to the craftables they produce
  *
  * This script populates the producesItemName field for recipes based on naming patterns.
  * For example:
@@ -20,11 +20,11 @@ const defaultsPath = path.join(__dirname, '../src/data/defaults.json')
 // Read the defaults.json
 const data = JSON.parse(fs.readFileSync(defaultsPath, 'utf-8'))
 
-// Create a set of potion names for quick lookup
-const potionNames = new Set(data.potionCrafts.map(p => p.name))
+// Create a set of craftable names for quick lookup
+const craftableNames = new Set(data.craftableRecipes.map(p => p.name))
 
-// Mapping patterns for recipe names to potion names
-// Format: recipe name pattern -> potion name extraction
+// Mapping patterns for recipe names to craftable names
+// Format: recipe name pattern -> craftable name extraction
 const recipePatterns = [
   // Direct pattern: "Potion Name Recipe" or "Potion Name Recipe (Untradable)"
   {
@@ -95,11 +95,11 @@ data.recipes = data.recipes.map(recipe => {
   for (const { pattern, extract } of recipePatterns) {
     const match = recipe.name.match(pattern)
     if (match) {
-      const potionName = extract(match)
+      const craftableName = extract(match)
 
-      // Check if this potion exists in potionCrafts
-      if (potionNames.has(potionName)) {
-        updated.producesItemName = potionName
+      // Check if this craftable exists in craftableRecipes
+      if (craftableNames.has(craftableName)) {
+        updated.producesItemName = craftableName
         linkedCount++
         return updated
       }
@@ -114,9 +114,9 @@ data.recipes = data.recipes.map(recipe => {
 // Write back to defaults.json
 fs.writeFileSync(defaultsPath, JSON.stringify(data, null, 2) + '\n', 'utf-8')
 
-console.log('✓ Linked recipes to potions')
-console.log(`✓ Linked ${linkedCount} recipes to known potions`)
-console.log(`✓ ${notLinkedCount} recipes not linked (potion not in potionCrafts or not a potion recipe)`)
+console.log('✓ Linked recipes to craftables')
+console.log(`✓ Linked ${linkedCount} recipes to known craftables`)
+console.log(`✓ ${notLinkedCount} recipes not linked (craftable not in craftableRecipes or not a craftable recipe)`)
 
 // Show which recipes were linked
 const linkedRecipes = data.recipes.filter(r => r.producesItemName)

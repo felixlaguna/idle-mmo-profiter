@@ -20,7 +20,7 @@ const sortKey = ref<SortKey>('rank')
 const sortOrder = ref<SortOrder>('asc')
 
 // Use shared filter state (with localStorage persistence)
-const { filterDungeons, filterPotions, filterResources, getFilteredAndRerankedActivities } = useActivityFilters()
+const { filterDungeons, filterCraftables, filterResources, getFilteredAndRerankedActivities } = useActivityFilters()
 
 // Get filtered and sorted activities
 const filteredAndSortedActivities = computed(() => {
@@ -109,8 +109,8 @@ const getTypeBadgeClass = (type: ActivityType): string => {
   switch (type) {
     case 'dungeon':
       return 'badge-dungeon'
-    case 'potion':
-      return 'badge-potion'
+    case 'craftable':
+      return 'badge-craftable'
     case 'resource':
       return 'badge-resource'
     default:
@@ -150,12 +150,12 @@ const profitRange = computed(() => {
       </button>
       <button
         class="filter-button"
-        :class="{ active: filterPotions, 'badge-potion': filterPotions }"
-        :aria-pressed="filterPotions"
-        aria-label="Toggle potion activities"
-        @click="filterPotions = !filterPotions"
+        :class="{ active: filterCraftables, 'badge-craftable': filterCraftables }"
+        :aria-pressed="filterCraftables"
+        aria-label="Toggle craftable activities"
+        @click="filterCraftables = !filterCraftables"
       >
-        Potions
+        Craftables
       </button>
       <button
         class="filter-button"
@@ -282,7 +282,7 @@ const profitRange = computed(() => {
   border-color: rgba(168, 85, 247, 0.4);
 }
 
-.filter-button.active.badge-potion {
+.filter-button.active.badge-craftable {
   background-color: rgba(34, 197, 94, 0.2);
   color: #4ade80;
   border-color: rgba(34, 197, 94, 0.4);
@@ -412,7 +412,7 @@ const profitRange = computed(() => {
   border: 1px solid rgba(168, 85, 247, 0.4);
 }
 
-.badge-potion {
+.badge-craftable {
   background-color: rgba(34, 197, 94, 0.2);
   color: #4ade80;
   border: 1px solid rgba(34, 197, 94, 0.4);

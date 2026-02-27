@@ -250,7 +250,7 @@ const isUntradableRecipe = (recipeName: string): boolean => {
                         <td class="text-right">
                           <span v-if="isUntradableRecipe(drop.recipeName)" class="computed-price">
                             {{ formatNumber(drop.price) }}
-                            <span class="computed-indicator" title="Price computed from potion profitability">ⓒ</span>
+                            <span class="computed-indicator" title="Price computed from craftable profitability">ⓒ</span>
                           </span>
                           <span v-else>{{ formatNumber(drop.price) }}</span>
                         </td>

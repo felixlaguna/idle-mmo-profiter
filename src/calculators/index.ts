@@ -7,10 +7,10 @@ export {
 } from './dungeonCalculator'
 
 export {
-  calculatePotionProfits,
-  type PotionProfitResult,
-  type PotionMaterialResult
-} from './potionCalculator'
+  calculateCraftableProfits,
+  type CraftableProfitResult,
+  type CraftableMaterialResult
+} from './craftableCalculator'
 
 export {
   calculateResourceProfits,

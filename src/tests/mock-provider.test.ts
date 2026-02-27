@@ -38,7 +38,7 @@ describe('MockProvider', () => {
     const data = await provider.getCurrentPrices()
     expect(data).toBeDefined()
     expect(data.materials).toBeDefined()
-    expect(data.potions).toBeDefined()
+    expect(data.craftables).toBeDefined()
     expect(data.resources).toBeDefined()
     expect(Array.isArray(data.materials)).toBe(true)
     expect(data.materials.length).toBeGreaterThan(0)
@@ -57,7 +57,7 @@ describe('MockProvider', () => {
     expect(resource?.name).toBe('Coal')
     expect(resource?.type).toBe('resource')
 
-    // Potions are now dynamically added, so potions array is empty in defaults
+    // Craftables are now dynamically added, so potions array is empty in defaults
   })
 
   it('should return null for non-existent items', async () => {

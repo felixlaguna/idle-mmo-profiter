@@ -160,16 +160,16 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
       })
     })
 
-    it('should include all potions when set to false', () => {
+    it('should include all craftables when set to false', () => {
       const dataProvider = useDataProvider()
 
       // First exclude all
-      dataProvider.setAllRefreshExcluded('potions', true)
+      dataProvider.setAllRefreshExcluded('craftables', true)
       // Then include all
-      dataProvider.setAllRefreshExcluded('potions', false)
+      dataProvider.setAllRefreshExcluded('craftables', false)
 
-      dataProvider.potions.value.forEach((potion) => {
-        expect(dataProvider.isRefreshExcluded('potions', potion.id)).toBe(false)
+      dataProvider.craftables.value.forEach((craftable) => {
+        expect(dataProvider.isRefreshExcluded('craftables', craftable.id)).toBe(false)
       })
     })
 
@@ -228,11 +228,11 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
     it('should return correct stats for a category with all excluded', () => {
       const dataProvider = useDataProvider()
 
-      dataProvider.setAllRefreshExcluded('potions', true)
-      const stats = dataProvider.getExclusionStats('potions')
+      dataProvider.setAllRefreshExcluded('craftables', true)
+      const stats = dataProvider.getExclusionStats('craftables')
 
-      expect(stats.total).toBe(dataProvider.potions.value.length)
-      expect(stats.excluded).toBe(dataProvider.potions.value.length)
+      expect(stats.total).toBe(dataProvider.craftables.value.length)
+      expect(stats.excluded).toBe(dataProvider.craftables.value.length)
       expect(stats.included).toBe(0)
     })
 
@@ -263,7 +263,7 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
 
       const totalItems =
         dataProvider.materials.value.length +
-        dataProvider.potions.value.length +
+        dataProvider.craftables.value.length +
         dataProvider.resources.value.length +
         dataProvider.recipes.value.length
 
@@ -277,19 +277,19 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
 
       // Exclude all materials
       dataProvider.setAllRefreshExcluded('materials', true)
-      // Exclude all potions
-      dataProvider.setAllRefreshExcluded('potions', true)
+      // Exclude all craftables
+      dataProvider.setAllRefreshExcluded('craftables', true)
 
       const stats = dataProvider.getExclusionStats()
 
       const totalItems =
         dataProvider.materials.value.length +
-        dataProvider.potions.value.length +
+        dataProvider.craftables.value.length +
         dataProvider.resources.value.length +
         dataProvider.recipes.value.length
 
       const expectedExcluded =
-        dataProvider.materials.value.length + dataProvider.potions.value.length
+        dataProvider.materials.value.length + dataProvider.craftables.value.length
 
       expect(stats.totalExcluded).toBe(expectedExcluded)
       expect(stats.total).toBe(totalItems)
@@ -477,7 +477,7 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
       dataProvider.setRefreshExcluded('recipes', dataProvider.recipes.value[1].id, true)
 
       const overallStats = dataProvider.getExclusionStats()
-      const expectedExcluded = dataProvider.materials.value.length + 0 + 0 + 2 // materials + potions(empty) + resources + recipes[0,1]
+      const expectedExcluded = dataProvider.materials.value.length + 0 + 0 + 2 // materials + craftables(empty) + resources + recipes[0,1]
 
       expect(overallStats.totalExcluded).toBe(expectedExcluded)
     })
@@ -505,18 +505,18 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
 
       // Check all required top-level keys exist
       expect(exported.materials).toBeDefined()
-      expect(exported.potions).toBeDefined()
+      expect(exported.craftables).toBeDefined()
       expect(exported.resources).toBeDefined()
       expect(exported.recipes).toBeDefined()
       expect(exported.dungeons).toBeDefined()
-      expect(exported.potionCrafts).toBeDefined()
+      expect(exported.craftableRecipes).toBeDefined()
       expect(exported.resourceGathering).toBeDefined()
       expect(exported.magicFindDefaults).toBeDefined()
       expect(exported.marketTaxRate).toBeDefined()
 
       // Check array lengths match defaults
       expect(exported.materials.length).toBe(dataProvider.materials.value.length)
-      expect(exported.potions.length).toBe(dataProvider.potions.value.length)
+      expect(exported.craftables.length).toBe(dataProvider.craftables.value.length)
       expect(exported.resources.length).toBe(dataProvider.resources.value.length)
       expect(exported.recipes.length).toBe(dataProvider.recipes.value.length)
     })
@@ -563,18 +563,18 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
       expect(exportedMaterial?.vendorValue).toBe(newVendorValue)
     })
 
-    it('should flow material price overrides to potionCraft unitCost', () => {
+    it('should flow material price overrides to craftableRecipe unitCost', () => {
       const dataProvider = useDataProvider()
 
-      // Add a potionCraft first (defaults are now empty)
-      dataProvider.addPotionCraft({
-        name: 'Test Potion',
+      // Add a craftableRecipe first (defaults are now empty)
+      dataProvider.addCraftableRecipe({
+        name: 'Test Craftable',
         timeSeconds: 60,
         materials: [{ name: 'Moose antler', quantity: 5, unitCost: 100 }],
         currentPrice: 1000
       })
 
-      const firstCraft = dataProvider.potionCrafts.value[0]
+      const firstCraft = dataProvider.craftableRecipes.value[0]
       const craftMaterialName = firstCraft.materials[0].name
 
       // Find the material in the materials array
@@ -587,7 +587,7 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
       const jsonString = dataProvider.exportAsDefaultsJson()
       const exported = JSON.parse(jsonString) as DefaultData
 
-      const exportedCraft = exported.potionCrafts.find((c) => c.name === firstCraft.name)
+      const exportedCraft = exported.craftableRecipes.find((c) => c.name === firstCraft.name)
       const exportedMaterial = exportedCraft?.materials.find((m) => m.name === craftMaterialName)
 
       expect(exportedMaterial?.unitCost).toBe(newPrice)
@@ -666,16 +666,16 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
       // Verify it matches the DefaultData interface structure
       expect(typeof exported.materials).toBe('object')
       expect(Array.isArray(exported.materials)).toBe(true)
-      expect(typeof exported.potions).toBe('object')
-      expect(Array.isArray(exported.potions)).toBe(true)
+      expect(typeof exported.craftables).toBe('object')
+      expect(Array.isArray(exported.craftables)).toBe(true)
       expect(typeof exported.resources).toBe('object')
       expect(Array.isArray(exported.resources)).toBe(true)
       expect(typeof exported.recipes).toBe('object')
       expect(Array.isArray(exported.recipes)).toBe(true)
       expect(typeof exported.dungeons).toBe('object')
       expect(Array.isArray(exported.dungeons)).toBe(true)
-      expect(typeof exported.potionCrafts).toBe('object')
-      expect(Array.isArray(exported.potionCrafts)).toBe(true)
+      expect(typeof exported.craftableRecipes).toBe('object')
+      expect(Array.isArray(exported.craftableRecipes)).toBe(true)
       expect(typeof exported.resourceGathering).toBe('object')
       expect(Array.isArray(exported.resourceGathering)).toBe(true)
       expect(typeof exported.magicFindDefaults).toBe('object')

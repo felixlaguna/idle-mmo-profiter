@@ -2,13 +2,13 @@
  * Tests for dungeon calculator with untradable limited-use recipe pricing
  *
  * This test suite verifies the complete flow:
- * 1. useRecipePricing computes prices for untradable recipes based on potion profitability
+ * 1. useRecipePricing computes prices for untradable recipes based on craftable profitability
  * 2. calculateDungeonProfits uses these computed prices in expected value calculations
  *
  * Key requirements tested:
- * - Untradable recipes with limited uses get computed price = uses × potion_profit
- * - Potion profit does NOT include recipe cost (only material costs)
- * - Negative potion profit results in price = 0
+ * - Untradable recipes with limited uses get computed price = uses × craftable_profit
+ * - Craftable profit does NOT include recipe cost (only material costs)
+ * - Negative craftable profit results in price = 0
  * - Untradable recipes without uses field are not affected
  * - Tradable recipes keep their market price
  */
@@ -17,13 +17,13 @@ import { describe, it, expect } from 'vitest'
 import { ref } from 'vue'
 import { useRecipePricing } from '../../composables/useRecipePricing'
 import { calculateDungeonProfits } from '../../calculators/dungeonCalculator'
-import type { Recipe, PotionCraft, Dungeon, MagicFindSettings } from '../../types'
+import type { Recipe, CraftableRecipe, Dungeon, MagicFindSettings } from '../../types'
 
 describe('Dungeon pricing for untradable limited-use recipes', () => {
   const mockTaxRate = 0.12
 
-  // Mock potion craft with known profit
-  const profitablePotion: PotionCraft = {
+  // Mock craftable with known profit
+  const profitableCraftable: CraftableRecipe = {
     name: 'Wraithbane',
     timeSeconds: 1090.9,
     materials: [
@@ -35,10 +35,10 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
 
   // Material cost: (15 * 114.1) + (20 * 378.9) = 1711.5 + 7578 = 9289.5
   // Sell after tax: 11894.6 * 0.88 = 10467.248
-  // Potion profit: 10467.248 - 9289.5 = 1177.748
+  // Craftable profit: 10467.248 - 9289.5 = 1177.748
 
-  // Mock potion craft with negative profit
-  const unprofitablePotion: PotionCraft = {
+  // Mock craftable with negative profit
+  const unprofitableCraftable: CraftableRecipe = {
     name: 'Failed Brew',
     timeSeconds: 1000,
     materials: [
@@ -49,7 +49,7 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
 
   // Material cost: 10 * 1000 = 10000
   // Sell after tax: 5000 * 0.88 = 4400
-  // Potion profit: 4400 - 10000 = -5600 (negative)
+  // Craftable profit: 4400 - 10000 = -5600 (negative)
 
   const mockMagicFind: MagicFindSettings = {
     streak: 0,
@@ -73,24 +73,24 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
       ]
 
       const recipesRef = ref(recipes)
-      const potionCraftsRef = ref([profitablePotion])
+      const craftableRecipesRef = ref([profitableCraftable])
       const taxRateRef = ref(mockTaxRate)
 
       const { recipesWithComputedPrices } = useRecipePricing(
         recipesRef,
-        potionCraftsRef,
+        craftableRecipesRef,
         taxRateRef
       )
 
       const result = recipesWithComputedPrices.value[0]
 
-      // Expected: uses × potion_profit = 10 × 1177.748 = 11777.48
+      // Expected: uses × craftable_profit = 10 × 1177.748 = 11777.48
       const expectedPrice = 10 * 1177.748
       expect(result.price).toBeCloseTo(expectedPrice, 2)
       expect(result.isUntradable).toBe(true)
     })
 
-    it('should set price to 0 when potion profit is negative', () => {
+    it('should set price to 0 when craftable profit is negative', () => {
       const recipes: Recipe[] = [
         {
           id: 'rec-999',
@@ -104,12 +104,12 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
       ]
 
       const recipesRef = ref(recipes)
-      const potionCraftsRef = ref([unprofitablePotion])
+      const craftableRecipesRef = ref([unprofitableCraftable])
       const taxRateRef = ref(mockTaxRate)
 
       const { recipesWithComputedPrices } = useRecipePricing(
         recipesRef,
-        potionCraftsRef,
+        craftableRecipesRef,
         taxRateRef
       )
 
@@ -133,12 +133,12 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
       ]
 
       const recipesRef = ref(recipes)
-      const potionCraftsRef = ref([profitablePotion])
+      const craftableRecipesRef = ref([profitableCraftable])
       const taxRateRef = ref(mockTaxRate)
 
       const { recipesWithComputedPrices } = useRecipePricing(
         recipesRef,
-        potionCraftsRef,
+        craftableRecipesRef,
         taxRateRef
       )
 
@@ -162,12 +162,12 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
       ]
 
       const recipesRef = ref(recipes)
-      const potionCraftsRef = ref([profitablePotion])
+      const craftableRecipesRef = ref([profitableCraftable])
       const taxRateRef = ref(mockTaxRate)
 
       const { recipesWithComputedPrices } = useRecipePricing(
         recipesRef,
-        potionCraftsRef,
+        craftableRecipesRef,
         taxRateRef
       )
 
@@ -191,12 +191,12 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
       ]
 
       const recipesRef = ref(recipes)
-      const potionCraftsRef = ref([profitablePotion])
+      const craftableRecipesRef = ref([profitableCraftable])
       const taxRateRef = ref(mockTaxRate)
 
       const { recipesWithComputedPrices } = useRecipePricing(
         recipesRef,
-        potionCraftsRef,
+        craftableRecipesRef,
         taxRateRef
       )
 
@@ -207,39 +207,39 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
       expect(result.isUntradable).toBe(false)
     })
 
-    it('should not compute price when producesItemName does not match any potion', () => {
+    it('should not compute price when producesItemName does not match any craftable', () => {
       const recipes: Recipe[] = [
         {
           id: 'rec-666',
-          name: 'Unknown Potion Recipe (Untradable)',
+          name: 'Unknown Craftable Recipe (Untradable)',
           price: 0,
           chance: 0.01,
           uses: 10,
-          producesItemName: 'NonExistentPotion',
+          producesItemName: 'NonExistentCraftable',
           isUntradable: true
         }
       ]
 
       const recipesRef = ref(recipes)
-      const potionCraftsRef = ref([profitablePotion])
+      const craftableRecipesRef = ref([profitableCraftable])
       const taxRateRef = ref(mockTaxRate)
 
       const { recipesWithComputedPrices } = useRecipePricing(
         recipesRef,
-        potionCraftsRef,
+        craftableRecipesRef,
         taxRateRef
       )
 
       const result = recipesWithComputedPrices.value[0]
 
-      // Expected: price stays 0 (potion not found in crafts)
+      // Expected: price stays 0 (craftable not found in crafts)
       expect(result.price).toBe(0)
     })
   })
 
   describe('calculateDungeonProfits - integration with computed prices', () => {
     it('should use computed price in dungeon expected value calculation', () => {
-      // Setup: untradable recipe with uses=10, potion profit = 1177.748
+      // Setup: untradable recipe with uses=10, craftable profit = 1177.748
       // Expected computed price: 10 × 1177.748 = 11777.48
       const recipes: Recipe[] = [
         {
@@ -427,12 +427,12 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
       ]
 
       const recipesRef = ref(recipes)
-      const potionCraftsRef = ref([profitablePotion])
+      const craftableRecipesRef = ref([profitableCraftable])
       const taxRateRef = ref(mockTaxRate)
 
       const { recipesWithComputedPrices } = useRecipePricing(
         recipesRef,
-        potionCraftsRef,
+        craftableRecipesRef,
         taxRateRef
       )
 
@@ -442,7 +442,7 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
       expect(result.price).toBe(0)
     })
 
-    it('should handle empty potion crafts array', () => {
+    it('should handle empty craftable recipes array', () => {
       const recipes: Recipe[] = [
         {
           id: 'rec-163',
@@ -456,22 +456,22 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
       ]
 
       const recipesRef = ref(recipes)
-      const potionCraftsRef = ref([]) // Empty potion crafts
+      const craftableRecipesRef = ref([]) // Empty craftable recipes
       const taxRateRef = ref(mockTaxRate)
 
       const { recipesWithComputedPrices } = useRecipePricing(
         recipesRef,
-        potionCraftsRef,
+        craftableRecipesRef,
         taxRateRef
       )
 
       const result = recipesWithComputedPrices.value[0]
 
-      // Expected: price stays 0 (no matching potion in profitMap)
+      // Expected: price stays 0 (no matching craftable in profitMap)
       expect(result.price).toBe(0)
     })
 
-    it('should reactively update when potion price changes', () => {
+    it('should reactively update when craftable price changes', () => {
       const recipes: Recipe[] = [
         {
           id: 'rec-163',
@@ -484,25 +484,25 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
         }
       ]
 
-      const potionCraft = { ...profitablePotion }
-      const potionCraftsRef = ref([potionCraft])
+      const craftableRecipe = { ...profitableCraftable }
+      const craftableRecipesRef = ref([craftableRecipe])
       const recipesRef = ref(recipes)
       const taxRateRef = ref(mockTaxRate)
 
       const { recipesWithComputedPrices } = useRecipePricing(
         recipesRef,
-        potionCraftsRef,
+        craftableRecipesRef,
         taxRateRef
       )
 
       const initialPrice = recipesWithComputedPrices.value[0].price
 
-      // Change potion price
-      potionCraftsRef.value[0].currentPrice = 20000
+      // Change craftable price
+      craftableRecipesRef.value[0].currentPrice = 20000
 
       // New calculation:
       // Sell after tax: 20000 * 0.88 = 17600
-      // Potion profit: 17600 - 9289.5 = 8310.5
+      // Craftable profit: 17600 - 9289.5 = 8310.5
       // Computed price: 10 * 8310.5 = 83105
       const newPrice = recipesWithComputedPrices.value[0].price
 

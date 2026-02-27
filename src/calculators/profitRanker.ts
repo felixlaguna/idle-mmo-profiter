@@ -1,6 +1,6 @@
 import type { ActivityType } from '../types'
 import type { DungeonProfitResult } from './dungeonCalculator'
-import type { PotionProfitResult } from './potionCalculator'
+import type { CraftableProfitResult } from './craftableCalculator'
 import type { ResourceProfitResult } from './resourceCalculator'
 
 export interface RankedActivity {
@@ -16,17 +16,17 @@ export interface RankedActivity {
 }
 
 /**
- * Combines and ranks all profit-generating activities from dungeons, potions, and resources.
+ * Combines and ranks all profit-generating activities from dungeons, craftables, and resources.
  *
  * @param dungeonResults - Results from dungeon calculator
- * @param potionResults - Results from potion calculator
+ * @param craftableResults - Results from craftable calculator
  * @param resourceResults - Results from resource calculator
  * @param includeNegative - Whether to include activities with negative profit (default: false)
  * @returns Array of ranked activities sorted by profit per hour descending
  */
 export function rankAllActivities(
   dungeonResults: DungeonProfitResult[],
-  potionResults: PotionProfitResult[],
+  craftableResults: CraftableProfitResult[],
   resourceResults: ResourceProfitResult[],
   includeNegative = false
 ): RankedActivity[] {
@@ -45,16 +45,16 @@ export function rankAllActivities(
     })
   })
 
-  // Add potion results
-  potionResults.forEach(potion => {
+  // Add craftable results
+  craftableResults.forEach(craftable => {
     allActivities.push({
-      activityType: 'potion',
-      name: potion.name,
-      profitPerHour: potion.profitPerHour,
-      profitPerAction: potion.profit,
-      timePerAction: potion.craftTimeSeconds,
-      cost: potion.totalCost,
-      details: `${potion.materials.length} materials, ${Math.round(potion.craftTimeSeconds / 60)} min craft`
+      activityType: 'craftable',
+      name: craftable.name,
+      profitPerHour: craftable.profitPerHour,
+      profitPerAction: craftable.profit,
+      timePerAction: craftable.craftTimeSeconds,
+      cost: craftable.totalCost,
+      details: `${craftable.materials.length} materials, ${Math.round(craftable.craftTimeSeconds / 60)} min craft`
     })
   })
 

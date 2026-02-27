@@ -131,7 +131,7 @@ export class MockProvider implements DataProvider {
     const material = this.defaults.materials.find(
       (m) => m.name.toLowerCase() === name.toLowerCase()
     )
-    const potion = this.defaults.potions.find(
+    const craftable = this.defaults.craftables.find(
       (p) => p.name.toLowerCase() === name.toLowerCase()
     )
     const resource = this.defaults.resources.find(
@@ -150,15 +150,15 @@ export class MockProvider implements DataProvider {
       }
     }
 
-    if (potion) {
+    if (craftable) {
       return {
-        hashed_id: potion.id,
-        name: potion.name,
-        vendor_price: potion.price,
+        hashed_id: craftable.id,
+        name: craftable.name,
+        vendor_price: craftable.price,
         is_tradeable: true,
         max_tier: 5,
-        description: `Potion: ${potion.name}`,
-        type: 'potion',
+        description: `Craftable: ${craftable.name}`,
+        type: 'craftable',
       }
     }
 
@@ -181,7 +181,7 @@ export class MockProvider implements DataProvider {
     // Combine all items from defaults
     const allItems: Array<{ id: string; name: string; type: string; price: number }> = [
       ...this.defaults.materials.map((m) => ({ ...m, type: 'material' })),
-      ...this.defaults.potions.map((p) => ({ ...p, type: 'potion' })),
+      ...this.defaults.craftables.map((p) => ({ ...p, type: 'craftable' })),
       ...this.defaults.resources.map((r) => ({
         id: r.id,
         name: r.name,

@@ -35,10 +35,10 @@ const hasApiKey = computed(() => {
   return settings.apiKey !== null && settings.apiKey !== ''
 })
 
-// Count of untracked potions (for Track All button)
-const untrackedPotionCount = computed(() => {
+// Count of untracked craftables (for Track All button)
+const untrackedCraftableCount = computed(() => {
   return dataProvider.recipes.value.filter(
-    (r) => isUntrackedPotionRecipe(r.name, r.producesItemName) && r.hashedId
+    (r) => isUntrackedCraftableRecipe(r.name, r.producesItemName) && r.hashedId
   ).length
 })
 
@@ -48,7 +48,7 @@ const searchQuery = ref('')
 // Section collapse state
 const sectionsExpanded = ref({
   materials: true,
-  potions: true,
+  craftables: true,
   resources: true,
   recipes: false, // Collapsed by default due to 345 items
 })
@@ -64,7 +64,7 @@ const hashedIdModalVisible = ref(false)
 const hashedIdModalItem = ref<{
   itemName: string
   itemId: string
-  category: 'materials' | 'potions' | 'resources' | 'recipes'
+  category: 'materials' | 'craftables' | 'resources' | 'recipes'
   currentHashedId: string
 } | null>(null)
 
@@ -74,8 +74,8 @@ const getDefaultMaterialPrice = (id: string): number => {
   return item?.price ?? 0
 }
 
-const getDefaultPotionPrice = (id: string): number => {
-  const item = dataProvider.potions.value.find((p) => p.id === id)
+const getDefaultCraftablePrice = (id: string): number => {
+  const item = dataProvider.craftables.value.find((p) => p.id === id)
   return item?.price ?? 0
 }
 
@@ -96,10 +96,10 @@ const filteredMaterials = computed(() => {
   return dataProvider.materials.value.filter((m) => m.name.toLowerCase().includes(query))
 })
 
-const filteredPotions = computed(() => {
-  if (!searchQuery.value) return dataProvider.potions.value
+const filteredCraftables = computed(() => {
+  if (!searchQuery.value) return dataProvider.craftables.value
   const query = searchQuery.value.toLowerCase()
-  return dataProvider.potions.value.filter((p) => p.name.toLowerCase().includes(query))
+  return dataProvider.craftables.value.filter((p) => p.name.toLowerCase().includes(query))
 })
 
 const filteredResources = computed(() => {
@@ -118,7 +118,7 @@ const filteredRecipes = computed(() => {
 const hasResults = computed(() => {
   return (
     filteredMaterials.value.length > 0 ||
-    filteredPotions.value.length > 0 ||
+    filteredCraftables.value.length > 0 ||
     filteredResources.value.length > 0 ||
     filteredRecipes.value.length > 0
   )
@@ -140,13 +140,13 @@ const resetMaterialsToDefaults = () => {
   }
 }
 
-const resetPotionsToDefaults = () => {
+const resetCraftablesToDefaults = () => {
   if (
     confirm(
-      'Reset all potion prices to default values? This will clear all your custom prices for potions.'
+      'Reset all craftable prices to default values? This will clear all your custom prices for craftables.'
     )
   ) {
-    dataProvider.clearCategoryOverrides('potions')
+    dataProvider.clearCategoryOverrides('craftables')
   }
 }
 
@@ -173,7 +173,7 @@ const resetRecipesToDefaults = () => {
 const resetAllToDefaults = () => {
   if (
     confirm(
-      'Reset ALL market data to default values? This will clear all your custom overrides for materials, potions, resources, and recipes.'
+      'Reset ALL market data to default values? This will clear all your custom overrides for materials, craftables, resources, and recipes.'
     )
   ) {
     dataProvider.clearAllOverrides()
@@ -185,8 +185,8 @@ const updateMaterialPrice = (id: string, price: number) => {
   dataProvider.updateMaterialPrice(id, price)
 }
 
-const updatePotionPrice = (id: string, price: number) => {
-  dataProvider.updatePotionPrice(id, price)
+const updateCraftablePrice = (id: string, price: number) => {
+  dataProvider.updateCraftablePrice(id, price)
 }
 
 const updateResourcePrice = (id: string, marketPrice: number) => {
@@ -309,11 +309,11 @@ const getCategoryExclusionState = (category: RefreshCategory): 'all' | 'none' | 
   return 'mixed'
 }
 
-// Check if a recipe produces a potion that's not yet tracked
-const isUntrackedPotionRecipe = (recipeName: string, producesItemName?: string): boolean => {
-  // Determine what potion this recipe produces
-  const potionName = producesItemName || inferPotionName(recipeName)
-  if (!potionName) return false
+// Check if a recipe produces a craftable that's not yet tracked
+const isUntrackedCraftableRecipe = (recipeName: string, producesItemName?: string): boolean => {
+  // Determine what craftable this recipe produces
+  const craftableName = producesItemName || inferCraftableName(recipeName)
+  if (!craftableName) return false
 
   // If producesItemName is not set AND the recipe name doesn't contain "Recipe",
   // this is likely not a craftable recipe (could be fishing loot, equipment, etc.)
@@ -321,16 +321,16 @@ const isUntrackedPotionRecipe = (recipeName: string, producesItemName?: string):
     return false
   }
 
-  // Check if the potion is already tracked in potionCrafts
-  const isTracked = dataProvider.potionCrafts.value.some(
-    (craft) => craft.name === potionName
+  // Check if the craftable is already tracked
+  const isTracked = dataProvider.craftableRecipes.value.some(
+    (craft) => craft.name === craftableName
   )
 
   return !isTracked
 }
 
-// Infer potion name from recipe name by stripping "Recipe" and "(Untradable)" suffixes
-const inferPotionName = (recipeName: string): string | null => {
+// Infer craftable name from recipe name by stripping "Recipe" and "(Untradable)" suffixes
+const inferCraftableName = (recipeName: string): string | null => {
   const cleaned = recipeName
     .replace(/\s*\(Untradable\)\s*/i, '')
     .replace(/\s*Recipe\s*$/i, '')
@@ -354,15 +354,15 @@ const addRecipeLoading = ref<Record<string, boolean>>({})
 // Loading state for refreshing item data
 const refreshItemDataLoading = ref(false)
 
-// Track All Untracked Potions state
+// Track All Untracked Craftables state
 const trackAllLoading = ref(false)
 const trackAllProgress = ref({ current: 0, total: 0 })
 const trackAllAborted = ref(false)
 
-// Add an untracked potion recipe to potionCrafts
+// Add an untracked craftable recipe
 // Recursively adds missing materials and fetches market prices from the API
 // Returns true on success, false on failure
-const addUntrackedPotion = async (
+const addUntrackedCraftable = async (
   recipe: {
     id: string
     name: string
@@ -371,10 +371,10 @@ const addUntrackedPotion = async (
   },
   silent = false
 ): Promise<boolean> => {
-  const potionName = recipe.producesItemName || inferPotionName(recipe.name)
-  if (!potionName) {
+  const craftableName = recipe.producesItemName || inferCraftableName(recipe.name)
+  if (!craftableName) {
     if (!silent) {
-      showToast('Cannot determine which potion this recipe produces.', 'error')
+      showToast('Cannot determine which craftable this recipe produces.', 'error')
     }
     return false
   }
@@ -400,7 +400,7 @@ const addUntrackedPotion = async (
         showToast(`No recipe details found for "${recipe.name}". Check the browser console.`, 'error')
       }
       console.error(
-        `[AddPotion] No recipe data for "${recipe.name}" (type: ${recipeDetails?.type || 'unknown'}). Full response:`,
+        `[AddCraftable] No recipe data for "${recipe.name}" (type: ${recipeDetails?.type || 'unknown'}). Full response:`,
         JSON.stringify(recipeDetails, null, 2)
       )
       return false
@@ -416,7 +416,7 @@ const addUntrackedPotion = async (
 
       if (!material) {
         // Material doesn't exist — add it with hashed ID from the recipe, fetch its market price
-        console.log(`[AddPotion] Material "${mat.item_name}" not found, fetching from API...`)
+        console.log(`[AddCraftable] Material "${mat.item_name}" not found, fetching from API...`)
 
         let price = 0
         let vendorValue = 0
@@ -426,11 +426,11 @@ const addUntrackedPotion = async (
           if (vendorBuyPrice) {
             price = vendorBuyPrice
             vendorValue = vendorBuyPrice
-            console.log(`[AddPotion] Using known vendor buy price for "${mat.item_name}": ${price}`)
+            console.log(`[AddCraftable] Using known vendor buy price for "${mat.item_name}": ${price}`)
           } else {
             const avgPrice = await getAverageMarketPrice(mat.hashed_item_id)
             price = avgPrice ?? 0
-            console.log(`[AddPotion] Fetched market price for "${mat.item_name}": ${price}`)
+            console.log(`[AddCraftable] Fetched market price for "${mat.item_name}": ${price}`)
           }
         }
 
@@ -443,18 +443,18 @@ const addUntrackedPotion = async (
         material = { id: '', name: mat.item_name, price, hashedId: mat.hashed_item_id }
       } else if (material.price === 0 && material.hashedId) {
         // Material exists but has no price — check vendor buy prices first, then market
-        console.log(`[AddPotion] Material "${material.name}" has price 0, fetching...`)
+        console.log(`[AddCraftable] Material "${material.name}" has price 0, fetching...`)
         const vendorBuyPrice = VENDOR_BUY_PRICES[material.hashedId]
         if (vendorBuyPrice) {
           dataProvider.updateMaterialPrice(material.id, vendorBuyPrice)
           material = { ...material, price: vendorBuyPrice }
-          console.log(`[AddPotion] Using known vendor buy price for "${material.name}": ${vendorBuyPrice}`)
+          console.log(`[AddCraftable] Using known vendor buy price for "${material.name}": ${vendorBuyPrice}`)
         } else {
           const avgPrice = await getAverageMarketPrice(material.hashedId)
           if (avgPrice && avgPrice > 0) {
             dataProvider.updateMaterialPrice(material.id, avgPrice)
             material = { ...material, price: avgPrice }
-            console.log(`[AddPotion] Updated market price for "${material.name}": ${avgPrice}`)
+            console.log(`[AddCraftable] Updated market price for "${material.name}": ${avgPrice}`)
           }
         }
       }
@@ -466,44 +466,44 @@ const addUntrackedPotion = async (
       })
     }
 
-    // Step 3: Get or fetch the potion's market price
+    // Step 3: Get or fetch the craftable's market price
     // Use the result item from the recipe if available
-    let potionPrice = 0
-    const existingPotion = dataProvider.potions.value.find((p) => p.name === potionName)
+    let craftablePrice = 0
+    const existingCraftable = dataProvider.craftables.value.find((p) => p.name === craftableName)
 
-    if (existingPotion) {
-      potionPrice = existingPotion.price
+    if (existingCraftable) {
+      craftablePrice = existingCraftable.price
     } else {
-      // Potion not in data — use recipe result hashed ID or search by name
-      const potionHashedId = recipeData.result?.hashed_item_id
-      console.log(`[AddPotion] Potion "${potionName}" not in data, fetching price...`)
+      // Craftable not in data — use recipe result hashed ID or search by name
+      const craftableHashedId = recipeData.result?.hashed_item_id
+      console.log(`[AddCraftable] Craftable "${craftableName}" not in data, fetching price...`)
 
-      if (potionHashedId) {
-        const avgPrice = await getAverageMarketPrice(potionHashedId)
-        potionPrice = avgPrice ?? 0
-        console.log(`[AddPotion] Fetched potion price for "${potionName}": ${potionPrice}`)
+      if (craftableHashedId) {
+        const avgPrice = await getAverageMarketPrice(craftableHashedId)
+        craftablePrice = avgPrice ?? 0
+        console.log(`[AddCraftable] Fetched craftable price for "${craftableName}": ${craftablePrice}`)
 
-        dataProvider.addPotion({
-          name: potionName,
-          price: potionPrice,
-          hashedId: potionHashedId,
+        dataProvider.addCraftable({
+          name: craftableName,
+          price: craftablePrice,
+          hashedId: craftableHashedId,
         })
       } else {
         // Fallback: search by name
-        const searchResult = await searchItems(potionName)
-        const potionItem = searchResult.items.find(
-          (item) => item.name.toLowerCase() === potionName.toLowerCase()
+        const searchResult = await searchItems(craftableName)
+        const craftableItem = searchResult.items.find(
+          (item) => item.name.toLowerCase() === craftableName.toLowerCase()
         ) || searchResult.items[0]
 
-        if (potionItem) {
-          const avgPrice = await getAverageMarketPrice(potionItem.hashed_id)
-          potionPrice = avgPrice ?? 0
+        if (craftableItem) {
+          const avgPrice = await getAverageMarketPrice(craftableItem.hashed_id)
+          craftablePrice = avgPrice ?? 0
 
-          dataProvider.addPotion({
-            name: potionName,
-            price: potionPrice,
-            hashedId: potionItem.hashed_id,
-            vendorValue: potionItem.vendor_price ?? 0,
+          dataProvider.addCraftable({
+            name: craftableName,
+            price: craftablePrice,
+            hashedId: craftableItem.hashed_id,
+            vendorValue: craftableItem.vendor_price ?? 0,
           })
         }
       }
@@ -512,7 +512,7 @@ const addUntrackedPotion = async (
     // Step 4: Update this recipe and its counterpart with uses and producesItemName
     const maxUses = recipeData.max_uses ?? undefined
     const recipeUpdate = {
-      producesItemName: potionName,
+      producesItemName: craftableName,
       ...(maxUses !== undefined && maxUses !== null ? { uses: maxUses } : {}),
     }
 
@@ -528,35 +528,35 @@ const addUntrackedPotion = async (
       dataProvider.updateRecipeDefaults(counterpart.id, recipeUpdate)
     }
 
-    console.log(`[AddPotion] Updated recipe "${recipe.name}" and ${counterparts.length} counterpart(s) with uses=${maxUses}, producesItemName="${potionName}"`)
+    console.log(`[AddCraftable] Updated recipe "${recipe.name}" and ${counterparts.length} counterpart(s) with uses=${maxUses}, producesItemName="${craftableName}"`)
 
-    // Step 5: Create the PotionCraft entry
+    // Step 5: Create the CraftableRecipe entry
     const craftTime = getCraftTimeForLevel(recipeData.level_required)
     const skill: 'alchemy' | 'forging' | undefined =
       recipeData.skill === 'alchemy' ? 'alchemy' :
       recipeData.skill === 'forging' ? 'forging' :
       undefined
-    const potionCraft = {
-      name: potionName,
+    const craftableRecipe = {
+      name: craftableName,
       timeSeconds: craftTime,
       materials,
-      currentPrice: potionPrice,
+      currentPrice: craftablePrice,
       skill,
     }
 
-    dataProvider.addPotionCraft(potionCraft)
+    dataProvider.addCraftableRecipe(craftableRecipe)
 
     if (!silent) {
       showToast(
-        `Added "${potionName}" with ${materials.length} materials! Check the Potions tab.`,
+        `Added "${craftableName}" with ${materials.length} materials! Check the Craftables tab.`,
         'success'
       )
     }
     return true
   } catch (error) {
-    console.error('Failed to add potion:', error)
+    console.error('Failed to add craftable:', error)
     if (!silent) {
-      showToast('Failed to add potion. Check browser console for details.', 'error')
+      showToast('Failed to add craftable. Check browser console for details.', 'error')
     }
     return false
   } finally {
@@ -564,21 +564,21 @@ const addUntrackedPotion = async (
   }
 }
 
-// Track all untracked potion recipes at once
-const trackAllUntrackedPotions = async () => {
+// Track all untracked craftable recipes at once
+const trackAllUntrackedCraftables = async () => {
   // Check API key
   if (!hasApiKey.value) {
-    showToast('API key required to track potions.', 'error')
+    showToast('API key required to track craftables.', 'error')
     return
   }
 
   // Filter to untracked recipes with hashedId
   const untrackedRecipes = dataProvider.recipes.value.filter(
-    (r) => isUntrackedPotionRecipe(r.name, r.producesItemName) && r.hashedId
+    (r) => isUntrackedCraftableRecipe(r.name, r.producesItemName) && r.hashedId
   )
 
   if (untrackedRecipes.length === 0) {
-    showToast('No untracked potions found.', 'info')
+    showToast('No untracked craftables found.', 'info')
     return
   }
 
@@ -596,7 +596,7 @@ const trackAllUntrackedPotions = async () => {
     // Check for cancellation
     if (trackAllAborted.value) {
       showToast(
-        `Cancelled. Tracked ${successCount} potions.`,
+        `Cancelled. Tracked ${successCount} craftables.`,
         'info'
       )
       trackAllLoading.value = false
@@ -606,13 +606,13 @@ const trackAllUntrackedPotions = async () => {
     trackAllProgress.value.current++
 
     // Re-check: recipe may have been tracked by a sibling variant (tradable/untradable)
-    if (!isUntrackedPotionRecipe(recipe.name, recipe.producesItemName)) {
+    if (!isUntrackedCraftableRecipe(recipe.name, recipe.producesItemName)) {
       skipCount++
       continue
     }
 
     // Call with silent=true to suppress individual toasts during bulk operations
-    const success = await addUntrackedPotion(recipe, true)
+    const success = await addUntrackedCraftable(recipe, true)
     if (success) {
       successCount++
     } else {
@@ -621,7 +621,7 @@ const trackAllUntrackedPotions = async () => {
   }
 
   // Show summary
-  const parts = [`Tracked ${successCount} potions`]
+  const parts = [`Tracked ${successCount} craftables`]
   if (skipCount > 0) parts.push(`${skipCount} skipped as duplicates`)
   if (failCount > 0) parts.push(`${failCount} failed`)
 
@@ -641,7 +641,7 @@ const cancelTrackAll = () => {
 
 // Hashed ID modal functions
 const openHashedIdModal = (
-  category: 'materials' | 'potions' | 'resources' | 'recipes',
+  category: 'materials' | 'craftables' | 'resources' | 'recipes',
   item: { id: string; name: string; hashedId?: string }
 ) => {
   hashedIdModalItem.value = {
@@ -779,7 +779,7 @@ const refreshItemData = async () => {
           <span v-if="searchQuery" class="search-count">
             {{
               filteredMaterials.length +
-              filteredPotions.length +
+              filteredCraftables.length +
               filteredResources.length +
               filteredRecipes.length
             }}
@@ -1068,52 +1068,52 @@ const refreshItemData = async () => {
       </div>
     </section>
 
-    <!-- Potions Section -->
+    <!-- Craftables Section -->
     <section
-      v-if="filteredPotions.length > 0"
+      v-if="filteredCraftables.length > 0"
       class="market-section"
-      :class="{ collapsed: !sectionsExpanded.potions }"
+      :class="{ collapsed: !sectionsExpanded.craftables }"
     >
-      <div class="section-header" @click="toggleSection('potions')">
+      <div class="section-header" @click="toggleSection('craftables')">
         <div class="section-title">
-          <span class="expand-icon">{{ sectionsExpanded.potions ? '▼' : '▶' }}</span>
-          <h2>Potions</h2>
-          <span class="item-count">{{ filteredPotions.length }} items</span>
-          <span v-if="overrideStats.potions > 0" class="override-badge">
-            {{ overrideStats.potions }} overridden
+          <span class="expand-icon">{{ sectionsExpanded.craftables ? '▼' : '▶' }}</span>
+          <h2>Craftables</h2>
+          <span class="item-count">{{ filteredCraftables.length }} items</span>
+          <span v-if="overrideStats.craftables > 0" class="override-badge">
+            {{ overrideStats.craftables }} overridden
           </span>
           <span
-            v-if="(dataProvider.getExclusionStats('potions')?.excluded ?? 0) > 0"
+            v-if="(dataProvider.getExclusionStats('craftables')?.excluded ?? 0) > 0"
             class="exclusion-badge"
           >
-            {{ dataProvider.getExclusionStats('potions')?.excluded ?? 0 }} excluded
+            {{ dataProvider.getExclusionStats('craftables')?.excluded ?? 0 }} excluded
           </span>
         </div>
         <div class="section-actions">
           <button
             class="btn-toggle-exclusion"
             :title="
-              getCategoryExclusionState('potions') === 'all'
-                ? 'Include all potions in refresh'
-                : 'Exclude all potions from refresh'
+              getCategoryExclusionState('craftables') === 'all'
+                ? 'Include all craftables in refresh'
+                : 'Exclude all craftables from refresh'
             "
-            @click.stop="toggleCategoryExclusion('potions')"
+            @click.stop="toggleCategoryExclusion('craftables')"
           >
-            <span v-if="getCategoryExclusionState('potions') === 'all'">☑</span>
-            <span v-else-if="getCategoryExclusionState('potions') === 'mixed'">▣</span>
+            <span v-if="getCategoryExclusionState('craftables') === 'all'">☑</span>
+            <span v-else-if="getCategoryExclusionState('craftables') === 'mixed'">▣</span>
             <span v-else>☐</span>
-            {{ getCategoryExclusionState('potions') === 'all' ? 'Include All' : 'Exclude All' }}
+            {{ getCategoryExclusionState('craftables') === 'all' ? 'Include All' : 'Exclude All' }}
           </button>
           <button
             class="btn-reset-section"
-            title="Reset potions to defaults"
-            @click.stop="resetPotionsToDefaults"
+            title="Reset craftables to defaults"
+            @click.stop="resetCraftablesToDefaults"
           >
             Reset Section
           </button>
         </div>
       </div>
-      <div v-if="sectionsExpanded.potions" class="section-content">
+      <div v-if="sectionsExpanded.craftables" class="section-content">
         <table class="market-items-table">
           <thead>
             <tr>
@@ -1126,43 +1126,43 @@ const refreshItemData = async () => {
           </thead>
           <tbody>
             <tr
-              v-for="potion in filteredPotions"
-              :key="potion.id"
-              :class="{ excluded: dataProvider.isRefreshExcluded('potions', potion.id) }"
+              v-for="craftable in filteredCraftables"
+              :key="craftable.id"
+              :class="{ excluded: dataProvider.isRefreshExcluded('craftables', craftable.id) }"
             >
               <td class="col-exclude">
                 <input
                   type="checkbox"
-                  :checked="dataProvider.isRefreshExcluded('potions', potion.id)"
+                  :checked="dataProvider.isRefreshExcluded('craftables', craftable.id)"
                   :title="
-                    dataProvider.isRefreshExcluded('potions', potion.id)
+                    dataProvider.isRefreshExcluded('craftables', craftable.id)
                       ? 'Include in refresh'
                       : 'Exclude from refresh'
                   "
-                  @change="toggleExclusion('potions', potion.id)"
+                  @change="toggleExclusion('craftables', craftable.id)"
                 />
               </td>
-              <td class="col-name">{{ potion.name }}</td>
+              <td class="col-name">{{ craftable.name }}</td>
               <td class="col-vendor">
                 <span class="vendor-value">
-                  {{ potion.vendorValue ? `${potion.vendorValue.toLocaleString()} gold` : 'N/A' }}
+                  {{ craftable.vendorValue ? `${craftable.vendorValue.toLocaleString()} gold` : 'N/A' }}
                 </span>
               </td>
               <td class="col-market">
                 <EditableValue
-                  :model-value="potion.price"
-                  :default-value="getDefaultPotionPrice(potion.id)"
+                  :model-value="craftable.price"
+                  :default-value="getDefaultCraftablePrice(craftable.id)"
                   suffix=" gold"
-                  @update:model-value="(value) => updatePotionPrice(potion.id, value)"
+                  @update:model-value="(value) => updateCraftablePrice(craftable.id, value)"
                 />
               </td>
               <td class="col-actions">
                 <div class="actions-wrapper">
                   <button
                     class="btn-hashed-id"
-                  :class="{ missing: !potion.hashedId }"
+                  :class="{ missing: !craftable.hashedId }"
                   title="View/edit hashed ID"
-                  @click="openHashedIdModal('potions', potion)"
+                  @click="openHashedIdModal('craftables', craftable)"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -1183,12 +1183,12 @@ const refreshItemData = async () => {
                 </button>
                 <button
                   class="btn-refresh-item"
-                  :disabled="!hasApiKey || itemRefreshLoading[`potions-${potion.id}`]"
+                  :disabled="!hasApiKey || itemRefreshLoading[`craftables-${craftable.id}`]"
                   :title="hasApiKey ? 'Refresh this item from API' : 'API key required'"
-                  @click="refreshItem('potions', potion.id)"
+                  @click="refreshItem('craftables', craftable.id)"
                 >
                   <span
-                    v-if="itemRefreshLoading[`potions-${potion.id}`]"
+                    v-if="itemRefreshLoading[`craftables-${craftable.id}`]"
                     class="spinner-small"
                   ></span>
                   <svg
@@ -1383,13 +1383,13 @@ const refreshItemData = async () => {
         </div>
         <div class="section-actions">
           <button
-            v-if="untrackedPotionCount > 0 && !trackAllLoading"
+            v-if="untrackedCraftableCount > 0 && !trackAllLoading"
             class="btn-track-all"
             :disabled="!hasApiKey"
-            :title="hasApiKey ? 'Track all untracked potion recipes' : 'API key required'"
-            @click.stop="trackAllUntrackedPotions"
+            :title="hasApiKey ? 'Track all untracked craftable recipes' : 'API key required'"
+            @click.stop="trackAllUntrackedCraftables"
           >
-            Track All ({{ untrackedPotionCount }})
+            Track All ({{ untrackedCraftableCount }})
           </button>
           <div v-if="trackAllLoading" class="track-all-progress" @click.stop>
             <span class="progress-text">
@@ -1458,11 +1458,11 @@ const refreshItemData = async () => {
               <td class="col-name">
                 <span>{{ recipe.name }}</span>
                 <span
-                  v-if="isUntrackedPotionRecipe(recipe.name, recipe.producesItemName)"
+                  v-if="isUntrackedCraftableRecipe(recipe.name, recipe.producesItemName)"
                   class="untracked-badge"
-                  title="This recipe produces a potion that's not yet tracked"
+                  title="This recipe produces a craftable that's not yet tracked"
                 >
-                  Untracked Potion
+                  Untracked Craftable
                 </span>
               </td>
               <td class="col-vendor">
@@ -1481,11 +1481,11 @@ const refreshItemData = async () => {
               <td class="col-actions">
                 <div class="actions-wrapper">
                   <button
-                    v-if="isUntrackedPotionRecipe(recipe.name, recipe.producesItemName)"
+                    v-if="isUntrackedCraftableRecipe(recipe.name, recipe.producesItemName)"
                     class="btn-add-recipe"
-                    :title="hasApiKey ? 'Add this potion to tracked potions' : 'API key required to add potion'"
+                    :title="hasApiKey ? 'Add this craftable to tracked craftables' : 'API key required to add craftable'"
                     :disabled="!hasApiKey || addRecipeLoading[recipe.id]"
-                    @click="addUntrackedPotion(recipe)"
+                    @click="addUntrackedCraftable(recipe)"
                   >
                     <span v-if="addRecipeLoading[recipe.id]">...</span>
                     <svg

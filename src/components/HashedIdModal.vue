@@ -5,7 +5,7 @@ interface Props {
   visible: boolean
   itemName: string
   itemId: string
-  category: 'materials' | 'potions' | 'resources' | 'recipes'
+  category: 'materials' | 'craftables' | 'resources' | 'recipes'
   currentHashedId: string
   refreshing?: boolean
 }

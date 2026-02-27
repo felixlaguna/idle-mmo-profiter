@@ -4,23 +4,38 @@ import type { RankedActivity } from '../calculators/profitRanker'
 
 export interface ActivityFilters {
   dungeons: boolean
-  potions: boolean
+  craftables: boolean
   resources: boolean
 }
 
 export interface UseActivityFiltersReturn {
   filterDungeons: Ref<boolean>
-  filterPotions: Ref<boolean>
+  filterCraftables: Ref<boolean>
   filterResources: Ref<boolean>
   getFilteredActivities: (activities: RankedActivity[]) => RankedActivity[]
   getFilteredAndRerankedActivities: (activities: RankedActivity[]) => RankedActivity[]
+}
+
+// One-time migration: Rename 'potions' to 'craftables' in active-filters
+try {
+  const stored = localStorage.getItem('active-filters')
+  if (stored) {
+    const filters = JSON.parse(stored)
+    if (filters.potions !== undefined && filters.craftables === undefined) {
+      filters.craftables = filters.potions
+      delete filters.potions
+      localStorage.setItem('active-filters', JSON.stringify(filters))
+    }
+  }
+} catch (error) {
+  console.error('Failed to migrate active-filters:', error)
 }
 
 // Module-level singleton: Create filter state once at module load time
 // This ensures all components share the SAME reactive refs
 const filters = useStorage<ActivityFilters>('active-filters', {
   dungeons: true,
-  potions: true,
+  craftables: true,
   resources: true,
 })
 
@@ -42,10 +57,10 @@ export function useActivityFilters(): UseActivityFiltersReturn {
     },
   })
 
-  const filterPotions = computed({
-    get: () => filters.value.potions,
+  const filterCraftables = computed({
+    get: () => filters.value.craftables,
     set: (value: boolean) => {
-      filters.value.potions = value
+      filters.value.craftables = value
     },
   })
 
@@ -63,7 +78,7 @@ export function useActivityFilters(): UseActivityFiltersReturn {
   const getFilteredActivities = (activities: RankedActivity[]): RankedActivity[] => {
     return activities.filter((activity) => {
       if (activity.activityType === 'dungeon' && !filters.value.dungeons) return false
-      if (activity.activityType === 'potion' && !filters.value.potions) return false
+      if (activity.activityType === 'craftable' && !filters.value.craftables) return false
       if (activity.activityType === 'resource' && !filters.value.resources) return false
       return true
     })
@@ -85,7 +100,7 @@ export function useActivityFilters(): UseActivityFiltersReturn {
 
   return {
     filterDungeons,
-    filterPotions,
+    filterCraftables,
     filterResources,
     getFilteredActivities,
     getFilteredAndRerankedActivities,

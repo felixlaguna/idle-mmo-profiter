@@ -37,7 +37,7 @@ const chartData = computed(() => {
     switch (a.activityType) {
       case 'dungeon':
         return 'rgba(168, 85, 247, 0.7)' // Purple
-      case 'potion':
+      case 'craftable':
         return 'rgba(34, 197, 94, 0.7)' // Green
       case 'resource':
         return 'rgba(59, 130, 246, 0.7)' // Blue
@@ -50,7 +50,7 @@ const chartData = computed(() => {
     switch (a.activityType) {
       case 'dungeon':
         return 'rgba(168, 85, 247, 1)'
-      case 'potion':
+      case 'craftable':
         return 'rgba(34, 197, 94, 1)'
       case 'resource':
         return 'rgba(59, 130, 246, 1)'

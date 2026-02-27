@@ -15,8 +15,8 @@ const categoryTotals = computed(() => {
   const totals = {
     dungeon: 0,
     dungeonCount: 0,
-    potion: 0,
-    potionCount: 0,
+    craftable: 0,
+    craftableCount: 0,
     resource: 0,
     resourceCount: 0,
   }
@@ -26,9 +26,9 @@ const categoryTotals = computed(() => {
       if (activity.activityType === 'dungeon') {
         totals.dungeon += activity.profitPerHour
         totals.dungeonCount++
-      } else if (activity.activityType === 'potion') {
-        totals.potion += activity.profitPerHour
-        totals.potionCount++
+      } else if (activity.activityType === 'craftable') {
+        totals.craftable += activity.profitPerHour
+        totals.craftableCount++
       } else if (activity.activityType === 'resource') {
         totals.resource += activity.profitPerHour
         totals.resourceCount++
@@ -36,13 +36,13 @@ const categoryTotals = computed(() => {
     }
   })
 
-  const grandTotal = totals.dungeon + totals.potion + totals.resource
+  const grandTotal = totals.dungeon + totals.craftable + totals.resource
 
   return {
     ...totals,
     grandTotal,
     dungeonPercent: grandTotal > 0 ? (totals.dungeon / grandTotal) * 100 : 0,
-    potionPercent: grandTotal > 0 ? (totals.potion / grandTotal) * 100 : 0,
+    craftablePercent: grandTotal > 0 ? (totals.craftable / grandTotal) * 100 : 0,
     resourcePercent: grandTotal > 0 ? (totals.resource / grandTotal) * 100 : 0,
   }
 })
@@ -52,13 +52,13 @@ const chartData = computed(() => {
   const totals = categoryTotals.value
 
   return {
-    labels: ['Dungeons', 'Potions', 'Resources'],
+    labels: ['Dungeons', 'Craftables', 'Resources'],
     datasets: [{
       label: 'Total Profit/hr',
-      data: [totals.dungeon, totals.potion, totals.resource],
+      data: [totals.dungeon, totals.craftable, totals.resource],
       backgroundColor: [
         'rgba(168, 85, 247, 0.7)', // Purple for dungeons
-        'rgba(34, 197, 94, 0.7)',  // Green for potions
+        'rgba(34, 197, 94, 0.7)',  // Green for craftables
         'rgba(59, 130, 246, 0.7)',  // Blue for resources
       ],
       borderColor: [
@@ -107,7 +107,7 @@ const createChart = () => {
                 return data.labels.map((label, i) => {
                   const value = data.datasets[0].data[i] as number
                   const percent = i === 0 ? totals.dungeonPercent :
-                                 i === 1 ? totals.potionPercent :
+                                 i === 1 ? totals.craftablePercent :
                                  totals.resourcePercent
                   return {
                     text: `${label}: ${Math.round(value).toLocaleString()} (${percent.toFixed(1)}%)`,
@@ -136,10 +136,10 @@ const createChart = () => {
               const value = context.parsed
               const totals = categoryTotals.value
               const percent = context.dataIndex === 0 ? totals.dungeonPercent :
-                             context.dataIndex === 1 ? totals.potionPercent :
+                             context.dataIndex === 1 ? totals.craftablePercent :
                              totals.resourcePercent
               const count = context.dataIndex === 0 ? totals.dungeonCount :
-                           context.dataIndex === 1 ? totals.potionCount :
+                           context.dataIndex === 1 ? totals.craftableCount :
                            totals.resourceCount
               return [
                 `Total: ${Math.round(value).toLocaleString()} gold/hr`,

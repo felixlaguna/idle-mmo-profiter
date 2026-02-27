@@ -316,7 +316,7 @@ The data provider ensures that activity-specific data (potionCrafts, resourceGat
 ```typescript
 // Line 164-181 in useDataProvider.ts
 const potionCrafts = computed(() => {
-  return defaults.value.potionCrafts.map((craft) => {
+  return defaults.value.craftableRecipes.map((craft) => {
     // Sync material prices from materials array
     const updatedMaterials = craft.materials.map((mat) => ({
       ...mat,
@@ -375,17 +375,17 @@ expectedValue = recipe.price * recipe.chance * (1 + totalMF / 100)
 ```typescript
 // App.vue line 96-100
 const potionProfits = computed(() => {
-  return calculatePotionProfits(
-    dataProvider.potionCrafts.value,  // ← Uses synced material prices & potion prices
+  return calculateCraftableProfits(
+    dataProvider.craftableRecipes.value,  // ← Uses synced material prices & potion prices
     marketTaxRate.value
   )
 })
 
-// potionCalculator.ts line 58-59
+// craftableCalculator.ts line 58-59
 totalMaterialCost = mat.quantity * mat.unitCost
 // Uses mat.unitCost synced from materials array (Market tab source of truth)
 
-// potionCalculator.ts line 72
+// craftableCalculator.ts line 72
 sellAfterTax = potion.currentPrice * (1 - taxRate)
 // Uses currentPrice synced from potions array (Market tab source of truth)
 ```
@@ -433,7 +433,7 @@ No manual refresh needed. All changes propagate instantly.
 - **src/composables/useMarketRefresh.ts** - Market value refresh logic, API integration, progress tracking
 - **src/components/MarketTable.vue** - UI for editing prices and refresh controls
 - **src/calculators/dungeonCalculator.ts** - Reads recipe prices from data provider
-- **src/calculators/potionCalculator.ts** - Reads material and potion prices from data provider
+- **src/calculators/craftableCalculator.ts** - Reads material and potion prices from data provider
 - **src/calculators/resourceCalculator.ts** - Reads resource prices from data provider
 - **src/api/services.ts** - API service layer, includes market price fetching
 - **src/App.vue** - Wires calculators to reactive data provider

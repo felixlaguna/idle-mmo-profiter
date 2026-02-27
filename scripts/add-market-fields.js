@@ -24,7 +24,7 @@ data.materials = data.materials.map(item => ({
 }))
 
 // Add hashedId and vendorValue to potions
-data.potions = data.potions.map(item => ({
+data.craftables = data.craftables.map(item => ({
   ...item,
   hashedId: item.hashedId || '',
   vendorValue: item.vendorValue || 0
@@ -48,7 +48,7 @@ fs.writeFileSync(defaultsPath, JSON.stringify(data, null, 2) + '\n', 'utf8')
 
 console.log('✓ Updated defaults.json')
 console.log(`  Materials: ${data.materials.length} items`)
-console.log(`  Potions: ${data.potions.length} items`)
+console.log(`  Craftables: ${data.craftables.length} items`)
 console.log(`  Resources: ${data.resources.length} items`)
 console.log(`  Recipes: ${data.recipes.length} items`)
 console.log('\nAll items now have hashedId and vendorValue fields.')

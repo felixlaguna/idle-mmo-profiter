@@ -8,7 +8,7 @@ export interface Material {
   vendorValue?: number
 }
 
-export interface Potion {
+export interface Craftable {
   id: string
   name: string
   price: number
@@ -52,16 +52,16 @@ export interface Dungeon {
   drops: DungeonDrop[]
 }
 
-export interface PotionMaterial {
+export interface CraftableMaterial {
   name: string
   quantity: number
   unitCost: number
 }
 
-export interface PotionCraft {
+export interface CraftableRecipe {
   name: string
   timeSeconds: number
-  materials: PotionMaterial[]
+  materials: CraftableMaterial[]
   currentPrice: number
   recipeId?: string
   untradableRecipeId?: string
@@ -109,7 +109,7 @@ export interface AppSettings {
 
 // Results and calculations
 
-export type ActivityType = 'dungeon' | 'potion' | 'resource'
+export type ActivityType = 'dungeon' | 'craftable' | 'resource'
 
 export interface ProfitResult {
   activityName: string
@@ -146,11 +146,11 @@ export interface AuthCheckResponse {
 
 export interface DefaultData {
   materials: Material[]
-  potions: Potion[]
+  craftables: Craftable[]
   resources: Resource[]
   recipes: Recipe[]
   dungeons: Dungeon[]
-  potionCrafts: PotionCraft[]
+  craftableRecipes: CraftableRecipe[]
   resourceGathering: ResourceGather[]
   magicFindDefaults: MagicFindSettings
   marketTaxRate: number

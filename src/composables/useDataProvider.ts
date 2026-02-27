@@ -16,7 +16,7 @@ import defaultData from '../data/defaults.json'
 // Storage keys
 const STORAGE_PREFIX = 'idlemmo:'
 const USER_OVERRIDES_KEY = `${STORAGE_PREFIX}user-overrides`
-const POTION_CRAFTS_KEY = `${STORAGE_PREFIX}potion-crafts`
+const CRAFTABLE_RECIPES_KEY = `${STORAGE_PREFIX}craftable-recipes`
 
 /**
  * User overrides structure
@@ -27,7 +27,7 @@ interface UserOverrides {
     string,
     { price?: number; refreshExcluded?: boolean; hashedId?: string; vendorValue?: number }
   >
-  potions?: Record<
+  craftables?: Record<
     string,
     { price?: number; refreshExcluded?: boolean; hashedId?: string; vendorValue?: number }
   >
@@ -81,29 +81,29 @@ function saveUserOverrides(overrides: UserOverrides): void {
 }
 
 /**
- * Save potionCrafts to localStorage
+ * Save craftableRecipes to localStorage
  */
-function savePotionCrafts(potionCrafts: DefaultData['potionCrafts']): void {
+function saveCraftableRecipes(craftableRecipes: DefaultData['craftableRecipes']): void {
   try {
-    localStorage.setItem(POTION_CRAFTS_KEY, JSON.stringify(potionCrafts))
+    localStorage.setItem(CRAFTABLE_RECIPES_KEY, JSON.stringify(craftableRecipes))
   } catch (error) {
-    console.error('Failed to save potion crafts:', error)
+    console.error('Failed to save craftable recipes:', error)
   }
 }
 
 /**
- * Load potionCrafts from localStorage, merging with defaults
+ * Load craftableRecipes from localStorage, merging with defaults
  */
-function loadPotionCrafts(defaultCrafts: DefaultData['potionCrafts']): DefaultData['potionCrafts'] {
+function loadCraftableRecipes(defaultCrafts: DefaultData['craftableRecipes']): DefaultData['craftableRecipes'] {
   try {
-    const stored = localStorage.getItem(POTION_CRAFTS_KEY)
+    const stored = localStorage.getItem(CRAFTABLE_RECIPES_KEY)
     if (!stored) return defaultCrafts
 
-    const savedCrafts = JSON.parse(stored) as DefaultData['potionCrafts']
+    const savedCrafts = JSON.parse(stored) as DefaultData['craftableRecipes']
     // Use saved crafts as the source of truth (includes additions, removals, time edits)
     return savedCrafts
   } catch (error) {
-    console.error('Failed to load potion crafts:', error)
+    console.error('Failed to load craftable recipes:', error)
     return defaultCrafts
   }
 }
@@ -136,10 +136,80 @@ function createDataProvider() {
     console.error('Failed to migrate user overrides:', error)
   }
 
+  // One-time migration: Rename potion-crafts to craftable-recipes
+  const oldCraftsKey = 'idlemmo:potion-crafts'
+  const newCraftsKey = 'idlemmo:craftable-recipes'
+  try {
+    const oldCraftsData = localStorage.getItem(oldCraftsKey)
+    const newCraftsData = localStorage.getItem(newCraftsKey)
+
+    if (oldCraftsData && !newCraftsData) {
+      localStorage.setItem(newCraftsKey, oldCraftsData)
+      localStorage.removeItem(oldCraftsKey)
+      console.log('Migrated craftable recipes from old storage key to new storage key')
+    }
+  } catch (error) {
+    console.error('Failed to migrate craftable recipes:', error)
+  }
+
+  // One-time migration: Rename 'potions' to 'craftables' in user overrides
+  try {
+    const overridesData = localStorage.getItem(USER_OVERRIDES_KEY)
+    if (overridesData) {
+      const overrides = JSON.parse(overridesData)
+      if (overrides.potions && !overrides.craftables) {
+        overrides.craftables = overrides.potions
+        delete overrides.potions
+        localStorage.setItem(USER_OVERRIDES_KEY, JSON.stringify(overrides))
+        console.log('Migrated user overrides: renamed potions to craftables')
+      }
+    }
+  } catch (error) {
+    console.error('Failed to migrate user overrides potions key:', error)
+  }
+
   // Load default data (cast to DefaultData type)
   const loadedDefaults = defaultData as DefaultData
-  // Restore persisted potionCrafts (includes user additions/removals/edits)
-  loadedDefaults.potionCrafts = loadPotionCrafts(loadedDefaults.potionCrafts)
+  // Restore persisted craftableRecipes (includes user additions/removals/edits)
+  loadedDefaults.craftableRecipes = loadCraftableRecipes(loadedDefaults.craftableRecipes)
+
+  // CRITICAL: Sync materials and craftables from craftableRecipes
+  // This ensures that all ingredients and outputs referenced by craftableRecipes
+  // exist in the materials and craftables arrays, preventing the Market tab bug
+  // where items disappear after reset-to-defaults.
+  const materialNames = new Set(loadedDefaults.materials.map((m) => m.name))
+  const craftableNames = new Set(loadedDefaults.craftables.map((c) => c.name))
+
+  for (const recipe of loadedDefaults.craftableRecipes) {
+    // Sync materials (ingredients)
+    for (const mat of recipe.materials) {
+      if (!materialNames.has(mat.name)) {
+        const id = `mat-auto-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`
+        loadedDefaults.materials.push({
+          id,
+          name: mat.name,
+          price: mat.unitCost,
+          hashedId: '',
+          vendorValue: 0,
+        })
+        materialNames.add(mat.name)
+      }
+    }
+
+    // Sync craftable output items
+    if (!craftableNames.has(recipe.name)) {
+      const id = `craft-auto-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`
+      loadedDefaults.craftables.push({
+        id,
+        name: recipe.name,
+        price: recipe.currentPrice,
+        hashedId: '',
+        vendorValue: 0,
+      })
+      craftableNames.add(recipe.name)
+    }
+  }
+
   const defaults = ref(loadedDefaults)
 
   // Load user overrides
@@ -176,8 +246,8 @@ function createDataProvider() {
     return applyOverrides(defaults.value.materials, userOverrides.value.materials)
   })
 
-  const potions = computed(() => {
-    return applyOverrides(defaults.value.potions, userOverrides.value.potions)
+  const craftables = computed(() => {
+    return applyOverrides(defaults.value.craftables, userOverrides.value.craftables)
   })
 
   const resources = computed(() => {
@@ -193,7 +263,7 @@ function createDataProvider() {
   const marketTaxRate = computed(() => defaults.value.marketTaxRate)
 
   /**
-   * Create lookup maps for material, potion, and resource prices
+   * Create lookup maps for material, craftable, and resource prices
    * These allow us to apply overrides to activity data
    */
   const materialPriceMap = computed(() => {
@@ -204,10 +274,10 @@ function createDataProvider() {
     return map
   })
 
-  const potionPriceMap = computed(() => {
+  const craftablePriceMap = computed(() => {
     const map = new Map<string, number>()
-    potions.value.forEach((pot) => {
-      map.set(pot.name, pot.price)
+    craftables.value.forEach((craft) => {
+      map.set(craft.name, craft.price)
     })
     return map
   })
@@ -221,20 +291,20 @@ function createDataProvider() {
   })
 
   /**
-   * PotionCrafts with material prices and potion prices updated from overrides
+   * CraftableRecipes with material prices and craftable prices updated from overrides
    * This ensures that when a user edits a material price in the Market tab,
-   * it flows through to the potion craft calculations
+   * it flows through to the craftable recipe calculations
    */
-  const potionCrafts = computed(() => {
-    return defaults.value.potionCrafts.map((craft) => {
+  const craftableRecipes = computed(() => {
+    return defaults.value.craftableRecipes.map((craft) => {
       // Update material unit costs from material price overrides
       const updatedMaterials = craft.materials.map((mat) => ({
         ...mat,
         unitCost: materialPriceMap.value.get(mat.name) ?? mat.unitCost,
       }))
 
-      // Update current price from potion price overrides
-      const updatedPrice = potionPriceMap.value.get(craft.name) ?? craft.currentPrice
+      // Update current price from craftable price overrides
+      const updatedPrice = craftablePriceMap.value.get(craft.name) ?? craft.currentPrice
 
       return {
         ...craft,
@@ -314,16 +384,16 @@ function createDataProvider() {
   }
 
   /**
-   * Update a single potion price
+   * Update a single craftable price
    */
-  function updatePotionPrice(id: string, price: number): void {
+  function updateCraftablePrice(id: string, price: number): void {
     const overrides = { ...userOverrides.value }
 
-    if (!overrides.potions) {
-      overrides.potions = {}
+    if (!overrides.craftables) {
+      overrides.craftables = {}
     }
 
-    overrides.potions[id] = { ...overrides.potions[id], price }
+    overrides.craftables[id] = { ...overrides.craftables[id], price }
     userOverrides.value = overrides
     saveUserOverrides(overrides)
   }
@@ -365,7 +435,7 @@ function createDataProvider() {
    * Clear all user overrides for a specific category
    */
   function clearCategoryOverrides(
-    category: 'materials' | 'potions' | 'resources' | 'recipes'
+    category: 'materials' | 'craftables' | 'resources' | 'recipes'
   ): void {
     const overrides = { ...userOverrides.value }
     delete overrides[category]
@@ -385,7 +455,7 @@ function createDataProvider() {
    * Update hashedId for an item — persisted to localStorage via user overrides
    */
   function updateHashedId(
-    category: 'materials' | 'potions' | 'resources' | 'recipes',
+    category: 'materials' | 'craftables' | 'resources' | 'recipes',
     id: string,
     hashedId: string
   ): void {
@@ -409,7 +479,7 @@ function createDataProvider() {
    * Update vendorValue for an item — persisted to localStorage via user overrides
    */
   function updateVendorValue(
-    category: 'materials' | 'potions' | 'resources' | 'recipes',
+    category: 'materials' | 'craftables' | 'resources' | 'recipes',
     id: string,
     vendorValue: number
   ): void {
@@ -427,7 +497,7 @@ function createDataProvider() {
    * Check if an item has user overrides
    */
   function hasOverride(
-    category: 'materials' | 'potions' | 'resources' | 'recipes',
+    category: 'materials' | 'craftables' | 'resources' | 'recipes',
     id: string
   ): boolean {
     return !!userOverrides.value[category]?.[id]
@@ -458,12 +528,12 @@ function createDataProvider() {
   function getOverrideStats() {
     const stats = {
       materials: Object.keys(userOverrides.value.materials || {}).length,
-      potions: Object.keys(userOverrides.value.potions || {}).length,
+      craftables: Object.keys(userOverrides.value.craftables || {}).length,
       resources: Object.keys(userOverrides.value.resources || {}).length,
       recipes: Object.keys(userOverrides.value.recipes || {}).length,
     }
 
-    const total = stats.materials + stats.potions + stats.resources + stats.recipes
+    const total = stats.materials + stats.craftables + stats.resources + stats.recipes
 
     return { ...stats, total }
   }
@@ -472,7 +542,7 @@ function createDataProvider() {
    * Set refresh exclusion state for a single item
    */
   function setRefreshExcluded(
-    category: 'materials' | 'potions' | 'resources' | 'recipes',
+    category: 'materials' | 'craftables' | 'resources' | 'recipes',
     id: string,
     excluded: boolean
   ): void {
@@ -495,7 +565,7 @@ function createDataProvider() {
    * Check if an item is excluded from refresh
    */
   function isRefreshExcluded(
-    category: 'materials' | 'potions' | 'resources' | 'recipes',
+    category: 'materials' | 'craftables' | 'resources' | 'recipes',
     id: string
   ): boolean {
     return userOverrides.value[category]?.[id]?.refreshExcluded ?? false
@@ -505,7 +575,7 @@ function createDataProvider() {
    * Bulk set refresh exclusion for all items in a category
    */
   function setAllRefreshExcluded(
-    category: 'materials' | 'potions' | 'resources' | 'recipes',
+    category: 'materials' | 'craftables' | 'resources' | 'recipes',
     excluded: boolean
   ): void {
     const overrides = { ...userOverrides.value }
@@ -520,8 +590,8 @@ function createDataProvider() {
       case 'materials':
         itemIds = defaults.value.materials.map((item) => item.id)
         break
-      case 'potions':
-        itemIds = defaults.value.potions.map((item) => item.id)
+      case 'craftables':
+        itemIds = defaults.value.craftables.map((item) => item.id)
         break
       case 'resources':
         itemIds = defaults.value.resources.map((item) => item.id)
@@ -546,7 +616,7 @@ function createDataProvider() {
   /**
    * Get exclusion statistics for a specific category or all categories
    */
-  function getExclusionStats(category?: 'materials' | 'potions' | 'resources' | 'recipes') {
+  function getExclusionStats(category?: 'materials' | 'craftables' | 'resources' | 'recipes') {
     if (category) {
       // Stats for a specific category
       let totalItems = 0
@@ -554,8 +624,8 @@ function createDataProvider() {
         case 'materials':
           totalItems = defaults.value.materials.length
           break
-        case 'potions':
-          totalItems = defaults.value.potions.length
+        case 'craftables':
+          totalItems = defaults.value.craftables.length
           break
         case 'resources':
           totalItems = defaults.value.resources.length
@@ -578,7 +648,7 @@ function createDataProvider() {
 
     // Stats for all categories
     const materialsTotal = defaults.value.materials.length
-    const potionsTotal = defaults.value.potions.length
+    const craftablesTotal = defaults.value.craftables.length
     const resourcesTotal = defaults.value.resources.length
     const recipesTotal = defaults.value.recipes.length
 
@@ -586,7 +656,7 @@ function createDataProvider() {
       (override) => override.refreshExcluded === true
     ).length
 
-    const potionsExcluded = Object.values(userOverrides.value.potions || {}).filter(
+    const craftablesExcluded = Object.values(userOverrides.value.craftables || {}).filter(
       (override) => override.refreshExcluded === true
     ).length
 
@@ -598,8 +668,8 @@ function createDataProvider() {
       (override) => override.refreshExcluded === true
     ).length
 
-    const totalItems = materialsTotal + potionsTotal + resourcesTotal + recipesTotal
-    const totalExcluded = materialsExcluded + potionsExcluded + resourcesExcluded + recipesExcluded
+    const totalItems = materialsTotal + craftablesTotal + resourcesTotal + recipesTotal
+    const totalExcluded = materialsExcluded + craftablesExcluded + resourcesExcluded + recipesExcluded
 
     return {
       materials: {
@@ -607,10 +677,10 @@ function createDataProvider() {
         excluded: materialsExcluded,
         included: materialsTotal - materialsExcluded,
       },
-      potions: {
-        total: potionsTotal,
-        excluded: potionsExcluded,
-        included: potionsTotal - potionsExcluded,
+      craftables: {
+        total: craftablesTotal,
+        excluded: craftablesExcluded,
+        included: craftablesTotal - craftablesExcluded,
       },
       resources: {
         total: resourcesTotal,
@@ -629,18 +699,18 @@ function createDataProvider() {
   }
 
   /**
-   * Add a new PotionCraft entry to the defaults
+   * Add a new CraftableRecipe entry to the defaults
    */
-  function addPotionCraft(potionCraft: {
+  function addCraftableRecipe(craftableRecipe: {
     name: string
     timeSeconds: number
     materials: Array<{ name: string; quantity: number; unitCost: number }>
     currentPrice: number
     skill?: 'alchemy' | 'forging'
   }): void {
-    defaults.value.potionCrafts.push(potionCraft)
+    defaults.value.craftableRecipes.push(craftableRecipe)
     defaults.value = { ...defaults.value }
-    savePotionCrafts(defaults.value.potionCrafts)
+    saveCraftableRecipes(defaults.value.craftableRecipes)
   }
 
   /**
@@ -663,45 +733,45 @@ function createDataProvider() {
   }
 
   /**
-   * Add a new Potion entry to the defaults (if it doesn't already exist)
+   * Add a new Craftable entry to the defaults (if it doesn't already exist)
    */
-  function addPotion(potion: { name: string; price: number; hashedId?: string; vendorValue?: number }): string {
-    const existing = potions.value.find((p) => p.name === potion.name)
+  function addCraftable(craftable: { name: string; price: number; hashedId?: string; vendorValue?: number }): string {
+    const existing = craftables.value.find((c) => c.name === craftable.name)
     if (existing) return existing.id
 
-    const id = `pot-auto-${Date.now()}`
-    defaults.value.potions.push({
+    const id = `craft-auto-${Date.now()}`
+    defaults.value.craftables.push({
       id,
-      name: potion.name,
-      price: potion.price,
-      hashedId: potion.hashedId || '',
-      vendorValue: potion.vendorValue || 0,
+      name: craftable.name,
+      price: craftable.price,
+      hashedId: craftable.hashedId || '',
+      vendorValue: craftable.vendorValue || 0,
     })
     defaults.value = { ...defaults.value }
     return id
   }
 
   /**
-   * Update a PotionCraft's craft time by potion name
+   * Update a CraftableRecipe's craft time by craftable name
    */
-  function updatePotionCraftTime(potionName: string, timeSeconds: number): void {
-    const craft = defaults.value.potionCrafts.find((c) => c.name === potionName)
+  function updateCraftableRecipeTime(craftableName: string, timeSeconds: number): void {
+    const craft = defaults.value.craftableRecipes.find((c) => c.name === craftableName)
     if (craft) {
       craft.timeSeconds = timeSeconds
       defaults.value = { ...defaults.value }
-      savePotionCrafts(defaults.value.potionCrafts)
+      saveCraftableRecipes(defaults.value.craftableRecipes)
     }
   }
 
   /**
-   * Remove a PotionCraft entry by name
+   * Remove a CraftableRecipe entry by name
    */
-  function removePotionCraft(name: string): void {
-    defaults.value.potionCrafts = defaults.value.potionCrafts.filter(
+  function removeCraftableRecipe(name: string): void {
+    defaults.value.craftableRecipes = defaults.value.craftableRecipes.filter(
       (craft) => craft.name !== name
     )
     defaults.value = { ...defaults.value }
-    savePotionCrafts(defaults.value.potionCrafts)
+    saveCraftableRecipes(defaults.value.craftableRecipes)
   }
 
   /**
@@ -742,12 +812,12 @@ function createDataProvider() {
         hashedId: mat.hashedId || '',
         vendorValue: mat.vendorValue || 0,
       })),
-      potions: potions.value.map(pot => ({
-        id: pot.id,
-        name: pot.name,
-        price: pot.price,
-        hashedId: pot.hashedId || '',
-        vendorValue: pot.vendorValue || 0,
+      craftables: craftables.value.map(craft => ({
+        id: craft.id,
+        name: craft.name,
+        price: craft.price,
+        hashedId: craft.hashedId || '',
+        vendorValue: craft.vendorValue || 0,
       })),
       resources: resources.value.map(res => ({
         id: res.id,
@@ -774,7 +844,7 @@ function createDataProvider() {
         return exported
       }),
       dungeons: dungeons.value,
-      potionCrafts: potionCrafts.value.map(craft => ({
+      craftableRecipes: craftableRecipes.value.map(craft => ({
         name: craft.name,
         skill: craft.skill,
         timeSeconds: craft.timeSeconds,
@@ -818,18 +888,18 @@ function createDataProvider() {
   return {
     // Reactive data
     materials,
-    potions,
+    craftables,
     resources,
     recipes,
     dungeons,
-    potionCrafts,
+    craftableRecipes,
     resourceGathering,
     magicFindDefaults,
     marketTaxRate,
 
     // Update methods
     updateMaterialPrice,
-    updatePotionPrice,
+    updateCraftablePrice,
     updateResourcePrice,
     updateRecipe,
     updateHashedId,
@@ -854,12 +924,12 @@ function createDataProvider() {
     // Export methods
     exportAsDefaultsJson,
 
-    // Potion craft methods
-    addPotionCraft,
-    updatePotionCraftTime,
-    removePotionCraft,
+    // Craftable methods
+    addCraftableRecipe,
+    updateCraftableRecipeTime,
+    removeCraftableRecipe,
     addMaterial,
-    addPotion,
+    addCraftable,
     updateRecipeDefaults,
   }
 }

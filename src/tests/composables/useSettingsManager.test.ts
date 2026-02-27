@@ -97,7 +97,7 @@ describe('useSettingsManager - Reset Functionality', () => {
       // Set user overrides and other settings
       const overrides = JSON.stringify({
         materials: { 'material-1': { price: 999 } },
-        potions: { 'potion-1': { price: 888 } },
+        craftables: { 'craftable-1': { price: 888 } },
       })
       setRawStorage('user-overrides', overrides)
       setRawStorage('magicFind', '100')

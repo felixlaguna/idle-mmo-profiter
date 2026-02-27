@@ -41,7 +41,7 @@ interface Item {
 
 interface DefaultData {
   materials: Item[]
-  potions: Item[]
+  craftables: Item[]
   resources: Item[]
   recipes: Item[]
   [key: string]: unknown
@@ -274,7 +274,7 @@ async function main() {
   // Calculate total items
   const totalItems =
     data.materials.length +
-    data.potions.length +
+    data.craftables.length +
     data.resources.length +
     data.recipes.length
 
@@ -293,14 +293,14 @@ async function main() {
   }
   data.materials = processedMaterials
 
-  // Process potions
-  console.log(`\n=== Processing Potions (${data.potions.length} items) ===\n`)
-  const processedPotions: Item[] = []
-  for (const item of data.potions) {
+  // Process craftables
+  console.log(`\n=== Processing Craftables (${data.craftables.length} items) ===\n`)
+  const processedCraftables: Item[] = []
+  for (const item of data.craftables) {
     currentIndex++
-    processedPotions.push(await processItem(item, apiKey, currentIndex, totalItems))
+    processedCraftables.push(await processItem(item, apiKey, currentIndex, totalItems))
   }
-  data.potions = processedPotions
+  data.craftables = processedCraftables
 
   // Process resources
   console.log(`\n=== Processing Resources (${data.resources.length} items) ===\n`)
@@ -330,7 +330,7 @@ async function main() {
   console.log('✓ Population complete!')
   console.log(`  Time taken: ${durationMinutes} minutes`)
   console.log(`  Materials: ${data.materials.length} items`)
-  console.log(`  Potions: ${data.potions.length} items`)
+  console.log(`  Craftables: ${data.craftables.length} items`)
   console.log(`  Resources: ${data.resources.length} items`)
   console.log(`  Recipes: ${data.recipes.length} items`)
 }

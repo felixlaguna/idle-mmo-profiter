@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import type { PotionProfitResult } from '../calculators/potionCalculator'
+import type { CraftableProfitResult } from '../calculators/craftableCalculator'
 import EditableValue from './EditableValue.vue'
 import EmptyState from './EmptyState.vue'
 import { useHeatmap } from '../composables/useHeatmap'
@@ -8,23 +8,23 @@ import { useHeatmap } from '../composables/useHeatmap'
 const { getHeatmapStyle } = useHeatmap()
 
 const props = defineProps<{
-  potions: PotionProfitResult[]
+  craftables: CraftableProfitResult[]
 }>()
 
 // Emit events for editing values
 const emit = defineEmits<{
-  (e: 'update:materialPrice', potionName: string, materialName: string, value: number): void
-  (e: 'update:marketPrice', potionName: string, value: number): void
-  (e: 'update:craftTime', potionName: string, value: number): void
-  (e: 'delete:potion', potionName: string): void
+  (e: 'update:materialPrice', craftableName: string, materialName: string, value: number): void
+  (e: 'update:marketPrice', craftableName: string, value: number): void
+  (e: 'update:craftTime', craftableName: string, value: number): void
+  (e: 'delete:craftable', craftableName: string): void
 }>()
 
 // Expanded rows tracking
 const expandedRows = ref<Set<string>>(new Set())
 
 // Sub-tab configuration
-type PotionSubTab = 'alchemy' | 'forging'
-const activeSubTab = ref<PotionSubTab>('alchemy')
+type CraftableSubTab = 'alchemy' | 'forging'
+const activeSubTab = ref<CraftableSubTab>('alchemy')
 
 // Sort configuration
 type SortKey = 'name' | 'totalCost' | 'currentPrice' | 'profit' | 'profitPerHour'
@@ -33,11 +33,11 @@ type SortOrder = 'asc' | 'desc'
 const sortKey = ref<SortKey>('profitPerHour')
 const sortOrder = ref<SortOrder>('desc')
 
-// Computed sorted potions
-const sortedPotions = computed(() => {
-  const potions = [...props.potions]
+// Computed sorted craftables
+const sortedCraftables = computed(() => {
+  const craftables = [...props.craftables]
 
-  potions.sort((a, b) => {
+  craftables.sort((a, b) => {
     let aValue: number | string
     let bValue: number | string
 
@@ -78,26 +78,26 @@ const sortedPotions = computed(() => {
       : (bValue as number) - (aValue as number)
   })
 
-  return potions
+  return craftables
 })
 
-// Filter potions by active sub-tab
-const filteredPotions = computed(() => {
-  return sortedPotions.value.filter(p => p.skill === activeSubTab.value)
+// Filter craftables by active sub-tab
+const filteredCraftables = computed(() => {
+  return sortedCraftables.value.filter(p => p.skill === activeSubTab.value)
 })
 
 // Toggle row expansion
-const toggleRow = (potionName: string) => {
-  if (expandedRows.value.has(potionName)) {
-    expandedRows.value.delete(potionName)
+const toggleRow = (craftableName: string) => {
+  if (expandedRows.value.has(craftableName)) {
+    expandedRows.value.delete(craftableName)
   } else {
-    expandedRows.value.add(potionName)
+    expandedRows.value.add(craftableName)
   }
 }
 
 // Check if row is expanded
-const isExpanded = (potionName: string): boolean => {
-  return expandedRows.value.has(potionName)
+const isExpanded = (craftableName: string): boolean => {
+  return expandedRows.value.has(craftableName)
 }
 
 // Toggle sort
@@ -136,15 +136,15 @@ const onTooltipHover = (event: MouseEvent) => {
 // Calculate profit range for heatmap
 const profitRange = computed(() => {
   // Guard against empty array: Math.min/max of empty array returns Infinity/-Infinity
-  if (filteredPotions.value.length === 0) {
+  if (filteredCraftables.value.length === 0) {
     return {
       profit: { min: 0, max: 0 },
       profitPerHour: { min: 0, max: 0 }
     }
   }
 
-  const profits = filteredPotions.value.map(p => p.profit)
-  const profitHours = filteredPotions.value.map(p => p.profitPerHour)
+  const profits = filteredCraftables.value.map(p => p.profit)
+  const profitHours = filteredCraftables.value.map(p => p.profitPerHour)
   return {
     profit: {
       min: Math.min(...profits),
@@ -158,16 +158,16 @@ const profitRange = computed(() => {
 })
 
 // Handle inline editing
-const handleMaterialPriceUpdate = (potionName: string, materialName: string, value: number) => {
-  emit('update:materialPrice', potionName, materialName, value)
+const handleMaterialPriceUpdate = (craftableName: string, materialName: string, value: number) => {
+  emit('update:materialPrice', craftableName, materialName, value)
 }
 
-const handleMarketPriceUpdate = (potionName: string, value: number) => {
-  emit('update:marketPrice', potionName, value)
+const handleMarketPriceUpdate = (craftableName: string, value: number) => {
+  emit('update:marketPrice', craftableName, value)
 }
 
-const handleCraftTimeUpdate = (potionName: string, value: number) => {
-  emit('update:craftTime', potionName, value)
+const handleCraftTimeUpdate = (craftableName: string, value: number) => {
+  emit('update:craftTime', craftableName, value)
 }
 
 // Format seconds into a readable string
@@ -181,7 +181,7 @@ const formatTime = (seconds: number): string => {
 </script>
 
 <template>
-  <div class="potion-table">
+  <div class="craftable-table">
     <!-- Sub-tab navigation -->
     <div class="sub-tab-navigation">
       <button
@@ -201,20 +201,20 @@ const formatTime = (seconds: number): string => {
     </div>
 
     <div class="table-container">
-      <!-- Empty state when no potions match the active sub-tab -->
+      <!-- Empty state when no craftables match the active sub-tab -->
       <EmptyState
-        v-if="filteredPotions.length === 0"
+        v-if="filteredCraftables.length === 0"
         icon="🧪"
-        title="No potions found"
-        description="No potions match this category yet. Add potions from the Market tab."
+        title="No craftables found"
+        description="No craftables match this category yet. Add craftables from the Market tab."
       />
 
-      <table v-else class="main-table mobile-card-layout" role="grid" aria-label="Potion crafting profitability">
+      <table v-else class="main-table mobile-card-layout" role="grid" aria-label="Craftable profitability">
         <thead>
           <tr>
             <th class="expand-col"></th>
             <th class="sortable" @click="toggleSort('name')">
-              Potion Name {{ getSortIcon('name') }}
+              Craftable Name {{ getSortIcon('name') }}
             </th>
             <th class="sortable text-right" @click="toggleSort('totalCost')">
               Total Cost {{ getSortIcon('totalCost') }}
@@ -231,125 +231,125 @@ const formatTime = (seconds: number): string => {
           </tr>
         </thead>
         <tbody>
-          <template v-for="potion in filteredPotions" :key="potion.name">
+          <template v-for="craftable in filteredCraftables" :key="craftable.name">
             <!-- Main Row -->
-            <tr class="main-row" :class="{ expanded: isExpanded(potion.name) }">
+            <tr class="main-row" :class="{ expanded: isExpanded(craftable.name) }">
               <td class="expand-col" data-label="">
                 <button
                   class="expand-button"
-                  :class="{ expanded: isExpanded(potion.name) }"
-                  :title="isExpanded(potion.name) ? 'Collapse' : 'Expand'"
-                  :aria-label="`${isExpanded(potion.name) ? 'Collapse' : 'Expand'} ${potion.name} details`"
-                  :aria-expanded="isExpanded(potion.name)"
-                  @click="toggleRow(potion.name)"
+                  :class="{ expanded: isExpanded(craftable.name) }"
+                  :title="isExpanded(craftable.name) ? 'Collapse' : 'Expand'"
+                  :aria-label="`${isExpanded(craftable.name) ? 'Collapse' : 'Expand'} ${craftable.name} details`"
+                  :aria-expanded="isExpanded(craftable.name)"
+                  @click="toggleRow(craftable.name)"
                 >
-                  {{ isExpanded(potion.name) ? '▼' : '▶' }}
+                  {{ isExpanded(craftable.name) ? '▼' : '▶' }}
                 </button>
               </td>
-              <td class="name-cell" data-label="Potion">
-                {{ potion.name }}
+              <td class="name-cell" data-label="Craftable">
+                {{ craftable.name }}
                 <button
-                  class="btn-delete-potion"
-                  title="Remove from potion list"
-                  @click.stop="emit('delete:potion', potion.name)"
+                  class="btn-delete-craftable"
+                  title="Remove from craftable list"
+                  @click.stop="emit('delete:craftable', craftable.name)"
                 >
                   ✕
                 </button>
               </td>
-              <td class="text-right" data-label="Total Cost">{{ formatNumber(potion.totalCost) }}</td>
+              <td class="text-right" data-label="Total Cost">{{ formatNumber(craftable.totalCost) }}</td>
               <td class="text-right" data-label="Market Price">
                 <EditableValue
-                  :model-value="potion.currentPrice"
-                  :default-value="potion.currentPrice"
-                  @update:model-value="(value) => handleMarketPriceUpdate(potion.name, value)"
+                  :model-value="craftable.currentPrice"
+                  :default-value="craftable.currentPrice"
+                  @update:model-value="(value) => handleMarketPriceUpdate(craftable.name, value)"
                 />
               </td>
               <td
                 class="text-right"
                 data-label="Profit"
-                :style="getHeatmapStyle(potion.profit, profitRange.profit.min, profitRange.profit.max)"
+                :style="getHeatmapStyle(craftable.profit, profitRange.profit.min, profitRange.profit.max)"
               >
-                <span v-if="potion.hasRecipeCost" class="profit-with-tooltip" @mouseenter="onTooltipHover">
-                  {{ formatNumber(potion.profit) }}
-                  <span class="recipe-indicator" :title="`Has recipe cost from ${potion.tradableRecipeName}`">ⓡ</span>
+                <span v-if="craftable.hasRecipeCost" class="profit-with-tooltip" @mouseenter="onTooltipHover">
+                  {{ formatNumber(craftable.profit) }}
+                  <span class="recipe-indicator" :title="`Has recipe cost from ${craftable.tradableRecipeName}`">ⓡ</span>
                   <div class="tooltip">
                     <div class="tooltip-content">
                       <div class="tooltip-title">Dual Profitability</div>
                       <div class="tooltip-row">
                         <span class="tooltip-label">With recipe cost:</span>
-                        <span class="tooltip-value">{{ formatNumber(potion.profit) }} gold</span>
+                        <span class="tooltip-value">{{ formatNumber(craftable.profit) }} gold</span>
                       </div>
-                      <div v-if="potion.profitWithRecipeCost !== undefined" class="tooltip-row">
+                      <div v-if="craftable.profitWithRecipeCost !== undefined" class="tooltip-row">
                         <span class="tooltip-label">Without recipe:</span>
-                        <span class="tooltip-value">{{ formatNumber(potion.profitWithRecipeCost) }} gold</span>
+                        <span class="tooltip-value">{{ formatNumber(craftable.profitWithRecipeCost) }} gold</span>
                       </div>
                       <hr class="tooltip-divider">
                       <div class="tooltip-row small">
                         <span class="tooltip-label">Recipe:</span>
-                        <span class="tooltip-value">{{ potion.tradableRecipeName }}</span>
+                        <span class="tooltip-value">{{ craftable.tradableRecipeName }}</span>
                       </div>
-                      <div v-if="potion.tradableRecipePrice !== undefined" class="tooltip-row small">
+                      <div v-if="craftable.tradableRecipePrice !== undefined" class="tooltip-row small">
                         <span class="tooltip-label">Recipe price:</span>
-                        <span class="tooltip-value">{{ formatNumber(potion.tradableRecipePrice) }} gold</span>
+                        <span class="tooltip-value">{{ formatNumber(craftable.tradableRecipePrice) }} gold</span>
                       </div>
-                      <div v-if="potion.recipeUses !== undefined" class="tooltip-row small">
+                      <div v-if="craftable.recipeUses !== undefined" class="tooltip-row small">
                         <span class="tooltip-label">Uses:</span>
-                        <span class="tooltip-value">{{ potion.recipeUses }}x</span>
+                        <span class="tooltip-value">{{ craftable.recipeUses }}x</span>
                       </div>
-                      <div v-if="potion.recipeCostPerCraft !== undefined" class="tooltip-row small">
+                      <div v-if="craftable.recipeCostPerCraft !== undefined" class="tooltip-row small">
                         <span class="tooltip-label">Cost per craft:</span>
-                        <span class="tooltip-value">{{ formatNumber(potion.recipeCostPerCraft) }} gold</span>
+                        <span class="tooltip-value">{{ formatNumber(craftable.recipeCostPerCraft) }} gold</span>
                       </div>
                     </div>
                   </div>
                 </span>
-                <span v-else>{{ formatNumber(potion.profit) }}</span>
+                <span v-else>{{ formatNumber(craftable.profit) }}</span>
               </td>
               <td
                 class="text-right profit-hr"
                 data-label="Profit/hr"
-                :style="getHeatmapStyle(potion.profitPerHour, profitRange.profitPerHour.min, profitRange.profitPerHour.max)"
+                :style="getHeatmapStyle(craftable.profitPerHour, profitRange.profitPerHour.min, profitRange.profitPerHour.max)"
               >
-                <span v-if="potion.hasRecipeCost" class="profit-with-tooltip" @mouseenter="onTooltipHover">
-                  {{ formatNumber(potion.profitPerHour) }}
-                  <span class="recipe-indicator" :title="`Has recipe cost from ${potion.tradableRecipeName}`">ⓡ</span>
+                <span v-if="craftable.hasRecipeCost" class="profit-with-tooltip" @mouseenter="onTooltipHover">
+                  {{ formatNumber(craftable.profitPerHour) }}
+                  <span class="recipe-indicator" :title="`Has recipe cost from ${craftable.tradableRecipeName}`">ⓡ</span>
                   <div class="tooltip">
                     <div class="tooltip-content">
                       <div class="tooltip-title">Dual Profitability (per hour)</div>
                       <div class="tooltip-row">
                         <span class="tooltip-label">With recipe cost:</span>
-                        <span class="tooltip-value">{{ formatNumber(potion.profitPerHour) }} gold/hr</span>
+                        <span class="tooltip-value">{{ formatNumber(craftable.profitPerHour) }} gold/hr</span>
                       </div>
-                      <div v-if="potion.profitPerHourWithRecipeCost !== undefined" class="tooltip-row">
+                      <div v-if="craftable.profitPerHourWithRecipeCost !== undefined" class="tooltip-row">
                         <span class="tooltip-label">Without recipe:</span>
-                        <span class="tooltip-value">{{ formatNumber(potion.profitPerHourWithRecipeCost) }} gold/hr</span>
+                        <span class="tooltip-value">{{ formatNumber(craftable.profitPerHourWithRecipeCost) }} gold/hr</span>
                       </div>
                       <hr class="tooltip-divider">
                       <div class="tooltip-row small">
                         <span class="tooltip-label">Recipe:</span>
-                        <span class="tooltip-value">{{ potion.tradableRecipeName }}</span>
+                        <span class="tooltip-value">{{ craftable.tradableRecipeName }}</span>
                       </div>
-                      <div v-if="potion.tradableRecipePrice !== undefined" class="tooltip-row small">
+                      <div v-if="craftable.tradableRecipePrice !== undefined" class="tooltip-row small">
                         <span class="tooltip-label">Recipe price:</span>
-                        <span class="tooltip-value">{{ formatNumber(potion.tradableRecipePrice) }} gold</span>
+                        <span class="tooltip-value">{{ formatNumber(craftable.tradableRecipePrice) }} gold</span>
                       </div>
-                      <div v-if="potion.recipeUses !== undefined" class="tooltip-row small">
+                      <div v-if="craftable.recipeUses !== undefined" class="tooltip-row small">
                         <span class="tooltip-label">Uses:</span>
-                        <span class="tooltip-value">{{ potion.recipeUses }}x</span>
+                        <span class="tooltip-value">{{ craftable.recipeUses }}x</span>
                       </div>
-                      <div v-if="potion.recipeCostPerCraft !== undefined" class="tooltip-row small">
+                      <div v-if="craftable.recipeCostPerCraft !== undefined" class="tooltip-row small">
                         <span class="tooltip-label">Cost per craft:</span>
-                        <span class="tooltip-value">{{ formatNumber(potion.recipeCostPerCraft) }} gold</span>
+                        <span class="tooltip-value">{{ formatNumber(craftable.recipeCostPerCraft) }} gold</span>
                       </div>
                     </div>
                   </div>
                 </span>
-                <span v-else>{{ formatNumber(potion.profitPerHour) }}</span>
+                <span v-else>{{ formatNumber(craftable.profitPerHour) }}</span>
               </td>
             </tr>
 
             <!-- Expanded Row: Material Breakdown -->
-            <tr v-if="isExpanded(potion.name)" class="expanded-row">
+            <tr v-if="isExpanded(craftable.name)" class="expanded-row">
               <td colspan="6" class="expanded-content">
                 <div class="material-breakdown">
                   <h4 class="breakdown-title">Material Breakdown</h4>
@@ -363,14 +363,14 @@ const formatTime = (seconds: number): string => {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="material in potion.materials" :key="material.name">
+                      <tr v-for="material in craftable.materials" :key="material.name">
                         <td>{{ material.name }}</td>
                         <td class="text-right">{{ material.quantity }}</td>
                         <td class="text-right">
                           <EditableValue
                             :model-value="material.unitCost"
                             :default-value="material.unitCost"
-                            @update:model-value="(value) => handleMaterialPriceUpdate(potion.name, material.name, value)"
+                            @update:model-value="(value) => handleMaterialPriceUpdate(craftable.name, material.name, value)"
                           />
                         </td>
                         <td class="text-right subtotal">{{ formatNumber(material.totalCost) }}</td>
@@ -379,7 +379,7 @@ const formatTime = (seconds: number): string => {
                     <tfoot>
                       <tr class="total-row">
                         <td colspan="3" class="text-right total-label">Total Cost:</td>
-                        <td class="text-right total-value">{{ formatNumber(potion.totalCost) }}</td>
+                        <td class="text-right total-value">{{ formatNumber(craftable.totalCost) }}</td>
                       </tr>
                     </tfoot>
                   </table>
@@ -388,49 +388,49 @@ const formatTime = (seconds: number): string => {
                   <div class="craft-time-row">
                     <span class="craft-time-label">Craft Time:</span>
                     <EditableValue
-                      :model-value="potion.craftTimeSeconds"
-                      :default-value="potion.craftTimeSeconds"
-                      @update:model-value="(value) => handleCraftTimeUpdate(potion.name, value)"
+                      :model-value="craftable.craftTimeSeconds"
+                      :default-value="craftable.craftTimeSeconds"
+                      @update:model-value="(value) => handleCraftTimeUpdate(craftable.name, value)"
                     />
-                    <span class="craft-time-display">({{ formatTime(potion.craftTimeSeconds) }})</span>
+                    <span class="craft-time-display">({{ formatTime(craftable.craftTimeSeconds) }})</span>
                   </div>
 
                   <!-- Recipe Cost Information -->
-                  <div v-if="potion.hasRecipeCost" class="recipe-cost-section">
+                  <div v-if="craftable.hasRecipeCost" class="recipe-cost-section">
                     <h4 class="breakdown-title">Recipe Cost (Dual Profitability)</h4>
                     <div class="recipe-info">
                       <div class="recipe-info-row">
                         <span class="recipe-info-label">Recipe:</span>
-                        <span class="recipe-info-value">{{ potion.tradableRecipeName }}</span>
+                        <span class="recipe-info-value">{{ craftable.tradableRecipeName }}</span>
                       </div>
-                      <div v-if="potion.tradableRecipePrice !== undefined" class="recipe-info-row">
+                      <div v-if="craftable.tradableRecipePrice !== undefined" class="recipe-info-row">
                         <span class="recipe-info-label">Recipe Market Price:</span>
-                        <span class="recipe-info-value">{{ formatNumber(potion.tradableRecipePrice) }} gold</span>
+                        <span class="recipe-info-value">{{ formatNumber(craftable.tradableRecipePrice) }} gold</span>
                       </div>
-                      <div v-if="potion.recipeUses !== undefined" class="recipe-info-row">
+                      <div v-if="craftable.recipeUses !== undefined" class="recipe-info-row">
                         <span class="recipe-info-label">Recipe Uses:</span>
-                        <span class="recipe-info-value">{{ potion.recipeUses }}x</span>
+                        <span class="recipe-info-value">{{ craftable.recipeUses }}x</span>
                       </div>
-                      <div v-if="potion.recipeCostPerCraft !== undefined" class="recipe-info-row">
+                      <div v-if="craftable.recipeCostPerCraft !== undefined" class="recipe-info-row">
                         <span class="recipe-info-label">Amortized Cost per Craft:</span>
-                        <span class="recipe-info-value">{{ formatNumber(potion.recipeCostPerCraft) }} gold</span>
+                        <span class="recipe-info-value">{{ formatNumber(craftable.recipeCostPerCraft) }} gold</span>
                       </div>
                       <hr class="recipe-divider">
                       <div class="recipe-info-row highlight">
                         <span class="recipe-info-label">Profit (with recipe cost):</span>
-                        <span class="recipe-info-value">{{ formatNumber(potion.profit) }} gold</span>
+                        <span class="recipe-info-value">{{ formatNumber(craftable.profit) }} gold</span>
                       </div>
                       <div class="recipe-info-row highlight">
                         <span class="recipe-info-label">Profit/hr (with recipe cost):</span>
-                        <span class="recipe-info-value">{{ formatNumber(potion.profitPerHour) }} gold/hr</span>
+                        <span class="recipe-info-value">{{ formatNumber(craftable.profitPerHour) }} gold/hr</span>
                       </div>
-                      <div v-if="potion.profitWithRecipeCost !== undefined" class="recipe-info-row highlight">
+                      <div v-if="craftable.profitWithRecipeCost !== undefined" class="recipe-info-row highlight">
                         <span class="recipe-info-label">Profit (without recipe):</span>
-                        <span class="recipe-info-value">{{ formatNumber(potion.profitWithRecipeCost) }} gold</span>
+                        <span class="recipe-info-value">{{ formatNumber(craftable.profitWithRecipeCost) }} gold</span>
                       </div>
-                      <div v-if="potion.profitPerHourWithRecipeCost !== undefined" class="recipe-info-row highlight">
+                      <div v-if="craftable.profitPerHourWithRecipeCost !== undefined" class="recipe-info-row highlight">
                         <span class="recipe-info-label">Profit/hr (without recipe):</span>
-                        <span class="recipe-info-value">{{ formatNumber(potion.profitPerHourWithRecipeCost) }} gold/hr</span>
+                        <span class="recipe-info-value">{{ formatNumber(craftable.profitPerHourWithRecipeCost) }} gold/hr</span>
                       </div>
                     </div>
                   </div>
@@ -445,7 +445,7 @@ const formatTime = (seconds: number): string => {
 </template>
 
 <style scoped>
-.potion-table {
+.craftable-table {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -588,7 +588,7 @@ const formatTime = (seconds: number): string => {
   gap: 0.5rem;
 }
 
-.btn-delete-potion {
+.btn-delete-craftable {
   background: none;
   border: none;
   color: var(--text-secondary);
@@ -602,11 +602,11 @@ const formatTime = (seconds: number): string => {
   flex-shrink: 0;
 }
 
-.main-row:hover .btn-delete-potion {
+.main-row:hover .btn-delete-craftable {
   opacity: 0.6;
 }
 
-.btn-delete-potion:hover {
+.btn-delete-craftable:hover {
   opacity: 1 !important;
   color: var(--error, #ef4444);
   background-color: rgba(239, 68, 68, 0.1);

@@ -35,13 +35,13 @@ for (let i = 1; i < marketData.length; i++) {
   }
 }
 
-// Potions (columns F-G, starting from row 2)
-const potions = []
+// Craftables (columns F-G, starting from row 2)
+const craftables = []
 for (let i = 1; i < marketData.length; i++) {
   const name = getValue(marketData[i], 5) // Column F
   const price = getValue(marketData[i], 6) // Column G
   if (name && price !== null) {
-    potions.push({
+    craftables.push({
       id: `pot-${i}`,
       name: name.toString().trim(),
       price: typeof price === 'number' ? price : parseFloat(price),
@@ -128,8 +128,8 @@ for (let i = 1; i < dungeonData.length && i < 19; i++) {
 }
 
 // Extract Potions sheet data
-const potionsSheet = workbook.Sheets['Potions']
-const potionsData = XLSX.utils.sheet_to_json(potionsSheet, { header: 1, defval: '' })
+const craftablesSheet = workbook.Sheets['Potions']
+const craftablesData = XLSX.utils.sheet_to_json(craftablesSheet, { header: 1, defval: '' })
 
 // Helper function to find material name by unit cost
 const findMaterialByUnitCost = (unitCost) => {
@@ -142,16 +142,16 @@ const findMaterialByUnitCost = (unitCost) => {
   return material ? material.name : `Unknown Material (${unitCost})`
 }
 
-const potionCrafts = []
-for (let i = 1; i < potionsData.length; i++) {
-  const name = getValue(potionsData[i], 0)
-  const time = getValue(potionsData[i], 1)
-  const mat1Qty = getValue(potionsData[i], 2)
-  const mat1Cost = getValue(potionsData[i], 3)
-  const mat2Qty = getValue(potionsData[i], 4)
-  const mat2Cost = getValue(potionsData[i], 5)
-  const vialCost = getValue(potionsData[i], 6)
-  const currentPrice = getValue(potionsData[i], 9)
+const craftableRecipes = []
+for (let i = 1; i < craftablesData.length; i++) {
+  const name = getValue(craftablesData[i], 0)
+  const time = getValue(craftablesData[i], 1)
+  const mat1Qty = getValue(craftablesData[i], 2)
+  const mat1Cost = getValue(craftablesData[i], 3)
+  const mat2Qty = getValue(craftablesData[i], 4)
+  const mat2Cost = getValue(craftablesData[i], 5)
+  const vialCost = getValue(craftablesData[i], 6)
+  const currentPrice = getValue(craftablesData[i], 9)
 
   if (!name || !time) break
 
@@ -179,7 +179,7 @@ for (let i = 1; i < potionsData.length; i++) {
     })
   }
 
-  potionCrafts.push({
+  craftableRecipes.push({
     name: name.toString().trim(),
     timeSeconds: typeof time === 'number' ? time : parseFloat(time),
     materials: craftMaterials,
@@ -223,11 +223,11 @@ for (let i = 1; i < profitData.length; i++) {
 // Create the final defaults object
 const defaults = {
   materials,
-  potions,
+  craftables,
   resources,
   recipes,
   dungeons,
-  potionCrafts,
+  craftableRecipes,
   resourceGathering,
   magicFindDefaults: {
     streak: 10,
@@ -245,9 +245,9 @@ fs.writeFileSync(outputPath, JSON.stringify(defaults, null, 2))
 console.log('✅ defaults.json generated successfully!')
 console.log(`📊 Data extracted:`)
 console.log(`   - ${materials.length} materials`)
-console.log(`   - ${potions.length} potions`)
+console.log(`   - ${craftables.length} craftables`)
 console.log(`   - ${resources.length} resources`)
 console.log(`   - ${recipes.length} recipes`)
 console.log(`   - ${dungeons.length} dungeons`)
-console.log(`   - ${potionCrafts.length} potion crafts`)
+console.log(`   - ${craftableRecipes.length} craftable recipes`)
 console.log(`   - ${resourceGathering.length} resource gathering activities`)

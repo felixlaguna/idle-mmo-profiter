@@ -17,7 +17,7 @@ import { invalidate, generateCacheKey } from '../api/cache'
 /**
  * Category types that support market refresh
  */
-export type RefreshCategory = 'materials' | 'potions' | 'resources' | 'recipes'
+export type RefreshCategory = 'materials' | 'craftables' | 'resources' | 'recipes'
 
 /**
  * Result of a single item refresh operation
@@ -103,8 +103,8 @@ function createMarketRefresh() {
       case 'materials':
         item = dataProvider.materials.value.find((m) => m.id === itemId)
         break
-      case 'potions':
-        item = dataProvider.potions.value.find((p) => p.id === itemId)
+      case 'craftables':
+        item = dataProvider.craftables.value.find((p) => p.id === itemId)
         break
       case 'resources':
         item = dataProvider.resources.value.find((r) => r.id === itemId)
@@ -179,8 +179,8 @@ function createMarketRefresh() {
         item = dataProvider.materials.value.find((m) => m.id === itemId)
         oldPrice = item?.price ?? null
         break
-      case 'potions':
-        item = dataProvider.potions.value.find((p) => p.id === itemId)
+      case 'craftables':
+        item = dataProvider.craftables.value.find((p) => p.id === itemId)
         oldPrice = item?.price ?? null
         break
       case 'resources':
@@ -250,8 +250,8 @@ function createMarketRefresh() {
         case 'materials':
           dataProvider.updateMaterialPrice(itemId, averagePrice)
           break
-        case 'potions':
-          dataProvider.updatePotionPrice(itemId, averagePrice)
+        case 'craftables':
+          dataProvider.updateCraftablePrice(itemId, averagePrice)
           break
         case 'resources':
           dataProvider.updateResourcePrice(itemId, averagePrice)
@@ -307,10 +307,10 @@ function createMarketRefresh() {
       })
     })
 
-    // Potions
-    dataProvider.potions.value.forEach((item) => {
+    // Craftables
+    dataProvider.craftables.value.forEach((item) => {
       items.push({
-        category: 'potions',
+        category: 'craftables',
         itemId: item.id,
         itemName: item.name,
       })

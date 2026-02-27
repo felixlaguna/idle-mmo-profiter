@@ -6,13 +6,13 @@ import { useProfitRanking } from './composables/useProfitRanking'
 import { useStorage } from './composables/useStorage'
 import { useActivityFilters } from './composables/useActivityFilters'
 import { calculateDungeonProfits } from './calculators/dungeonCalculator'
-import { calculatePotionProfits } from './calculators/potionCalculator'
+import { calculateCraftableProfits } from './calculators/craftableCalculator'
 import { calculateResourceProfits } from './calculators/resourceCalculator'
 import { getBestAction } from './calculators/profitRanker'
 import SettingsPanel from './components/SettingsPanel.vue'
 import ProfitRankingTable from './components/ProfitRankingTable.vue'
 import DungeonTable from './components/DungeonTable.vue'
-import PotionTable from './components/PotionTable.vue'
+import CraftableTable from './components/CraftableTable.vue'
 import ResourceTable from './components/ResourceTable.vue'
 import MarketTable from './components/MarketTable.vue'
 import Toast from './components/Toast.vue'
@@ -28,7 +28,7 @@ const RevenueBreakdown = defineAsyncComponent(() => import('./components/charts/
 const PriceHistoryChart = defineAsyncComponent(() => import('./components/charts/PriceHistoryChart.vue'))
 
 // Current tab state
-type Tab = 'all' | 'dungeons' | 'potions' | 'resources' | 'market' | 'charts'
+type Tab = 'all' | 'dungeons' | 'craftables' | 'resources' | 'market' | 'charts'
 const currentTab = ref<Tab>('all')
 
 // Settings modal state
@@ -79,7 +79,7 @@ const marketTaxRate = useStorage<number>('marketTaxRate', 0.12)
 // Compute recipe prices with untradable recipe pricing
 const { recipesWithComputedPrices } = useRecipePricing(
   dataProvider.recipes,
-  dataProvider.potionCrafts,
+  dataProvider.craftableRecipes,
   marketTaxRate
 )
 
@@ -87,7 +87,7 @@ const { recipesWithComputedPrices } = useRecipePricing(
 const { rankedActivities } = useProfitRanking({
   dungeons: dataProvider.dungeons,
   recipes: recipesWithComputedPrices,
-  potionCrafts: dataProvider.potionCrafts,
+  craftableRecipes: dataProvider.craftableRecipes,
   resourceGathering: dataProvider.resourceGathering,
   magicFind: computed(() => magicFind.value),
   taxRate: computed(() => marketTaxRate.value),
@@ -111,10 +111,10 @@ const dungeonProfits = computed(() => {
   )
 })
 
-// Calculate potion profits for potion table
-const potionProfits = computed(() => {
-  return calculatePotionProfits(
-    dataProvider.potionCrafts.value,
+// Calculate craftable profits for craftable table
+const craftableProfits = computed(() => {
+  return calculateCraftableProfits(
+    dataProvider.craftableRecipes.value,
     marketTaxRate.value,
     dataProvider.recipes.value
   )
@@ -128,14 +128,14 @@ const resourceProfits = computed(() => {
   )
 })
 
-// Remove a potion craft entry
-const removePotionCraft = (potionName: string) => {
-  dataProvider.removePotionCraft(potionName)
+// Remove a craftable recipe entry
+const removeCraftableRecipe = (craftableName: string) => {
+  dataProvider.removeCraftableRecipe(craftableName)
 }
 
-// Update a potion craft time
-const updatePotionCraftTime = (potionName: string, value: number) => {
-  dataProvider.updatePotionCraftTime(potionName, value)
+// Update a craftable recipe time
+const updateCraftableRecipeTime = (craftableName: string, value: number) => {
+  dataProvider.updateCraftableRecipeTime(craftableName, value)
 }
 
 // Last update time (placeholder - will be updated when API is integrated)
@@ -172,8 +172,8 @@ const getTypeBadgeClass = (type: string): string => {
   switch (type) {
     case 'dungeon':
       return 'badge-dungeon'
-    case 'potion':
-      return 'badge-potion'
+    case 'craftable':
+      return 'badge-craftable'
     case 'resource':
       return 'badge-resource'
     default:
@@ -295,13 +295,13 @@ onUnmounted(() => {
           </button>
           <button
             class="tab-button"
-            :class="{ active: currentTab === 'potions' }"
+            :class="{ active: currentTab === 'craftables' }"
             role="tab"
-            :aria-selected="currentTab === 'potions'"
-            :tabindex="currentTab === 'potions' ? 0 : -1"
-            @click="currentTab = 'potions'"
+            :aria-selected="currentTab === 'craftables'"
+            :tabindex="currentTab === 'craftables' ? 0 : -1"
+            @click="currentTab = 'craftables'"
           >
-            Potions
+            Craftables
           </button>
           <button
             class="tab-button"
@@ -345,11 +345,11 @@ onUnmounted(() => {
             <div v-if="currentTab === 'dungeons'">
               <DungeonTable :dungeons="dungeonProfits" />
             </div>
-            <div v-if="currentTab === 'potions'">
-              <PotionTable
-                :potions="potionProfits"
-                @update:craft-time="updatePotionCraftTime"
-                @delete:potion="removePotionCraft"
+            <div v-if="currentTab === 'craftables'">
+              <CraftableTable
+                :craftables="craftableProfits"
+                @update:craft-time="updateCraftableRecipeTime"
+                @delete:craftable="removeCraftableRecipe"
               />
             </div>
             <div v-if="currentTab === 'resources'">
@@ -565,7 +565,7 @@ onUnmounted(() => {
   border: 1px solid rgba(168, 85, 247, 0.4);
 }
 
-.badge-potion {
+.badge-craftable {
   background-color: rgba(34, 197, 94, 0.2);
   color: #4ade80;
   border: 1px solid rgba(34, 197, 94, 0.4);
