@@ -338,6 +338,9 @@ const getCraftTimeForLevel = (level: number): number => {
 // Loading state for adding recipes
 const addRecipeLoading = ref<Record<string, boolean>>({})
 
+// Loading state for refreshing item data
+const refreshItemDataLoading = ref(false)
+
 // Add an untracked potion recipe to potionCrafts
 // Recursively adds missing materials and fetches market prices from the API
 const addUntrackedPotion = async (recipe: {
@@ -551,6 +554,97 @@ const saveHashedId = (newHashedId: string) => {
     showToast(`Updated hashed ID for ${itemName}`, 'success')
   }
 }
+
+const refreshItemData = async () => {
+  if (!hashedIdModalItem.value) return
+
+  const { category, itemId, itemName, currentHashedId } = hashedIdModalItem.value
+
+  if (!currentHashedId) {
+    showToast('No hashed ID set for this item', 'error')
+    return
+  }
+
+  refreshItemDataLoading.value = true
+
+  try {
+    const { inspectItem } = await import('../api/services')
+    const { generateCacheKey, invalidate } = await import('../api/cache')
+
+    // Invalidate cache to ensure fresh data
+    const cacheKey = generateCacheKey(`/item/${currentHashedId}/inspect`)
+    invalidate(cacheKey)
+
+    // Fetch item details
+    const itemDetails = await inspectItem(currentHashedId)
+
+    if (!itemDetails) {
+      showToast(`Failed to fetch data for ${itemName}`, 'error')
+      return
+    }
+
+    // Update vendor value for ALL categories
+    if (itemDetails.vendor_price !== undefined && itemDetails.vendor_price !== null) {
+      dataProvider.updateVendorValue(category, itemId, itemDetails.vendor_price)
+    }
+
+    // Update recipe-specific fields if this item has recipe data
+    if (itemDetails.recipe && category === 'recipes') {
+      const recipeUpdate: {
+        uses?: number
+        producesItemName?: string
+        producesItemHashedId?: string
+      } = {}
+
+      // Extract max_uses
+      if (itemDetails.recipe.max_uses !== undefined && itemDetails.recipe.max_uses !== null) {
+        recipeUpdate.uses = itemDetails.recipe.max_uses
+      }
+
+      // Extract producesItemName and producesItemHashedId
+      if (itemDetails.recipe.result) {
+        if (itemDetails.recipe.result.item_name) {
+          recipeUpdate.producesItemName = itemDetails.recipe.result.item_name
+        }
+        if (itemDetails.recipe.result.hashed_item_id) {
+          recipeUpdate.producesItemHashedId = itemDetails.recipe.result.hashed_item_id
+        }
+      }
+
+      // Update the current recipe
+      dataProvider.updateRecipeDefaults(itemId, recipeUpdate)
+
+      // Find and update the counterpart (tradable ↔ untradable)
+      const recipe = dataProvider.recipes.value.find((r) => r.id === itemId)
+      if (recipe) {
+        const baseName = recipe.name.replace(/\s*\(Untradable\)\s*/i, '')
+        const counterparts = dataProvider.recipes.value.filter(
+          (r) => r.id !== itemId && r.name.replace(/\s*\(Untradable\)\s*/i, '') === baseName
+        )
+        for (const counterpart of counterparts) {
+          dataProvider.updateRecipeDefaults(counterpart.id, recipeUpdate)
+        }
+
+        console.log(
+          `[RefreshItemData] Updated recipe "${recipe.name}" and ${counterparts.length} counterpart(s) with uses=${recipeUpdate.uses ?? 'unchanged'}, producesItemName="${recipeUpdate.producesItemName ?? 'unchanged'}"`
+        )
+      }
+
+      showToast(`Updated ${itemName} with fresh data from API`, 'success')
+    } else {
+      // Non-recipe item or recipe with no recipe data
+      showToast(`Updated vendor value for ${itemName}`, 'success')
+    }
+  } catch (error) {
+    console.error('[RefreshItemData] Failed to refresh item data:', error)
+    showToast(
+      `Failed to refresh ${itemName}: ${error instanceof Error ? error.message : 'Unknown error'}`,
+      'error'
+    )
+  } finally {
+    refreshItemDataLoading.value = false
+  }
+}
 </script>
 
 <template>
@@ -696,7 +790,9 @@ const saveHashedId = (newHashedId: string) => {
       :item-id="hashedIdModalItem.itemId"
       :category="hashedIdModalItem.category"
       :current-hashed-id="hashedIdModalItem.currentHashedId"
+      :refreshing="refreshItemDataLoading"
       @save="saveHashedId"
+      @refresh="refreshItemData"
     />
 
     <!-- Empty State -->

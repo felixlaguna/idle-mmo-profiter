@@ -561,7 +561,10 @@
       "price": 7398.4,
       "chance": 0.0168,
       "hashedId": "7eA59WrBQRqyLzb62qKv",
-      "vendorValue": 10
+      "vendorValue": 10,
+      "uses": 0,
+      "producesItemName": "Riverbend Essence Crystal",
+      "producesItemHashedId": "mK5jqPopYG6ONrOzDRGV"
     },
     {
       "id": "rec-55",
@@ -569,7 +572,10 @@
       "price": 9429.8,
       "chance": 0.0168,
       "hashedId": "ElzPeorXNV4pLaW0kv53",
-      "vendorValue": 10
+      "vendorValue": 10,
+      "uses": 0,
+      "producesItemName": "Tampering Essence Crystal",
+      "producesItemHashedId": "3ZvrGV8RQpWyL2wgA5jD"
     },
     {
       "id": "rec-56",
@@ -578,6 +584,9 @@
       "chance": 0.0532,
       "hashedId": "oaJydnOmQWDdNbgRe5ME",
       "vendorValue": 10,
+      "uses": 0,
+      "producesItemName": "Riverbend Essence Crystal",
+      "producesItemHashedId": "mK5jqPopYG6ONrOzDRGV",
       "isUntradable": true,
       "tradableCounterpartId": "rec-54"
     },
@@ -588,6 +597,9 @@
       "chance": 0.0532,
       "hashedId": "ZqEegBydNwWzNkA59J61",
       "vendorValue": 10,
+      "uses": 0,
+      "producesItemName": "Tampering Essence Crystal",
+      "producesItemHashedId": "3ZvrGV8RQpWyL2wgA5jD",
       "isUntradable": true,
       "tradableCounterpartId": "rec-55"
     },
@@ -757,7 +769,10 @@
       "price": 2294.2,
       "chance": 0.0168,
       "hashedId": "XyeZRGx9YjP2QB80gWlP",
-      "vendorValue": 10
+      "vendorValue": 10,
+      "uses": 0,
+      "producesItemName": "Shieldbearer's Infusion",
+      "producesItemHashedId": "dgBq1boWYeB0LkJ3rXaD"
     },
     {
       "id": "rec-79",
@@ -765,7 +780,10 @@
       "price": 1810.1,
       "chance": 0.0168,
       "hashedId": "Ro31P7kZL675QveGxXOy",
-      "vendorValue": 10
+      "vendorValue": 10,
+      "uses": 0,
+      "producesItemName": "Unyielding Fortitude",
+      "producesItemHashedId": "7eA59WrBQRBpQzb62qKv"
     },
     {
       "id": "rec-80",
@@ -774,6 +792,9 @@
       "chance": 0.0532,
       "hashedId": "3Zbym56qLxwyYBRp7Eek",
       "vendorValue": 10,
+      "uses": 0,
+      "producesItemName": "Shieldbearer's Infusion",
+      "producesItemHashedId": "dgBq1boWYeB0LkJ3rXaD",
       "isUntradable": true,
       "tradableCounterpartId": "rec-78"
     },
@@ -784,6 +805,9 @@
       "chance": 0.0532,
       "hashedId": "oZwey82VNArMYD0dXM3g",
       "vendorValue": 10,
+      "uses": 0,
+      "producesItemName": "Unyielding Fortitude",
+      "producesItemHashedId": "7eA59WrBQRBpQzb62qKv",
       "isUntradable": true,
       "tradableCounterpartId": "rec-79"
     },
@@ -921,7 +945,10 @@
       "price": 6246.3,
       "chance": 0.012,
       "hashedId": "brz9RZnWN7qDLKAp0Mdl",
-      "vendorValue": 10
+      "vendorValue": 10,
+      "uses": 0,
+      "producesItemName": "Stoneheart Solution",
+      "producesItemHashedId": "ElzPeorXNVBjNaW0kv53"
     },
     {
       "id": "rec-99",
@@ -929,7 +956,10 @@
       "price": 29383,
       "chance": 0.012,
       "hashedId": "bAB1E9poQq8VLnakeJj5",
-      "vendorValue": 10
+      "vendorValue": 10,
+      "uses": 0,
+      "producesItemName": "Lightning Sprint",
+      "producesItemHashedId": "XyeZRGx9YjRKYB80gWlP"
     },
     {
       "id": "rec-100",
@@ -938,6 +968,9 @@
       "chance": 0.038,
       "hashedId": "JZdg5V3PQog1QEyWq0zl",
       "vendorValue": 10,
+      "uses": 0,
+      "producesItemName": "Stoneheart Solution",
+      "producesItemHashedId": "ElzPeorXNVBjNaW0kv53",
       "isUntradable": true,
       "tradableCounterpartId": "rec-98"
     },
@@ -948,6 +981,9 @@
       "chance": 0.038,
       "hashedId": "JVM29l7kQZaKL80q6WDG",
       "vendorValue": 10,
+      "uses": 0,
+      "producesItemName": "Lightning Sprint",
+      "producesItemHashedId": "XyeZRGx9YjRKYB80gWlP",
       "isUntradable": true,
       "tradableCounterpartId": "rec-99"
     },
@@ -1109,7 +1145,10 @@
       "price": 1244.1,
       "chance": 0.012,
       "hashedId": "ZjlPA8v9NMRnYEyMe2Oa",
-      "vendorValue": 10
+      "vendorValue": 10,
+      "uses": 0,
+      "producesItemName": "Twinstrike Elixir",
+      "producesItemHashedId": "Ro31P7kZL6RALveGxXOy"
     },
     {
       "id": "rec-122",
@@ -1117,7 +1156,10 @@
       "price": 1449.1,
       "chance": 0.012,
       "hashedId": "P1vlVrzjLr89Nao8mGKM",
-      "vendorValue": 10
+      "vendorValue": 10,
+      "uses": 0,
+      "producesItemName": "Frenzy Potion",
+      "producesItemHashedId": "brz9RZnWN7VaQKAp0Mdl"
     },
     {
       "id": "rec-123",
@@ -1126,6 +1168,9 @@
       "chance": 0.038,
       "hashedId": "93R0qXalLly5QAbn8DBg",
       "vendorValue": 10,
+      "uses": 0,
+      "producesItemName": "Twinstrike Elixir",
+      "producesItemHashedId": "Ro31P7kZL6RALveGxXOy",
       "isUntradable": true,
       "tradableCounterpartId": "rec-121"
     },
@@ -1136,6 +1181,9 @@
       "chance": 0.038,
       "hashedId": "1rZXlwg5YvEaNk9joDmG",
       "vendorValue": 10,
+      "uses": 0,
+      "producesItemName": "Frenzy Potion",
+      "producesItemHashedId": "brz9RZnWN7VaQKAp0Mdl",
       "isUntradable": true,
       "tradableCounterpartId": "rec-122"
     },
@@ -1273,7 +1321,10 @@
       "price": 209000,
       "chance": 0.006,
       "hashedId": "27gw0k38L4jwNWevJxyK",
-      "vendorValue": 10
+      "vendorValue": 10,
+      "uses": 0,
+      "producesItemName": "Dragonblood Tonic",
+      "producesItemHashedId": "ZjlPA8v9NMoXLEyMe2Oa"
     },
     {
       "id": "rec-142",
@@ -1281,7 +1332,10 @@
       "price": 420127.5,
       "chance": 0.006,
       "hashedId": "Z6aDoyRnLy8MYpV5AGXm",
-      "vendorValue": 10
+      "vendorValue": 10,
+      "uses": 0,
+      "producesItemName": "Gourmet Essence Crystal",
+      "producesItemHashedId": "bAB1E9poQqrkNnakeJj5"
     },
     {
       "id": "rec-143",
@@ -1290,6 +1344,9 @@
       "chance": 0.019,
       "hashedId": "zvjoJW96Y8nOQ3RaAylw",
       "vendorValue": 10,
+      "uses": 0,
+      "producesItemName": "Dragonblood Tonic",
+      "producesItemHashedId": "ZjlPA8v9NMoXLEyMe2Oa",
       "isUntradable": true,
       "tradableCounterpartId": "rec-141"
     },
@@ -1300,6 +1357,9 @@
       "chance": 0.019,
       "hashedId": "q9pwa0kxLBy8YgVj136l",
       "vendorValue": 10,
+      "uses": 0,
+      "producesItemName": "Gourmet Essence Crystal",
+      "producesItemHashedId": "bAB1E9poQqrkNnakeJj5",
       "isUntradable": true,
       "tradableCounterpartId": "rec-142"
     },
@@ -1437,7 +1497,10 @@
       "price": 1213888.8,
       "chance": 0.0042,
       "hashedId": "O2xMjGdBN56PY9P1nyrv",
-      "vendorValue": 10
+      "vendorValue": 10,
+      "uses": 0,
+      "producesItemName": "Wraithbane Essence",
+      "producesItemHashedId": "P1vlVrzjLryRYao8mGKM"
     },
     {
       "id": "rec-162",
@@ -1445,7 +1508,10 @@
       "price": 575600,
       "chance": 0.0042,
       "hashedId": "lrx463VdQg84N5w1zWKP",
-      "vendorValue": 10
+      "vendorValue": 10,
+      "uses": 0,
+      "producesItemName": "Thunderfury Brew",
+      "producesItemHashedId": "Z6aDoyRnLybkQpV5AGXm"
     },
     {
       "id": "rec-163",
@@ -1454,6 +1520,9 @@
       "chance": 0.0133,
       "hashedId": "PjVDJez3LD5JQKWO08Ga",
       "vendorValue": 10,
+      "uses": 0,
+      "producesItemName": "Wraithbane Essence",
+      "producesItemHashedId": "P1vlVrzjLryRYao8mGKM",
       "isUntradable": true,
       "tradableCounterpartId": "rec-161"
     },
@@ -1464,6 +1533,9 @@
       "chance": 0.0133,
       "hashedId": "0kK49j1VN9erNq6B2doa",
       "vendorValue": 10,
+      "uses": 0,
+      "producesItemName": "Thunderfury Brew",
+      "producesItemHashedId": "Z6aDoyRnLybkQpV5AGXm",
       "isUntradable": true,
       "tradableCounterpartId": "rec-162"
     },
@@ -1601,7 +1673,10 @@
       "price": 1166666.6666666667,
       "chance": 0.0021,
       "hashedId": "y7Do6jgkY0lqY8BAdKX0",
-      "vendorValue": 10
+      "vendorValue": 10,
+      "uses": 0,
+      "producesItemName": "Cosmic Tear",
+      "producesItemHashedId": "27gw0k38L4ZxNWevJxyK"
     },
     {
       "id": "rec-182",
@@ -1609,7 +1684,10 @@
       "price": 1583333.3333333333,
       "chance": 0.00105,
       "hashedId": "3yE1A84kYOjBNl6XeVKp",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Potion of the Hunter",
+      "producesItemHashedId": "O2xMjGdBN5eMN9P1nyrv"
     },
     {
       "id": "rec-183",
@@ -1618,6 +1696,9 @@
       "chance": 0.00645,
       "hashedId": "BPjze3x2Q3deNR85vgZV",
       "vendorValue": 10,
+      "uses": 0,
+      "producesItemName": "Cosmic Tear",
+      "producesItemHashedId": "27gw0k38L4ZxNWevJxyK",
       "isUntradable": true,
       "tradableCounterpartId": "rec-181"
     },
@@ -1628,6 +1709,9 @@
       "chance": 0.0054,
       "hashedId": "XjEaOeBkLa1ALlGwxVPq",
       "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Potion of the Hunter",
+      "producesItemHashedId": "O2xMjGdBN5eMN9P1nyrv",
       "isUntradable": true,
       "tradableCounterpartId": "rec-182"
     },
@@ -1797,7 +1881,10 @@
       "price": 1757999.9,
       "chance": 0.00105,
       "hashedId": "DBngxedVYJZZYX64wW8o",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Potion of the Gods",
+      "producesItemHashedId": "lrx463VdQgBOL5w1zWKP"
     },
     {
       "id": "rec-206",
@@ -1805,7 +1892,10 @@
       "price": 288400,
       "chance": 0.00105,
       "hashedId": "jGXBy7a4Lbx9N0Pw6Vdg",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Eternal Feast Essence Crystal",
+      "producesItemHashedId": "y7Do6jgkY0wzN8BAdKX0"
     },
     {
       "id": "rec-207",
@@ -1814,6 +1904,9 @@
       "chance": 0.00645,
       "hashedId": "njoPWKDkLX93Q06ZOX79",
       "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Potion of the Gods",
+      "producesItemHashedId": "lrx463VdQgBOL5w1zWKP",
       "isUntradable": true,
       "tradableCounterpartId": "rec-205"
     },
@@ -1824,6 +1917,9 @@
       "chance": 0.00645,
       "hashedId": "B2WEpv54Nm4nQj1xJrXk",
       "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Eternal Feast Essence Crystal",
+      "producesItemHashedId": "y7Do6jgkY0wzN8BAdKX0",
       "isUntradable": true,
       "tradableCounterpartId": "rec-206"
     },
@@ -1985,7 +2081,10 @@
       "price": 516999.8,
       "chance": 0.00105,
       "hashedId": "BRn3x72JQ2R7QzOMok41",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Divine Essence Crystal",
+      "producesItemHashedId": "3yE1A84kYOBwNl6XeVKp"
     },
     {
       "id": "rec-229",
@@ -1994,7 +2093,10 @@
       "chance": 0.00105,
       "hashedId": "gGZ2J71yYKl3LMmjbown",
       "vendorValue": 2000,
-      "value": null
+      "value": null,
+      "uses": 30,
+      "producesItemName": "Fallen Star Essence",
+      "producesItemHashedId": "DBngxedVYJwPLX64wW8o"
     },
     {
       "id": "rec-230",
@@ -2003,6 +2105,9 @@
       "chance": 0.00645,
       "hashedId": "RVrBKlPdNdRzLWG8xJe9",
       "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Divine Essence Crystal",
+      "producesItemHashedId": "3yE1A84kYOBwNl6XeVKp",
       "isUntradable": true,
       "tradableCounterpartId": "rec-228"
     },
@@ -2013,6 +2118,9 @@
       "chance": 0.00645,
       "hashedId": "6leApVoENkr2Q7nRPy2D",
       "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Fallen Star Essence",
+      "producesItemHashedId": "DBngxedVYJwPLX64wW8o",
       "isUntradable": true,
       "tradableCounterpartId": "rec-229"
     },
@@ -2166,7 +2274,10 @@
       "price": 753600,
       "chance": 0.0012,
       "hashedId": "JVM29l7kQZOwN80q6WDG",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Cosmic Crystal",
+      "producesItemHashedId": "3Zbym56qLxJRNBRp7Eek"
     },
     {
       "id": "rec-251",
@@ -2174,7 +2285,10 @@
       "price": 455999.9,
       "chance": 0.0012,
       "hashedId": "93R0qXalLlPkLAbn8DBg",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Guardian's Soul",
+      "producesItemHashedId": "oZwey82VNAg6LD0dXM3g"
     },
     {
       "id": "rec-252",
@@ -2183,6 +2297,9 @@
       "chance": 0.0038,
       "hashedId": "dgBq1boWYeVwLkJ3rXaD",
       "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Cosmic Crystal",
+      "producesItemHashedId": "3Zbym56qLxJRNBRp7Eek",
       "isUntradable": true,
       "tradableCounterpartId": "rec-250"
     },
@@ -2193,6 +2310,9 @@
       "chance": 0.0038,
       "hashedId": "7eA59WrBQRZjQzb62qKv",
       "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Guardian's Soul",
+      "producesItemHashedId": "oZwey82VNAg6LD0dXM3g",
       "isUntradable": true,
       "tradableCounterpartId": "rec-251"
     },
@@ -2320,7 +2440,10 @@
       "price": 972499.75,
       "chance": 0.00096,
       "hashedId": "1rZXlwg5Yv8VQk9joDmG",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Phoenix Ashes",
+      "producesItemHashedId": "JZdg5V3PQoqKYEyWq0zl"
     },
     {
       "id": "rec-269",
@@ -2328,7 +2451,10 @@
       "price": 476666.6666666667,
       "chance": 0.00096,
       "hashedId": "q9pwa0kxLB2lLgVj136l",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Omnipotent Might Essence",
+      "producesItemHashedId": "JVM29l7kQZdAY80q6WDG"
     },
     {
       "id": "rec-270",
@@ -2337,6 +2463,9 @@
       "chance": 0.00304,
       "hashedId": "ElzPeorXNV88LaW0kv53",
       "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Phoenix Ashes",
+      "producesItemHashedId": "JZdg5V3PQoqKYEyWq0zl",
       "isUntradable": true,
       "tradableCounterpartId": "rec-268"
     },
@@ -2347,6 +2476,9 @@
       "chance": 0.00304,
       "hashedId": "XyeZRGx9YjM1NB80gWlP",
       "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Omnipotent Might Essence",
+      "producesItemHashedId": "JVM29l7kQZdAY80q6WDG",
       "isUntradable": true,
       "tradableCounterpartId": "rec-269"
     },
@@ -2507,7 +2639,10 @@
       "chance": 0.00042,
       "hashedId": "yav4OK1wNEWwLZP7rzJb",
       "vendorValue": 2000,
-      "value": null
+      "value": null,
+      "uses": 30,
+      "producesItemName": "Sun's Light",
+      "producesItemHashedId": "jGXBy7a4LbBML0Pw6Vdg"
     },
     {
       "id": "rec-291",
@@ -2516,7 +2651,10 @@
       "chance": 0.00042,
       "hashedId": "oaJydnOmQW5zYbgRe5ME",
       "vendorValue": 2000,
-      "value": null
+      "value": null,
+      "uses": 30,
+      "producesItemName": "Essence of a Kraken",
+      "producesItemHashedId": "BRn3x72JQ2ADLzOMok41"
     },
     {
       "id": "rec-292",
@@ -2525,7 +2663,10 @@
       "chance": 0.00042,
       "hashedId": "zvjoJW96Y8MKL3RaAylw",
       "vendorValue": 2000,
-      "value": null
+      "value": null,
+      "uses": 30,
+      "producesItemName": "Cosmic Barrier",
+      "producesItemHashedId": "93R0qXalLljjNAbn8DBg"
     },
     {
       "id": "rec-293",
@@ -2533,7 +2674,10 @@
       "price": 463503,
       "chance": 0.00042,
       "hashedId": "PjVDJez3LDE5QKWO08Ga",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Flash Velocity Essence",
+      "producesItemHashedId": "1rZXlwg5Yv08Qk9joDmG"
     },
     {
       "id": "rec-294",
@@ -2542,6 +2686,9 @@
       "chance": 0.00133,
       "hashedId": "doyA279pNzAxQKRDEWm8",
       "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Sun's Light",
+      "producesItemHashedId": "jGXBy7a4LbBML0Pw6Vdg",
       "isUntradable": true,
       "tradableCounterpartId": "rec-290"
     },
@@ -2552,6 +2699,9 @@
       "chance": 0.00133,
       "hashedId": "j98bO5w1QPABN3xkREVJ",
       "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Essence of a Kraken",
+      "producesItemHashedId": "BRn3x72JQ2ADLzOMok41",
       "isUntradable": true,
       "tradableCounterpartId": "rec-291"
     },
@@ -2562,6 +2712,9 @@
       "chance": 0.00133,
       "hashedId": "Ro31P7kZL6xoNveGxXOy",
       "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Cosmic Barrier",
+      "producesItemHashedId": "93R0qXalLljjNAbn8DBg",
       "isUntradable": true,
       "tradableCounterpartId": "rec-292"
     },
@@ -2572,6 +2725,9 @@
       "chance": 0.00133,
       "hashedId": "brz9RZnWN7oeNKAp0Mdl",
       "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Flash Velocity Essence",
+      "producesItemHashedId": "1rZXlwg5Yv08Qk9joDmG",
       "isUntradable": true,
       "tradableCounterpartId": "rec-293"
     },
@@ -2719,7 +2875,10 @@
       "price": 709999.8,
       "chance": 0.00042,
       "hashedId": "ZqEegBydNwa8LkA59J61",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Neptune's Soul",
+      "producesItemHashedId": "gGZ2J71yYKx9LMmjbown"
     },
     {
       "id": "rec-315",
@@ -2727,7 +2886,10 @@
       "price": 570000,
       "chance": 0.00042,
       "hashedId": "3Zbym56qLx8WLBRp7Eek",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Magma Vein Infusion",
+      "producesItemHashedId": "yav4OK1wNEb5YZP7rzJb"
     },
     {
       "id": "rec-316",
@@ -2735,7 +2897,10 @@
       "price": 363333,
       "chance": 0.00042,
       "hashedId": "0kK49j1VN9rBYq6B2doa",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Cosmic Finesse Essence",
+      "producesItemHashedId": "q9pwa0kxLB0JNgVj136l"
     },
     {
       "id": "rec-317",
@@ -2744,6 +2909,9 @@
       "chance": 0.00156,
       "hashedId": "EWGwnXPlY1XANJqekZ2R",
       "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Neptune's Soul",
+      "producesItemHashedId": "gGZ2J71yYKx9LMmjbown",
       "isUntradable": true,
       "tradableCounterpartId": "rec-314"
     },
@@ -2754,6 +2922,9 @@
       "chance": 0.00156,
       "hashedId": "Rv5g4z1dQn56Lqy32jpG",
       "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Magma Vein Infusion",
+      "producesItemHashedId": "yav4OK1wNEb5YZP7rzJb",
       "isUntradable": true,
       "tradableCounterpartId": "rec-315"
     },
@@ -2764,6 +2935,9 @@
       "chance": 0.00162,
       "hashedId": "bAB1E9poQq5EQnakeJj5",
       "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Cosmic Finesse Essence",
+      "producesItemHashedId": "q9pwa0kxLB0JNgVj136l",
       "isUntradable": true,
       "tradableCounterpartId": "rec-316"
     },
@@ -2912,7 +3086,10 @@
       "price": 894444,
       "chance": 0.00025,
       "hashedId": "oZwey82VNAb0YD0dXM3g",
-      "vendorValue": 2000
+      "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Titans Essence",
+      "producesItemHashedId": "oaJydnOmQWB2LbgRe5ME"
     },
     {
       "id": "rec-337",
@@ -2921,7 +3098,10 @@
       "chance": 0.00025,
       "hashedId": "JZdg5V3PQo80NEyWq0zl",
       "vendorValue": 2000,
-      "value": null
+      "value": null,
+      "uses": 30,
+      "producesItemName": "Mjolnir's Essence Crystal",
+      "producesItemHashedId": "ZqEegBydNwO7NkA59J61"
     },
     {
       "id": "rec-338",
@@ -2930,7 +3110,10 @@
       "chance": 0.00025,
       "hashedId": "BPjze3x2Q3epYR85vgZV",
       "vendorValue": 2000,
-      "value": null
+      "value": null,
+      "uses": 30,
+      "producesItemName": "Dragon's Essence",
+      "producesItemHashedId": "zvjoJW96Y8j5Q3RaAylw"
     },
     {
       "id": "rec-339",
@@ -2939,7 +3122,10 @@
       "chance": 0.00025,
       "hashedId": "XjEaOeBkLaXJYlGwxVPq",
       "vendorValue": 2000,
-      "value": null
+      "value": null,
+      "uses": 30,
+      "producesItemName": "Titanwood Crystal",
+      "producesItemHashedId": "PjVDJez3LDJvNKWO08Ga"
     },
     {
       "id": "rec-340",
@@ -2948,7 +3134,10 @@
       "chance": 0.00025,
       "hashedId": "njoPWKDkLXaqQ06ZOX79",
       "vendorValue": 2000,
-      "value": null
+      "value": null,
+      "uses": 30,
+      "producesItemName": "Primordial Timber Crystal",
+      "producesItemHashedId": "0kK49j1VN96yYq6B2doa"
     },
     {
       "id": "rec-341",
@@ -2957,6 +3146,9 @@
       "chance": 0.00075,
       "hashedId": "mK5jqPopYGOeYrOzDRGV",
       "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Titans Essence",
+      "producesItemHashedId": "oaJydnOmQWB2LbgRe5ME",
       "isUntradable": true,
       "tradableCounterpartId": "rec-336"
     },
@@ -2967,6 +3159,9 @@
       "chance": 0.00075,
       "hashedId": "3ZvrGV8RQp0mQ2wgA5jD",
       "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Mjolnir's Essence Crystal",
+      "producesItemHashedId": "ZqEegBydNwO7NkA59J61",
       "isUntradable": true,
       "tradableCounterpartId": "rec-337"
     },
@@ -2977,6 +3172,9 @@
       "chance": 0.00075,
       "hashedId": "ZjlPA8v9NMZmYEyMe2Oa",
       "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Dragon's Essence",
+      "producesItemHashedId": "zvjoJW96Y8j5Q3RaAylw",
       "isUntradable": true,
       "tradableCounterpartId": "rec-338"
     },
@@ -2987,6 +3185,9 @@
       "chance": 0.00075,
       "hashedId": "P1vlVrzjLr0ZNao8mGKM",
       "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Titanwood Crystal",
+      "producesItemHashedId": "PjVDJez3LDJvNKWO08Ga",
       "isUntradable": true,
       "tradableCounterpartId": "rec-339"
     },
@@ -2997,6 +3198,9 @@
       "chance": 0.00075,
       "hashedId": "Z6aDoyRnLyvoQpV5AGXm",
       "vendorValue": 2000,
+      "uses": 30,
+      "producesItemName": "Primordial Timber Crystal",
+      "producesItemHashedId": "0kK49j1VN96yYq6B2doa",
       "isUntradable": true,
       "tradableCounterpartId": "rec-340"
     }

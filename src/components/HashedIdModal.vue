@@ -7,13 +7,17 @@ interface Props {
   itemId: string
   category: 'materials' | 'potions' | 'resources' | 'recipes'
   currentHashedId: string
+  refreshing?: boolean
 }
 
-const props = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+  refreshing: false,
+})
 
 const emit = defineEmits<{
   'update:visible': [value: boolean]
   save: [hashedId: string]
+  refresh: []
 }>()
 
 const inputValue = ref('')
@@ -76,6 +80,10 @@ function handleKeydown(event: KeyboardEvent) {
   }
 }
 
+function refreshItemData() {
+  emit('refresh')
+}
+
 // Auto-focus on mount if visible
 onMounted(() => {
   if (props.visible) {
@@ -124,6 +132,39 @@ onMounted(() => {
           <p class="form-hint warning">
             Warning: Incorrect hashed IDs will cause wrong price lookups from the API
           </p>
+        </div>
+        <hr class="separator" />
+        <div class="refresh-section">
+          <button
+            class="btn-refresh-data"
+            :disabled="!hasCurrentHashedId || refreshing"
+            :title="
+              !hasCurrentHashedId
+                ? 'Set a hashed ID first'
+                : refreshing
+                  ? 'Refreshing...'
+                  : 'Fetch latest data from API (uses, producesItemName, vendor price)'
+            "
+            @click="refreshItemData"
+          >
+            <span v-if="refreshing" class="spinner-inline"></span>
+            <svg
+              v-else
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="23 4 23 10 17 10"></polyline>
+              <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+            </svg>
+            {{ refreshing ? 'Refreshing...' : 'Refresh Item Data' }}
+          </button>
         </div>
         <div class="modal-actions">
           <button class="btn-save" :disabled="!isValueChanged" @click="save">Save</button>
@@ -325,6 +366,58 @@ onMounted(() => {
   .form-input {
     font-size: 16px; /* Prevent zoom on iOS */
     min-height: 44px; /* Finger-friendly touch target */
+  }
+}
+
+.separator {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 1rem 0;
+}
+
+.refresh-section {
+  margin-bottom: 1.5rem;
+}
+
+.btn-refresh-data {
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--accent-secondary, #3b82f6);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-refresh-data:hover:not(:disabled) {
+  background-color: #2563eb;
+}
+
+.btn-refresh-data:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.spinner-inline {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 </style>
