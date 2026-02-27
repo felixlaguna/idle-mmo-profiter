@@ -2863,10 +2863,10 @@
     },
     {
       "id": "rec-313",
-      "name": "Aqua Reaper",
+      "name": "Aqua Reaper Recipe",
       "price": 1000000,
       "chance": 0.0004,
-      "hashedId": "brz9RZnWN76DQKAp0Mdl",
+      "hashedId": "BPjze3x2Q341NR85vgZV",
       "vendorValue": 1000,
       "value": null
     },
@@ -4590,7 +4590,7 @@
           "expectedValue": 544
         },
         {
-          "recipeName": "Aqua Reaper",
+          "recipeName": "Aqua Reaper Recipe",
           "expectedValue": 544
         },
         {

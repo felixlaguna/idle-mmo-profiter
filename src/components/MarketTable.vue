@@ -35,6 +35,13 @@ const hasApiKey = computed(() => {
   return settings.apiKey !== null && settings.apiKey !== ''
 })
 
+// Count of untracked potions (for Track All button)
+const untrackedPotionCount = computed(() => {
+  return dataProvider.recipes.value.filter(
+    (r) => isUntrackedPotionRecipe(r.name, r.producesItemName) && r.hashedId
+  ).length
+})
+
 // Search state
 const searchQuery = ref('')
 
@@ -308,6 +315,12 @@ const isUntrackedPotionRecipe = (recipeName: string, producesItemName?: string):
   const potionName = producesItemName || inferPotionName(recipeName)
   if (!potionName) return false
 
+  // If producesItemName is not set AND the recipe name doesn't contain "Recipe",
+  // this is likely not a craftable recipe (could be fishing loot, equipment, etc.)
+  if (!producesItemName && !recipeName.toLowerCase().includes('recipe')) {
+    return false
+  }
+
   // Check if the potion is already tracked in potionCrafts
   const isTracked = dataProvider.potionCrafts.value.some(
     (craft) => craft.name === potionName
@@ -341,23 +354,36 @@ const addRecipeLoading = ref<Record<string, boolean>>({})
 // Loading state for refreshing item data
 const refreshItemDataLoading = ref(false)
 
+// Track All Untracked Potions state
+const trackAllLoading = ref(false)
+const trackAllProgress = ref({ current: 0, total: 0 })
+const trackAllAborted = ref(false)
+
 // Add an untracked potion recipe to potionCrafts
 // Recursively adds missing materials and fetches market prices from the API
-const addUntrackedPotion = async (recipe: {
-  id: string
-  name: string
-  hashedId?: string
-  producesItemName?: string
-}) => {
+// Returns true on success, false on failure
+const addUntrackedPotion = async (
+  recipe: {
+    id: string
+    name: string
+    hashedId?: string
+    producesItemName?: string
+  },
+  silent = false
+): Promise<boolean> => {
   const potionName = recipe.producesItemName || inferPotionName(recipe.name)
   if (!potionName) {
-    showToast('Cannot determine which potion this recipe produces.', 'error')
-    return
+    if (!silent) {
+      showToast('Cannot determine which potion this recipe produces.', 'error')
+    }
+    return false
   }
 
   if (!recipe.hashedId) {
-    showToast('Recipe is missing a hashed ID. Please set it first.', 'error')
-    return
+    if (!silent) {
+      showToast('Recipe is missing a hashed ID. Please set it first.', 'error')
+    }
+    return false
   }
 
   // Set loading state
@@ -370,9 +396,14 @@ const addUntrackedPotion = async (recipe: {
     const recipeDetails = await inspectItem(recipe.hashedId)
 
     if (!recipeDetails?.recipe) {
-      showToast(`No recipe details found for "${recipe.name}". Check the browser console.`, 'error')
-      console.error('[AddPotion] Full inspect response:', JSON.stringify(recipeDetails, null, 2))
-      return
+      if (!silent) {
+        showToast(`No recipe details found for "${recipe.name}". Check the browser console.`, 'error')
+      }
+      console.error(
+        `[AddPotion] No recipe data for "${recipe.name}" (type: ${recipeDetails?.type || 'unknown'}). Full response:`,
+        JSON.stringify(recipeDetails, null, 2)
+      )
+      return false
     }
 
     const recipeData = recipeDetails.recipe
@@ -515,16 +546,97 @@ const addUntrackedPotion = async (recipe: {
 
     dataProvider.addPotionCraft(potionCraft)
 
-    showToast(
-      `Added "${potionName}" with ${materials.length} materials! Check the Potions tab.`,
-      'success'
-    )
+    if (!silent) {
+      showToast(
+        `Added "${potionName}" with ${materials.length} materials! Check the Potions tab.`,
+        'success'
+      )
+    }
+    return true
   } catch (error) {
     console.error('Failed to add potion:', error)
-    showToast('Failed to add potion. Check browser console for details.', 'error')
+    if (!silent) {
+      showToast('Failed to add potion. Check browser console for details.', 'error')
+    }
+    return false
   } finally {
     addRecipeLoading.value[recipe.id] = false
   }
+}
+
+// Track all untracked potion recipes at once
+const trackAllUntrackedPotions = async () => {
+  // Check API key
+  if (!hasApiKey.value) {
+    showToast('API key required to track potions.', 'error')
+    return
+  }
+
+  // Filter to untracked recipes with hashedId
+  const untrackedRecipes = dataProvider.recipes.value.filter(
+    (r) => isUntrackedPotionRecipe(r.name, r.producesItemName) && r.hashedId
+  )
+
+  if (untrackedRecipes.length === 0) {
+    showToast('No untracked potions found.', 'info')
+    return
+  }
+
+  // Initialize progress tracking
+  trackAllLoading.value = true
+  trackAllAborted.value = false
+  trackAllProgress.value = { current: 0, total: untrackedRecipes.length }
+
+  let successCount = 0
+  let failCount = 0
+  let skipCount = 0
+
+  // Process recipes sequentially to respect API rate limits
+  for (const recipe of untrackedRecipes) {
+    // Check for cancellation
+    if (trackAllAborted.value) {
+      showToast(
+        `Cancelled. Tracked ${successCount} potions.`,
+        'info'
+      )
+      trackAllLoading.value = false
+      return
+    }
+
+    trackAllProgress.value.current++
+
+    // Re-check: recipe may have been tracked by a sibling variant (tradable/untradable)
+    if (!isUntrackedPotionRecipe(recipe.name, recipe.producesItemName)) {
+      skipCount++
+      continue
+    }
+
+    // Call with silent=true to suppress individual toasts during bulk operations
+    const success = await addUntrackedPotion(recipe, true)
+    if (success) {
+      successCount++
+    } else {
+      failCount++
+    }
+  }
+
+  // Show summary
+  const parts = [`Tracked ${successCount} potions`]
+  if (skipCount > 0) parts.push(`${skipCount} skipped as duplicates`)
+  if (failCount > 0) parts.push(`${failCount} failed`)
+
+  showToast(
+    `${parts.join(', ')}.`,
+    failCount > 0 ? 'warning' : 'success'
+  )
+
+  // Reset state
+  trackAllLoading.value = false
+}
+
+// Cancel the Track All operation
+const cancelTrackAll = () => {
+  trackAllAborted.value = true
 }
 
 // Hashed ID modal functions
@@ -1271,6 +1383,27 @@ const refreshItemData = async () => {
         </div>
         <div class="section-actions">
           <button
+            v-if="untrackedPotionCount > 0 && !trackAllLoading"
+            class="btn-track-all"
+            :disabled="!hasApiKey"
+            :title="hasApiKey ? 'Track all untracked potion recipes' : 'API key required'"
+            @click.stop="trackAllUntrackedPotions"
+          >
+            Track All ({{ untrackedPotionCount }})
+          </button>
+          <div v-if="trackAllLoading" class="track-all-progress" @click.stop>
+            <span class="progress-text">
+              Tracking {{ trackAllProgress.current }}/{{ trackAllProgress.total }}...
+            </span>
+            <button
+              class="btn-cancel-track"
+              title="Cancel tracking operation"
+              @click.stop="cancelTrackAll"
+            >
+              ✕ Cancel
+            </button>
+          </div>
+          <button
             class="btn-toggle-exclusion"
             :title="
               getCategoryExclusionState('recipes') === 'all'
@@ -1887,6 +2020,62 @@ const refreshItemData = async () => {
   color: var(--text-primary);
 }
 
+.btn-track-all {
+  padding: 0.375rem 0.75rem;
+  background-color: var(--success);
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn-track-all:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--success) 80%, black);
+}
+
+.btn-track-all:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.track-all-progress {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+}
+
+.progress-text {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.btn-cancel-track {
+  padding: 0.25rem 0.5rem;
+  background-color: var(--danger);
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn-cancel-track:hover {
+  background-color: color-mix(in srgb, var(--danger) 85%, black);
+}
+
 .btn-reset-section {
   padding: 0.5rem 1rem;
   background-color: transparent;
@@ -2098,7 +2287,9 @@ const refreshItemData = async () => {
   }
 
   .btn-toggle-exclusion,
-  .btn-reset-section {
+  .btn-reset-section,
+  .btn-track-all,
+  .track-all-progress {
     width: 100%;
   }
 
