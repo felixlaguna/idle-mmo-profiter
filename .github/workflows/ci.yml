@@ -16,23 +16,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: 'npm'
+      # Build the Docker image (ensures all dependencies are installed)
+      - name: Build Docker image
+        run: docker compose build app
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run ESLint
-        run: npx eslint .
-
-      - name: Type check
-        run: npx vue-tsc --noEmit
-
-      - name: Run tests
-        run: npm run test:run
-
-      - name: Build
-        run: npm run build
+      # Run all CI checks inside Docker containers using Make targets
+      # The 'make ci' target runs: lint -> typecheck -> test-run -> build-app
+      # All commands execute inside Docker, ensuring consistency with local development
+      - name: Run CI checks
+        run: make ci

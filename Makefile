@@ -1,18 +1,28 @@
-.PHONY: help up down restart logs build ps url clean dev install
+.PHONY: help up down restart logs build ps url clean dev install lint typecheck build-app test test-run format ci
 
 # Default target
 help:
 	@echo "Available commands:"
-	@echo "  make up          - Start all docker services (builds if needed)"
-	@echo "  make down        - Stop all docker services"
-	@echo "  make restart     - Restart all docker services"
-	@echo "  make logs        - Show docker logs (follow mode)"
-	@echo "  make build       - Rebuild Docker images"
-	@echo "  make ps          - Show running containers"
-	@echo "  make url         - Show application URLs"
-	@echo "  make dev         - Start dev server (app only, without tunnel)"
-	@echo "  make install     - Install npm dependencies in container"
-	@echo "  make clean       - Clean node_modules and dist"
+	@echo "  Development:"
+	@echo "    make up          - Start all docker services (builds if needed)"
+	@echo "    make down        - Stop all docker services"
+	@echo "    make restart     - Restart all docker services"
+	@echo "    make logs        - Show docker logs (follow mode)"
+	@echo "    make build       - Rebuild Docker images"
+	@echo "    make ps          - Show running containers"
+	@echo "    make url         - Show application URLs"
+	@echo "    make dev         - Start dev server (app only, without tunnel)"
+	@echo "    make install     - Install npm dependencies in container"
+	@echo "    make clean       - Clean node_modules and dist"
+	@echo ""
+	@echo "  Code Quality & CI:"
+	@echo "    make lint        - Run ESLint"
+	@echo "    make typecheck   - Run TypeScript type checking"
+	@echo "    make test        - Run tests in watch mode"
+	@echo "    make test-run    - Run tests once (CI mode)"
+	@echo "    make format      - Format code with Prettier"
+	@echo "    make build-app   - Build production bundle"
+	@echo "    make ci          - Run all CI checks (lint + typecheck + test + build)"
 
 # Start services (builds first if needed)
 up:
@@ -81,3 +91,26 @@ install:
 clean:
 	docker compose run --rm app rm -rf node_modules dist
 	@echo "✅ Cleaned node_modules and dist"
+
+# Code Quality & CI targets
+lint:
+	docker compose run --rm app npm run lint
+
+typecheck:
+	docker compose run --rm app npx vue-tsc --noEmit
+
+test:
+	docker compose run --rm app npm run test
+
+test-run:
+	docker compose run --rm app npm run test:run
+
+format:
+	docker compose run --rm app npm run format
+
+build-app:
+	docker compose run --rm app npm run build
+
+# Run all CI checks (fails fast)
+ci: lint typecheck test-run build-app
+	@echo "✅ All CI checks passed!"

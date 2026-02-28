@@ -25,17 +25,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: 'npm'
+      # Build Docker image (caches layers for faster builds)
+      - name: Build Docker image
+        run: docker compose build app
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run build
+      # Build application inside Docker container
+      # Volume mount (.:/app) ensures dist/ appears on host for upload step
+      - name: Build application
+        run: docker compose run --rm app npm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

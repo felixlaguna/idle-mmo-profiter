@@ -1,0 +1,86 @@
+# Dependencies
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+yarn.lock
+pnpm-lock.yaml
+
+# Build outputs
+dist
+dist-ssr
+build
+.vite
+
+# Testing
+coverage
+.nyc_output
+*.lcov
+
+# Environment files
+.env
+.env.*
+!.env.example
+*.local
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE and editor files
+.vscode
+.idea
+*.swp
+*.swo
+*.swn
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+.DS_Store
+*.iml
+.project
+.settings
+.classpath
+
+# Logs
+logs
+*.log
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.travis.yml
+.circleci
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Documentation (optional - comment out if you want these in image)
+*.md
+!README.md
+ARCHITECTURE*.md
+BUG_FIX_SUMMARY.md
+FILTER_FIX_SUMMARY.md
+MANUAL_TEST_GUIDE.md
+
+# Temporary files
+*.tmp
+*.temp
+.cache
+.temp
+
+# Project-specific
+.claude
+.tickets
+scripts
+Idlemmo.xlsx
+idle-mmo-docs.html
+
+# OS files
+Thumbs.DB
+.DS_Store

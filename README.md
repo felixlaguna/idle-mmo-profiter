@@ -22,10 +22,9 @@ A comprehensive profit calculator for IdleMMO that helps players optimize their 
 
 ### Prerequisites
 
-- **Node.js 18+ and npm** (for local development)
-- **Docker and Docker Compose** (for containerized development)
+- **Docker and Docker Compose**
 
-### Quick Start with Docker (Recommended)
+### Quick Start
 
 ```bash
 # Start all services (app + Cloudflare tunnel)
@@ -52,49 +51,35 @@ The app will be available at:
 3. Add the token to `.env`: `CLOUDFLARE_TUNNEL_TOKEN=your-token-here`
 4. Run `make up` to start with HTTPS access
 
-### Local Development (Without Docker)
-
-```bash
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
-```
-
 ### Development Commands
 
-#### Docker Commands
-
 ```bash
-make help       # Show all available commands
-make up         # Start services
-make down       # Stop services
-make restart    # Restart services
-make logs       # View logs (follow mode)
-make build      # Rebuild Docker images
-make dev        # Start only app (no tunnel)
-make install    # Install npm dependencies in container
-make clean      # Clean node_modules and dist
-```
+make help          # Show all available commands
 
-#### Local Commands
+# Services
+make up            # Start all services (app + tunnel)
+make dev           # Start dev server only (no tunnel)
+make down          # Stop all services
+make restart       # Restart services
+make logs          # View logs (follow mode)
+make ps            # Show running containers
 
-```bash
-# Run linter
-npm run lint
+# Code Quality
+make lint          # Run ESLint
+make typecheck     # Run TypeScript type checking
+make format        # Run Prettier formatter
+make test          # Run tests in watch mode
+make test-run      # Run tests once (CI mode)
 
-# Format code
-npm run format
+# Build
+make build         # Rebuild Docker images
+make build-app     # Build application for production
+make ci            # Run full CI suite (lint + typecheck + test + build)
 
-# Type checking
-npx vue-tsc --noEmit
+# Utilities
+make install       # Install npm dependencies in container
+make clean         # Clean node_modules and dist
+make url           # Show application URLs
 ```
 
 ## Project Structure
