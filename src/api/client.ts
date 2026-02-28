@@ -15,7 +15,8 @@ import { storageManager } from '../storage/persistence'
 // Use proxy in development, configurable in production
 // In dev: Vite proxy at /api forwards to https://api.idle-mmo.com
 // In prod: Can be configured via VITE_API_BASE_URL env var
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api/v1'
+const BASE_URL =
+  (typeof import.meta.env !== 'undefined' && import.meta.env.VITE_API_BASE_URL) || '/api/v1'
 const MAX_REQUESTS_PER_MINUTE = 20
 const WINDOW_SIZE_MS = 60000 // 1 minute in milliseconds
 const MAX_RETRIES = 3
@@ -78,11 +79,46 @@ class RateLimitedApiClient {
   // Request deduplication: track in-flight requests by URL
   // Maps URL to Promise of parsed JSON data
   private inFlightRequests = new Map<string, Promise<unknown>>()
+  // Configuration overrides for Node.js usage
+  private baseUrlOverride: string | null = null
+  private apiKeyOverride: string | null = null
 
   /**
-   * Get API key from localStorage
+   * Configure API client with custom baseUrl and/or apiKey
+   * This is primarily for Node.js usage where localStorage is not available
+   */
+  public configure(config: { baseUrl?: string; apiKey?: string }): void {
+    if (config.baseUrl !== undefined) {
+      this.baseUrlOverride = config.baseUrl
+    }
+    if (config.apiKey !== undefined) {
+      this.apiKeyOverride = config.apiKey
+    }
+  }
+
+  /**
+   * Get the base URL to use for API requests
+   * Checks override first, then falls back to BASE_URL constant
+   */
+  private getBaseUrl(): string {
+    return this.baseUrlOverride || BASE_URL
+  }
+
+  /**
+   * Get API key from configuration override or localStorage
    */
   private getApiKey(): string | null {
+    // Check override first (for Node.js usage)
+    if (this.apiKeyOverride !== null) {
+      return this.apiKeyOverride
+    }
+
+    // Fall back to localStorage (browser usage)
+    // Guard against Node.js environment where localStorage is undefined
+    if (typeof localStorage === 'undefined') {
+      return null
+    }
+
     const settings = storageManager.getSettings()
     return settings.apiKey
   }
@@ -215,7 +251,8 @@ class RateLimitedApiClient {
     }
 
     // Build full URL
-    const fullUrl = url.startsWith('http') ? url : `${BASE_URL}${url}`
+    const baseUrl = this.getBaseUrl()
+    const fullUrl = url.startsWith('http') ? url : `${baseUrl}${url}`
 
     // Add required headers
     const headers = new Headers(options.headers)
@@ -248,10 +285,7 @@ class RateLimitedApiClient {
       if (response.status === 429) {
         if (retryCount < MAX_RETRIES) {
           // Exponential backoff: 5s, 10s, 20s (capped at 120s)
-          const backoffTime = Math.min(
-            INITIAL_BACKOFF_MS * Math.pow(2, retryCount),
-            MAX_BACKOFF_MS
-          )
+          const backoffTime = Math.min(INITIAL_BACKOFF_MS * Math.pow(2, retryCount), MAX_BACKOFF_MS)
 
           // Also check if we have reset time from headers
           const waitTime = Math.max(backoffTime, this.getWaitTime())
@@ -323,11 +357,7 @@ class RateLimitedApiClient {
       if (!request) break
 
       try {
-        const response = await this.makeRequest(
-          request.url,
-          request.options,
-          request.retryCount
-        )
+        const response = await this.makeRequest(request.url, request.options, request.retryCount)
         request.resolve(response)
       } catch (error) {
         request.reject(error as Error)
@@ -387,7 +417,9 @@ class RateLimitedApiClient {
     }
 
     // Create promise that fetches and parses JSON
-    const dataPromise = this.request(url, { method: 'GET' }).then(response => response.json() as Promise<T>)
+    const dataPromise = this.request(url, { method: 'GET' }).then(
+      (response) => response.json() as Promise<T>
+    )
 
     // Track in-flight request
     this.inFlightRequests.set(url, dataPromise)

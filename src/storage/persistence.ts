@@ -1,6 +1,24 @@
 import type { AppSettings, MagicFindSettings } from '../types'
 
 /**
+ * Check if localStorage is available and functional
+ * Node.js v25+ has a global localStorage but it's non-functional without --localstorage-file
+ */
+function isLocalStorageAvailable(): boolean {
+  try {
+    if (typeof localStorage === 'undefined') return false
+    const testKey = '__persistence_test__'
+    localStorage.setItem(testKey, '1')
+    localStorage.removeItem(testKey)
+    return true
+  } catch {
+    return false
+  }
+}
+
+const HAS_LOCAL_STORAGE = isLocalStorageAvailable()
+
+/**
  * Storage version for migration support
  */
 const STORAGE_VERSION = 1
@@ -52,6 +70,7 @@ export class StorageManager {
    * Get settings from localStorage or return defaults
    */
   getSettings(): AppSettings {
+    if (!HAS_LOCAL_STORAGE) return { ...DEFAULT_SETTINGS }
     try {
       const stored = localStorage.getItem(STORAGE_KEYS.SETTINGS)
       if (stored === null) {
@@ -77,6 +96,7 @@ export class StorageManager {
    * Save settings to localStorage
    */
   saveSettings(settings: AppSettings): void {
+    if (!HAS_LOCAL_STORAGE) return
     try {
       const serialized = JSON.stringify(settings)
       localStorage.setItem(STORAGE_KEYS.SETTINGS, serialized)
@@ -90,6 +110,7 @@ export class StorageManager {
    * Returns a Map for efficient lookups
    */
   getPriceOverrides(): Map<string, number> {
+    if (!HAS_LOCAL_STORAGE) return new Map()
     try {
       const stored = localStorage.getItem(STORAGE_KEYS.OVERRIDES)
       if (stored === null) {
@@ -108,6 +129,7 @@ export class StorageManager {
    * User overrides always take precedence over API and default data
    */
   setPriceOverride(itemName: string, price: number): void {
+    if (!HAS_LOCAL_STORAGE) return
     try {
       const overrides = this.getPriceOverrides()
       overrides.set(itemName, price)
@@ -124,6 +146,7 @@ export class StorageManager {
    * Item will fall back to API or default data
    */
   clearPriceOverride(itemName: string): void {
+    if (!HAS_LOCAL_STORAGE) return
     try {
       const overrides = this.getPriceOverrides()
       overrides.delete(itemName)
@@ -140,6 +163,7 @@ export class StorageManager {
    * All items will fall back to API or default data
    */
   clearAllOverrides(): void {
+    if (!HAS_LOCAL_STORAGE) return
     try {
       localStorage.removeItem(STORAGE_KEYS.OVERRIDES)
     } catch (error) {
@@ -194,6 +218,7 @@ export class StorageManager {
    * Handles version migration if schema has changed
    */
   importAll(json: string): void {
+    if (!HAS_LOCAL_STORAGE) throw new Error('localStorage not available in this environment')
     try {
       const data = JSON.parse(json) as StorageSchema
 
@@ -219,7 +244,9 @@ export class StorageManager {
       localStorage.setItem(STORAGE_KEYS.VERSION, String(STORAGE_VERSION))
     } catch (error) {
       console.error('Failed to import data:', error)
-      throw new Error('Import failed: ' + (error instanceof Error ? error.message : 'Unknown error'))
+      throw new Error(
+        'Import failed: ' + (error instanceof Error ? error.message : 'Unknown error')
+      )
     }
   }
 
@@ -248,6 +275,7 @@ export class StorageManager {
    * Get the current storage version
    */
   getStorageVersion(): number {
+    if (!HAS_LOCAL_STORAGE) return STORAGE_VERSION
     try {
       const stored = localStorage.getItem(STORAGE_KEYS.VERSION)
       return stored ? parseInt(stored, 10) : STORAGE_VERSION
@@ -261,6 +289,7 @@ export class StorageManager {
    * WARNING: This removes all user data
    */
   clearAll(): void {
+    if (!HAS_LOCAL_STORAGE) return
     try {
       localStorage.removeItem(STORAGE_KEYS.SETTINGS)
       localStorage.removeItem(STORAGE_KEYS.PRICES)

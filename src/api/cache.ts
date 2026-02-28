@@ -14,6 +14,24 @@
 
 const CACHE_PREFIX = 'idlemmo-cache:'
 
+/**
+ * Check if localStorage is available and functional
+ * Node.js v25+ has a global localStorage but it's non-functional without --localstorage-file
+ */
+function isLocalStorageAvailable(): boolean {
+  try {
+    if (typeof localStorage === 'undefined') return false
+    const testKey = '__cache_test__'
+    localStorage.setItem(testKey, '1')
+    localStorage.removeItem(testKey)
+    return true
+  } catch {
+    return false
+  }
+}
+
+const HAS_LOCAL_STORAGE = isLocalStorageAvailable()
+
 // Default TTL values (in milliseconds)
 const DEFAULT_TTL = {
   'item/search': 24 * 60 * 60 * 1000, // 24 hours
@@ -38,10 +56,7 @@ interface CacheEntry<T> {
  * @param params - Optional query parameters
  * @returns Cache key string
  */
-export function generateCacheKey(
-  url: string,
-  params?: Record<string, string | number>
-): string {
+export function generateCacheKey(url: string, params?: Record<string, string | number>): string {
   // Sort params alphabetically for consistent keys
   const sortedParams = params
     ? Object.keys(params)
@@ -80,6 +95,7 @@ function getTTLForUrl(url: string): number {
  * @returns Cached data if valid, null otherwise
  */
 export function get<T>(key: string): T | null {
+  if (!HAS_LOCAL_STORAGE) return null
   try {
     const cached = localStorage.getItem(key)
     if (!cached) {
@@ -111,6 +127,7 @@ export function get<T>(key: string): T | null {
  * @param ttlMs - Time to live in milliseconds (optional, will be inferred from URL if not provided)
  */
 export function set<T>(key: string, data: T, ttlMs?: number): void {
+  if (!HAS_LOCAL_STORAGE) return
   const now = Date.now()
 
   // Extract URL from cache key (remove prefix)
@@ -157,6 +174,7 @@ export function set<T>(key: string, data: T, ttlMs?: number): void {
  * @param key - Cache key to invalidate
  */
 export function invalidate(key: string): void {
+  if (!HAS_LOCAL_STORAGE) return
   try {
     localStorage.removeItem(key)
   } catch (error) {
@@ -168,6 +186,7 @@ export function invalidate(key: string): void {
  * Clear all cache entries
  */
 export function invalidateAll(): void {
+  if (!HAS_LOCAL_STORAGE) return
   try {
     const keysToRemove: string[] = []
 
@@ -195,6 +214,7 @@ export function invalidateAll(): void {
  * @returns Age in milliseconds, or null if cache entry doesn't exist
  */
 export function getAge(key: string): number | null {
+  if (!HAS_LOCAL_STORAGE) return null
   try {
     const cached = localStorage.getItem(key)
     if (!cached) {
@@ -217,6 +237,7 @@ export function getAge(key: string): number | null {
  * @param count - Number of entries to evict
  */
 function evictOldestEntries(count: number): void {
+  if (!HAS_LOCAL_STORAGE) return
   try {
     const cacheEntries: Array<{ key: string; cachedAt: number }> = []
 
@@ -254,6 +275,7 @@ function evictOldestEntries(count: number): void {
  * Clear expired cache entries
  */
 export function clearExpiredCache(): void {
+  if (!HAS_LOCAL_STORAGE) return
   try {
     const keysToRemove: string[] = []
     const now = Date.now()
@@ -306,6 +328,9 @@ export function getCacheStats(): {
   const now = Date.now()
 
   try {
+    if (!HAS_LOCAL_STORAGE) {
+      return { totalEntries: 0, validEntries: 0, expiredEntries: 0, totalSizeBytes: 0 }
+    }
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i)
       if (key && key.startsWith(CACHE_PREFIX)) {

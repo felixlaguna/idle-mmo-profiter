@@ -248,4 +248,110 @@ describe('RateLimitedApiClient - Edge Cases', () => {
       // Note: promise with .catch() will be cleaned up by afterEach
     })
   })
+
+  describe('configure() method for Node.js usage', () => {
+    it('should allow configuring baseUrl and apiKey overrides', () => {
+      const client = new ApiClient()
+
+      // Before configuration, should use default behavior
+      expect(client.isConfigured()).toBe(true) // Uses mocked apiKey from storage
+
+      // Configure with custom settings
+      client.configure({
+        baseUrl: 'https://api.idle-mmo.com/v1',
+        apiKey: 'custom-key-123',
+      })
+
+      // Should still be configured
+      expect(client.isConfigured()).toBe(true)
+    })
+
+    it('should allow configuring only baseUrl', () => {
+      const client = new ApiClient()
+
+      client.configure({
+        baseUrl: 'https://custom-api.example.com',
+      })
+
+      // Should still use apiKey from storage
+      expect(client.isConfigured()).toBe(true)
+    })
+
+    it('should allow configuring only apiKey', () => {
+      const client = new ApiClient()
+
+      client.configure({
+        apiKey: 'new-api-key',
+      })
+
+      expect(client.isConfigured()).toBe(true)
+    })
+
+    it('should override apiKey from storage when configured', async () => {
+      const client = new ApiClient()
+
+      // Configure with custom API key
+      client.configure({
+        baseUrl: 'https://api.idle-mmo.com/v1',
+        apiKey: 'configured-key',
+      })
+
+      // Mock successful response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        status: 200,
+        headers: new Headers({
+          'X-RateLimit-Remaining': '19',
+          'X-RateLimit-Reset': Math.floor(Date.now() / 1000 + 60).toString(),
+          'X-RateLimit-Limit': '20',
+        }),
+        json: async () => ({ data: 'test' }),
+      })
+
+      await client.get('/test')
+
+      // Verify the request used the configured API key
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining('/test'),
+        expect.objectContaining({
+          headers: expect.any(Headers),
+        })
+      )
+
+      // Check that Authorization header contains the configured key
+      const call = mockFetch.mock.calls[0]
+      const headers = call[1]?.headers as Headers
+      expect(headers.get('Authorization')).toBe('Bearer configured-key')
+    })
+
+    it('should override baseUrl when configured', async () => {
+      const client = new ApiClient()
+
+      // Configure with custom baseUrl
+      client.configure({
+        baseUrl: 'https://custom-api.example.com/v2',
+        apiKey: 'test-key',
+      })
+
+      // Mock successful response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        status: 200,
+        headers: new Headers({
+          'X-RateLimit-Remaining': '19',
+          'X-RateLimit-Reset': Math.floor(Date.now() / 1000 + 60).toString(),
+          'X-RateLimit-Limit': '20',
+        }),
+        json: async () => ({ data: 'test' }),
+      })
+
+      await client.get('/endpoint')
+
+      // Verify the request used the configured baseUrl
+      expect(mockFetch).toHaveBeenCalledWith(
+        'https://custom-api.example.com/v2/endpoint',
+        expect.any(Object)
+      )
+    })
+  })
 })
