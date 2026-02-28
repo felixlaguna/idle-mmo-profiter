@@ -296,3 +296,7 @@ All tests passing (274/274). No changes to computeSuggestedRefreshMinutes() itse
 **2026-02-28T21:28:26Z**
 
 User Review: Perfect - approved. All features working correctly: lastUpdated tracking, suggestedRefreshMinutes computation, --smart flag, and default 24h fallback for rare items.
+
+**2026-02-28T21:30:15Z**
+
+Committed as 79b5f80: feat: add smart market refresh with suggested update frequency
