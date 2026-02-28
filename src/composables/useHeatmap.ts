@@ -34,13 +34,13 @@ export function getHeatmapStyle(
 
     // Red gradient: lighter to darker red
     const r = 239
-    const g = Math.round(68 - (20 * intensity))
-    const b = Math.round(68 - (20 * intensity))
-    const alpha = 0.15 + (intensity * 0.25)
+    const g = Math.round(68 - 20 * intensity)
+    const b = Math.round(68 - 20 * intensity)
+    const alpha = 0.15 + intensity * 0.25
 
     return {
       backgroundColor: `rgba(${r}, ${g}, ${b}, ${alpha})`,
-      color: '#ef4444' // Red text
+      color: '#ef4444', // Red text
     }
   }
 
@@ -48,7 +48,7 @@ export function getHeatmapStyle(
   if (profit < maxProfit * 0.1) {
     return {
       backgroundColor: 'rgba(234, 179, 8, 0.1)',
-      color: '#eab308' // Yellow text
+      color: '#eab308', // Yellow text
     }
   }
 
@@ -61,19 +61,19 @@ export function getHeatmapStyle(
     // Light green
     return {
       backgroundColor: 'rgba(16, 185, 129, 0.1)',
-      color: '#10b981'
+      color: '#10b981',
     }
   } else if (normalized < 0.66) {
     // Medium green
     return {
       backgroundColor: 'rgba(16, 185, 129, 0.2)',
-      color: '#10b981'
+      color: '#10b981',
     }
   } else {
     // Deep green
     return {
       backgroundColor: 'rgba(16, 185, 129, 0.3)',
-      color: '#059669'
+      color: '#059669',
     }
   }
 }
@@ -86,11 +86,7 @@ export function getHeatmapStyle(
  * @param maxProfit - The maximum profit in the dataset
  * @returns CSS class name for heatmap styling
  */
-export function getHeatmapClass(
-  profit: number,
-  minProfit: number,
-  maxProfit: number
-): string {
+export function getHeatmapClass(profit: number, minProfit: number, maxProfit: number): string {
   if (profit < 0) {
     return 'heatmap-negative'
   }

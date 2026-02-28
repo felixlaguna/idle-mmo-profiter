@@ -88,11 +88,7 @@ export function importSettings(file: File): Promise<void> {
  * Resets all settings to defaults except API key
  */
 export function resetToDefaults(): void {
-  if (
-    !confirm(
-      'This will reset all settings to defaults (except your API key). Are you sure?'
-    )
-  ) {
+  if (!confirm('This will reset all settings to defaults (except your API key). Are you sure?')) {
     return
   }
 
@@ -116,11 +112,7 @@ export function resetToDefaults(): void {
  * Resets ALL settings including API key
  */
 export function resetAll(): void {
-  if (
-    !confirm(
-      'This will reset ALL settings including your API key. Are you sure?'
-    )
-  ) {
+  if (!confirm('This will reset ALL settings including your API key. Are you sure?')) {
     return
   }
 

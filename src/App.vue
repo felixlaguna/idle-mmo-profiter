@@ -24,8 +24,12 @@ import type { MagicFindSettings } from './types'
 // Lazy load chart components for better performance
 const ProfitBarChart = defineAsyncComponent(() => import('./components/charts/ProfitBarChart.vue'))
 const DungeonChart = defineAsyncComponent(() => import('./components/charts/DungeonChart.vue'))
-const RevenueBreakdown = defineAsyncComponent(() => import('./components/charts/RevenueBreakdown.vue'))
-const PriceHistoryChart = defineAsyncComponent(() => import('./components/charts/PriceHistoryChart.vue'))
+const RevenueBreakdown = defineAsyncComponent(
+  () => import('./components/charts/RevenueBreakdown.vue')
+)
+const PriceHistoryChart = defineAsyncComponent(
+  () => import('./components/charts/PriceHistoryChart.vue')
+)
 
 // Current tab state
 type Tab = 'all' | 'dungeons' | 'craftables' | 'resources' | 'market' | 'charts'
@@ -122,10 +126,7 @@ const craftableProfits = computed(() => {
 
 // Calculate resource profits for resource table
 const resourceProfits = computed(() => {
-  return calculateResourceProfits(
-    dataProvider.resourceGathering.value,
-    marketTaxRate.value
-  )
+  return calculateResourceProfits(dataProvider.resourceGathering.value, marketTaxRate.value)
 })
 
 // Remove a craftable recipe entry
@@ -228,9 +229,7 @@ onUnmounted(() => {
               <path
                 d="M12 1v6m0 6v6m0-6h6m-6 0H6m12.364-6.364l-4.243 4.243m0 0l-4.243 4.243m4.243-4.243l4.243 4.243m-4.243-4.243l-4.243-4.243"
               ></path>
-              <path
-                d="M19.071 4.929a10 10 0 0 1 0 14.142m-14.142 0a10 10 0 0 1 0-14.142"
-              ></path>
+              <path d="M19.071 4.929a10 10 0 0 1 0 14.142m-14.142 0a10 10 0 0 1 0-14.142"></path>
             </svg>
           </button>
         </div>
@@ -257,7 +256,9 @@ onUnmounted(() => {
             <div class="hero-details">
               <div class="hero-detail">
                 <span class="detail-label">Profit per action</span>
-                <span class="detail-value">{{ formatNumber(bestAction.profitPerAction) }} gold</span>
+                <span class="detail-value"
+                  >{{ formatNumber(bestAction.profitPerAction) }} gold</span
+                >
               </div>
               <div class="hero-detail">
                 <span class="detail-label">Time per action</span>

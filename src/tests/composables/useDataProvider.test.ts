@@ -406,7 +406,9 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
       dataProvider.updateMaterialPrice(firstMaterial.id, newPrice)
 
       // Verify override is applied
-      const materialWithOverride = dataProvider.materials.value.find((m) => m.id === firstMaterial.id)
+      const materialWithOverride = dataProvider.materials.value.find(
+        (m) => m.id === firstMaterial.id
+      )
       expect(materialWithOverride?.price).toBe(newPrice)
 
       // Clear all overrides
@@ -490,9 +492,10 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
       // Find a recipe with producesItemHashedId that doesn't have a craftableRecipe yet
       // This ensures we're testing the creation of a NEW craftable
       const recipeWithProducedItem = dataProvider.recipes.value.find(
-        (r) => r.producesItemName &&
-               r.producesItemHashedId &&
-               !dataProvider.craftableRecipes.value.find(cr => cr.name === r.producesItemName)
+        (r) =>
+          r.producesItemName &&
+          r.producesItemHashedId &&
+          !dataProvider.craftableRecipes.value.find((cr) => cr.name === r.producesItemName)
       )
 
       // If no such recipe exists, create a test recipe manually
@@ -651,7 +654,7 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
         name: 'Test Craftable',
         timeSeconds: 60,
         materials: [{ name: 'Moose antler', quantity: 5, unitCost: 100 }],
-        currentPrice: 1000
+        currentPrice: 1000,
       })
 
       const firstCraft = dataProvider.craftableRecipes.value[0]
@@ -820,8 +823,12 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
       const exported = JSON.parse(jsonString) as DefaultData
 
       // Find recipes with and without value field in original data
-      const originalWithValue = (defaultData as DefaultData).recipes.find((r) => r.value !== undefined)
-      const originalWithoutValue = (defaultData as DefaultData).recipes.find((r) => r.value === undefined)
+      const originalWithValue = (defaultData as DefaultData).recipes.find(
+        (r) => r.value !== undefined
+      )
+      const originalWithoutValue = (defaultData as DefaultData).recipes.find(
+        (r) => r.value === undefined
+      )
 
       if (originalWithValue) {
         const exportedWithValue = exported.recipes.find((r) => r.id === originalWithValue.id)
@@ -831,7 +838,9 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
       if (originalWithoutValue) {
         const exportedWithoutValue = exported.recipes.find((r) => r.id === originalWithoutValue.id)
         // value field should either be undefined or not present
-        expect(exportedWithoutValue?.value === undefined || !('value' in exportedWithoutValue)).toBe(true)
+        expect(
+          exportedWithoutValue?.value === undefined || !('value' in exportedWithoutValue)
+        ).toBe(true)
       }
     })
   })

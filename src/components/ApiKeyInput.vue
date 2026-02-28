@@ -10,7 +10,7 @@ const apiKey = computed({
   set: (value) => {
     settings.value.apiKey = value
     storageManager.saveSettings(settings.value)
-  }
+  },
 })
 
 const inputValue = ref(apiKey.value || '')
@@ -101,25 +101,29 @@ const resetCountdown = computed(() => {
 })
 
 // Start countdown when we have a reset time, reset locally when it expires
-watch(() => lastValidation.value?.rateLimitReset, (resetTime) => {
-  if (countdownInterval) clearInterval(countdownInterval)
-  if (resetTime) {
-    countdownInterval = setInterval(() => {
-      now.value = Date.now()
-      if (resetTime * 1000 <= now.value) {
-        if (countdownInterval) clearInterval(countdownInterval)
-        // Reset rate limit locally - no API call needed
-        if (lastValidation.value) {
-          lastValidation.value = {
-            ...lastValidation.value,
-            rateLimitRemaining: lastValidation.value.keyInfo?.rate_limit ?? 20,
-            rateLimitReset: null,
+watch(
+  () => lastValidation.value?.rateLimitReset,
+  (resetTime) => {
+    if (countdownInterval) clearInterval(countdownInterval)
+    if (resetTime) {
+      countdownInterval = setInterval(() => {
+        now.value = Date.now()
+        if (resetTime * 1000 <= now.value) {
+          if (countdownInterval) clearInterval(countdownInterval)
+          // Reset rate limit locally - no API call needed
+          if (lastValidation.value) {
+            lastValidation.value = {
+              ...lastValidation.value,
+              rateLimitRemaining: lastValidation.value.keyInfo?.rate_limit ?? 20,
+              rateLimitReset: null,
+            }
           }
         }
-      }
-    }, 1000)
-  }
-}, { immediate: true })
+      }, 1000)
+    }
+  },
+  { immediate: true }
+)
 
 onUnmounted(() => {
   if (countdownInterval) clearInterval(countdownInterval)
@@ -149,9 +153,7 @@ if (hasApiKey.value) {
     <!-- Warning banner when no API key is set -->
     <div v-if="!hasApiKey" class="warning-banner">
       <span class="warning-icon">⚠️</span>
-      <span class="warning-text">
-        Using default data. Enter your API key to get live prices.
-      </span>
+      <span class="warning-text"> Using default data. Enter your API key to get live prices. </span>
     </div>
 
     <div class="input-row">
@@ -182,7 +184,10 @@ if (hasApiKey.value) {
     </div>
 
     <!-- Validation result display -->
-    <div v-if="lastValidation && lastValidation.isValid && lastValidation.keyInfo" class="validation-info">
+    <div
+      v-if="lastValidation && lastValidation.isValid && lastValidation.keyInfo"
+      class="validation-info"
+    >
       <div class="info-section">
         <h4 class="info-title">API Key Information</h4>
         <div class="info-grid">
@@ -210,10 +215,11 @@ if (hasApiKey.value) {
         <h4 class="info-title">Current Rate Limit Status</h4>
         <div class="rate-limit-bar">
           <div class="rate-limit-text">
-            <span>{{ lastValidation.rateLimitRemaining }} / {{ lastValidation.keyInfo.rate_limit }} remaining</span>
-            <span v-if="resetCountdown" class="reset-time">
-              Resets in {{ resetCountdown }}
-            </span>
+            <span
+              >{{ lastValidation.rateLimitRemaining }} /
+              {{ lastValidation.keyInfo.rate_limit }} remaining</span
+            >
+            <span v-if="resetCountdown" class="reset-time"> Resets in {{ resetCountdown }} </span>
           </div>
           <div class="progress-bar">
             <div

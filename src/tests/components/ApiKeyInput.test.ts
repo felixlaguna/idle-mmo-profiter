@@ -186,7 +186,14 @@ describe('ApiKeyInput', () => {
 
   it('should clear API key when clear button is clicked', async () => {
     // Set initial API key in localStorage
-    localStorageMock.setItem('immo-profit:settings', JSON.stringify({ apiKey: 'existing-key', marketTaxRate: 0.12, magicFind: { streak: 0, dungeon: 0, item: 0, bonus: 0 } }))
+    localStorageMock.setItem(
+      'immo-profit:settings',
+      JSON.stringify({
+        apiKey: 'existing-key',
+        marketTaxRate: 0.12,
+        magicFind: { streak: 0, dungeon: 0, item: 0, bonus: 0 },
+      })
+    )
     ;(global.confirm as any).mockReturnValue(true)
 
     const wrapper = mount(ApiKeyInput)
@@ -207,7 +214,14 @@ describe('ApiKeyInput', () => {
 
   it('should not clear API key when confirmation is cancelled', async () => {
     // Set initial API key in localStorage
-    localStorageMock.setItem('immo-profit:settings', JSON.stringify({ apiKey: 'existing-key', marketTaxRate: 0.12, magicFind: { streak: 0, dungeon: 0, item: 0, bonus: 0 } }))
+    localStorageMock.setItem(
+      'immo-profit:settings',
+      JSON.stringify({
+        apiKey: 'existing-key',
+        marketTaxRate: 0.12,
+        magicFind: { streak: 0, dungeon: 0, item: 0, bonus: 0 },
+      })
+    )
     ;(global.confirm as any).mockReturnValue(false)
 
     const wrapper = mount(ApiKeyInput)

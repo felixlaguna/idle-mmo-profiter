@@ -20,7 +20,13 @@ const emit = defineEmits<{
 const expandedRows = ref<Set<string>>(new Set())
 
 // Sort configuration
-type SortKey = 'name' | 'runCost' | 'timeSeconds' | 'expectedValue' | 'totalProfit' | 'profitPerHour'
+type SortKey =
+  | 'name'
+  | 'runCost'
+  | 'timeSeconds'
+  | 'expectedValue'
+  | 'totalProfit'
+  | 'profitPerHour'
 type SortOrder = 'asc' | 'desc'
 
 const sortKey = ref<SortKey>('profitPerHour')
@@ -65,9 +71,7 @@ const sortedDungeons = computed(() => {
     }
 
     if (typeof aValue === 'string' && typeof bValue === 'string') {
-      return sortOrder.value === 'asc'
-        ? aValue.localeCompare(bValue)
-        : bValue.localeCompare(aValue)
+      return sortOrder.value === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue)
     }
 
     return sortOrder.value === 'asc'
@@ -134,8 +138,8 @@ const handleTimeUpdate = (dungeonName: string, value: number) => {
 
 // Calculate profit range for heatmap
 const profitRange = computed(() => {
-  const profitHours = props.dungeons.map(d => d.profitPerHour)
-  const totalProfits = props.dungeons.map(d => d.totalProfit)
+  const profitHours = props.dungeons.map((d) => d.profitPerHour)
+  const totalProfits = props.dungeons.map((d) => d.totalProfit)
   return {
     profitPerHour: {
       min: Math.min(...profitHours),
@@ -144,7 +148,7 @@ const profitRange = computed(() => {
     totalProfit: {
       min: Math.min(...totalProfits),
       max: Math.max(...totalProfits),
-    }
+    },
   }
 })
 
@@ -213,18 +217,32 @@ const isUntradableRecipe = (recipeName: string): boolean => {
                   @update:model-value="(value) => handleTimeUpdate(dungeon.name, value)"
                 />
               </td>
-              <td class="text-right" data-label="Expected Value">{{ formatNumber(getTotalExpectedValue(dungeon)) }}</td>
+              <td class="text-right" data-label="Expected Value">
+                {{ formatNumber(getTotalExpectedValue(dungeon)) }}
+              </td>
               <td
                 class="text-right"
                 data-label="Profit"
-                :style="getHeatmapStyle(dungeon.totalProfit, profitRange.totalProfit.min, profitRange.totalProfit.max)"
+                :style="
+                  getHeatmapStyle(
+                    dungeon.totalProfit,
+                    profitRange.totalProfit.min,
+                    profitRange.totalProfit.max
+                  )
+                "
               >
                 {{ formatNumber(dungeon.totalProfit) }}
               </td>
               <td
                 class="text-right profit-hr"
                 data-label="Profit/hr"
-                :style="getHeatmapStyle(dungeon.profitPerHour, profitRange.profitPerHour.min, profitRange.profitPerHour.max)"
+                :style="
+                  getHeatmapStyle(
+                    dungeon.profitPerHour,
+                    profitRange.profitPerHour.min,
+                    profitRange.profitPerHour.max
+                  )
+                "
               >
                 {{ formatNumber(dungeon.profitPerHour) }}
               </td>
@@ -250,18 +268,26 @@ const isUntradableRecipe = (recipeName: string): boolean => {
                         <td class="text-right">
                           <span v-if="isUntradableRecipe(drop.recipeName)" class="computed-price">
                             {{ formatNumber(drop.price) }}
-                            <span class="computed-indicator" title="Price computed from craftable profitability">ⓒ</span>
+                            <span
+                              class="computed-indicator"
+                              title="Price computed from craftable profitability"
+                              >ⓒ</span
+                            >
                           </span>
                           <span v-else>{{ formatNumber(drop.price) }}</span>
                         </td>
                         <td class="text-right">{{ formatPercent(drop.chance) }}</td>
-                        <td class="text-right expected-value">{{ formatNumber(drop.expectedValue) }}</td>
+                        <td class="text-right expected-value">
+                          {{ formatNumber(drop.expectedValue) }}
+                        </td>
                       </tr>
                     </tbody>
                     <tfoot>
                       <tr class="total-row">
                         <td colspan="3" class="text-right total-label">Total Expected Value:</td>
-                        <td class="text-right total-value">{{ formatNumber(getTotalExpectedValue(dungeon)) }}</td>
+                        <td class="text-right total-value">
+                          {{ formatNumber(getTotalExpectedValue(dungeon)) }}
+                        </td>
                       </tr>
                     </tfoot>
                   </table>

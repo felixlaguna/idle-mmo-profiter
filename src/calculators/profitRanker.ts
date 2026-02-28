@@ -33,7 +33,7 @@ export function rankAllActivities(
   const allActivities: Omit<RankedActivity, 'rank' | 'isRecommended'>[] = []
 
   // Add dungeon results
-  dungeonResults.forEach(dungeon => {
+  dungeonResults.forEach((dungeon) => {
     allActivities.push({
       activityType: 'dungeon',
       name: dungeon.name,
@@ -41,12 +41,12 @@ export function rankAllActivities(
       profitPerAction: dungeon.totalProfit,
       timePerAction: dungeon.timeSeconds,
       cost: dungeon.runCost,
-      details: `${dungeon.drops.length} drops, ${Math.round(dungeon.timeSeconds / 60)} min run`
+      details: `${dungeon.drops.length} drops, ${Math.round(dungeon.timeSeconds / 60)} min run`,
     })
   })
 
   // Add craftable results
-  craftableResults.forEach(craftable => {
+  craftableResults.forEach((craftable) => {
     allActivities.push({
       activityType: 'craftable',
       name: craftable.name,
@@ -54,12 +54,12 @@ export function rankAllActivities(
       profitPerAction: craftable.profit,
       timePerAction: craftable.craftTimeSeconds,
       cost: craftable.totalCost,
-      details: `${craftable.materials.length} materials, ${Math.round(craftable.craftTimeSeconds / 60)} min craft`
+      details: `${craftable.materials.length} materials, ${Math.round(craftable.craftTimeSeconds / 60)} min craft`,
     })
   })
 
   // Add resource results
-  resourceResults.forEach(resource => {
+  resourceResults.forEach((resource) => {
     allActivities.push({
       activityType: 'resource',
       name: resource.name,
@@ -67,14 +67,14 @@ export function rankAllActivities(
       profitPerAction: resource.bestProfit,
       timePerAction: resource.timeSeconds,
       cost: resource.cost,
-      details: `Best: ${resource.bestMethod}, ${Math.round(resource.timeSeconds)} sec`
+      details: `Best: ${resource.bestMethod}, ${Math.round(resource.timeSeconds)} sec`,
     })
   })
 
   // Filter out negative profits if requested
   let filteredActivities = allActivities
   if (!includeNegative) {
-    filteredActivities = allActivities.filter(activity => activity.profitPerHour > 0)
+    filteredActivities = allActivities.filter((activity) => activity.profitPerHour > 0)
   }
 
   // Sort by profit per hour descending
@@ -84,7 +84,7 @@ export function rankAllActivities(
   const rankedActivities: RankedActivity[] = sortedActivities.map((activity, index) => ({
     ...activity,
     rank: index + 1,
-    isRecommended: index === 0
+    isRecommended: index === 0,
   }))
 
   return rankedActivities

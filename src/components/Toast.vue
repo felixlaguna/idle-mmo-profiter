@@ -71,13 +71,7 @@ const getTypeIcon = (type: string): string => {
     >
       <span class="toast-icon">{{ getTypeIcon(toast.type) }}</span>
       <span class="toast-message">{{ toast.message }}</span>
-      <button
-        class="toast-close"
-        title="Dismiss"
-        @click="emit('dismiss', toast.id)"
-      >
-        ×
-      </button>
+      <button class="toast-close" title="Dismiss" @click="emit('dismiss', toast.id)">×</button>
     </div>
   </div>
 </template>

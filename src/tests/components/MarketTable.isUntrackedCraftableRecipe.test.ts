@@ -52,10 +52,7 @@ describe('isUntrackedCraftableRecipe', () => {
 
   beforeEach(() => {
     // Setup: some craftables are already tracked
-    trackedCraftables = [
-      { name: 'Lesser Health Potion' },
-      { name: 'Greater Mana Potion' },
-    ]
+    trackedCraftables = [{ name: 'Lesser Health Potion' }, { name: 'Greater Mana Potion' }]
   })
 
   it('should return true for untracked recipe with "Recipe" in name', () => {

@@ -29,11 +29,11 @@ const chartData = computed(() => {
   // Reverse to show highest at top (horizontal bar chart)
   const reversed = [...activities].reverse()
 
-  const labels = reversed.map(a => a.name)
-  const data = reversed.map(a => a.profitPerHour)
+  const labels = reversed.map((a) => a.name)
+  const data = reversed.map((a) => a.profitPerHour)
 
   // Color by type
-  const backgroundColors = reversed.map(a => {
+  const backgroundColors = reversed.map((a) => {
     switch (a.activityType) {
       case 'dungeon':
         return 'rgba(168, 85, 247, 0.7)' // Purple
@@ -46,7 +46,7 @@ const chartData = computed(() => {
     }
   })
 
-  const borderColors = reversed.map(a => {
+  const borderColors = reversed.map((a) => {
     switch (a.activityType) {
       case 'dungeon':
         return 'rgba(168, 85, 247, 1)'
@@ -61,13 +61,15 @@ const chartData = computed(() => {
 
   return {
     labels,
-    datasets: [{
-      label: 'Profit/hr (gold)',
-      data,
-      backgroundColor: backgroundColors,
-      borderColor: borderColors,
-      borderWidth: 1,
-    }]
+    datasets: [
+      {
+        label: 'Profit/hr (gold)',
+        data,
+        backgroundColor: backgroundColors,
+        borderColor: borderColors,
+        borderWidth: 1,
+      },
+    ],
   }
 })
 
@@ -102,13 +104,13 @@ const createChart = () => {
           padding: 12,
           displayColors: true,
           callbacks: {
-            label: function(context) {
+            label: function (context) {
               const value = context.parsed.x
               if (value === null) return ''
               return `Profit/hr: ${Math.round(value).toLocaleString()} gold`
-            }
-          }
-        }
+            },
+          },
+        },
       },
       scales: {
         x: {
@@ -121,13 +123,13 @@ const createChart = () => {
           },
           ticks: {
             color: '#9ca3af',
-            callback: function(value) {
+            callback: function (value) {
               if (typeof value === 'number') {
                 return Math.round(value).toLocaleString()
               }
               return value !== null ? String(value) : ''
-            }
-          }
+            },
+          },
         },
         y: {
           grid: {
@@ -137,11 +139,11 @@ const createChart = () => {
             color: '#9ca3af',
             font: {
               size: 11,
-            }
-          }
-        }
-      }
-    }
+            },
+          },
+        },
+      },
+    },
   })
 }
 
@@ -160,9 +162,13 @@ onMounted(() => {
 })
 
 // Watch for data changes and update chart
-watch(chartData, () => {
-  updateChart()
-}, { deep: true })
+watch(
+  chartData,
+  () => {
+    updateChart()
+  },
+  { deep: true }
+)
 
 // Watch for show all toggle
 watch(showAll, () => {
@@ -184,7 +190,11 @@ watch(showAll, () => {
         {{ showAll ? 'Show Less' : `Show All (${activities.length})` }}
       </button>
     </div>
-    <div class="chart-container" role="img" aria-label="Bar chart showing profit per hour for different activities">
+    <div
+      class="chart-container"
+      role="img"
+      aria-label="Bar chart showing profit per hour for different activities"
+    >
       <canvas ref="chartCanvas"></canvas>
     </div>
   </div>

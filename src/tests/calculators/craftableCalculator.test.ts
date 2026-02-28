@@ -20,9 +20,9 @@ describe('calculateCraftableProfits', () => {
     timeSeconds: 1090.9,
     materials: [
       { name: 'Moose antler', quantity: 15, unitCost: 114.1 },
-      { name: 'Minotaur Hide', quantity: 20, unitCost: 378.9 }
+      { name: 'Minotaur Hide', quantity: 20, unitCost: 378.9 },
     ],
-    currentPrice: 11894.6
+    currentPrice: 11894.6,
   }
 
   describe('recipe cost logic', () => {
@@ -37,7 +37,7 @@ describe('calculateCraftableProfits', () => {
           chance: 0.0042,
           uses: 10,
           producesItemName: 'Wraithbane',
-          isUntradable: false
+          isUntradable: false,
         },
         {
           id: 'rec-163',
@@ -46,8 +46,8 @@ describe('calculateCraftableProfits', () => {
           chance: 0.0133,
           uses: 10,
           producesItemName: 'Wraithbane',
-          isUntradable: true
-        }
+          isUntradable: true,
+        },
       ]
 
       const results = calculateCraftableProfits([mockCraftableRecipe], mockTaxRate, recipes)
@@ -67,10 +67,8 @@ describe('calculateCraftableProfits', () => {
       const craftableRecipe: CraftableRecipe = {
         name: 'Exclusive Elixir',
         timeSeconds: 1000,
-        materials: [
-          { name: 'Rare Herb', quantity: 10, unitCost: 100 }
-        ],
-        currentPrice: 5000
+        materials: [{ name: 'Rare Herb', quantity: 10, unitCost: 100 }],
+        currentPrice: 5000,
       }
 
       const recipes: Recipe[] = [
@@ -81,8 +79,8 @@ describe('calculateCraftableProfits', () => {
           chance: 0.01,
           uses: 10,
           producesItemName: 'Exclusive Elixir',
-          isUntradable: false
-        }
+          isUntradable: false,
+        },
         // Note: NO untradable version exists
       ]
 
@@ -102,10 +100,8 @@ describe('calculateCraftableProfits', () => {
       const craftableRecipe: CraftableRecipe = {
         name: 'Unlimited Craftable',
         timeSeconds: 1000,
-        materials: [
-          { name: 'Common Herb', quantity: 5, unitCost: 50 }
-        ],
-        currentPrice: 3000
+        materials: [{ name: 'Common Herb', quantity: 5, unitCost: 50 }],
+        currentPrice: 3000,
       }
 
       const recipes: Recipe[] = [
@@ -116,8 +112,8 @@ describe('calculateCraftableProfits', () => {
           chance: 0.05,
           uses: 0, // Unlimited uses
           producesItemName: 'Unlimited Craftable',
-          isUntradable: false
-        }
+          isUntradable: false,
+        },
       ]
 
       const results = calculateCraftableProfits([craftableRecipe], mockTaxRate, recipes)
@@ -149,8 +145,8 @@ describe('calculateCraftableProfits', () => {
           chance: 0.0133,
           uses: 10,
           producesItemName: 'Wraithbane',
-          isUntradable: true
-        }
+          isUntradable: true,
+        },
       ]
 
       const results = calculateCraftableProfits([mockCraftableRecipe], mockTaxRate, recipes)
@@ -194,11 +190,9 @@ describe('calculateCraftableProfits', () => {
       const craftableRecipe: CraftableRecipe = {
         name: 'Alchemy Craftable',
         timeSeconds: 1000,
-        materials: [
-          { name: 'Rare Herb', quantity: 10, unitCost: 100 }
-        ],
+        materials: [{ name: 'Rare Herb', quantity: 10, unitCost: 100 }],
         currentPrice: 5000,
-        skill: 'alchemy'
+        skill: 'alchemy',
       }
 
       const results = calculateCraftableProfits([craftableRecipe], mockTaxRate, [])
@@ -213,9 +207,9 @@ describe('calculateCraftableProfits', () => {
         timeSeconds: 1000,
         materials: [
           { name: 'Gleaming Vial', quantity: 1, unitCost: 100 },
-          { name: 'Rare Herb', quantity: 10, unitCost: 50 }
+          { name: 'Rare Herb', quantity: 10, unitCost: 50 },
         ],
-        currentPrice: 5000
+        currentPrice: 5000,
       }
 
       const results = calculateCraftableProfits([craftableRecipe], mockTaxRate, [])
@@ -230,9 +224,9 @@ describe('calculateCraftableProfits', () => {
         timeSeconds: 1000,
         materials: [
           { name: 'Elemental Crystal', quantity: 1, unitCost: 200 },
-          { name: 'Metal Bar', quantity: 5, unitCost: 100 }
+          { name: 'Metal Bar', quantity: 5, unitCost: 100 },
         ],
-        currentPrice: 8000
+        currentPrice: 8000,
       }
 
       const results = calculateCraftableProfits([craftableRecipe], mockTaxRate, [])
@@ -247,9 +241,9 @@ describe('calculateCraftableProfits', () => {
         timeSeconds: 1000,
         materials: [
           { name: 'Moose antler', quantity: 15, unitCost: 100 },
-          { name: 'Minotaur Hide', quantity: 20, unitCost: 200 }
+          { name: 'Minotaur Hide', quantity: 20, unitCost: 200 },
         ],
-        currentPrice: 10000
+        currentPrice: 10000,
       }
 
       const results = calculateCraftableProfits([craftableRecipe], mockTaxRate, [])
@@ -264,10 +258,10 @@ describe('calculateCraftableProfits', () => {
         timeSeconds: 1000,
         materials: [
           { name: 'Gleaming Vial', quantity: 1, unitCost: 100 },
-          { name: 'Rare Material', quantity: 5, unitCost: 50 }
+          { name: 'Rare Material', quantity: 5, unitCost: 50 },
         ],
         currentPrice: 5000,
-        skill: 'forging' // Explicit skill differs from what would be inferred
+        skill: 'forging', // Explicit skill differs from what would be inferred
       }
 
       const results = calculateCraftableProfits([craftableRecipe], mockTaxRate, [])

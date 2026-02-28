@@ -3,23 +3,19 @@
 export {
   calculateDungeonProfits,
   type DungeonProfitResult,
-  type DungeonDropResult
+  type DungeonDropResult,
 } from './dungeonCalculator'
 
 export {
   calculateCraftableProfits,
   type CraftableProfitResult,
-  type CraftableMaterialResult
+  type CraftableMaterialResult,
 } from './craftableCalculator'
 
 export {
   calculateResourceProfits,
   type ResourceProfitResult,
-  type SaleMethod
+  type SaleMethod,
 } from './resourceCalculator'
 
-export {
-  rankAllActivities,
-  getBestAction,
-  type RankedActivity
-} from './profitRanker'
+export { rankAllActivities, getBestAction, type RankedActivity } from './profitRanker'

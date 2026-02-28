@@ -1,12 +1,15 @@
 # Resource Cost Calculation Test
 
 ## Purpose
+
 Verify that resource gathering costs are calculated dynamically from input material market prices, not hardcoded values.
 
 ## Fix Description
+
 Resource gathering activities that require input materials (Coal for cooking/smelting) now compute costs dynamically from market prices.
 
 ### Implementation
+
 - Added `ResourceInput` type with `resourceName`, `quantity`, and `useMarketPrice` fields
 - Changed `cost` field to `baseCost` (base gathering cost like rod/pickaxe wear)
 - Added optional `inputs` array to specify required materials
@@ -14,12 +17,14 @@ Resource gathering activities that require input materials (Coal for cooking/sme
 - Input prices use current market prices from resourcePriceMap (respects user overrides)
 
 ### Example: Cooked Stingray
+
 - **Base Cost:** 0 (no tool wear for cooking)
 - **Inputs:** 1x Stingray (market: 38 gold) + 1x Coal (market: 6 gold)
 - **Computed Cost:** 0 + 38 + 6 = 44 gold
 - **Dynamic:** If user changes Coal market price to 10, cost becomes 0 + 38 + 10 = 48 gold
 
 ### Example: Mystic Bar
+
 - **Base Cost:** 0 (no tool wear for smelting)
 - **Inputs:** 1x Mystic Ore (market: 24 gold) + 1x Coal (market: 6 gold)
 - **Computed Cost:** 0 + 24 + 6 = 30 gold
@@ -28,6 +33,7 @@ Resource gathering activities that require input materials (Coal for cooking/sme
 ## Test Scenario 1: Cooked Stingray Cost Updates
 
 **Steps:**
+
 1. Open the app
 2. Go to Market tab
 3. Note Coal market price (default: 6 gold)
@@ -47,6 +53,7 @@ Cost updates dynamically to 48 gold when Coal price changes to 10 (test PASSES)
 ## Test Scenario 2: Mystic Bar Cost Updates
 
 **Steps:**
+
 1. Open the app
 2. Go to Market tab
 3. Note Coal market price (default: 6 gold)
@@ -66,6 +73,7 @@ Cost updates dynamically to 39 gold when Coal price changes to 15 (test PASSES)
 ## Test Scenario 3: Cooked Great White Shark Cost Updates
 
 **Steps:**
+
 1. Open the app
 2. Go to Market tab
 3. Note Coal market price (default: 6 gold)
@@ -108,6 +116,7 @@ npx tsx scripts/test-resource-costs.ts
 ```
 
 **Expected Output:**
+
 - Test 1 (Default prices): All 12 resources show ✓, test PASSED
 - Test 2 (Coal price changed to 10): All costs update correctly, test PASSED
 - Test 3 (Stingray price changed to 50): Cooked Stingray cost updates, test PASSED

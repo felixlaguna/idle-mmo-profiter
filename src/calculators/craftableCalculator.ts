@@ -91,7 +91,7 @@ export function calculateCraftableProfits(
   const craftableRecipeMap = new Map<string, Recipe>()
 
   if (recipes) {
-    recipes.forEach(recipe => {
+    recipes.forEach((recipe) => {
       if (!recipe.producesItemName) return
 
       // Only consider tradable recipes that produce craftables
@@ -105,20 +105,17 @@ export function calculateCraftableProfits(
     })
   }
 
-  const results: CraftableProfitResult[] = craftableRecipes.map(craftable => {
+  const results: CraftableProfitResult[] = craftableRecipes.map((craftable) => {
     // Calculate material costs
-    const materialResults: CraftableMaterialResult[] = craftable.materials.map(mat => ({
+    const materialResults: CraftableMaterialResult[] = craftable.materials.map((mat) => ({
       name: mat.name,
       quantity: mat.quantity,
       unitCost: mat.unitCost,
-      totalCost: mat.quantity * mat.unitCost
+      totalCost: mat.quantity * mat.unitCost,
     }))
 
     // Calculate total material cost
-    const totalMaterialCost = materialResults.reduce(
-      (sum, mat) => sum + mat.totalCost,
-      0
-    )
+    const totalMaterialCost = materialResults.reduce((sum, mat) => sum + mat.totalCost, 0)
 
     // Total cost
     const totalCost = totalMaterialCost
@@ -152,7 +149,7 @@ export function calculateCraftableProfits(
       profit,
       profitPerHour,
       hasRecipeCost: false,
-      skill: craftable.skill || inferSkillFromMaterials(craftable.materials)
+      skill: craftable.skill || inferSkillFromMaterials(craftable.materials),
     }
 
     // Show dual profitability when:

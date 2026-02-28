@@ -6,7 +6,12 @@ defineProps<{
 </script>
 
 <template>
-  <div class="loading-spinner" :class="`spinner-${size || 'medium'}`" role="status" aria-live="polite">
+  <div
+    class="loading-spinner"
+    :class="`spinner-${size || 'medium'}`"
+    role="status"
+    aria-live="polite"
+  >
     <div class="spinner"></div>
     <p v-if="message" class="loading-message">{{ message }}</p>
     <span class="sr-only">Loading...</span>

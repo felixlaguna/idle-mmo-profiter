@@ -94,7 +94,9 @@ function saveCraftableRecipes(craftableRecipes: DefaultData['craftableRecipes'])
 /**
  * Load craftableRecipes from localStorage, merging with defaults
  */
-function loadCraftableRecipes(defaultCrafts: DefaultData['craftableRecipes']): DefaultData['craftableRecipes'] {
+function loadCraftableRecipes(
+  defaultCrafts: DefaultData['craftableRecipes']
+): DefaultData['craftableRecipes'] {
   try {
     const stored = localStorage.getItem(CRAFTABLE_RECIPES_KEY)
     if (!stored) return defaultCrafts
@@ -201,9 +203,7 @@ function createDataProvider() {
       const id = `craft-auto-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`
 
       // Look up the matching recipe to get the producesItemHashedId and producesItemVendorValue
-      const matchingRecipe = loadedDefaults.recipes.find(
-        (r) => r.producesItemName === recipe.name
-      )
+      const matchingRecipe = loadedDefaults.recipes.find((r) => r.producesItemName === recipe.name)
       const hashedId = matchingRecipe?.producesItemHashedId || ''
       const vendorValue = matchingRecipe?.producesItemVendorValue ?? 0
 
@@ -677,7 +677,8 @@ function createDataProvider() {
     ).length
 
     const totalItems = materialsTotal + craftablesTotal + resourcesTotal + recipesTotal
-    const totalExcluded = materialsExcluded + craftablesExcluded + resourcesExcluded + recipesExcluded
+    const totalExcluded =
+      materialsExcluded + craftablesExcluded + resourcesExcluded + recipesExcluded
 
     return {
       materials: {
@@ -746,7 +747,12 @@ function createDataProvider() {
   /**
    * Add a new Material entry to the defaults (if it doesn't already exist)
    */
-  function addMaterial(material: { name: string; price: number; hashedId?: string; vendorValue?: number }): string {
+  function addMaterial(material: {
+    name: string
+    price: number
+    hashedId?: string
+    vendorValue?: number
+  }): string {
     const existing = materials.value.find((m) => m.name === material.name)
     if (existing) return existing.id
 
@@ -765,7 +771,12 @@ function createDataProvider() {
   /**
    * Add a new Craftable entry to the defaults (if it doesn't already exist)
    */
-  function addCraftable(craftable: { name: string; price: number; hashedId?: string; vendorValue?: number }): string {
+  function addCraftable(craftable: {
+    name: string
+    price: number
+    hashedId?: string
+    vendorValue?: number
+  }): string {
     const existing = craftables.value.find((c) => c.name === craftable.name)
     if (existing) return existing.id
 
@@ -835,28 +846,28 @@ function createDataProvider() {
     // Build the complete data object with user overrides applied
     // Use computed arrays which already have overrides merged
     const exportData: DefaultData = {
-      materials: materials.value.map(mat => ({
+      materials: materials.value.map((mat) => ({
         id: mat.id,
         name: mat.name,
         price: mat.price,
         hashedId: mat.hashedId || '',
         vendorValue: mat.vendorValue || 0,
       })),
-      craftables: craftables.value.map(craft => ({
+      craftables: craftables.value.map((craft) => ({
         id: craft.id,
         name: craft.name,
         price: craft.price,
         hashedId: craft.hashedId || '',
         vendorValue: craft.vendorValue || 0,
       })),
-      resources: resources.value.map(res => ({
+      resources: resources.value.map((res) => ({
         id: res.id,
         name: res.name,
         marketPrice: res.marketPrice,
         vendorValue: res.vendorValue,
         hashedId: res.hashedId || '',
       })),
-      recipes: recipes.value.map(recipe => {
+      recipes: recipes.value.map((recipe) => {
         const exported: Recipe = {
           id: recipe.id,
           name: recipe.name,
@@ -870,22 +881,23 @@ function createDataProvider() {
         if (recipe.producesItemName) exported.producesItemName = recipe.producesItemName
         if (recipe.producesItemHashedId) exported.producesItemHashedId = recipe.producesItemHashedId
         if (recipe.isUntradable !== undefined) exported.isUntradable = recipe.isUntradable
-        if (recipe.tradableCounterpartId) exported.tradableCounterpartId = recipe.tradableCounterpartId
+        if (recipe.tradableCounterpartId)
+          exported.tradableCounterpartId = recipe.tradableCounterpartId
         return exported
       }),
       dungeons: dungeons.value,
-      craftableRecipes: craftableRecipes.value.map(craft => ({
+      craftableRecipes: craftableRecipes.value.map((craft) => ({
         name: craft.name,
         skill: craft.skill,
         timeSeconds: craft.timeSeconds,
-        materials: craft.materials.map(mat => ({
+        materials: craft.materials.map((mat) => ({
           name: mat.name,
           quantity: mat.quantity,
           unitCost: mat.unitCost,
         })),
         currentPrice: craft.currentPrice,
       })),
-      resourceGathering: resourceGathering.value.map(gather => {
+      resourceGathering: resourceGathering.value.map((gather) => {
         // Strip the computed 'cost' field - it doesn't exist in defaults.json
         const exported: {
           name: string

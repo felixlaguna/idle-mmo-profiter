@@ -11,16 +11,16 @@ import type { RefreshCategory } from '../composables/useMarketRefresh'
 // Vendor-sold items (vials, crystals) with their buy prices from NPC shops.
 // These items are not tradable on the market, so we use known buy prices.
 const VENDOR_BUY_PRICES: Record<string, number> = {
-  '3Zbym56qLx61NBRp7Eek': 5,    // Cheap Vial
-  'BRn3x72JQ2OrNzOMok41': 5,    // Cheap Crystal
-  'oZwey82VNAnPYD0dXM3g': 10,   // Tarnished Vial
-  'gGZ2J71yYKwxYMmjbown': 10,   // Tarnished Crystal
-  'JZdg5V3PQoXyNEyWq0zl': 50,  // Gleaming Vial
-  'yav4OK1wNEyWNZP7rzJb': 50,   // Gleaming Crystal
-  'JVM29l7kQZ0mY80q6WDG': 200,  // Elemental Vial
-  'oaJydnOmQWV9LbgRe5ME': 200,  // Elemental Crystal
-  '93R0qXalLl9xQAbn8DBg': 500,  // Eldritch Vial
-  'ZqEegBydNwAmLkA59J61': 500,   // Eldritch Crystal
+  '3Zbym56qLx61NBRp7Eek': 5, // Cheap Vial
+  BRn3x72JQ2OrNzOMok41: 5, // Cheap Crystal
+  oZwey82VNAnPYD0dXM3g: 10, // Tarnished Vial
+  gGZ2J71yYKwxYMmjbown: 10, // Tarnished Crystal
+  JZdg5V3PQoXyNEyWq0zl: 50, // Gleaming Vial
+  yav4OK1wNEyWNZP7rzJb: 50, // Gleaming Crystal
+  JVM29l7kQZ0mY80q6WDG: 200, // Elemental Vial
+  oaJydnOmQWV9LbgRe5ME: 200, // Elemental Crystal
+  '93R0qXalLl9xQAbn8DBg': 500, // Eldritch Vial
+  ZqEegBydNwAmLkA59J61: 500, // Eldritch Crystal
   '1rZXlwg5YvVkYk9joDmG': 2500, // Arcane Vial
   '3Zbym56qLxZENBRp7Eek': 2500, // Arcane Crystal
 }
@@ -397,7 +397,10 @@ const addUntrackedCraftable = async (
 
     if (!recipeDetails?.recipe) {
       if (!silent) {
-        showToast(`No recipe details found for "${recipe.name}". Check the browser console.`, 'error')
+        showToast(
+          `No recipe details found for "${recipe.name}". Check the browser console.`,
+          'error'
+        )
       }
       console.error(
         `[AddCraftable] No recipe data for "${recipe.name}" (type: ${recipeDetails?.type || 'unknown'}). Full response:`,
@@ -426,7 +429,9 @@ const addUntrackedCraftable = async (
           if (vendorBuyPrice) {
             price = vendorBuyPrice
             vendorValue = vendorBuyPrice
-            console.log(`[AddCraftable] Using known vendor buy price for "${mat.item_name}": ${price}`)
+            console.log(
+              `[AddCraftable] Using known vendor buy price for "${mat.item_name}": ${price}`
+            )
           } else {
             const avgPrice = await getAverageMarketPrice(mat.hashed_item_id)
             price = avgPrice ?? 0
@@ -448,7 +453,9 @@ const addUntrackedCraftable = async (
         if (vendorBuyPrice) {
           dataProvider.updateMaterialPrice(material.id, vendorBuyPrice)
           material = { ...material, price: vendorBuyPrice }
-          console.log(`[AddCraftable] Using known vendor buy price for "${material.name}": ${vendorBuyPrice}`)
+          console.log(
+            `[AddCraftable] Using known vendor buy price for "${material.name}": ${vendorBuyPrice}`
+          )
         } else {
           const avgPrice = await getAverageMarketPrice(material.hashedId)
           if (avgPrice && avgPrice > 0) {
@@ -481,7 +488,9 @@ const addUntrackedCraftable = async (
       if (craftableHashedId) {
         const avgPrice = await getAverageMarketPrice(craftableHashedId)
         craftablePrice = avgPrice ?? 0
-        console.log(`[AddCraftable] Fetched craftable price for "${craftableName}": ${craftablePrice}`)
+        console.log(
+          `[AddCraftable] Fetched craftable price for "${craftableName}": ${craftablePrice}`
+        )
 
         dataProvider.addCraftable({
           name: craftableName,
@@ -491,9 +500,10 @@ const addUntrackedCraftable = async (
       } else {
         // Fallback: search by name
         const searchResult = await searchItems(craftableName)
-        const craftableItem = searchResult.items.find(
-          (item) => item.name.toLowerCase() === craftableName.toLowerCase()
-        ) || searchResult.items[0]
+        const craftableItem =
+          searchResult.items.find(
+            (item) => item.name.toLowerCase() === craftableName.toLowerCase()
+          ) || searchResult.items[0]
 
         if (craftableItem) {
           const avgPrice = await getAverageMarketPrice(craftableItem.hashed_id)
@@ -528,14 +538,18 @@ const addUntrackedCraftable = async (
       dataProvider.updateRecipeDefaults(counterpart.id, recipeUpdate)
     }
 
-    console.log(`[AddCraftable] Updated recipe "${recipe.name}" and ${counterparts.length} counterpart(s) with uses=${maxUses}, producesItemName="${craftableName}"`)
+    console.log(
+      `[AddCraftable] Updated recipe "${recipe.name}" and ${counterparts.length} counterpart(s) with uses=${maxUses}, producesItemName="${craftableName}"`
+    )
 
     // Step 5: Create the CraftableRecipe entry
     const craftTime = getCraftTimeForLevel(recipeData.level_required)
     const skill: 'alchemy' | 'forging' | undefined =
-      recipeData.skill === 'alchemy' ? 'alchemy' :
-      recipeData.skill === 'forging' ? 'forging' :
-      undefined
+      recipeData.skill === 'alchemy'
+        ? 'alchemy'
+        : recipeData.skill === 'forging'
+          ? 'forging'
+          : undefined
     const craftableRecipe = {
       name: craftableName,
       timeSeconds: craftTime,
@@ -595,10 +609,7 @@ const trackAllUntrackedCraftables = async () => {
   for (const recipe of untrackedRecipes) {
     // Check for cancellation
     if (trackAllAborted.value) {
-      showToast(
-        `Cancelled. Tracked ${successCount} craftables.`,
-        'info'
-      )
+      showToast(`Cancelled. Tracked ${successCount} craftables.`, 'info')
       trackAllLoading.value = false
       return
     }
@@ -625,10 +636,7 @@ const trackAllUntrackedCraftables = async () => {
   if (skipCount > 0) parts.push(`${skipCount} skipped as duplicates`)
   if (failCount > 0) parts.push(`${failCount} failed`)
 
-  showToast(
-    `${parts.join(', ')}.`,
-    failCount > 0 ? 'warning' : 'success'
-  )
+  showToast(`${parts.join(', ')}.`, failCount > 0 ? 'warning' : 'success')
 
   // Reset state
   trackAllLoading.value = false
@@ -1040,26 +1048,26 @@ const refreshItemData = async () => {
                     :title="hasApiKey ? 'Refresh this item from API' : 'API key required'"
                     @click="refreshItem('materials', material.id)"
                   >
-                  <span
-                    v-if="itemRefreshLoading[`materials-${material.id}`]"
-                    class="spinner-small"
-                  ></span>
-                  <svg
-                    v-else
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polyline points="23 4 23 10 17 10"></polyline>
-                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
-                  </svg>
-                </button>
+                    <span
+                      v-if="itemRefreshLoading[`materials-${material.id}`]"
+                      class="spinner-small"
+                    ></span>
+                    <svg
+                      v-else
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="23 4 23 10 17 10"></polyline>
+                      <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                    </svg>
+                  </button>
                 </div>
               </td>
             </tr>
@@ -1145,7 +1153,9 @@ const refreshItemData = async () => {
               <td class="col-name">{{ craftable.name }}</td>
               <td class="col-vendor">
                 <span class="vendor-value">
-                  {{ craftable.vendorValue ? `${craftable.vendorValue.toLocaleString()} gold` : 'N/A' }}
+                  {{
+                    craftable.vendorValue ? `${craftable.vendorValue.toLocaleString()} gold` : 'N/A'
+                  }}
                 </span>
               </td>
               <td class="col-market">
@@ -1160,53 +1170,53 @@ const refreshItemData = async () => {
                 <div class="actions-wrapper">
                   <button
                     class="btn-hashed-id"
-                  :class="{ missing: !craftable.hashedId }"
-                  title="View/edit hashed ID"
-                  @click="openHashedIdModal('craftables', craftable)"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    :class="{ missing: !craftable.hashedId }"
+                    title="View/edit hashed ID"
+                    @click="openHashedIdModal('craftables', craftable)"
                   >
-                    <line x1="4" y1="9" x2="20" y2="9"></line>
-                    <line x1="4" y1="15" x2="20" y2="15"></line>
-                    <line x1="10" y1="3" x2="8" y2="21"></line>
-                    <line x1="16" y1="3" x2="14" y2="21"></line>
-                  </svg>
-                </button>
-                <button
-                  class="btn-refresh-item"
-                  :disabled="!hasApiKey || itemRefreshLoading[`craftables-${craftable.id}`]"
-                  :title="hasApiKey ? 'Refresh this item from API' : 'API key required'"
-                  @click="refreshItem('craftables', craftable.id)"
-                >
-                  <span
-                    v-if="itemRefreshLoading[`craftables-${craftable.id}`]"
-                    class="spinner-small"
-                  ></span>
-                  <svg
-                    v-else
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <line x1="4" y1="9" x2="20" y2="9"></line>
+                      <line x1="4" y1="15" x2="20" y2="15"></line>
+                      <line x1="10" y1="3" x2="8" y2="21"></line>
+                      <line x1="16" y1="3" x2="14" y2="21"></line>
+                    </svg>
+                  </button>
+                  <button
+                    class="btn-refresh-item"
+                    :disabled="!hasApiKey || itemRefreshLoading[`craftables-${craftable.id}`]"
+                    :title="hasApiKey ? 'Refresh this item from API' : 'API key required'"
+                    @click="refreshItem('craftables', craftable.id)"
                   >
-                    <polyline points="23 4 23 10 17 10"></polyline>
-                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
-                  </svg>
-                </button>
+                    <span
+                      v-if="itemRefreshLoading[`craftables-${craftable.id}`]"
+                      class="spinner-small"
+                    ></span>
+                    <svg
+                      v-else
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="23 4 23 10 17 10"></polyline>
+                      <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                    </svg>
+                  </button>
                 </div>
               </td>
             </tr>
@@ -1305,53 +1315,53 @@ const refreshItemData = async () => {
                 <div class="actions-wrapper">
                   <button
                     class="btn-hashed-id"
-                  :class="{ missing: !resource.hashedId }"
-                  title="View/edit hashed ID"
-                  @click="openHashedIdModal('resources', resource)"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    :class="{ missing: !resource.hashedId }"
+                    title="View/edit hashed ID"
+                    @click="openHashedIdModal('resources', resource)"
                   >
-                    <line x1="4" y1="9" x2="20" y2="9"></line>
-                    <line x1="4" y1="15" x2="20" y2="15"></line>
-                    <line x1="10" y1="3" x2="8" y2="21"></line>
-                    <line x1="16" y1="3" x2="14" y2="21"></line>
-                  </svg>
-                </button>
-                <button
-                  class="btn-refresh-item"
-                  :disabled="!hasApiKey || itemRefreshLoading[`resources-${resource.id}`]"
-                  :title="hasApiKey ? 'Refresh this item from API' : 'API key required'"
-                  @click="refreshItem('resources', resource.id)"
-                >
-                  <span
-                    v-if="itemRefreshLoading[`resources-${resource.id}`]"
-                    class="spinner-small"
-                  ></span>
-                  <svg
-                    v-else
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <line x1="4" y1="9" x2="20" y2="9"></line>
+                      <line x1="4" y1="15" x2="20" y2="15"></line>
+                      <line x1="10" y1="3" x2="8" y2="21"></line>
+                      <line x1="16" y1="3" x2="14" y2="21"></line>
+                    </svg>
+                  </button>
+                  <button
+                    class="btn-refresh-item"
+                    :disabled="!hasApiKey || itemRefreshLoading[`resources-${resource.id}`]"
+                    :title="hasApiKey ? 'Refresh this item from API' : 'API key required'"
+                    @click="refreshItem('resources', resource.id)"
                   >
-                    <polyline points="23 4 23 10 17 10"></polyline>
-                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
-                  </svg>
-                </button>
+                    <span
+                      v-if="itemRefreshLoading[`resources-${resource.id}`]"
+                      class="spinner-small"
+                    ></span>
+                    <svg
+                      v-else
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="23 4 23 10 17 10"></polyline>
+                      <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                    </svg>
+                  </button>
                 </div>
               </td>
             </tr>
@@ -1483,7 +1493,11 @@ const refreshItemData = async () => {
                   <button
                     v-if="isUntrackedCraftableRecipe(recipe.name, recipe.producesItemName)"
                     class="btn-add-recipe"
-                    :title="hasApiKey ? 'Add this craftable to tracked craftables' : 'API key required to add craftable'"
+                    :title="
+                      hasApiKey
+                        ? 'Add this craftable to tracked craftables'
+                        : 'API key required to add craftable'
+                    "
                     :disabled="!hasApiKey || addRecipeLoading[recipe.id]"
                     @click="addUntrackedCraftable(recipe)"
                   >
@@ -1507,53 +1521,53 @@ const refreshItemData = async () => {
                   </button>
                   <button
                     class="btn-hashed-id"
-                  :class="{ missing: !recipe.hashedId }"
-                  title="View/edit hashed ID"
-                  @click="openHashedIdModal('recipes', recipe)"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    :class="{ missing: !recipe.hashedId }"
+                    title="View/edit hashed ID"
+                    @click="openHashedIdModal('recipes', recipe)"
                   >
-                    <line x1="4" y1="9" x2="20" y2="9"></line>
-                    <line x1="4" y1="15" x2="20" y2="15"></line>
-                    <line x1="10" y1="3" x2="8" y2="21"></line>
-                    <line x1="16" y1="3" x2="14" y2="21"></line>
-                  </svg>
-                </button>
-                <button
-                  class="btn-refresh-item"
-                  :disabled="!hasApiKey || itemRefreshLoading[`recipes-${recipe.id}`]"
-                  :title="hasApiKey ? 'Refresh this item from API' : 'API key required'"
-                  @click="refreshItem('recipes', recipe.id)"
-                >
-                  <span
-                    v-if="itemRefreshLoading[`recipes-${recipe.id}`]"
-                    class="spinner-small"
-                  ></span>
-                  <svg
-                    v-else
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <line x1="4" y1="9" x2="20" y2="9"></line>
+                      <line x1="4" y1="15" x2="20" y2="15"></line>
+                      <line x1="10" y1="3" x2="8" y2="21"></line>
+                      <line x1="16" y1="3" x2="14" y2="21"></line>
+                    </svg>
+                  </button>
+                  <button
+                    class="btn-refresh-item"
+                    :disabled="!hasApiKey || itemRefreshLoading[`recipes-${recipe.id}`]"
+                    :title="hasApiKey ? 'Refresh this item from API' : 'API key required'"
+                    @click="refreshItem('recipes', recipe.id)"
                   >
-                    <polyline points="23 4 23 10 17 10"></polyline>
-                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
-                  </svg>
-                </button>
+                    <span
+                      v-if="itemRefreshLoading[`recipes-${recipe.id}`]"
+                      class="spinner-small"
+                    ></span>
+                    <svg
+                      v-else
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="23 4 23 10 17 10"></polyline>
+                      <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                    </svg>
+                  </button>
                 </div>
               </td>
             </tr>

@@ -107,11 +107,7 @@ const handleResetAll = () => {
           :default-value="DEFAULT_MF.dungeon"
           label="MF Dungeon"
         />
-        <EditableValue
-          v-model="magicFind.item"
-          :default-value="DEFAULT_MF.item"
-          label="MF Item"
-        />
+        <EditableValue v-model="magicFind.item" :default-value="DEFAULT_MF.item" label="MF Item" />
         <EditableValue
           v-model="magicFind.bonus"
           :default-value="DEFAULT_MF.bonus"
@@ -138,12 +134,8 @@ const handleResetAll = () => {
     <section class="settings-section">
       <h3 class="section-title">Backup & Restore</h3>
       <div class="button-row">
-        <button class="btn-secondary" @click="handleExport">
-          📥 Export Settings
-        </button>
-        <button class="btn-secondary" @click="handleImportClick">
-          📤 Import Settings
-        </button>
+        <button class="btn-secondary" @click="handleExport">📥 Export Settings</button>
+        <button class="btn-secondary" @click="handleImportClick">📤 Import Settings</button>
         <button class="btn-secondary" @click="handleExportDefaultsJson">
           💾 Export defaults.json
         </button>
@@ -161,19 +153,11 @@ const handleResetAll = () => {
     <section class="settings-section">
       <h3 class="section-title">Reset</h3>
       <div class="button-row">
-        <button class="btn-warning" @click="handleResetToDefaults">
-          🔄 Reset to Defaults
-        </button>
-        <button class="btn-danger" @click="handleResetAll">
-          ⚠️ Reset All (including API key)
-        </button>
+        <button class="btn-warning" @click="handleResetToDefaults">🔄 Reset to Defaults</button>
+        <button class="btn-danger" @click="handleResetAll">⚠️ Reset All (including API key)</button>
       </div>
-      <p class="reset-hint">
-        Reset to Defaults: Clears all custom values but keeps your API key.
-      </p>
-      <p class="reset-hint">
-        Reset All: Clears everything including your API key.
-      </p>
+      <p class="reset-hint">Reset to Defaults: Clears all custom values but keeps your API key.</p>
+      <p class="reset-hint">Reset All: Clears everything including your API key.</p>
     </section>
   </div>
 </template>

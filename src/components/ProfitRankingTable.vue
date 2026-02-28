@@ -20,7 +20,8 @@ const sortKey = ref<SortKey>('rank')
 const sortOrder = ref<SortOrder>('asc')
 
 // Use shared filter state (with localStorage persistence)
-const { filterDungeons, filterCraftables, filterResources, getFilteredAndRerankedActivities } = useActivityFilters()
+const { filterDungeons, filterCraftables, filterResources, getFilteredAndRerankedActivities } =
+  useActivityFilters()
 
 // Get filtered and sorted activities
 const filteredAndSortedActivities = computed(() => {
@@ -63,9 +64,7 @@ const filteredAndSortedActivities = computed(() => {
     }
 
     if (typeof aValue === 'string' && typeof bValue === 'string') {
-      return sortOrder.value === 'asc'
-        ? aValue.localeCompare(bValue)
-        : bValue.localeCompare(aValue)
+      return sortOrder.value === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue)
     }
 
     return sortOrder.value === 'asc'
@@ -126,7 +125,7 @@ const getSortIcon = (key: SortKey): string => {
 
 // Calculate min/max profit for heatmap
 const profitRange = computed(() => {
-  const profits = filteredAndSortedActivities.value.map(a => a.profitPerHour)
+  const profits = filteredAndSortedActivities.value.map((a) => a.profitPerHour)
   return {
     min: Math.min(...profits),
     max: Math.max(...profits),
@@ -170,12 +169,14 @@ const profitRange = computed(() => {
 
     <!-- Table -->
     <div class="table-container">
-      <table class="ranking-table mobile-card-layout" role="grid" aria-label="Activity profit rankings">
+      <table
+        class="ranking-table mobile-card-layout"
+        role="grid"
+        aria-label="Activity profit rankings"
+      >
         <thead>
           <tr>
-            <th class="sortable" @click="toggleSort('rank')">
-              Rank {{ getSortIcon('rank') }}
-            </th>
+            <th class="sortable" @click="toggleSort('rank')">Rank {{ getSortIcon('rank') }}</th>
             <th class="sortable" @click="toggleSort('name')">
               Activity Name {{ getSortIcon('name') }}
             </th>
@@ -218,7 +219,9 @@ const profitRange = computed(() => {
             >
               {{ formatNumber(activity.profitPerHour) }}
             </td>
-            <td class="text-right" data-label="Profit/action">{{ formatNumber(activity.profitPerAction) }}</td>
+            <td class="text-right" data-label="Profit/action">
+              {{ formatNumber(activity.profitPerAction) }}
+            </td>
             <td class="text-right" data-label="Time">{{ formatTime(activity.timePerAction) }}</td>
             <td class="text-right" data-label="Cost">{{ formatNumber(activity.cost) }}</td>
           </tr>

@@ -50,7 +50,10 @@ function calculateCraftableProfit(craft: CraftableRecipe, taxRate: number): numb
  * @param taxRate - Market tax rate
  * @returns Map of craftable name to profit per craft
  */
-function createCraftableProfitMap(craftableRecipes: CraftableRecipe[], taxRate: number): CraftableProfitMap {
+function createCraftableProfitMap(
+  craftableRecipes: CraftableRecipe[],
+  taxRate: number
+): CraftableProfitMap {
   const map: CraftableProfitMap = {}
 
   craftableRecipes.forEach((craft) => {

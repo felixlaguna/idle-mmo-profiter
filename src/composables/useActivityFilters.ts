@@ -48,7 +48,6 @@ const filters = useStorage<ActivityFilters>('active-filters', {
  * immediately trigger reactivity in other components (e.g., App.vue's bestAction).
  */
 export function useActivityFilters(): UseActivityFiltersReturn {
-
   // Individual filter refs for easy binding
   const filterDungeons = computed({
     get: () => filters.value.dungeons,

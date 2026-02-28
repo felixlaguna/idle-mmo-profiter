@@ -19,7 +19,14 @@ const emit = defineEmits<{
 }>()
 
 // Sort configuration
-type SortKey = 'name' | 'timeSeconds' | 'cost' | 'vendorValue' | 'marketPrice' | 'bestMethod' | 'bestProfitPerHour'
+type SortKey =
+  | 'name'
+  | 'timeSeconds'
+  | 'cost'
+  | 'vendorValue'
+  | 'marketPrice'
+  | 'bestMethod'
+  | 'bestProfitPerHour'
 type SortOrder = 'asc' | 'desc'
 
 const sortKey = ref<SortKey>('bestProfitPerHour')
@@ -68,9 +75,7 @@ const sortedResources = computed(() => {
     }
 
     if (typeof aValue === 'string' && typeof bValue === 'string') {
-      return sortOrder.value === 'asc'
-        ? aValue.localeCompare(bValue)
-        : bValue.localeCompare(aValue)
+      return sortOrder.value === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue)
     }
 
     return sortOrder.value === 'asc'
@@ -104,9 +109,9 @@ const getSortIcon = (key: SortKey): string => {
 
 // Calculate profit range for heatmap
 const profitRange = computed(() => {
-  const profitHours = props.resources.map(r => r.bestProfitPerHour)
-  const vendorProfits = props.resources.map(r => r.vendorProfit)
-  const marketProfits = props.resources.map(r => r.marketProfit)
+  const profitHours = props.resources.map((r) => r.bestProfitPerHour)
+  const vendorProfits = props.resources.map((r) => r.vendorProfit)
+  const marketProfits = props.resources.map((r) => r.marketProfit)
   return {
     profitPerHour: {
       min: Math.min(...profitHours),
@@ -119,7 +124,7 @@ const profitRange = computed(() => {
     marketProfit: {
       min: Math.min(...marketProfits),
       max: Math.max(...marketProfits),
-    }
+    },
   }
 })
 
@@ -144,12 +149,14 @@ const handleMarketPriceUpdate = (resourceName: string, value: number) => {
 <template>
   <div class="resource-table">
     <div class="table-container">
-      <table class="main-table mobile-card-layout" role="grid" aria-label="Resource gathering profitability">
+      <table
+        class="main-table mobile-card-layout"
+        role="grid"
+        aria-label="Resource gathering profitability"
+      >
         <thead>
           <tr>
-            <th class="sortable" @click="toggleSort('name')">
-              Resource {{ getSortIcon('name') }}
-            </th>
+            <th class="sortable" @click="toggleSort('name')">Resource {{ getSortIcon('name') }}</th>
             <th class="sortable text-right" @click="toggleSort('timeSeconds')">
               Time {{ getSortIcon('timeSeconds') }}
             </th>
@@ -207,7 +214,7 @@ const handleMarketPriceUpdate = (resourceName: string, value: number) => {
                 class="method-badge"
                 :class="{
                   'method-vendor': resource.bestMethod === 'vendor',
-                  'method-market': resource.bestMethod === 'market'
+                  'method-market': resource.bestMethod === 'market',
                 }"
               >
                 {{ resource.bestMethod === 'vendor' ? 'Vendor' : 'Market' }}
@@ -216,7 +223,13 @@ const handleMarketPriceUpdate = (resourceName: string, value: number) => {
             <td
               class="text-right profit-hr"
               data-label="Profit/hr"
-              :style="getHeatmapStyle(resource.bestProfitPerHour, profitRange.profitPerHour.min, profitRange.profitPerHour.max)"
+              :style="
+                getHeatmapStyle(
+                  resource.bestProfitPerHour,
+                  profitRange.profitPerHour.min,
+                  profitRange.profitPerHour.max
+                )
+              "
             >
               {{ formatNumber(resource.bestProfitPerHour) }}
             </td>

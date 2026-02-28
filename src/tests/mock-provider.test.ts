@@ -172,7 +172,11 @@ describe('createDataProvider', () => {
     // Set an API key in localStorage
     localStorage.setItem(
       'immo-profit:settings',
-      JSON.stringify({ apiKey: 'test-api-key', marketTaxRate: 0.12, magicFind: { streak: 0, dungeon: 0, item: 0, bonus: 0 } })
+      JSON.stringify({
+        apiKey: 'test-api-key',
+        marketTaxRate: 0.12,
+        magicFind: { streak: 0, dungeon: 0, item: 0, bonus: 0 },
+      })
     )
 
     const provider = createDataProvider()
@@ -217,7 +221,11 @@ describe('getDataProviderStatus', () => {
   it('should return correct status with API key', () => {
     localStorage.setItem(
       'immo-profit:settings',
-      JSON.stringify({ apiKey: 'test-api-key', marketTaxRate: 0.12, magicFind: { streak: 0, dungeon: 0, item: 0, bonus: 0 } })
+      JSON.stringify({
+        apiKey: 'test-api-key',
+        marketTaxRate: 0.12,
+        magicFind: { streak: 0, dungeon: 0, item: 0, bonus: 0 },
+      })
     )
     resetDataProvider()
 

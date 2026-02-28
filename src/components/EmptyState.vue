@@ -17,18 +17,10 @@ const emit = defineEmits<{
     <div v-if="icon" class="empty-icon">{{ icon }}</div>
     <h3 class="empty-title">{{ title }}</h3>
     <p v-if="description" class="empty-description">{{ description }}</p>
-    <a
-      v-if="actionText && actionHref"
-      :href="actionHref"
-      class="empty-action"
-    >
+    <a v-if="actionText && actionHref" :href="actionHref" class="empty-action">
       {{ actionText }}
     </a>
-    <button
-      v-else-if="actionText"
-      class="empty-action"
-      @click="emit('action')"
-    >
+    <button v-else-if="actionText" class="empty-action" @click="emit('action')">
       {{ actionText }}
     </button>
   </div>

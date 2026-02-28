@@ -28,9 +28,9 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
     timeSeconds: 1090.9,
     materials: [
       { name: 'Moose antler', quantity: 15, unitCost: 114.1 },
-      { name: 'Minotaur Hide', quantity: 20, unitCost: 378.9 }
+      { name: 'Minotaur Hide', quantity: 20, unitCost: 378.9 },
     ],
-    currentPrice: 11894.6
+    currentPrice: 11894.6,
   }
 
   // Material cost: (15 * 114.1) + (20 * 378.9) = 1711.5 + 7578 = 9289.5
@@ -41,10 +41,8 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
   const unprofitableCraftable: CraftableRecipe = {
     name: 'Failed Brew',
     timeSeconds: 1000,
-    materials: [
-      { name: 'Expensive Ingredient', quantity: 10, unitCost: 1000 }
-    ],
-    currentPrice: 5000
+    materials: [{ name: 'Expensive Ingredient', quantity: 10, unitCost: 1000 }],
+    currentPrice: 5000,
   }
 
   // Material cost: 10 * 1000 = 10000
@@ -55,7 +53,7 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
     streak: 0,
     dungeon: 0,
     item: 0,
-    bonus: 0
+    bonus: 0,
   }
 
   describe('useRecipePricing - computed price calculation', () => {
@@ -68,8 +66,8 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
           chance: 0.0133,
           uses: 10,
           producesItemName: 'Wraithbane',
-          isUntradable: true
-        }
+          isUntradable: true,
+        },
       ]
 
       const recipesRef = ref(recipes)
@@ -99,8 +97,8 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
           chance: 0.01,
           uses: 10,
           producesItemName: 'Failed Brew',
-          isUntradable: true
-        }
+          isUntradable: true,
+        },
       ]
 
       const recipesRef = ref(recipes)
@@ -128,8 +126,8 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
           chance: 0.01,
           // No uses field
           producesItemName: 'Wraithbane',
-          isUntradable: true
-        }
+          isUntradable: true,
+        },
       ]
 
       const recipesRef = ref(recipes)
@@ -157,8 +155,8 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
           chance: 0.01,
           uses: 0,
           producesItemName: 'Wraithbane',
-          isUntradable: true
-        }
+          isUntradable: true,
+        },
       ]
 
       const recipesRef = ref(recipes)
@@ -186,8 +184,8 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
           chance: 0.0042,
           uses: 10,
           producesItemName: 'Wraithbane',
-          isUntradable: false
-        }
+          isUntradable: false,
+        },
       ]
 
       const recipesRef = ref(recipes)
@@ -216,8 +214,8 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
           chance: 0.01,
           uses: 10,
           producesItemName: 'NonExistentCraftable',
-          isUntradable: true
-        }
+          isUntradable: true,
+        },
       ]
 
       const recipesRef = ref(recipes)
@@ -249,8 +247,8 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
           chance: 0.0133,
           uses: 10,
           producesItemName: 'Wraithbane',
-          isUntradable: true
-        }
+          isUntradable: true,
+        },
       ]
 
       const dungeon: Dungeon = {
@@ -258,9 +256,7 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
         runCost: 1000,
         timeSeconds: 3600,
         numDrops: 1,
-        drops: [
-          { recipeName: 'Wraithbane Essence Recipe (Untradable)', expectedValue: 0 }
-        ]
+        drops: [{ recipeName: 'Wraithbane Essence Recipe (Untradable)', expectedValue: 0 }],
       }
 
       const results = calculateDungeonProfits([dungeon], recipes, mockMagicFind)
@@ -289,7 +285,7 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
           chance: 0.0133,
           uses: 10,
           producesItemName: 'Wraithbane',
-          isUntradable: true
+          isUntradable: true,
         },
         // Tradable with market price
         {
@@ -299,8 +295,8 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
           chance: 0.0042,
           uses: 10,
           producesItemName: 'Wraithbane',
-          isUntradable: false
-        }
+          isUntradable: false,
+        },
       ]
 
       const dungeon: Dungeon = {
@@ -310,8 +306,8 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
         numDrops: 2,
         drops: [
           { recipeName: 'Wraithbane Essence Recipe (Untradable)', expectedValue: 0 },
-          { recipeName: 'Wraithbane Essence Recipe', expectedValue: 0 }
-        ]
+          { recipeName: 'Wraithbane Essence Recipe', expectedValue: 0 },
+        ],
       }
 
       const results = calculateDungeonProfits([dungeon], recipes, mockMagicFind)
@@ -342,8 +338,8 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
           chance: 0.05,
           uses: 10,
           producesItemName: 'Failed Brew',
-          isUntradable: true
-        }
+          isUntradable: true,
+        },
       ]
 
       const dungeon: Dungeon = {
@@ -351,9 +347,7 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
         runCost: 1000,
         timeSeconds: 3600,
         numDrops: 1,
-        drops: [
-          { recipeName: 'Failed Brew Recipe (Untradable)', expectedValue: 0 }
-        ]
+        drops: [{ recipeName: 'Failed Brew Recipe (Untradable)', expectedValue: 0 }],
       }
 
       const results = calculateDungeonProfits([dungeon], recipes, mockMagicFind)
@@ -378,8 +372,8 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
           chance: 0.0133,
           uses: 10,
           producesItemName: 'Wraithbane',
-          isUntradable: true
-        }
+          isUntradable: true,
+        },
       ]
 
       const dungeon: Dungeon = {
@@ -387,16 +381,14 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
         runCost: 1000,
         timeSeconds: 3600,
         numDrops: 1,
-        drops: [
-          { recipeName: 'Wraithbane Essence Recipe (Untradable)', expectedValue: 0 }
-        ]
+        drops: [{ recipeName: 'Wraithbane Essence Recipe (Untradable)', expectedValue: 0 }],
       }
 
       const magicFind: MagicFindSettings = {
         streak: 10,
         dungeon: 5,
         item: 3,
-        bonus: 2
+        bonus: 2,
       }
 
       // Total MF = 10 + 5 + 3 + 2 = 20%
@@ -407,7 +399,7 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
 
       // Expected value: price × chance × (1 + MF/100)
       // 11777.48 × 0.0133 × 1.20 = 187.97...
-      const expectedValue = 11777.48 * 0.0133 * 1.20
+      const expectedValue = 11777.48 * 0.0133 * 1.2
       expect(result.drops[0].expectedValue).toBeCloseTo(expectedValue, 2)
     })
   })
@@ -422,8 +414,8 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
           chance: 0.01,
           uses: 10,
           // No producesItemName
-          isUntradable: true
-        }
+          isUntradable: true,
+        },
       ]
 
       const recipesRef = ref(recipes)
@@ -451,8 +443,8 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
           chance: 0.0133,
           uses: 10,
           producesItemName: 'Wraithbane',
-          isUntradable: true
-        }
+          isUntradable: true,
+        },
       ]
 
       const recipesRef = ref(recipes)
@@ -480,8 +472,8 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
           chance: 0.0133,
           uses: 10,
           producesItemName: 'Wraithbane',
-          isUntradable: true
-        }
+          isUntradable: true,
+        },
       ]
 
       const craftableRecipe = { ...profitableCraftable }

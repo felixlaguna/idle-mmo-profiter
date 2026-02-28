@@ -34,7 +34,7 @@ export function calculateResourceProfits(
   resources: ResourceGather[],
   taxRate: number
 ): ResourceProfitResult[] {
-  const results: ResourceProfitResult[] = resources.map(resource => {
+  const results: ResourceProfitResult[] = resources.map((resource) => {
     // Get cost (should always be computed by data provider, but fallback to baseCost)
     const cost = resource.cost ?? resource.baseCost
 
@@ -64,7 +64,7 @@ export function calculateResourceProfits(
       marketProfitPerHour,
       bestMethod,
       bestProfit,
-      bestProfitPerHour
+      bestProfitPerHour,
     }
   })
 

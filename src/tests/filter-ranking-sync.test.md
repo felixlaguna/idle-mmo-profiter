@@ -3,6 +3,7 @@
 ## Test Case 1: Re-rank when filters change
 
 ### Before Fix (FAILING)
+
 1. Load the profit ranking table
 2. Observe the rankings (e.g., #1 = Dungeon A, #2 = Potion B, #3 = Resource C, #4 = Dungeon D)
 3. Disable "Dungeons" filter
@@ -10,6 +11,7 @@
 5. **ACTUAL (BUG)**: Items still show #2 = Potion B, #3 = Resource C (original ranks)
 
 ### After Fix (PASSING)
+
 1. Load the profit ranking table
 2. Observe the rankings (e.g., #1 = Dungeon A, #2 = Potion B, #3 = Resource C, #4 = Dungeon D)
 3. Disable "Dungeons" filter
@@ -20,6 +22,7 @@
 ## Test Case 2: Hero "Best Action" reflects filters
 
 ### Before Fix (FAILING)
+
 1. Load the page
 2. Observe hero section shows "Best Action: Dungeon A" (assuming it's #1 overall)
 3. Disable "Dungeons" filter in the table below
@@ -27,6 +30,7 @@
 5. **ACTUAL (BUG)**: Hero still shows "Dungeon A" (ignores filters)
 
 ### After Fix (PASSING)
+
 1. Load the page
 2. Observe hero section shows "Best Action: Dungeon A"
 3. Disable "Dungeons" filter
@@ -37,6 +41,7 @@
 ## Test Case 3: Filter state persisted in localStorage
 
 ### Before Fix (FAILING)
+
 1. Load the page
 2. Disable "Dungeons" filter
 3. Refresh the page
@@ -44,6 +49,7 @@
 5. **ACTUAL (BUG)**: All filters reset to enabled (default state)
 
 ### After Fix (PASSING)
+
 1. Load the page
 2. Disable "Dungeons" filter
 3. Refresh the page
@@ -54,11 +60,13 @@
 ## Additional Edge Cases
 
 ### All filters disabled
+
 1. Disable all three filters (dungeons, potions, resources)
 2. **EXPECTED**: Show empty state message "No activities found"
 3. **EXPECTED**: Hero section should either hide or show "No action available"
 
 ### Enable/disable combinations
+
 1. Try various combinations (only dungeons, only potions+resources, etc.)
 2. **EXPECTED**: Rankings always start from #1 for visible items
 3. **EXPECTED**: Hero always shows best among visible items

@@ -21,7 +21,7 @@ const categoryTotals = computed(() => {
     resourceCount: 0,
   }
 
-  props.activities.forEach(activity => {
+  props.activities.forEach((activity) => {
     if (activity.profitPerHour > 0) {
       if (activity.activityType === 'dungeon') {
         totals.dungeon += activity.profitPerHour
@@ -53,21 +53,19 @@ const chartData = computed(() => {
 
   return {
     labels: ['Dungeons', 'Craftables', 'Resources'],
-    datasets: [{
-      label: 'Total Profit/hr',
-      data: [totals.dungeon, totals.craftable, totals.resource],
-      backgroundColor: [
-        'rgba(168, 85, 247, 0.7)', // Purple for dungeons
-        'rgba(34, 197, 94, 0.7)',  // Green for craftables
-        'rgba(59, 130, 246, 0.7)',  // Blue for resources
-      ],
-      borderColor: [
-        'rgba(168, 85, 247, 1)',
-        'rgba(34, 197, 94, 1)',
-        'rgba(59, 130, 246, 1)',
-      ],
-      borderWidth: 2,
-    }]
+    datasets: [
+      {
+        label: 'Total Profit/hr',
+        data: [totals.dungeon, totals.craftable, totals.resource],
+        backgroundColor: [
+          'rgba(168, 85, 247, 0.7)', // Purple for dungeons
+          'rgba(34, 197, 94, 0.7)', // Green for craftables
+          'rgba(59, 130, 246, 0.7)', // Blue for resources
+        ],
+        borderColor: ['rgba(168, 85, 247, 1)', 'rgba(34, 197, 94, 1)', 'rgba(59, 130, 246, 1)'],
+        borderWidth: 2,
+      },
+    ],
   }
 })
 
@@ -98,7 +96,7 @@ const createChart = () => {
             font: {
               size: 13,
             },
-            generateLabels: function(chart) {
+            generateLabels: function (chart) {
               const data = chart.data
               if (data.labels && data.datasets.length) {
                 const totals = categoryTotals.value
@@ -106,9 +104,12 @@ const createChart = () => {
                 const borders = data.datasets[0].borderColor as string[]
                 return data.labels.map((label, i) => {
                   const value = data.datasets[0].data[i] as number
-                  const percent = i === 0 ? totals.dungeonPercent :
-                                 i === 1 ? totals.craftablePercent :
-                                 totals.resourcePercent
+                  const percent =
+                    i === 0
+                      ? totals.dungeonPercent
+                      : i === 1
+                        ? totals.craftablePercent
+                        : totals.resourcePercent
                   return {
                     text: `${label}: ${Math.round(value).toLocaleString()} (${percent.toFixed(1)}%)`,
                     fillStyle: backgrounds[i],
@@ -120,8 +121,8 @@ const createChart = () => {
                 })
               }
               return []
-            }
-          }
+            },
+          },
         },
         tooltip: {
           backgroundColor: 'rgba(17, 23, 34, 0.95)',
@@ -132,25 +133,31 @@ const createChart = () => {
           padding: 12,
           displayColors: true,
           callbacks: {
-            label: function(context) {
+            label: function (context) {
               const value = context.parsed
               const totals = categoryTotals.value
-              const percent = context.dataIndex === 0 ? totals.dungeonPercent :
-                             context.dataIndex === 1 ? totals.craftablePercent :
-                             totals.resourcePercent
-              const count = context.dataIndex === 0 ? totals.dungeonCount :
-                           context.dataIndex === 1 ? totals.craftableCount :
-                           totals.resourceCount
+              const percent =
+                context.dataIndex === 0
+                  ? totals.dungeonPercent
+                  : context.dataIndex === 1
+                    ? totals.craftablePercent
+                    : totals.resourcePercent
+              const count =
+                context.dataIndex === 0
+                  ? totals.dungeonCount
+                  : context.dataIndex === 1
+                    ? totals.craftableCount
+                    : totals.resourceCount
               return [
                 `Total: ${Math.round(value).toLocaleString()} gold/hr`,
                 `Percentage: ${percent.toFixed(1)}%`,
                 `Activities: ${count}`,
               ]
-            }
-          }
-        }
-      }
-    }
+            },
+          },
+        },
+      },
+    },
   })
 }
 
@@ -169,9 +176,13 @@ onMounted(() => {
 })
 
 // Watch for data changes and update chart
-watch(chartData, () => {
-  updateChart()
-}, { deep: true })
+watch(
+  chartData,
+  () => {
+    updateChart()
+  },
+  { deep: true }
+)
 </script>
 
 <template>
@@ -185,7 +196,9 @@ watch(chartData, () => {
     <div class="summary">
       <div class="summary-item">
         <span class="summary-label">Total Combined Profit/hr:</span>
-        <span class="summary-value">{{ Math.round(categoryTotals.grandTotal).toLocaleString() }} gold</span>
+        <span class="summary-value"
+          >{{ Math.round(categoryTotals.grandTotal).toLocaleString() }} gold</span
+        >
       </div>
     </div>
   </div>

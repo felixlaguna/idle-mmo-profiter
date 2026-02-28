@@ -88,11 +88,7 @@ export interface DataProvider {
    * Get average market price from recent history
    * Returns either API average or null
    */
-  getAverageMarketPrice(
-    hashedItemId: string,
-    limit?: number,
-    tier?: number
-  ): Promise<number | null>
+  getAverageMarketPrice(hashedItemId: string, limit?: number, tier?: number): Promise<number | null>
 
   /**
    * Check authentication status

@@ -32,7 +32,14 @@ describe('DataProviderStatus', () => {
   })
 
   it('should display API data status when API key is configured', () => {
-    localStorage.setItem('immo-profit:settings', JSON.stringify({ apiKey: 'test-key', marketTaxRate: 0.12, magicFind: { streak: 0, dungeon: 0, item: 0, bonus: 0 } }))
+    localStorage.setItem(
+      'immo-profit:settings',
+      JSON.stringify({
+        apiKey: 'test-key',
+        marketTaxRate: 0.12,
+        magicFind: { streak: 0, dungeon: 0, item: 0, bonus: 0 },
+      })
+    )
     resetDataProvider()
 
     const wrapper = mount(DataProviderStatus)
@@ -47,7 +54,14 @@ describe('DataProviderStatus', () => {
   })
 
   it('should show correct icon for API data', () => {
-    localStorage.setItem('immo-profit:settings', JSON.stringify({ apiKey: 'test-key', marketTaxRate: 0.12, magicFind: { streak: 0, dungeon: 0, item: 0, bonus: 0 } }))
+    localStorage.setItem(
+      'immo-profit:settings',
+      JSON.stringify({
+        apiKey: 'test-key',
+        marketTaxRate: 0.12,
+        magicFind: { streak: 0, dungeon: 0, item: 0, bonus: 0 },
+      })
+    )
     resetDataProvider()
 
     const wrapper = mount(DataProviderStatus)
@@ -62,7 +76,14 @@ describe('DataProviderStatus', () => {
     expect(wrapper.find('.status-default').exists()).toBe(true)
 
     // Add API key
-    localStorage.setItem('immo-profit:settings', JSON.stringify({ apiKey: 'test-key', marketTaxRate: 0.12, magicFind: { streak: 0, dungeon: 0, item: 0, bonus: 0 } }))
+    localStorage.setItem(
+      'immo-profit:settings',
+      JSON.stringify({
+        apiKey: 'test-key',
+        marketTaxRate: 0.12,
+        magicFind: { streak: 0, dungeon: 0, item: 0, bonus: 0 },
+      })
+    )
     resetDataProvider()
 
     // Fast-forward time by 30 seconds

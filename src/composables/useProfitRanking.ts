@@ -6,7 +6,7 @@ import {
   calculateCraftableProfits,
   calculateResourceProfits,
   rankAllActivities,
-  getBestAction
+  getBestAction,
 } from '../calculators'
 
 export interface UseProfitRankingOptions {
@@ -41,7 +41,7 @@ export function useProfitRanking(options: UseProfitRankingOptions): UseProfitRan
     resourceGathering,
     magicFind,
     taxRate,
-    includeNegative = false
+    includeNegative = false,
   } = options
 
   // Helper to unwrap ref or value
@@ -64,8 +64,16 @@ export function useProfitRanking(options: UseProfitRankingOptions): UseProfitRan
     const currentIncludeNegative = unwrap(includeNegative)
 
     // Calculate profits for each category
-    const dungeonResults = calculateDungeonProfits(currentDungeons, currentRecipes, currentMagicFind)
-    const craftableResults = calculateCraftableProfits(currentCraftableRecipes, currentTaxRate, currentRecipes)
+    const dungeonResults = calculateDungeonProfits(
+      currentDungeons,
+      currentRecipes,
+      currentMagicFind
+    )
+    const craftableResults = calculateCraftableProfits(
+      currentCraftableRecipes,
+      currentTaxRate,
+      currentRecipes
+    )
     const resourceResults = calculateResourceProfits(currentResourceGathering, currentTaxRate)
 
     // Rank all activities
@@ -83,6 +91,6 @@ export function useProfitRanking(options: UseProfitRankingOptions): UseProfitRan
 
   return {
     rankedActivities,
-    bestAction
+    bestAction,
   }
 }

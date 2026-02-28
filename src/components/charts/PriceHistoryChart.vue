@@ -26,38 +26,40 @@ const chartData = computed(() => {
   if (!hasData.value || !props.priceHistory) {
     return {
       labels: [],
-      datasets: []
+      datasets: [],
     }
   }
 
-  const sortedHistory = [...props.priceHistory].sort((a, b) =>
-    a.timestamp.getTime() - b.timestamp.getTime()
+  const sortedHistory = [...props.priceHistory].sort(
+    (a, b) => a.timestamp.getTime() - b.timestamp.getTime()
   )
 
-  const labels = sortedHistory.map(entry =>
+  const labels = sortedHistory.map((entry) =>
     entry.timestamp.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
   )
-  const data = sortedHistory.map(entry => entry.price)
+  const data = sortedHistory.map((entry) => entry.price)
 
   return {
     labels,
-    datasets: [{
-      label: props.itemName ?? 'Price',
-      data,
-      borderColor: 'rgba(59, 130, 246, 1)',
-      backgroundColor: 'rgba(59, 130, 246, 0.1)',
-      borderWidth: 2,
-      fill: true,
-      tension: 0.4, // Smooth line
-      pointRadius: 4,
-      pointBackgroundColor: 'rgba(59, 130, 246, 1)',
-      pointBorderColor: '#111722',
-      pointBorderWidth: 2,
-      pointHoverRadius: 6,
-      pointHoverBackgroundColor: 'rgba(59, 130, 246, 1)',
-      pointHoverBorderColor: '#e5e7eb',
-      pointHoverBorderWidth: 2,
-    }]
+    datasets: [
+      {
+        label: props.itemName ?? 'Price',
+        data,
+        borderColor: 'rgba(59, 130, 246, 1)',
+        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+        borderWidth: 2,
+        fill: true,
+        tension: 0.4, // Smooth line
+        pointRadius: 4,
+        pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+        pointBorderColor: '#111722',
+        pointBorderWidth: 2,
+        pointHoverRadius: 6,
+        pointHoverBackgroundColor: 'rgba(59, 130, 246, 1)',
+        pointHoverBorderColor: '#e5e7eb',
+        pointHoverBorderWidth: 2,
+      },
+    ],
   }
 })
 
@@ -87,8 +89,8 @@ const createChart = () => {
             padding: 15,
             font: {
               size: 13,
-            }
-          }
+            },
+          },
         },
         tooltip: {
           backgroundColor: 'rgba(17, 23, 34, 0.95)',
@@ -99,13 +101,13 @@ const createChart = () => {
           padding: 12,
           displayColors: true,
           callbacks: {
-            label: function(context) {
+            label: function (context) {
               const value = context.parsed.y
               if (value === null) return ''
               return `Price: ${Math.round(value).toLocaleString()} gold`
-            }
-          }
-        }
+            },
+          },
+        },
       },
       scales: {
         x: {
@@ -117,7 +119,7 @@ const createChart = () => {
           },
           ticks: {
             color: '#9ca3af',
-          }
+          },
         },
         y: {
           beginAtZero: true,
@@ -129,16 +131,16 @@ const createChart = () => {
           },
           ticks: {
             color: '#9ca3af',
-            callback: function(value) {
+            callback: function (value) {
               if (typeof value === 'number') {
                 return Math.round(value).toLocaleString()
               }
               return value !== null ? String(value) : ''
-            }
-          }
-        }
-      }
-    }
+            },
+          },
+        },
+      },
+    },
   })
 }
 
@@ -157,11 +159,15 @@ onMounted(() => {
 })
 
 // Watch for data changes and update chart
-watch(chartData, () => {
-  if (hasData.value) {
-    updateChart()
-  }
-}, { deep: true })
+watch(
+  chartData,
+  () => {
+    if (hasData.value) {
+      updateChart()
+    }
+  },
+  { deep: true }
+)
 
 watch(hasData, (newVal) => {
   if (newVal) {
@@ -199,8 +205,8 @@ watch(hasData, (newVal) => {
       </div>
       <h4 class="no-data-title">No Market History Available</h4>
       <p class="no-data-message">
-        Price history data will be available once the API integration is complete.
-        This feature will show market price trends over time for selected items.
+        Price history data will be available once the API integration is complete. This feature will
+        show market price trends over time for selected items.
       </p>
     </div>
     <div v-else class="chart-container">

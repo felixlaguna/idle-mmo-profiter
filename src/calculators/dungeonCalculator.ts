@@ -42,13 +42,13 @@ export function calculateDungeonProfits(
 
   // Create a map of recipe names to recipe data for quick lookup
   const recipeMap = new Map<string, Recipe>()
-  recipes.forEach(recipe => {
+  recipes.forEach((recipe) => {
     recipeMap.set(recipe.name, recipe)
   })
 
-  const results: DungeonProfitResult[] = dungeons.map(dungeon => {
+  const results: DungeonProfitResult[] = dungeons.map((dungeon) => {
     // Calculate expected value for each drop
-    const dropResults: DungeonDropResult[] = dungeon.drops.map(drop => {
+    const dropResults: DungeonDropResult[] = dungeon.drops.map((drop) => {
       const recipe = recipeMap.get(drop.recipeName)
 
       if (!recipe) {
@@ -57,7 +57,7 @@ export function calculateDungeonProfits(
           recipeName: drop.recipeName,
           price: 0,
           chance: 0,
-          expectedValue: 0
+          expectedValue: 0,
         }
       }
 
@@ -68,15 +68,12 @@ export function calculateDungeonProfits(
         recipeName: drop.recipeName,
         price: recipe.price,
         chance: recipe.chance,
-        expectedValue
+        expectedValue,
       }
     })
 
     // Sum all drop expected values
-    const totalExpectedValue = dropResults.reduce(
-      (sum, drop) => sum + drop.expectedValue,
-      0
-    )
+    const totalExpectedValue = dropResults.reduce((sum, drop) => sum + drop.expectedValue, 0)
 
     // Calculate profit
     const totalProfit = totalExpectedValue - dungeon.runCost
@@ -90,7 +87,7 @@ export function calculateDungeonProfits(
       timeSeconds: dungeon.timeSeconds,
       drops: dropResults,
       totalProfit,
-      profitPerHour
+      profitPerHour,
     }
   })
 

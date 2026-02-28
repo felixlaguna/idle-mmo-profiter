@@ -45,10 +45,7 @@ describe('StorageManager', () => {
 
     it('should merge with defaults if stored settings are partial', () => {
       // Simulate old version with missing fields
-      localStorage.setItem(
-        'immo-profit:settings',
-        JSON.stringify({ apiKey: 'test-key' })
-      )
+      localStorage.setItem('immo-profit:settings', JSON.stringify({ apiKey: 'test-key' }))
 
       const settings = storage.getSettings()
       expect(settings.apiKey).toBe('test-key')

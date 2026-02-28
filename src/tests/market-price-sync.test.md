@@ -1,10 +1,13 @@
 # Market Price Synchronization Test
 
 ## Purpose
+
 Verify that the Market tab is the single source of truth for all item prices across the app.
 
 ## Test Scenario 1: Material Price Update
+
 **Steps:**
+
 1. Open the app
 2. Go to Market tab
 3. Find "Moose antler" (default price: 125 gold)
@@ -16,7 +19,9 @@ Verify that the Market tab is the single source of truth for all item prices acr
 **Expected Result:** Material cost updates immediately to reflect the new price.
 
 ## Test Scenario 2: Potion Price Update
+
 **Steps:**
+
 1. Open the app
 2. Go to Market tab
 3. Find "Wraithbane" potion (default price: 11600 gold)
@@ -29,7 +34,9 @@ Verify that the Market tab is the single source of truth for all item prices acr
 **Expected Result:** Potion profit updates to use the new market price.
 
 ## Test Scenario 3: Resource Price Update
+
 **Steps:**
+
 1. Open the app
 2. Go to Market tab
 3. Find "Coal" (default market price: 6 gold, vendor value: 1 gold)
@@ -42,7 +49,9 @@ Verify that the Market tab is the single source of truth for all item prices acr
 **Expected Result:** Resource profit updates to use the new market price.
 
 ## Test Scenario 4: Recipe Price Update
+
 **Steps:**
+
 1. Open the app
 2. Go to Market tab
 3. Find a recipe (e.g., "Improved Fishing Rod Recipe", default price: 300 gold)
@@ -56,23 +65,29 @@ Verify that the Market tab is the single source of truth for all item prices acr
 ## Bug Validation Tests
 
 ### Bug 1: Resource vendorValue Missing
+
 **Current Behavior:**
+
 - Resource interface is missing vendorValue field
 - MarketTable shows "N/A" for resource vendor values
 - Resources in defaults.json have vendorValue but TypeScript doesn't recognize it
 
 **Test:**
+
 1. Check src/types/index.ts - Resource interface should have vendorValue: number
 2. Check MarketTable.vue - Resources section should display resource.vendorValue
 3. Open app and check Market tab - Resources should show vendor value
 
 ### Bug 2: Material Vendor/Market Confusion
+
 **Current Behavior:**
+
 - Materials only have one 'price' field
 - MarketTable shows this as both Vendor Value AND Market Value
 - This is confusing - implies materials have two different prices
 
 **Test:**
+
 1. Check defaults.json - materials only have 'price' field (correct)
 2. Check MarketTable.vue - should clarify that materials have a single price
 3. Consider updating UI to show "Price" instead of "Vendor Value" and "Market Value"
@@ -80,7 +95,9 @@ Verify that the Market tab is the single source of truth for all item prices acr
 ## Architecture Validation
 
 ### Data Flow Check
+
 **Verify the following chain works:**
+
 1. Market tab edit → updateMaterialPrice() → userOverrides.materials
 2. userOverrides → materials computed → materialPriceMap computed
 3. materialPriceMap → potionCrafts computed → updates unitCost
@@ -88,13 +105,16 @@ Verify that the Market tab is the single source of truth for all item prices acr
 5. potionProfits → displayed in Potions tab
 
 ### Reactivity Check
+
 **Verify that changes are reactive:**
+
 - No manual refresh needed
 - All tabs update automatically
 - LocalStorage persistence works
 - Override badge updates in Market tab
 
 ## Manual Testing Checklist
+
 - [ ] Build completes without errors
 - [ ] Material price changes affect potion calculations
 - [ ] Potion price changes affect potion profit display

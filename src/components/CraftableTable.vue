@@ -68,9 +68,7 @@ const sortedCraftables = computed(() => {
     }
 
     if (typeof aValue === 'string' && typeof bValue === 'string') {
-      return sortOrder.value === 'asc'
-        ? aValue.localeCompare(bValue)
-        : bValue.localeCompare(aValue)
+      return sortOrder.value === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue)
     }
 
     return sortOrder.value === 'asc'
@@ -83,7 +81,7 @@ const sortedCraftables = computed(() => {
 
 // Filter craftables by active sub-tab
 const filteredCraftables = computed(() => {
-  return sortedCraftables.value.filter(p => p.skill === activeSubTab.value)
+  return sortedCraftables.value.filter((p) => p.skill === activeSubTab.value)
 })
 
 // Toggle row expansion
@@ -139,12 +137,12 @@ const profitRange = computed(() => {
   if (filteredCraftables.value.length === 0) {
     return {
       profit: { min: 0, max: 0 },
-      profitPerHour: { min: 0, max: 0 }
+      profitPerHour: { min: 0, max: 0 },
     }
   }
 
-  const profits = filteredCraftables.value.map(p => p.profit)
-  const profitHours = filteredCraftables.value.map(p => p.profitPerHour)
+  const profits = filteredCraftables.value.map((p) => p.profit)
+  const profitHours = filteredCraftables.value.map((p) => p.profitPerHour)
   return {
     profit: {
       min: Math.min(...profits),
@@ -153,7 +151,7 @@ const profitRange = computed(() => {
     profitPerHour: {
       min: Math.min(...profitHours),
       max: Math.max(...profitHours),
-    }
+    },
   }
 })
 
@@ -209,7 +207,12 @@ const formatTime = (seconds: number): string => {
         description="No craftables match this category yet. Add craftables from the Market tab."
       />
 
-      <table v-else class="main-table mobile-card-layout" role="grid" aria-label="Craftable profitability">
+      <table
+        v-else
+        class="main-table mobile-card-layout"
+        role="grid"
+        aria-label="Craftable profitability"
+      >
         <thead>
           <tr>
             <th class="expand-col"></th>
@@ -256,7 +259,9 @@ const formatTime = (seconds: number): string => {
                   ✕
                 </button>
               </td>
-              <td class="text-right" data-label="Total Cost">{{ formatNumber(craftable.totalCost) }}</td>
+              <td class="text-right" data-label="Total Cost">
+                {{ formatNumber(craftable.totalCost) }}
+              </td>
               <td class="text-right" data-label="Market Price">
                 <EditableValue
                   :model-value="craftable.currentPrice"
@@ -267,11 +272,21 @@ const formatTime = (seconds: number): string => {
               <td
                 class="text-right"
                 data-label="Profit"
-                :style="getHeatmapStyle(craftable.profit, profitRange.profit.min, profitRange.profit.max)"
+                :style="
+                  getHeatmapStyle(craftable.profit, profitRange.profit.min, profitRange.profit.max)
+                "
               >
-                <span v-if="craftable.hasRecipeCost" class="profit-with-tooltip" @mouseenter="onTooltipHover">
+                <span
+                  v-if="craftable.hasRecipeCost"
+                  class="profit-with-tooltip"
+                  @mouseenter="onTooltipHover"
+                >
                   {{ formatNumber(craftable.profit) }}
-                  <span class="recipe-indicator" :title="`Has recipe cost from ${craftable.tradableRecipeName}`">ⓡ</span>
+                  <span
+                    class="recipe-indicator"
+                    :title="`Has recipe cost from ${craftable.tradableRecipeName}`"
+                    >ⓡ</span
+                  >
                   <div class="tooltip">
                     <div class="tooltip-content">
                       <div class="tooltip-title">Dual Profitability</div>
@@ -281,24 +296,36 @@ const formatTime = (seconds: number): string => {
                       </div>
                       <div v-if="craftable.profitWithRecipeCost !== undefined" class="tooltip-row">
                         <span class="tooltip-label">Without recipe:</span>
-                        <span class="tooltip-value">{{ formatNumber(craftable.profitWithRecipeCost) }} gold</span>
+                        <span class="tooltip-value"
+                          >{{ formatNumber(craftable.profitWithRecipeCost) }} gold</span
+                        >
                       </div>
-                      <hr class="tooltip-divider">
+                      <hr class="tooltip-divider" />
                       <div class="tooltip-row small">
                         <span class="tooltip-label">Recipe:</span>
                         <span class="tooltip-value">{{ craftable.tradableRecipeName }}</span>
                       </div>
-                      <div v-if="craftable.tradableRecipePrice !== undefined" class="tooltip-row small">
+                      <div
+                        v-if="craftable.tradableRecipePrice !== undefined"
+                        class="tooltip-row small"
+                      >
                         <span class="tooltip-label">Recipe price:</span>
-                        <span class="tooltip-value">{{ formatNumber(craftable.tradableRecipePrice) }} gold</span>
+                        <span class="tooltip-value"
+                          >{{ formatNumber(craftable.tradableRecipePrice) }} gold</span
+                        >
                       </div>
                       <div v-if="craftable.recipeUses !== undefined" class="tooltip-row small">
                         <span class="tooltip-label">Uses:</span>
                         <span class="tooltip-value">{{ craftable.recipeUses }}x</span>
                       </div>
-                      <div v-if="craftable.recipeCostPerCraft !== undefined" class="tooltip-row small">
+                      <div
+                        v-if="craftable.recipeCostPerCraft !== undefined"
+                        class="tooltip-row small"
+                      >
                         <span class="tooltip-label">Cost per craft:</span>
-                        <span class="tooltip-value">{{ formatNumber(craftable.recipeCostPerCraft) }} gold</span>
+                        <span class="tooltip-value"
+                          >{{ formatNumber(craftable.recipeCostPerCraft) }} gold</span
+                        >
                       </div>
                     </div>
                   </div>
@@ -308,38 +335,69 @@ const formatTime = (seconds: number): string => {
               <td
                 class="text-right profit-hr"
                 data-label="Profit/hr"
-                :style="getHeatmapStyle(craftable.profitPerHour, profitRange.profitPerHour.min, profitRange.profitPerHour.max)"
+                :style="
+                  getHeatmapStyle(
+                    craftable.profitPerHour,
+                    profitRange.profitPerHour.min,
+                    profitRange.profitPerHour.max
+                  )
+                "
               >
-                <span v-if="craftable.hasRecipeCost" class="profit-with-tooltip" @mouseenter="onTooltipHover">
+                <span
+                  v-if="craftable.hasRecipeCost"
+                  class="profit-with-tooltip"
+                  @mouseenter="onTooltipHover"
+                >
                   {{ formatNumber(craftable.profitPerHour) }}
-                  <span class="recipe-indicator" :title="`Has recipe cost from ${craftable.tradableRecipeName}`">ⓡ</span>
+                  <span
+                    class="recipe-indicator"
+                    :title="`Has recipe cost from ${craftable.tradableRecipeName}`"
+                    >ⓡ</span
+                  >
                   <div class="tooltip">
                     <div class="tooltip-content">
                       <div class="tooltip-title">Dual Profitability (per hour)</div>
                       <div class="tooltip-row">
                         <span class="tooltip-label">With recipe cost:</span>
-                        <span class="tooltip-value">{{ formatNumber(craftable.profitPerHour) }} gold/hr</span>
+                        <span class="tooltip-value"
+                          >{{ formatNumber(craftable.profitPerHour) }} gold/hr</span
+                        >
                       </div>
-                      <div v-if="craftable.profitPerHourWithRecipeCost !== undefined" class="tooltip-row">
+                      <div
+                        v-if="craftable.profitPerHourWithRecipeCost !== undefined"
+                        class="tooltip-row"
+                      >
                         <span class="tooltip-label">Without recipe:</span>
-                        <span class="tooltip-value">{{ formatNumber(craftable.profitPerHourWithRecipeCost) }} gold/hr</span>
+                        <span class="tooltip-value"
+                          >{{ formatNumber(craftable.profitPerHourWithRecipeCost) }} gold/hr</span
+                        >
                       </div>
-                      <hr class="tooltip-divider">
+                      <hr class="tooltip-divider" />
                       <div class="tooltip-row small">
                         <span class="tooltip-label">Recipe:</span>
                         <span class="tooltip-value">{{ craftable.tradableRecipeName }}</span>
                       </div>
-                      <div v-if="craftable.tradableRecipePrice !== undefined" class="tooltip-row small">
+                      <div
+                        v-if="craftable.tradableRecipePrice !== undefined"
+                        class="tooltip-row small"
+                      >
                         <span class="tooltip-label">Recipe price:</span>
-                        <span class="tooltip-value">{{ formatNumber(craftable.tradableRecipePrice) }} gold</span>
+                        <span class="tooltip-value"
+                          >{{ formatNumber(craftable.tradableRecipePrice) }} gold</span
+                        >
                       </div>
                       <div v-if="craftable.recipeUses !== undefined" class="tooltip-row small">
                         <span class="tooltip-label">Uses:</span>
                         <span class="tooltip-value">{{ craftable.recipeUses }}x</span>
                       </div>
-                      <div v-if="craftable.recipeCostPerCraft !== undefined" class="tooltip-row small">
+                      <div
+                        v-if="craftable.recipeCostPerCraft !== undefined"
+                        class="tooltip-row small"
+                      >
                         <span class="tooltip-label">Cost per craft:</span>
-                        <span class="tooltip-value">{{ formatNumber(craftable.recipeCostPerCraft) }} gold</span>
+                        <span class="tooltip-value"
+                          >{{ formatNumber(craftable.recipeCostPerCraft) }} gold</span
+                        >
                       </div>
                     </div>
                   </div>
@@ -370,7 +428,10 @@ const formatTime = (seconds: number): string => {
                           <EditableValue
                             :model-value="material.unitCost"
                             :default-value="material.unitCost"
-                            @update:model-value="(value) => handleMaterialPriceUpdate(craftable.name, material.name, value)"
+                            @update:model-value="
+                              (value) =>
+                                handleMaterialPriceUpdate(craftable.name, material.name, value)
+                            "
                           />
                         </td>
                         <td class="text-right subtotal">{{ formatNumber(material.totalCost) }}</td>
@@ -379,7 +440,9 @@ const formatTime = (seconds: number): string => {
                     <tfoot>
                       <tr class="total-row">
                         <td colspan="3" class="text-right total-label">Total Cost:</td>
-                        <td class="text-right total-value">{{ formatNumber(craftable.totalCost) }}</td>
+                        <td class="text-right total-value">
+                          {{ formatNumber(craftable.totalCost) }}
+                        </td>
                       </tr>
                     </tfoot>
                   </table>
@@ -392,7 +455,9 @@ const formatTime = (seconds: number): string => {
                       :default-value="craftable.craftTimeSeconds"
                       @update:model-value="(value) => handleCraftTimeUpdate(craftable.name, value)"
                     />
-                    <span class="craft-time-display">({{ formatTime(craftable.craftTimeSeconds) }})</span>
+                    <span class="craft-time-display"
+                      >({{ formatTime(craftable.craftTimeSeconds) }})</span
+                    >
                   </div>
 
                   <!-- Recipe Cost Information -->
@@ -403,34 +468,58 @@ const formatTime = (seconds: number): string => {
                         <span class="recipe-info-label">Recipe:</span>
                         <span class="recipe-info-value">{{ craftable.tradableRecipeName }}</span>
                       </div>
-                      <div v-if="craftable.tradableRecipePrice !== undefined" class="recipe-info-row">
+                      <div
+                        v-if="craftable.tradableRecipePrice !== undefined"
+                        class="recipe-info-row"
+                      >
                         <span class="recipe-info-label">Recipe Market Price:</span>
-                        <span class="recipe-info-value">{{ formatNumber(craftable.tradableRecipePrice) }} gold</span>
+                        <span class="recipe-info-value"
+                          >{{ formatNumber(craftable.tradableRecipePrice) }} gold</span
+                        >
                       </div>
                       <div v-if="craftable.recipeUses !== undefined" class="recipe-info-row">
                         <span class="recipe-info-label">Recipe Uses:</span>
                         <span class="recipe-info-value">{{ craftable.recipeUses }}x</span>
                       </div>
-                      <div v-if="craftable.recipeCostPerCraft !== undefined" class="recipe-info-row">
+                      <div
+                        v-if="craftable.recipeCostPerCraft !== undefined"
+                        class="recipe-info-row"
+                      >
                         <span class="recipe-info-label">Amortized Cost per Craft:</span>
-                        <span class="recipe-info-value">{{ formatNumber(craftable.recipeCostPerCraft) }} gold</span>
+                        <span class="recipe-info-value"
+                          >{{ formatNumber(craftable.recipeCostPerCraft) }} gold</span
+                        >
                       </div>
-                      <hr class="recipe-divider">
+                      <hr class="recipe-divider" />
                       <div class="recipe-info-row highlight">
                         <span class="recipe-info-label">Profit (with recipe cost):</span>
-                        <span class="recipe-info-value">{{ formatNumber(craftable.profit) }} gold</span>
+                        <span class="recipe-info-value"
+                          >{{ formatNumber(craftable.profit) }} gold</span
+                        >
                       </div>
                       <div class="recipe-info-row highlight">
                         <span class="recipe-info-label">Profit/hr (with recipe cost):</span>
-                        <span class="recipe-info-value">{{ formatNumber(craftable.profitPerHour) }} gold/hr</span>
+                        <span class="recipe-info-value"
+                          >{{ formatNumber(craftable.profitPerHour) }} gold/hr</span
+                        >
                       </div>
-                      <div v-if="craftable.profitWithRecipeCost !== undefined" class="recipe-info-row highlight">
+                      <div
+                        v-if="craftable.profitWithRecipeCost !== undefined"
+                        class="recipe-info-row highlight"
+                      >
                         <span class="recipe-info-label">Profit (without recipe):</span>
-                        <span class="recipe-info-value">{{ formatNumber(craftable.profitWithRecipeCost) }} gold</span>
+                        <span class="recipe-info-value"
+                          >{{ formatNumber(craftable.profitWithRecipeCost) }} gold</span
+                        >
                       </div>
-                      <div v-if="craftable.profitPerHourWithRecipeCost !== undefined" class="recipe-info-row highlight">
+                      <div
+                        v-if="craftable.profitPerHourWithRecipeCost !== undefined"
+                        class="recipe-info-row highlight"
+                      >
                         <span class="recipe-info-label">Profit/hr (without recipe):</span>
-                        <span class="recipe-info-value">{{ formatNumber(craftable.profitPerHourWithRecipeCost) }} gold/hr</span>
+                        <span class="recipe-info-value"
+                          >{{ formatNumber(craftable.profitPerHourWithRecipeCost) }} gold/hr</span
+                        >
                       </div>
                     </div>
                   </div>
@@ -597,7 +686,10 @@ const formatTime = (seconds: number): string => {
   padding: 0.1rem 0.3rem;
   border-radius: 0.25rem;
   opacity: 0;
-  transition: opacity 0.2s, color 0.2s, background-color 0.2s;
+  transition:
+    opacity 0.2s,
+    color 0.2s,
+    background-color 0.2s;
   margin-left: auto;
   flex-shrink: 0;
 }
@@ -832,7 +924,6 @@ const formatTime = (seconds: number): string => {
   border-top: 1px solid var(--border-color);
   margin: 0.5rem 0;
 }
-
 
 /* Mobile: Hide tooltips on touch devices, show in expanded view instead */
 @media (max-width: 767px) {
