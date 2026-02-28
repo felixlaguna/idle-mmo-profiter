@@ -199,12 +199,20 @@ function createDataProvider() {
     // Sync craftable output items
     if (!craftableNames.has(recipe.name)) {
       const id = `craft-auto-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`
+
+      // Look up the matching recipe to get the producesItemHashedId and producesItemVendorValue
+      const matchingRecipe = loadedDefaults.recipes.find(
+        (r) => r.producesItemName === recipe.name
+      )
+      const hashedId = matchingRecipe?.producesItemHashedId || ''
+      const vendorValue = matchingRecipe?.producesItemVendorValue ?? 0
+
       loadedDefaults.craftables.push({
         id,
         name: recipe.name,
         price: recipe.currentPrice,
-        hashedId: '',
-        vendorValue: 0,
+        hashedId,
+        vendorValue,
       })
       craftableNames.add(recipe.name)
     }
@@ -709,6 +717,28 @@ function createDataProvider() {
     skill?: 'alchemy' | 'forging'
   }): void {
     defaults.value.craftableRecipes.push(craftableRecipe)
+
+    // Sync the craftable output item (if it doesn't already exist)
+    const existing = defaults.value.craftables.find((c) => c.name === craftableRecipe.name)
+    if (!existing) {
+      const id = `craft-auto-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`
+
+      // Look up the matching recipe to get the producesItemHashedId and producesItemVendorValue
+      const matchingRecipe = defaults.value.recipes.find(
+        (r) => r.producesItemName === craftableRecipe.name
+      )
+      const hashedId = matchingRecipe?.producesItemHashedId || ''
+      const vendorValue = matchingRecipe?.producesItemVendorValue ?? 0
+
+      defaults.value.craftables.push({
+        id,
+        name: craftableRecipe.name,
+        price: craftableRecipe.currentPrice,
+        hashedId,
+        vendorValue,
+      })
+    }
+
     defaults.value = { ...defaults.value }
     saveCraftableRecipes(defaults.value.craftableRecipes)
   }

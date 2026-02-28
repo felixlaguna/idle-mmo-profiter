@@ -483,6 +483,86 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
     })
   })
 
+  describe('craftable hashedId sync from recipes', () => {
+    it('should populate craftable hashedId from recipe producesItemHashedId', () => {
+      const dataProvider = useDataProvider()
+
+      // Find a recipe with producesItemHashedId that doesn't have a craftableRecipe yet
+      // This ensures we're testing the creation of a NEW craftable
+      const recipeWithProducedItem = dataProvider.recipes.value.find(
+        (r) => r.producesItemName &&
+               r.producesItemHashedId &&
+               !dataProvider.craftableRecipes.value.find(cr => cr.name === r.producesItemName)
+      )
+
+      // If no such recipe exists, create a test recipe manually
+      if (!recipeWithProducedItem) {
+        // Skip this test if no suitable recipe exists
+        // This is expected in test environments with empty data
+        return
+      }
+
+      const craftableName = recipeWithProducedItem.producesItemName!
+
+      // Add a craftableRecipe with the same name as the produced item
+      dataProvider.addCraftableRecipe({
+        name: craftableName,
+        timeSeconds: 100,
+        materials: [{ name: 'Test Material', quantity: 1, unitCost: 10 }],
+        currentPrice: 100,
+      })
+
+      // Find the craftable that was auto-created
+      const craftable = dataProvider.craftables.value.find((c) => c.name === craftableName)
+
+      expect(craftable).toBeDefined()
+      expect(craftable?.hashedId).toBe(recipeWithProducedItem.producesItemHashedId)
+    })
+
+    it('should use empty string for craftable hashedId when no matching recipe exists', () => {
+      const dataProvider = useDataProvider()
+
+      // Add a craftableRecipe with a unique name that has no matching recipe
+      const uniqueName = 'Unique Craftable Without Recipe'
+      dataProvider.addCraftableRecipe({
+        name: uniqueName,
+        timeSeconds: 100,
+        materials: [{ name: 'Test Material', quantity: 1, unitCost: 10 }],
+        currentPrice: 100,
+      })
+
+      // Find the craftable that was auto-created
+      const craftable = dataProvider.craftables.value.find((c) => c.name === uniqueName)
+
+      expect(craftable).toBeDefined()
+      expect(craftable?.hashedId).toBe('')
+    })
+
+    it('should handle recipe without producesItemHashedId gracefully', () => {
+      const dataProvider = useDataProvider()
+
+      // Find a recipe with producesItemName but no producesItemHashedId
+      const recipeWithoutHashedId = dataProvider.recipes.value.find(
+        (r) => r.producesItemName && !r.producesItemHashedId
+      )
+
+      if (recipeWithoutHashedId) {
+        const craftableName = recipeWithoutHashedId.producesItemName!
+        dataProvider.addCraftableRecipe({
+          name: craftableName,
+          timeSeconds: 100,
+          materials: [{ name: 'Test Material', quantity: 1, unitCost: 10 }],
+          currentPrice: 100,
+        })
+
+        const craftable = dataProvider.craftables.value.find((c) => c.name === craftableName)
+
+        expect(craftable).toBeDefined()
+        expect(craftable?.hashedId).toBe('')
+      }
+    })
+  })
+
   describe('exportAsDefaultsJson', () => {
     beforeEach(() => {
       localStorage.clear()

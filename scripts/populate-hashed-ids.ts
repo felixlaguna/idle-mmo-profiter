@@ -11,8 +11,10 @@
  *
  * Run with: tsx scripts/populate-hashed-ids.ts
  *
- * IMPORTANT: You must have a valid API key set in localStorage before running this script.
- * The script will prompt you to enter the API key if not found.
+ * API key resolution order:
+ * 1. .env file (IDLE_MMO_SECRET_KEY_CLI)
+ * 2. CLI argument: --api-key=<key>
+ * 3. Interactive prompt
  */
 
 import fs from 'fs'
@@ -23,7 +25,7 @@ import readline from 'readline'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // API Configuration
-const API_BASE_URL = 'https://api.idle-mmo.com/api/v1'
+const API_BASE_URL = 'https://api.idle-mmo.com/v1'
 const MAX_REQUESTS_PER_MINUTE = 20
 const REQUEST_DELAY_MS = (60 * 1000) / MAX_REQUESTS_PER_MINUTE + 100 // Add 100ms buffer
 
@@ -37,6 +39,9 @@ interface Item {
   marketPrice?: number
   chance?: number
   value?: number
+  producesItemName?: string
+  producesItemHashedId?: string
+  producesItemVendorValue?: number
 }
 
 interface DefaultData {
@@ -99,8 +104,28 @@ function delay(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
-// Get API key from command line argument or prompt
+// Load API key from .env file
+function loadApiKeyFromEnv(): string | null {
+  const envPath = path.join(__dirname, '../.env')
+  try {
+    const envContent = fs.readFileSync(envPath, 'utf8')
+    const match = envContent.match(/^IDLE_MMO_SECRET_KEY_CLI=(.+)$/m)
+    return match ? match[1].trim() : null
+  } catch {
+    return null
+  }
+}
+
+// Get API key from .env, command line argument, or prompt
 async function getApiKey(): Promise<string> {
+  // 1. Check .env file
+  const envKey = loadApiKeyFromEnv()
+  if (envKey) {
+    console.log('Using API key from .env (IDLE_MMO_SECRET_KEY_CLI)')
+    return envKey
+  }
+
+  // 2. Check CLI argument
   const args = process.argv.slice(2)
   const apiKeyArg = args.find((arg) => arg.startsWith('--api-key='))
 
@@ -108,7 +133,7 @@ async function getApiKey(): Promise<string> {
     return apiKeyArg.split('=')[1]
   }
 
-  // Prompt for API key
+  // 3. Prompt for API key
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
@@ -200,8 +225,27 @@ async function processItem(
 ): Promise<Item> {
   console.log(`[${index}/${total}] Processing: ${item.name}`)
 
-  // Skip if already has hashedId and vendorValue
-  if (item.hashedId && item.hashedId !== '' && item.vendorValue !== undefined && item.vendorValue !== 0) {
+  // Check if we need to populate producesItemHashedId for recipes
+  const needsProducesItemHashedId =
+    item.producesItemName &&
+    (!item.producesItemHashedId || item.producesItemHashedId === '')
+
+  // Check if we need to populate producesItemVendorValue for recipes
+  const needsProducesItemVendorValue =
+    item.producesItemName &&
+    item.producesItemHashedId &&
+    item.producesItemHashedId !== '' &&
+    (item.producesItemVendorValue === undefined || item.producesItemVendorValue === 0)
+
+  // Skip if already has hashedId and vendorValue (and producesItemHashedId/producesItemVendorValue if applicable)
+  if (
+    item.hashedId &&
+    item.hashedId !== '' &&
+    item.vendorValue !== undefined &&
+    item.vendorValue !== 0 &&
+    !needsProducesItemHashedId &&
+    !needsProducesItemVendorValue
+  ) {
     console.log(`  ✓ Already populated (hashedId: ${item.hashedId}, vendorValue: ${item.vendorValue})`)
     return item
   }
@@ -251,6 +295,39 @@ async function processItem(
     console.log(`  ✓ Updated: hashedId=${hashedId}, vendorValue=${vendorValue}`)
   }
 
+  // For recipe items with producesItemName, populate producesItemHashedId and producesItemVendorValue
+  if (item.producesItemName && (needsProducesItemHashedId || needsProducesItemVendorValue)) {
+    let producesHashedId = result.producesItemHashedId
+
+    // If we don't have the producesItemHashedId yet, fetch it
+    if (needsProducesItemHashedId) {
+      console.log(`  → Looking up producesItemHashedId for: ${item.producesItemName}`)
+      producesHashedId = await searchItem(item.producesItemName, apiKey)
+      await delay(REQUEST_DELAY_MS) // Rate limit delay after search
+
+      if (producesHashedId) {
+        result.producesItemHashedId = producesHashedId
+        console.log(`  ✓ Found producesItemHashedId: ${producesHashedId}`)
+      } else {
+        console.error(`  ✗ Could not find hashedId for producesItemName: ${item.producesItemName}`)
+      }
+    }
+
+    // Get the vendor value for the produced item (if we have a hashedId)
+    if (producesHashedId && (needsProducesItemHashedId || needsProducesItemVendorValue)) {
+      console.log(`  → Looking up vendor value for produced item: ${item.producesItemName}`)
+      const producesItemDetails = await inspectItem(producesHashedId, apiKey)
+      await delay(REQUEST_DELAY_MS) // Rate limit delay after inspect
+
+      if (producesItemDetails) {
+        result.producesItemVendorValue = producesItemDetails.vendor_price || 0
+        console.log(`  ✓ Found producesItemVendorValue: ${result.producesItemVendorValue}`)
+      } else {
+        console.error(`  ✗ Could not get vendor value for producesItemName: ${item.producesItemName}`)
+      }
+    }
+  }
+
   return result
 }
 
@@ -267,6 +344,10 @@ async function main() {
     process.exit(1)
   }
 
+  // Check for --limit flag
+  const limitArg = process.argv.find((arg) => arg.startsWith('--limit='))
+  const limit = limitArg ? parseInt(limitArg.split('=')[1], 10) : Infinity
+
   // Read defaults.json
   const defaultsPath = path.join(__dirname, '../src/data/defaults.json')
   const data: DefaultData = JSON.parse(fs.readFileSync(defaultsPath, 'utf8'))
@@ -278,8 +359,9 @@ async function main() {
     data.resources.length +
     data.recipes.length
 
-  console.log(`Total items to process: ${totalItems}`)
-  console.log(`Estimated time: ~${Math.ceil((totalItems * 2 * REQUEST_DELAY_MS) / 1000 / 60)} minutes\n`)
+  const effectiveTotal = Math.min(totalItems, limit)
+  console.log(`Total items to process: ${effectiveTotal}${limit < Infinity ? ` (limited from ${totalItems})` : ''}`)
+  console.log(`Estimated time: ~${Math.ceil((effectiveTotal * 2 * REQUEST_DELAY_MS) / 1000 / 60)} minutes\n`)
 
   const startTime = Date.now()
   let currentIndex = 0
@@ -288,37 +370,41 @@ async function main() {
   console.log(`\n=== Processing Materials (${data.materials.length} items) ===\n`)
   const processedMaterials: Item[] = []
   for (const item of data.materials) {
+    if (currentIndex >= limit) break
     currentIndex++
-    processedMaterials.push(await processItem(item, apiKey, currentIndex, totalItems))
+    processedMaterials.push(await processItem(item, apiKey, currentIndex, effectiveTotal))
   }
-  data.materials = processedMaterials
+  data.materials = [...processedMaterials, ...data.materials.slice(processedMaterials.length)]
 
   // Process craftables
   console.log(`\n=== Processing Craftables (${data.craftables.length} items) ===\n`)
   const processedCraftables: Item[] = []
   for (const item of data.craftables) {
+    if (currentIndex >= limit) break
     currentIndex++
-    processedCraftables.push(await processItem(item, apiKey, currentIndex, totalItems))
+    processedCraftables.push(await processItem(item, apiKey, currentIndex, effectiveTotal))
   }
-  data.craftables = processedCraftables
+  data.craftables = [...processedCraftables, ...data.craftables.slice(processedCraftables.length)]
 
   // Process resources
   console.log(`\n=== Processing Resources (${data.resources.length} items) ===\n`)
   const processedResources: Item[] = []
   for (const item of data.resources) {
+    if (currentIndex >= limit) break
     currentIndex++
-    processedResources.push(await processItem(item, apiKey, currentIndex, totalItems))
+    processedResources.push(await processItem(item, apiKey, currentIndex, effectiveTotal))
   }
-  data.resources = processedResources
+  data.resources = [...processedResources, ...data.resources.slice(processedResources.length)]
 
   // Process recipes
   console.log(`\n=== Processing Recipes (${data.recipes.length} items) ===\n`)
   const processedRecipes: Item[] = []
   for (const item of data.recipes) {
+    if (currentIndex >= limit) break
     currentIndex++
-    processedRecipes.push(await processItem(item, apiKey, currentIndex, totalItems))
+    processedRecipes.push(await processItem(item, apiKey, currentIndex, effectiveTotal))
   }
-  data.recipes = processedRecipes
+  data.recipes = [...processedRecipes, ...data.recipes.slice(processedRecipes.length)]
 
   // Write back to defaults.json
   console.log('\n=== Saving results to defaults.json ===\n')

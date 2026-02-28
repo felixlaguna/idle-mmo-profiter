@@ -35,6 +35,7 @@ export interface Recipe {
   uses?: number
   producesItemName?: string
   producesItemHashedId?: string
+  producesItemVendorValue?: number
   tradableCounterpartId?: string
   isUntradable?: boolean
 }
