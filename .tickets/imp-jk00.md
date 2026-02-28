@@ -1,6 +1,6 @@
 ---
 id: imp-jk00
-status: open
+status: closed
 deps: [imp-mwtk]
 links: []
 created: 2026-02-26T22:15:39Z
@@ -62,3 +62,7 @@ Create or extend a script to populate recipe 'uses' count and potion linking dat
 **2026-02-27T11:24:50Z**
 
 Partially addressed: populate-hashed-ids.ts extended to fetch recipe data. defaults.json cleaned of stale producesItemName fields. Remaining: full API population run.
+
+**2026-02-28T23:39:01Z**
+
+Verified: Fully implemented in scripts/populate-hashed-ids.ts with API integration, rate limiting, hashed ID and recipe data population. Closing.

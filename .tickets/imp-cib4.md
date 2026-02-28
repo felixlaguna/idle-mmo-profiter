@@ -1,6 +1,6 @@
 ---
 id: imp-cib4
-status: open
+status: closed
 deps: []
 links: []
 created: 2026-02-25T21:51:10Z
@@ -35,3 +35,7 @@ This is a future epic -- not to implement now. The project is a static Vue 3 + V
 - Cloudflare Pages has a generous free tier (500 builds/month, unlimited bandwidth)
 - No child tasks yet -- this is a placeholder epic for future planning
 
+
+**2026-02-28T23:39:01Z**
+
+Superseded: Project deploys to GitHub Pages instead (deploy.yml workflow). No Cloudflare Pages needed. Closing.

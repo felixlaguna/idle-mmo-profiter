@@ -1,6 +1,6 @@
 ---
 id: imp-4ra7
-status: open
+status: closed
 deps: [imp-iolq, imp-o9wf]
 links: []
 created: 2026-02-25T18:33:29Z
@@ -37,3 +37,9 @@ Also create a recalculate() function that:
 
 Unified ranking correctly sorts all activities, #1 pick matches Excel 'Winner' cell logic
 
+
+## Notes
+
+**2026-02-28T23:39:01Z**
+
+Verified: Fully implemented in src/calculators/profitRanker.ts with unified ranking, recommendation, negative profit filter. Closing.

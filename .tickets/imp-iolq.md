@@ -1,6 +1,6 @@
 ---
 id: imp-iolq
-status: open
+status: closed
 deps: [imp-jyg0]
 links: []
 created: 2026-02-25T18:33:29Z
@@ -41,3 +41,9 @@ Each result: { name, craftTime, materials: [{name, qty, unitCost, totalCost}], v
 
 All 6 potions return correct profit values matching the Excel computed values
 
+
+## Notes
+
+**2026-02-28T23:39:01Z**
+
+Verified: Fully implemented in src/calculators/craftableCalculator.ts with material costs, vials, tax, dual profitability. Closing.

@@ -1,6 +1,6 @@
 ---
 id: imp-o9wf
-status: open
+status: closed
 deps: [imp-jyg0]
 links: []
 created: 2026-02-25T18:33:29Z
@@ -46,3 +46,9 @@ Function: calculateResourceProfits(resources, marketPrices, taxRate, priceOverri
 
 All resource chains return correct profit values matching the Excel computed values
 
+
+## Notes
+
+**2026-02-28T23:39:01Z**
+
+Verified: Fully implemented in src/calculators/resourceCalculator.ts with vendor vs market profit. Closing.

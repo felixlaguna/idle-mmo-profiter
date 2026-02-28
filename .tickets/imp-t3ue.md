@@ -1,6 +1,6 @@
 ---
 id: imp-t3ue
-status: open
+status: closed
 deps: [imp-apms]
 links: []
 created: 2026-02-25T18:32:48Z
@@ -24,3 +24,9 @@ Add to settings panel:
 
 Export produces valid JSON, import restores state, reset works correctly
 
+
+## Notes
+
+**2026-02-28T23:39:01Z**
+
+Verified: Fully implemented in useSettingsManager.ts composable with export, import, reset defaults, and reset all. UI in SettingsPanel.vue. Closing.
