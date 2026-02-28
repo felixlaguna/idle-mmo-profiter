@@ -21,6 +21,7 @@
  * Options:
  * --limit=N     Process only first N items (for testing)
  * --dry-run     Print what would change but don't write file
+ * --smart       Only refresh items that are due based on their suggested refresh frequency
  */
 
 import fs from 'fs'
@@ -28,9 +29,16 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import readline from 'readline'
 import { apiClient } from '../src/api/client.js'
-import { getAverageMarketPrice } from '../src/api/services.js'
+import { getMarketHistory } from '../src/api/services.js'
+import {
+  computeSuggestedRefreshMinutes,
+  formatRefreshInterval,
+} from '../src/utils/refreshFrequency.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+// Default refresh interval for items with insufficient sales data (24 hours)
+const DEFAULT_REFRESH_MINUTES = 1440 // 24 hours
 
 // Types - minimal interface for the items we need to update
 interface DefaultItem {
@@ -40,6 +48,8 @@ interface DefaultItem {
   price?: number
   marketPrice?: number
   isUntradable?: boolean
+  lastUpdated?: string
+  suggestedRefreshMinutes?: number
   [key: string]: unknown // preserve other fields
 }
 
@@ -112,6 +122,40 @@ interface ProcessResult {
   newPrice: number | null
   skipped: boolean
   skipReason?: string
+  suggestedRefreshMinutes?: number
+}
+
+/**
+ * Check if an item is due for refresh based on lastUpdated and suggestedRefreshMinutes
+ */
+function isDueForRefresh(item: DefaultItem): {
+  due: boolean
+  minutesSinceLast?: number
+  minutesUntilDue?: number
+} {
+  // Always due if never refreshed
+  if (!item.lastUpdated) {
+    return { due: true }
+  }
+
+  // Always due if no suggestion (need to compute one)
+  if (!item.suggestedRefreshMinutes) {
+    return { due: true }
+  }
+
+  // Calculate time since last update
+  const lastUpdatedTime = new Date(item.lastUpdated).getTime()
+  const currentTime = Date.now()
+  const minutesSinceLast = (currentTime - lastUpdatedTime) / (1000 * 60)
+
+  // Check if due
+  if (minutesSinceLast >= item.suggestedRefreshMinutes) {
+    return { due: true, minutesSinceLast }
+  }
+
+  // Not due yet
+  const minutesUntilDue = item.suggestedRefreshMinutes - minutesSinceLast
+  return { due: false, minutesSinceLast, minutesUntilDue }
 }
 
 /**
@@ -157,32 +201,53 @@ async function processItem(
     }
   }
 
-  // Fetch market price using the API service layer
-  const rawPrice = await getAverageMarketPrice(item.hashedId, 10)
-  // Round to 1 decimal place to match defaults.json format
-  const newPrice = rawPrice !== null ? Math.round(rawPrice * 10) / 10 : null
-  const oldPrice = item[priceField] as number | undefined
+  // Fetch market history to get both price and suggested refresh interval
+  const marketData = await getMarketHistory(item.hashedId)
 
-  if (newPrice === null) {
+  if (!marketData || marketData.latest_sold.length === 0) {
     console.log(`  ⚠ No market data available`)
     return {
       updated: false,
-      oldPrice,
+      oldPrice: item[priceField] as number | undefined,
       newPrice: null,
       skipped: false,
     }
   }
 
+  // Compute average price from latest_sold (replicate getAverageMarketPrice logic)
+  const recentTransactions = marketData.latest_sold.slice(0, 10).map((e) => e.price_per_item)
+  const average = recentTransactions.reduce((a, b) => a + b, 0) / recentTransactions.length
+  const newPrice = Math.round(average * 10) / 10 // Round to 1 decimal place
+  const oldPrice = item[priceField] as number | undefined
+
+  // Compute suggested refresh interval
+  const computedRefreshMinutes = computeSuggestedRefreshMinutes(marketData)
+
+  // Use computed value or default if insufficient data
+  const suggestedRefreshMinutes =
+    computedRefreshMinutes !== null ? computedRefreshMinutes : DEFAULT_REFRESH_MINUTES
+  const usedDefault = computedRefreshMinutes === null
+
   // Update the price in-place
   ;(item as Record<string, unknown>)[priceField] = newPrice
 
-  // Show the change
+  // Set lastUpdated timestamp
+  item.lastUpdated = new Date().toISOString()
+
+  // Set suggestedRefreshMinutes (either computed or default)
+  item.suggestedRefreshMinutes = suggestedRefreshMinutes
+
+  // Show the change with refresh interval
   if (oldPrice !== undefined) {
     const change = newPrice - oldPrice
     const changeSymbol = change > 0 ? '↑' : change < 0 ? '↓' : '='
-    console.log(`  ✓ ${oldPrice} → ${newPrice} (${changeSymbol} ${Math.abs(change).toFixed(1)})`)
+    const refreshInfo = ` [refresh: ${formatRefreshInterval(suggestedRefreshMinutes)}${usedDefault ? ' (default)' : ''}]`
+    console.log(
+      `  ✓ ${oldPrice} → ${newPrice} (${changeSymbol} ${Math.abs(change).toFixed(1)})${refreshInfo}`
+    )
   } else {
-    console.log(`  ✓ New price: ${newPrice}`)
+    const refreshInfo = ` [refresh: ${formatRefreshInterval(suggestedRefreshMinutes)}${usedDefault ? ' (default)' : ''}]`
+    console.log(`  ✓ New price: ${newPrice}${refreshInfo}`)
   }
 
   return {
@@ -190,6 +255,7 @@ async function processItem(
     oldPrice,
     newPrice,
     skipped: false,
+    suggestedRefreshMinutes,
   }
 }
 
@@ -217,9 +283,14 @@ async function main() {
   const limitArg = args.find((arg) => arg.startsWith('--limit='))
   const limit = limitArg ? parseInt(limitArg.split('=')[1], 10) : Infinity
   const dryRun = args.includes('--dry-run')
+  const smartMode = args.includes('--smart')
 
   if (dryRun) {
     console.log('DRY RUN MODE - No changes will be written to file\n')
+  }
+
+  if (smartMode) {
+    console.log('SMART MODE - Only refreshing items that are due\n')
   }
 
   // Read defaults.json
@@ -257,11 +328,52 @@ async function main() {
     console.log(`Limiting to first ${limit} items for testing\n`)
   }
 
+  // Smart mode pre-run analysis
+  if (smartMode) {
+    let dueNow = 0
+    let notYetDue = 0
+    let neverRefreshed = 0
+
+    const allItems = [
+      ...data.materials.filter((item) => item.hashedId),
+      ...data.craftables.filter((item) => item.hashedId),
+      ...data.resources.filter((item) => item.hashedId),
+      ...data.recipes.filter((item) => item.hashedId && !item.isUntradable),
+    ]
+
+    for (const item of allItems) {
+      if (!item.lastUpdated) {
+        neverRefreshed++
+      }
+      const refreshStatus = isDueForRefresh(item)
+      if (refreshStatus.due) {
+        dueNow++
+      } else {
+        notYetDue++
+      }
+    }
+
+    console.log('Smart mode analysis:')
+    console.log(`  Due now: ${dueNow} items`)
+    console.log(`  Not yet due: ${notYetDue} items`)
+    console.log(`  Never refreshed: ${neverRefreshed} items (will refresh)`)
+    const estimatedDueMinutes = Math.ceil(dueNow / 20)
+    console.log(`  Estimated time: ~${estimatedDueMinutes} minutes\n`)
+  }
+
   const startTime = Date.now()
   let currentIndex = 0
   let updatedCount = 0
   let skippedCount = 0
   let noDataCount = 0
+  let smartSkippedCount = 0
+
+  // Refresh frequency distribution
+  let fastRefreshCount = 0 // < 1 hour
+  let mediumRefreshCount = 0 // 1-24 hours
+  let slowRefreshCount = 0 // > 24 hours
+  let minRefreshMinutes: number | null = null
+  let maxRefreshMinutes: number | null = null
 
   // Per-category stats
   const categoryStats = {
@@ -276,6 +388,19 @@ async function main() {
   for (const item of data.materials) {
     if (!item.hashedId) continue
     if (currentIndex >= limit) break
+
+    // Smart mode: check if due for refresh
+    if (smartMode) {
+      const refreshStatus = isDueForRefresh(item)
+      if (!refreshStatus.due) {
+        console.log(
+          `  ⏳ ${item.name}: Not due (last: ${formatRefreshInterval(refreshStatus.minutesSinceLast!)} ago, next in: ${formatRefreshInterval(refreshStatus.minutesUntilDue!)})`
+        )
+        smartSkippedCount++
+        continue
+      }
+    }
+
     currentIndex++
 
     const result = await processItem(
@@ -290,6 +415,24 @@ async function main() {
     if (result.updated) {
       updatedCount++
       categoryStats.materials.updated++
+
+      // Track refresh frequency distribution
+      if (result.suggestedRefreshMinutes !== undefined) {
+        if (result.suggestedRefreshMinutes < 60) {
+          fastRefreshCount++
+        } else if (result.suggestedRefreshMinutes < 24 * 60) {
+          mediumRefreshCount++
+        } else {
+          slowRefreshCount++
+        }
+
+        if (minRefreshMinutes === null || result.suggestedRefreshMinutes < minRefreshMinutes) {
+          minRefreshMinutes = result.suggestedRefreshMinutes
+        }
+        if (maxRefreshMinutes === null || result.suggestedRefreshMinutes > maxRefreshMinutes) {
+          maxRefreshMinutes = result.suggestedRefreshMinutes
+        }
+      }
     }
     if (result.skipped) {
       skippedCount++
@@ -308,6 +451,19 @@ async function main() {
   for (const item of data.craftables) {
     if (!item.hashedId) continue
     if (currentIndex >= limit) break
+
+    // Smart mode: check if due for refresh
+    if (smartMode) {
+      const refreshStatus = isDueForRefresh(item)
+      if (!refreshStatus.due) {
+        console.log(
+          `  ⏳ ${item.name}: Not due (last: ${formatRefreshInterval(refreshStatus.minutesSinceLast!)} ago, next in: ${formatRefreshInterval(refreshStatus.minutesUntilDue!)})`
+        )
+        smartSkippedCount++
+        continue
+      }
+    }
+
     currentIndex++
 
     const result = await processItem(
@@ -322,6 +478,24 @@ async function main() {
     if (result.updated) {
       updatedCount++
       categoryStats.craftables.updated++
+
+      // Track refresh frequency distribution
+      if (result.suggestedRefreshMinutes !== undefined) {
+        if (result.suggestedRefreshMinutes < 60) {
+          fastRefreshCount++
+        } else if (result.suggestedRefreshMinutes < 24 * 60) {
+          mediumRefreshCount++
+        } else {
+          slowRefreshCount++
+        }
+
+        if (minRefreshMinutes === null || result.suggestedRefreshMinutes < minRefreshMinutes) {
+          minRefreshMinutes = result.suggestedRefreshMinutes
+        }
+        if (maxRefreshMinutes === null || result.suggestedRefreshMinutes > maxRefreshMinutes) {
+          maxRefreshMinutes = result.suggestedRefreshMinutes
+        }
+      }
     }
     if (result.skipped) {
       skippedCount++
@@ -340,6 +514,19 @@ async function main() {
   for (const item of data.resources) {
     if (!item.hashedId) continue
     if (currentIndex >= limit) break
+
+    // Smart mode: check if due for refresh
+    if (smartMode) {
+      const refreshStatus = isDueForRefresh(item)
+      if (!refreshStatus.due) {
+        console.log(
+          `  ⏳ ${item.name}: Not due (last: ${formatRefreshInterval(refreshStatus.minutesSinceLast!)} ago, next in: ${formatRefreshInterval(refreshStatus.minutesUntilDue!)})`
+        )
+        smartSkippedCount++
+        continue
+      }
+    }
+
     currentIndex++
 
     const result = await processItem(
@@ -354,6 +541,24 @@ async function main() {
     if (result.updated) {
       updatedCount++
       categoryStats.resources.updated++
+
+      // Track refresh frequency distribution
+      if (result.suggestedRefreshMinutes !== undefined) {
+        if (result.suggestedRefreshMinutes < 60) {
+          fastRefreshCount++
+        } else if (result.suggestedRefreshMinutes < 24 * 60) {
+          mediumRefreshCount++
+        } else {
+          slowRefreshCount++
+        }
+
+        if (minRefreshMinutes === null || result.suggestedRefreshMinutes < minRefreshMinutes) {
+          minRefreshMinutes = result.suggestedRefreshMinutes
+        }
+        if (maxRefreshMinutes === null || result.suggestedRefreshMinutes > maxRefreshMinutes) {
+          maxRefreshMinutes = result.suggestedRefreshMinutes
+        }
+      }
     }
     if (result.skipped) {
       skippedCount++
@@ -373,6 +578,19 @@ async function main() {
     if (!item.hashedId) continue
     if (item.isUntradable === true) continue // Skip untradable recipes
     if (currentIndex >= limit) break
+
+    // Smart mode: check if due for refresh
+    if (smartMode) {
+      const refreshStatus = isDueForRefresh(item)
+      if (!refreshStatus.due) {
+        console.log(
+          `  ⏳ ${item.name}: Not due (last: ${formatRefreshInterval(refreshStatus.minutesSinceLast!)} ago, next in: ${formatRefreshInterval(refreshStatus.minutesUntilDue!)})`
+        )
+        smartSkippedCount++
+        continue
+      }
+    }
+
     currentIndex++
 
     const result = await processItem(
@@ -387,6 +605,24 @@ async function main() {
     if (result.updated) {
       updatedCount++
       categoryStats.recipes.updated++
+
+      // Track refresh frequency distribution
+      if (result.suggestedRefreshMinutes !== undefined) {
+        if (result.suggestedRefreshMinutes < 60) {
+          fastRefreshCount++
+        } else if (result.suggestedRefreshMinutes < 24 * 60) {
+          mediumRefreshCount++
+        } else {
+          slowRefreshCount++
+        }
+
+        if (minRefreshMinutes === null || result.suggestedRefreshMinutes < minRefreshMinutes) {
+          minRefreshMinutes = result.suggestedRefreshMinutes
+        }
+        if (maxRefreshMinutes === null || result.suggestedRefreshMinutes > maxRefreshMinutes) {
+          maxRefreshMinutes = result.suggestedRefreshMinutes
+        }
+      }
     }
     if (result.skipped) {
       skippedCount++
@@ -451,8 +687,32 @@ async function main() {
   }
 
   console.log(`  ResourceGathering: ${syncedCount} synced from resources`)
+
+  if (smartMode) {
+    console.log(
+      `\nSmart mode: ${updatedCount} items refreshed, ${smartSkippedCount} items skipped (not yet due)`
+    )
+  }
+
   console.log(`\nTotal: ${updatedCount} updated, ${noDataCount} no data, ${skippedCount} skipped`)
-  console.log(`Time taken: ${durationMinutes} minutes`)
+
+  // Show refresh frequency distribution
+  const totalWithSuggestion = fastRefreshCount + mediumRefreshCount + slowRefreshCount
+  if (totalWithSuggestion > 0) {
+    console.log('\nRefresh frequency distribution:')
+    console.log(`  Fast refresh (< 1h):     ${fastRefreshCount} items`)
+    console.log(`  Medium refresh (1-24h):  ${mediumRefreshCount} items`)
+    console.log(`  Slow refresh (> 24h):    ${slowRefreshCount} items`)
+    console.log(`  Total with suggestions:  ${totalWithSuggestion} items`)
+
+    if (minRefreshMinutes !== null && maxRefreshMinutes !== null) {
+      console.log(
+        `  Fastest: ${formatRefreshInterval(minRefreshMinutes)}, Slowest: ${formatRefreshInterval(maxRefreshMinutes)}`
+      )
+    }
+  }
+
+  console.log(`\nTime taken: ${durationMinutes} minutes`)
 
   // Write to file (unless dry run)
   if (!dryRun) {

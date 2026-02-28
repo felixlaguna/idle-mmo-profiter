@@ -3,93 +3,119 @@
     {
       "id": "mat-1",
       "name": "Moose antler",
-      "price": 110.1,
+      "price": 108.7,
       "hashedId": "dgBq1boWYek4QkJ3rXaD",
-      "vendorValue": 35
+      "vendorValue": 35,
+      "lastUpdated": "2026-02-28T20:48:36.589Z",
+      "suggestedRefreshMinutes": 137
     },
     {
       "id": "mat-2",
       "name": "Minotaur Hide",
-      "price": 409.7,
+      "price": 394.8,
       "hashedId": "Rv5g4z1dQnEGLqy32jpG",
-      "vendorValue": 44
+      "vendorValue": 44,
+      "lastUpdated": "2026-02-28T20:48:36.810Z",
+      "suggestedRefreshMinutes": 137
     },
     {
       "id": "mat-3",
       "name": "Black Bear Pelt",
-      "price": 117.9,
+      "price": 117.8,
       "hashedId": "ElzPeorXNVlxLaW0kv53",
-      "vendorValue": 36
+      "vendorValue": 36,
+      "lastUpdated": "2026-02-28T20:48:36.955Z",
+      "suggestedRefreshMinutes": 28
     },
     {
       "id": "mat-4",
       "name": "Orb of elemental",
       "price": 94.2,
       "hashedId": "ElzPeorXNVvxNaW0kv53",
-      "vendorValue": 25
+      "vendorValue": 25,
+      "lastUpdated": "2026-02-28T20:48:37.094Z",
+      "suggestedRefreshMinutes": 44
     },
     {
       "id": "mat-5",
       "name": "Elk Antler",
-      "price": 333.2,
+      "price": 345.6,
       "hashedId": "O2xMjGdBN5MqN9P1nyrv",
-      "vendorValue": 25
+      "vendorValue": 25,
+      "lastUpdated": "2026-02-28T20:48:37.257Z",
+      "suggestedRefreshMinutes": 138
     },
     {
       "id": "mat-6",
       "name": "Enigmatic Stone",
-      "price": 43.5,
+      "price": 46,
       "hashedId": "njoPWKDkLXeAQ06ZOX79",
-      "vendorValue": 25
+      "vendorValue": 25,
+      "lastUpdated": "2026-02-28T20:48:37.420Z",
+      "suggestedRefreshMinutes": 30
     },
     {
       "id": "mat-7",
       "name": "Lions teeth",
-      "price": 250.3,
+      "price": 244.4,
       "hashedId": "Ro31P7kZL6r6LveGxXOy",
-      "vendorValue": 27
+      "vendorValue": 27,
+      "lastUpdated": "2026-02-28T20:48:37.594Z",
+      "suggestedRefreshMinutes": 166
     },
     {
       "id": "mat-8",
       "name": "Wolf pelt",
       "price": 89.5,
       "hashedId": "ZjlPA8v9NMybNEyMe2Oa",
-      "vendorValue": 37
+      "vendorValue": 37,
+      "lastUpdated": "2026-02-28T20:48:37.717Z",
+      "suggestedRefreshMinutes": 46
     },
     {
       "id": "mat-9",
       "name": "Goblin totem",
-      "price": 32.5,
+      "price": 32.7,
       "hashedId": "P1vlVrzjLrgwQao8mGKM",
-      "vendorValue": 5
+      "vendorValue": 5,
+      "lastUpdated": "2026-02-28T20:48:37.785Z",
+      "suggestedRefreshMinutes": 29
     },
     {
       "id": "mat-10",
       "name": "Harpy wing",
       "price": 10.7,
       "hashedId": "3ZvrGV8RQpGwL2wgA5jD",
-      "vendorValue": 5
+      "vendorValue": 5,
+      "lastUpdated": "2026-02-28T20:48:37.892Z",
+      "suggestedRefreshMinutes": 317
     },
     {
       "id": "mat-11",
       "name": "Air elemental",
       "price": 280.2,
       "hashedId": "Ro31P7kZL6m6YveGxXOy",
-      "vendorValue": 115
+      "vendorValue": 115,
+      "lastUpdated": "2026-02-28T20:48:38.018Z",
+      "suggestedRefreshMinutes": 217
     },
     {
       "id": "mat-auto-1772226753831-bem1",
       "name": "Harpy's Wings",
       "price": 10.7,
       "hashedId": "3ZvrGV8RQpGwL2wgA5jD",
-      "vendorValue": 5
+      "vendorValue": 5,
+      "lastUpdated": "2026-02-28T20:48:38.099Z",
+      "suggestedRefreshMinutes": 317
     },
     {
       "id": "mat-auto-1772226753831-p40h",
       "name": "Air Elemental Essence",
       "price": 280.2,
       "hashedId": "Ro31P7kZL6m6YveGxXOy",
-      "vendorValue": 115
+      "vendorValue": 115,
+      "lastUpdated": "2026-02-28T20:48:38.172Z",
+      "suggestedRefreshMinutes": 217
     },
     {
       "id": "mat-auto-1772226753831-grwj",
@@ -103,14 +129,18 @@
       "name": "Abyssal Scroll",
       "price": 428.1,
       "hashedId": "0kK49j1VN9mxNq6B2doa",
-      "vendorValue": 326
+      "vendorValue": 326,
+      "lastUpdated": "2026-02-28T20:48:38.362Z",
+      "suggestedRefreshMinutes": 55
     },
     {
       "id": "mat-auto-1772226753831-sqhk",
       "name": "Venom Extract",
       "price": 101.2,
       "hashedId": "oZwey82VNAKnLD0dXM3g",
-      "vendorValue": 35
+      "vendorValue": 35,
+      "lastUpdated": "2026-02-28T20:48:38.448Z",
+      "suggestedRefreshMinutes": 49
     },
     {
       "id": "mat-auto-1772226753831-7x2d",
@@ -122,44 +152,56 @@
     {
       "id": "mat-auto-1772226753831-erbs",
       "name": "Lucky Rabbit Foot",
-      "price": 100.1,
+      "price": 96.2,
       "hashedId": "ZjlPA8v9NMyyNEyMe2Oa",
-      "vendorValue": 25
+      "vendorValue": 25,
+      "lastUpdated": "2026-02-28T20:48:38.722Z",
+      "suggestedRefreshMinutes": 35
     },
     {
       "id": "mat-auto-1772226753831-xmmt",
       "name": "Goblin Totem",
-      "price": 32.5,
+      "price": 32.7,
       "hashedId": "P1vlVrzjLrgwQao8mGKM",
-      "vendorValue": 5
+      "vendorValue": 5,
+      "lastUpdated": "2026-02-28T20:49:36.115Z",
+      "suggestedRefreshMinutes": 29
     },
     {
       "id": "mat-auto-1772226753831-8bf6",
       "name": "Oak Log",
-      "price": 5,
+      "price": 4.9,
       "hashedId": "7eA59WrBQRpYzb62qKvp",
-      "vendorValue": 1
+      "vendorValue": 1,
+      "lastUpdated": "2026-02-28T21:09:56.188Z",
+      "suggestedRefreshMinutes": 5
     },
     {
       "id": "mat-auto-1772226753831-u5wu",
       "name": "Goblin Pouch",
-      "price": 33.3,
+      "price": 33.5,
       "hashedId": "Z6aDoyRnLy26QpV5AGXm",
-      "vendorValue": 25
+      "vendorValue": 25,
+      "lastUpdated": "2026-02-28T20:49:37.388Z",
+      "suggestedRefreshMinutes": 37
     },
     {
       "id": "mat-auto-1772226753831-kseg",
       "name": "Ducks Mouth",
-      "price": 44.9,
+      "price": 47.6,
       "hashedId": "P1vlVrzjLrgDQao8mGKM",
-      "vendorValue": 25
+      "vendorValue": 25,
+      "lastUpdated": "2026-02-28T20:49:37.544Z",
+      "suggestedRefreshMinutes": 40
     },
     {
       "id": "mat-auto-1772226753831-z9wi",
       "name": "Goblin Crown",
-      "price": 1715,
+      "price": 1706,
       "hashedId": "O2xMjGdBN5M6N9P1nyrv",
-      "vendorValue": 37
+      "vendorValue": 37,
+      "lastUpdated": "2026-02-28T20:49:37.630Z",
+      "suggestedRefreshMinutes": 128
     },
     {
       "id": "mat-auto-1772226753831-uskr",
@@ -171,37 +213,47 @@
     {
       "id": "mat-auto-1772226753831-hs5i",
       "name": "Boar Tusk",
-      "price": 347.9,
+      "price": 308.8,
       "hashedId": "27gw0k38L4qrQWevJxyK",
-      "vendorValue": 23
+      "vendorValue": 23,
+      "lastUpdated": "2026-02-28T20:49:37.794Z",
+      "suggestedRefreshMinutes": 90
     },
     {
       "id": "mat-auto-1772226753831-m3w4",
       "name": "Forbidden Tome",
       "price": 54.6,
       "hashedId": "JVM29l7kQZW5N80q6WDG",
-      "vendorValue": 24
+      "vendorValue": 24,
+      "lastUpdated": "2026-02-28T20:49:37.870Z",
+      "suggestedRefreshMinutes": 116
     },
     {
       "id": "mat-auto-1772226753831-4by8",
       "name": "Snakes Head",
-      "price": 167.9,
+      "price": 158.6,
       "hashedId": "3Zbym56qLxg5YBRp7Eek",
-      "vendorValue": 5
+      "vendorValue": 5,
+      "lastUpdated": "2026-02-28T20:49:37.953Z",
+      "suggestedRefreshMinutes": 64
     },
     {
       "id": "mat-auto-1772226753831-sjzy",
       "name": "Deer Antler",
-      "price": 86.7,
+      "price": 79.7,
       "hashedId": "Z6aDoyRnLy2yQpV5AGXm",
-      "vendorValue": 9
+      "vendorValue": 9,
+      "lastUpdated": "2026-02-28T20:49:38.097Z",
+      "suggestedRefreshMinutes": 50
     },
     {
       "id": "mat-auto-1772226753831-5mfi",
       "name": "Raw Onion",
       "price": 43.3,
       "hashedId": "gGZ2J71yYKMyQMmjbown",
-      "vendorValue": 15
+      "vendorValue": 15,
+      "lastUpdated": "2026-02-28T21:10:06.428Z",
+      "suggestedRefreshMinutes": 18
     },
     {
       "id": "mat-auto-1772226753831-fqrf",
@@ -215,7 +267,9 @@
       "name": "Djinn's Bottle",
       "price": 120.7,
       "hashedId": "ZqEegBydNwJ0QkA59J61",
-      "vendorValue": 5
+      "vendorValue": 5,
+      "lastUpdated": "2026-02-28T20:49:38.332Z",
+      "suggestedRefreshMinutes": 50
     },
     {
       "id": "mat-auto-1772226753831-ieqo",
@@ -229,14 +283,18 @@
       "name": "Swamp Juice",
       "price": 131.1,
       "hashedId": "yav4OK1wNER2YZP7rzJb",
-      "vendorValue": 15
+      "vendorValue": 15,
+      "lastUpdated": "2026-02-28T20:49:38.507Z",
+      "suggestedRefreshMinutes": 103
     },
     {
       "id": "mat-auto-1772226753831-lp3a",
       "name": "Slime Extract",
       "price": 9.4,
       "hashedId": "BRn3x72JQ26lQzOMok41",
-      "vendorValue": 5
+      "vendorValue": 5,
+      "lastUpdated": "2026-02-28T20:49:38.651Z",
+      "suggestedRefreshMinutes": 95
     },
     {
       "id": "mat-auto-1772226753831-7m1c",
@@ -250,49 +308,63 @@
       "name": "Ruined Robes",
       "price": 21.1,
       "hashedId": "JZdg5V3PQoD9NEyWq0zl",
-      "vendorValue": 15
+      "vendorValue": 15,
+      "lastUpdated": "2026-02-28T20:49:38.804Z",
+      "suggestedRefreshMinutes": 107
     },
     {
       "id": "mat-auto-1772226753831-qo9h",
       "name": "Essence of Shadows",
       "price": 277.4,
       "hashedId": "93R0qXalLlDyLAbn8DBg",
-      "vendorValue": 63
+      "vendorValue": 63,
+      "lastUpdated": "2026-02-28T20:49:38.880Z",
+      "suggestedRefreshMinutes": 59
     },
     {
       "id": "mat-auto-1772226753831-i7hd",
       "name": "Buffalo Horn",
       "price": 50.8,
       "hashedId": "7eA59WrBQRlKYzb62qKv",
-      "vendorValue": 25
+      "vendorValue": 25,
+      "lastUpdated": "2026-02-28T20:49:38.957Z",
+      "suggestedRefreshMinutes": 73
     },
     {
       "id": "mat-auto-1772226753831-wzc4",
       "name": "Pirates Code",
-      "price": 43.4,
+      "price": 46.3,
       "hashedId": "lrx463VdQgD9N5w1zWKP",
-      "vendorValue": 15
+      "vendorValue": 15,
+      "lastUpdated": "2026-02-28T20:50:37.122Z",
+      "suggestedRefreshMinutes": 72
     },
     {
       "id": "mat-auto-1772226753831-qsqd",
       "name": "Chest of Scraps",
-      "price": 198.1,
+      "price": 198.5,
       "hashedId": "3yE1A84kYOl3Ll6XeVKp",
-      "vendorValue": 15
+      "vendorValue": 15,
+      "lastUpdated": "2026-02-28T20:50:37.194Z",
+      "suggestedRefreshMinutes": 78
     },
     {
       "id": "mat-auto-1772226753831-ivkr",
       "name": "Bone Fragment",
-      "price": 45.3,
+      "price": 45.1,
       "hashedId": "DBngxedVYJqlNX64wW8o",
-      "vendorValue": 5
+      "vendorValue": 5,
+      "lastUpdated": "2026-02-28T21:10:06.734Z",
+      "suggestedRefreshMinutes": 21
     },
     {
       "id": "mat-auto-1772226753831-eg8e",
       "name": "Long Forgotten Necklace",
       "price": 14.6,
       "hashedId": "jGXBy7a4LbWzQ0Pw6Vdg",
-      "vendorValue": 5
+      "vendorValue": 5,
+      "lastUpdated": "2026-02-28T20:50:38.366Z",
+      "suggestedRefreshMinutes": 93
     },
     {
       "id": "mat-auto-1772226753831-3x7p",
@@ -306,56 +378,72 @@
       "name": "Umbral Claw",
       "price": 211.6,
       "hashedId": "BPjze3x2Q31OYR85vgZV",
-      "vendorValue": 15
+      "vendorValue": 15,
+      "lastUpdated": "2026-02-28T20:50:38.551Z",
+      "suggestedRefreshMinutes": 90
     },
     {
       "id": "mat-auto-1772226753831-9yqu",
       "name": "Goblin Scraps",
-      "price": 165.5,
+      "price": 179.3,
       "hashedId": "27gw0k38L4qZQWevJxyK",
-      "vendorValue": 25
+      "vendorValue": 25,
+      "lastUpdated": "2026-02-28T20:50:38.650Z",
+      "suggestedRefreshMinutes": 24
     },
     {
       "id": "mat-auto-1772226753831-kh93",
       "name": "Siren's Scales",
       "price": 18,
       "hashedId": "q9pwa0kxLBVpLgVj136l",
-      "vendorValue": 15
+      "vendorValue": 15,
+      "lastUpdated": "2026-02-28T20:50:38.724Z",
+      "suggestedRefreshMinutes": 25
     },
     {
       "id": "mat-auto-1772226753831-jr1i",
       "name": "Vial of Spectre Ectoplasm",
       "price": 172.9,
       "hashedId": "oaJydnOmQWlZNbgRe5ME",
-      "vendorValue": 89
+      "vendorValue": 89,
+      "lastUpdated": "2026-02-28T20:50:38.807Z",
+      "suggestedRefreshMinutes": 107
     },
     {
       "id": "mat-auto-1772226753831-7mzu",
       "name": "Moose Antler",
-      "price": 110.1,
+      "price": 108.7,
       "hashedId": "dgBq1boWYek4QkJ3rXaD",
-      "vendorValue": 35
+      "vendorValue": 35,
+      "lastUpdated": "2026-02-28T20:50:38.880Z",
+      "suggestedRefreshMinutes": 137
     },
     {
       "id": "mat-auto-1772226753831-pvma",
       "name": "Siren's Soulstone",
       "price": 168.2,
       "hashedId": "zvjoJW96Y8mWL3RaAylw",
-      "vendorValue": 50
+      "vendorValue": 50,
+      "lastUpdated": "2026-02-28T20:50:38.960Z",
+      "suggestedRefreshMinutes": 52
     },
     {
       "id": "mat-auto-1772226753831-j5gy",
       "name": "Parchment",
-      "price": 799.4,
+      "price": 826,
       "hashedId": "y7Do6jgkY0VjQ8BAdKX0",
-      "vendorValue": 25
+      "vendorValue": 25,
+      "lastUpdated": "2026-02-28T20:50:39.033Z",
+      "suggestedRefreshMinutes": 36
     },
     {
       "id": "mat-auto-1772226753831-s392",
       "name": "Ivory",
-      "price": 385.8,
+      "price": 393.5,
       "hashedId": "XyeZRGx9YjD4QB80gWlP",
-      "vendorValue": 60
+      "vendorValue": 60,
+      "lastUpdated": "2026-02-28T21:10:06.901Z",
+      "suggestedRefreshMinutes": 10
     },
     {
       "id": "mat-auto-1772226753831-pvbi",
@@ -369,238 +457,306 @@
       "name": "Sardines",
       "price": 19.3,
       "hashedId": "jGXBy7a4LbMY0Pw6Vdgl",
-      "vendorValue": 8
+      "vendorValue": 8,
+      "lastUpdated": "2026-02-28T20:50:39.322Z",
+      "suggestedRefreshMinutes": 72
     },
     {
       "id": "mat-auto-1772226753831-hwro",
       "name": "Yew Log",
-      "price": 4.7,
+      "price": 4.6,
       "hashedId": "ElzPeorXNVjNaW0kv53J",
-      "vendorValue": 2
+      "vendorValue": 2,
+      "lastUpdated": "2026-02-28T20:50:39.477Z",
+      "suggestedRefreshMinutes": 90
     },
     {
       "id": "mat-auto-1772226753831-erfa",
       "name": "Trout",
-      "price": 14.2,
+      "price": 14.3,
       "hashedId": "y7Do6jgkY0zQ8BAdKX0E",
-      "vendorValue": 5
+      "vendorValue": 5,
+      "lastUpdated": "2026-02-28T20:50:39.575Z",
+      "suggestedRefreshMinutes": 127
     },
     {
       "id": "mat-auto-1772226753831-v5c6",
       "name": "Perch",
-      "price": 10.1,
+      "price": 9.9,
       "hashedId": "3yE1A84kYOwYl6XeVKpD",
-      "vendorValue": 6
+      "vendorValue": 6,
+      "lastUpdated": "2026-02-28T20:50:39.685Z",
+      "suggestedRefreshMinutes": 719
     },
     {
       "id": "mat-auto-1772226753831-q6ox",
       "name": "Cursed Talisman",
-      "price": 29.2,
+      "price": 30.7,
       "hashedId": "1rZXlwg5YvkwLk9joDmG",
-      "vendorValue": 15
+      "vendorValue": 15,
+      "lastUpdated": "2026-02-28T20:50:39.839Z",
+      "suggestedRefreshMinutes": 95
     },
     {
       "id": "mat-auto-1772226753831-wfl7",
       "name": "Oceanic Essence",
       "price": 307.6,
       "hashedId": "PjVDJez3LD6zNKWO08Ga",
-      "vendorValue": 193
+      "vendorValue": 193,
+      "lastUpdated": "2026-02-28T20:50:39.909Z",
+      "suggestedRefreshMinutes": 116
     },
     {
       "id": "mat-auto-1772226753832-d2zu",
       "name": "Stoneheart Core",
       "price": 257.4,
       "hashedId": "B2WEpv54NmORLj1xJrXk",
-      "vendorValue": 200
+      "vendorValue": 200,
+      "lastUpdated": "2026-02-28T20:51:38.174Z",
+      "suggestedRefreshMinutes": 60
     },
     {
       "id": "mat-auto-1772226753832-k9kl",
       "name": "Polar Bear Pelt",
-      "price": 221.4,
+      "price": 221.7,
       "hashedId": "brz9RZnWN7yBLKAp0Mdl",
-      "vendorValue": 35
+      "vendorValue": 35,
+      "lastUpdated": "2026-02-28T20:51:38.253Z",
+      "suggestedRefreshMinutes": 55
     },
     {
       "id": "mat-auto-1772226753832-s8m1",
       "name": "Golem Core Fragment",
       "price": 23.2,
       "hashedId": "XjEaOeBkLayrLlGwxVPq",
-      "vendorValue": 15
+      "vendorValue": 15,
+      "lastUpdated": "2026-02-28T21:10:07.058Z",
+      "suggestedRefreshMinutes": 5
     },
     {
       "id": "mat-auto-1772226753832-w5a9",
       "name": "Spruce Log",
-      "price": 10.6,
+      "price": 10.1,
       "hashedId": "XyeZRGx9YjKLB80gWlPa",
-      "vendorValue": 3
+      "vendorValue": 3,
+      "lastUpdated": "2026-02-28T20:51:39.485Z",
+      "suggestedRefreshMinutes": 59
     },
     {
       "id": "mat-auto-1772226753832-giok",
       "name": "Birch Log",
       "price": 9.4,
       "hashedId": "Ro31P7kZL6AYveGxXOy5",
-      "vendorValue": 5
+      "vendorValue": 5,
+      "lastUpdated": "2026-02-28T20:51:39.623Z",
+      "suggestedRefreshMinutes": 39
     },
     {
       "id": "mat-auto-1772226753832-eg81",
       "name": "Lions Teeth",
-      "price": 250.3,
+      "price": 244.4,
       "hashedId": "Ro31P7kZL6r6LveGxXOy",
-      "vendorValue": 27
+      "vendorValue": 27,
+      "lastUpdated": "2026-02-28T20:51:39.691Z",
+      "suggestedRefreshMinutes": 166
     },
     {
       "id": "mat-auto-1772226753832-u494",
       "name": "Vial of Wraith Ectoplasm",
       "price": 77.8,
       "hashedId": "y7Do6jgkY01jL8BAdKX0",
-      "vendorValue": 64
+      "vendorValue": 64,
+      "lastUpdated": "2026-02-28T20:51:39.810Z",
+      "suggestedRefreshMinutes": 258
     },
     {
       "id": "mat-auto-1772226753832-dsjn",
       "name": "Wolf Pelt",
       "price": 89.5,
       "hashedId": "ZjlPA8v9NMybNEyMe2Oa",
-      "vendorValue": 37
+      "vendorValue": 37,
+      "lastUpdated": "2026-02-28T20:51:39.897Z",
+      "suggestedRefreshMinutes": 46
     },
     {
       "id": "mat-auto-1772226753832-jf4y",
       "name": "Herring",
       "price": 16.9,
       "hashedId": "DBngxedVYJPQX64wW8oa",
-      "vendorValue": 7
+      "vendorValue": 7,
+      "lastUpdated": "2026-02-28T20:51:40.013Z",
+      "suggestedRefreshMinutes": 400
     },
     {
       "id": "mat-auto-1772226753832-0dnf",
       "name": "Void Essence",
-      "price": 244.3,
+      "price": 241.2,
       "hashedId": "RVrBKlPdNdOxQWG8xJe9",
-      "vendorValue": 170
+      "vendorValue": 170,
+      "lastUpdated": "2026-02-28T20:51:40.141Z",
+      "suggestedRefreshMinutes": 208
     },
     {
       "id": "mat-auto-1772226753832-qnwx",
       "name": "Raccoon Fur",
-      "price": 80.2,
+      "price": 84,
       "hashedId": "bAB1E9poQqDbLnakeJj5",
-      "vendorValue": 35
+      "vendorValue": 35,
+      "lastUpdated": "2026-02-28T21:10:07.137Z",
+      "suggestedRefreshMinutes": 13
     },
     {
       "id": "mat-auto-1772226753832-jki0",
       "name": "Broken Dwarven Plate",
-      "price": 336,
+      "price": 334.7,
       "hashedId": "j98bO5w1QPvlY3xkREVJ",
-      "vendorValue": 100
+      "vendorValue": 100,
+      "lastUpdated": "2026-02-28T20:51:40.337Z",
+      "suggestedRefreshMinutes": 782
     },
     {
       "id": "mat-auto-1772226753832-ktp9",
       "name": "Lobster",
-      "price": 25,
+      "price": 25.1,
       "hashedId": "BRn3x72JQ2DYzOMok418",
-      "vendorValue": 14
+      "vendorValue": 14,
+      "lastUpdated": "2026-02-28T20:51:40.476Z",
+      "suggestedRefreshMinutes": 166
     },
     {
       "id": "mat-auto-1772226753832-tkiw",
       "name": "Arcane Starstone",
       "price": 3922.4,
       "hashedId": "XyeZRGx9YjW4LB80gWlP",
-      "vendorValue": 2800
+      "vendorValue": 2800,
+      "lastUpdated": "2026-02-28T20:51:40.593Z",
+      "suggestedRefreshMinutes": 173
     },
     {
       "id": "mat-auto-1772226753832-ruvv",
       "name": "Coal Ore",
-      "price": 5.8,
+      "price": 5.6,
       "hashedId": "7eA59WrBQRXJYzb62qKv",
-      "vendorValue": 1
+      "vendorValue": 1,
+      "lastUpdated": "2026-02-28T21:10:07.914Z",
+      "suggestedRefreshMinutes": 5
     },
     {
       "id": "mat-auto-1772226753832-gt7c",
       "name": "Uranium Bar",
       "price": 44.2,
       "hashedId": "O2xMjGdBN51PN9P1nyrv",
-      "vendorValue": 35
+      "vendorValue": 35,
+      "lastUpdated": "2026-02-28T20:51:40.769Z",
+      "suggestedRefreshMinutes": 215
     },
     {
       "id": "mat-auto-1772226753832-nows",
       "name": "Chromite Bar",
-      "price": 32.6,
+      "price": 32.7,
       "hashedId": "27gw0k38L4pwLWevJxyK",
-      "vendorValue": 25
+      "vendorValue": 25,
+      "lastUpdated": "2026-02-28T20:51:40.860Z",
+      "suggestedRefreshMinutes": 92
     },
     {
       "id": "mat-auto-1772226753832-phzi",
       "name": "Steel Bar",
       "price": 21.2,
       "hashedId": "P1vlVrzjLrZ9Lao8mGKM",
-      "vendorValue": 15
+      "vendorValue": 15,
+      "lastUpdated": "2026-02-28T20:51:40.989Z",
+      "suggestedRefreshMinutes": 21
     },
     {
       "id": "mat-auto-1772226753832-004a",
       "name": "Dwarven Whetstone",
-      "price": 20.4,
+      "price": 20.9,
       "hashedId": "doyA279pNzlRLKRDEWm8",
-      "vendorValue": 5
+      "vendorValue": 5,
+      "lastUpdated": "2026-02-28T20:51:41.060Z",
+      "suggestedRefreshMinutes": 90
     },
     {
       "id": "mat-auto-1772226753832-ieoc",
       "name": "Cursed Blade Fragment",
       "price": 87.4,
       "hashedId": "dgBq1boWYem4YkJ3rXaD",
-      "vendorValue": 15
+      "vendorValue": 15,
+      "lastUpdated": "2026-02-28T20:51:41.130Z",
+      "suggestedRefreshMinutes": 129
     },
     {
       "id": "mat-auto-1772226753832-0s90",
       "name": "Grimoire of Shadows",
       "price": 4949.6,
       "hashedId": "6leApVoENkKlN7nRPy2D",
-      "vendorValue": 4000
+      "vendorValue": 4000,
+      "lastUpdated": "2026-02-28T20:52:39.143Z",
+      "suggestedRefreshMinutes": 616
     },
     {
       "id": "mat-auto-1772226753832-650c",
       "name": "Cursed Cloth",
       "price": 8.3,
       "hashedId": "mK5jqPopYGM2QrOzDRGV",
-      "vendorValue": 5
+      "vendorValue": 5,
+      "lastUpdated": "2026-02-28T20:52:39.255Z",
+      "suggestedRefreshMinutes": 310
     },
     {
       "id": "mat-auto-1772226753832-jf7s",
       "name": "Banyan Log",
       "price": 13.4,
       "hashedId": "brz9RZnWN7aLKAp0Mdle",
-      "vendorValue": 7
+      "vendorValue": 7,
+      "lastUpdated": "2026-02-28T20:52:40.426Z",
+      "suggestedRefreshMinutes": 35
     },
     {
       "id": "mat-auto-1772226753833-3dlv",
       "name": "Minotaurs Horn",
       "price": 9.6,
       "hashedId": "EWGwnXPlY111YJqekZ2R",
-      "vendorValue": 5
+      "vendorValue": 5,
+      "lastUpdated": "2026-02-28T20:52:40.500Z",
+      "suggestedRefreshMinutes": 357
     },
     {
       "id": "mat-auto-1772226753833-hu4t",
       "name": "Orb of Elemental Conjuring",
       "price": 94.2,
       "hashedId": "ElzPeorXNVvxNaW0kv53",
-      "vendorValue": 25
+      "vendorValue": 25,
+      "lastUpdated": "2026-02-28T20:52:40.585Z",
+      "suggestedRefreshMinutes": 44
     },
     {
       "id": "mat-auto-1772226753833-ey7o",
       "name": "Undying Crest",
       "price": 208.6,
       "hashedId": "7eA59WrBQRvKQzb62qKv",
-      "vendorValue": 170
+      "vendorValue": 170,
+      "lastUpdated": "2026-02-28T20:52:40.691Z",
+      "suggestedRefreshMinutes": 173
     },
     {
       "id": "mat-auto-1772226753833-jdh1",
       "name": "Maple Log",
-      "price": 12.2,
+      "price": 12,
       "hashedId": "bAB1E9poQqkYnakeJj56",
-      "vendorValue": 9
+      "vendorValue": 9,
+      "lastUpdated": "2026-02-28T20:52:40.848Z",
+      "suggestedRefreshMinutes": 50
     },
     {
       "id": "mat-auto-1772226753833-4f8d",
       "name": "Willow Log",
-      "price": 16.9,
+      "price": 16.7,
       "hashedId": "ZjlPA8v9NMXQEyMe2OaW",
-      "vendorValue": 11
+      "vendorValue": 11,
+      "lastUpdated": "2026-02-28T20:52:40.985Z",
+      "suggestedRefreshMinutes": 72
     },
     {
       "id": "mat-auto-1772226753833-2rt5",
@@ -614,84 +770,108 @@
       "name": "Crab",
       "price": 29.6,
       "hashedId": "gGZ2J71yYK9QMmjbown5",
-      "vendorValue": 16
+      "vendorValue": 16,
+      "lastUpdated": "2026-02-28T20:52:41.187Z",
+      "suggestedRefreshMinutes": 85
     },
     {
       "id": "mat-auto-1772226753833-0jtc",
       "name": "Turtle",
-      "price": 37.8,
+      "price": 37.6,
       "hashedId": "yav4OK1wNE5NZP7rzJbe",
-      "vendorValue": 20
+      "vendorValue": 20,
+      "lastUpdated": "2026-02-28T20:52:41.337Z",
+      "suggestedRefreshMinutes": 133
     },
     {
       "id": "mat-auto-1772226753833-be5z",
       "name": "Mystical Log",
-      "price": 28.7,
+      "price": 28.6,
       "hashedId": "Z6aDoyRnLykNpV5AGXmk",
-      "vendorValue": 17
+      "vendorValue": 17,
+      "lastUpdated": "2026-02-28T20:52:41.462Z",
+      "suggestedRefreshMinutes": 55
     },
     {
       "id": "mat-auto-1772226753833-n0o4",
       "name": "Moonblood Tincture",
       "price": 49790.7,
       "hashedId": "Z6aDoyRnLy06YpV5AGXm",
-      "vendorValue": 10000
+      "vendorValue": 10000,
+      "lastUpdated": "2026-02-28T20:52:41.565Z",
+      "suggestedRefreshMinutes": 40
     },
     {
       "id": "mat-auto-1772226753833-ifpu",
       "name": "Mahogany Log",
-      "price": 19.2,
+      "price": 19.4,
       "hashedId": "P1vlVrzjLrRLao8mGKM2",
-      "vendorValue": 13
+      "vendorValue": 13,
+      "lastUpdated": "2026-02-28T20:52:41.693Z",
+      "suggestedRefreshMinutes": 92
     },
     {
       "id": "mat-auto-1772226753833-sx58",
       "name": "Water Elemental Essence",
       "price": 149.6,
       "hashedId": "ZjlPA8v9NMvbYEyMe2Oa",
-      "vendorValue": 117
+      "vendorValue": 117,
+      "lastUpdated": "2026-02-28T20:52:41.798Z",
+      "suggestedRefreshMinutes": 286
     },
     {
       "id": "mat-auto-1772226753833-f4iv",
       "name": "Basilisk Venom Vial",
       "price": 8727.4,
       "hashedId": "O2xMjGdBN5m6N9P1nyrv",
-      "vendorValue": 5000
+      "vendorValue": 5000,
+      "lastUpdated": "2026-02-28T20:52:41.875Z",
+      "suggestedRefreshMinutes": 474
     },
     {
       "id": "mat-auto-1772226753833-hh7b",
       "name": "Petrifying Gaze Crystal",
       "price": 6873.4,
       "hashedId": "27gw0k38L4mZQWevJxyK",
-      "vendorValue": 5000
+      "vendorValue": 5000,
+      "lastUpdated": "2026-02-28T21:10:08.089Z",
+      "suggestedRefreshMinutes": 8
     },
     {
       "id": "mat-auto-1772226753833-kipq",
       "name": "Fire Elemental Essence",
       "price": 160.6,
       "hashedId": "brz9RZnWN7mBLKAp0Mdl",
-      "vendorValue": 121
+      "vendorValue": 121,
+      "lastUpdated": "2026-02-28T20:52:42.051Z",
+      "suggestedRefreshMinutes": 558
     },
     {
       "id": "mat-auto-1772226753833-zkmm",
       "name": "Aetherial Feather Quill",
       "price": 8.4,
       "hashedId": "lrx463VdQgO9Q5w1zWKP",
-      "vendorValue": 5
+      "vendorValue": 5,
+      "lastUpdated": "2026-02-28T20:52:42.155Z",
+      "suggestedRefreshMinutes": 575
     },
     {
       "id": "mat-auto-1772226753833-87rr",
       "name": "Claw of the Alpha",
       "price": 11.9,
       "hashedId": "P1vlVrzjLrDwNao8mGKM",
-      "vendorValue": 5
+      "vendorValue": 5,
+      "lastUpdated": "2026-02-28T20:52:42.250Z",
+      "suggestedRefreshMinutes": 811
     },
     {
       "id": "mat-auto-1772226753833-2gdt",
       "name": "Earth Elemental Essence",
       "price": 169.9,
       "hashedId": "bAB1E9poQqGbYnakeJj5",
-      "vendorValue": 125
+      "vendorValue": 125,
+      "lastUpdated": "2026-02-28T20:53:40.186Z",
+      "suggestedRefreshMinutes": 726
     }
   ],
   "craftables": [],
@@ -699,51 +879,65 @@
     {
       "id": "res-1",
       "name": "Coal",
-      "marketPrice": 5.8,
+      "marketPrice": 5.6,
       "vendorValue": 1,
-      "hashedId": "7eA59WrBQRXJYzb62qKv"
+      "hashedId": "7eA59WrBQRXJYzb62qKv",
+      "lastUpdated": "2026-02-28T21:10:08.171Z",
+      "suggestedRefreshMinutes": 5
     },
     {
       "id": "res-2",
       "name": "Stingray",
-      "marketPrice": 36.3,
+      "marketPrice": 36.2,
       "vendorValue": 22,
-      "hashedId": "oaJydnOmQW2LbgRe5ME6"
+      "hashedId": "oaJydnOmQW2LbgRe5ME6",
+      "lastUpdated": "2026-02-28T20:53:41.521Z",
+      "suggestedRefreshMinutes": 85
     },
     {
       "id": "res-3",
       "name": "Cooked Stingray",
-      "marketPrice": 67.5,
+      "marketPrice": 67.4,
       "vendorValue": 55,
-      "hashedId": "6leApVoENk1RL7nRPy2D"
+      "hashedId": "6leApVoENk1RL7nRPy2D",
+      "lastUpdated": "2026-02-28T21:10:08.247Z",
+      "suggestedRefreshMinutes": 15
     },
     {
       "id": "res-4",
       "name": "Great White Shark",
-      "marketPrice": 49.4,
+      "marketPrice": 48.9,
       "vendorValue": 77,
-      "hashedId": "ZqEegBydNw7NkA59J61b"
+      "hashedId": "ZqEegBydNw7NkA59J61b",
+      "lastUpdated": "2026-02-28T20:53:41.913Z",
+      "suggestedRefreshMinutes": 92
     },
     {
       "id": "res-5",
       "name": "Cooked Great White Shark",
-      "marketPrice": 104.3,
+      "marketPrice": 104.8,
       "vendorValue": 92,
-      "hashedId": "Rv5g4z1dQnk9Nqy32jpG"
+      "hashedId": "Rv5g4z1dQnk9Nqy32jpG",
+      "lastUpdated": "2026-02-28T21:10:08.334Z",
+      "suggestedRefreshMinutes": 9
     },
     {
       "id": "res-6",
       "name": "Mystic Ore",
-      "marketPrice": 23.6,
+      "marketPrice": 23.8,
       "vendorValue": 17,
-      "hashedId": "0kK49j1VN9yNq6B2doap"
+      "hashedId": "0kK49j1VN9yNq6B2doap",
+      "lastUpdated": "2026-02-28T20:53:42.306Z",
+      "suggestedRefreshMinutes": 109
     },
     {
       "id": "res-7",
       "name": "Mystic Bar",
       "marketPrice": 64.8,
       "vendorValue": 50,
-      "hashedId": "dgBq1boWYegrQkJ3rXaD"
+      "hashedId": "dgBq1boWYegrQkJ3rXaD",
+      "lastUpdated": "2026-02-28T20:53:42.406Z",
+      "suggestedRefreshMinutes": 188
     }
   ],
   "recipes": [
@@ -757,19 +951,23 @@
       "uses": 1,
       "producesItemName": "Improved Fishing Rod",
       "producesItemHashedId": "Rv5g4z1dQnjlQqy32jpG",
-      "producesItemVendorValue": 4
+      "producesItemVendorValue": 4,
+      "lastUpdated": "2026-02-28T20:53:42.509Z",
+      "suggestedRefreshMinutes": 346
     },
     {
       "id": "rec-2",
       "name": "Improved Pickaxe Recipe",
-      "price": 1076.4,
+      "price": 1028,
       "chance": 0.05,
       "hashedId": "XjEaOeBkLa3ONlGwxVPq",
       "vendorValue": 10,
       "uses": 1,
       "producesItemName": "Improved Pickaxe",
       "producesItemHashedId": "ZjlPA8v9NMlnQEyMe2Oa",
-      "producesItemVendorValue": 4
+      "producesItemVendorValue": 4,
+      "lastUpdated": "2026-02-28T20:53:42.613Z",
+      "suggestedRefreshMinutes": 383
     },
     {
       "id": "rec-3",
@@ -781,7 +979,9 @@
       "uses": 1,
       "producesItemName": "Improved Felling axe",
       "producesItemHashedId": "BRn3x72JQ2v7QzOMok41",
-      "producesItemVendorValue": 4
+      "producesItemVendorValue": 4,
+      "lastUpdated": "2026-02-28T20:53:42.709Z",
+      "suggestedRefreshMinutes": 431
     },
     {
       "id": "rec-4",
@@ -793,7 +993,9 @@
       "uses": 0,
       "producesItemName": "Herculean Strength Elixir",
       "producesItemHashedId": "DBngxedVYJMPNX64wW8o",
-      "producesItemVendorValue": 100
+      "producesItemVendorValue": 100,
+      "lastUpdated": "2026-02-28T20:53:42.799Z",
+      "suggestedRefreshMinutes": 1096
     },
     {
       "id": "rec-5",
@@ -805,7 +1007,9 @@
       "uses": 0,
       "producesItemName": "Bastion Elixir",
       "producesItemHashedId": "jGXBy7a4LbqMY0Pw6Vdg",
-      "producesItemVendorValue": 100
+      "producesItemVendorValue": 100,
+      "lastUpdated": "2026-02-28T20:53:42.893Z",
+      "suggestedRefreshMinutes": 1256
     },
     {
       "id": "rec-6",
@@ -817,7 +1021,9 @@
       "uses": 0,
       "producesItemName": "Galeforce Speed Elixir",
       "producesItemHashedId": "BRn3x72JQ2rDQzOMok41",
-      "producesItemVendorValue": 100
+      "producesItemVendorValue": 100,
+      "lastUpdated": "2026-02-28T20:53:42.989Z",
+      "suggestedRefreshMinutes": 2513
     },
     {
       "id": "rec-7",
@@ -829,19 +1035,23 @@
       "uses": 0,
       "producesItemName": "Falcon's Grace Elixir",
       "producesItemHashedId": "gGZ2J71yYKr9NMmjbown",
-      "producesItemVendorValue": 100
+      "producesItemVendorValue": 100,
+      "lastUpdated": "2026-02-28T20:53:43.079Z",
+      "suggestedRefreshMinutes": 1485
     },
     {
       "id": "rec-8",
       "name": "Rivertamer Recipe",
-      "price": 560.6,
+      "price": 573.2,
       "chance": 0.05,
       "hashedId": "JVM29l7kQZ3MN80q6WDG",
       "vendorValue": 10,
       "uses": 1,
       "producesItemName": "Rivertamer",
       "producesItemHashedId": "mK5jqPopYGWDYrOzDRGV",
-      "producesItemVendorValue": 6
+      "producesItemVendorValue": 6,
+      "lastUpdated": "2026-02-28T20:53:43.180Z",
+      "suggestedRefreshMinutes": 941
     },
     {
       "id": "rec-9",
@@ -853,7 +1063,9 @@
       "uses": 1,
       "producesItemName": "Veinseeker",
       "producesItemHashedId": "P1vlVrzjLrM9Yao8mGKM",
-      "producesItemVendorValue": 6
+      "producesItemVendorValue": 6,
+      "lastUpdated": "2026-02-28T20:53:43.266Z",
+      "suggestedRefreshMinutes": 3474
     },
     {
       "id": "rec-10",
@@ -865,7 +1077,9 @@
       "uses": 1,
       "producesItemName": "Timberfall Talon",
       "producesItemHashedId": "gGZ2J71yYKo3YMmjbown",
-      "producesItemVendorValue": 6
+      "producesItemVendorValue": 6,
+      "lastUpdated": "2026-02-28T20:53:43.361Z",
+      "suggestedRefreshMinutes": 409
     },
     {
       "id": "rec-11",
@@ -877,7 +1091,9 @@
       "uses": 0,
       "producesItemName": "Protection Potion",
       "producesItemHashedId": "oaJydnOmQWW2QbgRe5ME",
-      "producesItemVendorValue": 250
+      "producesItemVendorValue": 250,
+      "lastUpdated": "2026-02-28T20:53:43.454Z",
+      "suggestedRefreshMinutes": 4403
     },
     {
       "id": "rec-12",
@@ -889,7 +1105,9 @@
       "uses": 0,
       "producesItemName": "Felling Essence",
       "producesItemHashedId": "ZqEegBydNwV7QkA59J61",
-      "producesItemVendorValue": 250
+      "producesItemVendorValue": 250,
+      "lastUpdated": "2026-02-28T20:53:43.535Z",
+      "suggestedRefreshMinutes": 1845
     },
     {
       "id": "rec-13",
@@ -901,7 +1119,9 @@
       "uses": 0,
       "producesItemName": "Oreseeker Essence Crystal",
       "producesItemHashedId": "3Zbym56qLxjRNBRp7Eek",
-      "producesItemVendorValue": 250
+      "producesItemVendorValue": 250,
+      "lastUpdated": "2026-02-28T20:54:41.150Z",
+      "suggestedRefreshMinutes": 646
     },
     {
       "id": "rec-14",
@@ -913,7 +1133,9 @@
       "uses": 0,
       "producesItemName": "Attack Power Potion",
       "producesItemHashedId": "oZwey82VNAA6ND0dXM3g",
-      "producesItemVendorValue": 250
+      "producesItemVendorValue": 250,
+      "lastUpdated": "2026-02-28T20:54:41.259Z",
+      "suggestedRefreshMinutes": 2726
     },
     {
       "id": "rec-15",
@@ -925,7 +1147,9 @@
       "uses": 0,
       "producesItemName": "Titan Power Brew",
       "producesItemHashedId": "JZdg5V3PQoEKYEyWq0zl",
-      "producesItemVendorValue": 250
+      "producesItemVendorValue": 250,
+      "lastUpdated": "2026-02-28T20:54:42.363Z",
+      "suggestedRefreshMinutes": 5065
     },
     {
       "id": "rec-16",
@@ -937,7 +1161,9 @@
       "uses": 0,
       "producesItemName": "Vortex Brew",
       "producesItemHashedId": "PjVDJez3LDRvNKWO08Ga",
-      "producesItemVendorValue": 500
+      "producesItemVendorValue": 500,
+      "lastUpdated": "2026-02-28T20:54:42.453Z",
+      "suggestedRefreshMinutes": 1680
     },
     {
       "id": "rec-17",
@@ -949,7 +1175,9 @@
       "uses": 1,
       "producesItemName": "Seasong's Lure",
       "producesItemHashedId": "3ZvrGV8RQp7dL2wgA5jD",
-      "producesItemVendorValue": 10
+      "producesItemVendorValue": 10,
+      "lastUpdated": "2026-02-28T20:54:42.546Z",
+      "suggestedRefreshMinutes": 2067
     },
     {
       "id": "rec-18",
@@ -961,7 +1189,9 @@
       "uses": 1,
       "producesItemName": "Ironbite",
       "producesItemHashedId": "Z6aDoyRnLyOMNpV5AGXm",
-      "producesItemVendorValue": 10
+      "producesItemVendorValue": 10,
+      "lastUpdated": "2026-02-28T20:54:42.640Z",
+      "suggestedRefreshMinutes": 2548
     },
     {
       "id": "rec-19",
@@ -973,7 +1203,9 @@
       "uses": 1,
       "producesItemName": "Wildwood Chopper",
       "producesItemHashedId": "yav4OK1wNEKwLZP7rzJb",
-      "producesItemVendorValue": 10
+      "producesItemVendorValue": 10,
+      "lastUpdated": "2026-02-28T20:54:42.725Z",
+      "suggestedRefreshMinutes": 388
     },
     {
       "id": "rec-20",
@@ -985,7 +1217,9 @@
       "uses": 0,
       "producesItemName": "Fortified Protection",
       "producesItemHashedId": "JVM29l7kQZAAL80q6WDG",
-      "producesItemVendorValue": 250
+      "producesItemVendorValue": 250,
+      "lastUpdated": "2026-02-28T20:54:42.806Z",
+      "suggestedRefreshMinutes": 9378
     },
     {
       "id": "rec-21",
@@ -997,7 +1231,9 @@
       "uses": 0,
       "producesItemName": "Quickstep Essence",
       "producesItemHashedId": "93R0qXalLlbjNAbn8DBg",
-      "producesItemVendorValue": 250
+      "producesItemVendorValue": 250,
+      "lastUpdated": "2026-02-28T20:54:42.897Z",
+      "suggestedRefreshMinutes": 4068
     },
     {
       "id": "rec-22",
@@ -1009,7 +1245,9 @@
       "uses": 0,
       "producesItemName": "Precision Essence",
       "producesItemHashedId": "1rZXlwg5YvR8Yk9joDmG",
-      "producesItemVendorValue": 250
+      "producesItemVendorValue": 250,
+      "lastUpdated": "2026-02-28T20:54:42.996Z",
+      "suggestedRefreshMinutes": 3312
     },
     {
       "id": "rec-23",
@@ -1021,7 +1259,9 @@
       "uses": 0,
       "producesItemName": "Merfolk Essence",
       "producesItemHashedId": "q9pwa0kxLBoJQgVj136l",
-      "producesItemVendorValue": 250
+      "producesItemVendorValue": 250,
+      "lastUpdated": "2026-02-28T20:54:43.100Z",
+      "suggestedRefreshMinutes": 2647
     },
     {
       "id": "rec-24",
@@ -1033,7 +1273,9 @@
       "uses": 0,
       "producesItemName": "Molten Core Tonic",
       "producesItemHashedId": "zvjoJW96Y8O5N3RaAylw",
-      "producesItemVendorValue": 500
+      "producesItemVendorValue": 500,
+      "lastUpdated": "2026-02-28T20:54:43.197Z",
+      "suggestedRefreshMinutes": 3015
     },
     {
       "id": "rec-25",
@@ -1045,7 +1287,9 @@
       "uses": 0,
       "producesItemName": "Spicefinder Essence Crystal",
       "producesItemHashedId": "0kK49j1VN9JyYq6B2doa",
-      "producesItemVendorValue": 500
+      "producesItemVendorValue": 500,
+      "lastUpdated": "2026-02-28T20:54:43.289Z",
+      "suggestedRefreshMinutes": 1530
     },
     {
       "id": "rec-26",
@@ -1057,7 +1301,9 @@
       "uses": 0,
       "producesItemName": "Bulwark Brew",
       "producesItemHashedId": "BPjze3x2Q3ygYR85vgZV",
-      "producesItemVendorValue": 500
+      "producesItemVendorValue": 500,
+      "lastUpdated": "2026-02-28T20:54:43.379Z",
+      "suggestedRefreshMinutes": 2390
     },
     {
       "id": "rec-27",
@@ -1069,7 +1315,9 @@
       "uses": 0,
       "producesItemName": "Bladeburst Elixir",
       "producesItemHashedId": "XjEaOeBkLa7MNlGwxVPq",
-      "producesItemVendorValue": 500
+      "producesItemVendorValue": 500,
+      "lastUpdated": "2026-02-28T20:54:43.468Z",
+      "suggestedRefreshMinutes": 2208
     },
     {
       "id": "rec-28",
@@ -1081,7 +1329,9 @@
       "uses": 0,
       "producesItemName": "Ironclad Tonic",
       "producesItemHashedId": "njoPWKDkLXwxY06ZOX79",
-      "producesItemVendorValue": 500
+      "producesItemVendorValue": 500,
+      "lastUpdated": "2026-02-28T20:54:43.560Z",
+      "suggestedRefreshMinutes": 3036
     },
     {
       "id": "rec-29",
@@ -1093,7 +1343,9 @@
       "uses": 1,
       "producesItemName": "Moonshimmer Hook",
       "producesItemHashedId": "dgBq1boWYe9mYkJ3rXaD",
-      "producesItemVendorValue": 25
+      "producesItemVendorValue": 25,
+      "lastUpdated": "2026-02-28T20:54:43.654Z",
+      "suggestedRefreshMinutes": 1210
     },
     {
       "id": "rec-30",
@@ -1105,7 +1357,9 @@
       "uses": 1,
       "producesItemName": "Boulder Breaker",
       "producesItemHashedId": "27gw0k38L4RwNWevJxyK",
-      "producesItemVendorValue": 25
+      "producesItemVendorValue": 25,
+      "lastUpdated": "2026-02-28T20:54:43.736Z",
+      "suggestedRefreshMinutes": 1717
     },
     {
       "id": "rec-31",
@@ -1117,7 +1371,9 @@
       "uses": 1,
       "producesItemName": "Leafblade",
       "producesItemHashedId": "oaJydnOmQW9zYbgRe5ME",
-      "producesItemVendorValue": 25
+      "producesItemVendorValue": 25,
+      "lastUpdated": "2026-02-28T20:54:43.843Z",
+      "suggestedRefreshMinutes": 644
     },
     {
       "id": "rec-32",
@@ -1129,7 +1385,9 @@
       "uses": 0,
       "producesItemName": "Impenetrable Essence",
       "producesItemHashedId": "B2WEpv54Nm2xYj1xJrXk",
-      "producesItemVendorValue": 500
+      "producesItemVendorValue": 500,
+      "lastUpdated": "2026-02-28T20:54:43.944Z",
+      "suggestedRefreshMinutes": 1819
     },
     {
       "id": "rec-33",
@@ -1141,7 +1399,9 @@
       "uses": 0,
       "producesItemName": "Windrider Essence",
       "producesItemHashedId": "RVrBKlPdNdrVLWG8xJe9",
-      "producesItemVendorValue": 500
+      "producesItemVendorValue": 500,
+      "lastUpdated": "2026-02-28T20:55:42.170Z",
+      "suggestedRefreshMinutes": 2840
     },
     {
       "id": "rec-34",
@@ -1153,7 +1413,9 @@
       "uses": 0,
       "producesItemName": "Acrobatic's Essence",
       "producesItemHashedId": "6leApVoENkJRQ7nRPy2D",
-      "producesItemVendorValue": 500
+      "producesItemVendorValue": 500,
+      "lastUpdated": "2026-02-28T21:10:08.407Z",
+      "suggestedRefreshMinutes": 5
     },
     {
       "id": "rec-35",
@@ -1165,7 +1427,9 @@
       "uses": 0,
       "producesItemName": "Strike Essence",
       "producesItemHashedId": "doyA279pNz70YKRDEWm8",
-      "producesItemVendorValue": 500
+      "producesItemVendorValue": 500,
+      "lastUpdated": "2026-02-28T20:55:43.375Z",
+      "suggestedRefreshMinutes": 3287
     },
     {
       "id": "rec-36",
@@ -1177,7 +1441,9 @@
       "uses": 0,
       "producesItemName": "Yggdrasil Nectar",
       "producesItemHashedId": "EWGwnXPlY1MyYJqekZ2R",
-      "producesItemVendorValue": 500
+      "producesItemVendorValue": 500,
+      "lastUpdated": "2026-02-28T20:55:43.464Z",
+      "suggestedRefreshMinutes": 2044
     },
     {
       "id": "rec-37",
@@ -1189,7 +1455,9 @@
       "uses": 0,
       "producesItemName": "Earthcore Infusion",
       "producesItemHashedId": "Rv5g4z1dQnK9Nqy32jpG",
-      "producesItemVendorValue": 2500
+      "producesItemVendorValue": 2500,
+      "lastUpdated": "2026-02-28T20:55:43.556Z",
+      "suggestedRefreshMinutes": 680
     },
     {
       "id": "rec-38",
@@ -1201,7 +1469,9 @@
       "uses": 1,
       "producesItemName": "Shadowbane",
       "producesItemHashedId": "brz9RZnWN7a4LKAp0Mdl",
-      "producesItemVendorValue": 250
+      "producesItemVendorValue": 250,
+      "lastUpdated": "2026-02-28T21:11:06.123Z",
+      "suggestedRefreshMinutes": 5
     },
     {
       "id": "rec-39",
@@ -1213,7 +1483,9 @@
       "uses": 1,
       "producesItemName": "Soulrender",
       "producesItemHashedId": "bAB1E9poQqpgLnakeJj5",
-      "producesItemVendorValue": 300
+      "producesItemVendorValue": 300,
+      "lastUpdated": "2026-02-28T20:55:43.743Z",
+      "suggestedRefreshMinutes": 9026
     },
     {
       "id": "rec-40",
@@ -1225,7 +1497,9 @@
       "uses": 1,
       "producesItemName": "Shadowstrike",
       "producesItemHashedId": "PjVDJez3LDOoYKWO08Ga",
-      "producesItemVendorValue": 250
+      "producesItemVendorValue": 250,
+      "lastUpdated": "2026-02-28T20:55:43.828Z",
+      "suggestedRefreshMinutes": 1261
     },
     {
       "id": "rec-41",
@@ -1237,7 +1511,9 @@
       "uses": 1,
       "producesItemName": "Venomfang",
       "producesItemHashedId": "0kK49j1VN9jAYq6B2doa",
-      "producesItemVendorValue": 300
+      "producesItemVendorValue": 300,
+      "lastUpdated": "2026-02-28T20:55:43.910Z",
+      "suggestedRefreshMinutes": 1454
     },
     {
       "id": "rec-42",
@@ -1249,7 +1525,9 @@
       "uses": 1,
       "producesItemName": "Whisperwind Bow",
       "producesItemHashedId": "Z6aDoyRnLyErLpV5AGXm",
-      "producesItemVendorValue": 250
+      "producesItemVendorValue": 250,
+      "lastUpdated": "2026-02-28T20:55:44.002Z",
+      "suggestedRefreshMinutes": 2470
     },
     {
       "id": "rec-43",
@@ -1261,7 +1539,9 @@
       "uses": 1,
       "producesItemName": "Stormcaster",
       "producesItemHashedId": "27gw0k38L412QWevJxyK",
-      "producesItemVendorValue": 300
+      "producesItemVendorValue": 300,
+      "lastUpdated": "2026-02-28T20:55:44.091Z",
+      "suggestedRefreshMinutes": 4862
     },
     {
       "id": "rec-44",
@@ -1273,7 +1553,9 @@
       "uses": 1,
       "producesItemName": "Radiant Crest",
       "producesItemHashedId": "93R0qXalLlxMLAbn8DBg",
-      "producesItemVendorValue": 250
+      "producesItemVendorValue": 250,
+      "lastUpdated": "2026-02-28T20:55:44.176Z",
+      "suggestedRefreshMinutes": 3353
     },
     {
       "id": "rec-45",
@@ -1285,7 +1567,9 @@
       "uses": 1,
       "producesItemName": "Shadow Helm",
       "producesItemHashedId": "1rZXlwg5YvXrQk9joDmG",
-      "producesItemVendorValue": 300
+      "producesItemVendorValue": 300,
+      "lastUpdated": "2026-02-28T20:55:44.251Z",
+      "suggestedRefreshMinutes": 9845
     },
     {
       "id": "rec-46",
@@ -1297,7 +1581,9 @@
       "uses": 1,
       "producesItemName": "Ironclad Gauntlets",
       "producesItemHashedId": "DBngxedVYJB1YX64wW8o",
-      "producesItemVendorValue": 250
+      "producesItemVendorValue": 250,
+      "lastUpdated": "2026-02-28T20:55:44.334Z",
+      "suggestedRefreshMinutes": 19027
     },
     {
       "id": "rec-47",
@@ -1309,7 +1595,9 @@
       "uses": 1,
       "producesItemName": "Stormguard Plate",
       "producesItemHashedId": "njoPWKDkLXJBN06ZOX79",
-      "producesItemVendorValue": 250
+      "producesItemVendorValue": 250,
+      "lastUpdated": "2026-02-28T20:55:44.423Z",
+      "suggestedRefreshMinutes": 1856
     },
     {
       "id": "rec-48",
@@ -1321,7 +1609,9 @@
       "uses": 1,
       "producesItemName": "Dragonheart Plate",
       "producesItemHashedId": "B2WEpv54NmR1Yj1xJrXk",
-      "producesItemVendorValue": 300
+      "producesItemVendorValue": 300,
+      "lastUpdated": "2026-02-28T20:55:44.519Z",
+      "suggestedRefreshMinutes": 4858
     },
     {
       "id": "rec-49",
@@ -1333,7 +1623,9 @@
       "uses": 1,
       "producesItemName": "Stormstrider Greaves",
       "producesItemHashedId": "Z6aDoyRnLykyNpV5AGXm",
-      "producesItemVendorValue": 250
+      "producesItemVendorValue": 250,
+      "lastUpdated": "2026-02-28T20:55:44.617Z",
+      "suggestedRefreshMinutes": 1941
     },
     {
       "id": "rec-50",
@@ -1345,7 +1637,9 @@
       "uses": 1,
       "producesItemName": "Shadowstep Greaves",
       "producesItemHashedId": "27gw0k38L4drLWevJxyK",
-      "producesItemVendorValue": 300
+      "producesItemVendorValue": 300,
+      "lastUpdated": "2026-02-28T20:55:44.701Z",
+      "suggestedRefreshMinutes": 5241
     },
     {
       "id": "rec-51",
@@ -1357,7 +1651,9 @@
       "uses": 1,
       "producesItemName": "Swiftwind Boots",
       "producesItemHashedId": "njoPWKDkLXm2Q06ZOX79",
-      "producesItemVendorValue": 250
+      "producesItemVendorValue": 250,
+      "lastUpdated": "2026-02-28T20:55:44.786Z",
+      "suggestedRefreshMinutes": 2431
     },
     {
       "id": "rec-52",
@@ -1369,7 +1665,9 @@
       "uses": 1,
       "producesItemName": "Aegis of the Seraph",
       "producesItemHashedId": "EWGwnXPlY1v4LJqekZ2R",
-      "producesItemVendorValue": 250
+      "producesItemVendorValue": 250,
+      "lastUpdated": "2026-02-28T20:55:44.881Z",
+      "suggestedRefreshMinutes": 4341
     },
     {
       "id": "rec-53",
@@ -1381,7 +1679,9 @@
       "uses": 1,
       "producesItemName": "Stormguard Shield",
       "producesItemHashedId": "Rv5g4z1dQndWYqy32jpG",
-      "producesItemVendorValue": 300
+      "producesItemVendorValue": 300,
+      "lastUpdated": "2026-02-28T20:56:43.166Z",
+      "suggestedRefreshMinutes": 6208
     },
     {
       "id": "rec-54",
@@ -1393,7 +1693,9 @@
       "uses": 0,
       "producesItemName": "Riverbend Essence Crystal",
       "producesItemHashedId": "mK5jqPopYG6ONrOzDRGV",
-      "producesItemVendorValue": 2500
+      "producesItemVendorValue": 2500,
+      "lastUpdated": "2026-02-28T20:56:43.274Z",
+      "suggestedRefreshMinutes": 4814
     },
     {
       "id": "rec-55",
@@ -1405,7 +1707,9 @@
       "uses": 0,
       "producesItemName": "Tampering Essence Crystal",
       "producesItemHashedId": "3ZvrGV8RQpWyL2wgA5jD",
-      "producesItemVendorValue": 2500
+      "producesItemVendorValue": 2500,
+      "lastUpdated": "2026-02-28T20:56:44.359Z",
+      "suggestedRefreshMinutes": 2500
     },
     {
       "id": "rec-56",
@@ -1445,7 +1749,9 @@
       "uses": 1,
       "producesItemName": "Frostbite",
       "producesItemHashedId": "ZjlPA8v9NMd8QEyMe2Oa",
-      "producesItemVendorValue": 350
+      "producesItemVendorValue": 350,
+      "lastUpdated": "2026-02-28T20:56:44.448Z",
+      "suggestedRefreshMinutes": 247
     },
     {
       "id": "rec-59",
@@ -1457,7 +1763,9 @@
       "uses": 1,
       "producesItemName": "Stormbringer",
       "producesItemHashedId": "P1vlVrzjLrn5Lao8mGKM",
-      "producesItemVendorValue": 400
+      "producesItemVendorValue": 400,
+      "lastUpdated": "2026-02-28T20:56:44.528Z",
+      "suggestedRefreshMinutes": 2276
     },
     {
       "id": "rec-60",
@@ -1469,7 +1777,9 @@
       "uses": 1,
       "producesItemName": "Bloodletter",
       "producesItemHashedId": "BPjze3x2Q391YR85vgZV",
-      "producesItemVendorValue": 350
+      "producesItemVendorValue": 350,
+      "lastUpdated": "2026-02-28T20:56:44.610Z",
+      "suggestedRefreshMinutes": 3229
     },
     {
       "id": "rec-61",
@@ -1481,7 +1791,9 @@
       "uses": 1,
       "producesItemName": "Whisperblade",
       "producesItemHashedId": "XjEaOeBkLagONlGwxVPq",
-      "producesItemVendorValue": 400
+      "producesItemVendorValue": 400,
+      "lastUpdated": "2026-02-28T21:11:06.199Z",
+      "suggestedRefreshMinutes": 5
     },
     {
       "id": "rec-62",
@@ -1493,7 +1805,9 @@
       "uses": 1,
       "producesItemName": "Shadow Shot",
       "producesItemHashedId": "O2xMjGdBN52xY9P1nyrv",
-      "producesItemVendorValue": 350
+      "producesItemVendorValue": 350,
+      "lastUpdated": "2026-02-28T20:56:44.790Z",
+      "suggestedRefreshMinutes": 1687
     },
     {
       "id": "rec-63",
@@ -1505,7 +1819,9 @@
       "uses": 1,
       "producesItemName": "Frostbite Shot",
       "producesItemHashedId": "lrx463VdQgKmQ5w1zWKP",
-      "producesItemVendorValue": 400
+      "producesItemVendorValue": 400,
+      "lastUpdated": "2026-02-28T20:56:44.872Z",
+      "suggestedRefreshMinutes": 1835
     },
     {
       "id": "rec-64",
@@ -1517,7 +1833,9 @@
       "uses": 1,
       "producesItemName": "Frostguard Visage",
       "producesItemHashedId": "q9pwa0kxLBAvYgVj136l",
-      "producesItemVendorValue": 350
+      "producesItemVendorValue": 350,
+      "lastUpdated": "2026-02-28T20:56:44.965Z",
+      "suggestedRefreshMinutes": 5552
     },
     {
       "id": "rec-65",
@@ -1529,7 +1847,9 @@
       "uses": 1,
       "producesItemName": "Sentinel's Gaze",
       "producesItemHashedId": "zvjoJW96Y8w3N3RaAylw",
-      "producesItemVendorValue": 400
+      "producesItemVendorValue": 400,
+      "lastUpdated": "2026-02-28T20:56:45.053Z",
+      "suggestedRefreshMinutes": 4105
     },
     {
       "id": "rec-66",
@@ -1541,7 +1861,9 @@
       "uses": 1,
       "producesItemName": "Dragonfire Grasp",
       "producesItemHashedId": "jGXBy7a4LbDDN0Pw6Vdg",
-      "producesItemVendorValue": 300
+      "producesItemVendorValue": 300,
+      "lastUpdated": "2026-02-28T20:56:45.139Z",
+      "suggestedRefreshMinutes": 2875
     },
     {
       "id": "rec-67",
@@ -1553,7 +1875,9 @@
       "uses": 1,
       "producesItemName": "Shadowstrike Grips",
       "producesItemHashedId": "BRn3x72JQ2BZQzOMok41",
-      "producesItemVendorValue": 350
+      "producesItemVendorValue": 350,
+      "lastUpdated": "2026-02-28T20:56:45.226Z",
+      "suggestedRefreshMinutes": 2827
     },
     {
       "id": "rec-68",
@@ -1565,7 +1889,9 @@
       "uses": 1,
       "producesItemName": "Frostbite Gauntlets",
       "producesItemHashedId": "gGZ2J71yYKJDNMmjbown",
-      "producesItemVendorValue": 400
+      "producesItemVendorValue": 400,
+      "lastUpdated": "2026-02-28T20:56:45.316Z",
+      "suggestedRefreshMinutes": 781
     },
     {
       "id": "rec-69",
@@ -1577,7 +1903,9 @@
       "uses": 1,
       "producesItemName": "Shadowcloak Vestments",
       "producesItemHashedId": "RVrBKlPdNdqkYWG8xJe9",
-      "producesItemVendorValue": 350
+      "producesItemVendorValue": 350,
+      "lastUpdated": "2026-02-28T20:56:45.412Z",
+      "suggestedRefreshMinutes": 2758
     },
     {
       "id": "rec-70",
@@ -1589,7 +1917,9 @@
       "uses": 1,
       "producesItemName": "Frostbite Plate",
       "producesItemHashedId": "6leApVoENkx3Y7nRPy2D",
-      "producesItemVendorValue": 400
+      "producesItemVendorValue": 400,
+      "lastUpdated": "2026-02-28T20:56:45.520Z",
+      "suggestedRefreshMinutes": 10502
     },
     {
       "id": "rec-71",
@@ -1601,7 +1931,9 @@
       "uses": 1,
       "producesItemName": "Frostbite Legguards",
       "producesItemHashedId": "O2xMjGdBN5bqY9P1nyrv",
-      "producesItemVendorValue": 350
+      "producesItemVendorValue": 350,
+      "lastUpdated": "2026-02-28T20:56:45.598Z",
+      "suggestedRefreshMinutes": 551
     },
     {
       "id": "rec-72",
@@ -1613,7 +1945,9 @@
       "uses": 1,
       "producesItemName": "Sentinel's Resolve",
       "producesItemHashedId": "lrx463VdQg1gY5w1zWKP",
-      "producesItemVendorValue": 400
+      "producesItemVendorValue": 400,
+      "lastUpdated": "2026-02-28T20:56:45.685Z",
+      "suggestedRefreshMinutes": 1331
     },
     {
       "id": "rec-73",
@@ -1625,7 +1959,9 @@
       "uses": 1,
       "producesItemName": "Shadowstep Footwear",
       "producesItemHashedId": "B2WEpv54Nml3Qj1xJrXk",
-      "producesItemVendorValue": 300
+      "producesItemVendorValue": 300,
+      "lastUpdated": "2026-02-28T20:56:45.787Z",
+      "suggestedRefreshMinutes": 3210
     },
     {
       "id": "rec-74",
@@ -1637,7 +1973,9 @@
       "uses": 1,
       "producesItemName": "Soulward Barrier",
       "producesItemHashedId": "mK5jqPopYGq7QrOzDRGV",
-      "producesItemVendorValue": 350
+      "producesItemVendorValue": 350,
+      "lastUpdated": "2026-02-28T20:56:45.879Z",
+      "suggestedRefreshMinutes": 729
     },
     {
       "id": "rec-75",
@@ -1649,7 +1987,9 @@
       "uses": 1,
       "producesItemName": "Hydra's Coil",
       "producesItemHashedId": "7eA59WrBQR9yLzb62qKv",
-      "producesItemVendorValue": 50
+      "producesItemVendorValue": 50,
+      "lastUpdated": "2026-02-28T20:57:44.235Z",
+      "suggestedRefreshMinutes": 1807
     },
     {
       "id": "rec-76",
@@ -1661,7 +2001,9 @@
       "uses": 1,
       "producesItemName": "Earthshaker",
       "producesItemHashedId": "O2xMjGdBN5VPY9P1nyrv",
-      "producesItemVendorValue": 50
+      "producesItemVendorValue": 50,
+      "lastUpdated": "2026-02-28T20:57:44.329Z",
+      "suggestedRefreshMinutes": 1619
     },
     {
       "id": "rec-77",
@@ -1673,7 +2015,9 @@
       "uses": 1,
       "producesItemName": "Grove Cleaver",
       "producesItemHashedId": "ZqEegBydNwg8NkA59J61",
-      "producesItemVendorValue": 50
+      "producesItemVendorValue": 50,
+      "lastUpdated": "2026-02-28T20:57:45.413Z",
+      "suggestedRefreshMinutes": 3122
     },
     {
       "id": "rec-78",
@@ -1685,7 +2029,9 @@
       "uses": 0,
       "producesItemName": "Shieldbearer's Infusion",
       "producesItemHashedId": "dgBq1boWYeB0LkJ3rXaD",
-      "producesItemVendorValue": 2500
+      "producesItemVendorValue": 2500,
+      "lastUpdated": "2026-02-28T20:57:45.502Z",
+      "suggestedRefreshMinutes": 2386
     },
     {
       "id": "rec-79",
@@ -1697,7 +2043,9 @@
       "uses": 0,
       "producesItemName": "Unyielding Fortitude",
       "producesItemHashedId": "7eA59WrBQRBpQzb62qKv",
-      "producesItemVendorValue": 2500
+      "producesItemVendorValue": 2500,
+      "lastUpdated": "2026-02-28T20:57:45.594Z",
+      "suggestedRefreshMinutes": 4778
     },
     {
       "id": "rec-80",
@@ -1737,7 +2085,9 @@
       "uses": 1,
       "producesItemName": "Doomblade",
       "producesItemHashedId": "Z6aDoyRnLyo9NpV5AGXm",
-      "producesItemVendorValue": 450
+      "producesItemVendorValue": 450,
+      "lastUpdated": "2026-02-28T20:57:45.683Z",
+      "suggestedRefreshMinutes": 5564
     },
     {
       "id": "rec-83",
@@ -1749,7 +2099,9 @@
       "uses": 1,
       "producesItemName": "Serpentstrike",
       "producesItemHashedId": "27gw0k38L4oGYWevJxyK",
-      "producesItemVendorValue": 500
+      "producesItemVendorValue": 500,
+      "lastUpdated": "2026-02-28T20:57:45.766Z",
+      "suggestedRefreshMinutes": 14049
     },
     {
       "id": "rec-84",
@@ -1761,7 +2113,9 @@
       "uses": 1,
       "producesItemName": "Serpent's Kiss",
       "producesItemHashedId": "njoPWKDkLXAVQ06ZOX79",
-      "producesItemVendorValue": 450
+      "producesItemVendorValue": 450,
+      "lastUpdated": "2026-02-28T20:57:45.857Z",
+      "suggestedRefreshMinutes": 6786
     },
     {
       "id": "rec-85",
@@ -1773,7 +2127,9 @@
       "uses": 1,
       "producesItemName": "Moonshadow",
       "producesItemHashedId": "B2WEpv54NmMKNj1xJrXk",
-      "producesItemVendorValue": 500
+      "producesItemVendorValue": 500,
+      "lastUpdated": "2026-02-28T20:57:45.944Z",
+      "suggestedRefreshMinutes": 9736
     },
     {
       "id": "rec-86",
@@ -1785,7 +2141,9 @@
       "uses": 1,
       "producesItemName": "Serpent's Arrow",
       "producesItemHashedId": "y7Do6jgkY0G0N8BAdKX0",
-      "producesItemVendorValue": 450
+      "producesItemVendorValue": 450,
+      "lastUpdated": "2026-02-28T20:57:46.027Z",
+      "suggestedRefreshMinutes": 1719
     },
     {
       "id": "rec-87",
@@ -1797,7 +2155,9 @@
       "uses": 1,
       "producesItemName": "Viper",
       "producesItemHashedId": "3yE1A84kYOoWYl6XeVKp",
-      "producesItemVendorValue": 500
+      "producesItemVendorValue": 500,
+      "lastUpdated": "2026-02-28T20:57:46.135Z",
+      "suggestedRefreshMinutes": 12203
     },
     {
       "id": "rec-88",
@@ -1809,7 +2169,9 @@
       "uses": 1,
       "producesItemName": "Celestial Crown",
       "producesItemHashedId": "PjVDJez3LDoVYKWO08Ga",
-      "producesItemVendorValue": 450
+      "producesItemVendorValue": 450,
+      "lastUpdated": "2026-02-28T20:57:46.230Z",
+      "suggestedRefreshMinutes": 11028
     },
     {
       "id": "rec-89",
@@ -1821,7 +2183,9 @@
       "uses": 1,
       "producesItemName": "Emberfire Helm",
       "producesItemHashedId": "0kK49j1VN9w7Lq6B2doa",
-      "producesItemVendorValue": 500
+      "producesItemVendorValue": 500,
+      "lastUpdated": "2026-02-28T20:57:46.324Z",
+      "suggestedRefreshMinutes": 8725
     },
     {
       "id": "rec-90",
@@ -1833,7 +2197,9 @@
       "uses": 1,
       "producesItemName": "Titan's Embrace",
       "producesItemHashedId": "yav4OK1wNE6RYZP7rzJb",
-      "producesItemVendorValue": 450
+      "producesItemVendorValue": 450,
+      "lastUpdated": "2026-02-28T20:57:46.430Z",
+      "suggestedRefreshMinutes": 944
     },
     {
       "id": "rec-91",
@@ -1845,7 +2211,9 @@
       "uses": 1,
       "producesItemName": "Celestial Touch Gloves",
       "producesItemHashedId": "oaJydnOmQWXvNbgRe5ME",
-      "producesItemVendorValue": 500
+      "producesItemVendorValue": 500,
+      "lastUpdated": "2026-02-28T20:57:46.527Z",
+      "suggestedRefreshMinutes": 2100
     },
     {
       "id": "rec-92",
@@ -1857,7 +2225,9 @@
       "uses": 1,
       "producesItemName": "Sentinel's Embrace",
       "producesItemHashedId": "doyA279pNzkwYKRDEWm8",
-      "producesItemVendorValue": 450
+      "producesItemVendorValue": 450,
+      "lastUpdated": "2026-02-28T20:57:46.621Z",
+      "suggestedRefreshMinutes": 18162
     },
     {
       "id": "rec-93",
@@ -1869,7 +2239,9 @@
       "uses": 1,
       "producesItemName": "Celestial Striders",
       "producesItemHashedId": "y7Do6jgkY0BDQ8BAdKX0",
-      "producesItemVendorValue": 450
+      "producesItemVendorValue": 450,
+      "lastUpdated": "2026-02-28T20:57:46.702Z",
+      "suggestedRefreshMinutes": 3110
     },
     {
       "id": "rec-94",
@@ -1881,7 +2253,9 @@
       "uses": 1,
       "producesItemName": "Frostbite Walkers",
       "producesItemHashedId": "RVrBKlPdNdEWYWG8xJe9",
-      "producesItemVendorValue": 350
+      "producesItemVendorValue": 350,
+      "lastUpdated": "2026-02-28T20:57:46.794Z",
+      "suggestedRefreshMinutes": 1826
     },
     {
       "id": "rec-95",
@@ -1893,7 +2267,9 @@
       "uses": 1,
       "producesItemName": "Guardian's Stride",
       "producesItemHashedId": "6leApVoENklBY7nRPy2D",
-      "producesItemVendorValue": 400
+      "producesItemVendorValue": 400,
+      "lastUpdated": "2026-02-28T21:11:07.290Z",
+      "suggestedRefreshMinutes": 5
     },
     {
       "id": "rec-96",
@@ -1905,7 +2281,9 @@
       "uses": 1,
       "producesItemName": "Flamebreaker Buckler",
       "producesItemHashedId": "3ZvrGV8RQpvZY2wgA5jD",
-      "producesItemVendorValue": 400
+      "producesItemVendorValue": 400,
+      "lastUpdated": "2026-02-28T20:57:46.963Z",
+      "suggestedRefreshMinutes": 4743
     },
     {
       "id": "rec-97",
@@ -1917,7 +2295,9 @@
       "uses": 1,
       "producesItemName": "Shadowbound Ward",
       "producesItemHashedId": "dgBq1boWYeljNkJ3rXaD",
-      "producesItemVendorValue": 450
+      "producesItemVendorValue": 450,
+      "lastUpdated": "2026-02-28T20:58:45.250Z",
+      "suggestedRefreshMinutes": 1379
     },
     {
       "id": "rec-98",
@@ -1929,7 +2309,9 @@
       "uses": 0,
       "producesItemName": "Stoneheart Solution",
       "producesItemHashedId": "ElzPeorXNVBjNaW0kv53",
-      "producesItemVendorValue": 2500
+      "producesItemVendorValue": 2500,
+      "lastUpdated": "2026-02-28T20:58:45.347Z",
+      "suggestedRefreshMinutes": 2927
     },
     {
       "id": "rec-99",
@@ -1941,7 +2323,9 @@
       "uses": 0,
       "producesItemName": "Lightning Sprint",
       "producesItemHashedId": "XyeZRGx9YjRKYB80gWlP",
-      "producesItemVendorValue": 2500
+      "producesItemVendorValue": 2500,
+      "lastUpdated": "2026-02-28T20:58:46.457Z",
+      "suggestedRefreshMinutes": 2554
     },
     {
       "id": "rec-100",
@@ -1981,7 +2365,9 @@
       "uses": 1,
       "producesItemName": "Celestial Edge",
       "producesItemHashedId": "O2xMjGdBN5ZRY9P1nyrv",
-      "producesItemVendorValue": 550
+      "producesItemVendorValue": 550,
+      "lastUpdated": "2026-02-28T20:58:46.566Z",
+      "suggestedRefreshMinutes": 4209
     },
     {
       "id": "rec-103",
@@ -1993,7 +2379,9 @@
       "uses": 1,
       "producesItemName": "Bloodmoon Sword",
       "producesItemHashedId": "lrx463VdQgr7L5w1zWKP",
-      "producesItemVendorValue": 600
+      "producesItemVendorValue": 600,
+      "lastUpdated": "2026-02-28T20:58:46.677Z",
+      "suggestedRefreshMinutes": 1469
     },
     {
       "id": "rec-104",
@@ -2005,7 +2393,9 @@
       "uses": 1,
       "producesItemName": "Quickstrike",
       "producesItemHashedId": "RVrBKlPdNd5yYWG8xJe9",
-      "producesItemVendorValue": 550
+      "producesItemVendorValue": 550,
+      "lastUpdated": "2026-02-28T21:11:07.370Z",
+      "suggestedRefreshMinutes": 5
     },
     {
       "id": "rec-105",
@@ -2017,7 +2407,9 @@
       "uses": 1,
       "producesItemName": "Runeblade Dagger",
       "producesItemHashedId": "6leApVoENk7ZN7nRPy2D",
-      "producesItemVendorValue": 600
+      "producesItemVendorValue": 600,
+      "lastUpdated": "2026-02-28T20:58:46.871Z",
+      "suggestedRefreshMinutes": 11646
     },
     {
       "id": "rec-106",
@@ -2029,7 +2421,9 @@
       "uses": 1,
       "producesItemName": "Moonshot",
       "producesItemHashedId": "DBngxedVYJ11NX64wW8o",
-      "producesItemVendorValue": 550
+      "producesItemVendorValue": 550,
+      "lastUpdated": "2026-02-28T20:58:46.951Z",
+      "suggestedRefreshMinutes": 1264
     },
     {
       "id": "rec-107",
@@ -2041,7 +2435,9 @@
       "uses": 1,
       "producesItemName": "Stormsong",
       "producesItemHashedId": "jGXBy7a4Lb6DL0Pw6Vdg",
-      "producesItemVendorValue": 600
+      "producesItemVendorValue": 600,
+      "lastUpdated": "2026-02-28T20:58:47.048Z",
+      "suggestedRefreshMinutes": 9435
     },
     {
       "id": "rec-108",
@@ -2053,7 +2449,9 @@
       "uses": 1,
       "producesItemName": "Thunder Helm",
       "producesItemHashedId": "BPjze3x2Q3wZQR85vgZV",
-      "producesItemVendorValue": 550
+      "producesItemVendorValue": 550,
+      "lastUpdated": "2026-02-28T20:58:47.139Z",
+      "suggestedRefreshMinutes": 2719
     },
     {
       "id": "rec-109",
@@ -2065,7 +2463,9 @@
       "uses": 1,
       "producesItemName": "Emberfist",
       "producesItemHashedId": "ZqEegBydNwqMLkA59J61",
-      "producesItemVendorValue": 550
+      "producesItemVendorValue": 550,
+      "lastUpdated": "2026-02-28T20:58:47.239Z",
+      "suggestedRefreshMinutes": 14127
     },
     {
       "id": "rec-110",
@@ -2077,7 +2477,9 @@
       "uses": 1,
       "producesItemName": "Celestial Radiance",
       "producesItemHashedId": "j98bO5w1QP1nN3xkREVJ",
-      "producesItemVendorValue": 500
+      "producesItemVendorValue": 500,
+      "lastUpdated": "2026-02-28T20:58:47.328Z",
+      "suggestedRefreshMinutes": 7570
     },
     {
       "id": "rec-111",
@@ -2089,7 +2491,9 @@
       "uses": 1,
       "producesItemName": "Ironbark Cuirass",
       "producesItemHashedId": "EWGwnXPlY1o4QJqekZ2R",
-      "producesItemVendorValue": 550
+      "producesItemVendorValue": 550,
+      "lastUpdated": "2026-02-28T20:58:47.421Z",
+      "suggestedRefreshMinutes": 5779
     },
     {
       "id": "rec-112",
@@ -2101,7 +2505,9 @@
       "uses": 1,
       "producesItemName": "Emberfoot Greaves",
       "producesItemHashedId": "3yE1A84kYORaNl6XeVKp",
-      "producesItemVendorValue": 500
+      "producesItemVendorValue": 500,
+      "lastUpdated": "2026-02-28T20:58:47.504Z",
+      "suggestedRefreshMinutes": 1825
     },
     {
       "id": "rec-113",
@@ -2113,7 +2519,9 @@
       "uses": 1,
       "producesItemName": "Thunderclash Greaves",
       "producesItemHashedId": "DBngxedVYJobLX64wW8o",
-      "producesItemVendorValue": 550
+      "producesItemVendorValue": 550,
+      "lastUpdated": "2026-02-28T20:58:47.595Z",
+      "suggestedRefreshMinutes": 7187
     },
     {
       "id": "rec-114",
@@ -2125,7 +2533,9 @@
       "uses": 1,
       "producesItemName": "Celestial Ascenders",
       "producesItemHashedId": "doyA279pNzOAYKRDEWm8",
-      "producesItemVendorValue": 450
+      "producesItemVendorValue": 450,
+      "lastUpdated": "2026-02-28T21:11:07.451Z",
+      "suggestedRefreshMinutes": 5
     },
     {
       "id": "rec-115",
@@ -2137,7 +2547,9 @@
       "uses": 1,
       "producesItemName": "Emberfoot Boots",
       "producesItemHashedId": "j98bO5w1QPV9Y3xkREVJ",
-      "producesItemVendorValue": 500
+      "producesItemVendorValue": 500,
+      "lastUpdated": "2026-02-28T20:58:47.767Z",
+      "suggestedRefreshMinutes": 151
     },
     {
       "id": "rec-116",
@@ -2149,7 +2561,9 @@
       "uses": 1,
       "producesItemName": "Frostbite Guard",
       "producesItemHashedId": "7eA59WrBQRO0Nzb62qKv",
-      "producesItemVendorValue": 500
+      "producesItemVendorValue": 500,
+      "lastUpdated": "2026-02-28T20:58:47.856Z",
+      "suggestedRefreshMinutes": 1149
     },
     {
       "id": "rec-117",
@@ -2161,7 +2575,9 @@
       "uses": 1,
       "producesItemName": "Sentinel's Bulwark",
       "producesItemHashedId": "ElzPeorXNVaJQaW0kv53",
-      "producesItemVendorValue": 550
+      "producesItemVendorValue": 550,
+      "lastUpdated": "2026-02-28T20:58:47.939Z",
+      "suggestedRefreshMinutes": 5486
     },
     {
       "id": "rec-118",
@@ -2173,7 +2589,9 @@
       "uses": 1,
       "producesItemName": "Ocean's Whisper",
       "producesItemHashedId": "ElzPeorXNV9pQaW0kv53",
-      "producesItemVendorValue": 75
+      "producesItemVendorValue": 75,
+      "lastUpdated": "2026-02-28T20:58:48.039Z",
+      "suggestedRefreshMinutes": 7806
     },
     {
       "id": "rec-119",
@@ -2185,7 +2603,9 @@
       "uses": 1,
       "producesItemName": "Stone Splinter",
       "producesItemHashedId": "lrx463VdQg94Y5w1zWKP",
-      "producesItemVendorValue": 75
+      "producesItemVendorValue": 75,
+      "lastUpdated": "2026-02-28T20:59:46.130Z",
+      "suggestedRefreshMinutes": 9880
     },
     {
       "id": "rec-120",
@@ -2197,7 +2617,9 @@
       "uses": 1,
       "producesItemName": "Branchbane Hatchet",
       "producesItemHashedId": "3Zbym56qLx0WLBRp7Eek",
-      "producesItemVendorValue": 75
+      "producesItemVendorValue": 75,
+      "lastUpdated": "2026-02-28T20:59:46.215Z",
+      "suggestedRefreshMinutes": 2155
     },
     {
       "id": "rec-121",
@@ -2209,7 +2631,9 @@
       "uses": 0,
       "producesItemName": "Twinstrike Elixir",
       "producesItemHashedId": "Ro31P7kZL6RALveGxXOy",
-      "producesItemVendorValue": 2500
+      "producesItemVendorValue": 2500,
+      "lastUpdated": "2026-02-28T20:59:47.305Z",
+      "suggestedRefreshMinutes": 5391
     },
     {
       "id": "rec-122",
@@ -2221,7 +2645,9 @@
       "uses": 0,
       "producesItemName": "Frenzy Potion",
       "producesItemHashedId": "brz9RZnWN7VaQKAp0Mdl",
-      "producesItemVendorValue": 2500
+      "producesItemVendorValue": 2500,
+      "lastUpdated": "2026-02-28T20:59:47.393Z",
+      "suggestedRefreshMinutes": 2313
     },
     {
       "id": "rec-123",
@@ -2261,7 +2687,9 @@
       "uses": 1,
       "producesItemName": "Whisperwind Sword",
       "producesItemHashedId": "y7Do6jgkY00bY8BAdKX0",
-      "producesItemVendorValue": 650
+      "producesItemVendorValue": 650,
+      "lastUpdated": "2026-02-28T20:59:47.480Z",
+      "suggestedRefreshMinutes": 20807
     },
     {
       "id": "rec-126",
@@ -2273,7 +2701,9 @@
       "uses": 1,
       "producesItemName": "Voidslayer",
       "producesItemHashedId": "3yE1A84kYOJrNl6XeVKp",
-      "producesItemVendorValue": 700
+      "producesItemVendorValue": 700,
+      "lastUpdated": "2026-02-28T20:59:47.554Z",
+      "suggestedRefreshMinutes": 16326
     },
     {
       "id": "rec-127",
@@ -2285,7 +2715,9 @@
       "uses": 1,
       "producesItemName": "Shadowfang",
       "producesItemHashedId": "doyA279pNz15QKRDEWm8",
-      "producesItemVendorValue": 650
+      "producesItemVendorValue": 650,
+      "lastUpdated": "2026-02-28T20:59:47.724Z",
+      "suggestedRefreshMinutes": 14419
     },
     {
       "id": "rec-128",
@@ -2297,7 +2729,9 @@
       "uses": 1,
       "producesItemName": "Emberheart",
       "producesItemHashedId": "BRn3x72JQ2dZYzOMok41",
-      "producesItemVendorValue": 650
+      "producesItemVendorValue": 650,
+      "lastUpdated": "2026-02-28T20:59:47.802Z",
+      "suggestedRefreshMinutes": 15792
     },
     {
       "id": "rec-129",
@@ -2309,7 +2743,9 @@
       "uses": 1,
       "producesItemName": "Otto's Mask",
       "producesItemHashedId": "XjEaOeBkLabBQlGwxVPq",
-      "producesItemVendorValue": 600
+      "producesItemVendorValue": 600,
+      "lastUpdated": "2026-02-28T20:59:47.893Z",
+      "suggestedRefreshMinutes": 2038
     },
     {
       "id": "rec-130",
@@ -2321,7 +2757,9 @@
       "uses": 1,
       "producesItemName": "Shadowbane Visor",
       "producesItemHashedId": "njoPWKDkLXM2Q06ZOX79",
-      "producesItemVendorValue": 650
+      "producesItemVendorValue": 650,
+      "lastUpdated": "2026-02-28T20:59:47.985Z",
+      "suggestedRefreshMinutes": 8117
     },
     {
       "id": "rec-131",
@@ -2333,7 +2771,9 @@
       "uses": 1,
       "producesItemName": "Thunderclap",
       "producesItemHashedId": "3Zbym56qLxMGQBRp7Eek",
-      "producesItemVendorValue": 600
+      "producesItemVendorValue": 600,
+      "lastUpdated": "2026-02-28T20:59:48.063Z",
+      "suggestedRefreshMinutes": 7221
     },
     {
       "id": "rec-132",
@@ -2345,7 +2785,9 @@
       "uses": 1,
       "producesItemName": "Soulgrasp",
       "producesItemHashedId": "oZwey82VNAedND0dXM3g",
-      "producesItemVendorValue": 650
+      "producesItemVendorValue": 650,
+      "lastUpdated": "2026-02-28T20:59:48.156Z",
+      "suggestedRefreshMinutes": 11248
     },
     {
       "id": "rec-133",
@@ -2357,7 +2799,9 @@
       "uses": 1,
       "producesItemName": "Flameguard Plate",
       "producesItemHashedId": "Rv5g4z1dQnVWQqy32jpG",
-      "producesItemVendorValue": 600
+      "producesItemVendorValue": 600,
+      "lastUpdated": "2026-02-28T20:59:48.237Z",
+      "suggestedRefreshMinutes": 9433
     },
     {
       "id": "rec-134",
@@ -2369,7 +2813,9 @@
       "uses": 1,
       "producesItemName": "Stormbreaker Mail",
       "producesItemHashedId": "mK5jqPopYGX7LrOzDRGV",
-      "producesItemVendorValue": 650
+      "producesItemVendorValue": 650,
+      "lastUpdated": "2026-02-28T20:59:48.317Z",
+      "suggestedRefreshMinutes": 9694
     },
     {
       "id": "rec-135",
@@ -2381,7 +2827,9 @@
       "uses": 1,
       "producesItemName": "Soulforge Legplates",
       "producesItemHashedId": "jGXBy7a4LblaN0Pw6Vdg",
-      "producesItemVendorValue": 600
+      "producesItemVendorValue": 600,
+      "lastUpdated": "2026-02-28T20:59:48.393Z",
+      "suggestedRefreshMinutes": 8121
     },
     {
       "id": "rec-136",
@@ -2393,7 +2841,9 @@
       "uses": 1,
       "producesItemName": "Shadowbane Greaves",
       "producesItemHashedId": "BRn3x72JQ2ZWQzOMok41",
-      "producesItemVendorValue": 650
+      "producesItemVendorValue": 650,
+      "lastUpdated": "2026-02-28T20:59:48.470Z",
+      "suggestedRefreshMinutes": 8909
     },
     {
       "id": "rec-137",
@@ -2405,7 +2855,9 @@
       "uses": 1,
       "producesItemName": "Thunderstrike Steps",
       "producesItemHashedId": "EWGwnXPlY1GdQJqekZ2R",
-      "producesItemVendorValue": 550
+      "producesItemVendorValue": 550,
+      "lastUpdated": "2026-02-28T20:59:48.555Z",
+      "suggestedRefreshMinutes": 13784
     },
     {
       "id": "rec-138",
@@ -2417,7 +2869,9 @@
       "uses": 1,
       "producesItemName": "Soulwalkers",
       "producesItemHashedId": "Rv5g4z1dQnxkYqy32jpG",
-      "producesItemVendorValue": 600
+      "producesItemVendorValue": 600,
+      "lastUpdated": "2026-02-28T20:59:48.635Z",
+      "suggestedRefreshMinutes": 12934
     },
     {
       "id": "rec-139",
@@ -2429,7 +2883,9 @@
       "uses": 1,
       "producesItemName": "Celestial Aegis",
       "producesItemHashedId": "XyeZRGx9YjA8NB80gWlP",
-      "producesItemVendorValue": 600
+      "producesItemVendorValue": 600,
+      "lastUpdated": "2026-02-28T20:59:48.717Z",
+      "suggestedRefreshMinutes": 10001
     },
     {
       "id": "rec-140",
@@ -2441,7 +2897,9 @@
       "uses": 1,
       "producesItemName": "Thunderstrike Barrier",
       "producesItemHashedId": "Ro31P7kZL6vOLveGxXOy",
-      "producesItemVendorValue": 650
+      "producesItemVendorValue": 650,
+      "lastUpdated": "2026-02-28T20:59:48.795Z",
+      "suggestedRefreshMinutes": 11014
     },
     {
       "id": "rec-141",
@@ -2453,7 +2911,9 @@
       "uses": 0,
       "producesItemName": "Dragonblood Tonic",
       "producesItemHashedId": "ZjlPA8v9NMoXLEyMe2Oa",
-      "producesItemVendorValue": 2500
+      "producesItemVendorValue": 2500,
+      "lastUpdated": "2026-02-28T21:00:47.170Z",
+      "suggestedRefreshMinutes": 10008
     },
     {
       "id": "rec-142",
@@ -2465,7 +2925,9 @@
       "uses": 0,
       "producesItemName": "Gourmet Essence Crystal",
       "producesItemHashedId": "bAB1E9poQqrkNnakeJj5",
-      "producesItemVendorValue": 2500
+      "producesItemVendorValue": 2500,
+      "lastUpdated": "2026-02-28T21:00:47.262Z",
+      "suggestedRefreshMinutes": 9212
     },
     {
       "id": "rec-143",
@@ -2505,7 +2967,9 @@
       "uses": 1,
       "producesItemName": "Sunfire",
       "producesItemHashedId": "DBngxedVYJ5nNX64wW8o",
-      "producesItemVendorValue": 750
+      "producesItemVendorValue": 750,
+      "lastUpdated": "2026-02-28T21:00:48.369Z",
+      "suggestedRefreshMinutes": 12330
     },
     {
       "id": "rec-146",
@@ -2517,7 +2981,9 @@
       "uses": 1,
       "producesItemName": "Flamebrand",
       "producesItemHashedId": "j98bO5w1QPWPL3xkREVJ",
-      "producesItemVendorValue": 700
+      "producesItemVendorValue": 700,
+      "lastUpdated": "2026-02-28T21:00:48.461Z",
+      "suggestedRefreshMinutes": 15756
     },
     {
       "id": "rec-147",
@@ -2529,7 +2995,9 @@
       "uses": 1,
       "producesItemName": "Soulshard",
       "producesItemHashedId": "EWGwnXPlY19wYJqekZ2R",
-      "producesItemVendorValue": 750
+      "producesItemVendorValue": 750,
+      "lastUpdated": "2026-02-28T21:00:48.561Z",
+      "suggestedRefreshMinutes": 8614
     },
     {
       "id": "rec-148",
@@ -2541,7 +3009,9 @@
       "uses": 1,
       "producesItemName": "Piercer",
       "producesItemHashedId": "gGZ2J71yYKZDNMmjbown",
-      "producesItemVendorValue": 700
+      "producesItemVendorValue": 700,
+      "lastUpdated": "2026-02-28T21:00:48.659Z",
+      "suggestedRefreshMinutes": 2588
     },
     {
       "id": "rec-149",
@@ -2553,7 +3023,9 @@
       "uses": 1,
       "producesItemName": "Sunseeker",
       "producesItemHashedId": "yav4OK1wNEXRQZP7rzJb",
-      "producesItemVendorValue": 750
+      "producesItemVendorValue": 750,
+      "lastUpdated": "2026-02-28T21:00:48.764Z",
+      "suggestedRefreshMinutes": 12735
     },
     {
       "id": "rec-150",
@@ -2565,7 +3037,9 @@
       "uses": 1,
       "producesItemName": "Windborne Casque",
       "producesItemHashedId": "B2WEpv54Nmd3Qj1xJrXk",
-      "producesItemVendorValue": 700
+      "producesItemVendorValue": 700,
+      "lastUpdated": "2026-02-28T21:00:48.884Z",
+      "suggestedRefreshMinutes": 1428
     },
     {
       "id": "rec-151",
@@ -2577,7 +3051,9 @@
       "uses": 1,
       "producesItemName": "Stormbreaker Helm",
       "producesItemHashedId": "RVrBKlPdNdPWNWG8xJe9",
-      "producesItemVendorValue": 750
+      "producesItemVendorValue": 750,
+      "lastUpdated": "2026-02-28T21:00:48.965Z",
+      "suggestedRefreshMinutes": 15917
     },
     {
       "id": "rec-152",
@@ -2589,7 +3065,9 @@
       "uses": 1,
       "producesItemName": "Shadowstep Gauntlets",
       "producesItemHashedId": "JZdg5V3PQoyAYEyWq0zl",
-      "producesItemVendorValue": 700
+      "producesItemVendorValue": 700,
+      "lastUpdated": "2026-02-28T21:00:49.055Z",
+      "suggestedRefreshMinutes": 12287
     },
     {
       "id": "rec-153",
@@ -2601,7 +3079,9 @@
       "uses": 1,
       "producesItemName": "Sentinel's Gauntlets",
       "producesItemHashedId": "JVM29l7kQZRXQ80q6WDG",
-      "producesItemVendorValue": 750
+      "producesItemVendorValue": 750,
+      "lastUpdated": "2026-02-28T21:00:49.140Z",
+      "suggestedRefreshMinutes": 10354
     },
     {
       "id": "rec-154",
@@ -2613,7 +3093,9 @@
       "uses": 1,
       "producesItemName": "Shadeweave Raiment",
       "producesItemHashedId": "3ZvrGV8RQp6ZY2wgA5jD",
-      "producesItemVendorValue": 700
+      "producesItemVendorValue": 700,
+      "lastUpdated": "2026-02-28T21:00:49.247Z",
+      "suggestedRefreshMinutes": 13583
     },
     {
       "id": "rec-155",
@@ -2625,7 +3107,9 @@
       "uses": 1,
       "producesItemName": "Crystalheart Plate",
       "producesItemHashedId": "dgBq1boWYebjLkJ3rXaD",
-      "producesItemVendorValue": 750
+      "producesItemVendorValue": 750,
+      "lastUpdated": "2026-02-28T21:00:49.347Z",
+      "suggestedRefreshMinutes": 21912
     },
     {
       "id": "rec-156",
@@ -2637,7 +3121,9 @@
       "uses": 1,
       "producesItemName": "Windrider Greaves",
       "producesItemHashedId": "gGZ2J71yYKBeNMmjbown",
-      "producesItemVendorValue": 700
+      "producesItemVendorValue": 700,
+      "lastUpdated": "2026-02-28T21:00:49.453Z",
+      "suggestedRefreshMinutes": 12307
     },
     {
       "id": "rec-157",
@@ -2649,7 +3135,9 @@
       "uses": 1,
       "producesItemName": "Stormbreaker Treads",
       "producesItemHashedId": "yav4OK1wNE1rNZP7rzJb",
-      "producesItemVendorValue": 750
+      "producesItemVendorValue": 750,
+      "lastUpdated": "2026-02-28T21:00:49.540Z",
+      "suggestedRefreshMinutes": 30272
     },
     {
       "id": "rec-158",
@@ -2661,7 +3149,9 @@
       "uses": 1,
       "producesItemName": "Shadowbane Footguards",
       "producesItemHashedId": "mK5jqPopYGDwLrOzDRGV",
-      "producesItemVendorValue": 650
+      "producesItemVendorValue": 650,
+      "lastUpdated": "2026-02-28T21:00:49.633Z",
+      "suggestedRefreshMinutes": 10736
     },
     {
       "id": "rec-159",
@@ -2673,7 +3163,9 @@
       "uses": 1,
       "producesItemName": "Windrider Striders",
       "producesItemHashedId": "3ZvrGV8RQpKPL2wgA5jD",
-      "producesItemVendorValue": 700
+      "producesItemVendorValue": 700,
+      "lastUpdated": "2026-02-28T21:00:49.729Z",
+      "suggestedRefreshMinutes": 20709
     },
     {
       "id": "rec-160",
@@ -2685,7 +3177,9 @@
       "uses": 1,
       "producesItemName": "Essenceweave Shield",
       "producesItemHashedId": "brz9RZnWN7v2QKAp0Mdl",
-      "producesItemVendorValue": 700
+      "producesItemVendorValue": 700,
+      "lastUpdated": "2026-02-28T21:00:49.832Z",
+      "suggestedRefreshMinutes": 1966
     },
     {
       "id": "rec-161",
@@ -2697,7 +3191,9 @@
       "uses": 0,
       "producesItemName": "Wraithbane Essence",
       "producesItemHashedId": "P1vlVrzjLryRYao8mGKM",
-      "producesItemVendorValue": 2500
+      "producesItemVendorValue": 2500,
+      "lastUpdated": "2026-02-28T21:00:49.928Z",
+      "suggestedRefreshMinutes": 29115
     },
     {
       "id": "rec-162",
@@ -2709,7 +3205,9 @@
       "uses": 0,
       "producesItemName": "Thunderfury Brew",
       "producesItemHashedId": "Z6aDoyRnLybkQpV5AGXm",
-      "producesItemVendorValue": 2500
+      "producesItemVendorValue": 2500,
+      "lastUpdated": "2026-02-28T21:00:50.006Z",
+      "suggestedRefreshMinutes": 23872
     },
     {
       "id": "rec-163",
@@ -2749,7 +3247,9 @@
       "uses": 1,
       "producesItemName": "Thunderstrike",
       "producesItemHashedId": "jGXBy7a4LbmKY0Pw6Vdg",
-      "producesItemVendorValue": 800
+      "producesItemVendorValue": 800,
+      "lastUpdated": "2026-02-28T21:01:48.168Z",
+      "suggestedRefreshMinutes": 22756
     },
     {
       "id": "rec-166",
@@ -2761,7 +3261,9 @@
       "uses": 1,
       "producesItemName": "Nightfall Sword",
       "producesItemHashedId": "BRn3x72JQ20gYzOMok41",
-      "producesItemVendorValue": 850
+      "producesItemVendorValue": 850,
+      "lastUpdated": "2026-02-28T21:01:48.244Z",
+      "suggestedRefreshMinutes": 19766
     },
     {
       "id": "rec-167",
@@ -2773,7 +3275,9 @@
       "uses": 1,
       "producesItemName": "Night's Whisper",
       "producesItemHashedId": "Rv5g4z1dQnvoQqy32jpG",
-      "producesItemVendorValue": 800
+      "producesItemVendorValue": 800,
+      "lastUpdated": "2026-02-28T21:01:49.338Z",
+      "suggestedRefreshMinutes": 17856
     },
     {
       "id": "rec-168",
@@ -2785,7 +3289,9 @@
       "uses": 1,
       "producesItemName": "Eclipse",
       "producesItemHashedId": "mK5jqPopYGb8NrOzDRGV",
-      "producesItemVendorValue": 850
+      "producesItemVendorValue": 850,
+      "lastUpdated": "2026-02-28T21:01:49.435Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-169",
@@ -2797,7 +3303,9 @@
       "uses": 1,
       "producesItemName": "Thundershot",
       "producesItemHashedId": "oaJydnOmQWyvYbgRe5ME",
-      "producesItemVendorValue": 800
+      "producesItemVendorValue": 800,
+      "lastUpdated": "2026-02-28T21:01:49.528Z",
+      "suggestedRefreshMinutes": 33800
     },
     {
       "id": "rec-170",
@@ -2809,7 +3317,9 @@
       "uses": 1,
       "producesItemName": "Nightshade Bow",
       "producesItemHashedId": "ZqEegBydNwXMYkA59J61",
-      "producesItemVendorValue": 850
+      "producesItemVendorValue": 850,
+      "lastUpdated": "2026-02-28T21:01:49.615Z",
+      "suggestedRefreshMinutes": 25278
     },
     {
       "id": "rec-171",
@@ -2821,7 +3331,9 @@
       "uses": 1,
       "producesItemName": "Voidwalker Cowl",
       "producesItemHashedId": "6leApVoENkEBL7nRPy2D",
-      "producesItemVendorValue": 800
+      "producesItemVendorValue": 800,
+      "lastUpdated": "2026-02-28T21:01:49.708Z",
+      "suggestedRefreshMinutes": 10241
     },
     {
       "id": "rec-172",
@@ -2833,7 +3345,9 @@
       "uses": 1,
       "producesItemName": "Lunar Radiance",
       "producesItemHashedId": "doyA279pNzRANKRDEWm8",
-      "producesItemVendorValue": 850
+      "producesItemVendorValue": 850,
+      "lastUpdated": "2026-02-28T21:01:49.809Z",
+      "suggestedRefreshMinutes": 19242
     },
     {
       "id": "rec-173",
@@ -2845,7 +3359,9 @@
       "uses": 1,
       "producesItemName": "Flameguard Gauntlets",
       "producesItemHashedId": "93R0qXalLl0mLAbn8DBg",
-      "producesItemVendorValue": 800
+      "producesItemVendorValue": 800,
+      "lastUpdated": "2026-02-28T21:01:49.895Z",
+      "suggestedRefreshMinutes": 14672
     },
     {
       "id": "rec-174",
@@ -2857,7 +3373,9 @@
       "uses": 1,
       "producesItemName": "Stormbreaker Gauntlets",
       "producesItemHashedId": "1rZXlwg5Yv7jLk9joDmG",
-      "producesItemVendorValue": 850
+      "producesItemVendorValue": 850,
+      "lastUpdated": "2026-02-28T21:01:49.983Z",
+      "suggestedRefreshMinutes": 18215
     },
     {
       "id": "rec-175",
@@ -2869,7 +3387,9 @@
       "uses": 1,
       "producesItemName": "Serpent Scale",
       "producesItemHashedId": "7eA59WrBQR10Lzb62qKv",
-      "producesItemVendorValue": 800
+      "producesItemVendorValue": 800,
+      "lastUpdated": "2026-02-28T21:01:50.078Z",
+      "suggestedRefreshMinutes": 11496
     },
     {
       "id": "rec-176",
@@ -2881,7 +3401,9 @@
       "uses": 1,
       "producesItemName": "Phoenix Soulplate",
       "producesItemHashedId": "ElzPeorXNV1JQaW0kv53",
-      "producesItemVendorValue": 850
+      "producesItemVendorValue": 850,
+      "lastUpdated": "2026-02-28T21:01:50.165Z",
+      "suggestedRefreshMinutes": 29907
     },
     {
       "id": "rec-177",
@@ -2893,7 +3415,9 @@
       "uses": 1,
       "producesItemName": "Voidwalker Striders",
       "producesItemHashedId": "oaJydnOmQWmkYbgRe5ME",
-      "producesItemVendorValue": 800
+      "producesItemVendorValue": 800,
+      "lastUpdated": "2026-02-28T21:01:50.257Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-178",
@@ -2905,7 +3429,9 @@
       "uses": 1,
       "producesItemName": "Stormbreaker Boots",
       "producesItemHashedId": "dgBq1boWYeWgQkJ3rXaD",
-      "producesItemVendorValue": 750
+      "producesItemVendorValue": 750,
+      "lastUpdated": "2026-02-28T21:01:50.337Z",
+      "suggestedRefreshMinutes": 34277
     },
     {
       "id": "rec-179",
@@ -2917,7 +3443,9 @@
       "uses": 1,
       "producesItemName": "Moonshadow Guard",
       "producesItemHashedId": "bAB1E9poQqeOQnakeJj5",
-      "producesItemVendorValue": 750
+      "producesItemVendorValue": 750,
+      "lastUpdated": "2026-02-28T21:01:50.453Z",
+      "suggestedRefreshMinutes": 9134
     },
     {
       "id": "rec-180",
@@ -2929,7 +3457,9 @@
       "uses": 1,
       "producesItemName": "Ashenfire Ward",
       "producesItemHashedId": "ZjlPA8v9NM0ZQEyMe2Oa",
-      "producesItemVendorValue": 800
+      "producesItemVendorValue": 800,
+      "lastUpdated": "2026-02-28T21:01:50.543Z",
+      "suggestedRefreshMinutes": 12404
     },
     {
       "id": "rec-181",
@@ -2941,7 +3471,9 @@
       "uses": 0,
       "producesItemName": "Cosmic Tear",
       "producesItemHashedId": "27gw0k38L4ZxNWevJxyK",
-      "producesItemVendorValue": 2500
+      "producesItemVendorValue": 2500,
+      "lastUpdated": "2026-02-28T21:01:50.630Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-182",
@@ -2953,7 +3485,9 @@
       "uses": 30,
       "producesItemName": "Potion of the Hunter",
       "producesItemHashedId": "O2xMjGdBN5eMN9P1nyrv",
-      "producesItemVendorValue": 20000
+      "producesItemVendorValue": 20000,
+      "lastUpdated": "2026-02-28T21:01:50.718Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-183",
@@ -2993,7 +3527,9 @@
       "uses": 1,
       "producesItemName": "Dawnbreaker Sword",
       "producesItemHashedId": "gGZ2J71yYKXKLMmjbown",
-      "producesItemVendorValue": 900
+      "producesItemVendorValue": 900,
+      "lastUpdated": "2026-02-28T21:01:50.825Z",
+      "suggestedRefreshMinutes": 13753
     },
     {
       "id": "rec-186",
@@ -3005,7 +3541,9 @@
       "uses": 1,
       "producesItemName": "Runeblade Sword",
       "producesItemHashedId": "oZwey82VNAy5ND0dXM3g",
-      "producesItemVendorValue": 1200
+      "producesItemVendorValue": 1200,
+      "lastUpdated": "2026-02-28T21:01:50.907Z",
+      "suggestedRefreshMinutes": 6434
     },
     {
       "id": "rec-187",
@@ -3017,7 +3555,9 @@
       "uses": 1,
       "producesItemName": "Duskblade",
       "producesItemHashedId": "3ZvrGV8RQprBY2wgA5jD",
-      "producesItemVendorValue": 900
+      "producesItemVendorValue": 900,
+      "lastUpdated": "2026-02-28T21:02:49.135Z",
+      "suggestedRefreshMinutes": 21318
     },
     {
       "id": "rec-188",
@@ -3029,7 +3569,9 @@
       "uses": 1,
       "producesItemName": "Silent Reaper",
       "producesItemHashedId": "Ro31P7kZL6ejYveGxXOy",
-      "producesItemVendorValue": 1200
+      "producesItemVendorValue": 1200,
+      "lastUpdated": "2026-02-28T21:02:49.235Z",
+      "suggestedRefreshMinutes": 25746
     },
     {
       "id": "rec-189",
@@ -3041,7 +3583,9 @@
       "uses": 1,
       "producesItemName": "Dawnbreaker Bow",
       "producesItemHashedId": "3Zbym56qLxmGQBRp7Eek",
-      "producesItemVendorValue": 900
+      "producesItemVendorValue": 900,
+      "lastUpdated": "2026-02-28T21:02:50.319Z",
+      "suggestedRefreshMinutes": 4480
     },
     {
       "id": "rec-190",
@@ -3053,7 +3597,9 @@
       "uses": 1,
       "producesItemName": "Silverthorn Bow",
       "producesItemHashedId": "1rZXlwg5YvGjLk9joDmG",
-      "producesItemVendorValue": 1200
+      "producesItemVendorValue": 1200,
+      "lastUpdated": "2026-02-28T21:02:50.407Z",
+      "suggestedRefreshMinutes": 31993
     },
     {
       "id": "rec-191",
@@ -3065,7 +3611,9 @@
       "uses": 1,
       "producesItemName": "Ashenfire Crown",
       "producesItemHashedId": "j98bO5w1QPD9Q3xkREVJ",
-      "producesItemVendorValue": 900
+      "producesItemVendorValue": 900,
+      "lastUpdated": "2026-02-28T21:02:50.494Z",
+      "suggestedRefreshMinutes": 5313
     },
     {
       "id": "rec-192",
@@ -3077,7 +3625,9 @@
       "uses": 1,
       "producesItemName": "Nightshade Mask",
       "producesItemHashedId": "dgBq1boWYekgQkJ3rXaD",
-      "producesItemVendorValue": 1200
+      "producesItemVendorValue": 1200,
+      "lastUpdated": "2026-02-28T21:02:50.574Z",
+      "suggestedRefreshMinutes": 11523
     },
     {
       "id": "rec-193",
@@ -3089,7 +3639,9 @@
       "uses": 1,
       "producesItemName": "Voidrend Gauntlets",
       "producesItemHashedId": "q9pwa0kxLBRbLgVj136l",
-      "producesItemVendorValue": 900
+      "producesItemVendorValue": 900,
+      "lastUpdated": "2026-02-28T21:02:50.657Z",
+      "suggestedRefreshMinutes": 6782
     },
     {
       "id": "rec-194",
@@ -3101,7 +3653,9 @@
       "uses": 1,
       "producesItemName": "Windrider",
       "producesItemHashedId": "XjEaOeBkLap7YlGwxVPq",
-      "producesItemVendorValue": 1200
+      "producesItemVendorValue": 1200,
+      "lastUpdated": "2026-02-28T21:02:50.729Z",
+      "suggestedRefreshMinutes": 23951
     },
     {
       "id": "rec-195",
@@ -3113,7 +3667,9 @@
       "uses": 1,
       "producesItemName": "Echosteel Breastplate",
       "producesItemHashedId": "P1vlVrzjLrR4Lao8mGKM",
-      "producesItemVendorValue": 1200
+      "producesItemVendorValue": 1200,
+      "lastUpdated": "2026-02-28T21:02:50.813Z",
+      "suggestedRefreshMinutes": 21455
     },
     {
       "id": "rec-196",
@@ -3125,7 +3681,9 @@
       "uses": 1,
       "producesItemName": "Lunarweave Leggings",
       "producesItemHashedId": "ZqEegBydNwlVYkA59J61",
-      "producesItemVendorValue": 850
+      "producesItemVendorValue": 850,
+      "lastUpdated": "2026-02-28T21:02:50.905Z",
+      "suggestedRefreshMinutes": 13335
     },
     {
       "id": "rec-197",
@@ -3137,7 +3695,9 @@
       "uses": 1,
       "producesItemName": "Nightshade Greaves",
       "producesItemHashedId": "1rZXlwg5YvOrLk9joDmG",
-      "producesItemVendorValue": 1200
+      "producesItemVendorValue": 1200,
+      "lastUpdated": "2026-02-28T21:02:51.010Z",
+      "suggestedRefreshMinutes": 43064
     },
     {
       "id": "rec-198",
@@ -3149,7 +3709,9 @@
       "uses": 1,
       "producesItemName": "Voidstep Boots",
       "producesItemHashedId": "7eA59WrBQRReQzb62qKv",
-      "producesItemVendorValue": 800
+      "producesItemVendorValue": 800,
+      "lastUpdated": "2026-02-28T21:02:51.099Z",
+      "suggestedRefreshMinutes": 2928
     },
     {
       "id": "rec-199",
@@ -3161,7 +3723,9 @@
       "uses": 1,
       "producesItemName": "Nightshade Boots",
       "producesItemHashedId": "P1vlVrzjLrEDYao8mGKM",
-      "producesItemVendorValue": 1200
+      "producesItemVendorValue": 1200,
+      "lastUpdated": "2026-02-28T21:02:51.185Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-200",
@@ -3173,7 +3737,9 @@
       "uses": 1,
       "producesItemName": "Runebound Bulwark",
       "producesItemHashedId": "P1vlVrzjLr14Yao8mGKM",
-      "producesItemVendorValue": 850
+      "producesItemVendorValue": 850,
+      "lastUpdated": "2026-02-28T21:02:51.271Z",
+      "suggestedRefreshMinutes": 7312
     },
     {
       "id": "rec-201",
@@ -3185,7 +3751,9 @@
       "uses": 1,
       "producesItemName": "Shadewalker Bulwark",
       "producesItemHashedId": "ElzPeorXNVrANaW0kv53",
-      "producesItemVendorValue": 1200
+      "producesItemVendorValue": 1200,
+      "lastUpdated": "2026-02-28T21:02:51.351Z",
+      "suggestedRefreshMinutes": 15493
     },
     {
       "id": "rec-202",
@@ -3197,7 +3765,9 @@
       "uses": 1,
       "producesItemName": "Rune-etched Reeler",
       "producesItemHashedId": "XyeZRGx9Yj92NB80gWlP",
-      "producesItemVendorValue": 150
+      "producesItemVendorValue": 150,
+      "lastUpdated": "2026-02-28T21:02:51.420Z",
+      "suggestedRefreshMinutes": 15598
     },
     {
       "id": "rec-203",
@@ -3209,7 +3779,9 @@
       "uses": 1,
       "producesItemName": "Corestrike",
       "producesItemHashedId": "y7Do6jgkY0ZqQ8BAdKX0",
-      "producesItemVendorValue": 150
+      "producesItemVendorValue": 150,
+      "lastUpdated": "2026-02-28T21:02:51.506Z",
+      "suggestedRefreshMinutes": 20186
     },
     {
       "id": "rec-204",
@@ -3221,7 +3793,9 @@
       "uses": 1,
       "producesItemName": "Silvan Splitter",
       "producesItemHashedId": "oZwey82VNAO0LD0dXM3g",
-      "producesItemVendorValue": 150
+      "producesItemVendorValue": 150,
+      "lastUpdated": "2026-02-28T21:02:51.606Z",
+      "suggestedRefreshMinutes": 24994
     },
     {
       "id": "rec-205",
@@ -3233,7 +3807,9 @@
       "uses": 30,
       "producesItemName": "Potion of the Gods",
       "producesItemHashedId": "lrx463VdQgBOL5w1zWKP",
-      "producesItemVendorValue": 20000
+      "producesItemVendorValue": 20000,
+      "lastUpdated": "2026-02-28T21:02:51.683Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-206",
@@ -3245,7 +3821,9 @@
       "uses": 30,
       "producesItemName": "Eternal Feast Essence Crystal",
       "producesItemHashedId": "y7Do6jgkY0wzN8BAdKX0",
-      "producesItemVendorValue": 20000
+      "producesItemVendorValue": 20000,
+      "lastUpdated": "2026-02-28T21:02:51.763Z",
+      "suggestedRefreshMinutes": 35160
     },
     {
       "id": "rec-207",
@@ -3285,7 +3863,9 @@
       "uses": 1,
       "producesItemName": "Starshard",
       "producesItemHashedId": "oaJydnOmQWApYbgRe5ME",
-      "producesItemVendorValue": 1000
+      "producesItemVendorValue": 1000,
+      "lastUpdated": "2026-02-28T21:03:50.190Z",
+      "suggestedRefreshMinutes": 19124
     },
     {
       "id": "rec-210",
@@ -3297,7 +3877,9 @@
       "uses": 1,
       "producesItemName": "Phoenix Requiem",
       "producesItemHashedId": "JZdg5V3PQopvNEyWq0zl",
-      "producesItemVendorValue": 1300
+      "producesItemVendorValue": 1300,
+      "lastUpdated": "2026-02-28T21:03:50.268Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-211",
@@ -3309,7 +3891,9 @@
       "uses": 1,
       "producesItemName": "Ghostwalker",
       "producesItemHashedId": "7eA59WrBQRoJNzb62qKv",
-      "producesItemVendorValue": 1000
+      "producesItemVendorValue": 1000,
+      "lastUpdated": "2026-02-28T21:03:51.366Z",
+      "suggestedRefreshMinutes": 15973
     },
     {
       "id": "rec-212",
@@ -3321,7 +3905,9 @@
       "uses": 1,
       "producesItemName": "Silvermist",
       "producesItemHashedId": "brz9RZnWN7R4QKAp0Mdl",
-      "producesItemVendorValue": 1300
+      "producesItemVendorValue": 1300,
+      "lastUpdated": "2026-02-28T21:03:51.444Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-213",
@@ -3333,7 +3919,9 @@
       "uses": 1,
       "producesItemName": "Starshower",
       "producesItemHashedId": "JZdg5V3PQojALEyWq0zl",
-      "producesItemVendorValue": 1000
+      "producesItemVendorValue": 1000,
+      "lastUpdated": "2026-02-28T21:03:51.536Z",
+      "suggestedRefreshMinutes": 24944
     },
     {
       "id": "rec-214",
@@ -3345,7 +3933,9 @@
       "uses": 1,
       "producesItemName": "Bloodmoon Bow",
       "producesItemHashedId": "q9pwa0kxLBkbQgVj136l",
-      "producesItemVendorValue": 1300
+      "producesItemVendorValue": 1300,
+      "lastUpdated": "2026-02-28T21:03:51.612Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-215",
@@ -3357,7 +3947,9 @@
       "uses": 1,
       "producesItemName": "Verdant Guardian Helm",
       "producesItemHashedId": "Rv5g4z1dQn1kLqy32jpG",
-      "producesItemVendorValue": 1000
+      "producesItemVendorValue": 1000,
+      "lastUpdated": "2026-02-28T21:03:51.692Z",
+      "suggestedRefreshMinutes": 15568
     },
     {
       "id": "rec-216",
@@ -3369,7 +3961,9 @@
       "uses": 1,
       "producesItemName": "Glimmersteel Helm",
       "producesItemHashedId": "7eA59WrBQRleYzb62qKv",
-      "producesItemVendorValue": 1300
+      "producesItemVendorValue": 1300,
+      "lastUpdated": "2026-02-28T21:03:51.775Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-217",
@@ -3381,7 +3975,9 @@
       "uses": 1,
       "producesItemName": "Lunarweave Gloves",
       "producesItemHashedId": "zvjoJW96Y8vBQ3RaAylw",
-      "producesItemVendorValue": 950
+      "producesItemVendorValue": 950,
+      "lastUpdated": "2026-02-28T21:03:51.859Z",
+      "suggestedRefreshMinutes": 23898
     },
     {
       "id": "rec-218",
@@ -3393,7 +3989,9 @@
       "uses": 1,
       "producesItemName": "Bloodforged Gauntlets",
       "producesItemHashedId": "PjVDJez3LDjlNKWO08Ga",
-      "producesItemVendorValue": 1000
+      "producesItemVendorValue": 1000,
+      "lastUpdated": "2026-02-28T21:03:51.950Z",
+      "suggestedRefreshMinutes": 25722
     },
     {
       "id": "rec-219",
@@ -3405,7 +4003,9 @@
       "uses": 1,
       "producesItemName": "Grasps of Protection",
       "producesItemHashedId": "njoPWKDkLX4BL06ZOX79",
-      "producesItemVendorValue": 1300
+      "producesItemVendorValue": 1300,
+      "lastUpdated": "2026-02-28T21:03:52.019Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-220",
@@ -3417,7 +4017,9 @@
       "uses": 1,
       "producesItemName": "Guardian's Valor",
       "producesItemHashedId": "Ro31P7kZL6ZOLveGxXOy",
-      "producesItemVendorValue": 950
+      "producesItemVendorValue": 950,
+      "lastUpdated": "2026-02-28T21:03:52.103Z",
+      "suggestedRefreshMinutes": 8010
     },
     {
       "id": "rec-221",
@@ -3429,7 +4031,9 @@
       "uses": 1,
       "producesItemName": "Verdant Chainmail",
       "producesItemHashedId": "Z6aDoyRnLyprYpV5AGXm",
-      "producesItemVendorValue": 1300
+      "producesItemVendorValue": 1300,
+      "lastUpdated": "2026-02-28T21:03:52.178Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-222",
@@ -3441,7 +4045,9 @@
       "uses": 1,
       "producesItemName": "Runebound Shinplates",
       "producesItemHashedId": "oZwey82VNAmbND0dXM3g",
-      "producesItemVendorValue": 950
+      "producesItemVendorValue": 950,
+      "lastUpdated": "2026-02-28T21:03:52.251Z",
+      "suggestedRefreshMinutes": 21582
     },
     {
       "id": "rec-223",
@@ -3453,7 +4059,9 @@
       "uses": 1,
       "producesItemName": "Glimmersteel Pathguards",
       "producesItemHashedId": "q9pwa0kxLBxvNgVj136l",
-      "producesItemVendorValue": 1300
+      "producesItemVendorValue": 1300,
+      "lastUpdated": "2026-02-28T21:03:52.338Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-224",
@@ -3465,7 +4073,9 @@
       "uses": 1,
       "producesItemName": "Ashenfire Boots",
       "producesItemHashedId": "XyeZRGx9Yj5zNB80gWlP",
-      "producesItemVendorValue": 900
+      "producesItemVendorValue": 900,
+      "lastUpdated": "2026-02-28T21:03:52.414Z",
+      "suggestedRefreshMinutes": 12241
     },
     {
       "id": "rec-225",
@@ -3477,7 +4087,9 @@
       "uses": 1,
       "producesItemName": "Glimmersteel Boots",
       "producesItemHashedId": "Z6aDoyRnLyeyLpV5AGXm",
-      "producesItemVendorValue": 1300
+      "producesItemVendorValue": 1300,
+      "lastUpdated": "2026-02-28T21:03:52.492Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-226",
@@ -3489,7 +4101,9 @@
       "uses": 1,
       "producesItemName": "Bloodbane Barrier",
       "producesItemHashedId": "27gw0k38L4d2LWevJxyK",
-      "producesItemVendorValue": 950
+      "producesItemVendorValue": 950,
+      "lastUpdated": "2026-02-28T21:03:52.575Z",
+      "suggestedRefreshMinutes": 10702
     },
     {
       "id": "rec-227",
@@ -3501,7 +4115,9 @@
       "uses": 1,
       "producesItemName": "Stormbringer Buckler",
       "producesItemHashedId": "XyeZRGx9YjpzQB80gWlP",
-      "producesItemVendorValue": 1300
+      "producesItemVendorValue": 1300,
+      "lastUpdated": "2026-02-28T21:03:52.647Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-228",
@@ -3513,7 +4129,9 @@
       "uses": 30,
       "producesItemName": "Divine Essence Crystal",
       "producesItemHashedId": "3yE1A84kYOBwNl6XeVKp",
-      "producesItemVendorValue": 20000
+      "producesItemVendorValue": 20000,
+      "lastUpdated": "2026-02-28T21:03:52.728Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-229",
@@ -3566,7 +4184,9 @@
       "uses": 1,
       "producesItemName": "Grimslayer",
       "producesItemHashedId": "3Zbym56qLx1PQBRp7Eek",
-      "producesItemVendorValue": 1100
+      "producesItemVendorValue": 1100,
+      "lastUpdated": "2026-02-28T21:04:51.260Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-233",
@@ -3578,7 +4198,9 @@
       "uses": 1,
       "producesItemName": "Death's Embrace",
       "producesItemHashedId": "JVM29l7kQZlMY80q6WDG",
-      "producesItemVendorValue": 1400
+      "producesItemVendorValue": 1400,
+      "lastUpdated": "2026-02-28T21:04:52.338Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-234",
@@ -3590,7 +4212,9 @@
       "uses": 1,
       "producesItemName": "Nightfall Dagger",
       "producesItemHashedId": "bAB1E9poQqkgYnakeJj5",
-      "producesItemVendorValue": 1400
+      "producesItemVendorValue": 1400,
+      "lastUpdated": "2026-02-28T21:04:52.421Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-235",
@@ -3602,7 +4226,9 @@
       "uses": 1,
       "producesItemName": "Fury",
       "producesItemHashedId": "JVM29l7kQZ1XL80q6WDG",
-      "producesItemVendorValue": 1050
+      "producesItemVendorValue": 1050,
+      "lastUpdated": "2026-02-28T21:04:52.510Z",
+      "suggestedRefreshMinutes": 29351
     },
     {
       "id": "rec-236",
@@ -3614,7 +4240,9 @@
       "uses": 1,
       "producesItemName": "Death's Touch",
       "producesItemHashedId": "zvjoJW96Y8ZBQ3RaAylw",
-      "producesItemVendorValue": 1400
+      "producesItemVendorValue": 1400,
+      "lastUpdated": "2026-02-28T21:04:52.614Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-237",
@@ -3626,7 +4254,9 @@
       "uses": 1,
       "producesItemName": "Bloodforged Helm",
       "producesItemHashedId": "mK5jqPopYGjwNrOzDRGV",
-      "producesItemVendorValue": 1050
+      "producesItemVendorValue": 1050,
+      "lastUpdated": "2026-02-28T21:04:52.696Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-238",
@@ -3638,7 +4268,9 @@
       "uses": 1,
       "producesItemName": "Soul",
       "producesItemHashedId": "ElzPeorXNVlALaW0kv53",
-      "producesItemVendorValue": 1400
+      "producesItemVendorValue": 1400,
+      "lastUpdated": "2026-02-28T21:04:52.786Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-239",
@@ -3650,7 +4282,9 @@
       "uses": 1,
       "producesItemName": "Phoenixclaw Gauntlets",
       "producesItemHashedId": "0kK49j1VN95PNq6B2doa",
-      "producesItemVendorValue": 1050
+      "producesItemVendorValue": 1050,
+      "lastUpdated": "2026-02-28T21:04:52.884Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-240",
@@ -3662,7 +4296,9 @@
       "uses": 1,
       "producesItemName": "Gloves of the Protector",
       "producesItemHashedId": "B2WEpv54Nmm1Nj1xJrXk",
-      "producesItemVendorValue": 1400
+      "producesItemVendorValue": 1400,
+      "lastUpdated": "2026-02-28T21:04:52.969Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-241",
@@ -3674,7 +4310,9 @@
       "uses": 1,
       "producesItemName": "Dreadbane Armor",
       "producesItemHashedId": "bAB1E9poQq7OYnakeJj5",
-      "producesItemVendorValue": 1050
+      "producesItemVendorValue": 1050,
+      "lastUpdated": "2026-02-28T21:04:53.054Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-242",
@@ -3686,7 +4324,9 @@
       "uses": 1,
       "producesItemName": "Ashenplate Cuirass",
       "producesItemHashedId": "27gw0k38L4v2NWevJxyK",
-      "producesItemVendorValue": 1400
+      "producesItemVendorValue": 1400,
+      "lastUpdated": "2026-02-28T21:04:53.137Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-243",
@@ -3698,7 +4338,9 @@
       "uses": 1,
       "producesItemName": "Phoenix Greaves",
       "producesItemHashedId": "93R0qXalLllMLAbn8DBg",
-      "producesItemVendorValue": 1100
+      "producesItemVendorValue": 1100,
+      "lastUpdated": "2026-02-28T21:04:53.221Z",
+      "suggestedRefreshMinutes": 20721
     },
     {
       "id": "rec-244",
@@ -3710,7 +4352,9 @@
       "uses": 1,
       "producesItemName": "Soulshield Legplates",
       "producesItemHashedId": "zvjoJW96Y8X3Y3RaAylw",
-      "producesItemVendorValue": 1400
+      "producesItemVendorValue": 1400,
+      "lastUpdated": "2026-02-28T21:04:53.304Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-245",
@@ -3722,7 +4366,9 @@
       "uses": 1,
       "producesItemName": "Verdant Boots",
       "producesItemHashedId": "brz9RZnWN7wpNKAp0Mdl",
-      "producesItemVendorValue": 1000
+      "producesItemVendorValue": 1000,
+      "lastUpdated": "2026-02-28T21:04:53.389Z",
+      "suggestedRefreshMinutes": 14399
     },
     {
       "id": "rec-246",
@@ -3734,7 +4380,9 @@
       "uses": 1,
       "producesItemName": "Soulshield Treads",
       "producesItemHashedId": "27gw0k38L4xrLWevJxyK",
-      "producesItemVendorValue": 1400
+      "producesItemVendorValue": 1400,
+      "lastUpdated": "2026-02-28T21:04:53.475Z",
+      "suggestedRefreshMinutes": 27801
     },
     {
       "id": "rec-247",
@@ -3746,7 +4394,9 @@
       "uses": 1,
       "producesItemName": "Phoenixguard Shield",
       "producesItemHashedId": "dgBq1boWYeEgYkJ3rXaD",
-      "producesItemVendorValue": 1050
+      "producesItemVendorValue": 1050,
+      "lastUpdated": "2026-02-28T21:04:53.578Z",
+      "suggestedRefreshMinutes": 30800
     },
     {
       "id": "rec-248",
@@ -3758,7 +4408,9 @@
       "uses": 1,
       "producesItemName": "Ironbark Protector",
       "producesItemHashedId": "Ro31P7kZL61vYveGxXOy",
-      "producesItemVendorValue": 1400
+      "producesItemVendorValue": 1400,
+      "lastUpdated": "2026-02-28T21:04:53.672Z",
+      "suggestedRefreshMinutes": 36487
     },
     {
       "id": "rec-249",
@@ -3770,7 +4422,9 @@
       "uses": 1,
       "producesItemName": "Arboreal Ender",
       "producesItemHashedId": "JZdg5V3PQo60LEyWq0zl",
-      "producesItemVendorValue": 500
+      "producesItemVendorValue": 500,
+      "lastUpdated": "2026-02-28T21:04:53.759Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-250",
@@ -3782,7 +4436,9 @@
       "uses": 30,
       "producesItemName": "Cosmic Crystal",
       "producesItemHashedId": "3Zbym56qLxJRNBRp7Eek",
-      "producesItemVendorValue": 20000
+      "producesItemVendorValue": 20000,
+      "lastUpdated": "2026-02-28T21:04:53.850Z",
+      "suggestedRefreshMinutes": 14701
     },
     {
       "id": "rec-251",
@@ -3794,7 +4450,9 @@
       "uses": 30,
       "producesItemName": "Guardian's Soul",
       "producesItemHashedId": "oZwey82VNAg6LD0dXM3g",
-      "producesItemVendorValue": 20000
+      "producesItemVendorValue": 20000,
+      "lastUpdated": "2026-02-28T21:05:52.190Z",
+      "suggestedRefreshMinutes": 20239
     },
     {
       "id": "rec-252",
@@ -3834,7 +4492,9 @@
       "uses": 1,
       "producesItemName": "Silverthorn Sword",
       "producesItemHashedId": "93R0qXalLlddLAbn8DBg",
-      "producesItemVendorValue": 1500
+      "producesItemVendorValue": 1500,
+      "lastUpdated": "2026-02-28T21:05:52.291Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-255",
@@ -3846,7 +4506,9 @@
       "uses": 1,
       "producesItemName": "Starglitter",
       "producesItemHashedId": "XyeZRGx9Yj6PYB80gWlP",
-      "producesItemVendorValue": 1100
+      "producesItemVendorValue": 1100,
+      "lastUpdated": "2026-02-28T21:05:53.384Z",
+      "suggestedRefreshMinutes": 31873
     },
     {
       "id": "rec-256",
@@ -3858,7 +4520,9 @@
       "uses": 1,
       "producesItemName": "Widow's Kiss",
       "producesItemHashedId": "ZjlPA8v9NMO8LEyMe2Oa",
-      "producesItemVendorValue": 1500
+      "producesItemVendorValue": 1500,
+      "lastUpdated": "2026-02-28T21:05:53.474Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-257",
@@ -3870,7 +4534,9 @@
       "uses": 1,
       "producesItemName": "Grimwood",
       "producesItemHashedId": "93R0qXalLlemQAbn8DBg",
-      "producesItemVendorValue": 1100
+      "producesItemVendorValue": 1100,
+      "lastUpdated": "2026-02-28T21:05:53.558Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-258",
@@ -3883,7 +4549,8 @@
       "uses": 1,
       "producesItemName": "Soulstring",
       "producesItemHashedId": "PjVDJez3LDXlLKWO08Ga",
-      "producesItemVendorValue": 1500
+      "producesItemVendorValue": 1500,
+      "lastUpdated": "2026-02-28T21:11:07.604Z"
     },
     {
       "id": "rec-259",
@@ -3895,7 +4562,9 @@
       "uses": 1,
       "producesItemName": "Phoenix Crown",
       "producesItemHashedId": "3ZvrGV8RQpdPQ2wgA5jD",
-      "producesItemVendorValue": 1100
+      "producesItemVendorValue": 1100,
+      "lastUpdated": "2026-02-28T21:05:53.734Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-260",
@@ -3920,7 +4589,9 @@
       "uses": 1,
       "producesItemName": "Nightshade Grips",
       "producesItemHashedId": "BPjze3x2Q3a8YR85vgZV",
-      "producesItemVendorValue": 1100
+      "producesItemVendorValue": 1100,
+      "lastUpdated": "2026-02-28T21:05:53.916Z",
+      "suggestedRefreshMinutes": 26527
     },
     {
       "id": "rec-262",
@@ -3933,7 +4604,8 @@
       "uses": 1,
       "producesItemName": "Sacred Grasp",
       "producesItemHashedId": "RVrBKlPdNdxkNWG8xJe9",
-      "producesItemVendorValue": 1500
+      "producesItemVendorValue": 1500,
+      "lastUpdated": "2026-02-28T21:11:07.759Z"
     },
     {
       "id": "rec-263",
@@ -3946,7 +4618,8 @@
       "uses": 1,
       "producesItemName": "Soulguard Armor",
       "producesItemHashedId": "O2xMjGdBN5dxQ9P1nyrv",
-      "producesItemVendorValue": 1500
+      "producesItemVendorValue": 1500,
+      "lastUpdated": "2026-02-28T21:11:07.838Z"
     },
     {
       "id": "rec-264",
@@ -3984,7 +4657,9 @@
       "uses": 1,
       "producesItemName": "Soulshield of Redemption",
       "producesItemHashedId": "brz9RZnWN7ppYKAp0Mdl",
-      "producesItemVendorValue": 1500
+      "producesItemVendorValue": 1500,
+      "lastUpdated": "2026-02-28T21:05:54.328Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-267",
@@ -3996,7 +4671,9 @@
       "uses": 1,
       "producesItemName": "Kraken's Grasp",
       "producesItemHashedId": "Ro31P7kZL6j5LveGxXOy",
-      "producesItemVendorValue": 500
+      "producesItemVendorValue": 500,
+      "lastUpdated": "2026-02-28T21:05:54.416Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-268",
@@ -4008,7 +4685,9 @@
       "uses": 30,
       "producesItemName": "Phoenix Ashes",
       "producesItemHashedId": "JZdg5V3PQoqKYEyWq0zl",
-      "producesItemVendorValue": 20000
+      "producesItemVendorValue": 20000,
+      "lastUpdated": "2026-02-28T21:05:54.490Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-269",
@@ -4020,7 +4699,9 @@
       "uses": 30,
       "producesItemName": "Omnipotent Might Essence",
       "producesItemHashedId": "JVM29l7kQZdAY80q6WDG",
-      "producesItemVendorValue": 20000
+      "producesItemVendorValue": 20000,
+      "lastUpdated": "2026-02-28T21:05:54.583Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-270",
@@ -4060,7 +4741,9 @@
       "uses": 1,
       "producesItemName": "Emberfang",
       "producesItemHashedId": "yav4OK1wNEZyYZP7rzJb",
-      "producesItemVendorValue": 950
+      "producesItemVendorValue": 950,
+      "lastUpdated": "2026-02-28T21:05:54.667Z",
+      "suggestedRefreshMinutes": 27418
     },
     {
       "id": "rec-273",
@@ -4073,7 +4756,9 @@
       "uses": 1,
       "producesItemName": "Bloodthirst",
       "producesItemHashedId": "1rZXlwg5YvDGQk9joDmG",
-      "producesItemVendorValue": 1600
+      "producesItemVendorValue": 1600,
+      "lastUpdated": "2026-02-28T21:05:54.745Z",
+      "suggestedRefreshMinutes": 13364
     },
     {
       "id": "rec-274",
@@ -4085,7 +4770,9 @@
       "uses": 1,
       "producesItemName": "Bloodthorn",
       "producesItemHashedId": "dgBq1boWYeJrLkJ3rXaD",
-      "producesItemVendorValue": 950
+      "producesItemVendorValue": 950,
+      "lastUpdated": "2026-02-28T21:05:54.825Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-275",
@@ -4097,7 +4784,9 @@
       "uses": 1,
       "producesItemName": "Fatebreaker",
       "producesItemHashedId": "P1vlVrzjLrl5Nao8mGKM",
-      "producesItemVendorValue": 1600
+      "producesItemVendorValue": 1600,
+      "lastUpdated": "2026-02-28T21:06:53.185Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-276",
@@ -4109,7 +4798,9 @@
       "uses": 1,
       "producesItemName": "Ashenwind",
       "producesItemHashedId": "oZwey82VNAPdQD0dXM3g",
-      "producesItemVendorValue": 950
+      "producesItemVendorValue": 950,
+      "lastUpdated": "2026-02-28T21:06:53.272Z",
+      "suggestedRefreshMinutes": 21122
     },
     {
       "id": "rec-277",
@@ -4134,7 +4825,9 @@
       "uses": 1,
       "producesItemName": "Runebound Helm",
       "producesItemHashedId": "EWGwnXPlY1jdLJqekZ2R",
-      "producesItemVendorValue": 950
+      "producesItemVendorValue": 950,
+      "lastUpdated": "2026-02-28T21:06:54.448Z",
+      "suggestedRefreshMinutes": 14636
     },
     {
       "id": "rec-279",
@@ -4172,7 +4865,9 @@
       "uses": 1,
       "producesItemName": "Bloodforged Harness",
       "producesItemHashedId": "XyeZRGx9Yjz8YB80gWlP",
-      "producesItemVendorValue": 900
+      "producesItemVendorValue": 900,
+      "lastUpdated": "2026-02-28T21:06:54.688Z",
+      "suggestedRefreshMinutes": 39639
     },
     {
       "id": "rec-282",
@@ -4185,7 +4880,8 @@
       "uses": 1,
       "producesItemName": "Windrider Harness",
       "producesItemHashedId": "lrx463VdQgxmN5w1zWKP",
-      "producesItemVendorValue": 1600
+      "producesItemVendorValue": 1600,
+      "lastUpdated": "2026-02-28T21:11:08.309Z"
     },
     {
       "id": "rec-283",
@@ -4197,7 +4893,9 @@
       "uses": 1,
       "producesItemName": "Ashenfire Greaves",
       "producesItemHashedId": "3Zbym56qLxkJYBRp7Eek",
-      "producesItemVendorValue": 900
+      "producesItemVendorValue": 900,
+      "lastUpdated": "2026-02-28T21:06:54.887Z",
+      "suggestedRefreshMinutes": 43153
     },
     {
       "id": "rec-284",
@@ -4210,7 +4908,9 @@
       "uses": 1,
       "producesItemName": "Twilight Veilguards",
       "producesItemHashedId": "0kK49j1VN917Nq6B2doa",
-      "producesItemVendorValue": 1600
+      "producesItemVendorValue": 1600,
+      "lastUpdated": "2026-02-28T21:06:54.978Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-285",
@@ -4222,7 +4922,9 @@
       "uses": 1,
       "producesItemName": "Lunarweave Boots",
       "producesItemHashedId": "ElzPeorXNV7AYaW0kv53",
-      "producesItemVendorValue": 850
+      "producesItemVendorValue": 850,
+      "lastUpdated": "2026-02-28T21:06:55.058Z",
+      "suggestedRefreshMinutes": 33202
     },
     {
       "id": "rec-286",
@@ -4234,7 +4936,9 @@
       "uses": 1,
       "producesItemName": "Twilight Veilwalkers",
       "producesItemHashedId": "lrx463VdQgJgL5w1zWKP",
-      "producesItemVendorValue": 1600
+      "producesItemVendorValue": 1600,
+      "lastUpdated": "2026-02-28T21:06:55.126Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-287",
@@ -4246,7 +4950,9 @@
       "uses": 1,
       "producesItemName": "Verdant Sentinel",
       "producesItemHashedId": "Z6aDoyRnLykrNpV5AGXm",
-      "producesItemVendorValue": 900
+      "producesItemVendorValue": 900,
+      "lastUpdated": "2026-02-28T21:06:55.212Z",
+      "suggestedRefreshMinutes": 11482
     },
     {
       "id": "rec-288",
@@ -4258,7 +4964,9 @@
       "uses": 1,
       "producesItemName": "Deathgate",
       "producesItemHashedId": "bAB1E9poQqmKQnakeJj5",
-      "producesItemVendorValue": 1600
+      "producesItemVendorValue": 1600,
+      "lastUpdated": "2026-02-28T21:06:55.299Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-289",
@@ -4270,7 +4978,8 @@
       "uses": 1,
       "producesItemName": "Boulder's Bane",
       "producesItemHashedId": "3yE1A84kYO9BQl6XeVKp",
-      "producesItemVendorValue": 500
+      "producesItemVendorValue": 500,
+      "lastUpdated": "2026-02-28T21:11:08.378Z"
     },
     {
       "id": "rec-290",
@@ -4283,7 +4992,9 @@
       "uses": 30,
       "producesItemName": "Sun's Light",
       "producesItemHashedId": "jGXBy7a4LbBML0Pw6Vdg",
-      "producesItemVendorValue": 20000
+      "producesItemVendorValue": 20000,
+      "lastUpdated": "2026-02-28T21:06:55.469Z",
+      "suggestedRefreshMinutes": 11821
     },
     {
       "id": "rec-291",
@@ -4309,7 +5020,9 @@
       "uses": 30,
       "producesItemName": "Cosmic Barrier",
       "producesItemHashedId": "93R0qXalLljjNAbn8DBg",
-      "producesItemVendorValue": 20000
+      "producesItemVendorValue": 20000,
+      "lastUpdated": "2026-02-28T21:06:55.623Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-293",
@@ -4321,7 +5034,9 @@
       "uses": 30,
       "producesItemName": "Flash Velocity Essence",
       "producesItemHashedId": "1rZXlwg5Yv08Qk9joDmG",
-      "producesItemVendorValue": 20000
+      "producesItemVendorValue": 20000,
+      "lastUpdated": "2026-02-28T21:06:55.699Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-294",
@@ -4389,7 +5104,9 @@
       "uses": 1,
       "producesItemName": "Tempest's Fury",
       "producesItemHashedId": "ZqEegBydNwG5NkA59J61",
-      "producesItemVendorValue": 1050
+      "producesItemVendorValue": 1050,
+      "lastUpdated": "2026-02-28T21:06:55.783Z",
+      "suggestedRefreshMinutes": 42230
     },
     {
       "id": "rec-299",
@@ -4414,7 +5131,9 @@
       "uses": 1,
       "producesItemName": "Emberstrike",
       "producesItemHashedId": "ElzPeorXNVABQaW0kv53",
-      "producesItemVendorValue": 1050
+      "producesItemVendorValue": 1050,
+      "lastUpdated": "2026-02-28T21:07:54.274Z",
+      "suggestedRefreshMinutes": 26045
     },
     {
       "id": "rec-301",
@@ -4440,7 +5159,8 @@
       "uses": 1,
       "producesItemName": "Sting",
       "producesItemHashedId": "BPjze3x2Q3l8NR85vgZV",
-      "producesItemVendorValue": 1700
+      "producesItemVendorValue": 1700,
+      "lastUpdated": "2026-02-28T21:12:07.135Z"
     },
     {
       "id": "rec-303",
@@ -4453,7 +5173,9 @@
       "uses": 1,
       "producesItemName": "Thunder",
       "producesItemHashedId": "brz9RZnWN7ypLKAp0Mdl",
-      "producesItemVendorValue": 1700
+      "producesItemVendorValue": 1700,
+      "lastUpdated": "2026-02-28T21:07:55.540Z",
+      "suggestedRefreshMinutes": 5591
     },
     {
       "id": "rec-304",
@@ -4478,7 +5200,9 @@
       "uses": 1,
       "producesItemName": "Starfire Plate",
       "producesItemHashedId": "brz9RZnWN7K2NKAp0Mdl",
-      "producesItemVendorValue": 1000
+      "producesItemVendorValue": 1000,
+      "lastUpdated": "2026-02-28T21:07:55.703Z",
+      "suggestedRefreshMinutes": 37367
     },
     {
       "id": "rec-306",
@@ -4491,7 +5215,8 @@
       "uses": 1,
       "producesItemName": "Twilight",
       "producesItemHashedId": "y7Do6jgkY0A0L8BAdKX0",
-      "producesItemVendorValue": 1700
+      "producesItemVendorValue": 1700,
+      "lastUpdated": "2026-02-28T21:12:08.308Z"
     },
     {
       "id": "rec-307",
@@ -4503,7 +5228,9 @@
       "uses": 1,
       "producesItemName": "Verdant Greaves",
       "producesItemHashedId": "JZdg5V3PQol6NEyWq0zl",
-      "producesItemVendorValue": 1000
+      "producesItemVendorValue": 1000,
+      "lastUpdated": "2026-02-28T21:07:55.869Z",
+      "suggestedRefreshMinutes": 34427
     },
     {
       "id": "rec-308",
@@ -4528,7 +5255,9 @@
       "uses": 1,
       "producesItemName": "Runebound Footwraps",
       "producesItemHashedId": "Ro31P7kZL6zvLveGxXOy",
-      "producesItemVendorValue": 950
+      "producesItemVendorValue": 950,
+      "lastUpdated": "2026-02-28T21:07:56.014Z",
+      "suggestedRefreshMinutes": 7013
     },
     {
       "id": "rec-310",
@@ -4553,7 +5282,9 @@
       "uses": 1,
       "producesItemName": "Twilight Sanctum",
       "producesItemHashedId": "O2xMjGdBN5bxY9P1nyrv",
-      "producesItemVendorValue": 1000
+      "producesItemVendorValue": 1000,
+      "lastUpdated": "2026-02-28T21:07:56.174Z",
+      "suggestedRefreshMinutes": 18414
     },
     {
       "id": "rec-312",
@@ -4591,7 +5322,9 @@
       "uses": 30,
       "producesItemName": "Neptune's Soul",
       "producesItemHashedId": "gGZ2J71yYKx9LMmjbown",
-      "producesItemVendorValue": 20000
+      "producesItemVendorValue": 20000,
+      "lastUpdated": "2026-02-28T21:07:56.423Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-315",
@@ -4603,7 +5336,8 @@
       "uses": 30,
       "producesItemName": "Magma Vein Infusion",
       "producesItemHashedId": "yav4OK1wNEb5YZP7rzJb",
-      "producesItemVendorValue": 20000
+      "producesItemVendorValue": 20000,
+      "lastUpdated": "2026-02-28T21:12:08.692Z"
     },
     {
       "id": "rec-316",
@@ -4615,7 +5349,9 @@
       "uses": 30,
       "producesItemName": "Cosmic Finesse Essence",
       "producesItemHashedId": "q9pwa0kxLB0JNgVj136l",
-      "producesItemVendorValue": 20000
+      "producesItemVendorValue": 20000,
+      "lastUpdated": "2026-02-28T21:07:56.576Z",
+      "suggestedRefreshMinutes": 40313
     },
     {
       "id": "rec-317",
@@ -4709,7 +5445,8 @@
       "uses": 1,
       "producesItemName": "Fortune",
       "producesItemHashedId": "bAB1E9poQqDKLnakeJj5",
-      "producesItemVendorValue": 2000
+      "producesItemVendorValue": 2000,
+      "lastUpdated": "2026-02-28T21:12:09.006Z"
     },
     {
       "id": "rec-324",
@@ -4734,7 +5471,9 @@
       "uses": 1,
       "producesItemName": "Moonshadow Vestment",
       "producesItemHashedId": "ZjlPA8v9NMXZQEyMe2Oa",
-      "producesItemVendorValue": 1100
+      "producesItemVendorValue": 1100,
+      "lastUpdated": "2026-02-28T21:08:56.487Z",
+      "suggestedRefreshMinutes": 36698
     },
     {
       "id": "rec-326",
@@ -4759,7 +5498,9 @@
       "uses": 1,
       "producesItemName": "Bloodforged Legguards",
       "producesItemHashedId": "JVM29l7kQZmbL80q6WDG",
-      "producesItemVendorValue": 1050
+      "producesItemVendorValue": 1050,
+      "lastUpdated": "2026-02-28T21:08:56.654Z",
+      "suggestedRefreshMinutes": 16658
     },
     {
       "id": "rec-328",
@@ -4784,7 +5525,9 @@
       "uses": 1,
       "producesItemName": "Bloodforged Boots",
       "producesItemHashedId": "bAB1E9poQqKKYnakeJj5",
-      "producesItemVendorValue": 1050
+      "producesItemVendorValue": 1050,
+      "lastUpdated": "2026-02-28T21:08:56.827Z",
+      "suggestedRefreshMinutes": 8990
     },
     {
       "id": "rec-330",
@@ -4796,7 +5539,9 @@
       "uses": 1,
       "producesItemName": "Phoenix Boots",
       "producesItemHashedId": "ZjlPA8v9NMDyQEyMe2Oa",
-      "producesItemVendorValue": 1100
+      "producesItemVendorValue": 1100,
+      "lastUpdated": "2026-02-28T21:08:56.913Z",
+      "suggestedRefreshMinutes": 29928
     },
     {
       "id": "rec-331",
@@ -4821,7 +5566,9 @@
       "uses": 1,
       "producesItemName": "Glimmersteel Ward",
       "producesItemHashedId": "7eA59WrBQR6eQzb62qKv",
-      "producesItemVendorValue": 1100
+      "producesItemVendorValue": 1100,
+      "lastUpdated": "2026-02-28T21:08:57.089Z",
+      "suggestedRefreshMinutes": 18528
     },
     {
       "id": "rec-333",
@@ -4872,7 +5619,9 @@
       "uses": 30,
       "producesItemName": "Titans Essence",
       "producesItemHashedId": "oaJydnOmQWB2LbgRe5ME",
-      "producesItemVendorValue": 20000
+      "producesItemVendorValue": 20000,
+      "lastUpdated": "2026-02-28T21:08:57.400Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-337",
@@ -4898,7 +5647,8 @@
       "uses": 30,
       "producesItemName": "Dragon's Essence",
       "producesItemHashedId": "zvjoJW96Y8j5Q3RaAylw",
-      "producesItemVendorValue": 20000
+      "producesItemVendorValue": 20000,
+      "lastUpdated": "2026-02-28T21:13:08.118Z"
     },
     {
       "id": "rec-339",
@@ -4911,7 +5661,9 @@
       "uses": 30,
       "producesItemName": "Titanwood Crystal",
       "producesItemHashedId": "PjVDJez3LDJvNKWO08Ga",
-      "producesItemVendorValue": 20000
+      "producesItemVendorValue": 20000,
+      "lastUpdated": "2026-02-28T21:08:57.631Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-340",
@@ -4924,7 +5676,9 @@
       "uses": 30,
       "producesItemName": "Primordial Timber Crystal",
       "producesItemHashedId": "0kK49j1VN96yYq6B2doa",
-      "producesItemVendorValue": 20000
+      "producesItemVendorValue": 20000,
+      "lastUpdated": "2026-02-28T21:08:57.712Z",
+      "suggestedRefreshMinutes": 43200
     },
     {
       "id": "rec-341",
@@ -14373,21 +15127,21 @@
       "timeSeconds": 8.3,
       "baseCost": 0,
       "vendorValue": 1,
-      "marketPrice": 5.8
+      "marketPrice": 5.6
     },
     {
       "name": "Stingray",
       "timeSeconds": 28.6,
       "baseCost": 16,
       "vendorValue": 26,
-      "marketPrice": 36.3
+      "marketPrice": 36.2
     },
     {
       "name": "Cooked Stingray",
       "timeSeconds": 33.3,
       "baseCost": 0,
       "vendorValue": 65,
-      "marketPrice": 67.5,
+      "marketPrice": 67.4,
       "inputs": [
         {
           "resourceName": "Stingray",
@@ -14420,14 +15174,14 @@
       "timeSeconds": 32.1,
       "baseCost": 25,
       "vendorValue": 41,
-      "marketPrice": 49.4
+      "marketPrice": 48.9
     },
     {
       "name": "Cooked Great White Shark",
       "timeSeconds": 45.8,
       "baseCost": 0,
       "vendorValue": 92,
-      "marketPrice": 104.3,
+      "marketPrice": 104.8,
       "inputs": [
         {
           "resourceName": "Great White Shark",
@@ -14467,7 +15221,7 @@
       "timeSeconds": 37.9,
       "baseCost": 0,
       "vendorValue": 20,
-      "marketPrice": 23.6
+      "marketPrice": 23.8
     },
     {
       "name": "Mystic Bar",

@@ -6,6 +6,8 @@ export interface Material {
   price: number
   hashedId?: string
   vendorValue?: number
+  lastUpdated?: string
+  suggestedRefreshMinutes?: number
 }
 
 export interface Craftable {
@@ -14,6 +16,8 @@ export interface Craftable {
   price: number
   hashedId?: string
   vendorValue?: number
+  lastUpdated?: string
+  suggestedRefreshMinutes?: number
 }
 
 export interface Resource {
@@ -22,6 +26,8 @@ export interface Resource {
   marketPrice: number
   vendorValue: number
   hashedId?: string
+  lastUpdated?: string
+  suggestedRefreshMinutes?: number
 }
 
 export interface Recipe {
@@ -38,6 +44,8 @@ export interface Recipe {
   producesItemVendorValue?: number
   tradableCounterpartId?: string
   isUntradable?: boolean
+  lastUpdated?: string
+  suggestedRefreshMinutes?: number
 }
 
 export interface DungeonDrop {

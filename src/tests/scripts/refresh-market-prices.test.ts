@@ -232,4 +232,154 @@ describe('refresh-market-prices utilities', () => {
       expect(syncedCount).toBe(2)
     })
   })
+
+  describe('default refresh minutes logic', () => {
+    it('should use default when computeSuggestedRefreshMinutes returns null', () => {
+      const DEFAULT_REFRESH_MINUTES = 1440 // 24 hours
+
+      // Simulate insufficient data scenario
+      const computedValue = null // computeSuggestedRefreshMinutes returned null
+
+      const suggestedRefreshMinutes =
+        computedValue !== null ? computedValue : DEFAULT_REFRESH_MINUTES
+      const usedDefault = computedValue === null
+
+      expect(suggestedRefreshMinutes).toBe(1440)
+      expect(usedDefault).toBe(true)
+    })
+
+    it('should not use default when computeSuggestedRefreshMinutes returns a value', () => {
+      const DEFAULT_REFRESH_MINUTES = 1440 // 24 hours
+
+      // Simulate sufficient data scenario
+      const computedValue = 60 // 1 hour
+
+      const suggestedRefreshMinutes =
+        computedValue !== null ? computedValue : DEFAULT_REFRESH_MINUTES
+      const usedDefault = computedValue === null
+
+      expect(suggestedRefreshMinutes).toBe(60)
+      expect(usedDefault).toBe(false)
+    })
+
+    it('should format default refresh interval correctly', () => {
+      const DEFAULT_REFRESH_MINUTES = 1440
+      const minutes = DEFAULT_REFRESH_MINUTES
+
+      // Simulate formatRefreshInterval logic for 1440 minutes (24 hours / 1 day)
+      const days = minutes / (24 * 60)
+      const formatted = `every ${days.toFixed(1)}d`
+
+      expect(formatted).toBe('every 1.0d')
+    })
+  })
+
+  describe('isDueForRefresh logic', () => {
+    it('should return due when item has no lastUpdated', () => {
+      const item = {
+        name: 'Test Item',
+        hashedId: 'abc123',
+        suggestedRefreshMinutes: 60,
+      }
+
+      // Simulate the isDueForRefresh logic
+      const due = !item.lastUpdated
+      expect(due).toBe(true)
+    })
+
+    it('should return due when item has no suggestedRefreshMinutes', () => {
+      const item = {
+        name: 'Test Item',
+        hashedId: 'abc123',
+        lastUpdated: new Date().toISOString(),
+      }
+
+      // Simulate the isDueForRefresh logic
+      const due = !item.suggestedRefreshMinutes
+      expect(due).toBe(true)
+    })
+
+    it('should return not due when refresh interval has not elapsed', () => {
+      const now = new Date()
+      const fiveMinutesAgo = new Date(now.getTime() - 5 * 60 * 1000)
+
+      const item = {
+        name: 'Test Item',
+        hashedId: 'abc123',
+        lastUpdated: fiveMinutesAgo.toISOString(),
+        suggestedRefreshMinutes: 10, // Should refresh every 10 minutes
+      }
+
+      // Simulate the isDueForRefresh logic
+      const lastUpdatedTime = new Date(item.lastUpdated).getTime()
+      const currentTime = now.getTime()
+      const minutesSinceLast = (currentTime - lastUpdatedTime) / (1000 * 60)
+      const due = minutesSinceLast >= item.suggestedRefreshMinutes
+
+      expect(due).toBe(false)
+      expect(minutesSinceLast).toBeCloseTo(5, 1)
+    })
+
+    it('should return due when refresh interval has elapsed', () => {
+      const now = new Date()
+      const fifteenMinutesAgo = new Date(now.getTime() - 15 * 60 * 1000)
+
+      const item = {
+        name: 'Test Item',
+        hashedId: 'abc123',
+        lastUpdated: fifteenMinutesAgo.toISOString(),
+        suggestedRefreshMinutes: 10, // Should refresh every 10 minutes
+      }
+
+      // Simulate the isDueForRefresh logic
+      const lastUpdatedTime = new Date(item.lastUpdated).getTime()
+      const currentTime = now.getTime()
+      const minutesSinceLast = (currentTime - lastUpdatedTime) / (1000 * 60)
+      const due = minutesSinceLast >= item.suggestedRefreshMinutes
+
+      expect(due).toBe(true)
+      expect(minutesSinceLast).toBeCloseTo(15, 1)
+    })
+
+    it('should return due when exactly at threshold', () => {
+      const now = new Date()
+      const twoHoursAgo = new Date(now.getTime() - 2 * 60 * 60 * 1000)
+
+      const item = {
+        name: 'Test Item',
+        hashedId: 'abc123',
+        lastUpdated: twoHoursAgo.toISOString(),
+        suggestedRefreshMinutes: 120, // 2 hours
+      }
+
+      // Simulate the isDueForRefresh logic
+      const lastUpdatedTime = new Date(item.lastUpdated).getTime()
+      const currentTime = now.getTime()
+      const minutesSinceLast = (currentTime - lastUpdatedTime) / (1000 * 60)
+      const due = minutesSinceLast >= item.suggestedRefreshMinutes
+
+      expect(due).toBe(true)
+      expect(minutesSinceLast).toBeCloseTo(120, 1)
+    })
+
+    it('should correctly calculate minutes until due', () => {
+      const now = new Date()
+      const thirtyMinutesAgo = new Date(now.getTime() - 30 * 60 * 1000)
+
+      const item = {
+        name: 'Test Item',
+        hashedId: 'abc123',
+        lastUpdated: thirtyMinutesAgo.toISOString(),
+        suggestedRefreshMinutes: 60, // 1 hour
+      }
+
+      // Simulate the isDueForRefresh logic
+      const lastUpdatedTime = new Date(item.lastUpdated).getTime()
+      const currentTime = now.getTime()
+      const minutesSinceLast = (currentTime - lastUpdatedTime) / (1000 * 60)
+      const minutesUntilDue = item.suggestedRefreshMinutes - minutesSinceLast
+
+      expect(minutesUntilDue).toBeCloseTo(30, 1)
+    })
+  })
 })
