@@ -44,6 +44,7 @@ export default [
         HTMLElement: 'readonly',
         HTMLCanvasElement: 'readonly',
         KeyboardEvent: 'readonly',
+        MouseEvent: 'readonly',
         Event: 'readonly',
         // Node globals (for vite.config.ts)
         process: 'readonly',
@@ -56,6 +57,27 @@ export default [
       ...pluginTypeScript.configs.recommended.rules,
       'vue/multi-word-component-names': 'off',
       'preserve-caught-error': 'off',
+    },
+  },
+  {
+    files: ['src/tests/**/*.{ts,tsx}'],
+    languageOptions: {
+      globals: {
+        // Vitest globals
+        describe: 'readonly',
+        it: 'readonly',
+        expect: 'readonly',
+        vi: 'readonly',
+        beforeAll: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
+        // Node/DOM globals
+        global: 'readonly',
+        Storage: 'readonly',
+      },
+    },
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
     },
   },
   {
