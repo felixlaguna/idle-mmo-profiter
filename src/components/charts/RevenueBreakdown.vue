@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, watch, nextTick } from 'vue'
+import { computed, ref, onMounted, onBeforeUnmount, watch, nextTick } from 'vue'
 import { Chart } from 'chart.js'
 import type { RankedActivity } from '../../calculators/profitRanker'
 
@@ -7,8 +7,11 @@ const props = defineProps<{
   activities: RankedActivity[]
 }>()
 
+const chartContainer = ref<HTMLElement | null>(null)
 const chartCanvas = ref<HTMLCanvasElement | null>(null)
 let chartInstance: Chart | null = null
+// eslint-disable-next-line no-undef
+let resizeObserver: ResizeObserver | null = null
 
 const hasData = computed(() => props.activities.length > 0 && props.activities.some((a) => a.profitPerHour > 0))
 
@@ -173,11 +176,32 @@ const updateChart = () => {
   chartInstance.update()
 }
 
-// Initialize chart on mount
+// Initialize chart on mount with delayed init for reliable canvas sizing
 onMounted(() => {
   nextTick(() => {
-    createChart()
+    setTimeout(() => createChart(), 150)
   })
+
+  if (chartContainer.value && typeof window !== 'undefined') {
+    // eslint-disable-next-line no-undef
+    resizeObserver = new ResizeObserver(() => {
+      if (chartInstance) {
+        chartInstance.resize()
+      }
+    })
+    resizeObserver.observe(chartContainer.value)
+  }
+})
+
+onBeforeUnmount(() => {
+  if (chartInstance) {
+    chartInstance.destroy()
+    chartInstance = null
+  }
+  if (resizeObserver) {
+    resizeObserver.disconnect()
+    resizeObserver = null
+  }
 })
 
 // Watch for data changes and update or create chart
@@ -187,7 +211,7 @@ watch(
     if (chartInstance) {
       updateChart()
     } else {
-      nextTick(() => createChart())
+      nextTick(() => setTimeout(() => createChart(), 150))
     }
   },
   { deep: true }
@@ -200,7 +224,7 @@ watch(
       <h3 class="chart-title">Revenue Breakdown by Type</h3>
     </div>
     <template v-if="hasData">
-      <div class="chart-container">
+      <div ref="chartContainer" class="chart-container">
         <canvas ref="chartCanvas"></canvas>
       </div>
       <div class="summary">
@@ -241,9 +265,6 @@ watch(
   position: relative;
   height: 350px;
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .summary {

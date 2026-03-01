@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, watch, nextTick } from 'vue'
+import { computed, ref, onMounted, onBeforeUnmount, watch, nextTick } from 'vue'
 import { Chart } from 'chart.js'
 import type { DungeonProfitResult } from '../../calculators/dungeonCalculator'
 
@@ -7,8 +7,11 @@ const props = defineProps<{
   dungeons: DungeonProfitResult[]
 }>()
 
+const chartContainer = ref<HTMLElement | null>(null)
 const chartCanvas = ref<HTMLCanvasElement | null>(null)
 let chartInstance: Chart | null = null
+// eslint-disable-next-line no-undef
+let resizeObserver: ResizeObserver | null = null
 
 const hasData = computed(() => props.dungeons.length > 0)
 
@@ -167,11 +170,34 @@ const updateChart = () => {
   chartInstance.update()
 }
 
-// Initialize chart on mount
+// Initialize chart on mount with delayed init for reliable canvas sizing
 onMounted(() => {
   nextTick(() => {
-    createChart()
+    // Delay chart creation to ensure container has been laid out
+    setTimeout(() => createChart(), 150)
   })
+
+  // Use ResizeObserver to recreate chart when container resizes
+  if (chartContainer.value && typeof window !== 'undefined') {
+    // eslint-disable-next-line no-undef
+    resizeObserver = new ResizeObserver(() => {
+      if (chartInstance) {
+        chartInstance.resize()
+      }
+    })
+    resizeObserver.observe(chartContainer.value)
+  }
+})
+
+onBeforeUnmount(() => {
+  if (chartInstance) {
+    chartInstance.destroy()
+    chartInstance = null
+  }
+  if (resizeObserver) {
+    resizeObserver.disconnect()
+    resizeObserver = null
+  }
 })
 
 // Watch for data changes and update or create chart
@@ -181,7 +207,7 @@ watch(
     if (chartInstance) {
       updateChart()
     } else {
-      nextTick(() => createChart())
+      nextTick(() => setTimeout(() => createChart(), 150))
     }
   },
   { deep: true }
@@ -198,7 +224,7 @@ watch(
         <span class="legend-label">High</span>
       </div>
     </div>
-    <div v-if="hasData" class="chart-container">
+    <div v-if="hasData" ref="chartContainer" class="chart-container">
       <canvas ref="chartCanvas"></canvas>
     </div>
     <div v-else class="empty-state">

@@ -350,6 +350,7 @@ onUnmounted(() => {
         </div>
 
         <!-- Tab Navigation -->
+        <div class="tab-navigation-wrapper">
         <nav class="tab-navigation" role="tablist" aria-label="Activity categories">
           <button
             class="tab-button"
@@ -423,6 +424,7 @@ onUnmounted(() => {
             Charts
           </button>
         </nav>
+        </div>
 
         <!-- Tab Content -->
         <div class="tab-content">
@@ -815,6 +817,22 @@ onUnmounted(() => {
 
 
 /* Tab Navigation */
+.tab-navigation-wrapper {
+  position: relative;
+}
+
+.tab-navigation-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 2rem;
+  background: linear-gradient(to right, transparent, var(--bg-primary));
+  pointer-events: none;
+  z-index: 1;
+}
+
 .tab-navigation {
   display: flex;
   gap: 0.5rem;

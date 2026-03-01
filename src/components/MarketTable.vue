@@ -784,7 +784,7 @@ const refreshItemData = async () => {
           v-model="searchQuery"
           type="text"
           class="search-input"
-          placeholder="Search items... (e.g., 'Moose', 'Wraithbane', 'Coal')"
+          placeholder="Search items..."
           autocomplete="off"
         />
         <div class="search-stats">
@@ -2136,8 +2136,6 @@ const refreshItemData = async () => {
 /* Market Items Table */
 .market-items-table {
   width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
   border-collapse: collapse;
 }
 
