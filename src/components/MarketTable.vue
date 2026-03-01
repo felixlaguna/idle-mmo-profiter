@@ -50,10 +50,10 @@ const searchQuery = ref('')
 
 // Section collapse state
 const sectionsExpanded = ref({
-  materials: true,
-  craftables: true,
-  resources: true,
-  recipes: false, // Collapsed by default due to 345 items
+  materials: false,
+  craftables: false,
+  resources: false,
+  recipes: false,
 })
 
 // Per-item refresh loading state

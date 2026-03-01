@@ -821,16 +821,18 @@ onUnmounted(() => {
   position: relative;
 }
 
-.tab-navigation-wrapper::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 2rem;
-  background: linear-gradient(to right, transparent, var(--bg-primary));
-  pointer-events: none;
-  z-index: 1;
+@media (max-width: 767px) {
+  .tab-navigation-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: calc(100% - 1.5rem);
+    width: 3rem;
+    background: linear-gradient(to right, transparent, var(--bg-primary) 85%);
+    pointer-events: none;
+    z-index: 2;
+  }
 }
 
 .tab-navigation {

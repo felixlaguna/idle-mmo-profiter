@@ -253,6 +253,11 @@ watch(showAll, () => {
 }
 
 @media (max-width: 767px) {
+  .chart-header {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
   .chart-container {
     height: 400px;
   }
