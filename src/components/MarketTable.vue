@@ -2268,6 +2268,12 @@ const refreshItemData = async () => {
   overflow-x: auto;
 }
 
+@media (max-width: 767px) {
+  .section-content {
+    overflow-x: visible;
+  }
+}
+
 /* Market Items Table */
 .market-items-table {
   width: 100%;

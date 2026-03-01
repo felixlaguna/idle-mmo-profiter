@@ -53,8 +53,14 @@ export function getHeatmapStyle(
   }
 
   // Handle positive profits - use continuous green gradient
-  // Normalize within positive range only (0 to maxProfit) for proportional intensity
-  const normalized = maxProfit === 0 ? 1 : profit / maxProfit
+  // Use logarithmic normalization to avoid extreme compression when max >> min
+  // (e.g., 17M max vs 440K min would make most rows look identical with linear)
+  const logNormalize = (value: number, max: number): number => {
+    if (max <= 1) return 1
+    if (value <= 0) return 0
+    return Math.log(1 + value) / Math.log(1 + max)
+  }
+  const normalized = maxProfit === 0 ? 1 : logNormalize(profit, maxProfit)
 
   // Continuous alpha: 0.03 (lowest) to 0.25 (highest)
   const alpha = 0.03 + normalized * 0.22
@@ -100,9 +106,31 @@ export function getHeatmapClass(profit: number, minProfit: number, maxProfit: nu
  *
  * @returns Object with heatmap utility functions
  */
+/**
+ * Get a subdued heatmap style (half intensity) for secondary profit columns.
+ */
+export function getSubduedHeatmapStyle(
+  profit: number,
+  minProfit: number,
+  maxProfit: number
+): HeatmapStyle {
+  const style = getHeatmapStyle(profit, minProfit, maxProfit)
+  // Halve the background alpha for a softer look
+  const match = style.backgroundColor.match(/rgba?\(([^)]+)\)/)
+  if (match) {
+    const parts = match[1].split(',').map((s) => s.trim())
+    if (parts.length === 4) {
+      const alpha = parseFloat(parts[3]) * 0.5
+      style.backgroundColor = `rgba(${parts[0]}, ${parts[1]}, ${parts[2]}, ${alpha.toFixed(3)})`
+    }
+  }
+  return style
+}
+
 export function useHeatmap() {
   return {
     getHeatmapStyle,
     getHeatmapClass,
+    getSubduedHeatmapStyle,
   }
 }

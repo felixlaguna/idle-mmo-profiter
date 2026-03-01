@@ -6,7 +6,7 @@ import EmptyState from './EmptyState.vue'
 import { useHeatmap } from '../composables/useHeatmap'
 import { useStaticMode } from '../composables/useStaticMode'
 
-const { getHeatmapStyle } = useHeatmap()
+const { getHeatmapStyle, getSubduedHeatmapStyle } = useHeatmap()
 const { isStaticMode } = useStaticMode()
 
 const props = defineProps<{
@@ -296,7 +296,7 @@ const formatTime = (seconds: number): string => {
                 class="text-right"
                 data-label="Profit"
                 :style="
-                  getHeatmapStyle(craftable.profit, profitRange.profit.min, profitRange.profit.max)
+                  getSubduedHeatmapStyle(craftable.profit, profitRange.profit.min, profitRange.profit.max)
                 "
               >
                 <span

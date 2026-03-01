@@ -317,8 +317,8 @@ onUnmounted(() => {
     <!-- Main Content -->
     <main class="app-main">
       <div class="content-wrapper">
-        <!-- Hero Section: Best Action (Full - All Activities tab only) -->
-        <section v-if="bestAction && currentTab === 'all'" class="hero-section" aria-labelledby="best-action-heading">
+        <!-- Hero Section: Best Action (Full - All Activities tab only, hidden on narrow mobile) -->
+        <section v-if="bestAction && currentTab === 'all'" class="hero-section hero-full-only" aria-labelledby="best-action-heading">
           <div class="hero-content">
             <p class="hero-label">Best Action Right Now</p>
             <div class="hero-activity">
@@ -348,7 +348,16 @@ onUnmounted(() => {
           </div>
         </section>
 
-        <!-- Hero Compact: Best Action (Other tabs) -->
+        <!-- Hero Compact: shown on All tab at narrow mobile, always on other tabs -->
+        <div v-if="bestAction && currentTab === 'all'" class="hero-compact hero-compact-fallback" aria-label="Best action summary">
+          <span class="hero-compact-label">Best:</span>
+          <span class="hero-compact-name">{{ bestAction.name }}</span>
+          <span class="hero-compact-badge" :class="getTypeBadgeClass(bestAction.activityType)">
+            {{ bestAction.activityType }}
+          </span>
+          <span class="hero-compact-separator" aria-hidden="true"></span>
+          <span class="hero-compact-profit">{{ formatNumber(bestAction.profitPerHour) }} gold/hr</span>
+        </div>
         <div v-if="bestAction && currentTab !== 'all'" class="hero-compact" aria-label="Best action summary">
           <span class="hero-compact-label">Best:</span>
           <span class="hero-compact-name">{{ bestAction.name }}</span>
@@ -649,6 +658,11 @@ onUnmounted(() => {
   margin: 0 auto;
 }
 
+/* Hero compact fallback: hidden by default, shown at narrow mobile */
+.hero-compact-fallback {
+  display: none;
+}
+
 /* Hero Section */
 .hero-section {
   background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(245, 158, 11, 0.05) 100%);
@@ -825,10 +839,10 @@ onUnmounted(() => {
   display: inline-block;
   width: 2px;
   height: 16px;
-  background-color: var(--text-secondary);
+  background-color: var(--border-color);
   margin: 0 0.75rem;
   vertical-align: middle;
-  opacity: 0.4;
+  opacity: 0.6;
   border-radius: 1px;
 }
 
@@ -1185,33 +1199,14 @@ onUnmounted(() => {
     display: none;
   }
 
-  /* At 375px, compress hero to 2 tight lines */
+  /* At 375px, swap full hero for compact on All tab */
   @media (max-width: 375px) {
-    .hero-section {
-      padding: 0.375rem 0.5rem;
-      margin-bottom: 0.25rem;
+    .hero-full-only {
+      display: none;
     }
 
-    .hero-content {
-      gap: 0.125rem;
-    }
-
-    .hero-label {
-      font-size: 0.5625rem;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    .hero-name {
-      font-size: 0.9375rem;
-    }
-
-    .hero-profit-value {
-      font-size: 1.125rem;
-    }
-
-    .hero-profit-label {
-      font-size: 0.75rem;
+    .hero-compact-fallback {
+      display: flex;
     }
   }
 

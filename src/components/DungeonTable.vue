@@ -466,6 +466,19 @@ const isUntradableRecipe = (recipeName: string): boolean => {
   white-space: nowrap;
 }
 
+@media (max-width: 767px) {
+  /* On mobile, hide raw seconds and show only human-readable time */
+  .time-display :deep(.editable-value),
+  .time-display :deep(.static-value) {
+    display: none;
+  }
+
+  .time-formatted {
+    color: var(--text-primary);
+    font-size: 0.8125rem;
+  }
+}
+
 .loss {
   color: var(--danger);
   font-weight: 600;
