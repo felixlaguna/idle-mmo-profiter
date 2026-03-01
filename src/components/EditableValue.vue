@@ -20,9 +20,8 @@ const editValue = ref(props.modelValue.toString())
 
 const isOverridden = computed(() => props.modelValue !== props.defaultValue)
 
-const displayValue = computed(() => {
-  const value = Math.round(props.modelValue).toLocaleString()
-  return props.suffix ? `${value}${props.suffix}` : value
+const baseDisplayValue = computed(() => {
+  return Math.round(props.modelValue).toLocaleString()
 })
 
 // Update editValue when modelValue changes externally
@@ -81,13 +80,13 @@ const handleKeydown = (e: KeyboardEvent) => {
   <!-- Static mode: plain read-only display -->
   <div v-if="isStaticMode" class="static-value">
     <span v-if="label" class="label">{{ label }}:</span>
-    <span class="value">{{ displayValue }}</span>
+    <span class="value">{{ baseDisplayValue }}</span><span v-if="suffix" class="value-suffix">{{ suffix }}</span>
   </div>
   <!-- Interactive mode: existing click-to-edit UI -->
   <div v-else class="editable-value" :class="{ overridden: isOverridden }">
     <span v-if="label" class="label">{{ label }}:</span>
     <div v-if="!isEditing" class="display-mode" @click="startEdit">
-      <span class="value">{{ displayValue }}</span>
+      <span class="value">{{ baseDisplayValue }}</span><span v-if="suffix" class="value-suffix">{{ suffix }}</span>
       <span class="edit-hint">✏️</span>
     </div>
     <div v-else class="edit-mode">
@@ -203,6 +202,11 @@ const handleKeydown = (e: KeyboardEvent) => {
   color: var(--text-secondary);
 }
 
+.value-suffix {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
 .btn-reset {
   padding: 0.5rem 0.75rem;
   min-height: 44px;
@@ -247,6 +251,10 @@ input[type='number'] {
 
   .value {
     font-size: 0.75rem;
+  }
+
+  .value-suffix {
+    display: none;
   }
 
   .edit-input {

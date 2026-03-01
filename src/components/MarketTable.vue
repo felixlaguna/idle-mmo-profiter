@@ -1182,9 +1182,7 @@ const refreshItemData = async () => {
               <td class="col-name name-cell" data-label="Name">{{ material.name }}</td>
               <td class="col-vendor" data-label="Vendor Value">
                 <span class="vendor-value">
-                  {{
-                    material.vendorValue ? `${material.vendorValue.toLocaleString()} gold` : 'N/A'
-                  }}
+                  {{ material.vendorValue ? material.vendorValue.toLocaleString() : 'N/A' }}<span v-if="material.vendorValue" class="gold-suffix"> gold</span>
                 </span>
               </td>
               <td class="col-market" :class="getSpreadClass(material.price, material.vendorValue)" data-label="Market Value">
@@ -1344,9 +1342,7 @@ const refreshItemData = async () => {
               <td class="col-name name-cell" data-label="Name">{{ craftable.name }}</td>
               <td class="col-vendor" data-label="Vendor Value">
                 <span class="vendor-value">
-                  {{
-                    craftable.vendorValue ? `${craftable.vendorValue.toLocaleString()} gold` : 'N/A'
-                  }}
+                  {{ craftable.vendorValue ? craftable.vendorValue.toLocaleString() : 'N/A' }}<span v-if="craftable.vendorValue" class="gold-suffix"> gold</span>
                 </span>
               </td>
               <td class="col-market" :class="getSpreadClass(craftable.price, craftable.vendorValue)" data-label="Market Value">
@@ -1503,7 +1499,7 @@ const refreshItemData = async () => {
               </td>
               <td class="col-name name-cell" data-label="Name">{{ resource.name }}</td>
               <td class="col-vendor" data-label="Vendor Value">
-                <span class="vendor-value">{{ resource.vendorValue.toLocaleString() }} gold</span>
+                <span class="vendor-value">{{ resource.vendorValue.toLocaleString() }}<span class="gold-suffix"> gold</span></span>
               </td>
               <td class="col-market" :class="getSpreadClass(resource.marketPrice, resource.vendorValue)" data-label="Market Value">
                 <EditableValue
@@ -1690,7 +1686,7 @@ const refreshItemData = async () => {
               </td>
               <td class="col-vendor" data-label="Vendor Value">
                 <span class="vendor-value">
-                  {{ recipe.vendorValue ? `${recipe.vendorValue.toLocaleString()} gold` : 'N/A' }}
+                  {{ recipe.vendorValue ? recipe.vendorValue.toLocaleString() : 'N/A' }}<span v-if="recipe.vendorValue" class="gold-suffix"> gold</span>
                 </span>
               </td>
               <td class="col-market" :class="getSpreadClass(recipe.price, recipe.vendorValue)" data-label="Market Value">
@@ -2414,15 +2410,20 @@ const refreshItemData = async () => {
 .col-name {
   font-weight: 600;
   color: var(--text-primary);
+  width: 30%;
 }
 
 .col-vendor {
   color: var(--text-secondary);
   font-size: 0.875rem;
+  width: 20%;
+  text-align: right;
 }
 
 .col-market {
-  min-width: 200px;
+  width: 20%;
+  min-width: 160px;
+  text-align: right;
 }
 
 .col-actions {
@@ -2642,6 +2643,7 @@ const refreshItemData = async () => {
 
 /* Spread column */
 .col-spread {
+  width: 12%;
   font-weight: 600;
   font-size: 0.875rem;
   white-space: nowrap;
