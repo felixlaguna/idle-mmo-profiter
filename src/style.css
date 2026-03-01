@@ -462,7 +462,9 @@ hr {
 
   /* De-emphasize less important fields — compact inline */
   .mobile-card-layout td[data-label='Time'],
-  .mobile-card-layout td[data-label='Cost'] {
+  .mobile-card-layout td[data-label='Cost'],
+  .mobile-card-layout td[data-label='Run Cost'],
+  .mobile-card-layout td[data-label='Total Cost'] {
     font-size: 0.75rem;
     color: var(--text-secondary);
     display: inline-flex;

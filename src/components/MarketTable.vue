@@ -1731,6 +1731,7 @@ const refreshItemData = async () => {
   flex-direction: column;
   gap: 1.5rem;
   max-width: 960px;
+  margin: 0 auto;
 }
 
 .market-summary {
@@ -2265,7 +2266,6 @@ const refreshItemData = async () => {
 
 .section-content {
   overflow-x: auto;
-  max-width: 960px;
 }
 
 /* Market Items Table */

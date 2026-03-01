@@ -1065,6 +1065,8 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  max-width: 960px;
+  margin: 0 auto;
 }
 
 .charts-grid {
@@ -1259,6 +1261,10 @@ onUnmounted(() => {
     min-height: 44px;
     padding: 0.625rem 0.5rem;
     font-size: 0.8125rem;
+  }
+
+  .tab-content {
+    min-height: auto;
   }
 
   .tab-label-full {
