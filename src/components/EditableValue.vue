@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
+import { useStaticMode } from '../composables/useStaticMode'
 
 const props = defineProps<{
   modelValue: number
@@ -11,6 +12,8 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: 'update:modelValue', value: number): void
 }>()
+
+const { isStaticMode } = useStaticMode()
 
 const isEditing = ref(false)
 const editValue = ref(props.modelValue.toString())
@@ -75,7 +78,13 @@ const handleKeydown = (e: KeyboardEvent) => {
 </script>
 
 <template>
-  <div class="editable-value" :class="{ overridden: isOverridden }">
+  <!-- Static mode: plain read-only display -->
+  <div v-if="isStaticMode" class="static-value">
+    <span v-if="label" class="label">{{ label }}:</span>
+    <span class="value">{{ displayValue }}</span>
+  </div>
+  <!-- Interactive mode: existing click-to-edit UI -->
+  <div v-else class="editable-value" :class="{ overridden: isOverridden }">
     <span v-if="label" class="label">{{ label }}:</span>
     <div v-if="!isEditing" class="display-mode" @click="startEdit">
       <span class="value">{{ displayValue }}</span>
@@ -105,6 +114,13 @@ const handleKeydown = (e: KeyboardEvent) => {
 </template>
 
 <style scoped>
+.static-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.5rem;
+}
+
 .editable-value {
   display: inline-flex;
   align-items: center;

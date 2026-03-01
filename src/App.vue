@@ -5,6 +5,7 @@ import { useRecipePricing } from './composables/useRecipePricing'
 import { useProfitRanking } from './composables/useProfitRanking'
 import { useStorage } from './composables/useStorage'
 import { useActivityFilters } from './composables/useActivityFilters'
+import { useStaticMode } from './composables/useStaticMode'
 import { calculateDungeonProfits } from './calculators/dungeonCalculator'
 import { calculateCraftableProfits } from './calculators/craftableCalculator'
 import { calculateResourceProfits } from './calculators/resourceCalculator'
@@ -20,6 +21,8 @@ import ErrorBoundary from './components/ErrorBoundary.vue'
 import LoadingSpinner from './components/LoadingSpinner.vue'
 import { useToast } from './composables/useToast'
 import type { MagicFindSettings } from './types'
+
+const { isStaticMode } = useStaticMode()
 
 // Lazy load chart components for better performance
 const ProfitBarChart = defineAsyncComponent(() => import('./components/charts/ProfitBarChart.vue'))
@@ -184,8 +187,8 @@ const getTypeBadgeClass = (type: string): string => {
 
 // Handle keyboard shortcuts
 const handleKeydown = (e: KeyboardEvent) => {
-  // Escape closes settings modal
-  if (e.key === 'Escape' && showSettings.value) {
+  // Escape closes settings modal (skip in static mode)
+  if (e.key === 'Escape' && showSettings.value && !isStaticMode) {
     closeSettings()
   }
 }
@@ -209,6 +212,7 @@ onUnmounted(() => {
         <div class="header-actions">
           <span class="last-update">{{ lastUpdateText }}</span>
           <button
+            v-if="!isStaticMode"
             class="btn-settings"
             title="Settings"
             aria-label="Open settings"
@@ -323,7 +327,9 @@ onUnmounted(() => {
             @click="currentTab = 'market'"
           >
             Market
-            <span v-if="overrideStats.total > 0" class="tab-badge">{{ overrideStats.total }}</span>
+            <span v-if="overrideStats.total > 0 && !isStaticMode" class="tab-badge">{{
+              overrideStats.total
+            }}</span>
           </button>
           <button
             class="tab-button"
@@ -400,9 +406,9 @@ onUnmounted(() => {
       </div>
     </main>
 
-    <!-- Settings Modal -->
+    <!-- Settings Modal (hidden in static mode) -->
     <div
-      v-if="showSettings"
+      v-if="showSettings && !isStaticMode"
       class="modal-overlay"
       role="dialog"
       aria-modal="true"

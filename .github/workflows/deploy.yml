@@ -30,9 +30,10 @@ jobs:
         run: docker compose build app
 
       # Build application inside Docker container
+      # VITE_STATIC_MODE=true removes all API/edit/settings UI for static deployment
       # Volume mount (.:/app) ensures dist/ appears on host for upload step
       - name: Build application
-        run: docker compose run --rm app npm run build
+        run: docker compose run --rm -e VITE_STATIC_MODE=true app npm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

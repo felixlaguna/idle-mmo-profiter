@@ -4,8 +4,10 @@ import type { CraftableProfitResult } from '../calculators/craftableCalculator'
 import EditableValue from './EditableValue.vue'
 import EmptyState from './EmptyState.vue'
 import { useHeatmap } from '../composables/useHeatmap'
+import { useStaticMode } from '../composables/useStaticMode'
 
 const { getHeatmapStyle } = useHeatmap()
+const { isStaticMode } = useStaticMode()
 
 const props = defineProps<{
   craftables: CraftableProfitResult[]
@@ -252,6 +254,7 @@ const formatTime = (seconds: number): string => {
               <td class="name-cell" data-label="Craftable">
                 {{ craftable.name }}
                 <button
+                  v-if="!isStaticMode"
                   class="btn-delete-craftable"
                   title="Remove from craftable list"
                   @click.stop="emit('delete:craftable', craftable.name)"

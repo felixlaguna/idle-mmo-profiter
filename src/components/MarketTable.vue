@@ -2,11 +2,14 @@
 import { ref, computed } from 'vue'
 import { useDataProvider } from '../composables/useDataProvider'
 import { useMarketRefresh } from '../composables/useMarketRefresh'
+import { useStaticMode } from '../composables/useStaticMode'
 import { storageManager } from '../storage/persistence'
 import { useToast } from '../composables/useToast'
 import EditableValue from './EditableValue.vue'
 import HashedIdModal from './HashedIdModal.vue'
 import type { RefreshCategory } from '../composables/useMarketRefresh'
+
+const { isStaticMode } = useStaticMode()
 
 // Vendor-sold items (vials, crystals) with their buy prices from NPC shops.
 // These items are not tradable on the market, so we use known buy prices.
@@ -793,10 +796,15 @@ const refreshItemData = async () => {
             }}
             results
           </span>
-          <span class="override-count" :class="{ active: overrideStats.total > 0 }">
+          <span
+            v-if="!isStaticMode"
+            class="override-count"
+            :class="{ active: overrideStats.total > 0 }"
+          >
             {{ overrideStats.total }} overrides
           </span>
           <span
+            v-if="!isStaticMode"
             class="exclusion-count"
             :class="{ active: (exclusionStats.totalExcluded ?? 0) > 0 }"
           >
@@ -805,6 +813,7 @@ const refreshItemData = async () => {
         </div>
       </div>
       <button
+        v-if="!isStaticMode"
         class="btn-refresh-all"
         :disabled="!hasApiKey || marketRefresh.isRefreshing.value"
         :title="hasApiKey ? 'Refresh all market prices from API' : 'API key required'"
@@ -828,13 +837,18 @@ const refreshItemData = async () => {
         <span v-if="marketRefresh.isRefreshing.value" class="spinner"></span>
         {{ marketRefresh.isRefreshing.value ? 'Refreshing...' : 'Refresh All Prices' }}
       </button>
-      <button class="btn-reset-all" title="Reset all to defaults" @click="resetAllToDefaults">
+      <button
+        v-if="!isStaticMode"
+        class="btn-reset-all"
+        title="Reset all to defaults"
+        @click="resetAllToDefaults"
+      >
         Reset All
       </button>
     </div>
 
     <!-- Refresh Progress Bar -->
-    <div v-if="marketRefresh.isRefreshing.value" class="refresh-progress-container">
+    <div v-if="marketRefresh.isRefreshing.value && !isStaticMode" class="refresh-progress-container">
       <div class="refresh-progress-header">
         <div class="refresh-progress-text">
           <span class="refresh-progress-current">{{
@@ -864,7 +878,11 @@ const refreshItemData = async () => {
     </div>
 
     <!-- Refresh Estimate Modal -->
-    <div v-if="showRefreshEstimate" class="modal-overlay" @click.self="showRefreshEstimate = false">
+    <div
+      v-if="showRefreshEstimate && !isStaticMode"
+      class="modal-overlay"
+      @click.self="showRefreshEstimate = false"
+    >
       <div class="modal-content-small">
         <div class="modal-header-small">
           <h3>Refresh All Market Prices</h3>
@@ -909,7 +927,7 @@ const refreshItemData = async () => {
 
     <!-- Hashed ID Modal -->
     <HashedIdModal
-      v-if="hashedIdModalItem"
+      v-if="hashedIdModalItem && !isStaticMode"
       v-model:visible="hashedIdModalVisible"
       :item-name="hashedIdModalItem.itemName"
       :item-id="hashedIdModalItem.itemId"
@@ -938,17 +956,17 @@ const refreshItemData = async () => {
           <span class="expand-icon">{{ sectionsExpanded.materials ? '▼' : '▶' }}</span>
           <h2>Materials</h2>
           <span class="item-count">{{ filteredMaterials.length }} items</span>
-          <span v-if="overrideStats.materials > 0" class="override-badge">
+          <span v-if="overrideStats.materials > 0 && !isStaticMode" class="override-badge">
             {{ overrideStats.materials }} overridden
           </span>
           <span
-            v-if="(dataProvider.getExclusionStats('materials')?.excluded ?? 0) > 0"
+            v-if="(dataProvider.getExclusionStats('materials')?.excluded ?? 0) > 0 && !isStaticMode"
             class="exclusion-badge"
           >
             {{ dataProvider.getExclusionStats('materials')?.excluded ?? 0 }} excluded
           </span>
         </div>
-        <div class="section-actions">
+        <div v-if="!isStaticMode" class="section-actions">
           <button
             class="btn-toggle-exclusion"
             :title="
@@ -976,11 +994,11 @@ const refreshItemData = async () => {
         <table class="market-items-table">
           <thead>
             <tr>
-              <th class="col-exclude">Exclude</th>
+              <th v-if="!isStaticMode" class="col-exclude">Exclude</th>
               <th class="col-name">Name</th>
               <th class="col-vendor">Vendor Value</th>
               <th class="col-market">Market Value</th>
-              <th class="col-actions">Actions</th>
+              <th v-if="!isStaticMode" class="col-actions">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -989,7 +1007,7 @@ const refreshItemData = async () => {
               :key="material.id"
               :class="{ excluded: dataProvider.isRefreshExcluded('materials', material.id) }"
             >
-              <td class="col-exclude">
+              <td v-if="!isStaticMode" class="col-exclude">
                 <input
                   type="checkbox"
                   :checked="dataProvider.isRefreshExcluded('materials', material.id)"
@@ -1017,7 +1035,7 @@ const refreshItemData = async () => {
                   @update:model-value="(value) => updateMaterialPrice(material.id, value)"
                 />
               </td>
-              <td class="col-actions">
+              <td v-if="!isStaticMode" class="col-actions">
                 <div class="actions-wrapper">
                   <button
                     class="btn-hashed-id"
@@ -1087,17 +1105,19 @@ const refreshItemData = async () => {
           <span class="expand-icon">{{ sectionsExpanded.craftables ? '▼' : '▶' }}</span>
           <h2>Craftables</h2>
           <span class="item-count">{{ filteredCraftables.length }} items</span>
-          <span v-if="overrideStats.craftables > 0" class="override-badge">
+          <span v-if="overrideStats.craftables > 0 && !isStaticMode" class="override-badge">
             {{ overrideStats.craftables }} overridden
           </span>
           <span
-            v-if="(dataProvider.getExclusionStats('craftables')?.excluded ?? 0) > 0"
+            v-if="
+              (dataProvider.getExclusionStats('craftables')?.excluded ?? 0) > 0 && !isStaticMode
+            "
             class="exclusion-badge"
           >
             {{ dataProvider.getExclusionStats('craftables')?.excluded ?? 0 }} excluded
           </span>
         </div>
-        <div class="section-actions">
+        <div v-if="!isStaticMode" class="section-actions">
           <button
             class="btn-toggle-exclusion"
             :title="
@@ -1125,11 +1145,11 @@ const refreshItemData = async () => {
         <table class="market-items-table">
           <thead>
             <tr>
-              <th class="col-exclude">Exclude</th>
+              <th v-if="!isStaticMode" class="col-exclude">Exclude</th>
               <th class="col-name">Name</th>
               <th class="col-vendor">Vendor Value</th>
               <th class="col-market">Market Value</th>
-              <th class="col-actions">Actions</th>
+              <th v-if="!isStaticMode" class="col-actions">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -1138,7 +1158,7 @@ const refreshItemData = async () => {
               :key="craftable.id"
               :class="{ excluded: dataProvider.isRefreshExcluded('craftables', craftable.id) }"
             >
-              <td class="col-exclude">
+              <td v-if="!isStaticMode" class="col-exclude">
                 <input
                   type="checkbox"
                   :checked="dataProvider.isRefreshExcluded('craftables', craftable.id)"
@@ -1166,7 +1186,7 @@ const refreshItemData = async () => {
                   @update:model-value="(value) => updateCraftablePrice(craftable.id, value)"
                 />
               </td>
-              <td class="col-actions">
+              <td v-if="!isStaticMode" class="col-actions">
                 <div class="actions-wrapper">
                   <button
                     class="btn-hashed-id"
@@ -1236,17 +1256,17 @@ const refreshItemData = async () => {
           <span class="expand-icon">{{ sectionsExpanded.resources ? '▼' : '▶' }}</span>
           <h2>Resources</h2>
           <span class="item-count">{{ filteredResources.length }} items</span>
-          <span v-if="overrideStats.resources > 0" class="override-badge">
+          <span v-if="overrideStats.resources > 0 && !isStaticMode" class="override-badge">
             {{ overrideStats.resources }} overridden
           </span>
           <span
-            v-if="(dataProvider.getExclusionStats('resources')?.excluded ?? 0) > 0"
+            v-if="(dataProvider.getExclusionStats('resources')?.excluded ?? 0) > 0 && !isStaticMode"
             class="exclusion-badge"
           >
             {{ dataProvider.getExclusionStats('resources')?.excluded ?? 0 }} excluded
           </span>
         </div>
-        <div class="section-actions">
+        <div v-if="!isStaticMode" class="section-actions">
           <button
             class="btn-toggle-exclusion"
             :title="
@@ -1274,11 +1294,11 @@ const refreshItemData = async () => {
         <table class="market-items-table">
           <thead>
             <tr>
-              <th class="col-exclude">Exclude</th>
+              <th v-if="!isStaticMode" class="col-exclude">Exclude</th>
               <th class="col-name">Name</th>
               <th class="col-vendor">Vendor Value</th>
               <th class="col-market">Market Value</th>
-              <th class="col-actions">Actions</th>
+              <th v-if="!isStaticMode" class="col-actions">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -1287,7 +1307,7 @@ const refreshItemData = async () => {
               :key="resource.id"
               :class="{ excluded: dataProvider.isRefreshExcluded('resources', resource.id) }"
             >
-              <td class="col-exclude">
+              <td v-if="!isStaticMode" class="col-exclude">
                 <input
                   type="checkbox"
                   :checked="dataProvider.isRefreshExcluded('resources', resource.id)"
@@ -1311,7 +1331,7 @@ const refreshItemData = async () => {
                   @update:model-value="(value) => updateResourcePrice(resource.id, value)"
                 />
               </td>
-              <td class="col-actions">
+              <td v-if="!isStaticMode" class="col-actions">
                 <div class="actions-wrapper">
                   <button
                     class="btn-hashed-id"
@@ -1381,17 +1401,17 @@ const refreshItemData = async () => {
           <span class="expand-icon">{{ sectionsExpanded.recipes ? '▼' : '▶' }}</span>
           <h2>Recipes</h2>
           <span class="item-count">{{ filteredRecipes.length }} items</span>
-          <span v-if="overrideStats.recipes > 0" class="override-badge">
+          <span v-if="overrideStats.recipes > 0 && !isStaticMode" class="override-badge">
             {{ overrideStats.recipes }} overridden
           </span>
           <span
-            v-if="(dataProvider.getExclusionStats('recipes')?.excluded ?? 0) > 0"
+            v-if="(dataProvider.getExclusionStats('recipes')?.excluded ?? 0) > 0 && !isStaticMode"
             class="exclusion-badge"
           >
             {{ dataProvider.getExclusionStats('recipes')?.excluded ?? 0 }} excluded
           </span>
         </div>
-        <div class="section-actions">
+        <div v-if="!isStaticMode" class="section-actions">
           <button
             v-if="untrackedCraftableCount > 0 && !trackAllLoading"
             class="btn-track-all"
@@ -1440,11 +1460,11 @@ const refreshItemData = async () => {
         <table class="market-items-table">
           <thead>
             <tr>
-              <th class="col-exclude">Exclude</th>
+              <th v-if="!isStaticMode" class="col-exclude">Exclude</th>
               <th class="col-name">Name</th>
               <th class="col-vendor">Vendor Value</th>
               <th class="col-market">Market Value</th>
-              <th class="col-actions">Actions</th>
+              <th v-if="!isStaticMode" class="col-actions">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -1453,7 +1473,7 @@ const refreshItemData = async () => {
               :key="recipe.id"
               :class="{ excluded: dataProvider.isRefreshExcluded('recipes', recipe.id) }"
             >
-              <td class="col-exclude">
+              <td v-if="!isStaticMode" class="col-exclude">
                 <input
                   type="checkbox"
                   :checked="dataProvider.isRefreshExcluded('recipes', recipe.id)"
@@ -1488,7 +1508,7 @@ const refreshItemData = async () => {
                   @update:model-value="(value) => updateRecipePrice(recipe.id, value)"
                 />
               </td>
-              <td class="col-actions">
+              <td v-if="!isStaticMode" class="col-actions">
                 <div class="actions-wrapper">
                   <button
                     v-if="isUntrackedCraftableRecipe(recipe.name, recipe.producesItemName)"
