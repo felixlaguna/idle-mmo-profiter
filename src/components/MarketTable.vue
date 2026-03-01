@@ -2708,8 +2708,8 @@ const refreshItemData = async () => {
   /* Place Vendor and Market values side-by-side on mobile */
   .market-items-table.mobile-card-layout .col-vendor,
   .market-items-table.mobile-card-layout .col-market {
-    display: inline-flex;
-    width: 50%;
+    display: inline-flex !important;
+    width: 50% !important;
     font-size: 0.75rem;
   }
 

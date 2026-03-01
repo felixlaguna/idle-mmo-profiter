@@ -31,10 +31,6 @@ const DungeonChart = defineAsyncComponent(() => import('./components/charts/Dung
 const RevenueBreakdown = defineAsyncComponent(
   () => import('./components/charts/RevenueBreakdown.vue')
 )
-const PriceHistoryChart = defineAsyncComponent(
-  () => import('./components/charts/PriceHistoryChart.vue')
-)
-
 // Current tab state
 type Tab = 'all' | 'dungeons' | 'craftables' | 'resources' | 'market' | 'charts'
 const currentTab = ref<Tab>('all')
@@ -451,16 +447,7 @@ onUnmounted(() => {
                   </Suspense>
                 </ErrorBoundary>
               </div>
-              <ErrorBoundary>
-                <Suspense>
-                  <template #default>
-                    <PriceHistoryChart />
-                  </template>
-                  <template #fallback>
-                    <LoadingSpinner message="Loading chart..." :timeout="10000" />
-                  </template>
-                </Suspense>
-              </ErrorBoundary>
+              <!-- PriceHistoryChart hidden until data is available -->
             </div>
           </ErrorBoundary>
         </div>
