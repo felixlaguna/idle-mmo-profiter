@@ -147,7 +147,7 @@ const profitRange = computed(() => {
 
 <template>
   <div class="profit-ranking-table">
-    <!-- Filter Controls -->
+    <!-- Filter Controls + Pagination -->
     <div class="filter-controls">
       <span class="filter-label">Show:</span>
       <button
@@ -177,12 +177,10 @@ const profitRange = computed(() => {
       >
         Resources
       </button>
-    </div>
-
-    <!-- Pagination info -->
-    <div v-if="hasMore && !showAll" class="pagination-info">
-      Showing {{ DEFAULT_DISPLAY_LIMIT }} of {{ filteredAndSortedActivities.length }} activities
-      <button class="btn-show-all-inline" @click="showAll = true">Show all</button>
+      <span v-if="hasMore && !showAll" class="pagination-info">
+        {{ DEFAULT_DISPLAY_LIMIT }}/{{ filteredAndSortedActivities.length }}
+        <button class="btn-show-all-inline" @click="showAll = true">all</button>
+      </span>
     </div>
 
     <!-- Table -->
@@ -320,10 +318,10 @@ const profitRange = computed(() => {
 }
 
 .pagination-info {
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   color: var(--text-secondary);
-  text-align: center;
-  padding: 0.25rem 0;
+  margin-left: auto;
+  white-space: nowrap;
 }
 
 .btn-show-all-inline {
@@ -643,8 +641,7 @@ const profitRange = computed(() => {
   }
 
   .pagination-info {
-    font-size: 0.75rem;
-    padding: 0.125rem 0;
+    font-size: 0.625rem;
   }
 
   .ranking-table th,

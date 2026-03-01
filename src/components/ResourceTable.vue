@@ -367,7 +367,13 @@ const handleMarketPriceUpdate = (resourceName: string, value: number) => {
 /* Mobile card layout overrides */
 @media (max-width: 767px) {
   .resource-table {
-    gap: 0.5rem;
+    gap: 0.375rem;
+  }
+
+  /* Hide less important rows — Best Method and Profit/HR tell the story */
+  .resource-table :deep(.mobile-card-layout td[data-label='Cost']),
+  .resource-table :deep(.mobile-card-layout td[data-label='Vendor Price']) {
+    display: none;
   }
 
   .table-container {

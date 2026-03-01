@@ -254,34 +254,50 @@ watch(hasData, (newVal) => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 3rem 2rem;
+  padding: 1.5rem 1rem;
   text-align: center;
-  min-height: 300px;
+  min-height: 0;
+  border: 1px dashed var(--border-color);
+  border-radius: 0.375rem;
+  opacity: 0.7;
 }
 
 .no-data-icon {
   color: var(--text-secondary);
-  opacity: 0.5;
-  margin-bottom: 1rem;
-}
-
-.no-data-title {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--text-primary);
+  opacity: 0.4;
   margin-bottom: 0.5rem;
 }
 
-.no-data-message {
+.no-data-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.no-data-title {
   font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.no-data-message {
+  font-size: 0.75rem;
   color: var(--text-secondary);
-  max-width: 500px;
-  line-height: 1.6;
+  max-width: 400px;
+  line-height: 1.5;
 }
 
 @media (max-width: 767px) {
+  .price-history-chart {
+    padding: 1rem;
+  }
+
   .chart-container {
     height: 300px;
+  }
+
+  .no-data {
+    padding: 1rem;
   }
 }
 </style>

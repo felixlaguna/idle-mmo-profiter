@@ -355,7 +355,7 @@ onUnmounted(() => {
           <span class="hero-compact-badge" :class="getTypeBadgeClass(bestAction.activityType)">
             {{ bestAction.activityType }}
           </span>
-          <span class="hero-compact-separator">—</span>
+          <span class="hero-compact-separator" aria-hidden="true"></span>
           <span class="hero-compact-profit">{{ formatNumber(bestAction.profitPerHour) }} gold/hr</span>
         </div>
 
@@ -818,8 +818,12 @@ onUnmounted(() => {
 }
 
 .hero-compact-separator {
-  color: var(--text-secondary);
-  font-weight: 400;
+  display: inline-block;
+  width: 1px;
+  height: 1em;
+  background-color: var(--text-secondary);
+  opacity: 0.3;
+  vertical-align: middle;
 }
 
 .hero-compact-profit {
@@ -1099,7 +1103,7 @@ onUnmounted(() => {
 /* Mobile Responsive (<768px) */
 @media (max-width: 767px) {
   .app-header {
-    padding: 0.625rem 0.75rem;
+    padding: 0.375rem 0.75rem;
   }
 
   .header-content {
@@ -1116,11 +1120,11 @@ onUnmounted(() => {
   }
 
   .app-title {
-    font-size: 1rem;
+    font-size: 0.875rem;
   }
 
   .last-update {
-    font-size: 0.8125rem;
+    font-size: 0.6875rem;
   }
 
   .btn-settings {
