@@ -1,17 +1,10 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, onBeforeUnmount, watch, nextTick } from 'vue'
-import { Chart } from 'chart.js'
+import { computed } from 'vue'
 import type { RankedActivity } from '../../calculators/profitRanker'
 
 const props = defineProps<{
   activities: RankedActivity[]
 }>()
-
-const chartContainer = ref<HTMLElement | null>(null)
-const chartCanvas = ref<HTMLCanvasElement | null>(null)
-let chartInstance: Chart | null = null
-// eslint-disable-next-line no-undef
-let resizeObserver: ResizeObserver | null = null
 
 const hasData = computed(() => props.activities.length > 0 && props.activities.some((a) => a.profitPerHour > 0))
 
@@ -52,170 +45,47 @@ const categoryTotals = computed(() => {
   }
 })
 
-// Get chart data
-const chartData = computed(() => {
+// Categories for the bar display
+const categories = computed(() => {
   const totals = categoryTotals.value
+  const maxValue = Math.max(totals.dungeon, totals.craftable, totals.resource)
 
-  return {
-    labels: ['Dungeons', 'Craftables', 'Resources'],
-    datasets: [
-      {
-        label: 'Total Profit/hr',
-        data: [totals.dungeon, totals.craftable, totals.resource],
-        backgroundColor: [
-          'rgba(168, 85, 247, 0.7)', // Purple for dungeons
-          'rgba(34, 197, 94, 0.7)', // Green for craftables
-          'rgba(59, 130, 246, 0.7)', // Blue for resources
-        ],
-        borderColor: ['rgba(168, 85, 247, 1)', 'rgba(34, 197, 94, 1)', 'rgba(59, 130, 246, 1)'],
-        borderWidth: 2,
-      },
-    ],
-  }
-})
-
-const createChart = () => {
-  if (!chartCanvas.value || !hasData.value) return
-
-  // Destroy existing chart
-  if (chartInstance) {
-    chartInstance.destroy()
-  }
-
-  const ctx = chartCanvas.value.getContext('2d')
-  if (!ctx) return
-
-  // Detect mobile viewport
-  const isMobile = window.innerWidth <= 767
-
-  chartInstance = new Chart(ctx, {
-    type: 'doughnut',
-    data: chartData.value,
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: true,
-          position: 'bottom',
-          labels: {
-            color: '#e5e7eb',
-            padding: isMobile ? 12 : 15,
-            font: {
-              size: isMobile ? 11 : 13,
-            },
-            generateLabels: function (chart) {
-              const data = chart.data
-              if (data.labels && data.datasets.length) {
-                const totals = categoryTotals.value
-                const backgrounds = data.datasets[0].backgroundColor as string[]
-                const borders = data.datasets[0].borderColor as string[]
-                return data.labels.map((label, i) => {
-                  const value = data.datasets[0].data[i] as number
-                  const percent =
-                    i === 0
-                      ? totals.dungeonPercent
-                      : i === 1
-                        ? totals.craftablePercent
-                        : totals.resourcePercent
-                  return {
-                    text: `${label}: ${Math.round(value).toLocaleString()} (${percent.toFixed(1)}%)`,
-                    fillStyle: backgrounds[i],
-                    strokeStyle: borders[i],
-                    lineWidth: 2,
-                    hidden: false,
-                    index: i,
-                  }
-                })
-              }
-              return []
-            },
-          },
-        },
-        tooltip: {
-          backgroundColor: 'rgba(17, 23, 34, 0.95)',
-          titleColor: '#e5e7eb',
-          bodyColor: '#e5e7eb',
-          borderColor: '#374151',
-          borderWidth: 1,
-          padding: 12,
-          displayColors: true,
-          callbacks: {
-            label: function (context) {
-              const value = context.parsed
-              const totals = categoryTotals.value
-              const percent =
-                context.dataIndex === 0
-                  ? totals.dungeonPercent
-                  : context.dataIndex === 1
-                    ? totals.craftablePercent
-                    : totals.resourcePercent
-              const count =
-                context.dataIndex === 0
-                  ? totals.dungeonCount
-                  : context.dataIndex === 1
-                    ? totals.craftableCount
-                    : totals.resourceCount
-              return [
-                `Total: ${Math.round(value).toLocaleString()} gold/hr`,
-                `Percentage: ${percent.toFixed(1)}%`,
-                `Activities: ${count}`,
-              ]
-            },
-          },
-        },
-      },
-    },
-  })
-}
-
-const updateChart = () => {
-  if (!chartInstance) return
-
-  chartInstance.data = chartData.value
-  chartInstance.update()
-}
-
-// Initialize chart on mount with delayed init for reliable canvas sizing
-onMounted(() => {
-  nextTick(() => {
-    setTimeout(() => createChart(), 150)
-  })
-
-  if (chartContainer.value && typeof window !== 'undefined') {
-    // eslint-disable-next-line no-undef
-    resizeObserver = new ResizeObserver(() => {
-      if (chartInstance) {
-        chartInstance.resize()
-      }
+  const items = []
+  if (totals.dungeonCount > 0) {
+    items.push({
+      label: 'Dungeons',
+      value: totals.dungeon,
+      count: totals.dungeonCount,
+      percent: totals.dungeonPercent,
+      barWidth: maxValue > 0 ? (totals.dungeon / maxValue) * 100 : 0,
+      color: 'rgba(168, 85, 247, 0.7)',
+      borderColor: 'rgba(168, 85, 247, 1)',
     })
-    resizeObserver.observe(chartContainer.value)
   }
+  if (totals.craftableCount > 0) {
+    items.push({
+      label: 'Craftables',
+      value: totals.craftable,
+      count: totals.craftableCount,
+      percent: totals.craftablePercent,
+      barWidth: maxValue > 0 ? (totals.craftable / maxValue) * 100 : 0,
+      color: 'rgba(34, 197, 94, 0.7)',
+      borderColor: 'rgba(34, 197, 94, 1)',
+    })
+  }
+  if (totals.resourceCount > 0) {
+    items.push({
+      label: 'Resources',
+      value: totals.resource,
+      count: totals.resourceCount,
+      percent: totals.resourcePercent,
+      barWidth: maxValue > 0 ? (totals.resource / maxValue) * 100 : 0,
+      color: 'rgba(59, 130, 246, 0.7)',
+      borderColor: 'rgba(59, 130, 246, 1)',
+    })
+  }
+  return items
 })
-
-onBeforeUnmount(() => {
-  if (chartInstance) {
-    chartInstance.destroy()
-    chartInstance = null
-  }
-  if (resizeObserver) {
-    resizeObserver.disconnect()
-    resizeObserver = null
-  }
-})
-
-// Watch for data changes and update or create chart
-watch(
-  chartData,
-  () => {
-    if (chartInstance) {
-      updateChart()
-    } else {
-      nextTick(() => setTimeout(() => createChart(), 150))
-    }
-  },
-  { deep: true }
-)
 </script>
 
 <template>
@@ -224,35 +94,44 @@ watch(
       <h3 class="chart-title">Revenue Breakdown by Type</h3>
     </div>
     <template v-if="hasData">
-      <div ref="chartContainer" class="chart-container">
-        <canvas ref="chartCanvas"></canvas>
+      <!-- Horizontal bars -->
+      <div class="bar-chart">
+        <div v-for="cat in categories" :key="cat.label" class="bar-row">
+          <div class="bar-label">
+            <span class="bar-dot" :style="{ background: cat.color }"></span>
+            <span class="bar-name">{{ cat.label }}</span>
+            <span class="bar-count">{{ cat.count }} activities</span>
+          </div>
+          <div class="bar-track">
+            <div
+              class="bar-fill"
+              :style="{ width: Math.max(cat.barWidth, 2) + '%', backgroundColor: cat.color, borderColor: cat.borderColor }"
+            ></div>
+          </div>
+          <div class="bar-stats">
+            <span class="bar-value">{{ Math.round(cat.value).toLocaleString() }}</span>
+            <span class="bar-pct">{{ cat.percent.toFixed(1) }}%</span>
+          </div>
+        </div>
       </div>
+
+      <!-- Stacked proportion bar -->
+      <div class="proportion-bar">
+        <div
+          v-for="cat in categories"
+          :key="cat.label"
+          class="proportion-segment"
+          :style="{ width: Math.max(cat.percent, 1) + '%', backgroundColor: cat.color }"
+          :title="`${cat.label}: ${cat.percent.toFixed(1)}%`"
+        ></div>
+      </div>
+
       <div class="summary">
         <div class="summary-item">
           <span class="summary-label">Total Combined Profit/hr:</span>
           <span class="summary-value"
             >{{ Math.round(categoryTotals.grandTotal).toLocaleString() }} gold</span
           >
-        </div>
-        <div class="category-stats">
-          <div class="category-stat" v-if="categoryTotals.dungeonCount > 0">
-            <span class="category-dot" style="background: rgba(168, 85, 247, 0.7)"></span>
-            <span class="category-label">Dungeons</span>
-            <span class="category-value">{{ Math.round(categoryTotals.dungeon).toLocaleString() }}</span>
-            <span class="category-pct">({{ categoryTotals.dungeonPercent.toFixed(1) }}%)</span>
-          </div>
-          <div class="category-stat" v-if="categoryTotals.craftableCount > 0">
-            <span class="category-dot" style="background: rgba(34, 197, 94, 0.7)"></span>
-            <span class="category-label">Craftables</span>
-            <span class="category-value">{{ Math.round(categoryTotals.craftable).toLocaleString() }}</span>
-            <span class="category-pct">({{ categoryTotals.craftablePercent.toFixed(1) }}%)</span>
-          </div>
-          <div class="category-stat" v-if="categoryTotals.resourceCount > 0">
-            <span class="category-dot" style="background: rgba(59, 130, 246, 0.7)"></span>
-            <span class="category-label">Resources</span>
-            <span class="category-value">{{ Math.round(categoryTotals.resource).toLocaleString() }}</span>
-            <span class="category-pct">({{ categoryTotals.resourcePercent.toFixed(1) }}%)</span>
-          </div>
         </div>
       </div>
     </template>
@@ -269,10 +148,12 @@ watch(
   border-radius: 0.5rem;
   padding: 1.5rem;
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .chart-header {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .chart-title {
@@ -282,15 +163,116 @@ watch(
   margin: 0;
 }
 
-.chart-container {
-  position: relative;
-  height: 350px;
-  width: 100%;
+/* Horizontal bar chart */
+.bar-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
+.bar-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.bar-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+}
+
+.bar-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.bar-name {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.bar-count {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  margin-left: auto;
+}
+
+.bar-track {
+  width: 100%;
+  height: 28px;
+  background-color: var(--bg-tertiary);
+  border-radius: 0.375rem;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 0.375rem;
+  border: 1px solid;
+  transition: width 0.4s ease;
+  min-width: 4px;
+}
+
+.bar-stats {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.8125rem;
+}
+
+.bar-value {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.bar-value::after {
+  content: ' gold/hr';
+  font-weight: 400;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+}
+
+.bar-pct {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+}
+
+/* Stacked proportion bar */
+.proportion-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 1.25rem;
+  background-color: var(--bg-tertiary);
+}
+
+.proportion-segment {
+  height: 100%;
+  transition: width 0.4s ease;
+  min-width: 3px;
+}
+
+.proportion-segment:first-child {
+  border-radius: 4px 0 0 4px;
+}
+
+.proportion-segment:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+.proportion-segment:only-child {
+  border-radius: 4px;
+}
+
+/* Summary */
 .summary {
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
   border-top: 1px solid var(--border-color);
 }
 
@@ -298,7 +280,7 @@ watch(
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 0;
+  padding: 0.25rem 0;
 }
 
 .summary-label {
@@ -318,52 +300,5 @@ watch(
   text-align: center;
   color: var(--text-secondary);
   font-size: 0.875rem;
-}
-
-.category-stats {
-  display: flex;
-  flex-direction: column;
-  gap: 0.375rem;
-  margin-top: 0.75rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid var(--border-color);
-}
-
-.category-stat {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.8125rem;
-}
-
-.category-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.category-label {
-  color: var(--text-secondary);
-  min-width: 70px;
-}
-
-.category-value {
-  color: var(--text-primary);
-  font-weight: 600;
-  margin-left: auto;
-}
-
-.category-pct {
-  color: var(--text-secondary);
-  font-size: 0.75rem;
-  min-width: 50px;
-  text-align: right;
-}
-
-@media (max-width: 767px) {
-  .chart-container {
-    height: 300px;
-  }
 }
 </style>

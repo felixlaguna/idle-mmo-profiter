@@ -49,14 +49,107 @@ const untrackedCraftableCount = computed(() => {
 const searchQuery = ref('')
 
 // Section collapse state
-const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
-
 const sectionsExpanded = ref({
-  materials: !isMobile,
+  materials: true,
   craftables: false,
   resources: false,
   recipes: false,
 })
+
+// Sort state
+type SortField = 'name' | 'vendor' | 'market' | 'spread'
+type SortDir = 'asc' | 'desc'
+const sortField = ref<SortField>('spread')
+const sortDir = ref<SortDir>('desc')
+
+const toggleSort = (field: SortField) => {
+  if (sortField.value === field) {
+    sortDir.value = sortDir.value === 'asc' ? 'desc' : 'asc'
+  } else {
+    sortField.value = field
+    sortDir.value = field === 'name' ? 'asc' : 'desc'
+  }
+}
+
+const getSortIcon = (field: SortField): string => {
+  if (sortField.value !== field) return '↕'
+  return sortDir.value === 'asc' ? '↑' : '↓'
+}
+
+// Compute spread percentage for an item
+const getSpreadPercent = (marketPrice: number, vendorValue?: number): number => {
+  if (!vendorValue || vendorValue <= 0 || marketPrice <= 0) return 0
+  return ((marketPrice - vendorValue) / vendorValue) * 100
+}
+
+// Format spread for display
+const formatSpread = (marketPrice: number, vendorValue?: number): string => {
+  if (!vendorValue || vendorValue <= 0 || marketPrice <= 0) return '—'
+  const pct = getSpreadPercent(marketPrice, vendorValue)
+  const sign = pct >= 0 ? '+' : ''
+  return `${sign}${pct.toFixed(0)}%`
+}
+
+// Get spread color class
+const getSpreadColorClass = (marketPrice: number, vendorValue?: number): string => {
+  const pct = getSpreadPercent(marketPrice, vendorValue)
+  if (pct <= 0) return 'spread-negative'
+  if (pct >= 900) return 'spread-extreme'
+  if (pct >= 200) return 'spread-high'
+  if (pct >= 50) return 'spread-moderate'
+  return 'spread-low'
+}
+
+// Generic sort function for market items
+function sortItems<T>(items: T[], getVendor: (i: T) => number | undefined, getMarket: (i: T) => number, getName: (i: T) => string): T[] {
+  return [...items].sort((a, b) => {
+    let cmp = 0
+    switch (sortField.value) {
+      case 'name':
+        cmp = getName(a).localeCompare(getName(b))
+        break
+      case 'vendor':
+        cmp = (getVendor(a) ?? 0) - (getVendor(b) ?? 0)
+        break
+      case 'market':
+        cmp = getMarket(a) - getMarket(b)
+        break
+      case 'spread':
+        cmp = getSpreadPercent(getMarket(a), getVendor(a)) - getSpreadPercent(getMarket(b), getVendor(b))
+        break
+    }
+    return sortDir.value === 'asc' ? cmp : -cmp
+  })
+}
+
+// Sorted & filtered arrays
+const sortedMaterials = computed(() => sortItems(
+  filteredMaterials.value,
+  (m) => m.vendorValue,
+  (m) => m.price,
+  (m) => m.name,
+))
+
+const sortedCraftables = computed(() => sortItems(
+  filteredCraftables.value,
+  (c) => c.vendorValue,
+  (c) => c.price,
+  (c) => c.name,
+))
+
+const sortedResources = computed(() => sortItems(
+  filteredResources.value,
+  (r) => r.vendorValue,
+  (r) => r.marketPrice,
+  (r) => r.name,
+))
+
+const sortedRecipes = computed(() => sortItems(
+  filteredRecipes.value,
+  (r) => r.vendorValue,
+  (r) => r.price,
+  (r) => r.name,
+))
 
 // Per-item refresh loading state
 const itemRefreshLoading = ref<Record<string, boolean>>({})
@@ -1013,15 +1106,16 @@ const refreshItemData = async () => {
           <thead>
             <tr>
               <th v-if="!isStaticMode" class="col-exclude">Exclude</th>
-              <th class="col-name">Name</th>
-              <th class="col-vendor">Vendor Value</th>
-              <th class="col-market">Market Value</th>
+              <th class="col-name sortable" @click="toggleSort('name')">Name <span class="sort-icon">{{ getSortIcon('name') }}</span></th>
+              <th class="col-vendor sortable" @click="toggleSort('vendor')">Vendor <span class="sort-icon">{{ getSortIcon('vendor') }}</span></th>
+              <th class="col-market sortable" @click="toggleSort('market')">Market <span class="sort-icon">{{ getSortIcon('market') }}</span></th>
+              <th class="col-spread sortable" @click="toggleSort('spread')">Spread <span class="sort-icon">{{ getSortIcon('spread') }}</span></th>
               <th v-if="!isStaticMode" class="col-actions">Actions</th>
             </tr>
           </thead>
           <tbody>
             <tr
-              v-for="material in filteredMaterials"
+              v-for="material in sortedMaterials"
               :key="material.id"
               :class="{ excluded: dataProvider.isRefreshExcluded('materials', material.id) }"
             >
@@ -1052,6 +1146,9 @@ const refreshItemData = async () => {
                   suffix=" gold"
                   @update:model-value="(value) => updateMaterialPrice(material.id, value)"
                 />
+              </td>
+              <td class="col-spread" :class="getSpreadColorClass(material.price, material.vendorValue)" data-label="Spread">
+                {{ formatSpread(material.price, material.vendorValue) }}
               </td>
               <td v-if="!isStaticMode" class="col-actions" data-label="Actions">
                 <div class="actions-wrapper">
@@ -1164,15 +1261,16 @@ const refreshItemData = async () => {
           <thead>
             <tr>
               <th v-if="!isStaticMode" class="col-exclude">Exclude</th>
-              <th class="col-name">Name</th>
-              <th class="col-vendor">Vendor Value</th>
-              <th class="col-market">Market Value</th>
+              <th class="col-name sortable" @click="toggleSort('name')">Name <span class="sort-icon">{{ getSortIcon('name') }}</span></th>
+              <th class="col-vendor sortable" @click="toggleSort('vendor')">Vendor <span class="sort-icon">{{ getSortIcon('vendor') }}</span></th>
+              <th class="col-market sortable" @click="toggleSort('market')">Market <span class="sort-icon">{{ getSortIcon('market') }}</span></th>
+              <th class="col-spread sortable" @click="toggleSort('spread')">Spread <span class="sort-icon">{{ getSortIcon('spread') }}</span></th>
               <th v-if="!isStaticMode" class="col-actions">Actions</th>
             </tr>
           </thead>
           <tbody>
             <tr
-              v-for="craftable in filteredCraftables"
+              v-for="craftable in sortedCraftables"
               :key="craftable.id"
               :class="{ excluded: dataProvider.isRefreshExcluded('craftables', craftable.id) }"
             >
@@ -1203,6 +1301,9 @@ const refreshItemData = async () => {
                   suffix=" gold"
                   @update:model-value="(value) => updateCraftablePrice(craftable.id, value)"
                 />
+              </td>
+              <td class="col-spread" :class="getSpreadColorClass(craftable.price, craftable.vendorValue)" data-label="Spread">
+                {{ formatSpread(craftable.price, craftable.vendorValue) }}
               </td>
               <td v-if="!isStaticMode" class="col-actions" data-label="Actions">
                 <div class="actions-wrapper">
@@ -1313,15 +1414,16 @@ const refreshItemData = async () => {
           <thead>
             <tr>
               <th v-if="!isStaticMode" class="col-exclude">Exclude</th>
-              <th class="col-name">Name</th>
-              <th class="col-vendor">Vendor Value</th>
-              <th class="col-market">Market Value</th>
+              <th class="col-name sortable" @click="toggleSort('name')">Name <span class="sort-icon">{{ getSortIcon('name') }}</span></th>
+              <th class="col-vendor sortable" @click="toggleSort('vendor')">Vendor <span class="sort-icon">{{ getSortIcon('vendor') }}</span></th>
+              <th class="col-market sortable" @click="toggleSort('market')">Market <span class="sort-icon">{{ getSortIcon('market') }}</span></th>
+              <th class="col-spread sortable" @click="toggleSort('spread')">Spread <span class="sort-icon">{{ getSortIcon('spread') }}</span></th>
               <th v-if="!isStaticMode" class="col-actions">Actions</th>
             </tr>
           </thead>
           <tbody>
             <tr
-              v-for="resource in filteredResources"
+              v-for="resource in sortedResources"
               :key="resource.id"
               :class="{ excluded: dataProvider.isRefreshExcluded('resources', resource.id) }"
             >
@@ -1348,6 +1450,9 @@ const refreshItemData = async () => {
                   suffix=" gold"
                   @update:model-value="(value) => updateResourcePrice(resource.id, value)"
                 />
+              </td>
+              <td class="col-spread" :class="getSpreadColorClass(resource.marketPrice, resource.vendorValue)" data-label="Spread">
+                {{ formatSpread(resource.marketPrice, resource.vendorValue) }}
               </td>
               <td v-if="!isStaticMode" class="col-actions" data-label="Actions">
                 <div class="actions-wrapper">
@@ -1479,15 +1584,16 @@ const refreshItemData = async () => {
           <thead>
             <tr>
               <th v-if="!isStaticMode" class="col-exclude">Exclude</th>
-              <th class="col-name">Name</th>
-              <th class="col-vendor">Vendor Value</th>
-              <th class="col-market">Market Value</th>
+              <th class="col-name sortable" @click="toggleSort('name')">Name <span class="sort-icon">{{ getSortIcon('name') }}</span></th>
+              <th class="col-vendor sortable" @click="toggleSort('vendor')">Vendor <span class="sort-icon">{{ getSortIcon('vendor') }}</span></th>
+              <th class="col-market sortable" @click="toggleSort('market')">Market <span class="sort-icon">{{ getSortIcon('market') }}</span></th>
+              <th class="col-spread sortable" @click="toggleSort('spread')">Spread <span class="sort-icon">{{ getSortIcon('spread') }}</span></th>
               <th v-if="!isStaticMode" class="col-actions">Actions</th>
             </tr>
           </thead>
           <tbody>
             <tr
-              v-for="recipe in filteredRecipes"
+              v-for="recipe in sortedRecipes"
               :key="recipe.id"
               :class="{ excluded: dataProvider.isRefreshExcluded('recipes', recipe.id) }"
             >
@@ -1525,6 +1631,9 @@ const refreshItemData = async () => {
                   suffix=" gold"
                   @update:model-value="(value) => updateRecipePrice(recipe.id, value)"
                 />
+              </td>
+              <td class="col-spread" :class="getSpreadColorClass(recipe.price, recipe.vendorValue)" data-label="Spread">
+                {{ formatSpread(recipe.price, recipe.vendorValue) }}
               </td>
               <td v-if="!isStaticMode" class="col-actions" data-label="Actions">
                 <div class="actions-wrapper">
@@ -2423,6 +2532,57 @@ const refreshItemData = async () => {
 .spread-moderate :deep(.value) {
   color: var(--text-primary);
   font-weight: 500;
+}
+
+/* Sortable column headers */
+.sortable {
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+.sortable:hover {
+  color: var(--text-primary);
+}
+
+.sort-icon {
+  font-size: 0.6875rem;
+  opacity: 0.5;
+  margin-left: 0.25rem;
+}
+
+.sortable:hover .sort-icon {
+  opacity: 1;
+}
+
+/* Spread column */
+.col-spread {
+  font-weight: 600;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.spread-extreme {
+  color: var(--success);
+  font-weight: 700;
+}
+
+.spread-high {
+  color: var(--success);
+}
+
+.spread-moderate {
+  color: var(--text-primary);
+}
+
+.spread-low {
+  color: var(--text-secondary);
+}
+
+.spread-negative {
+  color: var(--danger);
 }
 
 /* Mobile market card density */
