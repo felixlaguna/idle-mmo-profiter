@@ -550,23 +550,21 @@ const profitRange = computed(() => {
   }
 
   .filter-label {
-    width: 100%;
-    margin-bottom: 0rem;
-    font-size: 0.8125rem;
+    display: none;
   }
 
   .filter-button {
     flex: 1 1 calc(33.333% - 0.35rem);
-    min-width: 0;
+    min-width: calc(33.333% - 0.35rem);
     max-width: calc(33.333% - 0.35rem);
-    min-height: 48px;
-    padding: 0.625rem 0.5rem;
-    font-size: 0.8125rem;
+    min-height: auto;
+    padding: 0.5rem 0.375rem;
+    font-size: 0.75rem;
   }
 
   .ranking-table th,
   .ranking-table td {
-    padding: 0.5rem 0.625rem;
+    padding: 0.25rem 0.5rem;
   }
 }
 

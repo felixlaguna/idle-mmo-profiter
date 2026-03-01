@@ -561,10 +561,16 @@ const isUntradableRecipe = (recipeName: string): boolean => {
   }
 }
 
+@media (max-width: 767px) {
+  .main-table th,
+  .main-table td {
+    padding: 0.25rem 0.5rem;
+  }
+}
+
 @media (max-width: 640px) {
   .main-table th,
   .main-table td {
-    padding: 0.5rem 0.625rem;
     font-size: 0.8125rem;
   }
 
