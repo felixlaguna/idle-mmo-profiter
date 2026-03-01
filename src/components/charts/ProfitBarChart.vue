@@ -117,7 +117,7 @@ const createChart = () => {
       },
       scales: {
         x: {
-          beginAtZero: true,
+          type: 'logarithmic',
           grid: {
             color: '#374151',
           },

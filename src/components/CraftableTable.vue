@@ -566,7 +566,7 @@ const formatTime = (seconds: number): string => {
 .craftable-table {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.5rem;
   max-width: 1320px;
   margin: 0 auto;
 }
