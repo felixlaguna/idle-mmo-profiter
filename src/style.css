@@ -492,4 +492,18 @@ hr {
   .mobile-card-layout td[data-label='Market Price'] {
     display: none;
   }
+
+  /* Market tab: place Vendor Value and Market Value side-by-side */
+  .mobile-card-layout td[data-label='Vendor Value'],
+  .mobile-card-layout td[data-label='Market Value'] {
+    display: inline-flex;
+    width: 50%;
+    font-size: 0.75rem;
+  }
+
+  /* Market tab: hide Exclude and Actions columns */
+  .mobile-card-layout td[data-label='Exclude'],
+  .mobile-card-layout td[data-label='Actions'] {
+    display: none;
+  }
 }

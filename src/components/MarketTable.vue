@@ -2705,24 +2705,10 @@ const refreshItemData = async () => {
     line-height: 1.3;
   }
 
-  /* Place Vendor and Market values side-by-side on mobile */
-  .market-items-table.mobile-card-layout .col-vendor,
-  .market-items-table.mobile-card-layout .col-market {
-    display: inline-flex !important;
-    width: 50% !important;
-    font-size: 0.75rem;
-  }
-
   /* Compact the spread row */
   .market-items-table.mobile-card-layout .col-spread {
     font-size: 0.75rem;
     font-weight: 600;
-  }
-
-  /* Hide Exclude and Actions columns on mobile */
-  .market-items-table.mobile-card-layout .col-exclude,
-  .market-items-table.mobile-card-layout .col-actions {
-    display: none;
   }
 }
 </style>
