@@ -176,22 +176,72 @@ const profitRange = computed(() => {
       >
         <thead>
           <tr>
-            <th class="sortable" @click="toggleSort('rank')">Rank {{ getSortIcon('rank') }}</th>
-            <th class="sortable" @click="toggleSort('name')">
-              Activity Name {{ getSortIcon('name') }}
+            <th
+              class="sortable"
+              role="columnheader"
+              :aria-sort="sortKey === 'rank' ? (sortOrder === 'asc' ? 'ascending' : 'descending') : 'none'"
+              tabindex="0"
+              @click="toggleSort('rank')"
+              @keydown.enter="toggleSort('rank')"
+              @keydown.space.prevent="toggleSort('rank')"
+            >
+              Rank <span aria-hidden="true">{{ getSortIcon('rank') }}</span>
             </th>
-            <th>Type</th>
-            <th class="sortable text-right" @click="toggleSort('profitPerHour')">
-              Profit/hr {{ getSortIcon('profitPerHour') }}
+            <th
+              class="sortable"
+              role="columnheader"
+              :aria-sort="sortKey === 'name' ? (sortOrder === 'asc' ? 'ascending' : 'descending') : 'none'"
+              tabindex="0"
+              @click="toggleSort('name')"
+              @keydown.enter="toggleSort('name')"
+              @keydown.space.prevent="toggleSort('name')"
+            >
+              Activity Name <span aria-hidden="true">{{ getSortIcon('name') }}</span>
             </th>
-            <th class="sortable text-right" @click="toggleSort('profitPerAction')">
-              Profit/action {{ getSortIcon('profitPerAction') }}
+            <th role="columnheader">Type</th>
+            <th
+              class="sortable text-right"
+              role="columnheader"
+              :aria-sort="sortKey === 'profitPerHour' ? (sortOrder === 'asc' ? 'ascending' : 'descending') : 'none'"
+              tabindex="0"
+              @click="toggleSort('profitPerHour')"
+              @keydown.enter="toggleSort('profitPerHour')"
+              @keydown.space.prevent="toggleSort('profitPerHour')"
+            >
+              Profit/hr <span aria-hidden="true">{{ getSortIcon('profitPerHour') }}</span>
             </th>
-            <th class="sortable text-right" @click="toggleSort('timePerAction')">
-              Time {{ getSortIcon('timePerAction') }}
+            <th
+              class="sortable text-right"
+              role="columnheader"
+              :aria-sort="sortKey === 'profitPerAction' ? (sortOrder === 'asc' ? 'ascending' : 'descending') : 'none'"
+              tabindex="0"
+              @click="toggleSort('profitPerAction')"
+              @keydown.enter="toggleSort('profitPerAction')"
+              @keydown.space.prevent="toggleSort('profitPerAction')"
+            >
+              Profit/action <span aria-hidden="true">{{ getSortIcon('profitPerAction') }}</span>
             </th>
-            <th class="sortable text-right" @click="toggleSort('cost')">
-              Cost {{ getSortIcon('cost') }}
+            <th
+              class="sortable text-right"
+              role="columnheader"
+              :aria-sort="sortKey === 'timePerAction' ? (sortOrder === 'asc' ? 'ascending' : 'descending') : 'none'"
+              tabindex="0"
+              @click="toggleSort('timePerAction')"
+              @keydown.enter="toggleSort('timePerAction')"
+              @keydown.space.prevent="toggleSort('timePerAction')"
+            >
+              Time <span aria-hidden="true">{{ getSortIcon('timePerAction') }}</span>
+            </th>
+            <th
+              class="sortable text-right"
+              role="columnheader"
+              :aria-sort="sortKey === 'cost' ? (sortOrder === 'asc' ? 'ascending' : 'descending') : 'none'"
+              tabindex="0"
+              @click="toggleSort('cost')"
+              @keydown.enter="toggleSort('cost')"
+              @keydown.space.prevent="toggleSort('cost')"
+            >
+              Cost <span aria-hidden="true">{{ getSortIcon('cost') }}</span>
             </th>
           </tr>
         </thead>
@@ -271,30 +321,59 @@ const profitRange = computed(() => {
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease-in-out;
   text-transform: capitalize;
+  position: relative;
+  min-height: 44px;
 }
 
 .filter-button:hover {
   background-color: var(--bg-primary);
+  border-color: var(--accent-primary);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.filter-button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 
 .filter-button.active.badge-dungeon {
   background-color: rgba(168, 85, 247, 0.2);
   color: #c084fc;
   border-color: rgba(168, 85, 247, 0.4);
+  box-shadow: 0 2px 8px rgba(168, 85, 247, 0.3);
+}
+
+.filter-button.active.badge-dungeon:hover {
+  background-color: rgba(168, 85, 247, 0.3);
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.4);
 }
 
 .filter-button.active.badge-craftable {
   background-color: rgba(34, 197, 94, 0.2);
   color: #4ade80;
   border-color: rgba(34, 197, 94, 0.4);
+  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
+}
+
+.filter-button.active.badge-craftable:hover {
+  background-color: rgba(34, 197, 94, 0.3);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
 }
 
 .filter-button.active.badge-resource {
   background-color: rgba(59, 130, 246, 0.2);
   color: #60a5fa;
   border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+.filter-button.active.badge-resource:hover {
+  background-color: rgba(59, 130, 246, 0.3);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
 }
 
 /* Table Container */
@@ -342,20 +421,25 @@ const profitRange = computed(() => {
 
 .ranking-table tbody tr {
   border-bottom: 1px solid var(--border-color);
-  transition: background-color 0.2s;
+  transition: all 0.2s ease-in-out;
 }
 
 .ranking-table tbody tr:hover {
   background-color: var(--bg-tertiary);
+  transform: translateX(4px);
+  box-shadow: -4px 0 0 0 var(--accent-primary);
 }
 
 .ranking-table tbody tr.is-top-rank {
   background-color: rgba(245, 158, 11, 0.1);
   border: 2px solid rgba(245, 158, 11, 0.3);
+  box-shadow: -4px 0 0 0 var(--warning);
 }
 
 .ranking-table tbody tr.is-top-rank:hover {
   background-color: rgba(245, 158, 11, 0.15);
+  transform: translateX(4px);
+  box-shadow: -4px 0 0 0 var(--warning), 0 2px 8px rgba(245, 158, 11, 0.3);
 }
 
 .ranking-table td {
@@ -459,15 +543,35 @@ const profitRange = computed(() => {
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 767px) {
   .filter-controls {
     flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.75rem;
+  }
+
+  .filter-label {
+    width: 100%;
+    margin-bottom: 0.25rem;
+  }
+
+  .filter-button {
+    flex: 1;
+    min-width: calc(33.333% - 0.5rem);
+    min-height: 48px;
+    padding: 0.75rem 1rem;
+    font-size: 0.9375rem;
   }
 
   .ranking-table th,
   .ranking-table td {
-    padding: 0.75rem 0.5rem;
-    font-size: 0.75rem;
+    padding: 0.875rem 0.625rem;
+  }
+}
+
+@media (max-width: 479px) {
+  .filter-button {
+    min-width: calc(50% - 0.25rem);
   }
 }
 </style>

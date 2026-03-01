@@ -623,15 +623,18 @@ const formatTime = (seconds: number): string => {
 
 .main-table tbody tr.main-row {
   border-bottom: 1px solid var(--border-color);
-  transition: background-color 0.2s;
+  transition: all 0.2s ease-in-out;
 }
 
 .main-table tbody tr.main-row:hover {
   background-color: var(--bg-tertiary);
+  transform: translateX(4px);
+  box-shadow: -4px 0 0 0 var(--accent-primary);
 }
 
 .main-table tbody tr.main-row.expanded {
   background-color: var(--bg-tertiary);
+  box-shadow: -4px 0 0 0 var(--accent-primary);
 }
 
 .main-table td {
@@ -651,25 +654,33 @@ const formatTime = (seconds: number): string => {
 
 .expand-button {
   padding: 0.25rem 0.5rem;
-  background-color: transparent;
+  background-color: var(--bg-tertiary);
   color: var(--text-secondary);
   border: 1px solid var(--border-color);
   border-radius: 0.25rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease-in-out;
   font-size: 0.75rem;
 }
 
 .expand-button:hover {
   background-color: var(--bg-primary);
-  color: var(--text-primary);
+  color: var(--accent-primary);
   border-color: var(--accent-primary);
+  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
+  transform: translateY(-1px);
+}
+
+.expand-button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(59, 130, 246, 0.2);
 }
 
 .expand-button.expanded {
   background-color: var(--accent-primary);
   color: white;
   border-color: var(--accent-primary);
+  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.4);
 }
 
 /* Name Cell */

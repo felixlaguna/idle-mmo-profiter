@@ -14,6 +14,30 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  build: {
+    // Performance optimizations
+    target: 'es2015', // Modern browsers for smaller bundle
+    cssCodeSplit: true, // Split CSS for lazy-loaded components
+    sourcemap: false, // Disable sourcemaps in production for smaller size
+    minify: 'esbuild', // Fast and efficient minification
+    rollupOptions: {
+      output: {
+        // Manual chunking for optimal code splitting
+        manualChunks: {
+          // Vendor chunk for stable dependencies
+          'vue-vendor': ['vue'],
+          // Chart.js in separate chunk (large library)
+          'chart-vendor': ['chart.js', 'vue-chartjs'],
+        },
+        // Optimized chunk file naming
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]',
+      },
+    },
+    // Chunk size warning limit
+    chunkSizeWarningLimit: 600,
+  },
   server: {
     host: '0.0.0.0',
     port: 5173,

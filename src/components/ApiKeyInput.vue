@@ -162,6 +162,7 @@ if (hasApiKey.value) {
         :type="inputType"
         placeholder="Enter your IdleMMO API key"
         class="key-input"
+        autocomplete="off"
         :disabled="isValidating"
       />
       <button

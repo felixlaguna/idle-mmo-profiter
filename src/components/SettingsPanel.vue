@@ -94,8 +94,8 @@ const handleResetAll = () => {
     </section>
 
     <!-- Magic Find Settings Section -->
-    <section class="settings-section">
-      <h3 class="section-title">Magic Find Settings</h3>
+    <section class="settings-section" aria-labelledby="magic-find-title">
+      <h3 id="magic-find-title" class="section-title">Magic Find Settings</h3>
       <div class="settings-grid">
         <EditableValue
           v-model="magicFind.streak"
@@ -117,8 +117,8 @@ const handleResetAll = () => {
     </section>
 
     <!-- Market Tax Rate Section -->
-    <section class="settings-section">
-      <h3 class="section-title">Market Settings</h3>
+    <section class="settings-section" aria-labelledby="market-settings-title">
+      <h3 id="market-settings-title" class="section-title">Market Settings</h3>
       <div class="settings-grid">
         <EditableValue
           :model-value="taxRatePercent"
@@ -131,30 +131,55 @@ const handleResetAll = () => {
     </section>
 
     <!-- Import/Export Section -->
-    <section class="settings-section">
-      <h3 class="section-title">Backup & Restore</h3>
+    <section class="settings-section" aria-labelledby="backup-restore-title">
+      <h3 id="backup-restore-title" class="section-title">Backup & Restore</h3>
       <div class="button-row">
-        <button class="btn-secondary" @click="handleExport">📥 Export Settings</button>
-        <button class="btn-secondary" @click="handleImportClick">📤 Import Settings</button>
-        <button class="btn-secondary" @click="handleExportDefaultsJson">
-          💾 Export defaults.json
+        <button class="btn-secondary" aria-label="Export settings to file" @click="handleExport">
+          <span aria-hidden="true">📥</span> Export Settings
+        </button>
+        <button
+          class="btn-secondary"
+          aria-label="Import settings from file"
+          @click="handleImportClick"
+        >
+          <span aria-hidden="true">📤</span> Import Settings
+        </button>
+        <button
+          class="btn-secondary"
+          aria-label="Export defaults.json file"
+          @click="handleExportDefaultsJson"
+        >
+          <span aria-hidden="true">💾</span> Export defaults.json
         </button>
         <input
           ref="fileInput"
           type="file"
           accept=".json"
           style="display: none"
+          aria-label="Select settings file to import"
           @change="handleImportFile"
         />
       </div>
     </section>
 
     <!-- Reset Section -->
-    <section class="settings-section">
-      <h3 class="section-title">Reset</h3>
+    <section class="settings-section" aria-labelledby="reset-title">
+      <h3 id="reset-title" class="section-title">Reset</h3>
       <div class="button-row">
-        <button class="btn-warning" @click="handleResetToDefaults">🔄 Reset to Defaults</button>
-        <button class="btn-danger" @click="handleResetAll">⚠️ Reset All (including API key)</button>
+        <button
+          class="btn-warning"
+          aria-label="Reset settings to default values"
+          @click="handleResetToDefaults"
+        >
+          <span aria-hidden="true">🔄</span> Reset to Defaults
+        </button>
+        <button
+          class="btn-danger"
+          aria-label="Reset all settings including API key"
+          @click="handleResetAll"
+        >
+          <span aria-hidden="true">⚠️</span> Reset All (including API key)
+        </button>
       </div>
       <p class="reset-hint">Reset to Defaults: Clears all custom values but keeps your API key.</p>
       <p class="reset-hint">Reset All: Clears everything including your API key.</p>

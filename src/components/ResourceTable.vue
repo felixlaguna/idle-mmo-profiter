@@ -292,11 +292,13 @@ const handleMarketPriceUpdate = (resourceName: string, value: number) => {
 
 .main-table tbody tr {
   border-bottom: 1px solid var(--border-color);
-  transition: background-color 0.2s;
+  transition: all 0.2s ease-in-out;
 }
 
 .main-table tbody tr:hover {
   background-color: var(--bg-tertiary);
+  transform: translateX(4px);
+  box-shadow: -4px 0 0 0 var(--accent-primary);
 }
 
 .main-table td {

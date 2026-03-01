@@ -22,16 +22,61 @@ const emit = defineEmits<{
 
 const inputValue = ref('')
 const inputRef = ref<HTMLInputElement | null>(null)
+const modalRef = ref<HTMLElement | null>(null)
+
+// Focus trap state
+let previousActiveElement: HTMLElement | null = null
+
+// Get all focusable elements within the modal
+const getFocusableElements = () => {
+  if (!modalRef.value) return []
+  const focusableSelectors = [
+    'button:not([disabled])',
+    'input:not([disabled])',
+    'select:not([disabled])',
+    'textarea:not([disabled])',
+    '[tabindex]:not([tabindex="-1"])',
+  ]
+  return Array.from(
+    modalRef.value.querySelectorAll<HTMLElement>(focusableSelectors.join(', '))
+  ).filter((el) => !el.hasAttribute('disabled') && el.offsetParent !== null)
+}
+
+// Trap focus within modal
+const handleModalKeydown = (e: KeyboardEvent) => {
+  if (e.key !== 'Tab') return
+
+  const focusableElements = getFocusableElements()
+  if (focusableElements.length === 0) return
+
+  const firstElement = focusableElements[0]
+  const lastElement = focusableElements[focusableElements.length - 1]
+
+  if (e.shiftKey && document.activeElement === firstElement) {
+    e.preventDefault()
+    lastElement.focus()
+  } else if (!e.shiftKey && document.activeElement === lastElement) {
+    e.preventDefault()
+    firstElement.focus()
+  }
+}
 
 // Watch for modal visibility to reset input and auto-focus
 watch(
   () => props.visible,
   (newVisible) => {
     if (newVisible) {
+      previousActiveElement = document.activeElement as HTMLElement
       inputValue.value = props.currentHashedId || ''
       nextTick(() => {
         inputRef.value?.focus()
       })
+    } else {
+      // Restore focus when modal closes
+      if (previousActiveElement) {
+        previousActiveElement.focus()
+        previousActiveElement = null
+      }
     }
   }
 )
@@ -95,11 +140,19 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="visible" class="modal-overlay" @click.self="close" @keydown="handleKeydown">
-    <div class="modal-content-small">
+  <div
+    v-if="visible"
+    class="modal-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="hashed-id-modal-title"
+    @click.self="close"
+    @keydown="handleKeydown"
+  >
+    <div ref="modalRef" class="modal-content-small" @keydown="handleModalKeydown">
       <div class="modal-header-small">
-        <h3>Hashed ID - {{ itemName }}</h3>
-        <button class="btn-close-modal" @click="close">
+        <h3 id="hashed-id-modal-title">Hashed ID - {{ itemName }}</h3>
+        <button class="btn-close-modal" aria-label="Close modal" @click="close">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -110,6 +163,7 @@ onMounted(() => {
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
+            aria-hidden="true"
           >
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -125,6 +179,7 @@ onMounted(() => {
             v-model="inputValue"
             type="text"
             class="form-input"
+            autocomplete="off"
             :placeholder="hasCurrentHashedId ? currentHashedId : 'Not set'"
             @keydown="handleKeydown"
           />
@@ -167,9 +222,25 @@ onMounted(() => {
           </button>
         </div>
         <div class="modal-actions">
-          <button class="btn-save" :disabled="!isValueChanged" @click="save">Save</button>
-          <button class="btn-cancel" @click="close">Cancel</button>
-          <button v-if="hasCurrentHashedId" class="btn-clear" @click="clear">Clear</button>
+          <button
+            class="btn-save"
+            :disabled="!isValueChanged"
+            aria-label="Save hashed ID changes"
+            @click="save"
+          >
+            Save
+          </button>
+          <button class="btn-cancel" aria-label="Cancel and close modal" @click="close">
+            Cancel
+          </button>
+          <button
+            v-if="hasCurrentHashedId"
+            class="btn-clear"
+            aria-label="Clear hashed ID"
+            @click="clear"
+          >
+            Clear
+          </button>
         </div>
       </div>
     </div>

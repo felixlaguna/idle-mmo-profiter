@@ -1,0 +1,22 @@
+# Browsers that we support
+
+# Modern browsers (last 2 versions)
+last 2 Chrome versions
+last 2 Firefox versions
+last 2 Safari versions
+last 2 Edge versions
+
+# Browser market share > 1%
+> 1%
+
+# Firefox Extended Support Release
+Firefox ESR
+
+# Mobile browsers
+iOS >= 12
+Android >= 6
+
+# Explicitly exclude
+not dead
+not IE 11
+not op_mini all

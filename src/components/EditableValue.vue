@@ -97,6 +97,7 @@ const handleKeydown = (e: KeyboardEvent) => {
         step="any"
         min="0"
         class="edit-input"
+        autocomplete="off"
         @keydown="handleKeydown"
         @blur="saveEdit"
       />

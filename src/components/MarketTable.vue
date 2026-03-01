@@ -785,6 +785,7 @@ const refreshItemData = async () => {
           type="text"
           class="search-input"
           placeholder="Search items... (e.g., 'Moose', 'Wraithbane', 'Coal')"
+          autocomplete="off"
         />
         <div class="search-stats">
           <span v-if="searchQuery" class="search-count">
@@ -2162,8 +2163,14 @@ const refreshItemData = async () => {
   border-bottom: none;
 }
 
+.market-items-table tbody tr {
+  transition: all 0.2s ease-in-out;
+}
+
 .market-items-table tbody tr:hover {
   background-color: var(--bg-tertiary);
+  transform: translateX(4px);
+  box-shadow: -4px 0 0 0 var(--accent-primary);
 }
 
 .market-items-table tbody tr.excluded {
@@ -2172,6 +2179,8 @@ const refreshItemData = async () => {
 
 .market-items-table tbody tr.excluded:hover {
   opacity: 0.7;
+  transform: translateX(2px);
+  box-shadow: -4px 0 0 0 var(--text-secondary);
 }
 
 .col-exclude {

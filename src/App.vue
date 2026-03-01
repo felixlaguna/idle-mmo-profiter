@@ -19,6 +19,7 @@ import MarketTable from './components/MarketTable.vue'
 import Toast from './components/Toast.vue'
 import ErrorBoundary from './components/ErrorBoundary.vue'
 import LoadingSpinner from './components/LoadingSpinner.vue'
+import AppFooter from './components/AppFooter.vue'
 import { useToast } from './composables/useToast'
 import type { MagicFindSettings } from './types'
 
@@ -42,6 +43,8 @@ const currentTab = ref<Tab>('all')
 const showSettings = ref(false)
 // eslint-disable-next-line no-undef
 const modalCloseButtonRef = ref<HTMLButtonElement | null>(null)
+ 
+const modalContentRef = ref<HTMLElement | null>(null)
 
 // Toast notifications
 const { toasts, dismissToast } = useToast()
@@ -185,6 +188,66 @@ const getTypeBadgeClass = (type: string): string => {
   }
 }
 
+// Handle tab navigation with arrow keys
+const tabs: Tab[] = ['all', 'dungeons', 'craftables', 'resources', 'market', 'charts']
+
+const handleTabKeydown = (e: KeyboardEvent) => {
+  if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) return
+
+  e.preventDefault()
+  const currentIndex = tabs.indexOf(currentTab.value)
+
+  if (e.key === 'ArrowLeft') {
+    currentTab.value = tabs[currentIndex > 0 ? currentIndex - 1 : tabs.length - 1]
+  } else if (e.key === 'ArrowRight') {
+    currentTab.value = tabs[currentIndex < tabs.length - 1 ? currentIndex + 1 : 0]
+  } else if (e.key === 'Home') {
+    currentTab.value = tabs[0]
+  } else if (e.key === 'End') {
+    currentTab.value = tabs[tabs.length - 1]
+  }
+
+  // Focus the newly selected tab
+  setTimeout(() => {
+    const activeTab = document.querySelector('.tab-button.active') as HTMLElement
+    activeTab?.focus()
+  }, 0)
+}
+
+// Get all focusable elements within a container
+const getFocusableElements = (container: HTMLElement) => {
+  const focusableSelectors = [
+    'button:not([disabled])',
+    'input:not([disabled])',
+    'select:not([disabled])',
+    'textarea:not([disabled])',
+    'a[href]',
+    '[tabindex]:not([tabindex="-1"])',
+  ]
+  return Array.from(
+    container.querySelectorAll<HTMLElement>(focusableSelectors.join(', '))
+  ).filter((el) => !el.hasAttribute('disabled') && el.offsetParent !== null)
+}
+
+// Trap focus within modal
+const handleModalKeydown = (e: KeyboardEvent) => {
+  if (e.key !== 'Tab' || !modalContentRef.value) return
+
+  const focusableElements = getFocusableElements(modalContentRef.value)
+  if (focusableElements.length === 0) return
+
+  const firstElement = focusableElements[0]
+  const lastElement = focusableElements[focusableElements.length - 1]
+
+  if (e.shiftKey && document.activeElement === firstElement) {
+    e.preventDefault()
+    lastElement.focus()
+  } else if (!e.shiftKey && document.activeElement === lastElement) {
+    e.preventDefault()
+    firstElement.focus()
+  }
+}
+
 // Handle keyboard shortcuts
 const handleKeydown = (e: KeyboardEvent) => {
   // Escape closes settings modal (skip in static mode)
@@ -228,6 +291,7 @@ onUnmounted(() => {
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
+              aria-hidden="true"
             >
               <circle cx="12" cy="12" r="3"></circle>
               <path
@@ -244,35 +308,33 @@ onUnmounted(() => {
     <main class="app-main">
       <div class="content-wrapper">
         <!-- Hero Section: Best Action -->
-        <section v-if="bestAction" class="hero-section">
+        <section v-if="bestAction" class="hero-section" aria-labelledby="best-action-heading">
           <div class="hero-content">
-            <div class="hero-label">Best Action Right Now</div>
+            <p class="hero-label">Best Action Right Now</p>
             <div class="hero-activity">
-              <h2 class="hero-name">{{ bestAction.name }}</h2>
+              <h2 id="best-action-heading" class="hero-name">{{ bestAction.name }}</h2>
               <span class="hero-badge" :class="getTypeBadgeClass(bestAction.activityType)">
                 {{ bestAction.activityType }}
               </span>
             </div>
-            <div class="hero-profit">
-              <span class="hero-profit-value">{{ formatNumber(bestAction.profitPerHour) }}</span>
-              <span class="hero-profit-label">gold/hr</span>
+            <div class="hero-profit" aria-label="Profit per hour">
+              <span class="hero-profit-value" aria-label="{{ formatNumber(bestAction.profitPerHour) }} gold per hour">{{ formatNumber(bestAction.profitPerHour) }}</span>
+              <span class="hero-profit-label" aria-hidden="true">gold/hr</span>
             </div>
-            <div class="hero-details">
+            <dl class="hero-details">
               <div class="hero-detail">
-                <span class="detail-label">Profit per action</span>
-                <span class="detail-value"
-                  >{{ formatNumber(bestAction.profitPerAction) }} gold</span
-                >
+                <dt class="detail-label">Profit per action</dt>
+                <dd class="detail-value">{{ formatNumber(bestAction.profitPerAction) }} gold</dd>
               </div>
               <div class="hero-detail">
-                <span class="detail-label">Time per action</span>
-                <span class="detail-value">{{ formatTime(bestAction.timePerAction) }}</span>
+                <dt class="detail-label">Time per action</dt>
+                <dd class="detail-value">{{ formatTime(bestAction.timePerAction) }}</dd>
               </div>
               <div class="hero-detail">
-                <span class="detail-label">Cost</span>
-                <span class="detail-value">{{ formatNumber(bestAction.cost) }} gold</span>
+                <dt class="detail-label">Cost</dt>
+                <dd class="detail-value">{{ formatNumber(bestAction.cost) }} gold</dd>
               </div>
-            </div>
+            </dl>
           </div>
         </section>
 
@@ -285,6 +347,7 @@ onUnmounted(() => {
             :aria-selected="currentTab === 'all'"
             :tabindex="currentTab === 'all' ? 0 : -1"
             @click="currentTab = 'all'"
+            @keydown="handleTabKeydown"
           >
             All Activities
           </button>
@@ -295,6 +358,7 @@ onUnmounted(() => {
             :aria-selected="currentTab === 'dungeons'"
             :tabindex="currentTab === 'dungeons' ? 0 : -1"
             @click="currentTab = 'dungeons'"
+            @keydown="handleTabKeydown"
           >
             Dungeons
           </button>
@@ -305,6 +369,7 @@ onUnmounted(() => {
             :aria-selected="currentTab === 'craftables'"
             :tabindex="currentTab === 'craftables' ? 0 : -1"
             @click="currentTab = 'craftables'"
+            @keydown="handleTabKeydown"
           >
             Craftables
           </button>
@@ -315,6 +380,7 @@ onUnmounted(() => {
             :aria-selected="currentTab === 'resources'"
             :tabindex="currentTab === 'resources' ? 0 : -1"
             @click="currentTab = 'resources'"
+            @keydown="handleTabKeydown"
           >
             Resources
           </button>
@@ -325,6 +391,7 @@ onUnmounted(() => {
             :aria-selected="currentTab === 'market'"
             :tabindex="currentTab === 'market' ? 0 : -1"
             @click="currentTab = 'market'"
+            @keydown="handleTabKeydown"
           >
             Market
             <span v-if="overrideStats.total > 0 && !isStaticMode" class="tab-badge">{{
@@ -338,6 +405,7 @@ onUnmounted(() => {
             :aria-selected="currentTab === 'charts'"
             :tabindex="currentTab === 'charts' ? 0 : -1"
             @click="currentTab = 'charts'"
+            @keydown="handleTabKeydown"
           >
             Charts
           </button>
@@ -366,40 +434,48 @@ onUnmounted(() => {
               <MarketTable />
             </div>
             <div v-if="currentTab === 'charts'" class="charts-section">
-              <Suspense>
-                <template #default>
-                  <ProfitBarChart :activities="rankedActivities" />
-                </template>
-                <template #fallback>
-                  <LoadingSpinner message="Loading chart..." />
-                </template>
-              </Suspense>
+              <ErrorBoundary>
+                <Suspense>
+                  <template #default>
+                    <ProfitBarChart :activities="rankedActivities" />
+                  </template>
+                  <template #fallback>
+                    <LoadingSpinner message="Loading chart..." :timeout="10000" />
+                  </template>
+                </Suspense>
+              </ErrorBoundary>
               <div class="charts-grid">
-                <Suspense>
-                  <template #default>
-                    <DungeonChart :dungeons="dungeonProfits" />
-                  </template>
-                  <template #fallback>
-                    <LoadingSpinner message="Loading chart..." />
-                  </template>
-                </Suspense>
-                <Suspense>
-                  <template #default>
-                    <RevenueBreakdown :activities="rankedActivities" />
-                  </template>
-                  <template #fallback>
-                    <LoadingSpinner message="Loading chart..." />
-                  </template>
-                </Suspense>
+                <ErrorBoundary>
+                  <Suspense>
+                    <template #default>
+                      <DungeonChart :dungeons="dungeonProfits" />
+                    </template>
+                    <template #fallback>
+                      <LoadingSpinner message="Loading chart..." :timeout="10000" />
+                    </template>
+                  </Suspense>
+                </ErrorBoundary>
+                <ErrorBoundary>
+                  <Suspense>
+                    <template #default>
+                      <RevenueBreakdown :activities="rankedActivities" />
+                    </template>
+                    <template #fallback>
+                      <LoadingSpinner message="Loading chart..." :timeout="10000" />
+                    </template>
+                  </Suspense>
+                </ErrorBoundary>
               </div>
-              <Suspense>
-                <template #default>
-                  <PriceHistoryChart />
-                </template>
-                <template #fallback>
-                  <LoadingSpinner message="Loading chart..." />
-                </template>
-              </Suspense>
+              <ErrorBoundary>
+                <Suspense>
+                  <template #default>
+                    <PriceHistoryChart />
+                  </template>
+                  <template #fallback>
+                    <LoadingSpinner message="Loading chart..." :timeout="10000" />
+                  </template>
+                </Suspense>
+              </ErrorBoundary>
             </div>
           </ErrorBoundary>
         </div>
@@ -415,7 +491,7 @@ onUnmounted(() => {
       aria-labelledby="settings-title"
       @click.self="closeSettings"
     >
-      <div class="modal-content">
+      <div ref="modalContentRef" class="modal-content" @keydown="handleModalKeydown">
         <div class="modal-header">
           <button
             ref="modalCloseButtonRef"
@@ -434,6 +510,7 @@ onUnmounted(() => {
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
+              aria-hidden="true"
             >
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -443,6 +520,9 @@ onUnmounted(() => {
         <SettingsPanel />
       </div>
     </div>
+
+    <!-- Footer -->
+    <AppFooter />
 
     <!-- Toast Notifications -->
     <Toast :messages="toasts" @dismiss="dismissToast" />
@@ -464,6 +544,10 @@ onUnmounted(() => {
   position: sticky;
   top: 0;
   z-index: 100;
+  /* Performance: GPU acceleration for sticky positioning */
+  will-change: transform;
+  /* Contain layout shifts */
+  contain: layout style paint;
 }
 
 .header-content {
@@ -493,21 +577,29 @@ onUnmounted(() => {
 
 .btn-settings {
   padding: 0.5rem;
-  background-color: transparent;
+  background-color: var(--bg-tertiary);
   color: var(--text-secondary);
   border: 1px solid var(--border-color);
   border-radius: 0.375rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease-in-out;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
 }
 
 .btn-settings:hover {
-  background-color: var(--bg-tertiary);
-  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  color: var(--accent-primary);
   border-color: var(--accent-primary);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+.btn-settings:active {
+  transform: scale(0.95);
+  box-shadow: 0 1px 4px rgba(59, 130, 246, 0.2);
 }
 
 /* Main Content */
@@ -528,7 +620,31 @@ onUnmounted(() => {
   border-radius: 0.75rem;
   padding: 2rem;
   margin-bottom: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2), 0 8px 24px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--warning) 0%,
+    var(--accent-primary) 50%,
+    var(--warning) 100%
+  );
+  opacity: 0.5;
+}
+
+.hero-section:hover {
+  box-shadow: 0 6px 16px rgba(245, 158, 11, 0.25), 0 10px 28px rgba(0, 0, 0, 0.35);
+  transform: translateY(-2px);
 }
 
 .hero-content {
@@ -607,12 +723,14 @@ onUnmounted(() => {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
   margin-top: 0.5rem;
+  margin-bottom: 0;
 }
 
 .hero-detail {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  margin: 0;
 }
 
 .detail-label {
@@ -620,12 +738,14 @@ onUnmounted(() => {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--text-secondary);
+  font-weight: 500;
 }
 
 .detail-value {
   font-size: 1.125rem;
   font-weight: 600;
   color: var(--text-primary);
+  margin: 0;
 }
 
 /* Tab Navigation */
@@ -663,19 +783,41 @@ onUnmounted(() => {
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease-in-out;
   white-space: nowrap;
   flex-shrink: 0;
+  position: relative;
+}
+
+.tab-button::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: var(--accent-primary);
+  transform: translateX(-50%);
+  transition: width 0.2s ease-in-out;
 }
 
 .tab-button:hover {
   color: var(--text-primary);
-  background-color: var(--bg-tertiary);
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.tab-button:hover::before {
+  width: 80%;
 }
 
 .tab-button.active {
   color: var(--accent-primary);
   border-bottom-color: var(--accent-primary);
+  background-color: rgba(59, 130, 246, 0.05);
+}
+
+.tab-button.active::before {
+  width: 100%;
 }
 
 .tab-badge {
@@ -732,6 +874,10 @@ onUnmounted(() => {
   justify-content: center;
   z-index: 1000;
   padding: 2rem;
+  /* Performance: GPU acceleration for modal overlay */
+  will-change: opacity;
+  /* Contain paint operations */
+  contain: layout style paint;
 }
 
 .modal-content {
@@ -743,6 +889,10 @@ onUnmounted(() => {
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
+  /* Performance: GPU acceleration for smooth animations */
+  will-change: transform, opacity;
+  /* Contain layout and paint */
+  contain: layout style paint;
 }
 
 .modal-header {
@@ -758,21 +908,29 @@ onUnmounted(() => {
 
 .btn-close {
   padding: 0.5rem;
-  background-color: transparent;
+  background-color: var(--bg-tertiary);
   color: var(--text-secondary);
   border: 1px solid var(--border-color);
   border-radius: 0.375rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease-in-out;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
 }
 
 .btn-close:hover {
-  background-color: var(--bg-tertiary);
-  color: var(--text-primary);
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
   border-color: var(--danger);
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+.btn-close:active {
+  transform: scale(0.95);
+  box-shadow: 0 1px 4px rgba(239, 68, 68, 0.2);
 }
 
 /* Charts Section */
@@ -794,15 +952,42 @@ onUnmounted(() => {
   }
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Tablet Responsive (768px to 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
   .app-header {
-    padding: 1rem;
+    padding: 1rem 1.5rem;
+  }
+
+  .app-main {
+    padding: 1.5rem;
+  }
+
+  .hero-section {
+    padding: 1.75rem;
+  }
+
+  .hero-name {
+    font-size: 1.75rem;
+  }
+
+  .hero-profit-value {
+    font-size: 2.5rem;
+  }
+
+  .tab-button {
+    min-height: 44px;
+  }
+}
+
+/* Mobile Responsive (<768px) */
+@media (max-width: 767px) {
+  .app-header {
+    padding: 0.75rem 1rem;
   }
 
   .header-content {
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.75rem;
     align-items: flex-start;
   }
 
@@ -812,40 +997,106 @@ onUnmounted(() => {
   }
 
   .app-title {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
+  }
+
+  .btn-settings {
+    min-width: 48px;
+    min-height: 48px;
+    padding: 0.75rem;
   }
 
   .app-main {
-    padding: 1rem;
+    padding: 0.75rem;
   }
 
   .hero-section {
-    padding: 1.5rem;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
   }
 
   .hero-name {
-    font-size: 1.5rem;
+    font-size: 1.375rem;
   }
 
   .hero-profit-value {
-    font-size: 2rem;
+    font-size: 1.875rem;
   }
 
   .hero-details {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 0.875rem;
+  }
+
+  .tab-navigation {
+    margin-bottom: 1rem;
+    -webkit-mask-image: linear-gradient(90deg, black 90%, transparent);
+    mask-image: linear-gradient(90deg, black 90%, transparent);
+  }
+
+  .tab-button {
+    min-height: 48px;
+    padding: 0.875rem 1.25rem;
   }
 
   .modal-overlay {
     padding: 0;
     align-items: flex-end;
+    background-color: rgba(0, 0, 0, 0.85);
   }
 
   .modal-content {
-    max-height: 90vh;
-    border-radius: 1rem 1rem 0 0;
+    max-height: 92vh;
+    border-radius: 1.25rem 1.25rem 0 0;
     width: 100%;
     max-width: 100%;
+    animation: slideUp 0.3s ease-out;
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .modal-header {
+    padding: 1rem 1.25rem;
+  }
+
+  .modal-header::before {
+    content: '';
+    position: absolute;
+    top: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2.5rem;
+    height: 0.25rem;
+    background-color: var(--border-color);
+    border-radius: 0.125rem;
+  }
+
+  .btn-close {
+    min-width: 48px;
+    min-height: 48px;
+    padding: 0.75rem;
+  }
+}
+
+/* Small mobile (<480px) */
+@media (max-width: 479px) {
+  .app-title {
+    font-size: 1rem;
+  }
+
+  .hero-name {
+    font-size: 1.25rem;
+  }
+
+  .hero-profit-value {
+    font-size: 1.5rem;
   }
 }
 </style>

@@ -60,7 +60,7 @@ export default [
     },
   },
   {
-    files: ['src/tests/**/*.{ts,tsx}'],
+    files: ['src/tests/**/*.{ts,tsx}', 'src/components/__tests__/**/*.{ts,tsx}'],
     languageOptions: {
       globals: {
         // Vitest globals
@@ -81,6 +81,6 @@ export default [
     },
   },
   {
-    ignores: ['dist', 'node_modules', 'scripts'],
+    ignores: ['dist', 'dist.old', 'node_modules', 'scripts'],
   },
 ]

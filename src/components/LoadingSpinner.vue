@@ -1,20 +1,47 @@
 <script setup lang="ts">
-defineProps<{
+import { ref, onMounted, onUnmounted } from 'vue'
+
+const props = defineProps<{
   size?: 'small' | 'medium' | 'large'
   message?: string
+  timeout?: number // Optional timeout in milliseconds
 }>()
+
+const emit = defineEmits<{
+  (e: 'timeout'): void
+}>()
+
+const hasTimedOut = ref(false)
+let timeoutId: ReturnType<typeof setTimeout> | null = null
+
+onMounted(() => {
+  if (props.timeout && props.timeout > 0) {
+    timeoutId = setTimeout(() => {
+      hasTimedOut.value = true
+      emit('timeout')
+    }, props.timeout)
+  }
+})
+
+onUnmounted(() => {
+  if (timeoutId) {
+    clearTimeout(timeoutId)
+  }
+})
 </script>
 
 <template>
   <div
     class="loading-spinner"
-    :class="`spinner-${size || 'medium'}`"
+    :class="[`spinner-${size || 'medium'}`, { 'has-timed-out': hasTimedOut }]"
     role="status"
     aria-live="polite"
   >
-    <div class="spinner"></div>
-    <p v-if="message" class="loading-message">{{ message }}</p>
-    <span class="sr-only">Loading...</span>
+    <div v-if="!hasTimedOut" class="spinner"></div>
+    <div v-else class="timeout-icon">⏱️</div>
+    <p v-if="!hasTimedOut && message" class="loading-message">{{ message }}</p>
+    <p v-else-if="hasTimedOut" class="timeout-message">This is taking longer than expected...</p>
+    <span class="sr-only">{{ hasTimedOut ? 'Loading timed out' : 'Loading...' }}</span>
   </div>
 </template>
 
@@ -63,6 +90,32 @@ defineProps<{
   color: var(--text-secondary);
   font-size: 0.875rem;
   margin: 0;
+}
+
+.timeout-icon {
+  font-size: 3rem;
+  opacity: 0.5;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.timeout-message {
+  color: var(--warning);
+  font-size: 0.875rem;
+  margin: 0;
+  font-weight: 500;
+}
+
+.has-timed-out {
+  opacity: 0.8;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
 }
 
 .sr-only {

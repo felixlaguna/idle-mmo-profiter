@@ -20,6 +20,22 @@
   box-sizing: border-box;
 }
 
+/* Normalize box-sizing for pseudo-elements */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Prevent iOS text size adjust after orientation change */
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* Smooth scrolling for in-page navigation */
+  scroll-behavior: smooth;
+}
+
 body {
   font-family:
     'Inter',
@@ -38,10 +54,16 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Prevent horizontal scrolling */
+  overflow-x: hidden;
+  /* Better text rendering on Windows */
+  text-rendering: optimizeLegibility;
 }
 
 #app {
   min-height: 100vh;
+  /* Enable CSS containment for better rendering performance */
+  contain: layout style paint;
 }
 
 h1,
@@ -63,11 +85,70 @@ button {
   border-radius: 0.375rem;
   font-size: 0.875rem;
   font-weight: 500;
-  transition: all 0.2s;
+  transition: all 0.2s ease-in-out;
+  /* Normalize button appearance across browsers */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  /* Prevent text selection on buttons */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Minimum touch target size (WCAG 2.5.5 Level AAA) */
+  min-height: 44px;
+}
+
+/* Touch devices - disable hover transforms to prevent visual jank */
+@media (hover: none) and (pointer: coarse) {
+  button:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  button:active {
+    transform: scale(0.97);
+    opacity: 0.8;
+  }
 }
 
 button:hover {
-  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Primary CTA Button Style */
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-hover) 100%);
+  color: white;
+  font-weight: 600;
+  padding: 0.625rem 1.25rem;
+  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
+  border: 1px solid var(--accent-primary);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--accent-hover) 0%, #1e40af 100%);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5);
+}
+
+/* Secondary Button Style */
+.btn-secondary {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  font-weight: 500;
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-secondary);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
 }
 
 input,
@@ -81,13 +162,35 @@ textarea {
   background-color: var(--bg-secondary);
   color: var(--text-primary);
   transition: border-color 0.2s;
+  /* Normalize appearance across browsers */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Minimum touch target size for mobile */
+  min-height: 44px;
 }
 
 input:focus,
 select:focus,
 textarea:focus {
-  outline: none;
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
   border-color: var(--accent-primary);
+}
+
+/* Visible focus indicators for all interactive elements */
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible,
+[role="tab"]:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* High contrast focus for keyboard users */
+*:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
 }
 
 table {
@@ -108,10 +211,93 @@ th {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  /* Better touch targets for sortable headers */
+  min-height: 44px;
+  vertical-align: middle;
 }
 
 tr:hover {
   background-color: var(--bg-secondary);
+  transition: background-color 0.15s ease-in-out;
+}
+
+/* Additional cross-browser normalizations */
+
+/* Remove default link styling but keep accessibility */
+a {
+  color: var(--text-accent);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+  color: var(--accent-primary);
+  text-decoration: underline;
+}
+
+/* Image normalization and performance */
+img,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  /* Remove border on images in links in IE 10 */
+  border-style: none;
+}
+
+/* Lazy loading optimization for images */
+img[loading="lazy"] {
+  /* Reserve space to prevent layout shift */
+  min-height: 1px;
+  /* Decode images asynchronously for better performance */
+  content-visibility: auto;
+}
+
+/* Optimize SVG rendering */
+svg {
+  /* Optimize rendering performance */
+  shape-rendering: geometricPrecision;
+}
+
+/* Remove the gray background on active links in IE 10 */
+a:active {
+  background-color: transparent;
+}
+
+/* Prevent iOS zoom on form inputs */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+select,
+textarea {
+  font-size: 16px;
+}
+
+/* Fix select arrow in Firefox */
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239ca3af' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  padding-right: 2rem;
+}
+
+/* Consistent checkbox and radio styling */
+input[type="checkbox"],
+input[type="radio"] {
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+}
+
+/* Prevent double borders in Firefox */
+hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+  border: 0;
+  border-top: 1px solid var(--border-color);
 }
 
 /* Responsive Breakpoints */
@@ -119,8 +305,49 @@ tr:hover {
 /* Tablet: 768px-1023px (slightly condensed) */
 /* Mobile: <768px (card layout) */
 
+/* Tablet optimizations (768px to 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Slightly reduce padding to save space */
+  th,
+  td {
+    padding: 0.625rem;
+  }
+
+  /* Ensure comfortable touch targets on tablet */
+  button {
+    min-height: 44px;
+    padding: 0.625rem 1rem;
+  }
+
+  /* Optimize filter buttons spacing */
+  .filter-controls {
+    gap: 0.5rem;
+  }
+}
+
 /* Mobile Table Card Layout */
 @media (max-width: 767px) {
+  /* Increase touch target sizes on mobile */
+  button {
+    min-height: 48px;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9375rem;
+  }
+
+  /* Ensure input fields are comfortable for touch */
+  input,
+  select,
+  textarea {
+    min-height: 48px;
+    padding: 0.75rem;
+  }
+
+  /* Better spacing between interactive elements */
+  * + button,
+  * + input,
+  * + select {
+    margin-top: 0.75rem;
+  }
   /* Prevent horizontal scroll on mobile */
   body {
     overflow-x: hidden;
