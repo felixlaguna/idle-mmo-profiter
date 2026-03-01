@@ -135,7 +135,7 @@ const currentYear = ref(new Date().getFullYear())
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .app-footer {
     padding: 1.5rem 1rem 1rem;
   }

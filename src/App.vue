@@ -982,7 +982,7 @@ onUnmounted(() => {
 /* Mobile Responsive (<768px) */
 @media (max-width: 767px) {
   .app-header {
-    padding: 0.75rem 1rem;
+    padding: 1rem;
   }
 
   .header-content {
@@ -1020,7 +1020,7 @@ onUnmounted(() => {
   }
 
   .hero-profit-value {
-    font-size: 1.875rem;
+    font-size: 2rem;
   }
 
   .hero-details {
@@ -1032,6 +1032,11 @@ onUnmounted(() => {
     margin-bottom: 1rem;
     -webkit-mask-image: linear-gradient(90deg, black 90%, transparent);
     mask-image: linear-gradient(90deg, black 90%, transparent);
+    scroll-snap-type: x mandatory;
+  }
+
+  .tab-button {
+    scroll-snap-align: start;
   }
 
   .tab-button {

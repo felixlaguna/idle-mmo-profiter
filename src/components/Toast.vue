@@ -192,7 +192,7 @@ const getTypeIcon = (type: string): string => {
   color: var(--text-primary);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .toast-container {
     top: auto;
     bottom: 1rem;

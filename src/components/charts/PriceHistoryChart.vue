@@ -270,7 +270,7 @@ watch(hasData, (newVal) => {
   line-height: 1.6;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .chart-container {
     height: 300px;
   }

@@ -2307,7 +2307,7 @@ const refreshItemData = async () => {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .search-bar-container {
     flex-direction: column;
     align-items: stretch;

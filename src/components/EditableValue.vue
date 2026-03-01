@@ -204,7 +204,9 @@ const handleKeydown = (e: KeyboardEvent) => {
 }
 
 .btn-reset {
-  padding: 0.125rem 0.375rem;
+  padding: 0.5rem 0.75rem;
+  min-height: 44px;
+  min-width: 44px;
   font-size: 0.875rem;
   background-color: transparent;
   color: var(--text-secondary);
@@ -212,6 +214,9 @@ const handleKeydown = (e: KeyboardEvent) => {
   border-radius: 0.25rem;
   cursor: pointer;
   transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-reset:hover {
@@ -247,6 +252,12 @@ input[type='number'] {
   .edit-input {
     width: 6rem;
     font-size: 0.75rem;
+  }
+
+  .btn-reset {
+    min-height: 48px;
+    min-width: 48px;
+    padding: 0.75rem 1rem;
   }
 }
 </style>

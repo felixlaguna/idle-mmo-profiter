@@ -244,7 +244,7 @@ watch(
   width: 100%;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .chart-header {
     flex-direction: column;
     align-items: flex-start;

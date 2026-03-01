@@ -383,14 +383,19 @@ const isUntradableRecipe = (recipeName: string): boolean => {
 }
 
 .expand-button {
-  padding: 0.25rem 0.5rem;
+  padding: 0.5rem 0.75rem;
+  min-height: 44px;
+  min-width: 44px;
   background-color: var(--bg-tertiary);
   color: var(--text-secondary);
   border: 1px solid var(--border-color);
   border-radius: 0.25rem;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .expand-button:hover {
@@ -547,11 +552,20 @@ const isUntradableRecipe = (recipeName: string): boolean => {
   }
 }
 
+@media (max-width: 767px) {
+  .expand-button {
+    min-height: 48px;
+    min-width: 48px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+  }
+}
+
 @media (max-width: 640px) {
   .main-table th,
   .main-table td {
-    padding: 0.75rem 0.5rem;
-    font-size: 0.75rem;
+    padding: 0.875rem 0.625rem;
+    font-size: 0.8125rem;
   }
 
   .drop-breakdown {

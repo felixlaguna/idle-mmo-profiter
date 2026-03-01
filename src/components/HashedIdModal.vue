@@ -415,7 +415,7 @@ onMounted(() => {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .modal-overlay {
     padding: 1rem;
   }

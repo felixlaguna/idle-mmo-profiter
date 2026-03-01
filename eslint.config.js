@@ -81,6 +81,6 @@ export default [
     },
   },
   {
-    ignores: ['dist', 'dist.old', 'node_modules', 'scripts'],
+    ignores: ['dist', 'dist.old', 'dist-*', 'node_modules', 'scripts'],
   },
 ]

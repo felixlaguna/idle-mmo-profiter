@@ -382,8 +382,8 @@ const handleMarketPriceUpdate = (resourceName: string, value: number) => {
 @media (max-width: 640px) {
   .main-table th,
   .main-table td {
-    padding: 0.75rem 0.5rem;
-    font-size: 0.75rem;
+    padding: 0.875rem 0.625rem;
+    font-size: 0.8125rem;
   }
 }
 </style>
