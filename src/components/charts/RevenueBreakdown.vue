@@ -10,6 +10,8 @@ const props = defineProps<{
 const chartCanvas = ref<HTMLCanvasElement | null>(null)
 let chartInstance: Chart | null = null
 
+const hasData = computed(() => props.activities.length > 0 && props.activities.some((a) => a.profitPerHour > 0))
+
 // Calculate totals by category
 const categoryTotals = computed(() => {
   const totals = {
@@ -70,7 +72,7 @@ const chartData = computed(() => {
 })
 
 const createChart = () => {
-  if (!chartCanvas.value) return
+  if (!chartCanvas.value || !hasData.value) return
 
   // Destroy existing chart
   if (chartInstance) {
@@ -178,11 +180,15 @@ onMounted(() => {
   })
 })
 
-// Watch for data changes and update chart
+// Watch for data changes and update or create chart
 watch(
   chartData,
   () => {
-    updateChart()
+    if (chartInstance) {
+      updateChart()
+    } else {
+      nextTick(() => createChart())
+    }
   },
   { deep: true }
 )
@@ -193,16 +199,21 @@ watch(
     <div class="chart-header">
       <h3 class="chart-title">Revenue Breakdown by Type</h3>
     </div>
-    <div class="chart-container">
-      <canvas ref="chartCanvas"></canvas>
-    </div>
-    <div class="summary">
-      <div class="summary-item">
-        <span class="summary-label">Total Combined Profit/hr:</span>
-        <span class="summary-value"
-          >{{ Math.round(categoryTotals.grandTotal).toLocaleString() }} gold</span
-        >
+    <template v-if="hasData">
+      <div class="chart-container">
+        <canvas ref="chartCanvas"></canvas>
       </div>
+      <div class="summary">
+        <div class="summary-item">
+          <span class="summary-label">Total Combined Profit/hr:</span>
+          <span class="summary-value"
+            >{{ Math.round(categoryTotals.grandTotal).toLocaleString() }} gold</span
+          >
+        </div>
+      </div>
+    </template>
+    <div v-else class="empty-state">
+      <p>No revenue data available</p>
     </div>
   </div>
 </template>
@@ -258,6 +269,13 @@ watch(
   font-size: 1.125rem;
   color: var(--success);
   font-weight: 700;
+}
+
+.empty-state {
+  padding: 2rem;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
 }
 
 @media (max-width: 767px) {

@@ -61,7 +61,7 @@ body {
 }
 
 #app {
-  min-height: 100vh;
+  /* min-height handled by .app-container flex layout */
 }
 
 h1,

@@ -10,8 +10,12 @@ const props = defineProps<{
 const chartCanvas = ref<HTMLCanvasElement | null>(null)
 let chartInstance: Chart | null = null
 
+const hasData = computed(() => props.dungeons.length > 0)
+
 // Get chart data
 const chartData = computed(() => {
+  if (!hasData.value) return { labels: [], datasets: [] }
+
   const sorted = [...props.dungeons].sort((a, b) => a.profitPerHour - b.profitPerHour)
 
   const labels = sorted.map((d) => d.name)
@@ -20,10 +24,11 @@ const chartData = computed(() => {
   // Create gradient colors from low to high profit
   const minProfit = Math.min(...data)
   const maxProfit = Math.max(...data)
+  const range = maxProfit - minProfit || 1
 
   const backgroundColors = data.map((profit) => {
     // Normalize profit to 0-1 range
-    const normalized = (profit - minProfit) / (maxProfit - minProfit)
+    const normalized = (profit - minProfit) / range
 
     // Color gradient from red/orange (low) to green/yellow (high)
     if (normalized < 0.33) {
@@ -66,7 +71,7 @@ const chartData = computed(() => {
 })
 
 const createChart = () => {
-  if (!chartCanvas.value) return
+  if (!chartCanvas.value || !hasData.value) return
 
   // Destroy existing chart
   if (chartInstance) {
@@ -169,11 +174,15 @@ onMounted(() => {
   })
 })
 
-// Watch for data changes and update chart
+// Watch for data changes and update or create chart
 watch(
   chartData,
   () => {
-    updateChart()
+    if (chartInstance) {
+      updateChart()
+    } else {
+      nextTick(() => createChart())
+    }
   },
   { deep: true }
 )
@@ -183,14 +192,17 @@ watch(
   <div class="dungeon-chart">
     <div class="chart-header">
       <h3 class="chart-title">Dungeon Profit Comparison</h3>
-      <div class="legend">
+      <div v-if="hasData" class="legend">
         <span class="legend-label">Low</span>
         <div class="legend-gradient"></div>
         <span class="legend-label">High</span>
       </div>
     </div>
-    <div class="chart-container">
+    <div v-if="hasData" class="chart-container">
       <canvas ref="chartCanvas"></canvas>
+    </div>
+    <div v-else class="empty-state">
+      <p>No dungeon data available</p>
     </div>
   </div>
 </template>
@@ -248,6 +260,13 @@ watch(
   position: relative;
   height: 600px;
   width: 100%;
+}
+
+.empty-state {
+  padding: 2rem;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
 }
 
 @media (max-width: 767px) {
