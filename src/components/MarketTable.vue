@@ -992,7 +992,7 @@ const refreshItemData = async () => {
         </div>
       </div>
       <div v-if="sectionsExpanded.materials" class="section-content">
-        <table class="market-items-table">
+        <table class="market-items-table mobile-card-layout">
           <thead>
             <tr>
               <th v-if="!isStaticMode" class="col-exclude">Exclude</th>
@@ -1008,7 +1008,7 @@ const refreshItemData = async () => {
               :key="material.id"
               :class="{ excluded: dataProvider.isRefreshExcluded('materials', material.id) }"
             >
-              <td v-if="!isStaticMode" class="col-exclude">
+              <td v-if="!isStaticMode" class="col-exclude" data-label="Exclude">
                 <input
                   type="checkbox"
                   :checked="dataProvider.isRefreshExcluded('materials', material.id)"
@@ -1020,15 +1020,15 @@ const refreshItemData = async () => {
                   @change="toggleExclusion('materials', material.id)"
                 />
               </td>
-              <td class="col-name">{{ material.name }}</td>
-              <td class="col-vendor">
+              <td class="col-name name-cell" data-label="Name">{{ material.name }}</td>
+              <td class="col-vendor" data-label="Vendor Value">
                 <span class="vendor-value">
                   {{
                     material.vendorValue ? `${material.vendorValue.toLocaleString()} gold` : 'N/A'
                   }}
                 </span>
               </td>
-              <td class="col-market">
+              <td class="col-market" data-label="Market Value">
                 <EditableValue
                   :model-value="material.price"
                   :default-value="getDefaultMaterialPrice(material.id)"
@@ -1036,7 +1036,7 @@ const refreshItemData = async () => {
                   @update:model-value="(value) => updateMaterialPrice(material.id, value)"
                 />
               </td>
-              <td v-if="!isStaticMode" class="col-actions">
+              <td v-if="!isStaticMode" class="col-actions" data-label="Actions">
                 <div class="actions-wrapper">
                   <button
                     class="btn-hashed-id"
@@ -1143,7 +1143,7 @@ const refreshItemData = async () => {
         </div>
       </div>
       <div v-if="sectionsExpanded.craftables" class="section-content">
-        <table class="market-items-table">
+        <table class="market-items-table mobile-card-layout">
           <thead>
             <tr>
               <th v-if="!isStaticMode" class="col-exclude">Exclude</th>
@@ -1159,7 +1159,7 @@ const refreshItemData = async () => {
               :key="craftable.id"
               :class="{ excluded: dataProvider.isRefreshExcluded('craftables', craftable.id) }"
             >
-              <td v-if="!isStaticMode" class="col-exclude">
+              <td v-if="!isStaticMode" class="col-exclude" data-label="Exclude">
                 <input
                   type="checkbox"
                   :checked="dataProvider.isRefreshExcluded('craftables', craftable.id)"
@@ -1171,15 +1171,15 @@ const refreshItemData = async () => {
                   @change="toggleExclusion('craftables', craftable.id)"
                 />
               </td>
-              <td class="col-name">{{ craftable.name }}</td>
-              <td class="col-vendor">
+              <td class="col-name name-cell" data-label="Name">{{ craftable.name }}</td>
+              <td class="col-vendor" data-label="Vendor Value">
                 <span class="vendor-value">
                   {{
                     craftable.vendorValue ? `${craftable.vendorValue.toLocaleString()} gold` : 'N/A'
                   }}
                 </span>
               </td>
-              <td class="col-market">
+              <td class="col-market" data-label="Market Value">
                 <EditableValue
                   :model-value="craftable.price"
                   :default-value="getDefaultCraftablePrice(craftable.id)"
@@ -1187,7 +1187,7 @@ const refreshItemData = async () => {
                   @update:model-value="(value) => updateCraftablePrice(craftable.id, value)"
                 />
               </td>
-              <td v-if="!isStaticMode" class="col-actions">
+              <td v-if="!isStaticMode" class="col-actions" data-label="Actions">
                 <div class="actions-wrapper">
                   <button
                     class="btn-hashed-id"
@@ -1292,7 +1292,7 @@ const refreshItemData = async () => {
         </div>
       </div>
       <div v-if="sectionsExpanded.resources" class="section-content">
-        <table class="market-items-table">
+        <table class="market-items-table mobile-card-layout">
           <thead>
             <tr>
               <th v-if="!isStaticMode" class="col-exclude">Exclude</th>
@@ -1308,7 +1308,7 @@ const refreshItemData = async () => {
               :key="resource.id"
               :class="{ excluded: dataProvider.isRefreshExcluded('resources', resource.id) }"
             >
-              <td v-if="!isStaticMode" class="col-exclude">
+              <td v-if="!isStaticMode" class="col-exclude" data-label="Exclude">
                 <input
                   type="checkbox"
                   :checked="dataProvider.isRefreshExcluded('resources', resource.id)"
@@ -1320,11 +1320,11 @@ const refreshItemData = async () => {
                   @change="toggleExclusion('resources', resource.id)"
                 />
               </td>
-              <td class="col-name">{{ resource.name }}</td>
-              <td class="col-vendor">
+              <td class="col-name name-cell" data-label="Name">{{ resource.name }}</td>
+              <td class="col-vendor" data-label="Vendor Value">
                 <span class="vendor-value">{{ resource.vendorValue.toLocaleString() }} gold</span>
               </td>
-              <td class="col-market">
+              <td class="col-market" data-label="Market Value">
                 <EditableValue
                   :model-value="resource.marketPrice"
                   :default-value="getDefaultResourcePrice(resource.id)"
@@ -1332,7 +1332,7 @@ const refreshItemData = async () => {
                   @update:model-value="(value) => updateResourcePrice(resource.id, value)"
                 />
               </td>
-              <td v-if="!isStaticMode" class="col-actions">
+              <td v-if="!isStaticMode" class="col-actions" data-label="Actions">
                 <div class="actions-wrapper">
                   <button
                     class="btn-hashed-id"
@@ -1458,7 +1458,7 @@ const refreshItemData = async () => {
         </div>
       </div>
       <div v-if="sectionsExpanded.recipes" class="section-content">
-        <table class="market-items-table">
+        <table class="market-items-table mobile-card-layout">
           <thead>
             <tr>
               <th v-if="!isStaticMode" class="col-exclude">Exclude</th>
@@ -1474,7 +1474,7 @@ const refreshItemData = async () => {
               :key="recipe.id"
               :class="{ excluded: dataProvider.isRefreshExcluded('recipes', recipe.id) }"
             >
-              <td v-if="!isStaticMode" class="col-exclude">
+              <td v-if="!isStaticMode" class="col-exclude" data-label="Exclude">
                 <input
                   type="checkbox"
                   :checked="dataProvider.isRefreshExcluded('recipes', recipe.id)"
@@ -1486,7 +1486,7 @@ const refreshItemData = async () => {
                   @change="toggleExclusion('recipes', recipe.id)"
                 />
               </td>
-              <td class="col-name">
+              <td class="col-name name-cell" data-label="Name">
                 <span>{{ recipe.name }}</span>
                 <span
                   v-if="isUntrackedCraftableRecipe(recipe.name, recipe.producesItemName)"
@@ -1496,12 +1496,12 @@ const refreshItemData = async () => {
                   Untracked Craftable
                 </span>
               </td>
-              <td class="col-vendor">
+              <td class="col-vendor" data-label="Vendor Value">
                 <span class="vendor-value">
                   {{ recipe.vendorValue ? `${recipe.vendorValue.toLocaleString()} gold` : 'N/A' }}
                 </span>
               </td>
-              <td class="col-market">
+              <td class="col-market" data-label="Market Value">
                 <EditableValue
                   :model-value="recipe.price"
                   :default-value="getDefaultRecipePrice(recipe.id)"
@@ -1509,7 +1509,7 @@ const refreshItemData = async () => {
                   @update:model-value="(value) => updateRecipePrice(recipe.id, value)"
                 />
               </td>
-              <td v-if="!isStaticMode" class="col-actions">
+              <td v-if="!isStaticMode" class="col-actions" data-label="Actions">
                 <div class="actions-wrapper">
                   <button
                     v-if="isUntrackedCraftableRecipe(recipe.name, recipe.producesItemName)"
@@ -2136,6 +2136,8 @@ const refreshItemData = async () => {
 /* Market Items Table */
 .market-items-table {
   width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
   border-collapse: collapse;
 }
 

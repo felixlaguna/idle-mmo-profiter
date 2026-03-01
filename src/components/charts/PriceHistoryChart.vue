@@ -74,6 +74,9 @@ const createChart = () => {
   const ctx = chartCanvas.value.getContext('2d')
   if (!ctx) return
 
+  // Detect mobile viewport
+  const isMobile = window.innerWidth <= 767
+
   chartInstance = new Chart(ctx, {
     type: 'line',
     data: chartData.value,
@@ -86,9 +89,9 @@ const createChart = () => {
           position: 'top',
           labels: {
             color: '#e5e7eb',
-            padding: 15,
+            padding: isMobile ? 12 : 15,
             font: {
-              size: 13,
+              size: isMobile ? 11 : 13,
             },
           },
         },
@@ -119,6 +122,9 @@ const createChart = () => {
           },
           ticks: {
             color: '#9ca3af',
+            font: {
+              size: isMobile ? 10 : 11,
+            },
           },
         },
         y: {
@@ -131,6 +137,9 @@ const createChart = () => {
           },
           ticks: {
             color: '#9ca3af',
+            font: {
+              size: isMobile ? 10 : 11,
+            },
             callback: function (value) {
               if (typeof value === 'number') {
                 return Math.round(value).toLocaleString()

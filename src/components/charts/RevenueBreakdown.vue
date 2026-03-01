@@ -80,6 +80,9 @@ const createChart = () => {
   const ctx = chartCanvas.value.getContext('2d')
   if (!ctx) return
 
+  // Detect mobile viewport
+  const isMobile = window.innerWidth <= 767
+
   chartInstance = new Chart(ctx, {
     type: 'doughnut',
     data: chartData.value,
@@ -92,9 +95,9 @@ const createChart = () => {
           position: 'bottom',
           labels: {
             color: '#e5e7eb',
-            padding: 15,
+            padding: isMobile ? 12 : 15,
             font: {
-              size: 13,
+              size: isMobile ? 11 : 13,
             },
             generateLabels: function (chart) {
               const data = chart.data

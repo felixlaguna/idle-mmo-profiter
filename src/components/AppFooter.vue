@@ -65,7 +65,6 @@ const currentYear = ref(new Date().getFullYear())
 
 <style scoped>
 .app-footer {
-  margin-top: auto;
   background-color: var(--bg-secondary);
   border-top: 1px solid var(--border-color);
   padding: 2rem 2rem 1.5rem;

@@ -62,8 +62,6 @@ body {
 
 #app {
   min-height: 100vh;
-  /* Enable CSS containment for better rendering performance */
-  contain: layout style paint;
 }
 
 h1,

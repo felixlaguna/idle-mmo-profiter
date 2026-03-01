@@ -307,8 +307,8 @@ onUnmounted(() => {
     <!-- Main Content -->
     <main class="app-main">
       <div class="content-wrapper">
-        <!-- Hero Section: Best Action -->
-        <section v-if="bestAction" class="hero-section" aria-labelledby="best-action-heading">
+        <!-- Hero Section: Best Action (Full - All Activities tab only) -->
+        <section v-if="bestAction && currentTab === 'all'" class="hero-section" aria-labelledby="best-action-heading">
           <div class="hero-content">
             <p class="hero-label">Best Action Right Now</p>
             <div class="hero-activity">
@@ -338,6 +338,17 @@ onUnmounted(() => {
           </div>
         </section>
 
+        <!-- Hero Compact: Best Action (Other tabs) -->
+        <div v-if="bestAction && currentTab !== 'all'" class="hero-compact" aria-label="Best action summary">
+          <span class="hero-compact-label">Best:</span>
+          <span class="hero-compact-name">{{ bestAction.name }}</span>
+          <span class="hero-compact-badge" :class="getTypeBadgeClass(bestAction.activityType)">
+            {{ bestAction.activityType }}
+          </span>
+          <span class="hero-compact-separator">—</span>
+          <span class="hero-compact-profit">{{ formatNumber(bestAction.profitPerHour) }} gold/hr</span>
+        </div>
+
         <!-- Tab Navigation -->
         <nav class="tab-navigation" role="tablist" aria-label="Activity categories">
           <button
@@ -349,7 +360,8 @@ onUnmounted(() => {
             @click="currentTab = 'all'"
             @keydown="handleTabKeydown"
           >
-            All Activities
+            <span class="tab-label-full">All Activities</span>
+            <span class="tab-label-short">All</span>
           </button>
           <button
             class="tab-button"
@@ -371,7 +383,8 @@ onUnmounted(() => {
             @click="currentTab = 'craftables'"
             @keydown="handleTabKeydown"
           >
-            Craftables
+            <span class="tab-label-full">Craftables</span>
+            <span class="tab-label-short">Craft</span>
           </button>
           <button
             class="tab-button"
@@ -548,6 +561,8 @@ onUnmounted(() => {
   will-change: transform;
   /* Contain layout shifts */
   contain: layout style paint;
+  /* Ensure header fully covers hero section when scrolling */
+  box-shadow: 0 1px 0 0 var(--bg-secondary);
 }
 
 .header-content {
@@ -572,7 +587,8 @@ onUnmounted(() => {
 
 .last-update {
   font-size: 0.875rem;
-  color: var(--text-secondary);
+  color: #b0b8c4;
+  opacity: 1;
 }
 
 .btn-settings {
@@ -748,6 +764,56 @@ onUnmounted(() => {
   margin: 0;
 }
 
+/* Hero Compact */
+.hero-compact {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1;
+  min-height: 44px;
+}
+
+.hero-compact-label {
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+}
+
+.hero-compact-name {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: 0.9375rem;
+}
+
+.hero-compact-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.hero-compact-separator {
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.hero-compact-profit {
+  font-weight: 700;
+  color: var(--warning);
+  font-size: 1rem;
+  margin-left: auto;
+}
+
+
 /* Tab Navigation */
 .tab-navigation {
   display: flex;
@@ -834,6 +900,14 @@ onUnmounted(() => {
   color: var(--accent-primary);
   border: 1px solid rgba(59, 130, 246, 0.4);
   border-radius: 0.75rem;
+}
+
+.tab-label-short {
+  display: none;
+}
+
+.tab-label-full {
+  display: inline;
 }
 
 /* Tab Content */
@@ -1003,7 +1077,7 @@ onUnmounted(() => {
   }
 
   .last-update {
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
   }
 
   .btn-settings {
@@ -1060,20 +1134,74 @@ onUnmounted(() => {
     font-size: 0.875rem;
   }
 
+  .hero-compact {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 1rem;
+    min-height: 44px;
+  }
+
+  .hero-compact-label {
+    font-size: 0.6875rem;
+  }
+
+  .hero-compact-name {
+    font-size: 0.875rem;
+  }
+
+  .hero-compact-badge {
+    padding: 0.1875rem 0.375rem;
+    font-size: 0.6875rem;
+  }
+
+  .hero-compact-profit {
+    font-size: 0.9375rem;
+    width: 100%;
+    margin-left: 0;
+    margin-top: 0.25rem;
+    text-align: left;
+  }
+
+
   .tab-navigation {
     margin-bottom: 1rem;
-    -webkit-mask-image: linear-gradient(90deg, black 90%, transparent);
-    mask-image: linear-gradient(90deg, black 90%, transparent);
+    position: relative;
     scroll-snap-type: x mandatory;
+    scroll-padding-inline: 0.5rem;
+  }
+
+  .tab-navigation::after {
+    content: '›';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 2px;
+    width: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(90deg, transparent, var(--bg-primary) 30%);
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    font-weight: 700;
+    pointer-events: none;
+    opacity: 0.8;
   }
 
   .tab-button {
     scroll-snap-align: start;
+    min-height: 44px;
+    padding: 0.625rem 0.75rem;
+    font-size: 0.8125rem;
   }
 
-  .tab-button {
-    min-height: 48px;
-    padding: 0.875rem 1.25rem;
+  .tab-label-full {
+    display: none;
+  }
+
+  .tab-label-short {
+    display: inline;
   }
 
   .modal-overlay {

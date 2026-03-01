@@ -189,14 +189,16 @@ const formatTime = (seconds: number): string => {
         :class="{ active: activeSubTab === 'alchemy' }"
         @click="activeSubTab = 'alchemy'"
       >
-        Alchemy
+        <span class="sub-tab-icon">🧪</span>
+        <span>Alchemy</span>
       </button>
       <button
         class="sub-tab-button"
         :class="{ active: activeSubTab === 'forging' }"
         @click="activeSubTab = 'forging'"
       >
-        Forging
+        <span class="sub-tab-icon">⚒️</span>
+        <span>Forging</span>
       </button>
     </div>
 
@@ -547,35 +549,50 @@ const formatTime = (seconds: number): string => {
 .sub-tab-navigation {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1rem;
   padding: 1rem;
   background-color: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: 0.5rem;
   flex-wrap: wrap;
+  max-width: 500px;
 }
 
 .sub-tab-button {
-  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.5rem;
   background-color: var(--bg-tertiary);
   color: var(--text-secondary);
   border: 1px solid var(--border-color);
   border-radius: 0.375rem;
-  font-size: 0.875rem;
+  border-bottom: 3px solid transparent;
+  font-size: 0.9375rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
   text-transform: capitalize;
+  position: relative;
+}
+
+.sub-tab-icon {
+  font-size: 1.125rem;
+  line-height: 1;
 }
 
 .sub-tab-button:hover {
   background-color: var(--bg-primary);
+  border-color: var(--accent-primary);
+  color: var(--text-primary);
 }
 
 .sub-tab-button.active {
-  background-color: rgba(34, 197, 94, 0.2);
-  color: #4ade80;
-  border-color: rgba(34, 197, 94, 0.4);
+  background-color: rgba(59, 130, 246, 0.15);
+  color: var(--accent-primary);
+  border-color: var(--accent-primary);
+  border-bottom-color: var(--accent-primary);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
 }
 
 /* Table Container */

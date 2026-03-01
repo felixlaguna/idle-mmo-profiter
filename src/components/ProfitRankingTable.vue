@@ -554,10 +554,10 @@ const profitRange = computed(() => {
   }
 
   .filter-button {
-    flex: 1 1 calc(33.333% - 0.35rem);
-    min-width: calc(33.333% - 0.35rem);
-    max-width: calc(33.333% - 0.35rem);
-    min-height: auto;
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: none;
+    min-height: 44px;
     padding: 0.5rem 0.375rem;
     font-size: 0.75rem;
   }
@@ -570,7 +570,8 @@ const profitRange = computed(() => {
 
 @media (max-width: 479px) {
   .filter-button {
-    min-width: calc(50% - 0.25rem);
+    padding: 0.375rem 0.25rem;
+    font-size: 0.6875rem;
   }
 }
 </style>
