@@ -212,12 +212,10 @@ const formatTime = (seconds: number): string => {
         <span class="sub-tab-icon">⚒️</span>
         <span>Forging</span>
       </button>
-    </div>
-
-    <!-- Pagination info -->
-    <div v-if="hasMoreCraftables && !showAllCraftables" class="pagination-info">
-      Showing {{ DEFAULT_DISPLAY_LIMIT }} of {{ filteredCraftables.length }} items
-      <button class="btn-show-all-inline" @click="showAllCraftables = true">Show all</button>
+      <span v-if="hasMoreCraftables && !showAllCraftables" class="pagination-info-inline">
+        {{ DEFAULT_DISPLAY_LIMIT }}/{{ filteredCraftables.length }}
+        <button class="btn-show-all-inline" @click="showAllCraftables = true">all</button>
+      </span>
     </div>
 
     <div class="table-container">
@@ -571,13 +569,6 @@ const formatTime = (seconds: number): string => {
   margin: 0 auto;
 }
 
-.pagination-info {
-  font-size: 0.8125rem;
-  color: var(--text-secondary);
-  text-align: center;
-  padding: 0.25rem 0;
-}
-
 .btn-show-all-inline {
   background: none;
   border: none;
@@ -652,6 +643,13 @@ const formatTime = (seconds: number): string => {
 .sub-tab-icon {
   font-size: 1rem;
   line-height: 1;
+}
+
+.pagination-info-inline {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
 }
 
 .sub-tab-button:hover {
