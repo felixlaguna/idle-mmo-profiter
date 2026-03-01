@@ -110,6 +110,18 @@ const toggleSort = (key: SortKey) => {
   }
 }
 
+// Display limit for pagination
+const DEFAULT_DISPLAY_LIMIT = 25
+const showAllCraftables = ref(false)
+
+const displayedCraftables = computed(() => {
+  const all = filteredCraftables.value
+  if (showAllCraftables.value || all.length <= DEFAULT_DISPLAY_LIMIT) return all
+  return all.slice(0, DEFAULT_DISPLAY_LIMIT)
+})
+
+const hasMoreCraftables = computed(() => filteredCraftables.value.length > DEFAULT_DISPLAY_LIMIT)
+
 // Format numbers
 const formatNumber = (num: number): string => {
   return Math.round(num).toLocaleString()
@@ -238,7 +250,7 @@ const formatTime = (seconds: number): string => {
           </tr>
         </thead>
         <tbody>
-          <template v-for="craftable in filteredCraftables" :key="craftable.name">
+          <template v-for="craftable in displayedCraftables" :key="craftable.name">
             <!-- Main Row -->
             <tr class="main-row" :class="{ expanded: isExpanded(craftable.name) }">
               <td class="expand-col" data-label="">
@@ -534,6 +546,12 @@ const formatTime = (seconds: number): string => {
           </template>
         </tbody>
       </table>
+
+      <div v-if="hasMoreCraftables && !showAllCraftables" class="show-more-container">
+        <button class="btn-show-more" @click="showAllCraftables = true">
+          Show all {{ filteredCraftables.length }} items
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -543,6 +561,30 @@ const formatTime = (seconds: number): string => {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.show-more-container {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.btn-show-more {
+  padding: 0.625rem 1.5rem;
+  background-color: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-show-more:hover {
+  background-color: var(--bg-primary);
+  color: var(--accent-primary);
+  border-color: var(--accent-primary);
 }
 
 /* Sub-tab Navigation — inline tabs aligned with table */

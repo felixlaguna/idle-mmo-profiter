@@ -21,7 +21,7 @@ const editValue = ref(props.modelValue.toString())
 const isOverridden = computed(() => props.modelValue !== props.defaultValue)
 
 const displayValue = computed(() => {
-  const value = props.modelValue.toLocaleString()
+  const value = Math.round(props.modelValue).toLocaleString()
   return props.suffix ? `${value}${props.suffix}` : value
 })
 

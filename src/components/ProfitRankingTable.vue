@@ -85,6 +85,18 @@ const toggleSort = (key: SortKey) => {
   }
 }
 
+// Display limit for pagination
+const DEFAULT_DISPLAY_LIMIT = 25
+const showAll = ref(false)
+
+const displayedActivities = computed(() => {
+  const all = filteredAndSortedActivities.value
+  if (showAll.value || all.length <= DEFAULT_DISPLAY_LIMIT) return all
+  return all.slice(0, DEFAULT_DISPLAY_LIMIT)
+})
+
+const hasMore = computed(() => filteredAndSortedActivities.value.length > DEFAULT_DISPLAY_LIMIT)
+
 // Format numbers
 const formatNumber = (num: number): string => {
   return Math.round(num).toLocaleString()
@@ -247,7 +259,7 @@ const profitRange = computed(() => {
         </thead>
         <tbody>
           <tr
-            v-for="activity in filteredAndSortedActivities"
+            v-for="activity in displayedActivities"
             :key="activity.name"
             :class="{ 'is-top-rank': activity.rank === 1 }"
           >
@@ -278,6 +290,12 @@ const profitRange = computed(() => {
         </tbody>
       </table>
 
+      <div v-if="hasMore && !showAll" class="show-more-container">
+        <button class="btn-show-more" @click="showAll = true">
+          Show all {{ filteredAndSortedActivities.length }} activities
+        </button>
+      </div>
+
       <EmptyState
         v-if="filteredAndSortedActivities.length === 0"
         icon="🔍"
@@ -293,6 +311,30 @@ const profitRange = computed(() => {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.show-more-container {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.btn-show-more {
+  padding: 0.625rem 1.5rem;
+  background-color: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-show-more:hover {
+  background-color: var(--bg-primary);
+  color: var(--accent-primary);
+  border-color: var(--accent-primary);
 }
 
 /* Filter Controls */
