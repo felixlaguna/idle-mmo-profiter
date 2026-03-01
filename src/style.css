@@ -430,21 +430,30 @@ hr {
     text-overflow: ellipsis;
   }
 
-  /* Make activity name more prominent */
+  /* 2-row card layout: Name + Profit/HR share the first row */
   .mobile-card-layout td.name-cell {
+    order: -2;
     font-weight: 600;
     font-size: 0.875rem;
     color: var(--text-primary);
+    width: 58%;
+    display: inline-flex;
   }
 
-  /* Make profit/hr stand out */
+  /* Hide redundant label on name cell — the name IS the content */
+  .mobile-card-layout td.name-cell::before {
+    display: none;
+  }
+
   .mobile-card-layout td.profit-hr,
   .mobile-card-layout td[data-label='Profit/hr'] {
+    order: -1;
     font-weight: 700;
     font-size: 0.8125rem;
     color: var(--success);
-    padding-top: 0.0625rem;
-    border-top: 1px solid var(--border-color);
+    width: 42%;
+    display: inline-flex;
+    justify-content: flex-end;
   }
 
   /* Hide rank row on mobile — cards are in rank order, badge visible */
@@ -491,6 +500,12 @@ hr {
   /* Hide Market Price on mobile — visible via scoped override where needed */
   .mobile-card-layout td[data-label='Market Price'] {
     display: none;
+  }
+
+  /* Market tab: name gets full width since there's no profit-hr cell */
+  .mobile-card-layout td.name-cell[data-label='Name'] {
+    width: 100%;
+    order: -2;
   }
 
   /* Market tab: place Vendor Value and Market Value side-by-side */

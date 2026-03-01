@@ -2694,19 +2694,21 @@ const refreshItemData = async () => {
 /* Show More Button */
 .btn-show-more {
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.625rem 1.5rem;
   margin-top: 0.5rem;
   background-color: var(--bg-tertiary);
-  color: var(--text-accent);
-  border: 1px dashed var(--border-color);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
   border-radius: 0.375rem;
-  font-size: 0.8125rem;
-  font-weight: 500;
+  font-size: 0.875rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 0.2s;
 }
 
 .btn-show-more:hover {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-primary);
+  color: var(--accent-primary);
   border-color: var(--accent-primary);
 }
 

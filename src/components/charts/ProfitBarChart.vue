@@ -278,7 +278,7 @@ watch(showAll, () => {
 
 .btn-toggle:hover {
   background-color: var(--bg-primary);
-  color: var(--text-primary);
+  color: var(--accent-primary);
   border-color: var(--accent-primary);
 }
 
