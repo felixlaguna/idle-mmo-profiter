@@ -1198,6 +1198,10 @@ onUnmounted(() => {
     font-size: 0.6875rem;
   }
 
+  .hero-compact-separator {
+    display: none;
+  }
+
   .hero-compact-profit {
     font-size: 0.9375rem;
     width: 100%;
@@ -1211,12 +1215,13 @@ onUnmounted(() => {
     margin-bottom: 0.5rem;
     scroll-snap-type: x mandatory;
     scroll-padding-inline: 0.5rem;
+    gap: 0.125rem;
   }
 
   .tab-button {
     scroll-snap-align: start;
     min-height: 44px;
-    padding: 0.625rem 0.75rem;
+    padding: 0.625rem 0.5rem;
     font-size: 0.8125rem;
   }
 

@@ -253,9 +253,21 @@ watch(showAll, () => {
 }
 
 @media (max-width: 767px) {
+  .profit-bar-chart {
+    padding: 1rem;
+  }
+
   .chart-header {
-    flex-wrap: wrap;
     gap: 0.5rem;
+  }
+
+  .chart-title {
+    font-size: 1rem;
+  }
+
+  .btn-toggle {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
   }
 
   .chart-container {
