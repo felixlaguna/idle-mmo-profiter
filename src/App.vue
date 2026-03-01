@@ -982,28 +982,34 @@ onUnmounted(() => {
 /* Mobile Responsive (<768px) */
 @media (max-width: 767px) {
   .app-header {
-    padding: 1rem;
+    padding: 0.625rem 0.75rem;
   }
 
   .header-content {
-    flex-direction: column;
-    gap: 0.75rem;
-    align-items: flex-start;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
   }
 
   .header-actions {
-    width: 100%;
-    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
   }
 
   .app-title {
-    font-size: 1.125rem;
+    font-size: 1rem;
+  }
+
+  .last-update {
+    font-size: 0.75rem;
   }
 
   .btn-settings {
-    min-width: 48px;
-    min-height: 48px;
-    padding: 0.75rem;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.5rem;
   }
 
   .app-main {
@@ -1011,21 +1017,47 @@ onUnmounted(() => {
   }
 
   .hero-section {
-    padding: 1.25rem;
+    padding: 0.75rem;
     margin-bottom: 1rem;
   }
 
+  .hero-content {
+    gap: 0.5rem;
+  }
+
+  .hero-label {
+    font-size: 0.75rem;
+  }
+
   .hero-name {
-    font-size: 1.375rem;
+    font-size: 1.125rem;
+  }
+
+  .hero-badge {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
   }
 
   .hero-profit-value {
-    font-size: 2rem;
+    font-size: 1.5rem;
+  }
+
+  .hero-profit-label {
+    font-size: 1rem;
   }
 
   .hero-details {
-    grid-template-columns: 1fr;
-    gap: 0.875rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+  }
+
+  .detail-label {
+    font-size: 0.625rem;
+  }
+
+  .detail-value {
+    font-size: 0.875rem;
   }
 
   .tab-navigation {

@@ -859,9 +859,16 @@ const formatTime = (seconds: number): string => {
 }
 
 @media (max-width: 767px) {
+  .sub-tab-navigation {
+    padding: 0.75rem;
+    gap: 0.5rem;
+  }
+
   .sub-tab-button {
     min-height: 48px;
-    padding: 0.75rem 1.25rem;
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    flex: 1;
   }
 
   .expand-button {
@@ -882,7 +889,7 @@ const formatTime = (seconds: number): string => {
 @media (max-width: 640px) {
   .main-table th,
   .main-table td {
-    padding: 0.875rem 0.625rem;
+    padding: 0.5rem 0.625rem;
     font-size: 0.8125rem;
   }
 

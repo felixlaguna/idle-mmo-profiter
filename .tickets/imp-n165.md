@@ -1,6 +1,6 @@
 ---
 id: imp-n165
-status: open
+status: closed
 deps: []
 links: []
 created: 2026-03-01T00:08:24Z
@@ -470,3 +470,11 @@ Build succeeds (vue-tsc + vite build). Output: ~175KB gzipped total. Code splitt
 | App.vue | 956 (`min-width: 768px and max-width: 1023px`) |
 
 **Summary**: The `min-width: 768px` usages are correct for the tablet tier. But 7 files still use `max-width: 768px` instead of `767px`, creating a 1px overlap where both mobile and tablet styles would apply at exactly 768px viewport width. These should be updated to `max-width: 767px` for consistency with App.vue, AppFooter.vue, CraftableTable.vue, DungeonTable.vue, EditableValue.vue, and ResourceTable.vue which were already fixed.
+
+**2026-03-01T01:30:03Z**
+
+Mobile layout fixes pushed (29e4613). Fixed all 11 issues + 7 additional breakpoint inconsistencies found in review. All breakpoints now use 767px consistently.
+
+**2026-03-01T01:43:03Z**
+
+Bug fix complete (imp-gafs): Fixed CI test failure caused by unhandled promise rejections in performance.test.ts. The test now properly awaits dynamic chart imports instead of creating unawaited promises, preventing 'Closing rpc while fetch was pending' errors during Vitest worker shutdown. All CI checks passing.
