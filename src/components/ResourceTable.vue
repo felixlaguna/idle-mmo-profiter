@@ -209,7 +209,7 @@ const handleMarketPriceUpdate = (resourceName: string, value: number) => {
                 @update:model-value="(value) => handleMarketPriceUpdate(resource.name, value)"
               />
             </td>
-            <td data-label="Best Method">
+            <td data-label="Best">
               <span
                 class="method-badge"
                 :class="{

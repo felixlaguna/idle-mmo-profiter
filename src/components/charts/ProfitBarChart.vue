@@ -90,9 +90,38 @@ const createChart = () => {
   // Detect mobile viewport
   const isMobile = window.innerWidth <= 767
 
+  // Custom plugin: draw value labels at the end of each bar
+  const barLabelPlugin = {
+    id: 'barLabels',
+    afterDatasetsDraw(chart: Chart) {
+      const ctx2 = chart.ctx
+      const dataset = chart.data.datasets[0]
+      if (!dataset) return
+      const meta = chart.getDatasetMeta(0)
+      ctx2.save()
+      ctx2.font = `${isMobile ? 9 : 10}px Inter, sans-serif`
+      ctx2.fillStyle = '#9ca3af'
+      ctx2.textBaseline = 'middle'
+      meta.data.forEach((bar, i) => {
+        const value = dataset.data[i] as number
+        if (value == null) return
+        const abs = Math.abs(value)
+        let label: string
+        if (abs >= 1_000_000) label = (value / 1_000_000).toFixed(abs >= 10_000_000 ? 0 : 1) + 'M'
+        else if (abs >= 1_000) label = (value / 1_000).toFixed(0) + 'K'
+        else label = String(Math.round(value))
+        const x = bar.x + 4
+        const y = bar.y
+        ctx2.fillText(label, x, y)
+      })
+      ctx2.restore()
+    },
+  }
+
   chartInstance = new Chart(ctx, {
     type: 'bar',
     data: chartData.value,
+    plugins: [barLabelPlugin],
     options: {
       indexAxis: 'y', // Horizontal bar chart
       responsive: true,

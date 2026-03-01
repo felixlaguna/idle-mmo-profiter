@@ -470,7 +470,8 @@ hr {
   .mobile-card-layout td[data-label='Cost'],
   .mobile-card-layout td[data-label='Run Cost'],
   .mobile-card-layout td[data-label='Total Cost'],
-  .mobile-card-layout td[data-label='Best Method'] {
+  .mobile-card-layout td[data-label='Best Method'],
+  .mobile-card-layout td[data-label='Best'] {
     font-size: 0.75rem;
     color: var(--text-secondary);
     display: inline-flex;
@@ -506,9 +507,10 @@ hr {
     padding: 0.125rem 0.375rem;
   }
 
-  /* Market tab: hide Exclude and Actions columns */
+  /* Market tab: hide less essential columns on mobile */
   .mobile-card-layout td[data-label='Exclude'],
-  .mobile-card-layout td[data-label='Actions'] {
+  .mobile-card-layout td[data-label='Actions'],
+  .mobile-card-layout td[data-label='Spread'] {
     display: none;
   }
 }
