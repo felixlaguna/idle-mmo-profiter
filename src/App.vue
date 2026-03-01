@@ -511,7 +511,7 @@ onUnmounted(() => {
 .app-header {
   background-color: var(--bg-secondary);
   border-bottom: 1px solid var(--border-color);
-  padding: 1rem 2rem;
+  padding: 0.75rem 2rem;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -583,7 +583,7 @@ onUnmounted(() => {
 /* Main Content */
 .app-main {
   flex: 1;
-  padding: 2rem;
+  padding: 1.25rem 2rem;
 }
 
 .content-wrapper {
@@ -596,8 +596,8 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.75rem 1.25rem;
-  margin-bottom: 1.5rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.75rem;
   background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
   border: 1px solid rgba(245, 158, 11, 0.25);
   border-radius: 0.5rem;
@@ -666,8 +666,9 @@ onUnmounted(() => {
 
 .tab-navigation {
   display: flex;
+  align-items: stretch;
   gap: 0.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
   border-bottom: 2px solid var(--border-color);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -689,7 +690,10 @@ onUnmounted(() => {
 }
 
 .tab-button {
-  padding: 0.75rem 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.25rem;
   background-color: transparent;
   color: var(--text-secondary);
   border: none;

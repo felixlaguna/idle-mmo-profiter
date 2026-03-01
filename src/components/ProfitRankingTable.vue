@@ -481,7 +481,7 @@ const profitRange = computed(() => {
 }
 
 .ranking-table th {
-  padding: 1rem;
+  padding: 0.625rem 0.75rem;
   text-align: left;
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -537,7 +537,7 @@ const profitRange = computed(() => {
 }
 
 .ranking-table td {
-  padding: 1rem;
+  padding: 0.625rem 0.75rem;
   color: var(--text-primary);
   font-size: 0.875rem;
 }

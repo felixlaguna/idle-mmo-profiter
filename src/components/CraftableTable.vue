@@ -680,7 +680,7 @@ const formatTime = (seconds: number): string => {
 }
 
 .main-table th {
-  padding: 1rem;
+  padding: 0.625rem 0.75rem;
   text-align: left;
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -721,7 +721,7 @@ const formatTime = (seconds: number): string => {
 }
 
 .main-table td {
-  padding: 1rem;
+  padding: 0.625rem 0.75rem;
   color: var(--text-primary);
   font-size: 0.875rem;
 }

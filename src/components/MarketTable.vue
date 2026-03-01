@@ -2358,7 +2358,7 @@ const refreshItemData = async () => {
 }
 
 .market-items-table th {
-  padding: 0.75rem 1.5rem;
+  padding: 0.625rem 0.75rem;
   text-align: left;
   font-size: 0.875rem;
   font-weight: 600;
@@ -2368,7 +2368,7 @@ const refreshItemData = async () => {
 }
 
 .market-items-table td {
-  padding: 1rem 1.5rem;
+  padding: 0.625rem 0.75rem;
   border-bottom: 1px solid var(--border-color);
 }
 
