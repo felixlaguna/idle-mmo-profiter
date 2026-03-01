@@ -555,7 +555,7 @@ const formatTime = (seconds: number): string => {
 
       <div v-if="hasMoreCraftables && !showAllCraftables" class="show-more-container">
         <button class="btn-show-more" @click="showAllCraftables = true">
-          Show all {{ filteredCraftables.length }} items
+          Show all ({{ filteredCraftables.length }})
         </button>
       </div>
     </div>
@@ -614,6 +614,14 @@ const formatTime = (seconds: number): string => {
   background-color: var(--bg-primary);
   color: var(--accent-primary);
   border-color: var(--accent-primary);
+}
+
+@media (max-width: 767px) {
+  .btn-show-more {
+    width: 100%;
+    padding: 0.75rem;
+    font-weight: 600;
+  }
 }
 
 /* Sub-tab Navigation — inline tabs aligned with table */

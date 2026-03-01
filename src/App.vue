@@ -819,11 +819,13 @@ onUnmounted(() => {
 
 .hero-compact-separator {
   display: inline-block;
-  width: 1px;
-  height: 1em;
-  background-color: var(--text-secondary);
-  opacity: 0.3;
+  width: 2px;
+  height: 14px;
+  background-color: var(--border-color);
+  margin: 0 0.625rem;
   vertical-align: middle;
+  opacity: 0.5;
+  border-radius: 1px;
 }
 
 .hero-compact-profit {
@@ -1065,6 +1067,12 @@ onUnmounted(() => {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   gap: 1.5rem;
+  align-items: stretch;
+}
+
+.charts-grid > * {
+  display: flex;
+  flex-direction: column;
 }
 
 @media (max-width: 1024px) {
@@ -1169,6 +1177,46 @@ onUnmounted(() => {
 
   .hero-details {
     display: none;
+  }
+
+  /* At 375px, compress hero further: label + name inline, tighter padding */
+  @media (max-width: 375px) {
+    .hero-section {
+      padding: 0.375rem 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .hero-content {
+      gap: 0.25rem;
+    }
+
+    .hero-label {
+      display: inline;
+      font-size: 0.5625rem;
+      margin-right: 0.375rem;
+    }
+
+    .hero-activity {
+      display: inline;
+    }
+
+    .hero-name {
+      display: inline;
+      font-size: 0.9375rem;
+    }
+
+    .hero-badge {
+      display: inline;
+      vertical-align: middle;
+    }
+
+    .hero-profit-value {
+      font-size: 1.125rem;
+    }
+
+    .hero-profit-label {
+      font-size: 0.75rem;
+    }
   }
 
   .hero-compact {

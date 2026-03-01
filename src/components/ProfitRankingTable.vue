@@ -265,7 +265,7 @@ const profitRange = computed(() => {
           <tr
             v-for="activity in displayedActivities"
             :key="activity.name"
-            :class="{ 'is-top-rank': activity.rank === 1 }"
+            :class="{ 'is-top-rank': activity.rank === 1, 'negative-profit': activity.profitPerHour < 0 }"
           >
             <td class="rank-cell" data-label="Rank">
               <span class="rank-number" :class="{ 'rank-first': activity.rank === 1 }">
@@ -296,7 +296,7 @@ const profitRange = computed(() => {
 
       <div v-if="hasMore && !showAll" class="show-more-container">
         <button class="btn-show-more" @click="showAll = true">
-          Show all {{ filteredAndSortedActivities.length }} activities
+          Show all ({{ filteredAndSortedActivities.length }})
         </button>
       </div>
 
@@ -362,6 +362,14 @@ const profitRange = computed(() => {
   background-color: var(--bg-primary);
   color: var(--accent-primary);
   border-color: var(--accent-primary);
+}
+
+@media (max-width: 767px) {
+  .btn-show-more {
+    width: 100%;
+    padding: 0.75rem;
+    font-weight: 600;
+  }
 }
 
 /* Filter Controls */
@@ -497,6 +505,14 @@ const profitRange = computed(() => {
   background-color: var(--bg-tertiary);
   transform: translateX(4px);
   box-shadow: -4px 0 0 0 var(--accent-primary);
+}
+
+.ranking-table tbody tr.negative-profit {
+  box-shadow: -3px 0 0 0 var(--danger);
+}
+
+.ranking-table tbody tr.negative-profit:hover {
+  box-shadow: -4px 0 0 0 var(--danger);
 }
 
 .ranking-table tbody tr.is-top-rank {

@@ -188,7 +188,7 @@ const isUntradableRecipe = (recipeName: string): boolean => {
         <tbody>
           <template v-for="dungeon in sortedDungeons" :key="dungeon.name">
             <!-- Main Row -->
-            <tr class="main-row" :class="{ expanded: isExpanded(dungeon.name) }">
+            <tr class="main-row" :class="{ expanded: isExpanded(dungeon.name), 'negative-profit': dungeon.totalProfit < 0 }">
               <td class="expand-col" data-label="">
                 <button
                   class="expand-button"
@@ -360,6 +360,14 @@ const isUntradableRecipe = (recipeName: string): boolean => {
   background-color: var(--bg-tertiary);
   transform: translateX(4px);
   box-shadow: -4px 0 0 0 var(--accent-primary);
+}
+
+.main-table tbody tr.main-row.negative-profit {
+  box-shadow: -3px 0 0 0 var(--danger);
+}
+
+.main-table tbody tr.main-row.negative-profit:hover {
+  box-shadow: -4px 0 0 0 var(--danger);
 }
 
 .main-table tbody tr.main-row.expanded {

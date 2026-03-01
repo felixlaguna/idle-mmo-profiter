@@ -52,29 +52,17 @@ export function getHeatmapStyle(
     }
   }
 
-  // Handle positive profits - use green gradient
+  // Handle positive profits - use continuous green gradient
   const range = maxProfit - minProfit
   const normalized = range === 0 ? 1 : (profit - minProfit) / range
 
-  // Green gradient: light to dark green
-  if (normalized < 0.33) {
-    // Light green
-    return {
-      backgroundColor: 'rgba(16, 185, 129, 0.1)',
-      color: '#10b981',
-    }
-  } else if (normalized < 0.66) {
-    // Medium green
-    return {
-      backgroundColor: 'rgba(16, 185, 129, 0.2)',
-      color: '#10b981',
-    }
-  } else {
-    // Deep green
-    return {
-      backgroundColor: 'rgba(16, 185, 129, 0.3)',
-      color: '#059669',
-    }
+  // Continuous alpha: 0.05 (lowest) to 0.30 (highest)
+  const alpha = 0.05 + normalized * 0.25
+  const textColor = normalized > 0.6 ? '#059669' : '#10b981'
+
+  return {
+    backgroundColor: `rgba(16, 185, 129, ${alpha.toFixed(3)})`,
+    color: textColor,
   }
 }
 

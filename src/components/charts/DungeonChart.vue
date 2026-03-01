@@ -239,6 +239,7 @@ watch(
   border: 1px solid var(--border-color);
   border-radius: 0.5rem;
   padding: 1.5rem;
+  flex: 1;
 }
 
 .chart-header {

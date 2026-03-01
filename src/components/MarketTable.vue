@@ -359,6 +359,16 @@ const addRecipeLoading = ref<Record<string, boolean>>({})
 // Loading state for refreshing item data
 const refreshItemDataLoading = ref(false)
 
+// Market value spread class based on vendor-to-market ratio
+const getSpreadClass = (marketPrice: number, vendorValue?: number): string => {
+  if (!vendorValue || vendorValue <= 0 || marketPrice <= 0) return ''
+  const ratio = marketPrice / vendorValue
+  if (ratio >= 10) return 'spread-extreme'
+  if (ratio >= 3) return 'spread-high'
+  if (ratio >= 1.5) return 'spread-moderate'
+  return ''
+}
+
 // Track All Untracked Craftables state
 const trackAllLoading = ref(false)
 const trackAllProgress = ref({ current: 0, total: 0 })
@@ -1035,7 +1045,7 @@ const refreshItemData = async () => {
                   }}
                 </span>
               </td>
-              <td class="col-market" data-label="Market Value">
+              <td class="col-market" :class="getSpreadClass(material.price, material.vendorValue)" data-label="Market Value">
                 <EditableValue
                   :model-value="material.price"
                   :default-value="getDefaultMaterialPrice(material.id)"
@@ -1186,7 +1196,7 @@ const refreshItemData = async () => {
                   }}
                 </span>
               </td>
-              <td class="col-market" data-label="Market Value">
+              <td class="col-market" :class="getSpreadClass(craftable.price, craftable.vendorValue)" data-label="Market Value">
                 <EditableValue
                   :model-value="craftable.price"
                   :default-value="getDefaultCraftablePrice(craftable.id)"
@@ -1331,7 +1341,7 @@ const refreshItemData = async () => {
               <td class="col-vendor" data-label="Vendor Value">
                 <span class="vendor-value">{{ resource.vendorValue.toLocaleString() }} gold</span>
               </td>
-              <td class="col-market" data-label="Market Value">
+              <td class="col-market" :class="getSpreadClass(resource.marketPrice, resource.vendorValue)" data-label="Market Value">
                 <EditableValue
                   :model-value="resource.marketPrice"
                   :default-value="getDefaultResourcePrice(resource.id)"
@@ -1508,7 +1518,7 @@ const refreshItemData = async () => {
                   {{ recipe.vendorValue ? `${recipe.vendorValue.toLocaleString()} gold` : 'N/A' }}
                 </span>
               </td>
-              <td class="col-market" data-label="Market Value">
+              <td class="col-market" :class="getSpreadClass(recipe.price, recipe.vendorValue)" data-label="Market Value">
                 <EditableValue
                   :model-value="recipe.price"
                   :default-value="getDefaultRecipePrice(recipe.id)"
@@ -2395,6 +2405,37 @@ const refreshItemData = async () => {
   .btn-hashed-id,
   .btn-refresh-item {
     width: 100%;
+  }
+}
+
+/* Market value spread differentiation */
+.spread-extreme :deep(.value) {
+  color: var(--success);
+  font-weight: 700;
+}
+
+.spread-high :deep(.value) {
+  color: var(--success);
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+.spread-moderate :deep(.value) {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* Mobile market card density */
+@media (max-width: 767px) {
+  .market-items-table.mobile-card-layout tbody tr {
+    padding: 0.25rem 0.375rem;
+    margin-bottom: 0.125rem;
+  }
+
+  .market-items-table.mobile-card-layout td {
+    padding: 0.125rem 0.375rem;
+    font-size: 0.8125rem;
+    line-height: 1.3;
   }
 }
 </style>

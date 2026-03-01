@@ -216,7 +216,8 @@ th {
 
 tr:hover {
   background-color: var(--bg-secondary);
-  transition: background-color 0.15s ease-in-out;
+  transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  box-shadow: inset 3px 0 0 var(--accent-primary);
 }
 
 /* Additional cross-browser normalizations */
