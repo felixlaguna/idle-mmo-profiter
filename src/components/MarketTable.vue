@@ -2725,9 +2725,9 @@ const refreshItemData = async () => {
   width: 100%;
   padding: 0.625rem 1.5rem;
   margin-top: 0.5rem;
-  background-color: var(--bg-tertiary);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-color);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+  color: var(--accent-primary);
+  border: 1px solid rgba(59, 130, 246, 0.3);
   border-radius: 0.5rem;
   font-size: 0.875rem;
   font-weight: 600;
@@ -2736,10 +2736,10 @@ const refreshItemData = async () => {
 }
 
 .btn-show-more:hover {
-  background-color: var(--bg-primary);
-  color: var(--accent-primary);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%);
+  color: var(--text-primary);
   border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
 }
 
 .btn-show-more:active {
