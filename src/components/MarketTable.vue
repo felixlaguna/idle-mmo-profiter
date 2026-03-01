@@ -2189,10 +2189,11 @@ const refreshItemData = async () => {
 
 /* Market Section */
 .market-section {
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 0.5rem;
+  background: linear-gradient(180deg, #1e2436 0%, var(--bg-secondary) 100%);
+  border: 1px solid rgba(55, 65, 81, 0.7);
+  border-radius: 0.75rem;
   overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .section-header {
