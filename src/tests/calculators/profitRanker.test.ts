@@ -170,4 +170,155 @@ describe('profitRanker', () => {
       expect(best).toBeNull()
     })
   })
+
+  describe('isLowConfidence', () => {
+    it('should pass through isLowConfidence for dungeon activities', () => {
+      const dungeonResults: DungeonProfitResult[] = [
+        {
+          name: 'Low Confidence Dungeon',
+          timeSeconds: 180,
+          runCost: 100,
+          totalRevenue: 500,
+          totalProfit: 400,
+          profitPerHour: 8000,
+          drops: [],
+          isLowConfidence: true,
+        },
+        {
+          name: 'High Confidence Dungeon',
+          timeSeconds: 180,
+          runCost: 100,
+          totalRevenue: 400,
+          totalProfit: 300,
+          profitPerHour: 6000,
+          drops: [],
+          isLowConfidence: false,
+        },
+      ]
+
+      const ranked = rankAllActivities(dungeonResults, [], [])
+
+      expect(ranked).toHaveLength(2)
+      expect(ranked[0].name).toBe('Low Confidence Dungeon')
+      expect(ranked[0].isLowConfidence).toBe(true)
+      expect(ranked[1].name).toBe('High Confidence Dungeon')
+      expect(ranked[1].isLowConfidence).toBe(false)
+    })
+
+    it('should pass through isLowConfidence for craftable activities', () => {
+      const craftableResults: CraftableProfitResult[] = [
+        {
+          name: 'Low Confidence Craftable',
+          craftTimeSeconds: 60,
+          marketPrice: 200,
+          totalCost: 100,
+          profit: 100,
+          profitPerHour: 6000,
+          materials: [],
+          isLowConfidence: true,
+        },
+        {
+          name: 'High Confidence Craftable',
+          craftTimeSeconds: 60,
+          marketPrice: 180,
+          totalCost: 100,
+          profit: 80,
+          profitPerHour: 4800,
+          materials: [],
+          isLowConfidence: false,
+        },
+      ]
+
+      const ranked = rankAllActivities([], craftableResults, [])
+
+      expect(ranked).toHaveLength(2)
+      expect(ranked[0].name).toBe('Low Confidence Craftable')
+      expect(ranked[0].isLowConfidence).toBe(true)
+      expect(ranked[1].name).toBe('High Confidence Craftable')
+      expect(ranked[1].isLowConfidence).toBe(false)
+    })
+
+    it('should have undefined isLowConfidence for resource activities', () => {
+      const resourceResults: ResourceProfitResult[] = [
+        {
+          name: 'Oak Log',
+          timeSeconds: 10,
+          cost: 5,
+          vendorValue: 10,
+          marketPrice: 15,
+          vendorProfit: 5,
+          vendorProfitPerHour: 1800,
+          marketProfit: 10,
+          marketProfitPerHour: 3600,
+          bestMethod: 'market',
+          bestProfit: 10,
+          bestProfitPerHour: 3600,
+        },
+      ]
+
+      const ranked = rankAllActivities([], [], resourceResults)
+
+      expect(ranked).toHaveLength(1)
+      expect(ranked[0].name).toBe('Oak Log')
+      expect(ranked[0].isLowConfidence).toBeUndefined()
+    })
+
+    it('should preserve isLowConfidence when mixing activity types', () => {
+      const dungeonResults: DungeonProfitResult[] = [
+        {
+          name: 'Low Confidence Dungeon',
+          timeSeconds: 180,
+          runCost: 100,
+          totalRevenue: 1000,
+          totalProfit: 900,
+          profitPerHour: 18000,
+          drops: [],
+          isLowConfidence: true,
+        },
+      ]
+
+      const craftableResults: CraftableProfitResult[] = [
+        {
+          name: 'High Confidence Craftable',
+          craftTimeSeconds: 60,
+          marketPrice: 500,
+          totalCost: 100,
+          profit: 400,
+          profitPerHour: 24000,
+          materials: [],
+          isLowConfidence: false,
+        },
+      ]
+
+      const resourceResults: ResourceProfitResult[] = [
+        {
+          name: 'Resource',
+          timeSeconds: 10,
+          cost: 5,
+          vendorValue: 10,
+          marketPrice: 15,
+          vendorProfit: 5,
+          vendorProfitPerHour: 1800,
+          marketProfit: 10,
+          marketProfitPerHour: 3600,
+          bestMethod: 'market',
+          bestProfit: 10,
+          bestProfitPerHour: 3600,
+        },
+      ]
+
+      const ranked = rankAllActivities(dungeonResults, craftableResults, resourceResults)
+
+      expect(ranked).toHaveLength(3)
+      // Sorted by profit per hour: craftable > dungeon > resource
+      expect(ranked[0].name).toBe('High Confidence Craftable')
+      expect(ranked[0].isLowConfidence).toBe(false)
+
+      expect(ranked[1].name).toBe('Low Confidence Dungeon')
+      expect(ranked[1].isLowConfidence).toBe(true)
+
+      expect(ranked[2].name).toBe('Resource')
+      expect(ranked[2].isLowConfidence).toBeUndefined()
+    })
+  })
 })

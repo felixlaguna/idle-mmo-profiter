@@ -127,7 +127,8 @@ const craftableProfits = computed(() => {
     marketTaxRate.value,
     dataProvider.materialPriceMap.value,
     dataProvider.recipes.value,
-    dataProvider.materialLastSaleAtMap.value
+    dataProvider.materialLastSaleAtMap.value,
+    dataProvider.materialVendorValueMap.value
   )
 })
 

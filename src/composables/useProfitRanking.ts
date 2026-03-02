@@ -18,6 +18,7 @@ export interface UseProfitRankingOptions {
   taxRate: ComputedRef<number> | number
   materialPriceMap: ComputedRef<Map<string, number>> | Map<string, number>
   materialLastSaleAtMap?: ComputedRef<Map<string, string>> | Map<string, string>
+  materialVendorValueMap?: ComputedRef<Map<string, number>> | Map<string, number>
   includeNegative?: ComputedRef<boolean> | boolean
 }
 
@@ -45,6 +46,7 @@ export function useProfitRanking(options: UseProfitRankingOptions): UseProfitRan
     taxRate,
     materialPriceMap,
     materialLastSaleAtMap,
+    materialVendorValueMap,
     includeNegative = false,
   } = options
 
@@ -67,6 +69,7 @@ export function useProfitRanking(options: UseProfitRankingOptions): UseProfitRan
     const currentTaxRate = unwrap(taxRate)
     const currentMaterialPriceMap = unwrap(materialPriceMap)
     const currentMaterialLastSaleAtMap = unwrap(materialLastSaleAtMap)
+    const currentMaterialVendorValueMap = unwrap(materialVendorValueMap)
     const currentIncludeNegative = unwrap(includeNegative)
 
     // Calculate profits for each category
@@ -80,7 +83,8 @@ export function useProfitRanking(options: UseProfitRankingOptions): UseProfitRan
       currentTaxRate,
       currentMaterialPriceMap,
       currentRecipes,
-      currentMaterialLastSaleAtMap
+      currentMaterialLastSaleAtMap,
+      currentMaterialVendorValueMap
     )
     const resourceResults = calculateResourceProfits(currentResourceGathering, currentTaxRate)
 

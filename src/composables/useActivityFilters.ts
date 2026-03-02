@@ -1,5 +1,6 @@
 import { computed, type Ref } from 'vue'
 import { useStorage } from './useStorage'
+import { useLowConfidenceFilter } from './useLowConfidenceFilter'
 import type { RankedActivity } from '../calculators/profitRanker'
 
 export interface ActivityFilters {
@@ -39,6 +40,10 @@ const filters = useStorage<ActivityFilters>('active-filters', {
   resources: true,
 })
 
+// Access low-confidence filter state (also a singleton) at module level
+// for the filtering functions
+const lowConfidenceFilter = useLowConfidenceFilter()
+
 /**
  * Composable for managing activity type filters.
  * Persists filter state to localStorage and provides filtering logic.
@@ -72,13 +77,32 @@ export function useActivityFilters(): UseActivityFiltersReturn {
 
   /**
    * Filter activities based on current filter state.
+   * Also respects low-confidence toggles for dungeons and craftables.
    * Preserves original rank numbers.
    */
   const getFilteredActivities = (activities: RankedActivity[]): RankedActivity[] => {
     return activities.filter((activity) => {
+      // Filter by activity type
       if (activity.activityType === 'dungeon' && !filters.value.dungeons) return false
       if (activity.activityType === 'craftable' && !filters.value.craftables) return false
       if (activity.activityType === 'resource' && !filters.value.resources) return false
+
+      // Filter by low-confidence status
+      if (
+        activity.activityType === 'dungeon' &&
+        activity.isLowConfidence &&
+        !lowConfidenceFilter.showLowConfidenceDungeons.value
+      ) {
+        return false
+      }
+      if (
+        activity.activityType === 'craftable' &&
+        activity.isLowConfidence &&
+        !lowConfidenceFilter.showLowConfidenceCraftables.value
+      ) {
+        return false
+      }
+
       return true
     })
   }

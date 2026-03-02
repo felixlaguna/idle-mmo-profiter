@@ -14,6 +14,8 @@ export interface RankedActivity {
   details: string
   isRecommended: boolean
   saleMethod?: SaleMethod
+  /** True if the activity has low-confidence price data */
+  isLowConfidence?: boolean
 }
 
 /**
@@ -43,6 +45,7 @@ export function rankAllActivities(
       timePerAction: dungeon.timeSeconds,
       cost: dungeon.runCost,
       details: `${dungeon.drops.length} drops, ${Math.round(dungeon.timeSeconds / 60)} min run`,
+      isLowConfidence: dungeon.isLowConfidence,
     })
   })
 
@@ -56,6 +59,7 @@ export function rankAllActivities(
       timePerAction: craftable.craftTimeSeconds,
       cost: craftable.totalCost,
       details: `${craftable.materials.length} materials, ${Math.round(craftable.craftTimeSeconds / 60)} min craft`,
+      isLowConfidence: craftable.isLowConfidence,
     })
   })
 

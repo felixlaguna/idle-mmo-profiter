@@ -33,15 +33,18 @@ function isLowConfidence(lastSaleAt?: string): boolean {
  * 1. The craftable itself (its lastSaleAt)
  * 2. Its tradable recipe (if exists, its lastSaleAt)
  * 3. ANY of its materials/components (their lastSaleAt) - only if materialLastSaleAts is provided
+ *    NOTE: Vendor-sold materials (with vendorValue > 0) are excluded from this check
  *
  * @param craftableLastSaleAt - The last sale timestamp of the crafted item
  * @param recipeLastSaleAt - The last sale timestamp of the tradable recipe (if any)
  * @param materialLastSaleAts - Array of last sale timestamps for each material. If not provided, materials are not checked.
+ * @param materialVendorValues - Array of vendor values for each material. Materials with vendorValue > 0 are excluded from confidence check.
  */
 function isCraftableLowConfidence(
   craftableLastSaleAt?: string,
   recipeLastSaleAt?: string,
-  materialLastSaleAts?: (string | undefined)[]
+  materialLastSaleAts?: (string | undefined)[],
+  materialVendorValues?: (number | undefined)[]
 ): boolean {
   // Check the craftable itself
   if (isLowConfidence(craftableLastSaleAt)) {
@@ -54,8 +57,17 @@ function isCraftableLowConfidence(
   }
 
   // Check all materials only if the array is provided (backwards compatibility)
+  // Skip materials that have a vendor value (they have fixed prices, no market data needed)
   if (materialLastSaleAts !== undefined) {
-    for (const materialLastSaleAt of materialLastSaleAts) {
+    for (let i = 0; i < materialLastSaleAts.length; i++) {
+      const materialLastSaleAt = materialLastSaleAts[i]
+      const materialVendorValue = materialVendorValues?.[i]
+
+      // Skip vendor-sold materials - they have fixed prices, no market data
+      if (materialVendorValue && materialVendorValue > 0) {
+        continue
+      }
+
       if (isLowConfidence(materialLastSaleAt)) {
         return true
       }
@@ -155,6 +167,7 @@ export interface CraftableProfitResult {
  * @param materialPriceMap - Map of material names to their current prices
  * @param recipes - Optional array of recipes for dual profitability calculation
  * @param materialLastSaleAtMap - Optional map of material names to their last sale timestamps
+ * @param materialVendorValueMap - Optional map of material names to their vendor values (vendor-sold materials are excluded from low-confidence check)
  * @returns Array of potion profit results sorted by profit per hour descending
  */
 export function calculateCraftableProfits(
@@ -162,7 +175,8 @@ export function calculateCraftableProfits(
   taxRate: number,
   materialPriceMap: Map<string, number>,
   recipes?: Recipe[],
-  materialLastSaleAtMap?: Map<string, string>
+  materialLastSaleAtMap?: Map<string, string>,
+  materialVendorValueMap?: Map<string, number>
 ): CraftableProfitResult[] {
   // Create a map of craftable names to tradable recipes (if recipes provided)
   const craftableRecipeMap = new Map<string, Recipe>()
@@ -235,9 +249,15 @@ export function calculateCraftableProfits(
       ? craftable.materials.map((mat) => materialLastSaleAtMap.get(mat.name))
       : undefined
 
+    // Gather material vendor values - vendor-sold materials are excluded from confidence check
+    const materialVendorValues = materialVendorValueMap
+      ? craftable.materials.map((mat) => materialVendorValueMap.get(mat.name))
+      : undefined
+
     // Base result
     // Note: isLowConfidence checks the ENTIRE crafting chain:
     // - craftable itself, tradable recipe (if any), and ALL materials (if map provided)
+    // - Vendor-sold materials (vendorValue > 0) are excluded from confidence check
     // isRecipeLowConfidence is tracked separately for UI display on recipe cost line
     const result: CraftableProfitResult = {
       name: craftable.name,
@@ -253,7 +273,8 @@ export function calculateCraftableProfits(
       isLowConfidence: isCraftableLowConfidence(
         craftable.lastSaleAt,
         tradableRecipe?.lastSaleAt,
-        materialLastSaleAts
+        materialLastSaleAts,
+        materialVendorValues
       ),
       isRecipeLowConfidence: tradableRecipe ? isRecipeLowConfidence(tradableRecipe.lastSaleAt) : false,
     }

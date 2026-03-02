@@ -322,6 +322,20 @@ function createDataProvider() {
     return map
   })
 
+  /**
+   * Map of material names to their vendorValue
+   * Used to exclude vendor-sold materials from low-confidence detection
+   */
+  const materialVendorValueMap = computed(() => {
+    const map = new Map<string, number>()
+    materials.value.forEach((mat) => {
+      if (mat.vendorValue) {
+        map.set(mat.name, mat.vendorValue)
+      }
+    })
+    return map
+  })
+
   const craftablePriceMap = computed(() => {
     const map = new Map<string, number>()
     craftables.value.forEach((craft) => {
@@ -994,6 +1008,7 @@ function createDataProvider() {
     craftablePriceMap,
     resourcePriceMap,
     materialLastSaleAtMap,
+    materialVendorValueMap,
 
     // Update methods
     updateMaterialPrice,
