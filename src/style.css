@@ -563,7 +563,7 @@ hr {
     order: -1;
     display: inline-flex;
     width: 50%;
-    font-size: 0.875rem;
+    font-size: 1rem;
     font-weight: 700;
     padding: 0.1875rem 0.375rem;
     justify-content: flex-end;

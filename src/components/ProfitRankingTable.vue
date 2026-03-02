@@ -331,7 +331,8 @@ const profitRange = computed(() => {
   color: var(--text-secondary);
   margin-left: auto;
   white-space: nowrap;
-  background-color: var(--bg-tertiary);
+  background-color: rgba(30, 36, 54, 0.8);
+  border: 1px solid rgba(96, 165, 250, 0.15);
   padding: 0.25rem 0.625rem;
   border-radius: 1rem;
   font-weight: 500;

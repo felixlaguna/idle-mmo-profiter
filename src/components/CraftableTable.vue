@@ -700,11 +700,11 @@ const formatTime = (seconds: number): string => {
   font-size: 0.6875rem;
   color: var(--text-secondary);
   white-space: nowrap;
-  background-color: rgba(55, 65, 81, 0.4);
+  background-color: rgba(30, 36, 54, 0.8);
   padding: 0.1875rem 0.5rem;
   border-radius: 1rem;
   font-weight: 500;
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(96, 165, 250, 0.15);
 }
 
 
