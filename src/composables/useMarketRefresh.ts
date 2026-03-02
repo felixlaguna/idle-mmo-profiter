@@ -11,7 +11,7 @@
 
 import { ref } from 'vue'
 import { useDataProvider } from './useDataProvider'
-import { searchItems, getAverageMarketPrice } from '../api/services'
+import { searchItems, getMarketHistory } from '../api/services'
 import { invalidate, generateCacheKey } from '../api/cache'
 
 /**
@@ -230,10 +230,10 @@ function createMarketRefresh() {
       })
       invalidate(marketCacheKey)
 
-      // Get average market price (default to last 10 transactions)
-      const averagePrice = await getAverageMarketPrice(hashedId, 10)
+      // Get market history to extract both price and lastSaleAt
+      const marketHistory = await getMarketHistory(hashedId, 0, 'listings')
 
-      if (averagePrice === null) {
+      if (!marketHistory.latest_sold || marketHistory.latest_sold.length === 0) {
         return {
           success: false,
           category,
@@ -245,19 +245,31 @@ function createMarketRefresh() {
         }
       }
 
-      // Update the item's price in the data provider
+      // Calculate average market price (default to last 10 transactions)
+      const recentTransactions = marketHistory.latest_sold.slice(0, 10)
+      const sum = recentTransactions.reduce((acc, entry) => acc + entry.price_per_item, 0)
+      const averagePrice = sum / recentTransactions.length
+
+      // Extract the most recent sold_at timestamp
+      // latest_sold is sorted by recency (most recent first)
+      const lastSaleAt = marketHistory.latest_sold[0].sold_at
+
+      // Update the item's price and lastSaleAt in the data provider
       switch (category) {
         case 'materials':
           dataProvider.updateMaterialPrice(itemId, averagePrice)
+          dataProvider.updateLastSaleAt('materials', itemId, lastSaleAt)
           break
         case 'craftables':
           dataProvider.updateCraftablePrice(itemId, averagePrice)
+          dataProvider.updateLastSaleAt('craftables', itemId, lastSaleAt)
           break
         case 'resources':
           dataProvider.updateResourcePrice(itemId, averagePrice)
           break
         case 'recipes':
           dataProvider.updateRecipe(itemId, { price: averagePrice })
+          dataProvider.updateLastSaleAt('recipes', itemId, lastSaleAt)
           break
       }
 

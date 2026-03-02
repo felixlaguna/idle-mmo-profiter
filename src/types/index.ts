@@ -8,6 +8,8 @@ export interface Material {
   vendorValue?: number
   lastUpdated?: string
   suggestedRefreshMinutes?: number
+  /** ISO timestamp of most recent sale from market history */
+  lastSaleAt?: string
 }
 
 export interface Craftable {
@@ -18,6 +20,8 @@ export interface Craftable {
   vendorValue?: number
   lastUpdated?: string
   suggestedRefreshMinutes?: number
+  /** ISO timestamp of most recent sale from market history */
+  lastSaleAt?: string
 }
 
 export interface Resource {
@@ -46,6 +50,8 @@ export interface Recipe {
   isUntradable?: boolean
   lastUpdated?: string
   suggestedRefreshMinutes?: number
+  /** ISO timestamp of most recent sale from market history */
+  lastSaleAt?: string
 }
 
 export interface DungeonDrop {
@@ -76,6 +82,8 @@ export interface CraftableRecipe {
   recipeName?: string
   recipeUses?: number
   skill?: 'alchemy' | 'forging'
+  /** ISO timestamp of most recent sale from market history */
+  lastSaleAt?: string
 }
 
 export interface ResourceInput {

@@ -25,11 +25,23 @@ const CRAFTABLE_RECIPES_KEY = `${STORAGE_PREFIX}craftable-recipes`
 interface UserOverrides {
   materials?: Record<
     string,
-    { price?: number; refreshExcluded?: boolean; hashedId?: string; vendorValue?: number }
+    {
+      price?: number
+      refreshExcluded?: boolean
+      hashedId?: string
+      vendorValue?: number
+      lastSaleAt?: string
+    }
   >
   craftables?: Record<
     string,
-    { price?: number; refreshExcluded?: boolean; hashedId?: string; vendorValue?: number }
+    {
+      price?: number
+      refreshExcluded?: boolean
+      hashedId?: string
+      vendorValue?: number
+      lastSaleAt?: string
+    }
   >
   resources?: Record<
     string,
@@ -49,6 +61,7 @@ interface UserOverrides {
       producesItemHashedId?: string
       isUntradable?: boolean
       tradableCounterpartId?: string
+      lastSaleAt?: string
     }
   >
 }
@@ -103,7 +116,18 @@ function loadCraftableRecipes(
 
     const savedCrafts = JSON.parse(stored) as DefaultData['craftableRecipes']
     // Use saved crafts as the source of truth (includes additions, removals, time edits)
-    return savedCrafts
+    // But merge lastSaleAt from defaults for low-confidence detection
+    const defaultLastSaleAt = new Map<string, string>()
+    defaultCrafts.forEach((craft) => {
+      if (craft.lastSaleAt) {
+        defaultLastSaleAt.set(craft.name, craft.lastSaleAt)
+      }
+    })
+
+    return savedCrafts.map((craft) => {
+      const lastSaleAt = defaultLastSaleAt.get(craft.name)
+      return lastSaleAt ? { ...craft, lastSaleAt } : craft
+    })
   } catch (error) {
     console.error('Failed to load craftable recipes:', error)
     return defaultCrafts
@@ -213,6 +237,8 @@ function createDataProvider() {
         price: recipe.currentPrice,
         hashedId,
         vendorValue,
+        // Copy lastSaleAt from craftableRecipe for low-confidence detection
+        lastSaleAt: recipe.lastSaleAt,
       })
       craftableNames.add(recipe.name)
     }
@@ -278,6 +304,20 @@ function createDataProvider() {
     const map = new Map<string, number>()
     materials.value.forEach((mat) => {
       map.set(mat.name, mat.price)
+    })
+    return map
+  })
+
+  /**
+   * Map of material names to their lastSaleAt timestamps
+   * Used for low-confidence detection in crafting chain
+   */
+  const materialLastSaleAtMap = computed(() => {
+    const map = new Map<string, string>()
+    materials.value.forEach((mat) => {
+      if (mat.lastSaleAt) {
+        map.set(mat.name, mat.lastSaleAt)
+      }
     })
     return map
   })
@@ -489,6 +529,25 @@ function createDataProvider() {
     }
     const categoryOverrides = overrides[category]!
     categoryOverrides[id] = { ...categoryOverrides[id], vendorValue }
+    userOverrides.value = overrides
+    saveUserOverrides(overrides)
+  }
+
+  /**
+   * Update lastSaleAt timestamp for an item — persisted to localStorage via user overrides
+   * This stores the most recent sale timestamp from the market history API.
+   */
+  function updateLastSaleAt(
+    category: 'materials' | 'craftables' | 'recipes',
+    id: string,
+    lastSaleAt: string
+  ): void {
+    const overrides = { ...userOverrides.value }
+    if (!overrides[category]) {
+      overrides[category] = {} as Record<string, never>
+    }
+    const categoryOverrides = overrides[category]!
+    categoryOverrides[id] = { ...categoryOverrides[id], lastSaleAt }
     userOverrides.value = overrides
     saveUserOverrides(overrides)
   }
@@ -934,6 +993,7 @@ function createDataProvider() {
     materialPriceMap,
     craftablePriceMap,
     resourcePriceMap,
+    materialLastSaleAtMap,
 
     // Update methods
     updateMaterialPrice,
@@ -942,6 +1002,7 @@ function createDataProvider() {
     updateRecipe,
     updateHashedId,
     updateVendorValue,
+    updateLastSaleAt,
 
     // Clear methods
     clearCategoryOverrides,

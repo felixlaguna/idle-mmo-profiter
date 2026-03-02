@@ -3,8 +3,14 @@ import { ref, computed } from 'vue'
 import type { DungeonProfitResult } from '../calculators/dungeonCalculator'
 import EditableValue from './EditableValue.vue'
 import { useHeatmap } from '../composables/useHeatmap'
+import { useLowConfidenceFilter } from '../composables/useLowConfidenceFilter'
 
 const { getHeatmapStyle } = useHeatmap()
+const {
+  showLowConfidenceDungeons,
+  setShowLowConfidenceDungeons,
+  filterDungeons,
+} = useLowConfidenceFilter()
 
 const props = defineProps<{
   dungeons: DungeonProfitResult[]
@@ -33,10 +39,19 @@ const sortKey = ref<SortKey>('runCost')
 const sortOrder = ref<SortOrder>('desc')
 
 // Computed sorted dungeons
+// Low-confidence items always sort to the bottom, regardless of sort column/order
 const sortedDungeons = computed(() => {
   const dungeons = [...props.dungeons]
 
   dungeons.sort((a, b) => {
+    // Primary sort: low-confidence items always at bottom
+    const aLowConf = a.isLowConfidence ? 1 : 0
+    const bLowConf = b.isLowConfidence ? 1 : 0
+    if (aLowConf !== bLowConf) {
+      return aLowConf - bLowConf // High-confidence first, low-confidence last
+    }
+
+    // Secondary sort: user's selected sort column
     let aValue: number | string
     let bValue: number | string
 
@@ -80,6 +95,16 @@ const sortedDungeons = computed(() => {
   })
 
   return dungeons
+})
+
+// Filtered dungeons (applies low-confidence filter)
+const filteredDungeons = computed(() => {
+  return filterDungeons(sortedDungeons.value)
+})
+
+// Count of low-confidence dungeons (for toggle label)
+const lowConfidenceCount = computed(() => {
+  return sortedDungeons.value.filter((d) => d.isLowConfidence).length
 })
 
 // Toggle row expansion
@@ -172,6 +197,26 @@ const isUntradableRecipe = (recipeName: string): boolean => {
 
 <template>
   <div class="dungeon-table">
+    <!-- Low-confidence toggle -->
+    <div v-if="lowConfidenceCount > 0" class="toggle-bar">
+      <label class="low-confidence-toggle">
+        <span class="toggle-switch">
+          <input
+            type="checkbox"
+            :checked="showLowConfidenceDungeons"
+            aria-label="Show low-confidence items"
+            @change="setShowLowConfidenceDungeons(!showLowConfidenceDungeons)"
+          />
+          <span class="toggle-slider"></span>
+        </span>
+        <span class="toggle-label">
+          <span class="toggle-label-full">Show low-confidence</span>
+          <span class="toggle-label-short">Low-conf.</span>
+          <span class="toggle-count">({{ lowConfidenceCount }})</span>
+        </span>
+      </label>
+    </div>
+
     <div class="table-container">
       <table class="main-table mobile-card-layout" role="grid" aria-label="Dungeon profitability">
         <thead>
@@ -198,7 +243,7 @@ const isUntradableRecipe = (recipeName: string): boolean => {
           </tr>
         </thead>
         <tbody>
-          <template v-for="dungeon in sortedDungeons" :key="dungeon.name">
+          <template v-for="dungeon in filteredDungeons" :key="dungeon.name">
             <!-- Main Row -->
             <tr class="main-row" :class="{ expanded: isExpanded(dungeon.name), 'negative-profit': dungeon.totalProfit < 0 }">
               <td class="expand-col" data-label="">
@@ -213,7 +258,14 @@ const isUntradableRecipe = (recipeName: string): boolean => {
                   <svg class="expand-icon" :class="{ expanded: isExpanded(dungeon.name) }" viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
                 </button>
               </td>
-              <td class="name-cell" data-label="Dungeon">{{ dungeon.name }}</td>
+              <td class="name-cell" data-label="Dungeon">
+                {{ dungeon.name }}
+                <span
+                  v-if="dungeon.isLowConfidence"
+                  class="low-confidence-badge"
+                  title="Low confidence: One or more drops have no recent sales data (over 30 days)"
+                >⚠</span>
+              </td>
               <td class="text-right" data-label="Run Cost">
                 <EditableValue
                   :model-value="dungeon.runCost"
@@ -281,7 +333,14 @@ const isUntradableRecipe = (recipeName: string): boolean => {
                     </thead>
                     <tbody>
                       <tr v-for="drop in dungeon.drops" :key="drop.recipeName">
-                        <td>{{ drop.recipeName }}</td>
+                        <td>
+                          {{ drop.recipeName }}
+                          <span
+                            v-if="drop.isLowConfidence"
+                            class="low-confidence-badge small"
+                            title="Low confidence: No recent sales data (over 30 days)"
+                          >⚠</span>
+                        </td>
                         <td class="text-right">
                           <span v-if="isUntradableRecipe(drop.recipeName)" class="computed-price">
                             {{ formatNumber(drop.price) }}
@@ -696,5 +755,173 @@ const isUntradableRecipe = (recipeName: string): boolean => {
 
 .computed-indicator:hover {
   opacity: 1;
+}
+
+/* Toggle bar for low-confidence filter */
+.toggle-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.5rem;
+}
+
+/* Low-confidence toggle */
+.low-confidence-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* Toggle switch container */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* Hide the default checkbox */
+.toggle-switch input[type="checkbox"] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+/* The slider */
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  transition: all 0.3s var(--ease-out);
+}
+
+/* The slider knob */
+.toggle-slider::before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 2px;
+  bottom: 2px;
+  background-color: var(--text-secondary);
+  border-radius: 50%;
+  transition: all 0.3s var(--ease-out);
+}
+
+/* Hover state */
+.low-confidence-toggle:hover .toggle-slider {
+  border-color: var(--warning);
+}
+
+/* Focus state for accessibility */
+.toggle-switch input[type="checkbox"]:focus + .toggle-slider {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* Checked state */
+.toggle-switch input[type="checkbox"]:checked + .toggle-slider {
+  background-color: rgba(245, 158, 11, 0.2);
+  border-color: var(--warning);
+}
+
+.toggle-switch input[type="checkbox"]:checked + .toggle-slider::before {
+  background-color: var(--warning);
+  transform: translateX(16px);
+}
+
+.low-confidence-toggle .toggle-label {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.low-confidence-toggle .toggle-label-short {
+  display: none;
+}
+
+.low-confidence-toggle .toggle-count {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.low-confidence-toggle:hover {
+  color: var(--text-primary);
+}
+
+/* Low-confidence badge */
+.low-confidence-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.375rem;
+  font-size: 0.875rem;
+  color: var(--warning, #f59e0b);
+  cursor: help;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+
+.low-confidence-badge:hover {
+  opacity: 1;
+}
+
+.low-confidence-badge.small {
+  font-size: 0.75rem;
+}
+
+/* Row with low-confidence dungeon */
+.main-row:has(.low-confidence-badge) {
+  border-left: 2px solid var(--warning, #f59e0b);
+}
+
+@media (max-width: 767px) {
+  .toggle-bar {
+    padding: 0 0.5rem;
+  }
+
+  .low-confidence-toggle {
+    font-size: 0.75rem;
+    padding: 0.25rem 0;
+    gap: 0.375rem;
+  }
+
+  .toggle-switch {
+    width: 32px;
+    height: 18px;
+  }
+
+  .toggle-slider::before {
+    height: 12px;
+    width: 12px;
+  }
+
+  .toggle-switch input[type="checkbox"]:checked + .toggle-slider::before {
+    transform: translateX(14px);
+  }
+
+  .toggle-label-full {
+    display: none;
+  }
+
+  .toggle-label-short {
+    display: inline;
+  }
+
+  .low-confidence-badge {
+    font-size: 0.8125rem;
+  }
 }
 </style>

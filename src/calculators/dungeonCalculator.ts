@@ -5,6 +5,8 @@ export interface DungeonDropResult {
   price: number
   chance: number
   expectedValue: number
+  /** True if this drop's price is low-confidence */
+  isLowConfidence?: boolean
 }
 
 export interface DungeonProfitResult {
@@ -14,6 +16,28 @@ export interface DungeonProfitResult {
   drops: DungeonDropResult[]
   totalProfit: number
   profitPerHour: number
+  /** True if ANY drop has a low-confidence price */
+  isLowConfidence?: boolean
+}
+
+/** Number of days without sales to consider a price low-confidence */
+const LOW_CONFIDENCE_THRESHOLD_DAYS = 30
+
+/** Number of milliseconds in a day */
+const MS_PER_DAY = 24 * 60 * 60 * 1000
+
+/**
+ * Check if a lastSaleAt timestamp indicates a low-confidence price.
+ * A price is low-confidence if there's no sale data or the last sale was >30 days ago.
+ */
+function isLowConfidence(lastSaleAt?: string): boolean {
+  if (!lastSaleAt) {
+    return true // No sale data = low confidence
+  }
+  const lastSaleTime = new Date(lastSaleAt).getTime()
+  const now = Date.now()
+  const daysSinceLastSale = (now - lastSaleTime) / MS_PER_DAY
+  return daysSinceLastSale > LOW_CONFIDENCE_THRESHOLD_DAYS
 }
 
 /**
@@ -52,23 +76,27 @@ export function calculateDungeonProfits(
       const recipe = recipeMap.get(drop.recipeName)
 
       if (!recipe) {
-        // Recipe not found - return zero values
+        // Recipe not found - return zero values, mark as low-confidence
         return {
           recipeName: drop.recipeName,
           price: 0,
           chance: 0,
           expectedValue: 0,
+          isLowConfidence: true,
         }
       }
 
       // Formula: expected_value = price * chance * (1 + totalMF/100)
       const expectedValue = recipe.price * recipe.chance * (1 + totalMF / 100)
+      // Untradable recipes don't affect confidence - they can't be traded
+      const dropIsLowConfidence = recipe.isUntradable ? false : isLowConfidence(recipe.lastSaleAt)
 
       return {
         recipeName: drop.recipeName,
         price: recipe.price,
         chance: recipe.chance,
         expectedValue,
+        isLowConfidence: dropIsLowConfidence,
       }
     })
 
@@ -81,6 +109,19 @@ export function calculateDungeonProfits(
     // Calculate profit per hour
     const profitPerHour = totalProfit / (dungeon.timeSeconds / 3600)
 
+    // Dungeon is low-confidence only if any TRADABLE drop is low-confidence
+    // (untradable recipes don't count - they can't be traded so no market price)
+    // Missing recipes still count as low-confidence
+    const dungeonIsLowConfidence = dropResults.some((drop) => {
+      const recipe = recipeMap.get(drop.recipeName)
+      // Missing recipe = low-confidence
+      if (!recipe) return drop.isLowConfidence
+      // Untradable = doesn't affect confidence
+      if (recipe.isUntradable) return false
+      // Tradable = use drop's confidence flag
+      return drop.isLowConfidence
+    })
+
     return {
       name: dungeon.name,
       runCost: dungeon.runCost,
@@ -88,6 +129,7 @@ export function calculateDungeonProfits(
       drops: dropResults,
       totalProfit,
       profitPerHour,
+      isLowConfidence: dungeonIsLowConfidence,
     }
   })
 

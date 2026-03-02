@@ -50,6 +50,7 @@ interface DefaultItem {
   isUntradable?: boolean
   lastUpdated?: string
   suggestedRefreshMinutes?: number
+  lastSaleAt?: string // Most recent sale timestamp for low-confidence detection
   [key: string]: unknown // preserve other fields
 }
 
@@ -236,6 +237,12 @@ async function processItem(
 
   // Set suggestedRefreshMinutes (either computed or default)
   item.suggestedRefreshMinutes = suggestedRefreshMinutes
+
+  // Extract and store the most recent sale timestamp for low-confidence detection
+  // latest_sold is sorted by recency (most recent first)
+  if (marketData.latest_sold.length > 0) {
+    item.lastSaleAt = marketData.latest_sold[0].sold_at
+  }
 
   // Show the change with refresh interval
   if (oldPrice !== undefined) {
@@ -655,6 +662,53 @@ async function main() {
       console.log(`  ⊘ ${rg.name}: No matching resource, keeping ${rg.marketPrice}`)
     }
   })
+
+  // Process craftableRecipes: fetch lastSaleAt for each craftableRecipe
+  // This is needed because craftables are auto-generated from craftableRecipes
+  // and they need lastSaleAt for low-confidence detection to work
+  const craftableRecipes = (data as DefaultData & { craftableRecipes?: DefaultItem[] }).craftableRecipes
+  if (craftableRecipes && craftableRecipes.length > 0) {
+    console.log(`\n=== Processing Craftable Recipes (${craftableRecipes.length} items) ===\n`)
+
+    // Build a map of producesItemName -> recipe for lookup
+    const recipeByProducesName = new Map<string, DefaultItem>()
+    data.recipes.forEach((recipe) => {
+      if (recipe.producesItemName && recipe.producesItemHashedId) {
+        recipeByProducesName.set(recipe.producesItemName, recipe)
+      }
+    })
+
+    let craftableRecipeUpdatedCount = 0
+    for (const craftableRecipe of craftableRecipes) {
+      if (currentIndex >= limit) break
+
+      // Find the matching recipe to get the hashedId
+      const matchingRecipe = recipeByProducesName.get(craftableRecipe.name)
+      if (!matchingRecipe || !matchingRecipe.producesItemHashedId) {
+        console.log(`  ⊘ ${craftableRecipe.name}: No matching recipe with hashedId, skipped`)
+        continue
+      }
+
+      currentIndex++
+      console.log(`[${currentIndex}/${Math.min(totalItems + craftableRecipes.length, limit)}] Processing: ${craftableRecipe.name} (craftableRecipe)`)
+
+      // Fetch market history to get lastSaleAt
+      const marketData = await getMarketHistory(matchingRecipe.producesItemHashedId)
+
+      if (!marketData || marketData.latest_sold.length === 0) {
+        console.log(`  ⚠ No market data available for ${craftableRecipe.name}`)
+        continue
+      }
+
+      // Extract and store the most recent sale timestamp
+      const lastSaleAt = marketData.latest_sold[0].sold_at
+      ;(craftableRecipe as Record<string, unknown>).lastSaleAt = lastSaleAt
+      craftableRecipeUpdatedCount++
+      console.log(`  ✓ lastSaleAt: ${lastSaleAt}`)
+    }
+
+    console.log(`\nCraftable recipes updated: ${craftableRecipeUpdatedCount}`)
+  }
 
   const endTime = Date.now()
   const durationMinutes = ((endTime - startTime) / 1000 / 60).toFixed(2)

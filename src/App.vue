@@ -99,6 +99,7 @@ const { rankedActivities } = useProfitRanking({
   magicFind: computed(() => magicFind.value),
   taxRate: computed(() => marketTaxRate.value),
   materialPriceMap: dataProvider.materialPriceMap,
+  materialLastSaleAtMap: dataProvider.materialLastSaleAtMap,
 })
 
 // Use shared filter state to get filtered best action
@@ -125,7 +126,8 @@ const craftableProfits = computed(() => {
     dataProvider.craftableRecipes.value,
     marketTaxRate.value,
     dataProvider.materialPriceMap.value,
-    dataProvider.recipes.value
+    dataProvider.recipes.value,
+    dataProvider.materialLastSaleAtMap.value
   )
 })
 

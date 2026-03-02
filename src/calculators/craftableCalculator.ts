@@ -7,6 +7,75 @@ export interface CraftableMaterialResult {
   totalCost: number
 }
 
+/** Number of days without sales to consider a price low-confidence */
+const LOW_CONFIDENCE_THRESHOLD_DAYS = 30
+
+/** Number of milliseconds in a day */
+const MS_PER_DAY = 24 * 60 * 60 * 1000
+
+/**
+ * Check if a lastSaleAt timestamp indicates a low-confidence price.
+ * A price is low-confidence if there's no sale data or the last sale was >30 days ago.
+ */
+function isLowConfidence(lastSaleAt?: string): boolean {
+  if (!lastSaleAt) {
+    return true // No sale data = low confidence
+  }
+  const lastSaleTime = new Date(lastSaleAt).getTime()
+  const now = Date.now()
+  const daysSinceLastSale = (now - lastSaleTime) / MS_PER_DAY
+  return daysSinceLastSale > LOW_CONFIDENCE_THRESHOLD_DAYS
+}
+
+/**
+ * Check if a craftable is low-confidence based on the entire crafting chain's sales.
+ * A craftable is low-confidence if ANY of the following lack recent sales (>30 days):
+ * 1. The craftable itself (its lastSaleAt)
+ * 2. Its tradable recipe (if exists, its lastSaleAt)
+ * 3. ANY of its materials/components (their lastSaleAt) - only if materialLastSaleAts is provided
+ *
+ * @param craftableLastSaleAt - The last sale timestamp of the crafted item
+ * @param recipeLastSaleAt - The last sale timestamp of the tradable recipe (if any)
+ * @param materialLastSaleAts - Array of last sale timestamps for each material. If not provided, materials are not checked.
+ */
+function isCraftableLowConfidence(
+  craftableLastSaleAt?: string,
+  recipeLastSaleAt?: string,
+  materialLastSaleAts?: (string | undefined)[]
+): boolean {
+  // Check the craftable itself
+  if (isLowConfidence(craftableLastSaleAt)) {
+    return true
+  }
+
+  // Check the tradable recipe (if provided)
+  if (recipeLastSaleAt !== undefined && isLowConfidence(recipeLastSaleAt)) {
+    return true
+  }
+
+  // Check all materials only if the array is provided (backwards compatibility)
+  if (materialLastSaleAts !== undefined) {
+    for (const materialLastSaleAt of materialLastSaleAts) {
+      if (isLowConfidence(materialLastSaleAt)) {
+        return true
+      }
+    }
+  }
+
+  return false
+}
+
+/**
+ * Check if a recipe's price is low-confidence.
+ * A recipe is low-confidence if it has no sales within 30 days.
+ * This is shown separately in the UI and does NOT affect the craftable's filtering.
+ *
+ * @param recipeLastSaleAt - The last sale timestamp of the recipe
+ */
+function isRecipeLowConfidence(recipeLastSaleAt?: string): boolean {
+  return isLowConfidence(recipeLastSaleAt)
+}
+
 /**
  * Infer crafting skill from material names using a heuristic.
  *
@@ -43,6 +112,10 @@ export interface CraftableProfitResult {
   tradableRecipePrice?: number
   tradableRecipeName?: string
   skill?: 'alchemy' | 'forging'
+  /** True if the craftable's price is low-confidence (no recent sales) */
+  isLowConfidence?: boolean
+  /** True if the tradable recipe's price is low-confidence (shown as warning on recipe cost line) */
+  isRecipeLowConfidence?: boolean
 }
 
 /**
@@ -81,13 +154,15 @@ export interface CraftableProfitResult {
  * @param taxRate - Market tax rate (e.g., 0.12 for 12%)
  * @param materialPriceMap - Map of material names to their current prices
  * @param recipes - Optional array of recipes for dual profitability calculation
+ * @param materialLastSaleAtMap - Optional map of material names to their last sale timestamps
  * @returns Array of potion profit results sorted by profit per hour descending
  */
 export function calculateCraftableProfits(
   craftableRecipes: CraftableRecipe[],
   taxRate: number,
   materialPriceMap: Map<string, number>,
-  recipes?: Recipe[]
+  recipes?: Recipe[],
+  materialLastSaleAtMap?: Map<string, string>
 ): CraftableProfitResult[] {
   // Create a map of craftable names to tradable recipes (if recipes provided)
   const craftableRecipeMap = new Map<string, Recipe>()
@@ -154,7 +229,16 @@ export function calculateCraftableProfits(
     // Check if this craftable has a tradable recipe
     const tradableRecipe = craftableRecipeMap.get(craftable.name)
 
+    // Gather material lastSaleAt timestamps for chain confidence check
+    // Only check materials if the map is provided
+    const materialLastSaleAts = materialLastSaleAtMap
+      ? craftable.materials.map((mat) => materialLastSaleAtMap.get(mat.name))
+      : undefined
+
     // Base result
+    // Note: isLowConfidence checks the ENTIRE crafting chain:
+    // - craftable itself, tradable recipe (if any), and ALL materials (if map provided)
+    // isRecipeLowConfidence is tracked separately for UI display on recipe cost line
     const result: CraftableProfitResult = {
       name: craftable.name,
       craftTimeSeconds: craftable.timeSeconds,
@@ -166,6 +250,12 @@ export function calculateCraftableProfits(
       profitPerHour,
       hasRecipeCost: false,
       skill: craftable.skill || inferSkillFromMaterials(craftable.materials),
+      isLowConfidence: isCraftableLowConfidence(
+        craftable.lastSaleAt,
+        tradableRecipe?.lastSaleAt,
+        materialLastSaleAts
+      ),
+      isRecipeLowConfidence: tradableRecipe ? isRecipeLowConfidence(tradableRecipe.lastSaleAt) : false,
     }
 
     // Show dual profitability when:

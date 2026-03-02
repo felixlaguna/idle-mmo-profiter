@@ -536,4 +536,281 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
       expect(newPrice).toBeCloseTo(83105, 2)
     })
   })
+
+  describe('low-confidence detection', () => {
+    it('should mark dungeon as low-confidence when any drop has no lastSaleAt', () => {
+      const recipes: Recipe[] = [
+        {
+          id: 'rec-1',
+          name: 'Drop A',
+          price: 1000,
+          chance: 0.1,
+          // No lastSaleAt
+        },
+      ]
+
+      const dungeon: Dungeon = {
+        name: 'Test Dungeon',
+        runCost: 100,
+        timeSeconds: 3600,
+        numDrops: 1,
+        drops: [{ recipeName: 'Drop A', expectedValue: 0 }],
+      }
+
+      const results = calculateDungeonProfits([dungeon], recipes, mockMagicFind)
+
+      expect(results).toHaveLength(1)
+      expect(results[0].isLowConfidence).toBe(true)
+      expect(results[0].drops[0].isLowConfidence).toBe(true)
+    })
+
+    it('should mark dungeon as low-confidence when any drop has stale lastSaleAt', () => {
+      const oldDate = new Date()
+      oldDate.setDate(oldDate.getDate() - 45) // 45 days ago
+
+      const recipes: Recipe[] = [
+        {
+          id: 'rec-1',
+          name: 'Drop A',
+          price: 1000,
+          chance: 0.1,
+          lastSaleAt: oldDate.toISOString(),
+        },
+      ]
+
+      const dungeon: Dungeon = {
+        name: 'Test Dungeon',
+        runCost: 100,
+        timeSeconds: 3600,
+        numDrops: 1,
+        drops: [{ recipeName: 'Drop A', expectedValue: 0 }],
+      }
+
+      const results = calculateDungeonProfits([dungeon], recipes, mockMagicFind)
+
+      expect(results).toHaveLength(1)
+      expect(results[0].isLowConfidence).toBe(true)
+      expect(results[0].drops[0].isLowConfidence).toBe(true)
+    })
+
+    it('should NOT mark dungeon as low-confidence when all drops have recent sales', () => {
+      const recentDate = new Date()
+      recentDate.setDate(recentDate.getDate() - 5) // 5 days ago
+
+      const recipes: Recipe[] = [
+        {
+          id: 'rec-1',
+          name: 'Drop A',
+          price: 1000,
+          chance: 0.1,
+          lastSaleAt: recentDate.toISOString(),
+        },
+        {
+          id: 'rec-2',
+          name: 'Drop B',
+          price: 500,
+          chance: 0.2,
+          lastSaleAt: recentDate.toISOString(),
+        },
+      ]
+
+      const dungeon: Dungeon = {
+        name: 'Test Dungeon',
+        runCost: 100,
+        timeSeconds: 3600,
+        numDrops: 2,
+        drops: [
+          { recipeName: 'Drop A', expectedValue: 0 },
+          { recipeName: 'Drop B', expectedValue: 0 },
+        ],
+      }
+
+      const results = calculateDungeonProfits([dungeon], recipes, mockMagicFind)
+
+      expect(results).toHaveLength(1)
+      expect(results[0].isLowConfidence).toBe(false)
+      expect(results[0].drops[0].isLowConfidence).toBe(false)
+      expect(results[0].drops[1].isLowConfidence).toBe(false)
+    })
+
+    it('should mark dungeon as low-confidence if even one drop is low-confidence', () => {
+      const recentDate = new Date()
+      recentDate.setDate(recentDate.getDate() - 5) // 5 days ago
+
+      const oldDate = new Date()
+      oldDate.setDate(oldDate.getDate() - 45) // 45 days ago
+
+      const recipes: Recipe[] = [
+        {
+          id: 'rec-1',
+          name: 'Fresh Drop',
+          price: 1000,
+          chance: 0.1,
+          lastSaleAt: recentDate.toISOString(),
+        },
+        {
+          id: 'rec-2',
+          name: 'Stale Drop',
+          price: 500,
+          chance: 0.2,
+          lastSaleAt: oldDate.toISOString(), // Low confidence
+        },
+      ]
+
+      const dungeon: Dungeon = {
+        name: 'Mixed Dungeon',
+        runCost: 100,
+        timeSeconds: 3600,
+        numDrops: 2,
+        drops: [
+          { recipeName: 'Fresh Drop', expectedValue: 0 },
+          { recipeName: 'Stale Drop', expectedValue: 0 },
+        ],
+      }
+
+      const results = calculateDungeonProfits([dungeon], recipes, mockMagicFind)
+
+      expect(results).toHaveLength(1)
+      // Dungeon is low-confidence because ONE drop is low-confidence
+      expect(results[0].isLowConfidence).toBe(true)
+      // Individual drops have correct flags
+      expect(results[0].drops[0].isLowConfidence).toBe(false)
+      expect(results[0].drops[1].isLowConfidence).toBe(true)
+    })
+
+    it('should mark missing recipe as low-confidence', () => {
+      const dungeon: Dungeon = {
+        name: 'Missing Recipe Dungeon',
+        runCost: 100,
+        timeSeconds: 3600,
+        numDrops: 1,
+        drops: [{ recipeName: 'Nonexistent Drop', expectedValue: 0 }],
+      }
+
+      const results = calculateDungeonProfits([dungeon], [], mockMagicFind)
+
+      expect(results).toHaveLength(1)
+      expect(results[0].isLowConfidence).toBe(true)
+      expect(results[0].drops[0].isLowConfidence).toBe(true)
+    })
+
+    it('should NOT mark dungeon as low-confidence when only untradable drops have no sales', () => {
+      const recipes: Recipe[] = [
+        {
+          id: 'rec-1',
+          name: 'Untradable Drop',
+          price: 1000,
+          chance: 0.1,
+          isUntradable: true,
+          // No lastSaleAt - but this is expected for untradable items
+        },
+      ]
+
+      const dungeon: Dungeon = {
+        name: 'Untradable Only Dungeon',
+        runCost: 100,
+        timeSeconds: 3600,
+        numDrops: 1,
+        drops: [{ recipeName: 'Untradable Drop', expectedValue: 0 }],
+      }
+
+      const results = calculateDungeonProfits([dungeon], recipes, mockMagicFind)
+
+      expect(results).toHaveLength(1)
+      // Dungeon should be high-confidence because untradable drops don't count
+      expect(results[0].isLowConfidence).toBe(false)
+      // Individual drop should also NOT be marked as low-confidence
+      expect(results[0].drops[0].isLowConfidence).toBe(false)
+    })
+
+    it('should NOT mark dungeon as low-confidence with mix of tradable (high-conf) + untradable drops', () => {
+      const recentDate = new Date()
+      recentDate.setDate(recentDate.getDate() - 5) // 5 days ago
+
+      const recipes: Recipe[] = [
+        {
+          id: 'rec-1',
+          name: 'Tradable Drop',
+          price: 1000,
+          chance: 0.1,
+          lastSaleAt: recentDate.toISOString(),
+          isUntradable: false,
+        },
+        {
+          id: 'rec-2',
+          name: 'Untradable Drop',
+          price: 500,
+          chance: 0.2,
+          isUntradable: true,
+          // No lastSaleAt - but this is expected for untradable items
+        },
+      ]
+
+      const dungeon: Dungeon = {
+        name: 'Mixed Dungeon',
+        runCost: 100,
+        timeSeconds: 3600,
+        numDrops: 2,
+        drops: [
+          { recipeName: 'Tradable Drop', expectedValue: 0 },
+          { recipeName: 'Untradable Drop', expectedValue: 0 },
+        ],
+      }
+
+      const results = calculateDungeonProfits([dungeon], recipes, mockMagicFind)
+
+      expect(results).toHaveLength(1)
+      // Dungeon should be high-confidence because:
+      // - Tradable drop has recent sales (high-conf)
+      // - Untradable drop doesn't count for confidence
+      expect(results[0].isLowConfidence).toBe(false)
+      expect(results[0].drops[0].isLowConfidence).toBe(false)
+      expect(results[0].drops[1].isLowConfidence).toBe(false)
+    })
+
+    it('should mark dungeon as low-confidence when tradable drop is low-confidence', () => {
+      const oldDate = new Date()
+      oldDate.setDate(oldDate.getDate() - 45) // 45 days ago
+
+      const recipes: Recipe[] = [
+        {
+          id: 'rec-1',
+          name: 'Stale Tradable Drop',
+          price: 1000,
+          chance: 0.1,
+          lastSaleAt: oldDate.toISOString(),
+          isUntradable: false,
+        },
+        {
+          id: 'rec-2',
+          name: 'Untradable Drop',
+          price: 500,
+          chance: 0.2,
+          isUntradable: true,
+          // No lastSaleAt - but this is expected for untradable items
+        },
+      ]
+
+      const dungeon: Dungeon = {
+        name: 'Mixed Dungeon with Stale Tradable',
+        runCost: 100,
+        timeSeconds: 3600,
+        numDrops: 2,
+        drops: [
+          { recipeName: 'Stale Tradable Drop', expectedValue: 0 },
+          { recipeName: 'Untradable Drop', expectedValue: 0 },
+        ],
+      }
+
+      const results = calculateDungeonProfits([dungeon], recipes, mockMagicFind)
+
+      expect(results).toHaveLength(1)
+      // Dungeon should be low-confidence because tradable drop is low-confidence
+      expect(results[0].isLowConfidence).toBe(true)
+      // Individual tradable drop should be marked as low-confidence
+      expect(results[0].drops[0].isLowConfidence).toBe(true)
+      // Untradable drop should NOT be marked as low-confidence
+      expect(results[0].drops[1].isLowConfidence).toBe(false)
+    })
+  })
 })

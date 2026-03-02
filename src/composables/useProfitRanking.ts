@@ -17,6 +17,7 @@ export interface UseProfitRankingOptions {
   magicFind: ComputedRef<MagicFindSettings> | MagicFindSettings
   taxRate: ComputedRef<number> | number
   materialPriceMap: ComputedRef<Map<string, number>> | Map<string, number>
+  materialLastSaleAtMap?: ComputedRef<Map<string, string>> | Map<string, string>
   includeNegative?: ComputedRef<boolean> | boolean
 }
 
@@ -43,16 +44,17 @@ export function useProfitRanking(options: UseProfitRankingOptions): UseProfitRan
     magicFind,
     taxRate,
     materialPriceMap,
+    materialLastSaleAtMap,
     includeNegative = false,
   } = options
 
   // Helper to unwrap ref or value
-  const unwrap = <T>(value: ComputedRef<T> | T): T => {
+  const unwrap = <T>(value: ComputedRef<T> | T | undefined): T | undefined => {
     // Check if it's a ComputedRef by checking if it has a value property
     if (value && typeof value === 'object' && 'value' in value) {
       return (value as ComputedRef<T>).value
     }
-    return value as T
+    return value as T | undefined
   }
 
   const rankedActivities = computed(() => {
@@ -64,6 +66,7 @@ export function useProfitRanking(options: UseProfitRankingOptions): UseProfitRan
     const currentMagicFind = unwrap(magicFind)
     const currentTaxRate = unwrap(taxRate)
     const currentMaterialPriceMap = unwrap(materialPriceMap)
+    const currentMaterialLastSaleAtMap = unwrap(materialLastSaleAtMap)
     const currentIncludeNegative = unwrap(includeNegative)
 
     // Calculate profits for each category
@@ -76,7 +79,8 @@ export function useProfitRanking(options: UseProfitRankingOptions): UseProfitRan
       currentCraftableRecipes,
       currentTaxRate,
       currentMaterialPriceMap,
-      currentRecipes
+      currentRecipes,
+      currentMaterialLastSaleAtMap
     )
     const resourceResults = calculateResourceProfits(currentResourceGathering, currentTaxRate)
 
