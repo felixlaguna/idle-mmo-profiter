@@ -178,22 +178,22 @@ const isUntradableRecipe = (recipeName: string): boolean => {
           <tr>
             <th class="expand-col"></th>
             <th class="sortable" @click="toggleSort('name')">
-              Dungeon Name {{ getSortIcon('name') }}
+              Dungeon Name <span class="sort-icon">{{ getSortIcon('name') }}</span>
             </th>
             <th class="sortable text-right" @click="toggleSort('runCost')">
-              Run Cost {{ getSortIcon('runCost') }}
+              Run Cost <span class="sort-icon">{{ getSortIcon('runCost') }}</span>
             </th>
             <th class="sortable text-right" @click="toggleSort('timeSeconds')">
-              Time {{ getSortIcon('timeSeconds') }}
+              Time <span class="sort-icon">{{ getSortIcon('timeSeconds') }}</span>
             </th>
             <th class="sortable text-right" @click="toggleSort('expectedValue')">
-              Expected Value {{ getSortIcon('expectedValue') }}
+              Expected Value <span class="sort-icon">{{ getSortIcon('expectedValue') }}</span>
             </th>
             <th class="sortable text-right" @click="toggleSort('totalProfit')">
-              Profit {{ getSortIcon('totalProfit') }}
+              Profit <span class="sort-icon">{{ getSortIcon('totalProfit') }}</span>
             </th>
             <th class="sortable text-right" @click="toggleSort('profitPerHour')">
-              Profit/hr {{ getSortIcon('profitPerHour') }}
+              Profit/hr <span class="sort-icon">{{ getSortIcon('profitPerHour') }}</span>
             </th>
           </tr>
         </thead>
@@ -350,7 +350,7 @@ const isUntradableRecipe = (recipeName: string): boolean => {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--text-secondary);
+  color: #b8bcc5;
   font-weight: 600;
   white-space: nowrap;
 }
@@ -363,6 +363,14 @@ const isUntradableRecipe = (recipeName: string): boolean => {
 
 .main-table th.sortable:hover {
   color: var(--text-primary);
+}
+
+.sort-icon {
+  display: inline-block;
+  margin-left: 0.25rem;
+  font-size: 0.875rem;
+  color: rgba(96, 165, 250, 0.6);
+  vertical-align: middle;
 }
 
 .main-table th.text-right {

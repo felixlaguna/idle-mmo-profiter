@@ -237,19 +237,19 @@ const formatTime = (seconds: number): string => {
           <tr>
             <th class="expand-col"></th>
             <th class="sortable" @click="toggleSort('name')">
-              Craftable Name {{ getSortIcon('name') }}
+              Craftable Name <span class="sort-icon">{{ getSortIcon('name') }}</span>
             </th>
             <th class="sortable text-right" @click="toggleSort('totalCost')">
-              Total Cost {{ getSortIcon('totalCost') }}
+              Total Cost <span class="sort-icon">{{ getSortIcon('totalCost') }}</span>
             </th>
             <th class="sortable text-right" @click="toggleSort('currentPrice')">
-              Market Price {{ getSortIcon('currentPrice') }}
+              Market Price <span class="sort-icon">{{ getSortIcon('currentPrice') }}</span>
             </th>
             <th class="sortable text-right" @click="toggleSort('profit')">
-              Profit {{ getSortIcon('profit') }}
+              Profit <span class="sort-icon">{{ getSortIcon('profit') }}</span>
             </th>
             <th class="sortable text-right" @click="toggleSort('profitPerHour')">
-              Profit/hr {{ getSortIcon('profitPerHour') }}
+              Profit/hr <span class="sort-icon">{{ getSortIcon('profitPerHour') }}</span>
             </th>
           </tr>
         </thead>
@@ -686,7 +686,7 @@ const formatTime = (seconds: number): string => {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--text-secondary);
+  color: #b8bcc5;
   font-weight: 600;
   white-space: nowrap;
 }
@@ -699,6 +699,14 @@ const formatTime = (seconds: number): string => {
 
 .main-table th.sortable:hover {
   color: var(--text-primary);
+}
+
+.sort-icon {
+  display: inline-block;
+  margin-left: 0.25rem;
+  font-size: 0.875rem;
+  color: rgba(96, 165, 250, 0.6);
+  vertical-align: middle;
 }
 
 .main-table th.text-right {

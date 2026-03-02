@@ -2392,7 +2392,7 @@ const refreshItemData = async () => {
   text-align: left;
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: #b8bcc5;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -2678,13 +2678,15 @@ const refreshItemData = async () => {
 }
 
 .sort-icon {
-  font-size: 0.6875rem;
-  opacity: 0.5;
+  display: inline-block;
   margin-left: 0.25rem;
+  font-size: 0.875rem;
+  color: rgba(96, 165, 250, 0.6);
+  vertical-align: middle;
 }
 
 .sortable:hover .sort-icon {
-  opacity: 1;
+  color: rgba(96, 165, 250, 1);
 }
 
 /* Spread column */

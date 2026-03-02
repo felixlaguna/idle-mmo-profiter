@@ -156,24 +156,24 @@ const handleMarketPriceUpdate = (resourceName: string, value: number) => {
       >
         <thead>
           <tr>
-            <th class="sortable" @click="toggleSort('name')">Resource {{ getSortIcon('name') }}</th>
+            <th class="sortable" @click="toggleSort('name')">Resource <span class="sort-icon">{{ getSortIcon('name') }}</span></th>
             <th class="sortable text-right" @click="toggleSort('timeSeconds')">
-              Time {{ getSortIcon('timeSeconds') }}
+              Time <span class="sort-icon">{{ getSortIcon('timeSeconds') }}</span>
             </th>
             <th class="sortable text-right" @click="toggleSort('cost')">
-              Cost {{ getSortIcon('cost') }}
+              Cost <span class="sort-icon">{{ getSortIcon('cost') }}</span>
             </th>
             <th class="sortable text-right" @click="toggleSort('vendorValue')">
-              Vendor Price {{ getSortIcon('vendorValue') }}
+              Vendor Price <span class="sort-icon">{{ getSortIcon('vendorValue') }}</span>
             </th>
             <th class="sortable text-right" @click="toggleSort('marketPrice')">
-              Market Price {{ getSortIcon('marketPrice') }}
+              Market Price <span class="sort-icon">{{ getSortIcon('marketPrice') }}</span>
             </th>
             <th class="sortable" @click="toggleSort('bestMethod')">
-              Best Method {{ getSortIcon('bestMethod') }}
+              Best Method <span class="sort-icon">{{ getSortIcon('bestMethod') }}</span>
             </th>
             <th class="sortable text-right" @click="toggleSort('bestProfitPerHour')">
-              Profit/hr {{ getSortIcon('bestProfitPerHour') }}
+              Profit/hr <span class="sort-icon">{{ getSortIcon('bestProfitPerHour') }}</span>
             </th>
           </tr>
         </thead>
@@ -274,7 +274,7 @@ const handleMarketPriceUpdate = (resourceName: string, value: number) => {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--text-secondary);
+  color: #b8bcc5;
   font-weight: 600;
   white-space: nowrap;
 }
@@ -287,6 +287,14 @@ const handleMarketPriceUpdate = (resourceName: string, value: number) => {
 
 .main-table th.sortable:hover {
   color: var(--text-primary);
+}
+
+.sort-icon {
+  display: inline-block;
+  margin-left: 0.25rem;
+  font-size: 0.875rem;
+  color: rgba(96, 165, 250, 0.6);
+  vertical-align: middle;
 }
 
 .main-table th.text-right {

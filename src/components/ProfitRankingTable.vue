@@ -201,7 +201,7 @@ const profitRange = computed(() => {
               @keydown.enter="toggleSort('rank')"
               @keydown.space.prevent="toggleSort('rank')"
             >
-              Rank <span aria-hidden="true">{{ getSortIcon('rank') }}</span>
+              Rank <span class="sort-icon" aria-hidden="true">{{ getSortIcon('rank') }}</span>
             </th>
             <th
               class="sortable"
@@ -212,7 +212,7 @@ const profitRange = computed(() => {
               @keydown.enter="toggleSort('name')"
               @keydown.space.prevent="toggleSort('name')"
             >
-              Activity Name <span aria-hidden="true">{{ getSortIcon('name') }}</span>
+              Activity Name <span class="sort-icon" aria-hidden="true">{{ getSortIcon('name') }}</span>
             </th>
             <th role="columnheader">Type</th>
             <th
@@ -224,7 +224,7 @@ const profitRange = computed(() => {
               @keydown.enter="toggleSort('profitPerHour')"
               @keydown.space.prevent="toggleSort('profitPerHour')"
             >
-              Profit/hr <span aria-hidden="true">{{ getSortIcon('profitPerHour') }}</span>
+              Profit/hr <span class="sort-icon" aria-hidden="true">{{ getSortIcon('profitPerHour') }}</span>
             </th>
             <th
               class="sortable text-right"
@@ -235,7 +235,7 @@ const profitRange = computed(() => {
               @keydown.enter="toggleSort('profitPerAction')"
               @keydown.space.prevent="toggleSort('profitPerAction')"
             >
-              Profit/action <span aria-hidden="true">{{ getSortIcon('profitPerAction') }}</span>
+              Profit/action <span class="sort-icon" aria-hidden="true">{{ getSortIcon('profitPerAction') }}</span>
             </th>
             <th
               class="sortable text-right"
@@ -246,7 +246,7 @@ const profitRange = computed(() => {
               @keydown.enter="toggleSort('timePerAction')"
               @keydown.space.prevent="toggleSort('timePerAction')"
             >
-              Time <span aria-hidden="true">{{ getSortIcon('timePerAction') }}</span>
+              Time <span class="sort-icon" aria-hidden="true">{{ getSortIcon('timePerAction') }}</span>
             </th>
             <th
               class="sortable text-right"
@@ -257,7 +257,7 @@ const profitRange = computed(() => {
               @keydown.enter="toggleSort('cost')"
               @keydown.space.prevent="toggleSort('cost')"
             >
-              Cost <span aria-hidden="true">{{ getSortIcon('cost') }}</span>
+              Cost <span class="sort-icon" aria-hidden="true">{{ getSortIcon('cost') }}</span>
             </th>
           </tr>
         </thead>
@@ -491,7 +491,7 @@ const profitRange = computed(() => {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--text-secondary);
+  color: #b8bcc5;
   font-weight: 600;
   white-space: nowrap;
 }
@@ -504,6 +504,14 @@ const profitRange = computed(() => {
 
 .ranking-table th.sortable:hover {
   color: var(--text-primary);
+}
+
+.sort-icon {
+  display: inline-block;
+  margin-left: 0.25rem;
+  font-size: 0.875rem;
+  color: rgba(96, 165, 250, 0.6);
+  vertical-align: middle;
 }
 
 .ranking-table th.text-right {

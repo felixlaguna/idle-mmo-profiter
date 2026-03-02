@@ -205,7 +205,7 @@ td {
 
 th {
   font-weight: 600;
-  color: var(--text-secondary);
+  color: #b8bcc5;
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -416,11 +416,11 @@ hr {
     border-bottom: none;
   }
 
-  /* Add labels before values on mobile - left side, muted */
+  /* Add labels before values on mobile - left side */
   .mobile-card-layout td::before {
     content: attr(data-label);
-    font-weight: 500;
-    color: var(--text-secondary);
+    font-weight: 600;
+    color: #b8bcc5;
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
