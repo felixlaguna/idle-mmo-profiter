@@ -269,7 +269,7 @@ onUnmounted(() => {
           <span class="title-short">Profit Calc</span>
         </h1>
         <div class="header-actions">
-          <span class="last-update"><svg class="info-icon" viewBox="0 0 20 20" fill="currentColor" width="12" height="12"><circle cx="10" cy="10" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 9v5M10 6.5v.01"/></svg>{{ lastUpdateText }}</span>
+          <span class="last-update"><svg class="info-icon" viewBox="0 0 20 20" fill="currentColor" width="12" height="12"><circle cx="10" cy="10" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 9v5M10 6.5v.01"/></svg><span class="update-text-full">{{ lastUpdateText }}</span><span class="update-text-short">Default</span></span>
           <button
             v-if="!isStaticMode"
             class="btn-settings"
@@ -571,6 +571,14 @@ onUnmounted(() => {
 .info-icon {
   flex-shrink: 0;
   opacity: 0.7;
+}
+
+.update-text-full {
+  display: inline;
+}
+
+.update-text-short {
+  display: none;
 }
 
 .btn-settings {
@@ -1097,18 +1105,22 @@ onUnmounted(() => {
   }
 
   .last-update {
-    font-size: 0;
-    padding: 0.25rem;
-    gap: 0;
-    min-width: 24px;
-    min-height: 24px;
-    justify-content: center;
+    font-size: 0.5625rem;
+    padding: 0.1875rem 0.375rem;
+    gap: 0.25rem;
   }
 
   .last-update .info-icon {
-    font-size: initial;
-    width: 14px;
-    height: 14px;
+    width: 10px;
+    height: 10px;
+  }
+
+  .update-text-full {
+    display: none;
+  }
+
+  .update-text-short {
+    display: inline;
   }
 }
 </style>

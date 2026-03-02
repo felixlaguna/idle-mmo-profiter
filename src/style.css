@@ -514,6 +514,15 @@ hr {
     order: 1;
   }
 
+  /* Unify cost labels across tabs: all show "COST" on mobile */
+  .mobile-card-layout td[data-label='Run Cost']::before {
+    content: 'COST';
+  }
+
+  .mobile-card-layout td[data-label='Total Cost']::before {
+    content: 'COST';
+  }
+
   /* Hide expand buttons on mobile to save space */
   .mobile-card-layout td.expand-col {
     display: none;
