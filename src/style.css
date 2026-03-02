@@ -205,7 +205,7 @@ td {
 
 th {
   font-weight: 600;
-  color: #b8bcc5;
+  color: #d1d5db;
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -420,7 +420,7 @@ hr {
   .mobile-card-layout td::before {
     content: attr(data-label);
     font-weight: 600;
-    color: #b8bcc5;
+    color: #d1d5db;
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;

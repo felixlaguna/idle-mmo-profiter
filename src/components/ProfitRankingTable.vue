@@ -360,22 +360,21 @@ const profitRange = computed(() => {
 }
 
 .btn-show-more {
-  padding: 0.625rem 1.5rem;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
-  color: var(--accent-primary);
-  border: 1px solid rgba(59, 130, 246, 0.3);
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
+  padding: 0.375rem 1rem;
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .btn-show-more:hover {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%);
-  color: var(--text-primary);
+  background-color: var(--bg-tertiary);
+  color: var(--accent-primary);
   border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
 }
 
 .btn-show-more:active {
@@ -384,8 +383,8 @@ const profitRange = computed(() => {
 
 @media (max-width: 767px) {
   .btn-show-more {
-    width: 100%;
-    padding: 0.75rem;
+    width: auto;
+    padding: 0.375rem 1rem;
     font-weight: 600;
   }
 }
@@ -491,7 +490,7 @@ const profitRange = computed(() => {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #b8bcc5;
+  color: #d1d5db;
   font-weight: 600;
   white-space: nowrap;
 }
@@ -521,6 +520,10 @@ const profitRange = computed(() => {
 .ranking-table tbody tr {
   border-bottom: 1px solid var(--border-color);
   transition: all 0.2s ease-in-out;
+}
+
+.ranking-table tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.015);
 }
 
 .ranking-table tbody tr:hover {

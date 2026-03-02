@@ -350,7 +350,7 @@ const isUntradableRecipe = (recipeName: string): boolean => {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #b8bcc5;
+  color: #d1d5db;
   font-weight: 600;
   white-space: nowrap;
 }
@@ -380,6 +380,10 @@ const isUntradableRecipe = (recipeName: string): boolean => {
 .main-table tbody tr.main-row {
   border-bottom: 1px solid var(--border-color);
   transition: all 0.2s ease-in-out;
+}
+
+.main-table tbody tr.main-row:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.015);
 }
 
 .main-table tbody tr.main-row:hover {

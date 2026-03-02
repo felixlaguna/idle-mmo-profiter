@@ -274,7 +274,7 @@ const handleMarketPriceUpdate = (resourceName: string, value: number) => {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #b8bcc5;
+  color: #d1d5db;
   font-weight: 600;
   white-space: nowrap;
 }
@@ -304,6 +304,10 @@ const handleMarketPriceUpdate = (resourceName: string, value: number) => {
 .main-table tbody tr {
   border-bottom: 1px solid var(--border-color);
   transition: all 0.2s ease-in-out;
+}
+
+.main-table tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.015);
 }
 
 .main-table tbody tr:hover {

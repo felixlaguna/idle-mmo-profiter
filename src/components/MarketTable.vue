@@ -2398,7 +2398,7 @@ const refreshItemData = async () => {
   text-align: left;
   font-size: 0.75rem;
   font-weight: 600;
-  color: #b8bcc5;
+  color: #d1d5db;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -2414,6 +2414,10 @@ const refreshItemData = async () => {
 
 .market-items-table tbody tr {
   transition: all 0.2s ease-in-out;
+}
+
+.market-items-table tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.015);
 }
 
 .market-items-table tbody tr:hover {
@@ -2731,21 +2735,23 @@ const refreshItemData = async () => {
 /* Mobile market card density */
 /* Show More Button */
 .btn-show-more {
-  width: 100%;
-  padding: 0.625rem 1.5rem;
-  margin-top: 0.5rem;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
-  color: var(--accent-primary);
-  border: 1px solid rgba(59, 130, 246, 0.3);
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
+  display: block;
+  margin: 0.5rem auto 0;
+  padding: 0.375rem 1rem;
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .btn-show-more:hover {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%);
+  background-color: var(--bg-tertiary);
+  color: var(--accent-primary);
+  border-color: var(--accent-primary);
   color: var(--text-primary);
   border-color: var(--accent-primary);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);

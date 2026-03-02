@@ -268,20 +268,20 @@ watch(showAll, () => {
 }
 
 .btn-toggle {
-  padding: 0.5rem 1.25rem;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
-  color: var(--accent-primary);
-  border: 1px solid rgba(59, 130, 246, 0.3);
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
+  padding: 0.375rem 1rem;
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .btn-toggle:hover {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%);
-  color: var(--text-primary);
+  background-color: var(--bg-tertiary);
+  color: var(--accent-primary);
   border-color: var(--accent-primary);
 }
 
