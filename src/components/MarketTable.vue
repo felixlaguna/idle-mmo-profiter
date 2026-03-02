@@ -1807,7 +1807,7 @@ const refreshItemData = async () => {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  max-width: 1320px;
+  max-width: 960px;
   margin: 0 auto;
 }
 

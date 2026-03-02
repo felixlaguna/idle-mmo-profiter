@@ -338,7 +338,7 @@ onUnmounted(() => {
             @keydown="handleTabKeydown"
           >
             <span class="tab-label-full">Dungeons</span>
-            <span class="tab-label-short">Dung</span>
+            <span class="tab-label-short">Dungs</span>
           </button>
           <button
             class="tab-button"

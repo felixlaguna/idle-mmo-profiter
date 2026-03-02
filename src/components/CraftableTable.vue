@@ -775,43 +775,44 @@ const formatTime = (seconds: number): string => {
 
 /* Expand Column */
 .expand-col {
-  width: 3rem;
+  width: 2.5rem;
 }
 
 .expand-button {
-  padding: 0.5rem 0.75rem;
-  min-height: 44px;
-  min-width: 44px;
-  background-color: var(--bg-tertiary);
+  padding: 0;
+  min-height: 32px;
+  min-width: 32px;
+  width: 32px;
+  height: 32px;
+  background-color: transparent;
   color: var(--text-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 0.25rem;
+  border: 1px solid rgba(55, 65, 81, 0.4);
+  border-radius: 50%;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   font-size: 0.875rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 0.5;
 }
 
 .expand-button:hover {
-  background-color: var(--bg-primary);
+  opacity: 1;
+  background-color: rgba(59, 130, 246, 0.1);
   color: var(--accent-primary);
   border-color: var(--accent-primary);
-  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
-  transform: translateY(-1px);
 }
 
 .expand-button:active {
-  transform: translateY(0);
-  box-shadow: 0 1px 3px rgba(59, 130, 246, 0.2);
+  transform: scale(0.95);
 }
 
 .expand-button.expanded {
-  background-color: var(--accent-primary);
-  color: white;
+  opacity: 1;
+  background-color: rgba(59, 130, 246, 0.15);
+  color: var(--accent-primary);
   border-color: var(--accent-primary);
-  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.4);
 }
 
 .expand-icon {
@@ -1013,10 +1014,13 @@ const formatTime = (seconds: number): string => {
   }
 
   .expand-button {
-    min-height: 48px;
-    min-width: 48px;
-    padding: 0.75rem 1rem;
+    min-height: 40px;
+    min-width: 40px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
     font-size: 1rem;
+    opacity: 0.7;
   }
 
   .btn-delete-craftable {

@@ -32,15 +32,15 @@ export function getHeatmapStyle(
     const normalized = minNegative === 0 ? 1 : Math.abs(profit / minNegative)
     const intensity = Math.min(normalized, 1)
 
-    // Red gradient: lighter to darker red
+    // Red gradient: lighter to darker red — capped at 0.12 alpha for contrast
     const r = 239
     const g = Math.round(68 - 20 * intensity)
     const b = Math.round(68 - 20 * intensity)
-    const alpha = 0.08 + intensity * 0.12
+    const alpha = 0.05 + intensity * 0.07
 
     return {
       backgroundColor: `rgba(${r}, ${g}, ${b}, ${alpha})`,
-      color: '#ef4444', // Red text
+      color: '#fca5a5', // Lighter red for WCAG AA contrast on dark backgrounds
     }
   }
 
