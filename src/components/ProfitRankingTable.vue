@@ -456,7 +456,7 @@ const profitRange = computed(() => {
 .filter-button.active.badge-dungeon {
   color: #c084fc;
   border-bottom-color: #c084fc;
-  background-color: rgba(168, 85, 247, 0.05);
+  background-color: rgba(168, 85, 247, 0.1);
 }
 
 .filter-button.active.badge-dungeon::before {
@@ -467,7 +467,7 @@ const profitRange = computed(() => {
 .filter-button.active.badge-craftable {
   color: #4ade80;
   border-bottom-color: #4ade80;
-  background-color: rgba(34, 197, 94, 0.05);
+  background-color: rgba(34, 197, 94, 0.1);
 }
 
 .filter-button.active.badge-craftable::before {
@@ -478,7 +478,7 @@ const profitRange = computed(() => {
 .filter-button.active.badge-resource {
   color: #60a5fa;
   border-bottom-color: #60a5fa;
-  background-color: rgba(59, 130, 246, 0.05);
+  background-color: rgba(59, 130, 246, 0.1);
 }
 
 .filter-button.active.badge-resource::before {

@@ -677,7 +677,7 @@ const formatTime = (seconds: number): string => {
 .sub-tab-alchemy.active {
   color: #4ade80;
   border-bottom-color: #4ade80;
-  background-color: rgba(34, 197, 94, 0.05);
+  background-color: rgba(34, 197, 94, 0.1);
 }
 
 .sub-tab-alchemy.active::before {
@@ -688,7 +688,7 @@ const formatTime = (seconds: number): string => {
 .sub-tab-forging.active {
   color: #fbbf24;
   border-bottom-color: #fbbf24;
-  background-color: rgba(251, 191, 36, 0.05);
+  background-color: rgba(251, 191, 36, 0.1);
 }
 
 .sub-tab-forging.active::before {

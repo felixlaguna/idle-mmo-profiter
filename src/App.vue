@@ -560,8 +560,8 @@ onUnmounted(() => {
   gap: 0.375rem;
   font-size: 0.6875rem;
   color: var(--text-secondary);
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
+  background: rgba(30, 36, 54, 0.8);
+  border: 1px solid rgba(96, 165, 250, 0.2);
   padding: 0.25rem 0.625rem;
   border-radius: 0.75rem;
   font-weight: 500;
@@ -570,7 +570,7 @@ onUnmounted(() => {
 
 .info-icon {
   flex-shrink: 0;
-  opacity: 0.7;
+  color: rgba(96, 165, 250, 0.5);
 }
 
 .update-text-full {
@@ -758,7 +758,7 @@ onUnmounted(() => {
 .tab-button.active {
   color: var(--accent-primary);
   border-bottom-color: var(--accent-primary);
-  background-color: rgba(59, 130, 246, 0.05);
+  background-color: rgba(59, 130, 246, 0.1);
 }
 
 .tab-button.active::before {

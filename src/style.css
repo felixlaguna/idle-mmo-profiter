@@ -420,8 +420,8 @@ hr {
   .mobile-card-layout td::before {
     content: attr(data-label);
     font-weight: 600;
-    color: #e5e7eb;
-    font-size: 0.75rem;
+    color: #9ca3af;
+    font-size: 0.6875rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     text-align: left;
