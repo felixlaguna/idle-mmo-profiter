@@ -36,7 +36,7 @@ export function getHeatmapStyle(
     const r = 239
     const g = Math.round(68 - 20 * intensity)
     const b = Math.round(68 - 20 * intensity)
-    const alpha = 0.15 + intensity * 0.25
+    const alpha = 0.08 + intensity * 0.12
 
     return {
       backgroundColor: `rgba(${r}, ${g}, ${b}, ${alpha})`,
@@ -58,8 +58,8 @@ export function getHeatmapStyle(
   const linear = maxProfit === 0 ? 1 : profit / maxProfit
   const normalized = Math.pow(Math.max(linear, 0), 0.3)
 
-  // Continuous alpha: 0.06 (lowest) to 0.28 (highest)
-  const alpha = 0.06 + normalized * 0.22
+  // Continuous alpha: 0.04 (lowest) to 0.16 (highest) — subtle to avoid visual clash
+  const alpha = 0.04 + normalized * 0.12
   const textColor = normalized > 0.5 ? '#059669' : '#10b981'
 
   return {
