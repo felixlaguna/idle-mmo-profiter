@@ -5,11 +5,13 @@ import { useMarketRefresh } from '../composables/useMarketRefresh'
 import { useStaticMode } from '../composables/useStaticMode'
 import { storageManager } from '../storage/persistence'
 import { useToast } from '../composables/useToast'
+import { useHeatmap } from '../composables/useHeatmap'
 import EditableValue from './EditableValue.vue'
 import HashedIdModal from './HashedIdModal.vue'
 import type { RefreshCategory } from '../composables/useMarketRefresh'
 
 const { isStaticMode } = useStaticMode()
+const { getHeatmapStyle } = useHeatmap()
 
 // Vendor-sold items (vials, crystals) with their buy prices from NPC shops.
 // These items are not tradable on the market, so we use known buy prices.
@@ -141,6 +143,20 @@ function sortItems<T>(items: T[], getVendor: (i: T) => number | undefined, getMa
     return sortDir.value === 'asc' ? cmp : -cmp
   })
 }
+
+// Profit range for heatmap coloring
+const profitRange = computed(() => {
+  const allProfits = [
+    ...filteredMaterials.value.map((m) => getGoldProfit(m.price, m.vendorValue)),
+    ...filteredCraftables.value.map((c) => getGoldProfit(c.price, c.vendorValue)),
+    ...filteredResources.value.map((r) => getGoldProfit(r.marketPrice, r.vendorValue)),
+    ...filteredRecipes.value.map((r) => getGoldProfit(r.price, r.vendorValue)),
+  ].filter((p) => p !== 0)
+  return {
+    min: allProfits.length ? Math.min(...allProfits) : 0,
+    max: allProfits.length ? Math.max(...allProfits) : 0,
+  }
+})
 
 // Sorted & filtered arrays
 const sortedMaterials = computed(() => sortItems(
@@ -1219,7 +1235,7 @@ const refreshItemData = async () => {
                   @update:model-value="(value) => updateMaterialPrice(material.id, value)"
                 />
               </td>
-              <td class="col-profit" :class="getProfitColorClass(material.price, material.vendorValue)" data-label="Profit">
+              <td class="col-profit" :class="getProfitColorClass(material.price, material.vendorValue)" data-label="Profit" :style="getHeatmapStyle(getGoldProfit(material.price, material.vendorValue), profitRange.min, profitRange.max)">
                 {{ formatGoldProfit(material.price, material.vendorValue) }}
               </td>
               <td class="col-spread" :class="getSpreadColorClass(material.price, material.vendorValue)" data-label="Spread">
@@ -1383,7 +1399,7 @@ const refreshItemData = async () => {
                   @update:model-value="(value) => updateCraftablePrice(craftable.id, value)"
                 />
               </td>
-              <td class="col-profit" :class="getProfitColorClass(craftable.price, craftable.vendorValue)" data-label="Profit">
+              <td class="col-profit" :class="getProfitColorClass(craftable.price, craftable.vendorValue)" data-label="Profit" :style="getHeatmapStyle(getGoldProfit(craftable.price, craftable.vendorValue), profitRange.min, profitRange.max)">
                 {{ formatGoldProfit(craftable.price, craftable.vendorValue) }}
               </td>
               <td class="col-spread" :class="getSpreadColorClass(craftable.price, craftable.vendorValue)" data-label="Spread">
@@ -1543,7 +1559,7 @@ const refreshItemData = async () => {
                   @update:model-value="(value) => updateResourcePrice(resource.id, value)"
                 />
               </td>
-              <td class="col-profit" :class="getProfitColorClass(resource.marketPrice, resource.vendorValue)" data-label="Profit">
+              <td class="col-profit" :class="getProfitColorClass(resource.marketPrice, resource.vendorValue)" data-label="Profit" :style="getHeatmapStyle(getGoldProfit(resource.marketPrice, resource.vendorValue), profitRange.min, profitRange.max)">
                 {{ formatGoldProfit(resource.marketPrice, resource.vendorValue) }}
               </td>
               <td class="col-spread" :class="getSpreadColorClass(resource.marketPrice, resource.vendorValue)" data-label="Spread">
@@ -1735,7 +1751,7 @@ const refreshItemData = async () => {
                   @update:model-value="(value) => updateRecipePrice(recipe.id, value)"
                 />
               </td>
-              <td class="col-profit" :class="getProfitColorClass(recipe.price, recipe.vendorValue)" data-label="Profit">
+              <td class="col-profit" :class="getProfitColorClass(recipe.price, recipe.vendorValue)" data-label="Profit" :style="getHeatmapStyle(getGoldProfit(recipe.price, recipe.vendorValue), profitRange.min, profitRange.max)">
                 {{ formatGoldProfit(recipe.price, recipe.vendorValue) }}
               </td>
               <td class="col-spread" :class="getSpreadColorClass(recipe.price, recipe.vendorValue)" data-label="Spread">
@@ -2756,12 +2772,10 @@ const refreshItemData = async () => {
 
 .profit-positive {
   color: var(--success);
-  background: linear-gradient(90deg, transparent 0%, rgba(16, 185, 129, 0.25) 100%);
 }
 
 .profit-negative {
   color: var(--danger);
-  background: linear-gradient(90deg, transparent 0%, rgba(239, 68, 68, 0.2) 100%);
 }
 
 /* Spread column */
