@@ -105,7 +105,8 @@ export function getHeatmapClass(profit: number, minProfit: number, maxProfit: nu
  * @returns Object with heatmap utility functions
  */
 /**
- * Get a subdued heatmap style (half intensity) for secondary profit columns.
+ * Get a subdued heatmap style (1/3 intensity) for secondary profit columns.
+ * Creates a 3:1 visual ratio with the primary profit/hr column.
  */
 export function getSubduedHeatmapStyle(
   profit: number,
@@ -113,16 +114,43 @@ export function getSubduedHeatmapStyle(
   maxProfit: number
 ): HeatmapStyle {
   const style = getHeatmapStyle(profit, minProfit, maxProfit)
-  // Halve the background alpha for a softer look
+  // Use 1/3 the background alpha for secondary columns (3:1 ratio with primary)
   const match = style.backgroundColor.match(/rgba?\(([^)]+)\)/)
   if (match) {
     const parts = match[1].split(',').map((s) => s.trim())
     if (parts.length === 4) {
-      const alpha = parseFloat(parts[3]) * 0.5
+      const alpha = parseFloat(parts[3]) * 0.33
       style.backgroundColor = `rgba(${parts[0]}, ${parts[1]}, ${parts[2]}, ${alpha.toFixed(3)})`
     }
   }
   return style
+}
+
+/**
+ * Get a logarithmic spread style for Market tab spread column.
+ * Uses log10 scale to handle the extreme dynamic range (24% to 13789%).
+ */
+export function getSpreadStyle(spreadPercent: number, maxSpread: number): HeatmapStyle {
+  if (spreadPercent <= 0) {
+    return {
+      backgroundColor: 'rgba(239, 68, 68, 0.08)',
+      color: '#f87171',
+    }
+  }
+
+  // Logarithmic scale for wide dynamic range
+  const logMax = Math.log10(Math.max(maxSpread, 1))
+  const logVal = Math.log10(Math.max(spreadPercent, 1))
+  const normalized = logMax === 0 ? 0.5 : logVal / logMax
+
+  // Alpha range: 0.02 (low spread) to 0.14 (high spread)
+  const alpha = 0.02 + normalized * 0.12
+  const textColor = normalized > 0.6 ? '#10b981' : '#34d399'
+
+  return {
+    backgroundColor: `rgba(16, 185, 129, ${alpha.toFixed(3)})`,
+    color: textColor,
+  }
 }
 
 export function useHeatmap() {
@@ -130,5 +158,6 @@ export function useHeatmap() {
     getHeatmapStyle,
     getHeatmapClass,
     getSubduedHeatmapStyle,
+    getSpreadStyle,
   }
 }

@@ -11,7 +11,7 @@ import HashedIdModal from './HashedIdModal.vue'
 import type { RefreshCategory } from '../composables/useMarketRefresh'
 
 const { isStaticMode } = useStaticMode()
-const { getHeatmapStyle } = useHeatmap()
+const { getHeatmapStyle, getSpreadStyle } = useHeatmap()
 
 // Vendor-sold items (vials, crystals) with their buy prices from NPC shops.
 // These items are not tradable on the market, so we use known buy prices.
@@ -92,16 +92,6 @@ const formatSpread = (marketPrice: number, vendorValue?: number): string => {
   return `${sign}${pct.toFixed(0)}%`
 }
 
-// Get spread color class
-const getSpreadColorClass = (marketPrice: number, vendorValue?: number): string => {
-  const pct = getSpreadPercent(marketPrice, vendorValue)
-  if (pct <= 0) return 'spread-negative'
-  if (pct >= 900) return 'spread-extreme'
-  if (pct >= 200) return 'spread-high'
-  if (pct >= 50) return 'spread-moderate'
-  return 'spread-low'
-}
-
 // Gold profit: absolute difference between market price and vendor value
 const getGoldProfit = (marketPrice: number, vendorValue?: number): number => {
   if (!vendorValue || vendorValue <= 0 || marketPrice <= 0) return 0
@@ -175,6 +165,17 @@ const profitRange = computed(() => {
   return {
     min: allProfits.length ? Math.min(...allProfits) : 0,
     max: allProfits.length ? Math.max(...allProfits) : 0,
+  }
+})
+
+// Spread range for logarithmic heatmap coloring (materials and resources only)
+const spreadRange = computed(() => {
+  const allSpreads = [
+    ...filteredMaterials.value.map((m) => getSpreadPercent(m.price, m.vendorValue)),
+    ...filteredResources.value.map((r) => getSpreadPercent(r.marketPrice, r.vendorValue)),
+  ].filter((s) => s > 0)
+  return {
+    max: allSpreads.length ? Math.max(...allSpreads) : 100,
   }
 })
 
@@ -1257,7 +1258,7 @@ const refreshItemData = async () => {
               <td class="col-profit" :class="getProfitColorClass(material.price, material.vendorValue)" data-label="Profit" :style="getHeatmapStyle(getGoldProfit(material.price, material.vendorValue), profitRange.min, profitRange.max)">
                 {{ formatGoldProfitForCategory('materials', material.price, material.vendorValue) }}
               </td>
-              <td class="col-spread" :class="getSpreadColorClass(material.price, material.vendorValue)" data-label="Spread">
+              <td class="col-spread" data-label="Spread" :style="getSpreadStyle(getSpreadPercent(material.price, material.vendorValue), spreadRange.max)">
                 {{ formatSpreadForCategory('materials', material.price, material.vendorValue) }}
               </td>
               <td v-if="!isStaticMode" class="col-actions" data-label="Actions">
@@ -1581,7 +1582,7 @@ const refreshItemData = async () => {
               <td class="col-profit" :class="getProfitColorClass(resource.marketPrice, resource.vendorValue)" data-label="Profit" :style="getHeatmapStyle(getGoldProfit(resource.marketPrice, resource.vendorValue), profitRange.min, profitRange.max)">
                 {{ formatGoldProfitForCategory('resources', resource.marketPrice, resource.vendorValue) }}
               </td>
-              <td class="col-spread" :class="getSpreadColorClass(resource.marketPrice, resource.vendorValue)" data-label="Spread">
+              <td class="col-spread" data-label="Spread" :style="getSpreadStyle(getSpreadPercent(resource.marketPrice, resource.vendorValue), spreadRange.max)">
                 {{ formatSpreadForCategory('resources', resource.marketPrice, resource.vendorValue) }}
               </td>
               <td v-if="!isStaticMode" class="col-actions" data-label="Actions">

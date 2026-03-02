@@ -342,6 +342,7 @@ onUnmounted(() => {
           >
             {{ bestAction.saleMethod === 'vendor' ? 'Vendor' : 'Market' }}
           </span>
+          <span class="hero-separator" aria-hidden="true"></span>
           <span class="hero-compact-profit">{{ formatNumber(bestAction.profitPerHour) }} gold/hr</span>
         </button>
 
@@ -755,6 +756,15 @@ onUnmounted(() => {
   background-color: rgba(59, 130, 246, 0.25);
   color: #60a5fa;
   border: 1px solid rgba(59, 130, 246, 0.5);
+}
+
+.hero-separator {
+  width: 2px;
+  height: 16px;
+  background: rgba(251, 191, 36, 0.4);
+  border-radius: 1px;
+  margin: 0 0.5rem;
+  flex-shrink: 0;
 }
 
 .hero-compact-profit {
