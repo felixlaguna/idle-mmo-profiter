@@ -511,7 +511,7 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
       dataProvider.addCraftableRecipe({
         name: craftableName,
         timeSeconds: 100,
-        materials: [{ name: 'Test Material', quantity: 1, unitCost: 10 }],
+        materials: [{ name: 'Test Material', quantity: 1 }],
         currentPrice: 100,
       })
 
@@ -530,7 +530,7 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
       dataProvider.addCraftableRecipe({
         name: uniqueName,
         timeSeconds: 100,
-        materials: [{ name: 'Test Material', quantity: 1, unitCost: 10 }],
+        materials: [{ name: 'Test Material', quantity: 1 }],
         currentPrice: 100,
       })
 
@@ -554,7 +554,7 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
         dataProvider.addCraftableRecipe({
           name: craftableName,
           timeSeconds: 100,
-          materials: [{ name: 'Test Material', quantity: 1, unitCost: 10 }],
+          materials: [{ name: 'Test Material', quantity: 1 }],
           currentPrice: 100,
         })
 
@@ -646,34 +646,31 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
       expect(exportedMaterial?.vendorValue).toBe(newVendorValue)
     })
 
-    it('should flow material price overrides to craftableRecipe unitCost', () => {
+    it('should export craftableRecipe materials without unitCost field', () => {
       const dataProvider = useDataProvider()
 
-      // Add a craftableRecipe first (defaults are now empty)
+      // Add a craftableRecipe first
+      const uniqueRecipeName = 'Unique Test Craftable ' + Date.now()
       dataProvider.addCraftableRecipe({
-        name: 'Test Craftable',
+        name: uniqueRecipeName,
         timeSeconds: 60,
-        materials: [{ name: 'Moose antler', quantity: 5, unitCost: 100 }],
+        materials: [{ name: 'Moose antler', quantity: 5 }],
         currentPrice: 1000,
       })
-
-      const firstCraft = dataProvider.craftableRecipes.value[0]
-      const craftMaterialName = firstCraft.materials[0].name
-
-      // Find the material in the materials array
-      const material = dataProvider.materials.value.find((m) => m.name === craftMaterialName)
-      expect(material).toBeDefined()
-
-      const newPrice = 888
-      dataProvider.updateMaterialPrice(material!.id, newPrice)
 
       const jsonString = dataProvider.exportAsDefaultsJson()
       const exported = JSON.parse(jsonString) as DefaultData
 
-      const exportedCraft = exported.craftableRecipes.find((c) => c.name === firstCraft.name)
-      const exportedMaterial = exportedCraft?.materials.find((m) => m.name === craftMaterialName)
+      const exportedCraft = exported.craftableRecipes.find((c) => c.name === uniqueRecipeName)
+      expect(exportedCraft).toBeDefined()
 
-      expect(exportedMaterial?.unitCost).toBe(newPrice)
+      const exportedMaterial = exportedCraft?.materials[0]
+      expect(exportedMaterial).toBeDefined()
+
+      // unitCost should NOT be in the exported data anymore
+      expect(exportedMaterial).not.toHaveProperty('unitCost')
+      expect(exportedMaterial?.name).toBe('Moose antler')
+      expect(exportedMaterial?.quantity).toBe(5)
     })
 
     it('should strip computed cost field from resourceGathering', () => {

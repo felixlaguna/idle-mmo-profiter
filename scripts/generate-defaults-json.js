@@ -164,7 +164,7 @@ for (let i = 1; i < craftablesData.length; i++) {
     craftMaterials.push({
       name: findMaterialByUnitCost(unitCost),
       quantity: qty,
-      unitCost: unitCost,
+      // unitCost removed - prices resolved via materialPriceMap in calculator
     })
   }
 
@@ -175,7 +175,7 @@ for (let i = 1; i < craftablesData.length; i++) {
     craftMaterials.push({
       name: findMaterialByUnitCost(unitCost),
       quantity: qty,
-      unitCost: unitCost,
+      // unitCost removed - prices resolved via materialPriceMap in calculator
     })
   }
 

@@ -3,7 +3,7 @@ import type { CraftableRecipe, Recipe, CraftableMaterial } from '../types'
 export interface CraftableMaterialResult {
   name: string
   quantity: number
-  unitCost: number
+  unitCost: number // Resolved from material price map
   totalCost: number
 }
 
@@ -79,12 +79,14 @@ export interface CraftableProfitResult {
  *
  * @param craftableRecipes - Array of craftable recipes with materials and market prices
  * @param taxRate - Market tax rate (e.g., 0.12 for 12%)
+ * @param materialPriceMap - Map of material names to their current prices
  * @param recipes - Optional array of recipes for dual profitability calculation
  * @returns Array of potion profit results sorted by profit per hour descending
  */
 export function calculateCraftableProfits(
   craftableRecipes: CraftableRecipe[],
   taxRate: number,
+  materialPriceMap: Map<string, number>,
   recipes?: Recipe[]
 ): CraftableProfitResult[] {
   // Create a map of craftable names to tradable recipes (if recipes provided)
@@ -106,13 +108,27 @@ export function calculateCraftableProfits(
   }
 
   const results: CraftableProfitResult[] = craftableRecipes.map((craftable) => {
-    // Calculate material costs
-    const materialResults: CraftableMaterialResult[] = craftable.materials.map((mat) => ({
-      name: mat.name,
-      quantity: mat.quantity,
-      unitCost: mat.unitCost,
-      totalCost: mat.quantity * mat.unitCost,
-    }))
+    // Calculate material costs by looking up prices from materialPriceMap
+    const materialResults: CraftableMaterialResult[] = craftable.materials.map((mat) => {
+      const unitCost = materialPriceMap.get(mat.name)
+
+      if (unitCost === undefined) {
+        console.warn(`Material price not found for: ${mat.name}. Using 0.`)
+        return {
+          name: mat.name,
+          quantity: mat.quantity,
+          unitCost: 0,
+          totalCost: 0,
+        }
+      }
+
+      return {
+        name: mat.name,
+        quantity: mat.quantity,
+        unitCost,
+        totalCost: mat.quantity * unitCost,
+      }
+    })
 
     // Calculate total material cost
     const totalMaterialCost = materialResults.reduce((sum, mat) => sum + mat.totalCost, 0)

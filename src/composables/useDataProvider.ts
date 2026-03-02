@@ -190,7 +190,7 @@ function createDataProvider() {
         loadedDefaults.materials.push({
           id,
           name: mat.name,
-          price: mat.unitCost,
+          price: 0, // Will be resolved from market data or overrides
           hashedId: '',
           vendorValue: 0,
         })
@@ -299,24 +299,16 @@ function createDataProvider() {
   })
 
   /**
-   * CraftableRecipes with material prices and craftable prices updated from overrides
-   * This ensures that when a user edits a material price in the Market tab,
-   * it flows through to the craftable recipe calculations
+   * CraftableRecipes with craftable prices updated from overrides
+   * Material prices are resolved via materialPriceMap by the calculator
    */
   const craftableRecipes = computed(() => {
     return defaults.value.craftableRecipes.map((craft) => {
-      // Update material unit costs from material price overrides
-      const updatedMaterials = craft.materials.map((mat) => ({
-        ...mat,
-        unitCost: materialPriceMap.value.get(mat.name) ?? mat.unitCost,
-      }))
-
       // Update current price from craftable price overrides
       const updatedPrice = craftablePriceMap.value.get(craft.name) ?? craft.currentPrice
 
       return {
         ...craft,
-        materials: updatedMaterials,
         currentPrice: updatedPrice,
       }
     })
@@ -713,7 +705,7 @@ function createDataProvider() {
   function addCraftableRecipe(craftableRecipe: {
     name: string
     timeSeconds: number
-    materials: Array<{ name: string; quantity: number; unitCost: number }>
+    materials: Array<{ name: string; quantity: number }>
     currentPrice: number
     skill?: 'alchemy' | 'forging'
   }): void {
@@ -893,7 +885,6 @@ function createDataProvider() {
         materials: craft.materials.map((mat) => ({
           name: mat.name,
           quantity: mat.quantity,
-          unitCost: mat.unitCost,
         })),
         currentPrice: craft.currentPrice,
       })),
@@ -938,6 +929,11 @@ function createDataProvider() {
     resourceGathering,
     magicFindDefaults,
     marketTaxRate,
+
+    // Price lookup maps
+    materialPriceMap,
+    craftablePriceMap,
+    resourcePriceMap,
 
     // Update methods
     updateMaterialPrice,

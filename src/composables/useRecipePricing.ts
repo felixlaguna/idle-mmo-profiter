@@ -24,14 +24,19 @@ interface CraftableProfitMap {
  *
  * @param craft - The craftable recipe data
  * @param taxRate - Market tax rate
+ * @param materialPriceMap - Map of material names to prices
  * @returns Profit per craftable after tax and material costs
  */
-function calculateCraftableProfit(craft: CraftableRecipe, taxRate: number): number {
-  // Calculate total material cost
-  const totalMaterialCost = craft.materials.reduce(
-    (sum, mat) => sum + mat.quantity * mat.unitCost,
-    0
-  )
+function calculateCraftableProfit(
+  craft: CraftableRecipe,
+  taxRate: number,
+  materialPriceMap: Map<string, number>
+): number {
+  // Calculate total material cost by looking up prices
+  const totalMaterialCost = craft.materials.reduce((sum, mat) => {
+    const unitCost = materialPriceMap.get(mat.name) ?? 0
+    return sum + mat.quantity * unitCost
+  }, 0)
 
   // Total cost
   const totalCost = totalMaterialCost
@@ -48,16 +53,18 @@ function calculateCraftableProfit(craft: CraftableRecipe, taxRate: number): numb
  *
  * @param craftableRecipes - Array of craftable recipe data
  * @param taxRate - Market tax rate
+ * @param materialPriceMap - Map of material names to prices
  * @returns Map of craftable name to profit per craft
  */
 function createCraftableProfitMap(
   craftableRecipes: CraftableRecipe[],
-  taxRate: number
+  taxRate: number,
+  materialPriceMap: Map<string, number>
 ): CraftableProfitMap {
   const map: CraftableProfitMap = {}
 
   craftableRecipes.forEach((craft) => {
-    map[craft.name] = calculateCraftableProfit(craft, taxRate)
+    map[craft.name] = calculateCraftableProfit(craft, taxRate, materialPriceMap)
   })
 
   return map
@@ -69,12 +76,14 @@ function createCraftableProfitMap(
  * @param recipes - Reactive reference to recipe data
  * @param craftableRecipes - Reactive reference to craftable recipe data
  * @param taxRate - Reactive reference to market tax rate
+ * @param materialPriceMap - Reactive reference to material name-to-price map
  * @returns Computed reference to recipes with computed prices for untradable recipes
  */
 export function useRecipePricing(
   recipes: Ref<Recipe[]> | ComputedRef<Recipe[]>,
   craftableRecipes: Ref<CraftableRecipe[]> | ComputedRef<CraftableRecipe[]>,
-  taxRate: Ref<number> | ComputedRef<number>
+  taxRate: Ref<number> | ComputedRef<number>,
+  materialPriceMap: Ref<Map<string, number>> | ComputedRef<Map<string, number>>
 ) {
   /**
    * Recipes with computed prices for untradable recipes
@@ -88,7 +97,11 @@ export function useRecipePricing(
    */
   const recipesWithComputedPrices = computed(() => {
     // Create profit map for craftables
-    const profitMap = createCraftableProfitMap(craftableRecipes.value, taxRate.value)
+    const profitMap = createCraftableProfitMap(
+      craftableRecipes.value,
+      taxRate.value,
+      materialPriceMap.value
+    )
 
     return recipes.value.map((recipe) => {
       // If recipe is not untradable or already has a price, return as is

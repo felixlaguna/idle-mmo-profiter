@@ -64,7 +64,6 @@ export interface Dungeon {
 export interface CraftableMaterial {
   name: string
   quantity: number
-  unitCost: number
 }
 
 export interface CraftableRecipe {

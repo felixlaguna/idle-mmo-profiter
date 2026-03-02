@@ -19,11 +19,16 @@ describe('calculateCraftableProfits', () => {
     name: 'Wraithbane',
     timeSeconds: 1090.9,
     materials: [
-      { name: 'Moose antler', quantity: 15, unitCost: 114.1 },
-      { name: 'Minotaur Hide', quantity: 20, unitCost: 378.9 },
+      { name: 'Moose antler', quantity: 15 },
+      { name: 'Minotaur Hide', quantity: 20 },
     ],
     currentPrice: 11894.6,
   }
+
+  const mockMaterialPriceMap = new Map<string, number>([
+    ['Moose antler', 114.1],
+    ['Minotaur Hide', 378.9],
+  ])
 
   describe('recipe cost logic', () => {
     it('should apply recipe cost when craftable has both tradable AND untradable recipes', () => {
@@ -50,7 +55,12 @@ describe('calculateCraftableProfits', () => {
         },
       ]
 
-      const results = calculateCraftableProfits([mockCraftableRecipe], mockTaxRate, recipes)
+      const results = calculateCraftableProfits(
+        [mockCraftableRecipe],
+        mockTaxRate,
+        mockMaterialPriceMap,
+        recipes
+      )
 
       expect(results).toHaveLength(1)
       const result = results[0]
@@ -67,9 +77,11 @@ describe('calculateCraftableProfits', () => {
       const craftableRecipe: CraftableRecipe = {
         name: 'Exclusive Elixir',
         timeSeconds: 1000,
-        materials: [{ name: 'Rare Herb', quantity: 10, unitCost: 100 }],
+        materials: [{ name: 'Rare Herb', quantity: 10 }],
         currentPrice: 5000,
       }
+
+      const materialPriceMap = new Map<string, number>([['Rare Herb', 100]])
 
       const recipes: Recipe[] = [
         {
@@ -84,7 +96,7 @@ describe('calculateCraftableProfits', () => {
         // Note: NO untradable version exists
       ]
 
-      const results = calculateCraftableProfits([craftableRecipe], mockTaxRate, recipes)
+      const results = calculateCraftableProfits([craftableRecipe], mockTaxRate, materialPriceMap, recipes)
 
       expect(results).toHaveLength(1)
       const result = results[0]
@@ -100,9 +112,11 @@ describe('calculateCraftableProfits', () => {
       const craftableRecipe: CraftableRecipe = {
         name: 'Unlimited Craftable',
         timeSeconds: 1000,
-        materials: [{ name: 'Common Herb', quantity: 5, unitCost: 50 }],
+        materials: [{ name: 'Common Herb', quantity: 5 }],
         currentPrice: 3000,
       }
+
+      const materialPriceMap = new Map<string, number>([['Common Herb', 50]])
 
       const recipes: Recipe[] = [
         {
@@ -116,7 +130,7 @@ describe('calculateCraftableProfits', () => {
         },
       ]
 
-      const results = calculateCraftableProfits([craftableRecipe], mockTaxRate, recipes)
+      const results = calculateCraftableProfits([craftableRecipe], mockTaxRate, materialPriceMap, recipes)
 
       expect(results).toHaveLength(1)
       const result = results[0]
@@ -127,7 +141,12 @@ describe('calculateCraftableProfits', () => {
     })
 
     it('should NOT apply recipe cost when craftable has no recipes at all', () => {
-      const results = calculateCraftableProfits([mockCraftableRecipe], mockTaxRate, [])
+      const results = calculateCraftableProfits(
+        [mockCraftableRecipe],
+        mockTaxRate,
+        mockMaterialPriceMap,
+        []
+      )
 
       expect(results).toHaveLength(1)
       const result = results[0]
@@ -149,7 +168,12 @@ describe('calculateCraftableProfits', () => {
         },
       ]
 
-      const results = calculateCraftableProfits([mockCraftableRecipe], mockTaxRate, recipes)
+      const results = calculateCraftableProfits(
+        [mockCraftableRecipe],
+        mockTaxRate,
+        mockMaterialPriceMap,
+        recipes
+      )
 
       expect(results).toHaveLength(1)
       const result = results[0]
@@ -161,7 +185,12 @@ describe('calculateCraftableProfits', () => {
 
   describe('basic profitability calculations', () => {
     it('should calculate profit correctly without recipe cost', () => {
-      const results = calculateCraftableProfits([mockCraftableRecipe], mockTaxRate, [])
+      const results = calculateCraftableProfits(
+        [mockCraftableRecipe],
+        mockTaxRate,
+        mockMaterialPriceMap,
+        []
+      )
 
       expect(results).toHaveLength(1)
       const result = results[0]
@@ -190,12 +219,14 @@ describe('calculateCraftableProfits', () => {
       const craftableRecipe: CraftableRecipe = {
         name: 'Alchemy Craftable',
         timeSeconds: 1000,
-        materials: [{ name: 'Rare Herb', quantity: 10, unitCost: 100 }],
+        materials: [{ name: 'Rare Herb', quantity: 10 }],
         currentPrice: 5000,
         skill: 'alchemy',
       }
 
-      const results = calculateCraftableProfits([craftableRecipe], mockTaxRate, [])
+      const materialPriceMap = new Map<string, number>([['Rare Herb', 100]])
+
+      const results = calculateCraftableProfits([craftableRecipe], mockTaxRate, materialPriceMap, [])
 
       expect(results).toHaveLength(1)
       expect(results[0].skill).toBe('alchemy')
@@ -206,13 +237,18 @@ describe('calculateCraftableProfits', () => {
         name: 'Mystery Craftable',
         timeSeconds: 1000,
         materials: [
-          { name: 'Gleaming Vial', quantity: 1, unitCost: 100 },
-          { name: 'Rare Herb', quantity: 10, unitCost: 50 },
+          { name: 'Gleaming Vial', quantity: 1 },
+          { name: 'Rare Herb', quantity: 10 },
         ],
         currentPrice: 5000,
       }
 
-      const results = calculateCraftableProfits([craftableRecipe], mockTaxRate, [])
+      const materialPriceMap = new Map<string, number>([
+        ['Gleaming Vial', 100],
+        ['Rare Herb', 50],
+      ])
+
+      const results = calculateCraftableProfits([craftableRecipe], mockTaxRate, materialPriceMap, [])
 
       expect(results).toHaveLength(1)
       expect(results[0].skill).toBe('alchemy')
@@ -223,13 +259,18 @@ describe('calculateCraftableProfits', () => {
         name: 'Crystal Craftable',
         timeSeconds: 1000,
         materials: [
-          { name: 'Elemental Crystal', quantity: 1, unitCost: 200 },
-          { name: 'Metal Bar', quantity: 5, unitCost: 100 },
+          { name: 'Elemental Crystal', quantity: 1 },
+          { name: 'Metal Bar', quantity: 5 },
         ],
         currentPrice: 8000,
       }
 
-      const results = calculateCraftableProfits([craftableRecipe], mockTaxRate, [])
+      const materialPriceMap = new Map<string, number>([
+        ['Elemental Crystal', 200],
+        ['Metal Bar', 100],
+      ])
+
+      const results = calculateCraftableProfits([craftableRecipe], mockTaxRate, materialPriceMap, [])
 
       expect(results).toHaveLength(1)
       expect(results[0].skill).toBe('alchemy')
@@ -240,13 +281,18 @@ describe('calculateCraftableProfits', () => {
         name: 'Forged Item',
         timeSeconds: 1000,
         materials: [
-          { name: 'Moose antler', quantity: 15, unitCost: 100 },
-          { name: 'Minotaur Hide', quantity: 20, unitCost: 200 },
+          { name: 'Moose antler', quantity: 15 },
+          { name: 'Minotaur Hide', quantity: 20 },
         ],
         currentPrice: 10000,
       }
 
-      const results = calculateCraftableProfits([craftableRecipe], mockTaxRate, [])
+      const materialPriceMap = new Map<string, number>([
+        ['Moose antler', 100],
+        ['Minotaur Hide', 200],
+      ])
+
+      const results = calculateCraftableProfits([craftableRecipe], mockTaxRate, materialPriceMap, [])
 
       expect(results).toHaveLength(1)
       expect(results[0].skill).toBe('forging')
@@ -257,14 +303,19 @@ describe('calculateCraftableProfits', () => {
         name: 'Edge Case Potion',
         timeSeconds: 1000,
         materials: [
-          { name: 'Gleaming Vial', quantity: 1, unitCost: 100 },
-          { name: 'Rare Material', quantity: 5, unitCost: 50 },
+          { name: 'Gleaming Vial', quantity: 1 },
+          { name: 'Rare Material', quantity: 5 },
         ],
         currentPrice: 5000,
         skill: 'forging', // Explicit skill differs from what would be inferred
       }
 
-      const results = calculateCraftableProfits([craftableRecipe], mockTaxRate, [])
+      const materialPriceMap = new Map<string, number>([
+        ['Gleaming Vial', 100],
+        ['Rare Material', 50],
+      ])
+
+      const results = calculateCraftableProfits([craftableRecipe], mockTaxRate, materialPriceMap, [])
 
       expect(results).toHaveLength(1)
       expect(results[0].skill).toBe('forging') // Should use explicit skill, not inferred 'alchemy'

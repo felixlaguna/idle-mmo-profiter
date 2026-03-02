@@ -27,8 +27,8 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
     name: 'Wraithbane',
     timeSeconds: 1090.9,
     materials: [
-      { name: 'Moose antler', quantity: 15, unitCost: 114.1 },
-      { name: 'Minotaur Hide', quantity: 20, unitCost: 378.9 },
+      { name: 'Moose antler', quantity: 15 },
+      { name: 'Minotaur Hide', quantity: 20 },
     ],
     currentPrice: 11894.6,
   }
@@ -41,13 +41,20 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
   const unprofitableCraftable: CraftableRecipe = {
     name: 'Failed Brew',
     timeSeconds: 1000,
-    materials: [{ name: 'Expensive Ingredient', quantity: 10, unitCost: 1000 }],
+    materials: [{ name: 'Expensive Ingredient', quantity: 10 }],
     currentPrice: 5000,
   }
 
   // Material cost: 10 * 1000 = 10000
   // Sell after tax: 5000 * 0.88 = 4400
   // Craftable profit: 4400 - 10000 = -5600 (negative)
+
+  // Material price map for tests
+  const mockMaterialPriceMap = new Map<string, number>([
+    ['Moose antler', 114.1],
+    ['Minotaur Hide', 378.9],
+    ['Expensive Ingredient', 1000],
+  ])
 
   const mockMagicFind: MagicFindSettings = {
     streak: 0,
@@ -74,10 +81,13 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
       const craftableRecipesRef = ref([profitableCraftable])
       const taxRateRef = ref(mockTaxRate)
 
+      const materialPriceMapRef = ref(mockMaterialPriceMap)
+
       const { recipesWithComputedPrices } = useRecipePricing(
         recipesRef,
         craftableRecipesRef,
-        taxRateRef
+        taxRateRef,
+        materialPriceMapRef
       )
 
       const result = recipesWithComputedPrices.value[0]
@@ -105,10 +115,13 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
       const craftableRecipesRef = ref([unprofitableCraftable])
       const taxRateRef = ref(mockTaxRate)
 
+      const materialPriceMapRef = ref(mockMaterialPriceMap)
+
       const { recipesWithComputedPrices } = useRecipePricing(
         recipesRef,
         craftableRecipesRef,
-        taxRateRef
+        taxRateRef,
+        materialPriceMapRef
       )
 
       const result = recipesWithComputedPrices.value[0]
@@ -134,10 +147,13 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
       const craftableRecipesRef = ref([profitableCraftable])
       const taxRateRef = ref(mockTaxRate)
 
+      const materialPriceMapRef = ref(mockMaterialPriceMap)
+
       const { recipesWithComputedPrices } = useRecipePricing(
         recipesRef,
         craftableRecipesRef,
-        taxRateRef
+        taxRateRef,
+        materialPriceMapRef
       )
 
       const result = recipesWithComputedPrices.value[0]
@@ -163,10 +179,13 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
       const craftableRecipesRef = ref([profitableCraftable])
       const taxRateRef = ref(mockTaxRate)
 
+      const materialPriceMapRef = ref(mockMaterialPriceMap)
+
       const { recipesWithComputedPrices } = useRecipePricing(
         recipesRef,
         craftableRecipesRef,
-        taxRateRef
+        taxRateRef,
+        materialPriceMapRef
       )
 
       const result = recipesWithComputedPrices.value[0]
@@ -192,10 +211,13 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
       const craftableRecipesRef = ref([profitableCraftable])
       const taxRateRef = ref(mockTaxRate)
 
+      const materialPriceMapRef = ref(mockMaterialPriceMap)
+
       const { recipesWithComputedPrices } = useRecipePricing(
         recipesRef,
         craftableRecipesRef,
-        taxRateRef
+        taxRateRef,
+        materialPriceMapRef
       )
 
       const result = recipesWithComputedPrices.value[0]
@@ -222,10 +244,13 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
       const craftableRecipesRef = ref([profitableCraftable])
       const taxRateRef = ref(mockTaxRate)
 
+      const materialPriceMapRef = ref(mockMaterialPriceMap)
+
       const { recipesWithComputedPrices } = useRecipePricing(
         recipesRef,
         craftableRecipesRef,
-        taxRateRef
+        taxRateRef,
+        materialPriceMapRef
       )
 
       const result = recipesWithComputedPrices.value[0]
@@ -422,10 +447,13 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
       const craftableRecipesRef = ref([profitableCraftable])
       const taxRateRef = ref(mockTaxRate)
 
+      const materialPriceMapRef = ref(mockMaterialPriceMap)
+
       const { recipesWithComputedPrices } = useRecipePricing(
         recipesRef,
         craftableRecipesRef,
-        taxRateRef
+        taxRateRef,
+        materialPriceMapRef
       )
 
       const result = recipesWithComputedPrices.value[0]
@@ -451,10 +479,13 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
       const craftableRecipesRef = ref([]) // Empty craftable recipes
       const taxRateRef = ref(mockTaxRate)
 
+      const materialPriceMapRef = ref(mockMaterialPriceMap)
+
       const { recipesWithComputedPrices } = useRecipePricing(
         recipesRef,
         craftableRecipesRef,
-        taxRateRef
+        taxRateRef,
+        materialPriceMapRef
       )
 
       const result = recipesWithComputedPrices.value[0]
@@ -481,10 +512,13 @@ describe('Dungeon pricing for untradable limited-use recipes', () => {
       const recipesRef = ref(recipes)
       const taxRateRef = ref(mockTaxRate)
 
+      const materialPriceMapRef = ref(mockMaterialPriceMap)
+
       const { recipesWithComputedPrices } = useRecipePricing(
         recipesRef,
         craftableRecipesRef,
-        taxRateRef
+        taxRateRef,
+        materialPriceMapRef
       )
 
       const initialPrice = recipesWithComputedPrices.value[0].price

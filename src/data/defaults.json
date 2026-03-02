@@ -907,8 +907,8 @@
       "id": "res-4",
       "name": "Great White Shark",
       "marketPrice": 48.9,
-      "vendorValue": 77,
-      "hashedId": "ZqEegBydNw7NkA59J61b",
+      "vendorValue": 41,
+      "hashedId": "3Zbym56qLxRNBRp7Eekd",
       "lastUpdated": "2026-02-28T20:53:41.913Z",
       "suggestedRefreshMinutes": 92
     },
@@ -7284,18 +7284,15 @@
       "materials": [
         {
           "name": "Harpy's Wings",
-          "quantity": 40,
-          "unitCost": 9.7
+          "quantity": 40
         },
         {
           "name": "Air Elemental Essence",
-          "quantity": 12,
-          "unitCost": 277.9
+          "quantity": 12
         },
         {
           "name": "Eldritch Vial",
-          "quantity": 1,
-          "unitCost": 500
+          "quantity": 1
         }
       ],
       "currentPrice": 5712.3
@@ -7306,18 +7303,15 @@
       "materials": [
         {
           "name": "Abyssal Scroll",
-          "quantity": 8,
-          "unitCost": 436.6
+          "quantity": 8
         },
         {
           "name": "Venom Extract",
-          "quantity": 20,
-          "unitCost": 99.4
+          "quantity": 20
         },
         {
           "name": "Arcane Crystal",
-          "quantity": 1,
-          "unitCost": 2500
+          "quantity": 1
         }
       ],
       "currentPrice": 49486.3
@@ -7328,18 +7322,15 @@
       "materials": [
         {
           "name": "Lucky Rabbit Foot",
-          "quantity": 3,
-          "unitCost": 97
+          "quantity": 3
         },
         {
           "name": "Goblin Totem",
-          "quantity": 6,
-          "unitCost": 26.5
+          "quantity": 6
         },
         {
           "name": "Oak Log",
-          "quantity": 20,
-          "unitCost": 4.4
+          "quantity": 20
         }
       ],
       "currentPrice": 430.2
@@ -7350,13 +7341,11 @@
       "materials": [
         {
           "name": "Goblin Pouch",
-          "quantity": 3,
-          "unitCost": 35.7
+          "quantity": 3
         },
         {
           "name": "Goblin Totem",
-          "quantity": 6,
-          "unitCost": 26.5
+          "quantity": 6
         }
       ],
       "currentPrice": 2131.1
@@ -7367,13 +7356,11 @@
       "materials": [
         {
           "name": "Ducks Mouth",
-          "quantity": 3,
-          "unitCost": 49.3
+          "quantity": 3
         },
         {
           "name": "Goblin Totem",
-          "quantity": 6,
-          "unitCost": 26.5
+          "quantity": 6
         }
       ],
       "currentPrice": 1323.9
@@ -7384,13 +7371,11 @@
       "materials": [
         {
           "name": "Goblin Crown",
-          "quantity": 1,
-          "unitCost": 1743.2
+          "quantity": 1
         },
         {
           "name": "Tarnished Crystal",
-          "quantity": 1,
-          "unitCost": 10
+          "quantity": 1
         }
       ],
       "currentPrice": 456.8
@@ -7401,13 +7386,11 @@
       "materials": [
         {
           "name": "Boar Tusk",
-          "quantity": 2,
-          "unitCost": 404.9
+          "quantity": 2
         },
         {
           "name": "Tarnished Crystal",
-          "quantity": 1,
-          "unitCost": 10
+          "quantity": 1
         }
       ],
       "currentPrice": 119.1
@@ -7418,13 +7401,11 @@
       "materials": [
         {
           "name": "Forbidden Tome",
-          "quantity": 2,
-          "unitCost": 50.7
+          "quantity": 2
         },
         {
           "name": "Tarnished Crystal",
-          "quantity": 1,
-          "unitCost": 10
+          "quantity": 1
         }
       ],
       "currentPrice": 139.9
@@ -7435,13 +7416,11 @@
       "materials": [
         {
           "name": "Snakes Head",
-          "quantity": 10,
-          "unitCost": 166.6
+          "quantity": 10
         },
         {
           "name": "Tarnished Crystal",
-          "quantity": 1,
-          "unitCost": 10
+          "quantity": 1
         }
       ],
       "currentPrice": 123.6
@@ -7452,8 +7431,7 @@
       "materials": [
         {
           "name": "Deer Antler",
-          "quantity": 5,
-          "unitCost": 99.4
+          "quantity": 5
         }
       ],
       "currentPrice": 1958.8
@@ -7464,8 +7442,7 @@
       "materials": [
         {
           "name": "Goblin Crown",
-          "quantity": 1,
-          "unitCost": 1743.2
+          "quantity": 1
         }
       ],
       "currentPrice": 9589.6
@@ -7476,8 +7453,7 @@
       "materials": [
         {
           "name": "Boar Tusk",
-          "quantity": 2,
-          "unitCost": 404.9
+          "quantity": 2
         }
       ],
       "currentPrice": 3958.5
@@ -7488,13 +7464,11 @@
       "materials": [
         {
           "name": "Raw Onion",
-          "quantity": 13,
-          "unitCost": 43.7
+          "quantity": 13
         },
         {
           "name": "Gleaming Vial",
-          "quantity": 1,
-          "unitCost": 50
+          "quantity": 1
         }
       ],
       "currentPrice": 354.7
@@ -7505,13 +7479,11 @@
       "materials": [
         {
           "name": "Djinn's Bottle",
-          "quantity": 23,
-          "unitCost": 119.3
+          "quantity": 23
         },
         {
           "name": "Gleaming Crystal",
-          "quantity": 1,
-          "unitCost": 50
+          "quantity": 1
         }
       ],
       "currentPrice": 2861.7
@@ -7522,13 +7494,11 @@
       "materials": [
         {
           "name": "Swamp Juice",
-          "quantity": 12,
-          "unitCost": 116.3
+          "quantity": 12
         },
         {
           "name": "Gleaming Crystal",
-          "quantity": 1,
-          "unitCost": 50
+          "quantity": 1
         }
       ],
       "currentPrice": 2031.6
@@ -7539,18 +7509,15 @@
       "materials": [
         {
           "name": "Slime Extract",
-          "quantity": 20,
-          "unitCost": 9.2
+          "quantity": 20
         },
         {
           "name": "Raw Onion",
-          "quantity": 5,
-          "unitCost": 43.7
+          "quantity": 5
         },
         {
           "name": "Gleaming Vial",
-          "quantity": 1,
-          "unitCost": 50
+          "quantity": 1
         }
       ],
       "currentPrice": 344
@@ -7561,13 +7528,11 @@
       "materials": [
         {
           "name": "Slime Extract",
-          "quantity": 38,
-          "unitCost": 9.2
+          "quantity": 38
         },
         {
           "name": "Gleaming Crystal",
-          "quantity": 1,
-          "unitCost": 50
+          "quantity": 1
         }
       ],
       "currentPrice": 313.5
@@ -7578,18 +7543,15 @@
       "materials": [
         {
           "name": "Venom Extract",
-          "quantity": 1,
-          "unitCost": 99.4
+          "quantity": 1
         },
         {
           "name": "Djinn's Bottle",
-          "quantity": 18,
-          "unitCost": 119.3
+          "quantity": 18
         },
         {
           "name": "Elemental Vial",
-          "quantity": 1,
-          "unitCost": 200
+          "quantity": 1
         }
       ],
       "currentPrice": 1119.2
@@ -7600,18 +7562,15 @@
       "materials": [
         {
           "name": "Ruined Robes",
-          "quantity": 3,
-          "unitCost": 23
+          "quantity": 3
         },
         {
           "name": "Forbidden Tome",
-          "quantity": 1,
-          "unitCost": 50.7
+          "quantity": 1
         },
         {
           "name": "Deer Antler",
-          "quantity": 5,
-          "unitCost": 99.4
+          "quantity": 5
         }
       ],
       "currentPrice": 7612.4
@@ -7622,18 +7581,15 @@
       "materials": [
         {
           "name": "Goblin Crown",
-          "quantity": 1,
-          "unitCost": 1743.2
+          "quantity": 1
         },
         {
           "name": "Ruined Robes",
-          "quantity": 4,
-          "unitCost": 23
+          "quantity": 4
         },
         {
           "name": "Venom Extract",
-          "quantity": 2,
-          "unitCost": 99.4
+          "quantity": 2
         }
       ],
       "currentPrice": 23527.3
@@ -7644,18 +7600,15 @@
       "materials": [
         {
           "name": "Boar Tusk",
-          "quantity": 2,
-          "unitCost": 404.9
+          "quantity": 2
         },
         {
           "name": "Essence of Shadows",
-          "quantity": 1,
-          "unitCost": 284.2
+          "quantity": 1
         },
         {
           "name": "Goblin Totem",
-          "quantity": 3,
-          "unitCost": 26.5
+          "quantity": 3
         }
       ],
       "currentPrice": 6623.9
@@ -7666,13 +7619,11 @@
       "materials": [
         {
           "name": "Buffalo Horn",
-          "quantity": 8,
-          "unitCost": 50.4
+          "quantity": 8
         },
         {
           "name": "Gleaming Crystal",
-          "quantity": 1,
-          "unitCost": 50
+          "quantity": 1
         }
       ],
       "currentPrice": 324.3
@@ -7683,18 +7634,15 @@
       "materials": [
         {
           "name": "Pirates Code",
-          "quantity": 4,
-          "unitCost": 47.4
+          "quantity": 4
         },
         {
           "name": "Chest of Scraps",
-          "quantity": 5,
-          "unitCost": 195.9
+          "quantity": 5
         },
         {
           "name": "Gleaming Crystal",
-          "quantity": 1,
-          "unitCost": 50
+          "quantity": 1
         }
       ],
       "currentPrice": 460.4
@@ -7705,13 +7653,11 @@
       "materials": [
         {
           "name": "Bone Fragment",
-          "quantity": 30,
-          "unitCost": 42.9
+          "quantity": 30
         },
         {
           "name": "Gleaming Crystal",
-          "quantity": 1,
-          "unitCost": 50
+          "quantity": 1
         }
       ],
       "currentPrice": 331.9
@@ -7722,13 +7668,11 @@
       "materials": [
         {
           "name": "Chest of Scraps",
-          "quantity": 12,
-          "unitCost": 195.9
+          "quantity": 12
         },
         {
           "name": "Gleaming Crystal",
-          "quantity": 1,
-          "unitCost": 50
+          "quantity": 1
         }
       ],
       "currentPrice": 3382
@@ -7739,13 +7683,11 @@
       "materials": [
         {
           "name": "Long Forgotten Necklace",
-          "quantity": 38,
-          "unitCost": 16.2
+          "quantity": 38
         },
         {
           "name": "Elemental Crystal",
-          "quantity": 1,
-          "unitCost": 200
+          "quantity": 1
         }
       ],
       "currentPrice": 823.5
@@ -7756,13 +7698,11 @@
       "materials": [
         {
           "name": "Umbral Claw",
-          "quantity": 11,
-          "unitCost": 180.2
+          "quantity": 11
         },
         {
           "name": "Elemental Crystal",
-          "quantity": 1,
-          "unitCost": 200
+          "quantity": 1
         }
       ],
       "currentPrice": 2909.8
@@ -7773,18 +7713,15 @@
       "materials": [
         {
           "name": "Slime Extract",
-          "quantity": 20,
-          "unitCost": 9.2
+          "quantity": 20
         },
         {
           "name": "Goblin Scraps",
-          "quantity": 3,
-          "unitCost": 162.8
+          "quantity": 3
         },
         {
           "name": "Elemental Vial",
-          "quantity": 1,
-          "unitCost": 200
+          "quantity": 1
         }
       ],
       "currentPrice": 848.3
@@ -7795,18 +7732,15 @@
       "materials": [
         {
           "name": "Siren's Scales",
-          "quantity": 4,
-          "unitCost": 18.6
+          "quantity": 4
         },
         {
           "name": "Goblin Crown",
-          "quantity": 1,
-          "unitCost": 1743.2
+          "quantity": 1
         },
         {
           "name": "Elemental Vial",
-          "quantity": 1,
-          "unitCost": 200
+          "quantity": 1
         }
       ],
       "currentPrice": 2679.6
@@ -7817,18 +7751,15 @@
       "materials": [
         {
           "name": "Goblin Crown",
-          "quantity": 1,
-          "unitCost": 1743.2
+          "quantity": 1
         },
         {
           "name": "Goblin Totem",
-          "quantity": 12,
-          "unitCost": 26.5
+          "quantity": 12
         },
         {
           "name": "Elemental Crystal",
-          "quantity": 1,
-          "unitCost": 200
+          "quantity": 1
         }
       ],
       "currentPrice": 1470
@@ -7839,18 +7770,15 @@
       "materials": [
         {
           "name": "Ruined Robes",
-          "quantity": 3,
-          "unitCost": 23
+          "quantity": 3
         },
         {
           "name": "Djinn's Bottle",
-          "quantity": 8,
-          "unitCost": 119.3
+          "quantity": 8
         },
         {
           "name": "Swamp Juice",
-          "quantity": 2,
-          "unitCost": 116.3
+          "quantity": 2
         }
       ],
       "currentPrice": 13094.7
@@ -7861,18 +7789,15 @@
       "materials": [
         {
           "name": "Ruined Robes",
-          "quantity": 4,
-          "unitCost": 23
+          "quantity": 4
         },
         {
           "name": "Venom Extract",
-          "quantity": 2,
-          "unitCost": 99.4
+          "quantity": 2
         },
         {
           "name": "Vial of Spectre Ectoplasm",
-          "quantity": 1,
-          "unitCost": 154.4
+          "quantity": 1
         }
       ],
       "currentPrice": 41913.8
@@ -7883,18 +7808,15 @@
       "materials": [
         {
           "name": "Essence of Shadows",
-          "quantity": 1,
-          "unitCost": 284.2
+          "quantity": 1
         },
         {
           "name": "Goblin Totem",
-          "quantity": 3,
-          "unitCost": 26.5
+          "quantity": 3
         },
         {
           "name": "Buffalo Horn",
-          "quantity": 4,
-          "unitCost": 50.4
+          "quantity": 4
         }
       ],
       "currentPrice": 10078.1
@@ -7905,18 +7827,15 @@
       "materials": [
         {
           "name": "Goblin Totem",
-          "quantity": 7,
-          "unitCost": 26.5
+          "quantity": 7
         },
         {
           "name": "Goblin Pouch",
-          "quantity": 9,
-          "unitCost": 35.7
+          "quantity": 9
         },
         {
           "name": "Elemental Crystal",
-          "quantity": 1,
-          "unitCost": 200
+          "quantity": 1
         }
       ],
       "currentPrice": 664.2
@@ -7927,13 +7846,11 @@
       "materials": [
         {
           "name": "Elk Antler",
-          "quantity": 9,
-          "unitCost": 346.3
+          "quantity": 9
         },
         {
           "name": "Elemental Crystal",
-          "quantity": 1,
-          "unitCost": 200
+          "quantity": 1
         }
       ],
       "currentPrice": 1718.5
@@ -7944,13 +7861,11 @@
       "materials": [
         {
           "name": "Moose Antler",
-          "quantity": 10,
-          "unitCost": 121.1
+          "quantity": 10
         },
         {
           "name": "Elemental Crystal",
-          "quantity": 1,
-          "unitCost": 200
+          "quantity": 1
         }
       ],
       "currentPrice": 764.8
@@ -7961,13 +7876,11 @@
       "materials": [
         {
           "name": "Siren's Soulstone",
-          "quantity": 6,
-          "unitCost": 185.2
+          "quantity": 6
         },
         {
           "name": "Elemental Vial",
-          "quantity": 1,
-          "unitCost": 200
+          "quantity": 1
         }
       ],
       "currentPrice": 1212
@@ -7978,18 +7891,15 @@
       "materials": [
         {
           "name": "Goblin Crown",
-          "quantity": 1,
-          "unitCost": 1743.2
+          "quantity": 1
         },
         {
           "name": "Bone Fragment",
-          "quantity": 20,
-          "unitCost": 42.9
+          "quantity": 20
         },
         {
           "name": "Elemental Crystal",
-          "quantity": 1,
-          "unitCost": 200
+          "quantity": 1
         }
       ],
       "currentPrice": 3477
@@ -8000,18 +7910,15 @@
       "materials": [
         {
           "name": "Parchment",
-          "quantity": 6,
-          "unitCost": 715.7
+          "quantity": 6
         },
         {
           "name": "Ivory",
-          "quantity": 6,
-          "unitCost": 327.9
+          "quantity": 6
         },
         {
           "name": "Eldritch Crystal",
-          "quantity": 1,
-          "unitCost": 500
+          "quantity": 1
         }
       ],
       "currentPrice": 8518.6
@@ -8022,18 +7929,15 @@
       "materials": [
         {
           "name": "Vial of Spectre Ectoplasm",
-          "quantity": 3,
-          "unitCost": 154.4
+          "quantity": 3
         },
         {
           "name": "Elk Antler",
-          "quantity": 10,
-          "unitCost": 346.3
+          "quantity": 10
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 19959.4
@@ -8044,23 +7948,19 @@
       "materials": [
         {
           "name": "Boar Tusk",
-          "quantity": 5,
-          "unitCost": 404.9
+          "quantity": 5
         },
         {
           "name": "Elk Antler",
-          "quantity": 5,
-          "unitCost": 346.3
+          "quantity": 5
         },
         {
           "name": "Long Forgotten Necklace",
-          "quantity": 40,
-          "unitCost": 16.2
+          "quantity": 40
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 14930.2
@@ -8071,18 +7971,15 @@
       "materials": [
         {
           "name": "Deer Antler",
-          "quantity": 10,
-          "unitCost": 99.4
+          "quantity": 10
         },
         {
           "name": "Ivory",
-          "quantity": 8,
-          "unitCost": 327.9
+          "quantity": 8
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 7339.8
@@ -8093,18 +7990,15 @@
       "materials": [
         {
           "name": "Raw Onion",
-          "quantity": 15,
-          "unitCost": 43.7
+          "quantity": 15
         },
         {
           "name": "Lucky Rabbit Foot",
-          "quantity": 25,
-          "unitCost": 97
+          "quantity": 25
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 13449.1
@@ -8115,28 +8009,23 @@
       "materials": [
         {
           "name": "Lucky Rabbit Foot",
-          "quantity": 20,
-          "unitCost": 97
+          "quantity": 20
         },
         {
           "name": "Ducks Mouth",
-          "quantity": 10,
-          "unitCost": 49.3
+          "quantity": 10
         },
         {
           "name": "Goblin Pouch",
-          "quantity": 10,
-          "unitCost": 35.7
+          "quantity": 10
         },
         {
           "name": "Oak Log",
-          "quantity": 200,
-          "unitCost": 4.4
+          "quantity": 200
         },
         {
           "name": "Yew Log",
-          "quantity": 200,
-          "unitCost": 4.5
+          "quantity": 200
         }
       ],
       "currentPrice": 12859.6
@@ -8147,28 +8036,23 @@
       "materials": [
         {
           "name": "Deer Antler",
-          "quantity": 20,
-          "unitCost": 99.4
+          "quantity": 20
         },
         {
           "name": "Boar Tusk",
-          "quantity": 5,
-          "unitCost": 404.9
+          "quantity": 5
         },
         {
           "name": "Snakes Head",
-          "quantity": 20,
-          "unitCost": 166.6
+          "quantity": 20
         },
         {
           "name": "Oak Log",
-          "quantity": 200,
-          "unitCost": 4.4
+          "quantity": 200
         },
         {
           "name": "Yew Log",
-          "quantity": 250,
-          "unitCost": 4.5
+          "quantity": 250
         }
       ],
       "currentPrice": 2440
@@ -8179,18 +8063,15 @@
       "materials": [
         {
           "name": "Goblin Crown",
-          "quantity": 6,
-          "unitCost": 1743.2
+          "quantity": 6
         },
         {
           "name": "Slime Extract",
-          "quantity": 10,
-          "unitCost": 9.2
+          "quantity": 10
         },
         {
           "name": "Trout",
-          "quantity": 500,
-          "unitCost": 12.8
+          "quantity": 500
         }
       ],
       "currentPrice": 7119.4
@@ -8201,18 +8082,15 @@
       "materials": [
         {
           "name": "Goblin Totem",
-          "quantity": 30,
-          "unitCost": 26.5
+          "quantity": 30
         },
         {
           "name": "Boar Tusk",
-          "quantity": 10,
-          "unitCost": 404.9
+          "quantity": 10
         },
         {
           "name": "Perch",
-          "quantity": 500,
-          "unitCost": 10.5
+          "quantity": 500
         }
       ],
       "currentPrice": 8779.7
@@ -8223,18 +8101,15 @@
       "materials": [
         {
           "name": "Forbidden Tome",
-          "quantity": 3,
-          "unitCost": 50.7
+          "quantity": 3
         },
         {
           "name": "Parchment",
-          "quantity": 15,
-          "unitCost": 715.7
+          "quantity": 15
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 6654.8
@@ -8245,18 +8120,15 @@
       "materials": [
         {
           "name": "Raw Onion",
-          "quantity": 10,
-          "unitCost": 43.7
+          "quantity": 10
         },
         {
           "name": "Forbidden Tome",
-          "quantity": 10,
-          "unitCost": 50.7
+          "quantity": 10
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 1291.8
@@ -8267,28 +8139,23 @@
       "materials": [
         {
           "name": "Essence of Shadows",
-          "quantity": 2,
-          "unitCost": 284.2
+          "quantity": 2
         },
         {
           "name": "Cursed Talisman",
-          "quantity": 3,
-          "unitCost": 26.1
+          "quantity": 3
         },
         {
           "name": "Oceanic Essence",
-          "quantity": 2,
-          "unitCost": 259
+          "quantity": 2
         },
         {
           "name": "Goblin Pouch",
-          "quantity": 5,
-          "unitCost": 35.7
+          "quantity": 5
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 5190
@@ -8299,18 +8166,15 @@
       "materials": [
         {
           "name": "Long Forgotten Necklace",
-          "quantity": 50,
-          "unitCost": 16.2
+          "quantity": 50
         },
         {
           "name": "Swamp Juice",
-          "quantity": 20,
-          "unitCost": 116.3
+          "quantity": 20
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 1958.7
@@ -8321,13 +8185,11 @@
       "materials": [
         {
           "name": "Forbidden Tome",
-          "quantity": 15,
-          "unitCost": 50.7
+          "quantity": 15
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 2410.3
@@ -8338,13 +8200,11 @@
       "materials": [
         {
           "name": "Stoneheart Core",
-          "quantity": 4,
-          "unitCost": 247
+          "quantity": 4
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 2229.8
@@ -8355,18 +8215,15 @@
       "materials": [
         {
           "name": "Long Forgotten Necklace",
-          "quantity": 20,
-          "unitCost": 16.2
+          "quantity": 20
         },
         {
           "name": "Umbral Claw",
-          "quantity": 30,
-          "unitCost": 180.2
+          "quantity": 30
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 1786.3
@@ -8377,18 +8234,15 @@
       "materials": [
         {
           "name": "Umbral Claw",
-          "quantity": 20,
-          "unitCost": 180.2
+          "quantity": 20
         },
         {
           "name": "Pirates Code",
-          "quantity": 20,
-          "unitCost": 47.4
+          "quantity": 20
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 17464.8
@@ -8399,18 +8253,15 @@
       "materials": [
         {
           "name": "Polar Bear Pelt",
-          "quantity": 20,
-          "unitCost": 220.8
+          "quantity": 20
         },
         {
           "name": "Djinn's Bottle",
-          "quantity": 30,
-          "unitCost": 119.3
+          "quantity": 30
         },
         {
           "name": "Eldritch Crystal",
-          "quantity": 1,
-          "unitCost": 500
+          "quantity": 1
         }
       ],
       "currentPrice": 9448
@@ -8421,18 +8272,15 @@
       "materials": [
         {
           "name": "Golem Core Fragment",
-          "quantity": 25,
-          "unitCost": 19.9
+          "quantity": 25
         },
         {
           "name": "Snakes Head",
-          "quantity": 30,
-          "unitCost": 166.6
+          "quantity": 30
         },
         {
           "name": "Eldritch Crystal",
-          "quantity": 1,
-          "unitCost": 500
+          "quantity": 1
         }
       ],
       "currentPrice": 5947.1
@@ -8443,18 +8291,15 @@
       "materials": [
         {
           "name": "Snakes Head",
-          "quantity": 20,
-          "unitCost": 166.6
+          "quantity": 20
         },
         {
           "name": "Ducks Mouth",
-          "quantity": 30,
-          "unitCost": 49.3
+          "quantity": 30
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 8333.9
@@ -8465,18 +8310,15 @@
       "materials": [
         {
           "name": "Parchment",
-          "quantity": 20,
-          "unitCost": 715.7
+          "quantity": 20
         },
         {
           "name": "Long Forgotten Necklace",
-          "quantity": 50,
-          "unitCost": 16.2
+          "quantity": 50
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 10465.6
@@ -8487,18 +8329,15 @@
       "materials": [
         {
           "name": "Djinn's Bottle",
-          "quantity": 15,
-          "unitCost": 119.3
+          "quantity": 15
         },
         {
           "name": "Ducks Mouth",
-          "quantity": 30,
-          "unitCost": 49.3
+          "quantity": 30
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 4094.7
@@ -8509,18 +8348,15 @@
       "materials": [
         {
           "name": "Elk Antler",
-          "quantity": 10,
-          "unitCost": 346.3
+          "quantity": 10
         },
         {
           "name": "Forbidden Tome",
-          "quantity": 10,
-          "unitCost": 50.7
+          "quantity": 10
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 14338.3
@@ -8531,33 +8367,27 @@
       "materials": [
         {
           "name": "Elk Antler",
-          "quantity": 10,
-          "unitCost": 346.3
+          "quantity": 10
         },
         {
           "name": "Moose Antler",
-          "quantity": 15,
-          "unitCost": 121.1
+          "quantity": 15
         },
         {
           "name": "Siren's Scales",
-          "quantity": 30,
-          "unitCost": 18.6
+          "quantity": 30
         },
         {
           "name": "Oak Log",
-          "quantity": 250,
-          "unitCost": 4.4
+          "quantity": 250
         },
         {
           "name": "Spruce Log",
-          "quantity": 100,
-          "unitCost": 10.5
+          "quantity": 100
         },
         {
           "name": "Yew Log",
-          "quantity": 150,
-          "unitCost": 4.5
+          "quantity": 150
         }
       ],
       "currentPrice": 3619.6
@@ -8568,33 +8398,27 @@
       "materials": [
         {
           "name": "Bone Fragment",
-          "quantity": 25,
-          "unitCost": 42.9
+          "quantity": 25
         },
         {
           "name": "Slime Extract",
-          "quantity": 15,
-          "unitCost": 9.2
+          "quantity": 15
         },
         {
           "name": "Parchment",
-          "quantity": 20,
-          "unitCost": 715.7
+          "quantity": 20
         },
         {
           "name": "Djinn's Bottle",
-          "quantity": 20,
-          "unitCost": 119.3
+          "quantity": 20
         },
         {
           "name": "Spruce Log",
-          "quantity": 300,
-          "unitCost": 10.5
+          "quantity": 300
         },
         {
           "name": "Birch Log",
-          "quantity": 150,
-          "unitCost": 9.4
+          "quantity": 150
         }
       ],
       "currentPrice": 3833.7
@@ -8605,18 +8429,15 @@
       "materials": [
         {
           "name": "Deer Antler",
-          "quantity": 20,
-          "unitCost": 99.4
+          "quantity": 20
         },
         {
           "name": "Chest of Scraps",
-          "quantity": 45,
-          "unitCost": 195.9
+          "quantity": 45
         },
         {
           "name": "Perch",
-          "quantity": 500,
-          "unitCost": 10.5
+          "quantity": 500
         }
       ],
       "currentPrice": 20449.8
@@ -8627,18 +8448,15 @@
       "materials": [
         {
           "name": "Parchment",
-          "quantity": 15,
-          "unitCost": 715.7
+          "quantity": 15
         },
         {
           "name": "Essence of Shadows",
-          "quantity": 4,
-          "unitCost": 284.2
+          "quantity": 4
         },
         {
           "name": "Perch",
-          "quantity": 500,
-          "unitCost": 10.5
+          "quantity": 500
         }
       ],
       "currentPrice": 28716.6
@@ -8649,18 +8467,15 @@
       "materials": [
         {
           "name": "Goblin Totem",
-          "quantity": 50,
-          "unitCost": 26.5
+          "quantity": 50
         },
         {
           "name": "Venom Extract",
-          "quantity": 5,
-          "unitCost": 99.4
+          "quantity": 5
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 2509
@@ -8671,28 +8486,23 @@
       "materials": [
         {
           "name": "Siren's Scales",
-          "quantity": 40,
-          "unitCost": 18.6
+          "quantity": 40
         },
         {
           "name": "Umbral Claw",
-          "quantity": 5,
-          "unitCost": 180.2
+          "quantity": 5
         },
         {
           "name": "Goblin Scraps",
-          "quantity": 5,
-          "unitCost": 162.8
+          "quantity": 5
         },
         {
           "name": "Lions Teeth",
-          "quantity": 5,
-          "unitCost": 251
+          "quantity": 5
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 3588
@@ -8703,18 +8513,15 @@
       "materials": [
         {
           "name": "Long Forgotten Necklace",
-          "quantity": 10,
-          "unitCost": 16.2
+          "quantity": 10
         },
         {
           "name": "Vial of Wraith Ectoplasm",
-          "quantity": 8,
-          "unitCost": 79.5
+          "quantity": 8
         },
         {
           "name": "Raw Onion",
-          "quantity": 48,
-          "unitCost": 43.7
+          "quantity": 48
         }
       ],
       "currentPrice": 18199.4
@@ -8725,18 +8532,15 @@
       "materials": [
         {
           "name": "Swamp Juice",
-          "quantity": 30,
-          "unitCost": 116.3
+          "quantity": 30
         },
         {
           "name": "Slime Extract",
-          "quantity": 50,
-          "unitCost": 9.2
+          "quantity": 50
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 6533.1
@@ -8747,28 +8551,23 @@
       "materials": [
         {
           "name": "Ruined Robes",
-          "quantity": 30,
-          "unitCost": 23
+          "quantity": 30
         },
         {
           "name": "Lions Teeth",
-          "quantity": 4,
-          "unitCost": 251
+          "quantity": 4
         },
         {
           "name": "Chest of Scraps",
-          "quantity": 10,
-          "unitCost": 195.9
+          "quantity": 10
         },
         {
           "name": "Boar Tusk",
-          "quantity": 3,
-          "unitCost": 404.9
+          "quantity": 3
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 2696.7
@@ -8779,18 +8578,15 @@
       "materials": [
         {
           "name": "Goblin Scraps",
-          "quantity": 15,
-          "unitCost": 162.8
+          "quantity": 15
         },
         {
           "name": "Elk Antler",
-          "quantity": 10,
-          "unitCost": 346.3
+          "quantity": 10
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 12194.9
@@ -8801,23 +8597,19 @@
       "materials": [
         {
           "name": "Ruined Robes",
-          "quantity": 10,
-          "unitCost": 23
+          "quantity": 10
         },
         {
           "name": "Polar Bear Pelt",
-          "quantity": 14,
-          "unitCost": 220.8
+          "quantity": 14
         },
         {
           "name": "Ducks Mouth",
-          "quantity": 20,
-          "unitCost": 49.3
+          "quantity": 20
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 17135
@@ -8828,13 +8620,11 @@
       "materials": [
         {
           "name": "Enigmatic Stone",
-          "quantity": 25,
-          "unitCost": 61.9
+          "quantity": 25
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 18104.9
@@ -8845,18 +8635,15 @@
       "materials": [
         {
           "name": "Lions Teeth",
-          "quantity": 10,
-          "unitCost": 251
+          "quantity": 10
         },
         {
           "name": "Ivory",
-          "quantity": 12,
-          "unitCost": 327.9
+          "quantity": 12
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 8739.9
@@ -8867,23 +8654,19 @@
       "materials": [
         {
           "name": "Djinn's Bottle",
-          "quantity": 8,
-          "unitCost": 119.3
+          "quantity": 8
         },
         {
           "name": "Swamp Juice",
-          "quantity": 2,
-          "unitCost": 116.3
+          "quantity": 2
         },
         {
           "name": "Pirates Code",
-          "quantity": 4,
-          "unitCost": 47.4
+          "quantity": 4
         },
         {
           "name": "Parchment",
-          "quantity": 1,
-          "unitCost": 715.7
+          "quantity": 1
         }
       ],
       "currentPrice": 85233.9
@@ -8894,18 +8677,15 @@
       "materials": [
         {
           "name": "Vial of Spectre Ectoplasm",
-          "quantity": 1,
-          "unitCost": 154.4
+          "quantity": 1
         },
         {
           "name": "Chest of Scraps",
-          "quantity": 4,
-          "unitCost": 195.9
+          "quantity": 4
         },
         {
           "name": "Bone Fragment",
-          "quantity": 8,
-          "unitCost": 42.9
+          "quantity": 8
         }
       ],
       "currentPrice": 131329.1
@@ -8916,18 +8696,15 @@
       "materials": [
         {
           "name": "Buffalo Horn",
-          "quantity": 4,
-          "unitCost": 50.4
+          "quantity": 4
         },
         {
           "name": "Slime Extract",
-          "quantity": 8,
-          "unitCost": 9.2
+          "quantity": 8
         },
         {
           "name": "Abyssal Scroll",
-          "quantity": 1,
-          "unitCost": 436.6
+          "quantity": 1
         }
       ],
       "currentPrice": 45849.9
@@ -8938,18 +8715,15 @@
       "materials": [
         {
           "name": "Siren's Soulstone",
-          "quantity": 8,
-          "unitCost": 185.2
+          "quantity": 8
         },
         {
           "name": "Elk Antler",
-          "quantity": 9,
-          "unitCost": 346.3
+          "quantity": 9
         },
         {
           "name": "Eldritch Vial",
-          "quantity": 1,
-          "unitCost": 500
+          "quantity": 1
         }
       ],
       "currentPrice": 3199.7
@@ -8960,18 +8734,15 @@
       "materials": [
         {
           "name": "Enigmatic Stone",
-          "quantity": 15,
-          "unitCost": 61.9
+          "quantity": 15
         },
         {
           "name": "Snakes Head",
-          "quantity": 15,
-          "unitCost": 166.6
+          "quantity": 15
         },
         {
           "name": "Eldritch Crystal",
-          "quantity": 1,
-          "unitCost": 500
+          "quantity": 1
         }
       ],
       "currentPrice": 3199.1
@@ -8982,23 +8753,19 @@
       "materials": [
         {
           "name": "Cursed Talisman",
-          "quantity": 10,
-          "unitCost": 26.1
+          "quantity": 10
         },
         {
           "name": "Djinn's Bottle",
-          "quantity": 30,
-          "unitCost": 119.3
+          "quantity": 30
         },
         {
           "name": "Vial of Spectre Ectoplasm",
-          "quantity": 5,
-          "unitCost": 154.4
+          "quantity": 5
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 52584
@@ -9009,23 +8776,19 @@
       "materials": [
         {
           "name": "Siren's Soulstone",
-          "quantity": 10,
-          "unitCost": 185.2
+          "quantity": 10
         },
         {
           "name": "Raw Onion",
-          "quantity": 5,
-          "unitCost": 43.7
+          "quantity": 5
         },
         {
           "name": "Swamp Juice",
-          "quantity": 45,
-          "unitCost": 116.3
+          "quantity": 45
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 63989.3
@@ -9036,18 +8799,15 @@
       "materials": [
         {
           "name": "Essence of Shadows",
-          "quantity": 3,
-          "unitCost": 284.2
+          "quantity": 3
         },
         {
           "name": "Ivory",
-          "quantity": 8,
-          "unitCost": 327.9
+          "quantity": 8
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 14734.9
@@ -9058,23 +8818,19 @@
       "materials": [
         {
           "name": "Chest of Scraps",
-          "quantity": 20,
-          "unitCost": 195.9
+          "quantity": 20
         },
         {
           "name": "Ruined Robes",
-          "quantity": 20,
-          "unitCost": 23
+          "quantity": 20
         },
         {
           "name": "Cursed Talisman",
-          "quantity": 15,
-          "unitCost": 26.1
+          "quantity": 15
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 10480.9
@@ -9085,28 +8841,23 @@
       "materials": [
         {
           "name": "Buffalo Horn",
-          "quantity": 15,
-          "unitCost": 50.4
+          "quantity": 15
         },
         {
           "name": "Ivory",
-          "quantity": 10,
-          "unitCost": 327.9
+          "quantity": 10
         },
         {
           "name": "Wolf Pelt",
-          "quantity": 20,
-          "unitCost": 89.1
+          "quantity": 20
         },
         {
           "name": "Spruce Log",
-          "quantity": 300,
-          "unitCost": 10.5
+          "quantity": 300
         },
         {
           "name": "Birch Log",
-          "quantity": 200,
-          "unitCost": 9.4
+          "quantity": 200
         }
       ],
       "currentPrice": 31619.3
@@ -9117,38 +8868,31 @@
       "materials": [
         {
           "name": "Lions Teeth",
-          "quantity": 20,
-          "unitCost": 251
+          "quantity": 20
         },
         {
           "name": "Chest of Scraps",
-          "quantity": 15,
-          "unitCost": 195.9
+          "quantity": 15
         },
         {
           "name": "Long Forgotten Necklace",
-          "quantity": 30,
-          "unitCost": 16.2
+          "quantity": 30
         },
         {
           "name": "Raw Onion",
-          "quantity": 30,
-          "unitCost": 43.7
+          "quantity": 30
         },
         {
           "name": "Swamp Juice",
-          "quantity": 10,
-          "unitCost": 116.3
+          "quantity": 10
         },
         {
           "name": "Spruce Log",
-          "quantity": 300,
-          "unitCost": 10.5
+          "quantity": 300
         },
         {
           "name": "Birch Log",
-          "quantity": 200,
-          "unitCost": 9.4
+          "quantity": 200
         }
       ],
       "currentPrice": 48444.3
@@ -9159,23 +8903,19 @@
       "materials": [
         {
           "name": "Black Bear Pelt",
-          "quantity": 15,
-          "unitCost": 104.7
+          "quantity": 15
         },
         {
           "name": "Moose Antler",
-          "quantity": 15,
-          "unitCost": 121.1
+          "quantity": 15
         },
         {
           "name": "Boar Tusk",
-          "quantity": 8,
-          "unitCost": 404.9
+          "quantity": 8
         },
         {
           "name": "Herring",
-          "quantity": 500,
-          "unitCost": 17.9
+          "quantity": 500
         }
       ],
       "currentPrice": 35478.2
@@ -9186,18 +8926,15 @@
       "materials": [
         {
           "name": "Chest of Scraps",
-          "quantity": 12,
-          "unitCost": 195.9
+          "quantity": 12
         },
         {
           "name": "Oceanic Essence",
-          "quantity": 8,
-          "unitCost": 259
+          "quantity": 8
         },
         {
           "name": "Herring",
-          "quantity": 500,
-          "unitCost": 17.9
+          "quantity": 500
         }
       ],
       "currentPrice": 26949.7
@@ -9208,13 +8945,11 @@
       "materials": [
         {
           "name": "Void Essence",
-          "quantity": 9,
-          "unitCost": 250.2
+          "quantity": 9
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 13984.7
@@ -9225,23 +8960,19 @@
       "materials": [
         {
           "name": "Lions Teeth",
-          "quantity": 40,
-          "unitCost": 251
+          "quantity": 40
         },
         {
           "name": "Raw Onion",
-          "quantity": 15,
-          "unitCost": 43.7
+          "quantity": 15
         },
         {
           "name": "Polar Bear Pelt",
-          "quantity": 15,
-          "unitCost": 220.8
+          "quantity": 15
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 41155.2
@@ -9252,23 +8983,19 @@
       "materials": [
         {
           "name": "Enigmatic Stone",
-          "quantity": 15,
-          "unitCost": 61.9
+          "quantity": 15
         },
         {
           "name": "Boar Tusk",
-          "quantity": 5,
-          "unitCost": 404.9
+          "quantity": 5
         },
         {
           "name": "Elk Antler",
-          "quantity": 10,
-          "unitCost": 346.3
+          "quantity": 10
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 11394.9
@@ -9279,18 +9006,15 @@
       "materials": [
         {
           "name": "Siren's Soulstone",
-          "quantity": 10,
-          "unitCost": 185.2
+          "quantity": 10
         },
         {
           "name": "Enigmatic Stone",
-          "quantity": 20,
-          "unitCost": 61.9
+          "quantity": 20
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 19342.8
@@ -9301,18 +9025,15 @@
       "materials": [
         {
           "name": "Oceanic Essence",
-          "quantity": 2,
-          "unitCost": 259
+          "quantity": 2
         },
         {
           "name": "Essence of Shadows",
-          "quantity": 3,
-          "unitCost": 284.2
+          "quantity": 3
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 6825.4
@@ -9323,23 +9044,19 @@
       "materials": [
         {
           "name": "Vial of Wraith Ectoplasm",
-          "quantity": 5,
-          "unitCost": 79.5
+          "quantity": 5
         },
         {
           "name": "Lions Teeth",
-          "quantity": 4,
-          "unitCost": 251
+          "quantity": 4
         },
         {
           "name": "Oceanic Essence",
-          "quantity": 4,
-          "unitCost": 259
+          "quantity": 4
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 11826.6
@@ -9350,18 +9067,15 @@
       "materials": [
         {
           "name": "Raccoon Fur",
-          "quantity": 40,
-          "unitCost": 75.6
+          "quantity": 40
         },
         {
           "name": "Slime Extract",
-          "quantity": 50,
-          "unitCost": 9.2
+          "quantity": 50
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 21124.2
@@ -9372,18 +9086,15 @@
       "materials": [
         {
           "name": "Raccoon Fur",
-          "quantity": 25,
-          "unitCost": 75.6
+          "quantity": 25
         },
         {
           "name": "Forbidden Tome",
-          "quantity": 10,
-          "unitCost": 50.7
+          "quantity": 10
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 11777.4
@@ -9394,18 +9105,15 @@
       "materials": [
         {
           "name": "Raccoon Fur",
-          "quantity": 10,
-          "unitCost": 75.6
+          "quantity": 10
         },
         {
           "name": "Goblin Scraps",
-          "quantity": 10,
-          "unitCost": 162.8
+          "quantity": 10
         },
         {
           "name": "Eldritch Crystal",
-          "quantity": 1,
-          "unitCost": 500
+          "quantity": 1
         }
       ],
       "currentPrice": 3131.9
@@ -9416,18 +9124,15 @@
       "materials": [
         {
           "name": "Broken Dwarven Plate",
-          "quantity": 7,
-          "unitCost": 308.8
+          "quantity": 7
         },
         {
           "name": "Goblin Pouch",
-          "quantity": 15,
-          "unitCost": 35.7
+          "quantity": 15
         },
         {
           "name": "Eldritch Crystal",
-          "quantity": 1,
-          "unitCost": 500
+          "quantity": 1
         }
       ],
       "currentPrice": 4839
@@ -9438,18 +9143,15 @@
       "materials": [
         {
           "name": "Ivory",
-          "quantity": 10,
-          "unitCost": 327.9
+          "quantity": 10
         },
         {
           "name": "Pirates Code",
-          "quantity": 35,
-          "unitCost": 47.4
+          "quantity": 35
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 25690
@@ -9460,18 +9162,15 @@
       "materials": [
         {
           "name": "Slime Extract",
-          "quantity": 45,
-          "unitCost": 9.2
+          "quantity": 45
         },
         {
           "name": "Vial of Wraith Ectoplasm",
-          "quantity": 30,
-          "unitCost": 79.5
+          "quantity": 30
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 22450.5
@@ -9482,18 +9181,15 @@
       "materials": [
         {
           "name": "Vial of Wraith Ectoplasm",
-          "quantity": 20,
-          "unitCost": 79.5
+          "quantity": 20
         },
         {
           "name": "Deer Antler",
-          "quantity": 15,
-          "unitCost": 99.4
+          "quantity": 15
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 10812.7
@@ -9504,18 +9200,15 @@
       "materials": [
         {
           "name": "Venom Extract",
-          "quantity": 11,
-          "unitCost": 99.4
+          "quantity": 11
         },
         {
           "name": "Long Forgotten Necklace",
-          "quantity": 30,
-          "unitCost": 16.2
+          "quantity": 30
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 47486.9
@@ -9526,28 +9219,23 @@
       "materials": [
         {
           "name": "Enigmatic Stone",
-          "quantity": 10,
-          "unitCost": 61.9
+          "quantity": 10
         },
         {
           "name": "Forbidden Tome",
-          "quantity": 15,
-          "unitCost": 50.7
+          "quantity": 15
         },
         {
           "name": "Ruined Robes",
-          "quantity": 12,
-          "unitCost": 23
+          "quantity": 12
         },
         {
           "name": "Spruce Log",
-          "quantity": 300,
-          "unitCost": 10.5
+          "quantity": 300
         },
         {
           "name": "Birch Log",
-          "quantity": 200,
-          "unitCost": 9.4
+          "quantity": 200
         }
       ],
       "currentPrice": 2740.6
@@ -9558,33 +9246,27 @@
       "materials": [
         {
           "name": "Vial of Spectre Ectoplasm",
-          "quantity": 6,
-          "unitCost": 154.4
+          "quantity": 6
         },
         {
           "name": "Polar Bear Pelt",
-          "quantity": 5,
-          "unitCost": 220.8
+          "quantity": 5
         },
         {
           "name": "Goblin Scraps",
-          "quantity": 5,
-          "unitCost": 162.8
+          "quantity": 5
         },
         {
           "name": "Goblin Crown",
-          "quantity": 2,
-          "unitCost": 1743.2
+          "quantity": 2
         },
         {
           "name": "Spruce Log",
-          "quantity": 300,
-          "unitCost": 10.5
+          "quantity": 300
         },
         {
           "name": "Birch Log",
-          "quantity": 200,
-          "unitCost": 9.4
+          "quantity": 200
         }
       ],
       "currentPrice": 8794.9
@@ -9595,18 +9277,15 @@
       "materials": [
         {
           "name": "Enigmatic Stone",
-          "quantity": 35,
-          "unitCost": 61.9
+          "quantity": 35
         },
         {
           "name": "Golem Core Fragment",
-          "quantity": 30,
-          "unitCost": 19.9
+          "quantity": 30
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 12479.7
@@ -9617,38 +9296,31 @@
       "materials": [
         {
           "name": "Arcane Starstone",
-          "quantity": 3,
-          "unitCost": 3872.8
+          "quantity": 3
         },
         {
           "name": "Abyssal Scroll",
-          "quantity": 3,
-          "unitCost": 436.6
+          "quantity": 3
         },
         {
           "name": "Siren's Soulstone",
-          "quantity": 20,
-          "unitCost": 185.2
+          "quantity": 20
         },
         {
           "name": "Coal Ore",
-          "quantity": 25,
-          "unitCost": 5.2
+          "quantity": 25
         },
         {
           "name": "Uranium Bar",
-          "quantity": 25,
-          "unitCost": 44.3
+          "quantity": 25
         },
         {
           "name": "Chromite Bar",
-          "quantity": 45,
-          "unitCost": 31.7
+          "quantity": 45
         },
         {
           "name": "Steel Bar",
-          "quantity": 75,
-          "unitCost": 19.1
+          "quantity": 75
         }
       ],
       "currentPrice": 27399.5
@@ -9659,23 +9331,19 @@
       "materials": [
         {
           "name": "Golem Core Fragment",
-          "quantity": 30,
-          "unitCost": 19.9
+          "quantity": 30
         },
         {
           "name": "Ducks Mouth",
-          "quantity": 35,
-          "unitCost": 49.3
+          "quantity": 35
         },
         {
           "name": "Snakes Head",
-          "quantity": 15,
-          "unitCost": 166.6
+          "quantity": 15
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 71675.3
@@ -9686,28 +9354,23 @@
       "materials": [
         {
           "name": "Abyssal Scroll",
-          "quantity": 1,
-          "unitCost": 436.6
+          "quantity": 1
         },
         {
           "name": "Lions Teeth",
-          "quantity": 30,
-          "unitCost": 251
+          "quantity": 30
         },
         {
           "name": "Ivory",
-          "quantity": 4,
-          "unitCost": 327.9
+          "quantity": 4
         },
         {
           "name": "Ducks Mouth",
-          "quantity": 15,
-          "unitCost": 49.3
+          "quantity": 15
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 12589.7
@@ -9718,18 +9381,15 @@
       "materials": [
         {
           "name": "Siren's Soulstone",
-          "quantity": 20,
-          "unitCost": 185.2
+          "quantity": 20
         },
         {
           "name": "Snakes Head",
-          "quantity": 50,
-          "unitCost": 166.6
+          "quantity": 50
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 38834.6
@@ -9740,13 +9400,11 @@
       "materials": [
         {
           "name": "Ducks Mouth",
-          "quantity": 60,
-          "unitCost": 49.3
+          "quantity": 60
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 7062.4
@@ -9757,18 +9415,15 @@
       "materials": [
         {
           "name": "Goblin Crown",
-          "quantity": 3,
-          "unitCost": 1743.2
+          "quantity": 3
         },
         {
           "name": "Chest of Scraps",
-          "quantity": 30,
-          "unitCost": 195.9
+          "quantity": 30
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 20216.3
@@ -9779,18 +9434,15 @@
       "materials": [
         {
           "name": "Ruined Robes",
-          "quantity": 30,
-          "unitCost": 23
+          "quantity": 30
         },
         {
           "name": "Boar Tusk",
-          "quantity": 5,
-          "unitCost": 404.9
+          "quantity": 5
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 15337.6
@@ -9801,18 +9453,15 @@
       "materials": [
         {
           "name": "Ruined Robes",
-          "quantity": 25,
-          "unitCost": 23
+          "quantity": 25
         },
         {
           "name": "Raccoon Fur",
-          "quantity": 30,
-          "unitCost": 75.6
+          "quantity": 30
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 26475.4
@@ -9823,18 +9472,15 @@
       "materials": [
         {
           "name": "Parchment",
-          "quantity": 10,
-          "unitCost": 715.7
+          "quantity": 10
         },
         {
           "name": "Black Bear Pelt",
-          "quantity": 40,
-          "unitCost": 104.7
+          "quantity": 40
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 21624.9
@@ -9845,23 +9491,19 @@
       "materials": [
         {
           "name": "Pirates Code",
-          "quantity": 4,
-          "unitCost": 47.4
+          "quantity": 4
         },
         {
           "name": "Parchment",
-          "quantity": 1,
-          "unitCost": 715.7
+          "quantity": 1
         },
         {
           "name": "Siren's Soulstone",
-          "quantity": 5,
-          "unitCost": 185.2
+          "quantity": 5
         },
         {
           "name": "Siren's Scales",
-          "quantity": 3,
-          "unitCost": 18.6
+          "quantity": 3
         }
       ],
       "currentPrice": 625875.4
@@ -9872,23 +9514,19 @@
       "materials": [
         {
           "name": "Chest of Scraps",
-          "quantity": 4,
-          "unitCost": 195.9
+          "quantity": 4
         },
         {
           "name": "Bone Fragment",
-          "quantity": 8,
-          "unitCost": 42.9
+          "quantity": 8
         },
         {
           "name": "Ivory",
-          "quantity": 3,
-          "unitCost": 327.9
+          "quantity": 3
         },
         {
           "name": "Elk Antler",
-          "quantity": 3,
-          "unitCost": 346.3
+          "quantity": 3
         }
       ],
       "currentPrice": 639499.9
@@ -9899,18 +9537,15 @@
       "materials": [
         {
           "name": "Slime Extract",
-          "quantity": 8,
-          "unitCost": 9.2
+          "quantity": 8
         },
         {
           "name": "Abyssal Scroll",
-          "quantity": 1,
-          "unitCost": 436.6
+          "quantity": 1
         },
         {
           "name": "Umbral Claw",
-          "quantity": 5,
-          "unitCost": 180.2
+          "quantity": 5
         }
       ],
       "currentPrice": 436175
@@ -9921,18 +9556,15 @@
       "materials": [
         {
           "name": "Dwarven Whetstone",
-          "quantity": 35,
-          "unitCost": 20
+          "quantity": 35
         },
         {
           "name": "Cursed Blade Fragment",
-          "quantity": 25,
-          "unitCost": 88.9
+          "quantity": 25
         },
         {
           "name": "Eldritch Crystal",
-          "quantity": 1,
-          "unitCost": 500
+          "quantity": 1
         }
       ],
       "currentPrice": 3136.5
@@ -9943,18 +9575,15 @@
       "materials": [
         {
           "name": "Wolf Pelt",
-          "quantity": 14,
-          "unitCost": 89.1
+          "quantity": 14
         },
         {
           "name": "Goblin Totem",
-          "quantity": 60,
-          "unitCost": 26.5
+          "quantity": 60
         },
         {
           "name": "Eldritch Vial",
-          "quantity": 1,
-          "unitCost": 500
+          "quantity": 1
         }
       ],
       "currentPrice": 3109.4
@@ -9965,18 +9594,15 @@
       "materials": [
         {
           "name": "Grimoire of Shadows",
-          "quantity": 1,
-          "unitCost": 4959.6
+          "quantity": 1
         },
         {
           "name": "Cursed Cloth",
-          "quantity": 100,
-          "unitCost": 8.4
+          "quantity": 100
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 37761.1
@@ -9987,23 +9613,19 @@
       "materials": [
         {
           "name": "Abyssal Scroll",
-          "quantity": 3,
-          "unitCost": 436.6
+          "quantity": 3
         },
         {
           "name": "Forbidden Tome",
-          "quantity": 8,
-          "unitCost": 50.7
+          "quantity": 8
         },
         {
           "name": "Bone Fragment",
-          "quantity": 30,
-          "unitCost": 42.9
+          "quantity": 30
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 45237.9
@@ -10014,23 +9636,19 @@
       "materials": [
         {
           "name": "Golem Core Fragment",
-          "quantity": 40,
-          "unitCost": 19.9
+          "quantity": 40
         },
         {
           "name": "Goblin Totem",
-          "quantity": 40,
-          "unitCost": 26.5
+          "quantity": 40
         },
         {
           "name": "Wolf Pelt",
-          "quantity": 25,
-          "unitCost": 89.1
+          "quantity": 25
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 39408.2
@@ -10041,33 +9659,27 @@
       "materials": [
         {
           "name": "Pirates Code",
-          "quantity": 5,
-          "unitCost": 47.4
+          "quantity": 5
         },
         {
           "name": "Goblin Totem",
-          "quantity": 50,
-          "unitCost": 26.5
+          "quantity": 50
         },
         {
           "name": "Raccoon Fur",
-          "quantity": 5,
-          "unitCost": 75.6
+          "quantity": 5
         },
         {
           "name": "Oceanic Essence",
-          "quantity": 7,
-          "unitCost": 259
+          "quantity": 7
         },
         {
           "name": "Birch Log",
-          "quantity": 300,
-          "unitCost": 9.4
+          "quantity": 300
         },
         {
           "name": "Banyan Log",
-          "quantity": 200,
-          "unitCost": 13.4
+          "quantity": 200
         }
       ],
       "currentPrice": 48239.9
@@ -10078,18 +9690,15 @@
       "materials": [
         {
           "name": "Siren's Scales",
-          "quantity": 25,
-          "unitCost": 18.6
+          "quantity": 25
         },
         {
           "name": "Wolf Pelt",
-          "quantity": 60,
-          "unitCost": 89.1
+          "quantity": 60
         },
         {
           "name": "Sardines",
-          "quantity": 15,
-          "unitCost": 19.8
+          "quantity": 15
         }
       ],
       "currentPrice": 45916.7
@@ -10100,18 +9709,15 @@
       "materials": [
         {
           "name": "Raccoon Fur",
-          "quantity": 50,
-          "unitCost": 75.6
+          "quantity": 50
         },
         {
           "name": "Ducks Mouth",
-          "quantity": 40,
-          "unitCost": 49.3
+          "quantity": 40
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 112282.9
@@ -10122,23 +9728,19 @@
       "materials": [
         {
           "name": "Moose Antler",
-          "quantity": 10,
-          "unitCost": 121.1
+          "quantity": 10
         },
         {
           "name": "Siren's Soulstone",
-          "quantity": 15,
-          "unitCost": 185.2
+          "quantity": 15
         },
         {
           "name": "Lions Teeth",
-          "quantity": 20,
-          "unitCost": 251
+          "quantity": 20
         },
         {
           "name": "Swamp Juice",
-          "quantity": 12,
-          "unitCost": 116.3
+          "quantity": 12
         }
       ],
       "currentPrice": 27529.7
@@ -10149,23 +9751,19 @@
       "materials": [
         {
           "name": "Elk Antler",
-          "quantity": 40,
-          "unitCost": 346.3
+          "quantity": 40
         },
         {
           "name": "Boar Tusk",
-          "quantity": 5,
-          "unitCost": 404.9
+          "quantity": 5
         },
         {
           "name": "Raw Onion",
-          "quantity": 5,
-          "unitCost": 43.7
+          "quantity": 5
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 80869
@@ -10176,23 +9774,19 @@
       "materials": [
         {
           "name": "Golem Core Fragment",
-          "quantity": 100,
-          "unitCost": 19.9
+          "quantity": 100
         },
         {
           "name": "Chest of Scraps",
-          "quantity": 15,
-          "unitCost": 195.9
+          "quantity": 15
         },
         {
           "name": "Dwarven Whetstone",
-          "quantity": 36,
-          "unitCost": 20
+          "quantity": 36
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 32927.5
@@ -10203,23 +9797,19 @@
       "materials": [
         {
           "name": "Goblin Pouch",
-          "quantity": 50,
-          "unitCost": 35.7
+          "quantity": 50
         },
         {
           "name": "Djinn's Bottle",
-          "quantity": 40,
-          "unitCost": 119.3
+          "quantity": 40
         },
         {
           "name": "Stoneheart Core",
-          "quantity": 3,
-          "unitCost": 247
+          "quantity": 3
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 99923.8
@@ -10230,13 +9820,11 @@
       "materials": [
         {
           "name": "Vial of Spectre Ectoplasm",
-          "quantity": 10,
-          "unitCost": 154.4
+          "quantity": 10
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 20671.9
@@ -10247,23 +9835,19 @@
       "materials": [
         {
           "name": "Raw Onion",
-          "quantity": 5,
-          "unitCost": 43.7
+          "quantity": 5
         },
         {
           "name": "Parchment",
-          "quantity": 5,
-          "unitCost": 715.7
+          "quantity": 5
         },
         {
           "name": "Essence of Shadows",
-          "quantity": 5,
-          "unitCost": 284.2
+          "quantity": 5
         },
         {
           "name": "Cursed Talisman",
-          "quantity": 33,
-          "unitCost": 26.1
+          "quantity": 33
         }
       ],
       "currentPrice": 26867.2
@@ -10274,18 +9858,15 @@
       "materials": [
         {
           "name": "Umbral Claw",
-          "quantity": 25,
-          "unitCost": 180.2
+          "quantity": 25
         },
         {
           "name": "Siren's Scales",
-          "quantity": 40,
-          "unitCost": 18.6
+          "quantity": 40
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 41246.6
@@ -10296,18 +9877,15 @@
       "materials": [
         {
           "name": "Goblin Scraps",
-          "quantity": 10,
-          "unitCost": 162.8
+          "quantity": 10
         },
         {
           "name": "Broken Dwarven Plate",
-          "quantity": 15,
-          "unitCost": 308.8
+          "quantity": 15
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 42212.8
@@ -10318,18 +9896,15 @@
       "materials": [
         {
           "name": "Enigmatic Stone",
-          "quantity": 30,
-          "unitCost": 61.9
+          "quantity": 30
         },
         {
           "name": "Minotaurs Horn",
-          "quantity": 50,
-          "unitCost": 9
+          "quantity": 50
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 26903
@@ -10340,18 +9915,15 @@
       "materials": [
         {
           "name": "Broken Dwarven Plate",
-          "quantity": 20,
-          "unitCost": 308.8
+          "quantity": 20
         },
         {
           "name": "Slime Extract",
-          "quantity": 50,
-          "unitCost": 9.2
+          "quantity": 50
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 6626.7
@@ -10362,18 +9934,15 @@
       "materials": [
         {
           "name": "Minotaurs Horn",
-          "quantity": 25,
-          "unitCost": 9
+          "quantity": 25
         },
         {
           "name": "Lions Teeth",
-          "quantity": 25,
-          "unitCost": 251
+          "quantity": 25
         },
         {
           "name": "Eldritch Vial",
-          "quantity": 1,
-          "unitCost": 500
+          "quantity": 1
         }
       ],
       "currentPrice": 5295.6
@@ -10384,18 +9953,15 @@
       "materials": [
         {
           "name": "Enigmatic Stone",
-          "quantity": 12,
-          "unitCost": 61.9
+          "quantity": 12
         },
         {
           "name": "Elk Antler",
-          "quantity": 15,
-          "unitCost": 346.3
+          "quantity": 15
         },
         {
           "name": "Eldritch Crystal",
-          "quantity": 1,
-          "unitCost": 500
+          "quantity": 1
         }
       ],
       "currentPrice": 7647.9
@@ -10406,23 +9972,19 @@
       "materials": [
         {
           "name": "Parchment",
-          "quantity": 15,
-          "unitCost": 715.7
+          "quantity": 15
         },
         {
           "name": "Pirates Code",
-          "quantity": 15,
-          "unitCost": 47.4
+          "quantity": 15
         },
         {
           "name": "Boar Tusk",
-          "quantity": 10,
-          "unitCost": 404.9
+          "quantity": 10
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 60500.9
@@ -10433,18 +9995,15 @@
       "materials": [
         {
           "name": "Goblin Pouch",
-          "quantity": 20,
-          "unitCost": 35.7
+          "quantity": 20
         },
         {
           "name": "Ivory",
-          "quantity": 15,
-          "unitCost": 327.9
+          "quantity": 15
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 22027.7
@@ -10455,18 +10014,15 @@
       "materials": [
         {
           "name": "Lucky Rabbit Foot",
-          "quantity": 30,
-          "unitCost": 97
+          "quantity": 30
         },
         {
           "name": "Moose Antler",
-          "quantity": 30,
-          "unitCost": 121.1
+          "quantity": 30
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 38715
@@ -10477,38 +10033,31 @@
       "materials": [
         {
           "name": "Venom Extract",
-          "quantity": 5,
-          "unitCost": 99.4
+          "quantity": 5
         },
         {
           "name": "Black Bear Pelt",
-          "quantity": 5,
-          "unitCost": 104.7
+          "quantity": 5
         },
         {
           "name": "Essence of Shadows",
-          "quantity": 5,
-          "unitCost": 284.2
+          "quantity": 5
         },
         {
           "name": "Golem Core Fragment",
-          "quantity": 5,
-          "unitCost": 19.9
+          "quantity": 5
         },
         {
           "name": "Cursed Talisman",
-          "quantity": 15,
-          "unitCost": 26.1
+          "quantity": 15
         },
         {
           "name": "Birch Log",
-          "quantity": 300,
-          "unitCost": 9.4
+          "quantity": 300
         },
         {
           "name": "Banyan Log",
-          "quantity": 200,
-          "unitCost": 13.4
+          "quantity": 200
         }
       ],
       "currentPrice": 22047.4
@@ -10519,28 +10068,23 @@
       "materials": [
         {
           "name": "Siren's Soulstone",
-          "quantity": 15,
-          "unitCost": 185.2
+          "quantity": 15
         },
         {
           "name": "Pirates Code",
-          "quantity": 15,
-          "unitCost": 47.4
+          "quantity": 15
         },
         {
           "name": "Broken Dwarven Plate",
-          "quantity": 15,
-          "unitCost": 308.8
+          "quantity": 15
         },
         {
           "name": "Birch Log",
-          "quantity": 300,
-          "unitCost": 9.4
+          "quantity": 300
         },
         {
           "name": "Banyan Log",
-          "quantity": 200,
-          "unitCost": 13.4
+          "quantity": 200
         }
       ],
       "currentPrice": 55130
@@ -10551,18 +10095,15 @@
       "materials": [
         {
           "name": "Parchment",
-          "quantity": 20,
-          "unitCost": 715.7
+          "quantity": 20
         },
         {
           "name": "Essence of Shadows",
-          "quantity": 8,
-          "unitCost": 284.2
+          "quantity": 8
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 64744.1
@@ -10573,13 +10114,11 @@
       "materials": [
         {
           "name": "Abyssal Scroll",
-          "quantity": 7,
-          "unitCost": 436.6
+          "quantity": 7
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 49419.4
@@ -10590,18 +10129,15 @@
       "materials": [
         {
           "name": "Boar Tusk",
-          "quantity": 20,
-          "unitCost": 404.9
+          "quantity": 20
         },
         {
           "name": "Djinn's Bottle",
-          "quantity": 25,
-          "unitCost": 119.3
+          "quantity": 25
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 33295.7
@@ -10612,23 +10148,19 @@
       "materials": [
         {
           "name": "Moose Antler",
-          "quantity": 60,
-          "unitCost": 121.1
+          "quantity": 60
         },
         {
           "name": "Void Essence",
-          "quantity": 2,
-          "unitCost": 250.2
+          "quantity": 2
         },
         {
           "name": "Ducks Mouth",
-          "quantity": 10,
-          "unitCost": 49.3
+          "quantity": 10
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 43343.1
@@ -10639,28 +10171,23 @@
       "materials": [
         {
           "name": "Slime Extract",
-          "quantity": 10,
-          "unitCost": 9.2
+          "quantity": 10
         },
         {
           "name": "Goblin Crown",
-          "quantity": 5,
-          "unitCost": 1743.2
+          "quantity": 5
         },
         {
           "name": "Siren's Soulstone",
-          "quantity": 18,
-          "unitCost": 185.2
+          "quantity": 18
         },
         {
           "name": "Void Essence",
-          "quantity": 4,
-          "unitCost": 250.2
+          "quantity": 4
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 54276.8
@@ -10671,23 +10198,19 @@
       "materials": [
         {
           "name": "Elk Antler",
-          "quantity": 20,
-          "unitCost": 346.3
+          "quantity": 20
         },
         {
           "name": "Polar Bear Pelt",
-          "quantity": 15,
-          "unitCost": 220.8
+          "quantity": 15
         },
         {
           "name": "Lions Teeth",
-          "quantity": 64,
-          "unitCost": 251
+          "quantity": 64
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 71578.1
@@ -10698,23 +10221,19 @@
       "materials": [
         {
           "name": "Raw Onion",
-          "quantity": 100,
-          "unitCost": 43.7
+          "quantity": 100
         },
         {
           "name": "Ivory",
-          "quantity": 5,
-          "unitCost": 327.9
+          "quantity": 5
         },
         {
           "name": "Raccoon Fur",
-          "quantity": 5,
-          "unitCost": 75.6
+          "quantity": 5
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 29585.5
@@ -10725,33 +10244,27 @@
       "materials": [
         {
           "name": "Oceanic Essence",
-          "quantity": 6,
-          "unitCost": 259
+          "quantity": 6
         },
         {
           "name": "Enigmatic Stone",
-          "quantity": 5,
-          "unitCost": 61.9
+          "quantity": 5
         },
         {
           "name": "Golem Core Fragment",
-          "quantity": 10,
-          "unitCost": 19.9
+          "quantity": 10
         },
         {
           "name": "Ivory",
-          "quantity": 6,
-          "unitCost": 327.9
+          "quantity": 6
         },
         {
           "name": "Chest of Scraps",
-          "quantity": 10,
-          "unitCost": 195.9
+          "quantity": 10
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 56522
@@ -10762,18 +10275,15 @@
       "materials": [
         {
           "name": "Stoneheart Core",
-          "quantity": 4,
-          "unitCost": 247
+          "quantity": 4
         },
         {
           "name": "Essence of Shadows",
-          "quantity": 5,
-          "unitCost": 284.2
+          "quantity": 5
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 34986.6
@@ -10784,23 +10294,19 @@
       "materials": [
         {
           "name": "Venom Extract",
-          "quantity": 5,
-          "unitCost": 99.4
+          "quantity": 5
         },
         {
           "name": "Cursed Cloth",
-          "quantity": 40,
-          "unitCost": 8.4
+          "quantity": 40
         },
         {
           "name": "Goblin Scraps",
-          "quantity": 20,
-          "unitCost": 162.8
+          "quantity": 20
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 72288
@@ -10811,18 +10317,15 @@
       "materials": [
         {
           "name": "Raccoon Fur",
-          "quantity": 50,
-          "unitCost": 75.6
+          "quantity": 50
         },
         {
           "name": "Djinn's Bottle",
-          "quantity": 75,
-          "unitCost": 119.3
+          "quantity": 75
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 32377.5
@@ -10833,18 +10336,15 @@
       "materials": [
         {
           "name": "Moose Antler",
-          "quantity": 15,
-          "unitCost": 121.1
+          "quantity": 15
         },
         {
           "name": "Minotaur Hide",
-          "quantity": 20,
-          "unitCost": 411.2
+          "quantity": 20
         },
         {
           "name": "Eldritch Vial",
-          "quantity": 1,
-          "unitCost": 500
+          "quantity": 1
         }
       ],
       "currentPrice": 11860
@@ -10855,18 +10355,15 @@
       "materials": [
         {
           "name": "Black Bear Pelt",
-          "quantity": 25,
-          "unitCost": 104.7
+          "quantity": 25
         },
         {
           "name": "Orb of Elemental Conjuring",
-          "quantity": 20,
-          "unitCost": 88.1
+          "quantity": 20
         },
         {
           "name": "Eldritch Vial",
-          "quantity": 1,
-          "unitCost": 500
+          "quantity": 1
         }
       ],
       "currentPrice": 5240
@@ -10877,23 +10374,19 @@
       "materials": [
         {
           "name": "Pirates Code",
-          "quantity": 30,
-          "unitCost": 47.4
+          "quantity": 30
         },
         {
           "name": "Minotaur Hide",
-          "quantity": 15,
-          "unitCost": 411.2
+          "quantity": 15
         },
         {
           "name": "Vial of Spectre Ectoplasm",
-          "quantity": 5,
-          "unitCost": 154.4
+          "quantity": 5
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 111583.7
@@ -10904,18 +10397,15 @@
       "materials": [
         {
           "name": "Deer Antler",
-          "quantity": 60,
-          "unitCost": 99.4
+          "quantity": 60
         },
         {
           "name": "Ducks Mouth",
-          "quantity": 30,
-          "unitCost": 49.3
+          "quantity": 30
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 86241.9
@@ -10926,23 +10416,19 @@
       "materials": [
         {
           "name": "Undying Crest",
-          "quantity": 5,
-          "unitCost": 206.7
+          "quantity": 5
         },
         {
           "name": "Venom Extract",
-          "quantity": 5,
-          "unitCost": 99.4
+          "quantity": 5
         },
         {
           "name": "Broken Dwarven Plate",
-          "quantity": 10,
-          "unitCost": 308.8
+          "quantity": 10
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 56188
@@ -10953,28 +10439,23 @@
       "materials": [
         {
           "name": "Broken Dwarven Plate",
-          "quantity": 5,
-          "unitCost": 308.8
+          "quantity": 5
         },
         {
           "name": "Ruined Robes",
-          "quantity": 50,
-          "unitCost": 23
+          "quantity": 50
         },
         {
           "name": "Pirates Code",
-          "quantity": 10,
-          "unitCost": 47.4
+          "quantity": 10
         },
         {
           "name": "Bone Fragment",
-          "quantity": 20,
-          "unitCost": 42.9
+          "quantity": 20
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 120399.9
@@ -10985,28 +10466,23 @@
       "materials": [
         {
           "name": "Stoneheart Core",
-          "quantity": 5,
-          "unitCost": 247
+          "quantity": 5
         },
         {
           "name": "Ivory",
-          "quantity": 5,
-          "unitCost": 327.9
+          "quantity": 5
         },
         {
           "name": "Buffalo Horn",
-          "quantity": 40,
-          "unitCost": 50.4
+          "quantity": 40
         },
         {
           "name": "Birch Log",
-          "quantity": 300,
-          "unitCost": 9.4
+          "quantity": 300
         },
         {
           "name": "Banyan Log",
-          "quantity": 200,
-          "unitCost": 13.4
+          "quantity": 200
         }
       ],
       "currentPrice": 90303.8
@@ -11017,33 +10493,27 @@
       "materials": [
         {
           "name": "Slime Extract",
-          "quantity": 50,
-          "unitCost": 9.2
+          "quantity": 50
         },
         {
           "name": "Cursed Talisman",
-          "quantity": 10,
-          "unitCost": 26.1
+          "quantity": 10
         },
         {
           "name": "Umbral Claw",
-          "quantity": 25,
-          "unitCost": 180.2
+          "quantity": 25
         },
         {
           "name": "Void Essence",
-          "quantity": 9,
-          "unitCost": 250.2
+          "quantity": 9
         },
         {
           "name": "Maple Log",
-          "quantity": 300,
-          "unitCost": 13.3
+          "quantity": 300
         },
         {
           "name": "Willow Log",
-          "quantity": 200,
-          "unitCost": 16.9
+          "quantity": 200
         }
       ],
       "currentPrice": 67845.7
@@ -11054,18 +10524,15 @@
       "materials": [
         {
           "name": "Broken Dwarven Plate",
-          "quantity": 20,
-          "unitCost": 308.8
+          "quantity": 20
         },
         {
           "name": "Siren's Soulstone",
-          "quantity": 30,
-          "unitCost": 185.2
+          "quantity": 30
         },
         {
           "name": "Sardines",
-          "quantity": 500,
-          "unitCost": 19.8
+          "quantity": 500
         }
       ],
       "currentPrice": 82073.4
@@ -11076,23 +10543,19 @@
       "materials": [
         {
           "name": "Minotaurs Horn",
-          "quantity": 60,
-          "unitCost": 9
+          "quantity": 60
         },
         {
           "name": "Minotaur Hide",
-          "quantity": 20,
-          "unitCost": 411.2
+          "quantity": 20
         },
         {
           "name": "Cursed Blade Fragment",
-          "quantity": 80,
-          "unitCost": 88.9
+          "quantity": 80
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 86069.9
@@ -11103,23 +10566,19 @@
       "materials": [
         {
           "name": "Moose Antler",
-          "quantity": 45,
-          "unitCost": 121.1
+          "quantity": 45
         },
         {
           "name": "Stoneheart Core",
-          "quantity": 4,
-          "unitCost": 247
+          "quantity": 4
         },
         {
           "name": "Venom Extract",
-          "quantity": 4,
-          "unitCost": 99.4
+          "quantity": 4
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 100131.5
@@ -11130,28 +10589,23 @@
       "materials": [
         {
           "name": "Bone Fragment",
-          "quantity": 30,
-          "unitCost": 42.9
+          "quantity": 30
         },
         {
           "name": "Venom Extract",
-          "quantity": 12,
-          "unitCost": 99.4
+          "quantity": 12
         },
         {
           "name": "Lucky Rabbit Foot",
-          "quantity": 15,
-          "unitCost": 97
+          "quantity": 15
         },
         {
           "name": "Lions Teeth",
-          "quantity": 25,
-          "unitCost": 251
+          "quantity": 25
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 182533.8
@@ -11162,28 +10616,23 @@
       "materials": [
         {
           "name": "Boar Tusk",
-          "quantity": 15,
-          "unitCost": 404.9
+          "quantity": 15
         },
         {
           "name": "Goblin Scraps",
-          "quantity": 5,
-          "unitCost": 162.8
+          "quantity": 5
         },
         {
           "name": "Ivory",
-          "quantity": 10,
-          "unitCost": 327.9
+          "quantity": 10
         },
         {
           "name": "Broken Dwarven Plate",
-          "quantity": 5,
-          "unitCost": 308.8
+          "quantity": 5
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 128316.2
@@ -11194,23 +10643,19 @@
       "materials": [
         {
           "name": "Vial of Wraith Ectoplasm",
-          "quantity": 40,
-          "unitCost": 79.5
+          "quantity": 40
         },
         {
           "name": "Slime Extract",
-          "quantity": 25,
-          "unitCost": 9.2
+          "quantity": 25
         },
         {
           "name": "Cursed Talisman",
-          "quantity": 20,
-          "unitCost": 26.1
+          "quantity": 20
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 252922.5
@@ -11221,18 +10666,15 @@
       "materials": [
         {
           "name": "Polar Bear Pelt",
-          "quantity": 50,
-          "unitCost": 220.8
+          "quantity": 50
         },
         {
           "name": "Cursed Talisman",
-          "quantity": 30,
-          "unitCost": 26.1
+          "quantity": 30
         },
         {
           "name": "Boar Tusk",
-          "quantity": 4,
-          "unitCost": 404.9
+          "quantity": 4
         }
       ],
       "currentPrice": 82280.4
@@ -11243,28 +10685,23 @@
       "materials": [
         {
           "name": "Venom Extract",
-          "quantity": 5,
-          "unitCost": 99.4
+          "quantity": 5
         },
         {
           "name": "Slime Extract",
-          "quantity": 50,
-          "unitCost": 9.2
+          "quantity": 50
         },
         {
           "name": "Swamp Juice",
-          "quantity": 5,
-          "unitCost": 116.3
+          "quantity": 5
         },
         {
           "name": "Vial of Spectre Ectoplasm",
-          "quantity": 6,
-          "unitCost": 154.4
+          "quantity": 6
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 53686.9
@@ -11275,28 +10712,23 @@
       "materials": [
         {
           "name": "Dwarven Whetstone",
-          "quantity": 35,
-          "unitCost": 20
+          "quantity": 35
         },
         {
           "name": "Ivory",
-          "quantity": 10,
-          "unitCost": 327.9
+          "quantity": 10
         },
         {
           "name": "Void Essence",
-          "quantity": 5,
-          "unitCost": 250.2
+          "quantity": 5
         },
         {
           "name": "Polar Bear Pelt",
-          "quantity": 10,
-          "unitCost": 220.8
+          "quantity": 10
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 13724.2
@@ -11307,18 +10739,15 @@
       "materials": [
         {
           "name": "Parchment",
-          "quantity": 30,
-          "unitCost": 715.7
+          "quantity": 30
         },
         {
           "name": "Black Bear Pelt",
-          "quantity": 30,
-          "unitCost": 104.7
+          "quantity": 30
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 41614.9
@@ -11329,18 +10758,15 @@
       "materials": [
         {
           "name": "Arcane Starstone",
-          "quantity": 7,
-          "unitCost": 3872.8
+          "quantity": 7
         },
         {
           "name": "Goblin Scraps",
-          "quantity": 50,
-          "unitCost": 162.8
+          "quantity": 50
         },
         {
           "name": "Arcane Vial",
-          "quantity": 1,
-          "unitCost": 2500
+          "quantity": 1
         }
       ],
       "currentPrice": 262000
@@ -11351,28 +10777,23 @@
       "materials": [
         {
           "name": "Goblin Pouch",
-          "quantity": 30,
-          "unitCost": 35.7
+          "quantity": 30
         },
         {
           "name": "Bone Fragment",
-          "quantity": 20,
-          "unitCost": 42.9
+          "quantity": 20
         },
         {
           "name": "Cursed Talisman",
-          "quantity": 20,
-          "unitCost": 26.1
+          "quantity": 20
         },
         {
           "name": "Minotaur Hide",
-          "quantity": 30,
-          "unitCost": 411.2
+          "quantity": 30
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 75049.2
@@ -11383,23 +10804,19 @@
       "materials": [
         {
           "name": "Ruined Robes",
-          "quantity": 42,
-          "unitCost": 23
+          "quantity": 42
         },
         {
           "name": "Snakes Head",
-          "quantity": 150,
-          "unitCost": 166.6
+          "quantity": 150
         },
         {
           "name": "Slime Extract",
-          "quantity": 30,
-          "unitCost": 9.2
+          "quantity": 30
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 1140555.5
@@ -11410,23 +10827,19 @@
       "materials": [
         {
           "name": "Elk Antler",
-          "quantity": 40,
-          "unitCost": 346.3
+          "quantity": 40
         },
         {
           "name": "Siren's Scales",
-          "quantity": 10,
-          "unitCost": 18.6
+          "quantity": 10
         },
         {
           "name": "Venom Extract",
-          "quantity": 5,
-          "unitCost": 99.4
+          "quantity": 5
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 69694.4
@@ -11437,18 +10850,15 @@
       "materials": [
         {
           "name": "Enigmatic Stone",
-          "quantity": 30,
-          "unitCost": 61.9
+          "quantity": 30
         },
         {
           "name": "Venom Extract",
-          "quantity": 20,
-          "unitCost": 99.4
+          "quantity": 20
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 703555.3
@@ -11459,23 +10869,19 @@
       "materials": [
         {
           "name": "Forbidden Tome",
-          "quantity": 10,
-          "unitCost": 50.7
+          "quantity": 10
         },
         {
           "name": "Umbral Claw",
-          "quantity": 5,
-          "unitCost": 180.2
+          "quantity": 5
         },
         {
           "name": "Vial of Spectre Ectoplasm",
-          "quantity": 10,
-          "unitCost": 154.4
+          "quantity": 10
         },
         {
           "name": "Willow Log",
-          "quantity": 500,
-          "unitCost": 16.9
+          "quantity": 500
         }
       ],
       "currentPrice": 98700
@@ -11486,23 +10892,19 @@
       "materials": [
         {
           "name": "Arcane Starstone",
-          "quantity": 4,
-          "unitCost": 3872.8
+          "quantity": 4
         },
         {
           "name": "Bone Fragment",
-          "quantity": 30,
-          "unitCost": 42.9
+          "quantity": 30
         },
         {
           "name": "Goblin Crown",
-          "quantity": 10,
-          "unitCost": 1743.2
+          "quantity": 10
         },
         {
           "name": "Mystical Log",
-          "quantity": 10000,
-          "unitCost": 29.7
+          "quantity": 10000
         }
       ],
       "currentPrice": 1291999.9
@@ -11513,23 +10915,19 @@
       "materials": [
         {
           "name": "Cursed Cloth",
-          "quantity": 70,
-          "unitCost": 8.4
+          "quantity": 70
         },
         {
           "name": "Harpy's Wings",
-          "quantity": 70,
-          "unitCost": 9.7
+          "quantity": 70
         },
         {
           "name": "Vial of Spectre Ectoplasm",
-          "quantity": 10,
-          "unitCost": 154.4
+          "quantity": 10
         },
         {
           "name": "Lobster",
-          "quantity": 900,
-          "unitCost": 28.2
+          "quantity": 900
         }
       ],
       "currentPrice": 97159
@@ -11540,18 +10938,15 @@
       "materials": [
         {
           "name": "Dwarven Whetstone",
-          "quantity": 50,
-          "unitCost": 20
+          "quantity": 50
         },
         {
           "name": "Stoneheart Core",
-          "quantity": 20,
-          "unitCost": 247
+          "quantity": 20
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 697900
@@ -11562,28 +10957,23 @@
       "materials": [
         {
           "name": "Void Essence",
-          "quantity": 1,
-          "unitCost": 250.2
+          "quantity": 1
         },
         {
           "name": "Ivory",
-          "quantity": 12,
-          "unitCost": 327.9
+          "quantity": 12
         },
         {
           "name": "Wolf Pelt",
-          "quantity": 15,
-          "unitCost": 89.1
+          "quantity": 15
         },
         {
           "name": "Cursed Talisman",
-          "quantity": 60,
-          "unitCost": 26.1
+          "quantity": 60
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 123736.1
@@ -11594,28 +10984,23 @@
       "materials": [
         {
           "name": "Minotaur Hide",
-          "quantity": 50,
-          "unitCost": 411.2
+          "quantity": 50
         },
         {
           "name": "Boar Tusk",
-          "quantity": 10,
-          "unitCost": 404.9
+          "quantity": 10
         },
         {
           "name": "Abyssal Scroll",
-          "quantity": 2,
-          "unitCost": 436.6
+          "quantity": 2
         },
         {
           "name": "Cursed Blade Fragment",
-          "quantity": 12,
-          "unitCost": 88.9
+          "quantity": 12
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 1071949.8
@@ -11626,18 +11011,15 @@
       "materials": [
         {
           "name": "Minotaur Hide",
-          "quantity": 50,
-          "unitCost": 411.2
+          "quantity": 50
         },
         {
           "name": "Goblin Crown",
-          "quantity": 10,
-          "unitCost": 1743.2
+          "quantity": 10
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 1135399.9
@@ -11648,18 +11030,15 @@
       "materials": [
         {
           "name": "Void Essence",
-          "quantity": 10,
-          "unitCost": 250.2
+          "quantity": 10
         },
         {
           "name": "Essence of Shadows",
-          "quantity": 5,
-          "unitCost": 284.2
+          "quantity": 5
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 112287.5
@@ -11670,33 +11049,27 @@
       "materials": [
         {
           "name": "Void Essence",
-          "quantity": 15,
-          "unitCost": 250.2
+          "quantity": 15
         },
         {
           "name": "Ducks Mouth",
-          "quantity": 15,
-          "unitCost": 49.3
+          "quantity": 15
         },
         {
           "name": "Deer Antler",
-          "quantity": 6,
-          "unitCost": 99.4
+          "quantity": 6
         },
         {
           "name": "Wolf Pelt",
-          "quantity": 15,
-          "unitCost": 89.1
+          "quantity": 15
         },
         {
           "name": "Dwarven Whetstone",
-          "quantity": 50,
-          "unitCost": 20
+          "quantity": 50
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 989900
@@ -11707,23 +11080,19 @@
       "materials": [
         {
           "name": "Lions Teeth",
-          "quantity": 30,
-          "unitCost": 251
+          "quantity": 30
         },
         {
           "name": "Vial of Spectre Ectoplasm",
-          "quantity": 7,
-          "unitCost": 154.4
+          "quantity": 7
         },
         {
           "name": "Goblin Totem",
-          "quantity": 30,
-          "unitCost": 26.5
+          "quantity": 30
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 71328.7
@@ -11734,33 +11103,27 @@
       "materials": [
         {
           "name": "Arcane Starstone",
-          "quantity": 3,
-          "unitCost": 3872.8
+          "quantity": 3
         },
         {
           "name": "Moose Antler",
-          "quantity": 20,
-          "unitCost": 121.1
+          "quantity": 20
         },
         {
           "name": "Bone Fragment",
-          "quantity": 30,
-          "unitCost": 42.9
+          "quantity": 30
         },
         {
           "name": "Lions Teeth",
-          "quantity": 20,
-          "unitCost": 251
+          "quantity": 20
         },
         {
           "name": "Dwarven Whetstone",
-          "quantity": 35,
-          "unitCost": 20
+          "quantity": 35
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 1695000
@@ -11771,18 +11134,15 @@
       "materials": [
         {
           "name": "Minotaurs Horn",
-          "quantity": 75,
-          "unitCost": 9
+          "quantity": 75
         },
         {
           "name": "Umbral Claw",
-          "quantity": 65,
-          "unitCost": 180.2
+          "quantity": 65
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 30358.8
@@ -11793,23 +11153,19 @@
       "materials": [
         {
           "name": "Undying Crest",
-          "quantity": 20,
-          "unitCost": 206.7
+          "quantity": 20
         },
         {
           "name": "Black Bear Pelt",
-          "quantity": 10,
-          "unitCost": 104.7
+          "quantity": 10
         },
         {
           "name": "Ruined Robes",
-          "quantity": 30,
-          "unitCost": 23
+          "quantity": 30
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 626499.5
@@ -11820,23 +11176,19 @@
       "materials": [
         {
           "name": "Siren's Soulstone",
-          "quantity": 5,
-          "unitCost": 185.2
+          "quantity": 5
         },
         {
           "name": "Siren's Scales",
-          "quantity": 3,
-          "unitCost": 18.6
+          "quantity": 3
         },
         {
           "name": "Stoneheart Core",
-          "quantity": 2,
-          "unitCost": 247
+          "quantity": 2
         },
         {
           "name": "Enigmatic Stone",
-          "quantity": 6,
-          "unitCost": 61.9
+          "quantity": 6
         }
       ],
       "currentPrice": 2660799.9
@@ -11847,23 +11199,19 @@
       "materials": [
         {
           "name": "Ivory",
-          "quantity": 3,
-          "unitCost": 327.9
+          "quantity": 3
         },
         {
           "name": "Elk Antler",
-          "quantity": 3,
-          "unitCost": 346.3
+          "quantity": 3
         },
         {
           "name": "Vial of Wraith Ectoplasm",
-          "quantity": 5,
-          "unitCost": 79.5
+          "quantity": 5
         },
         {
           "name": "Moose Antler",
-          "quantity": 4,
-          "unitCost": 121.1
+          "quantity": 4
         }
       ],
       "currentPrice": 2274900
@@ -11874,18 +11222,15 @@
       "materials": [
         {
           "name": "Umbral Claw",
-          "quantity": 5,
-          "unitCost": 180.2
+          "quantity": 5
         },
         {
           "name": "Oceanic Essence",
-          "quantity": 2,
-          "unitCost": 259
+          "quantity": 2
         },
         {
           "name": "Lions Teeth",
-          "quantity": 3,
-          "unitCost": 251
+          "quantity": 3
         }
       ],
       "currentPrice": 968996.8
@@ -11896,18 +11241,15 @@
       "materials": [
         {
           "name": "Moonblood Tincture",
-          "quantity": 1,
-          "unitCost": 43310.1
+          "quantity": 1
         },
         {
           "name": "Goblin Crown",
-          "quantity": 5,
-          "unitCost": 1743.2
+          "quantity": 5
         },
         {
           "name": "Arcane Vial",
-          "quantity": 1,
-          "unitCost": 2500
+          "quantity": 1
         }
       ],
       "currentPrice": 178938.7
@@ -11918,18 +11260,15 @@
       "materials": [
         {
           "name": "Arcane Starstone",
-          "quantity": 6,
-          "unitCost": 3872.8
+          "quantity": 6
         },
         {
           "name": "Goblin Totem",
-          "quantity": 100,
-          "unitCost": 26.5
+          "quantity": 100
         },
         {
           "name": "Arcane Crystal",
-          "quantity": 1,
-          "unitCost": 2500
+          "quantity": 1
         }
       ],
       "currentPrice": 31832.8
@@ -11940,18 +11279,15 @@
       "materials": [
         {
           "name": "Siren's Soulstone",
-          "quantity": 20,
-          "unitCost": 185.2
+          "quantity": 20
         },
         {
           "name": "Goblin Pouch",
-          "quantity": 50,
-          "unitCost": 35.7
+          "quantity": 50
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 189730.8
@@ -11962,28 +11298,23 @@
       "materials": [
         {
           "name": "Arcane Starstone",
-          "quantity": 3,
-          "unitCost": 3872.8
+          "quantity": 3
         },
         {
           "name": "Umbral Claw",
-          "quantity": 7,
-          "unitCost": 180.2
+          "quantity": 7
         },
         {
           "name": "Vial of Spectre Ectoplasm",
-          "quantity": 5,
-          "unitCost": 154.4
+          "quantity": 5
         },
         {
           "name": "Deer Antler",
-          "quantity": 20,
-          "unitCost": 99.4
+          "quantity": 20
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 2148400
@@ -11994,28 +11325,23 @@
       "materials": [
         {
           "name": "Siren's Soulstone",
-          "quantity": 10,
-          "unitCost": 185.2
+          "quantity": 10
         },
         {
           "name": "Abyssal Scroll",
-          "quantity": 4,
-          "unitCost": 436.6
+          "quantity": 4
         },
         {
           "name": "Lions Teeth",
-          "quantity": 10,
-          "unitCost": 251
+          "quantity": 10
         },
         {
           "name": "Swamp Juice",
-          "quantity": 5,
-          "unitCost": 116.3
+          "quantity": 5
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 79284.6
@@ -12026,33 +11352,27 @@
       "materials": [
         {
           "name": "Goblin Scraps",
-          "quantity": 23,
-          "unitCost": 162.8
+          "quantity": 23
         },
         {
           "name": "Elk Antler",
-          "quantity": 44,
-          "unitCost": 346.3
+          "quantity": 44
         },
         {
           "name": "Chest of Scraps",
-          "quantity": 44,
-          "unitCost": 195.9
+          "quantity": 44
         },
         {
           "name": "Harpy's Wings",
-          "quantity": 20,
-          "unitCost": 9.7
+          "quantity": 20
         },
         {
           "name": "Golem Core Fragment",
-          "quantity": 20,
-          "unitCost": 19.9
+          "quantity": 20
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 750000
@@ -12063,28 +11383,23 @@
       "materials": [
         {
           "name": "Buffalo Horn",
-          "quantity": 10,
-          "unitCost": 50.4
+          "quantity": 10
         },
         {
           "name": "Long Forgotten Necklace",
-          "quantity": 20,
-          "unitCost": 16.2
+          "quantity": 20
         },
         {
           "name": "Slime Extract",
-          "quantity": 40,
-          "unitCost": 9.2
+          "quantity": 40
         },
         {
           "name": "Venom Extract",
-          "quantity": 20,
-          "unitCost": 99.4
+          "quantity": 20
         },
         {
           "name": "Mahogany Log",
-          "quantity": 500,
-          "unitCost": 18.4
+          "quantity": 500
         }
       ],
       "currentPrice": 285800
@@ -12095,28 +11410,23 @@
       "materials": [
         {
           "name": "Vial of Wraith Ectoplasm",
-          "quantity": 30,
-          "unitCost": 79.5
+          "quantity": 30
         },
         {
           "name": "Minotaurs Horn",
-          "quantity": 40,
-          "unitCost": 9
+          "quantity": 40
         },
         {
           "name": "Dwarven Whetstone",
-          "quantity": 40,
-          "unitCost": 20
+          "quantity": 40
         },
         {
           "name": "Void Essence",
-          "quantity": 15,
-          "unitCost": 250.2
+          "quantity": 15
         },
         {
           "name": "Mystical Log",
-          "quantity": 10000,
-          "unitCost": 29.7
+          "quantity": 10000
         }
       ],
       "currentPrice": 2950000
@@ -12127,23 +11437,19 @@
       "materials": [
         {
           "name": "Elk Antler",
-          "quantity": 35,
-          "unitCost": 346.3
+          "quantity": 35
         },
         {
           "name": "Lucky Rabbit Foot",
-          "quantity": 60,
-          "unitCost": 97
+          "quantity": 60
         },
         {
           "name": "Enigmatic Stone",
-          "quantity": 15,
-          "unitCost": 61.9
+          "quantity": 15
         },
         {
           "name": "Crab",
-          "quantity": 900,
-          "unitCost": 29.7
+          "quantity": 900
         }
       ],
       "currentPrice": 314750
@@ -12154,18 +11460,15 @@
       "materials": [
         {
           "name": "Water Elemental Essence",
-          "quantity": 15,
-          "unitCost": 150.5
+          "quantity": 15
         },
         {
           "name": "Grimoire of Shadows",
-          "quantity": 3,
-          "unitCost": 4959.6
+          "quantity": 3
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 1180833.3333333333
@@ -12176,28 +11479,23 @@
       "materials": [
         {
           "name": "Golem Core Fragment",
-          "quantity": 40,
-          "unitCost": 19.9
+          "quantity": 40
         },
         {
           "name": "Enigmatic Stone",
-          "quantity": 10,
-          "unitCost": 61.9
+          "quantity": 10
         },
         {
           "name": "Raw Onion",
-          "quantity": 15,
-          "unitCost": 43.7
+          "quantity": 15
         },
         {
           "name": "Grimoire of Shadows",
-          "quantity": 2,
-          "unitCost": 4959.6
+          "quantity": 2
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 251734.1
@@ -12208,18 +11506,15 @@
       "materials": [
         {
           "name": "Goblin Scraps",
-          "quantity": 40,
-          "unitCost": 162.8
+          "quantity": 40
         },
         {
           "name": "Vial of Spectre Ectoplasm",
-          "quantity": 4,
-          "unitCost": 154.4
+          "quantity": 4
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 329379.6
@@ -12230,18 +11525,15 @@
       "materials": [
         {
           "name": "Oceanic Essence",
-          "quantity": 10,
-          "unitCost": 259
+          "quantity": 10
         },
         {
           "name": "Deer Antler",
-          "quantity": 80,
-          "unitCost": 99.4
+          "quantity": 80
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 1140000
@@ -12252,18 +11544,15 @@
       "materials": [
         {
           "name": "Forbidden Tome",
-          "quantity": 25,
-          "unitCost": 50.7
+          "quantity": 25
         },
         {
           "name": "Long Forgotten Necklace",
-          "quantity": 100,
-          "unitCost": 16.2
+          "quantity": 100
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 386999.9
@@ -12274,28 +11563,23 @@
       "materials": [
         {
           "name": "Void Essence",
-          "quantity": 10,
-          "unitCost": 250.2
+          "quantity": 10
         },
         {
           "name": "Air Elemental Essence",
-          "quantity": 10,
-          "unitCost": 277.9
+          "quantity": 10
         },
         {
           "name": "Snakes Head",
-          "quantity": 30,
-          "unitCost": 166.6
+          "quantity": 30
         },
         {
           "name": "Lions Teeth",
-          "quantity": 30,
-          "unitCost": 251
+          "quantity": 30
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 1231166.6666666667
@@ -12306,18 +11590,15 @@
       "materials": [
         {
           "name": "Elk Antler",
-          "quantity": 50,
-          "unitCost": 346.3
+          "quantity": 50
         },
         {
           "name": "Goblin Crown",
-          "quantity": 5,
-          "unitCost": 1743.2
+          "quantity": 5
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 205171.7
@@ -12328,28 +11609,23 @@
       "materials": [
         {
           "name": "Deer Antler",
-          "quantity": 15,
-          "unitCost": 99.4
+          "quantity": 15
         },
         {
           "name": "Cursed Cloth",
-          "quantity": 31,
-          "unitCost": 8.4
+          "quantity": 31
         },
         {
           "name": "Essence of Shadows",
-          "quantity": 15,
-          "unitCost": 284.2
+          "quantity": 15
         },
         {
           "name": "Goblin Totem",
-          "quantity": 15,
-          "unitCost": 26.5
+          "quantity": 15
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 1355833.25
@@ -12360,18 +11636,15 @@
       "materials": [
         {
           "name": "Undying Crest",
-          "quantity": 15,
-          "unitCost": 206.7
+          "quantity": 15
         },
         {
           "name": "Cursed Blade Fragment",
-          "quantity": 30,
-          "unitCost": 88.9
+          "quantity": 30
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 107135.9
@@ -12382,28 +11655,23 @@
       "materials": [
         {
           "name": "Forbidden Tome",
-          "quantity": 10,
-          "unitCost": 50.7
+          "quantity": 10
         },
         {
           "name": "Grimoire of Shadows",
-          "quantity": 2,
-          "unitCost": 4959.6
+          "quantity": 2
         },
         {
           "name": "Orb of Elemental Conjuring",
-          "quantity": 12,
-          "unitCost": 88.1
+          "quantity": 12
         },
         {
           "name": "Harpy's Wings",
-          "quantity": 30,
-          "unitCost": 9.7
+          "quantity": 30
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 2303703.3333333335
@@ -12414,28 +11682,23 @@
       "materials": [
         {
           "name": "Golem Core Fragment",
-          "quantity": 40,
-          "unitCost": 19.9
+          "quantity": 40
         },
         {
           "name": "Bone Fragment",
-          "quantity": 30,
-          "unitCost": 42.9
+          "quantity": 30
         },
         {
           "name": "Minotaur Hide",
-          "quantity": 15,
-          "unitCost": 411.2
+          "quantity": 15
         },
         {
           "name": "Lucky Rabbit Foot",
-          "quantity": 50,
-          "unitCost": 97
+          "quantity": 50
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 60649.9
@@ -12446,23 +11709,19 @@
       "materials": [
         {
           "name": "Siren's Soulstone",
-          "quantity": 20,
-          "unitCost": 185.2
+          "quantity": 20
         },
         {
           "name": "Pirates Code",
-          "quantity": 10,
-          "unitCost": 47.4
+          "quantity": 10
         },
         {
           "name": "Oceanic Essence",
-          "quantity": 12,
-          "unitCost": 259
+          "quantity": 12
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 700000
@@ -12473,18 +11732,15 @@
       "materials": [
         {
           "name": "Void Essence",
-          "quantity": 13,
-          "unitCost": 250.2
+          "quantity": 13
         },
         {
           "name": "Pirates Code",
-          "quantity": 50,
-          "unitCost": 47.4
+          "quantity": 50
         },
         {
           "name": "Arcane Crystal",
-          "quantity": 1,
-          "unitCost": 2500
+          "quantity": 1
         }
       ],
       "currentPrice": 34799.6
@@ -12495,18 +11751,15 @@
       "materials": [
         {
           "name": "Basilisk Venom Vial",
-          "quantity": 3,
-          "unitCost": 8829.9
+          "quantity": 3
         },
         {
           "name": "Raccoon Fur",
-          "quantity": 20,
-          "unitCost": 75.6
+          "quantity": 20
         },
         {
           "name": "Arcane Vial",
-          "quantity": 1,
-          "unitCost": 2500
+          "quantity": 1
         }
       ],
       "currentPrice": 277100
@@ -12517,18 +11770,15 @@
       "materials": [
         {
           "name": "Siren's Soulstone",
-          "quantity": 30,
-          "unitCost": 185.2
+          "quantity": 30
         },
         {
           "name": "Cursed Talisman",
-          "quantity": 60,
-          "unitCost": 26.1
+          "quantity": 60
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 1007735.3
@@ -12539,28 +11789,23 @@
       "materials": [
         {
           "name": "Forbidden Tome",
-          "quantity": 30,
-          "unitCost": 50.7
+          "quantity": 30
         },
         {
           "name": "Elk Antler",
-          "quantity": 4,
-          "unitCost": 346.3
+          "quantity": 4
         },
         {
           "name": "Essence of Shadows",
-          "quantity": 5,
-          "unitCost": 284.2
+          "quantity": 5
         },
         {
           "name": "Snakes Head",
-          "quantity": 25,
-          "unitCost": 166.6
+          "quantity": 25
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 3277500
@@ -12571,28 +11816,23 @@
       "materials": [
         {
           "name": "Harpy's Wings",
-          "quantity": 10,
-          "unitCost": 9.7
+          "quantity": 10
         },
         {
           "name": "Minotaur Hide",
-          "quantity": 10,
-          "unitCost": 411.2
+          "quantity": 10
         },
         {
           "name": "Air Elemental Essence",
-          "quantity": 7,
-          "unitCost": 277.9
+          "quantity": 7
         },
         {
           "name": "Grimoire of Shadows",
-          "quantity": 3,
-          "unitCost": 4959.6
+          "quantity": 3
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 1019400
@@ -12603,28 +11843,23 @@
       "materials": [
         {
           "name": "Stoneheart Core",
-          "quantity": 10,
-          "unitCost": 247
+          "quantity": 10
         },
         {
           "name": "Snakes Head",
-          "quantity": 5,
-          "unitCost": 166.6
+          "quantity": 5
         },
         {
           "name": "Ruined Robes",
-          "quantity": 10,
-          "unitCost": 23
+          "quantity": 10
         },
         {
           "name": "Pirates Code",
-          "quantity": 30,
-          "unitCost": 47.4
+          "quantity": 30
         },
         {
           "name": "Mahogany Log",
-          "quantity": 500,
-          "unitCost": 18.4
+          "quantity": 500
         }
       ],
       "currentPrice": 557498
@@ -12635,33 +11870,27 @@
       "materials": [
         {
           "name": "Cursed Blade Fragment",
-          "quantity": 60,
-          "unitCost": 88.9
+          "quantity": 60
         },
         {
           "name": "Harpy's Wings",
-          "quantity": 30,
-          "unitCost": 9.7
+          "quantity": 30
         },
         {
           "name": "Minotaur Hide",
-          "quantity": 40,
-          "unitCost": 411.2
+          "quantity": 40
         },
         {
           "name": "Broken Dwarven Plate",
-          "quantity": 30,
-          "unitCost": 308.8
+          "quantity": 30
         },
         {
           "name": "Air Elemental Essence",
-          "quantity": 2,
-          "unitCost": 277.9
+          "quantity": 2
         },
         {
           "name": "Mystical Log",
-          "quantity": 10000,
-          "unitCost": 29.7
+          "quantity": 10000
         }
       ],
       "currentPrice": 4064999.8
@@ -12672,18 +11901,15 @@
       "materials": [
         {
           "name": "Cursed Cloth",
-          "quantity": 50,
-          "unitCost": 8.4
+          "quantity": 50
         },
         {
           "name": "Undying Crest",
-          "quantity": 30,
-          "unitCost": 206.7
+          "quantity": 30
         },
         {
           "name": "Crab",
-          "quantity": 1000,
-          "unitCost": 29.7
+          "quantity": 1000
         }
       ],
       "currentPrice": 445195
@@ -12694,18 +11920,15 @@
       "materials": [
         {
           "name": "Vial of Wraith Ectoplasm",
-          "quantity": 20,
-          "unitCost": 79.5
+          "quantity": 20
         },
         {
           "name": "Arcane Starstone",
-          "quantity": 7,
-          "unitCost": 3872.8
+          "quantity": 7
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 2383542
@@ -12716,13 +11939,11 @@
       "materials": [
         {
           "name": "Essence of Shadows",
-          "quantity": 16,
-          "unitCost": 284.2
+          "quantity": 16
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 520999.9
@@ -12733,28 +11954,23 @@
       "materials": [
         {
           "name": "Buffalo Horn",
-          "quantity": 40,
-          "unitCost": 50.4
+          "quantity": 40
         },
         {
           "name": "Void Essence",
-          "quantity": 4,
-          "unitCost": 250.2
+          "quantity": 4
         },
         {
           "name": "Polar Bear Pelt",
-          "quantity": 20,
-          "unitCost": 220.8
+          "quantity": 20
         },
         {
           "name": "Arcane Starstone",
-          "quantity": 3,
-          "unitCost": 3872.8
+          "quantity": 3
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 1480185
@@ -12765,33 +11981,27 @@
       "materials": [
         {
           "name": "Undying Crest",
-          "quantity": 5,
-          "unitCost": 206.7
+          "quantity": 5
         },
         {
           "name": "Boar Tusk",
-          "quantity": 10,
-          "unitCost": 404.9
+          "quantity": 10
         },
         {
           "name": "Vial of Wraith Ectoplasm",
-          "quantity": 3,
-          "unitCost": 79.5
+          "quantity": 3
         },
         {
           "name": "Moose Antler",
-          "quantity": 10,
-          "unitCost": 121.1
+          "quantity": 10
         },
         {
           "name": "Cursed Talisman",
-          "quantity": 30,
-          "unitCost": 26.1
+          "quantity": 30
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 908901.5
@@ -12802,23 +12012,19 @@
       "materials": [
         {
           "name": "Black Bear Pelt",
-          "quantity": 60,
-          "unitCost": 104.7
+          "quantity": 60
         },
         {
           "name": "Stoneheart Core",
-          "quantity": 10,
-          "unitCost": 247
+          "quantity": 10
         },
         {
           "name": "Moose Antler",
-          "quantity": 15,
-          "unitCost": 121.1
+          "quantity": 15
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 2037000
@@ -12829,33 +12035,27 @@
       "materials": [
         {
           "name": "Golem Core Fragment",
-          "quantity": 50,
-          "unitCost": 19.9
+          "quantity": 50
         },
         {
           "name": "Goblin Pouch",
-          "quantity": 30,
-          "unitCost": 35.7
+          "quantity": 30
         },
         {
           "name": "Goblin Crown",
-          "quantity": 5,
-          "unitCost": 1743.2
+          "quantity": 5
         },
         {
           "name": "Chest of Scraps",
-          "quantity": 20,
-          "unitCost": 195.9
+          "quantity": 20
         },
         {
           "name": "Snakes Head",
-          "quantity": 20,
-          "unitCost": 166.6
+          "quantity": 20
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 1306696.9
@@ -12866,33 +12066,27 @@
       "materials": [
         {
           "name": "Raw Onion",
-          "quantity": 30,
-          "unitCost": 43.7
+          "quantity": 30
         },
         {
           "name": "Stoneheart Core",
-          "quantity": 5,
-          "unitCost": 247
+          "quantity": 5
         },
         {
           "name": "Lucky Rabbit Foot",
-          "quantity": 30,
-          "unitCost": 97
+          "quantity": 30
         },
         {
           "name": "Abyssal Scroll",
-          "quantity": 3,
-          "unitCost": 436.6
+          "quantity": 3
         },
         {
           "name": "Wolf Pelt",
-          "quantity": 20,
-          "unitCost": 89.1
+          "quantity": 20
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 1900000
@@ -12903,18 +12097,15 @@
       "materials": [
         {
           "name": "Broken Dwarven Plate",
-          "quantity": 15,
-          "unitCost": 308.8
+          "quantity": 15
         },
         {
           "name": "Forbidden Tome",
-          "quantity": 25,
-          "unitCost": 50.7
+          "quantity": 25
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 228029.9
@@ -12925,28 +12116,23 @@
       "materials": [
         {
           "name": "Lions Teeth",
-          "quantity": 16,
-          "unitCost": 251
+          "quantity": 16
         },
         {
           "name": "Arcane Starstone",
-          "quantity": 5,
-          "unitCost": 3872.8
+          "quantity": 5
         },
         {
           "name": "Cursed Talisman",
-          "quantity": 10,
-          "unitCost": 26.1
+          "quantity": 10
         },
         {
           "name": "Boar Tusk",
-          "quantity": 5,
-          "unitCost": 404.9
+          "quantity": 5
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 2234710
@@ -12957,18 +12143,15 @@
       "materials": [
         {
           "name": "Slime Extract",
-          "quantity": 80,
-          "unitCost": 9.2
+          "quantity": 80
         },
         {
           "name": "Minotaur Hide",
-          "quantity": 80,
-          "unitCost": 411.2
+          "quantity": 80
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 187901.4
@@ -12979,28 +12162,23 @@
       "materials": [
         {
           "name": "Goblin Pouch",
-          "quantity": 75,
-          "unitCost": 35.7
+          "quantity": 75
         },
         {
           "name": "Lions Teeth",
-          "quantity": 40,
-          "unitCost": 251
+          "quantity": 40
         },
         {
           "name": "Chest of Scraps",
-          "quantity": 25,
-          "unitCost": 195.9
+          "quantity": 25
         },
         {
           "name": "Djinn's Bottle",
-          "quantity": 40,
-          "unitCost": 119.3
+          "quantity": 40
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 920799.9
@@ -13011,18 +12189,15 @@
       "materials": [
         {
           "name": "Oceanic Essence",
-          "quantity": 2,
-          "unitCost": 259
+          "quantity": 2
         },
         {
           "name": "Lions Teeth",
-          "quantity": 3,
-          "unitCost": 251
+          "quantity": 3
         },
         {
           "name": "Golem Core Fragment",
-          "quantity": 8,
-          "unitCost": 19.9
+          "quantity": 8
         }
       ],
       "currentPrice": 4527400
@@ -13033,18 +12208,15 @@
       "materials": [
         {
           "name": "Petrifying Gaze Crystal",
-          "quantity": 5,
-          "unitCost": 6833.7
+          "quantity": 5
         },
         {
           "name": "Broken Dwarven Plate",
-          "quantity": 25,
-          "unitCost": 308.8
+          "quantity": 25
         },
         {
           "name": "Arcane Vial",
-          "quantity": 1,
-          "unitCost": 2500
+          "quantity": 1
         }
       ],
       "currentPrice": 119623.7
@@ -13055,33 +12227,27 @@
       "materials": [
         {
           "name": "Siren's Soulstone",
-          "quantity": 35,
-          "unitCost": 185.2
+          "quantity": 35
         },
         {
           "name": "Raw Onion",
-          "quantity": 20,
-          "unitCost": 43.7
+          "quantity": 20
         },
         {
           "name": "Pirates Code",
-          "quantity": 30,
-          "unitCost": 47.4
+          "quantity": 30
         },
         {
           "name": "Moose Antler",
-          "quantity": 20,
-          "unitCost": 121.1
+          "quantity": 20
         },
         {
           "name": "Dwarven Whetstone",
-          "quantity": 50,
-          "unitCost": 20
+          "quantity": 50
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 4445000
@@ -13092,23 +12258,19 @@
       "materials": [
         {
           "name": "Polar Bear Pelt",
-          "quantity": 10,
-          "unitCost": 220.8
+          "quantity": 10
         },
         {
           "name": "Siren's Soulstone",
-          "quantity": 30,
-          "unitCost": 185.2
+          "quantity": 30
         },
         {
           "name": "Cursed Talisman",
-          "quantity": 50,
-          "unitCost": 26.1
+          "quantity": 50
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 392799.9
@@ -13119,23 +12281,19 @@
       "materials": [
         {
           "name": "Chest of Scraps",
-          "quantity": 70,
-          "unitCost": 195.9
+          "quantity": 70
         },
         {
           "name": "Ruined Robes",
-          "quantity": 41,
-          "unitCost": 23
+          "quantity": 41
         },
         {
           "name": "Enigmatic Stone",
-          "quantity": 60,
-          "unitCost": 61.9
+          "quantity": 60
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 2543785.4444444445
@@ -13146,28 +12304,23 @@
       "materials": [
         {
           "name": "Djinn's Bottle",
-          "quantity": 10,
-          "unitCost": 119.3
+          "quantity": 10
         },
         {
           "name": "Undying Crest",
-          "quantity": 17,
-          "unitCost": 206.7
+          "quantity": 17
         },
         {
           "name": "Swamp Juice",
-          "quantity": 30,
-          "unitCost": 116.3
+          "quantity": 30
         },
         {
           "name": "Raw Onion",
-          "quantity": 20,
-          "unitCost": 43.7
+          "quantity": 20
         },
         {
           "name": "Mahogany Log",
-          "quantity": 500,
-          "unitCost": 18.4
+          "quantity": 500
         }
       ],
       "currentPrice": 1243896.6
@@ -13178,23 +12331,19 @@
       "materials": [
         {
           "name": "Fire Elemental Essence",
-          "quantity": 15,
-          "unitCost": 151.8
+          "quantity": 15
         },
         {
           "name": "Arcane Starstone",
-          "quantity": 4,
-          "unitCost": 3872.8
+          "quantity": 4
         },
         {
           "name": "Undying Crest",
-          "quantity": 12,
-          "unitCost": 206.7
+          "quantity": 12
         },
         {
           "name": "Mystical Log",
-          "quantity": 10000,
-          "unitCost": 29.7
+          "quantity": 10000
         }
       ],
       "currentPrice": 1500000
@@ -13205,18 +12354,15 @@
       "materials": [
         {
           "name": "Grimoire of Shadows",
-          "quantity": 3,
-          "unitCost": 4959.6
+          "quantity": 3
         },
         {
           "name": "Cursed Blade Fragment",
-          "quantity": 18,
-          "unitCost": 88.9
+          "quantity": 18
         },
         {
           "name": "Crab",
-          "quantity": 1000,
-          "unitCost": 29.7
+          "quantity": 1000
         }
       ],
       "currentPrice": 1568274.2
@@ -13227,18 +12373,15 @@
       "materials": [
         {
           "name": "Aetherial Feather Quill",
-          "quantity": 100,
-          "unitCost": 8.5
+          "quantity": 100
         },
         {
           "name": "Air Elemental Essence",
-          "quantity": 50,
-          "unitCost": 277.9
+          "quantity": 50
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 3133333.3333333335
@@ -13249,28 +12392,23 @@
       "materials": [
         {
           "name": "Siren's Scales",
-          "quantity": 100,
-          "unitCost": 18.6
+          "quantity": 100
         },
         {
           "name": "Venom Extract",
-          "quantity": 5,
-          "unitCost": 99.4
+          "quantity": 5
         },
         {
           "name": "Raw Onion",
-          "quantity": 5,
-          "unitCost": 43.7
+          "quantity": 5
         },
         {
           "name": "Buffalo Horn",
-          "quantity": 30,
-          "unitCost": 50.4
+          "quantity": 30
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 1165288.8
@@ -13281,23 +12419,19 @@
       "materials": [
         {
           "name": "Venom Extract",
-          "quantity": 5,
-          "unitCost": 99.4
+          "quantity": 5
         },
         {
           "name": "Elk Antler",
-          "quantity": 50,
-          "unitCost": 346.3
+          "quantity": 50
         },
         {
           "name": "Swamp Juice",
-          "quantity": 80,
-          "unitCost": 116.3
+          "quantity": 80
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 3700000
@@ -13308,38 +12442,31 @@
       "materials": [
         {
           "name": "Arcane Starstone",
-          "quantity": 8,
-          "unitCost": 3872.8
+          "quantity": 8
         },
         {
           "name": "Stoneheart Core",
-          "quantity": 10,
-          "unitCost": 247
+          "quantity": 10
         },
         {
           "name": "Vial of Wraith Ectoplasm",
-          "quantity": 50,
-          "unitCost": 79.5
+          "quantity": 50
         },
         {
           "name": "Coal Ore",
-          "quantity": 25,
-          "unitCost": 5.2
+          "quantity": 25
         },
         {
           "name": "Uranium Bar",
-          "quantity": 15,
-          "unitCost": 44.3
+          "quantity": 15
         },
         {
           "name": "Chromite Bar",
-          "quantity": 50,
-          "unitCost": 31.7
+          "quantity": 50
         },
         {
           "name": "Steel Bar",
-          "quantity": 75,
-          "unitCost": 19.1
+          "quantity": 75
         }
       ],
       "currentPrice": 3000000
@@ -13350,23 +12477,19 @@
       "materials": [
         {
           "name": "Ivory",
-          "quantity": 45,
-          "unitCost": 327.9
+          "quantity": 45
         },
         {
           "name": "Ducks Mouth",
-          "quantity": 20,
-          "unitCost": 49.3
+          "quantity": 20
         },
         {
           "name": "Dwarven Whetstone",
-          "quantity": 25,
-          "unitCost": 20
+          "quantity": 25
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 0
@@ -13377,18 +12500,15 @@
       "materials": [
         {
           "name": "Lions Teeth",
-          "quantity": 100,
-          "unitCost": 251
+          "quantity": 100
         },
         {
           "name": "Moose Antler",
-          "quantity": 60,
-          "unitCost": 121.1
+          "quantity": 60
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 0
@@ -13399,28 +12519,23 @@
       "materials": [
         {
           "name": "Moose Antler",
-          "quantity": 10,
-          "unitCost": 121.1
+          "quantity": 10
         },
         {
           "name": "Enigmatic Stone",
-          "quantity": 10,
-          "unitCost": 61.9
+          "quantity": 10
         },
         {
           "name": "Harpy's Wings",
-          "quantity": 10,
-          "unitCost": 9.7
+          "quantity": 10
         },
         {
           "name": "Basilisk Venom Vial",
-          "quantity": 3,
-          "unitCost": 8829.9
+          "quantity": 3
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 2000000
@@ -13431,23 +12546,19 @@
       "materials": [
         {
           "name": "Stoneheart Core",
-          "quantity": 2,
-          "unitCost": 247
+          "quantity": 2
         },
         {
           "name": "Enigmatic Stone",
-          "quantity": 6,
-          "unitCost": 61.9
+          "quantity": 6
         },
         {
           "name": "Void Essence",
-          "quantity": 3,
-          "unitCost": 250.2
+          "quantity": 3
         },
         {
           "name": "Raccoon Fur",
-          "quantity": 10,
-          "unitCost": 75.6
+          "quantity": 10
         }
       ],
       "currentPrice": 6333333.333333333
@@ -13458,18 +12569,15 @@
       "materials": [
         {
           "name": "Grimoire of Shadows",
-          "quantity": 2,
-          "unitCost": 4959.6
+          "quantity": 2
         },
         {
           "name": "Chest of Scraps",
-          "quantity": 40,
-          "unitCost": 195.9
+          "quantity": 40
         },
         {
           "name": "Arcane Vial",
-          "quantity": 1,
-          "unitCost": 2500
+          "quantity": 1
         }
       ],
       "currentPrice": 74963.7
@@ -13480,18 +12588,15 @@
       "materials": [
         {
           "name": "Essence of Shadows",
-          "quantity": 10,
-          "unitCost": 284.2
+          "quantity": 10
         },
         {
           "name": "Swamp Juice",
-          "quantity": 50,
-          "unitCost": 116.3
+          "quantity": 50
         },
         {
           "name": "Arcane Crystal",
-          "quantity": 1,
-          "unitCost": 2500
+          "quantity": 1
         }
       ],
       "currentPrice": 32000
@@ -13502,28 +12607,23 @@
       "materials": [
         {
           "name": "Stoneheart Core",
-          "quantity": 5,
-          "unitCost": 247
+          "quantity": 5
         },
         {
           "name": "Siren's Scales",
-          "quantity": 15,
-          "unitCost": 18.6
+          "quantity": 15
         },
         {
           "name": "Wolf Pelt",
-          "quantity": 15,
-          "unitCost": 89.1
+          "quantity": 15
         },
         {
           "name": "Raw Onion",
-          "quantity": 50,
-          "unitCost": 43.7
+          "quantity": 50
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 158088.6
@@ -13534,18 +12634,15 @@
       "materials": [
         {
           "name": "Vial of Wraith Ectoplasm",
-          "quantity": 50,
-          "unitCost": 79.5
+          "quantity": 50
         },
         {
           "name": "Vial of Spectre Ectoplasm",
-          "quantity": 10,
-          "unitCost": 154.4
+          "quantity": 10
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 0
@@ -13556,23 +12653,19 @@
       "materials": [
         {
           "name": "Broken Dwarven Plate",
-          "quantity": 15,
-          "unitCost": 308.8
+          "quantity": 15
         },
         {
           "name": "Snakes Head",
-          "quantity": 20,
-          "unitCost": 166.6
+          "quantity": 20
         },
         {
           "name": "Deer Antler",
-          "quantity": 40,
-          "unitCost": 99.4
+          "quantity": 40
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 52349.9
@@ -13583,28 +12676,23 @@
       "materials": [
         {
           "name": "Elk Antler",
-          "quantity": 61,
-          "unitCost": 346.3
+          "quantity": 61
         },
         {
           "name": "Goblin Totem",
-          "quantity": 30,
-          "unitCost": 26.5
+          "quantity": 30
         },
         {
           "name": "Golem Core Fragment",
-          "quantity": 60,
-          "unitCost": 19.9
+          "quantity": 60
         },
         {
           "name": "Lucky Rabbit Foot",
-          "quantity": 60,
-          "unitCost": 97
+          "quantity": 60
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 4299999
@@ -13615,23 +12703,19 @@
       "materials": [
         {
           "name": "Vial of Wraith Ectoplasm",
-          "quantity": 12,
-          "unitCost": 79.5
+          "quantity": 12
         },
         {
           "name": "Goblin Pouch",
-          "quantity": 25,
-          "unitCost": 35.7
+          "quantity": 25
         },
         {
           "name": "Ivory",
-          "quantity": 20,
-          "unitCost": 327.9
+          "quantity": 20
         },
         {
           "name": "Mahogany Log",
-          "quantity": 500,
-          "unitCost": 18.4
+          "quantity": 500
         }
       ],
       "currentPrice": 187708.9
@@ -13642,23 +12726,19 @@
       "materials": [
         {
           "name": "Petrifying Gaze Crystal",
-          "quantity": 3,
-          "unitCost": 6833.7
+          "quantity": 3
         },
         {
           "name": "Orb of Elemental Conjuring",
-          "quantity": 20,
-          "unitCost": 88.1
+          "quantity": 20
         },
         {
           "name": "Abyssal Scroll",
-          "quantity": 5,
-          "unitCost": 436.6
+          "quantity": 5
         },
         {
           "name": "Mystical Log",
-          "quantity": 10000,
-          "unitCost": 29.7
+          "quantity": 10000
         }
       ],
       "currentPrice": 0
@@ -13669,18 +12749,15 @@
       "materials": [
         {
           "name": "Oceanic Essence",
-          "quantity": 15,
-          "unitCost": 259
+          "quantity": 15
         },
         {
           "name": "Lions Teeth",
-          "quantity": 20,
-          "unitCost": 251
+          "quantity": 20
         },
         {
           "name": "Crab",
-          "quantity": 900,
-          "unitCost": 29.7
+          "quantity": 900
         }
       ],
       "currentPrice": 264937
@@ -13691,18 +12768,15 @@
       "materials": [
         {
           "name": "Claw of the Alpha",
-          "quantity": 20,
-          "unitCost": 12.9
+          "quantity": 20
         },
         {
           "name": "Petrifying Gaze Crystal",
-          "quantity": 6,
-          "unitCost": 6833.7
+          "quantity": 6
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 0
@@ -13713,28 +12787,23 @@
       "materials": [
         {
           "name": "Cursed Talisman",
-          "quantity": 67,
-          "unitCost": 26.1
+          "quantity": 67
         },
         {
           "name": "Cursed Cloth",
-          "quantity": 10,
-          "unitCost": 8.4
+          "quantity": 10
         },
         {
           "name": "Siren's Soulstone",
-          "quantity": 30,
-          "unitCost": 185.2
+          "quantity": 30
         },
         {
           "name": "Snakes Head",
-          "quantity": 100,
-          "unitCost": 166.6
+          "quantity": 100
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 5500000
@@ -13745,13 +12814,11 @@
       "materials": [
         {
           "name": "Cursed Cloth",
-          "quantity": 300,
-          "unitCost": 8.4
+          "quantity": 300
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 434899.4
@@ -13762,28 +12829,23 @@
       "materials": [
         {
           "name": "Oceanic Essence",
-          "quantity": 9,
-          "unitCost": 259
+          "quantity": 9
         },
         {
           "name": "Forbidden Tome",
-          "quantity": 20,
-          "unitCost": 50.7
+          "quantity": 20
         },
         {
           "name": "Djinn's Bottle",
-          "quantity": 20,
-          "unitCost": 119.3
+          "quantity": 20
         },
         {
           "name": "Water Elemental Essence",
-          "quantity": 10,
-          "unitCost": 150.5
+          "quantity": 10
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 0
@@ -13794,28 +12856,23 @@
       "materials": [
         {
           "name": "Stoneheart Core",
-          "quantity": 10,
-          "unitCost": 247
+          "quantity": 10
         },
         {
           "name": "Minotaur Hide",
-          "quantity": 10,
-          "unitCost": 411.2
+          "quantity": 10
         },
         {
           "name": "Cursed Cloth",
-          "quantity": 15,
-          "unitCost": 8.4
+          "quantity": 15
         },
         {
           "name": "Pirates Code",
-          "quantity": 10,
-          "unitCost": 47.4
+          "quantity": 10
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 154764.7
@@ -13826,23 +12883,19 @@
       "materials": [
         {
           "name": "Siren's Scales",
-          "quantity": 100,
-          "unitCost": 18.6
+          "quantity": 100
         },
         {
           "name": "Goblin Crown",
-          "quantity": 10,
-          "unitCost": 1743.2
+          "quantity": 10
         },
         {
           "name": "Parchment",
-          "quantity": 20,
-          "unitCost": 715.7
+          "quantity": 20
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 0
@@ -13853,28 +12906,23 @@
       "materials": [
         {
           "name": "Moose Antler",
-          "quantity": 30,
-          "unitCost": 121.1
+          "quantity": 30
         },
         {
           "name": "Broken Dwarven Plate",
-          "quantity": 15,
-          "unitCost": 308.8
+          "quantity": 15
         },
         {
           "name": "Raccoon Fur",
-          "quantity": 12,
-          "unitCost": 75.6
+          "quantity": 12
         },
         {
           "name": "Slime Extract",
-          "quantity": 50,
-          "unitCost": 9.2
+          "quantity": 50
         },
         {
           "name": "Lobster",
-          "quantity": 500,
-          "unitCost": 28.2
+          "quantity": 500
         }
       ],
       "currentPrice": 184287.9
@@ -13885,23 +12933,19 @@
       "materials": [
         {
           "name": "Harpy's Wings",
-          "quantity": 76,
-          "unitCost": 9.7
+          "quantity": 76
         },
         {
           "name": "Black Bear Pelt",
-          "quantity": 91,
-          "unitCost": 104.7
+          "quantity": 91
         },
         {
           "name": "Polar Bear Pelt",
-          "quantity": 70,
-          "unitCost": 220.8
+          "quantity": 70
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 3200000
@@ -13912,18 +12956,15 @@
       "materials": [
         {
           "name": "Forbidden Tome",
-          "quantity": 12,
-          "unitCost": 50.7
+          "quantity": 12
         },
         {
           "name": "Siren's Soulstone",
-          "quantity": 30,
-          "unitCost": 185.2
+          "quantity": 30
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 80218.6
@@ -13934,18 +12975,15 @@
       "materials": [
         {
           "name": "Broken Dwarven Plate",
-          "quantity": 45,
-          "unitCost": 308.8
+          "quantity": 45
         },
         {
           "name": "Undying Crest",
-          "quantity": 15,
-          "unitCost": 206.7
+          "quantity": 15
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 4200000
@@ -13956,23 +12994,19 @@
       "materials": [
         {
           "name": "Vial of Wraith Ectoplasm",
-          "quantity": 5,
-          "unitCost": 79.5
+          "quantity": 5
         },
         {
           "name": "Moose Antler",
-          "quantity": 4,
-          "unitCost": 121.1
+          "quantity": 4
         },
         {
           "name": "Stoneheart Core",
-          "quantity": 3,
-          "unitCost": 247
+          "quantity": 3
         },
         {
           "name": "Polar Bear Pelt",
-          "quantity": 10,
-          "unitCost": 220.8
+          "quantity": 10
         }
       ],
       "currentPrice": 6275000
@@ -13983,18 +13017,15 @@
       "materials": [
         {
           "name": "Ruined Robes",
-          "quantity": 25,
-          "unitCost": 23
+          "quantity": 25
         },
         {
           "name": "Enigmatic Stone",
-          "quantity": 80,
-          "unitCost": 61.9
+          "quantity": 80
         },
         {
           "name": "Arcane Vial",
-          "quantity": 1,
-          "unitCost": 2500
+          "quantity": 1
         }
       ],
       "currentPrice": 144170
@@ -14005,18 +13036,15 @@
       "materials": [
         {
           "name": "Undying Crest",
-          "quantity": 12,
-          "unitCost": 206.7
+          "quantity": 12
         },
         {
           "name": "Goblin Scraps",
-          "quantity": 50,
-          "unitCost": 162.8
+          "quantity": 50
         },
         {
           "name": "Arcane Crystal",
-          "quantity": 1,
-          "unitCost": 2500
+          "quantity": 1
         }
       ],
       "currentPrice": 44899.8
@@ -14027,18 +13055,15 @@
       "materials": [
         {
           "name": "Vial of Spectre Ectoplasm",
-          "quantity": 15,
-          "unitCost": 154.4
+          "quantity": 15
         },
         {
           "name": "Lions Teeth",
-          "quantity": 30,
-          "unitCost": 251
+          "quantity": 30
         },
         {
           "name": "Arcane Crystal",
-          "quantity": 1,
-          "unitCost": 2500
+          "quantity": 1
         }
       ],
       "currentPrice": 34506.9
@@ -14049,18 +13074,15 @@
       "materials": [
         {
           "name": "Oceanic Essence",
-          "quantity": 20,
-          "unitCost": 259
+          "quantity": 20
         },
         {
           "name": "Snakes Head",
-          "quantity": 20,
-          "unitCost": 166.6
+          "quantity": 20
         },
         {
           "name": "Arcane Crystal",
-          "quantity": 1,
-          "unitCost": 2500
+          "quantity": 1
         }
       ],
       "currentPrice": 39189.6
@@ -14071,18 +13093,15 @@
       "materials": [
         {
           "name": "Parchment",
-          "quantity": 30,
-          "unitCost": 715.7
+          "quantity": 30
         },
         {
           "name": "Vial of Spectre Ectoplasm",
-          "quantity": 6,
-          "unitCost": 154.4
+          "quantity": 6
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 486060.1
@@ -14093,23 +13112,19 @@
       "materials": [
         {
           "name": "Black Bear Pelt",
-          "quantity": 50,
-          "unitCost": 104.7
+          "quantity": 50
         },
         {
           "name": "Swamp Juice",
-          "quantity": 40,
-          "unitCost": 116.3
+          "quantity": 40
         },
         {
           "name": "Pirates Code",
-          "quantity": 100,
-          "unitCost": 47.4
+          "quantity": 100
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 0
@@ -14120,23 +13135,19 @@
       "materials": [
         {
           "name": "Broken Dwarven Plate",
-          "quantity": 10,
-          "unitCost": 308.8
+          "quantity": 10
         },
         {
           "name": "Vial of Wraith Ectoplasm",
-          "quantity": 10,
-          "unitCost": 79.5
+          "quantity": 10
         },
         {
           "name": "Deer Antler",
-          "quantity": 70,
-          "unitCost": 99.4
+          "quantity": 70
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 162149.9
@@ -14147,28 +13158,23 @@
       "materials": [
         {
           "name": "Long Forgotten Necklace",
-          "quantity": 31,
-          "unitCost": 16.2
+          "quantity": 31
         },
         {
           "name": "Wolf Pelt",
-          "quantity": 40,
-          "unitCost": 89.1
+          "quantity": 40
         },
         {
           "name": "Stoneheart Core",
-          "quantity": 20,
-          "unitCost": 247
+          "quantity": 20
         },
         {
           "name": "Slime Extract",
-          "quantity": 45,
-          "unitCost": 9.2
+          "quantity": 45
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 0
@@ -14179,28 +13185,23 @@
       "materials": [
         {
           "name": "Basilisk Venom Vial",
-          "quantity": 2,
-          "unitCost": 8829.9
+          "quantity": 2
         },
         {
           "name": "Earth Elemental Essence",
-          "quantity": 30,
-          "unitCost": 170.1
+          "quantity": 30
         },
         {
           "name": "Orb of Elemental Conjuring",
-          "quantity": 15,
-          "unitCost": 88.1
+          "quantity": 15
         },
         {
           "name": "Cursed Cloth",
-          "quantity": 15,
-          "unitCost": 8.4
+          "quantity": 15
         },
         {
           "name": "Mystical Log",
-          "quantity": 10000,
-          "unitCost": 29.7
+          "quantity": 10000
         }
       ],
       "currentPrice": 0
@@ -14211,18 +13212,15 @@
       "materials": [
         {
           "name": "Basilisk Venom Vial",
-          "quantity": 4,
-          "unitCost": 8829.9
+          "quantity": 4
         },
         {
           "name": "Vial of Wraith Ectoplasm",
-          "quantity": 20,
-          "unitCost": 79.5
+          "quantity": 20
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 0
@@ -14233,23 +13231,19 @@
       "materials": [
         {
           "name": "Oceanic Essence",
-          "quantity": 10,
-          "unitCost": 259
+          "quantity": 10
         },
         {
           "name": "Stoneheart Core",
-          "quantity": 15,
-          "unitCost": 247
+          "quantity": 15
         },
         {
           "name": "Long Forgotten Necklace",
-          "quantity": 50,
-          "unitCost": 16.2
+          "quantity": 50
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 0
@@ -14260,28 +13254,23 @@
       "materials": [
         {
           "name": "Broken Dwarven Plate",
-          "quantity": 15,
-          "unitCost": 308.8
+          "quantity": 15
         },
         {
           "name": "Siren's Soulstone",
-          "quantity": 15,
-          "unitCost": 185.2
+          "quantity": 15
         },
         {
           "name": "Goblin Crown",
-          "quantity": 3,
-          "unitCost": 1743.2
+          "quantity": 3
         },
         {
           "name": "Djinn's Bottle",
-          "quantity": 30,
-          "unitCost": 119.3
+          "quantity": 30
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 480111
@@ -14292,28 +13281,23 @@
       "materials": [
         {
           "name": "Orb of Elemental Conjuring",
-          "quantity": 30,
-          "unitCost": 88.1
+          "quantity": 30
         },
         {
           "name": "Ruined Robes",
-          "quantity": 10,
-          "unitCost": 23
+          "quantity": 10
         },
         {
           "name": "Boar Tusk",
-          "quantity": 5,
-          "unitCost": 404.9
+          "quantity": 5
         },
         {
           "name": "Abyssal Scroll",
-          "quantity": 9,
-          "unitCost": 436.6
+          "quantity": 9
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 0
@@ -14324,13 +13308,11 @@
       "materials": [
         {
           "name": "Slime Extract",
-          "quantity": 420,
-          "unitCost": 9.2
+          "quantity": 420
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 357500
@@ -14341,28 +13323,23 @@
       "materials": [
         {
           "name": "Arcane Starstone",
-          "quantity": 5,
-          "unitCost": 3872.8
+          "quantity": 5
         },
         {
           "name": "Snakes Head",
-          "quantity": 40,
-          "unitCost": 166.6
+          "quantity": 40
         },
         {
           "name": "Undying Crest",
-          "quantity": 10,
-          "unitCost": 206.7
+          "quantity": 10
         },
         {
           "name": "Lucky Rabbit Foot",
-          "quantity": 20,
-          "unitCost": 97
+          "quantity": 20
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 0
@@ -14373,18 +13350,15 @@
       "materials": [
         {
           "name": "Cursed Talisman",
-          "quantity": 20,
-          "unitCost": 26.1
+          "quantity": 20
         },
         {
           "name": "Goblin Scraps",
-          "quantity": 40,
-          "unitCost": 162.8
+          "quantity": 40
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 207291
@@ -14395,28 +13369,23 @@
       "materials": [
         {
           "name": "Moose Antler",
-          "quantity": 56,
-          "unitCost": 121.1
+          "quantity": 56
         },
         {
           "name": "Air Elemental Essence",
-          "quantity": 10,
-          "unitCost": 277.9
+          "quantity": 10
         },
         {
           "name": "Ruined Robes",
-          "quantity": 10,
-          "unitCost": 23
+          "quantity": 10
         },
         {
           "name": "Boar Tusk",
-          "quantity": 25,
-          "unitCost": 404.9
+          "quantity": 25
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 9000000
@@ -14427,23 +13396,19 @@
       "materials": [
         {
           "name": "Ivory",
-          "quantity": 20,
-          "unitCost": 327.9
+          "quantity": 20
         },
         {
           "name": "Umbral Claw",
-          "quantity": 20,
-          "unitCost": 180.2
+          "quantity": 20
         },
         {
           "name": "Ruined Robes",
-          "quantity": 30,
-          "unitCost": 23
+          "quantity": 30
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 108280.9
@@ -14454,23 +13419,19 @@
       "materials": [
         {
           "name": "Goblin Totem",
-          "quantity": 50,
-          "unitCost": 26.5
+          "quantity": 50
         },
         {
           "name": "Siren's Soulstone",
-          "quantity": 85,
-          "unitCost": 185.2
+          "quantity": 85
         },
         {
           "name": "Pirates Code",
-          "quantity": 12,
-          "unitCost": 47.4
+          "quantity": 12
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 3250000
@@ -14481,18 +13442,15 @@
       "materials": [
         {
           "name": "Water Elemental Essence",
-          "quantity": 45,
-          "unitCost": 150.5
+          "quantity": 45
         },
         {
           "name": "Snakes Head",
-          "quantity": 65,
-          "unitCost": 166.6
+          "quantity": 65
         },
         {
           "name": "Arcane Crystal",
-          "quantity": 1,
-          "unitCost": 2500
+          "quantity": 1
         }
       ],
       "currentPrice": 66000
@@ -14503,18 +13461,15 @@
       "materials": [
         {
           "name": "Earth Elemental Essence",
-          "quantity": 6,
-          "unitCost": 170.1
+          "quantity": 6
         },
         {
           "name": "Goblin Crown",
-          "quantity": 15,
-          "unitCost": 1743.2
+          "quantity": 15
         },
         {
           "name": "Arcane Crystal",
-          "quantity": 1,
-          "unitCost": 2500
+          "quantity": 1
         }
       ],
       "currentPrice": 48666.666666666664
@@ -14525,18 +13480,15 @@
       "materials": [
         {
           "name": "Abyssal Scroll",
-          "quantity": 5,
-          "unitCost": 436.6
+          "quantity": 5
         },
         {
           "name": "Lions Teeth",
-          "quantity": 55,
-          "unitCost": 251
+          "quantity": 55
         },
         {
           "name": "Arcane Crystal",
-          "quantity": 1,
-          "unitCost": 2500
+          "quantity": 1
         }
       ],
       "currentPrice": 32438.777777777777
@@ -14547,28 +13499,23 @@
       "materials": [
         {
           "name": "Grimoire of Shadows",
-          "quantity": 4,
-          "unitCost": 4959.6
+          "quantity": 4
         },
         {
           "name": "Orb of Elemental Conjuring",
-          "quantity": 30,
-          "unitCost": 88.1
+          "quantity": 30
         },
         {
           "name": "Raw Onion",
-          "quantity": 12,
-          "unitCost": 43.7
+          "quantity": 12
         },
         {
           "name": "Siren's Scales",
-          "quantity": 30,
-          "unitCost": 18.6
+          "quantity": 30
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 0
@@ -14579,23 +13526,19 @@
       "materials": [
         {
           "name": "Minotaurs Horn",
-          "quantity": 20,
-          "unitCost": 9
+          "quantity": 20
         },
         {
           "name": "Venom Extract",
-          "quantity": 50,
-          "unitCost": 99.4
+          "quantity": 50
         },
         {
           "name": "Deer Antler",
-          "quantity": 20,
-          "unitCost": 99.4
+          "quantity": 20
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 0
@@ -14606,13 +13549,11 @@
       "materials": [
         {
           "name": "Moonblood Tincture",
-          "quantity": 1,
-          "unitCost": 43310.1
+          "quantity": 1
         },
         {
           "name": "Mystical Log",
-          "quantity": 10000,
-          "unitCost": 29.7
+          "quantity": 10000
         }
       ],
       "currentPrice": 0
@@ -14623,23 +13564,19 @@
       "materials": [
         {
           "name": "Claw of the Alpha",
-          "quantity": 50,
-          "unitCost": 12.9
+          "quantity": 50
         },
         {
           "name": "Moonblood Tincture",
-          "quantity": 1,
-          "unitCost": 43310.1
+          "quantity": 1
         },
         {
           "name": "Arcane Starstone",
-          "quantity": 1,
-          "unitCost": 3872.8
+          "quantity": 1
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 0
@@ -14650,18 +13587,15 @@
       "materials": [
         {
           "name": "Aetherial Feather Quill",
-          "quantity": 50,
-          "unitCost": 8.5
+          "quantity": 50
         },
         {
           "name": "Petrifying Gaze Crystal",
-          "quantity": 3,
-          "unitCost": 6833.7
+          "quantity": 3
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 0
@@ -14672,33 +13606,27 @@
       "materials": [
         {
           "name": "Buffalo Horn",
-          "quantity": 5,
-          "unitCost": 50.4
+          "quantity": 5
         },
         {
           "name": "Raw Onion",
-          "quantity": 5,
-          "unitCost": 43.7
+          "quantity": 5
         },
         {
           "name": "Basilisk Venom Vial",
-          "quantity": 2,
-          "unitCost": 8829.9
+          "quantity": 2
         },
         {
           "name": "Water Elemental Essence",
-          "quantity": 5,
-          "unitCost": 150.5
+          "quantity": 5
         },
         {
           "name": "Harpy's Wings",
-          "quantity": 20,
-          "unitCost": 9.7
+          "quantity": 20
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 1388399.9
@@ -14709,28 +13637,23 @@
       "materials": [
         {
           "name": "Air Elemental Essence",
-          "quantity": 50,
-          "unitCost": 277.9
+          "quantity": 50
         },
         {
           "name": "Cursed Talisman",
-          "quantity": 30,
-          "unitCost": 26.1
+          "quantity": 30
         },
         {
           "name": "Swamp Juice",
-          "quantity": 30,
-          "unitCost": 116.3
+          "quantity": 30
         },
         {
           "name": "Arcane Starstone",
-          "quantity": 3,
-          "unitCost": 3872.8
+          "quantity": 3
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 0
@@ -14741,18 +13664,15 @@
       "materials": [
         {
           "name": "Stoneheart Core",
-          "quantity": 5,
-          "unitCost": 247
+          "quantity": 5
         },
         {
           "name": "Vial of Spectre Ectoplasm",
-          "quantity": 9,
-          "unitCost": 154.4
+          "quantity": 9
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 563399.8
@@ -14763,23 +13683,19 @@
       "materials": [
         {
           "name": "Minotaur Hide",
-          "quantity": 25,
-          "unitCost": 411.2
+          "quantity": 25
         },
         {
           "name": "Water Elemental Essence",
-          "quantity": 35,
-          "unitCost": 150.5
+          "quantity": 35
         },
         {
           "name": "Goblin Scraps",
-          "quantity": 50,
-          "unitCost": 162.8
+          "quantity": 50
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 0
@@ -14790,28 +13706,23 @@
       "materials": [
         {
           "name": "Air Elemental Essence",
-          "quantity": 20,
-          "unitCost": 277.9
+          "quantity": 20
         },
         {
           "name": "Chest of Scraps",
-          "quantity": 15,
-          "unitCost": 195.9
+          "quantity": 15
         },
         {
           "name": "Black Bear Pelt",
-          "quantity": 15,
-          "unitCost": 104.7
+          "quantity": 15
         },
         {
           "name": "Undying Crest",
-          "quantity": 5,
-          "unitCost": 206.7
+          "quantity": 5
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 311912.9
@@ -14822,18 +13733,15 @@
       "materials": [
         {
           "name": "Air Elemental Essence",
-          "quantity": 25,
-          "unitCost": 277.9
+          "quantity": 25
         },
         {
           "name": "Siren's Soulstone",
-          "quantity": 20,
-          "unitCost": 185.2
+          "quantity": 20
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 940099.8
@@ -14844,33 +13752,27 @@
       "materials": [
         {
           "name": "Raccoon Fur",
-          "quantity": 25,
-          "unitCost": 75.6
+          "quantity": 25
         },
         {
           "name": "Lions Teeth",
-          "quantity": 30,
-          "unitCost": 251
+          "quantity": 30
         },
         {
           "name": "Goblin Totem",
-          "quantity": 90,
-          "unitCost": 26.5
+          "quantity": 90
         },
         {
           "name": "Vial of Spectre Ectoplasm",
-          "quantity": 20,
-          "unitCost": 154.4
+          "quantity": 20
         },
         {
           "name": "Aetherial Feather Quill",
-          "quantity": 50,
-          "unitCost": 8.5
+          "quantity": 50
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 0
@@ -14881,28 +13783,23 @@
       "materials": [
         {
           "name": "Water Elemental Essence",
-          "quantity": 15,
-          "unitCost": 150.5
+          "quantity": 15
         },
         {
           "name": "Vial of Wraith Ectoplasm",
-          "quantity": 10,
-          "unitCost": 79.5
+          "quantity": 10
         },
         {
           "name": "Parchment",
-          "quantity": 10,
-          "unitCost": 715.7
+          "quantity": 10
         },
         {
           "name": "Goblin Totem",
-          "quantity": 80,
-          "unitCost": 26.5
+          "quantity": 80
         },
         {
           "name": "Crab",
-          "quantity": 500,
-          "unitCost": 29.7
+          "quantity": 500
         }
       ],
       "currentPrice": 351215.2
@@ -14913,28 +13810,23 @@
       "materials": [
         {
           "name": "Undying Crest",
-          "quantity": 10,
-          "unitCost": 206.7
+          "quantity": 10
         },
         {
           "name": "Essence of Shadows",
-          "quantity": 10,
-          "unitCost": 284.2
+          "quantity": 10
         },
         {
           "name": "Grimoire of Shadows",
-          "quantity": 2,
-          "unitCost": 4959.6
+          "quantity": 2
         },
         {
           "name": "Swamp Juice",
-          "quantity": 20,
-          "unitCost": 116.3
+          "quantity": 20
         },
         {
           "name": "Turtle",
-          "quantity": 10000,
-          "unitCost": 35
+          "quantity": 10000
         }
       ],
       "currentPrice": 0
@@ -14945,18 +13837,15 @@
       "materials": [
         {
           "name": "Stoneheart Core",
-          "quantity": 3,
-          "unitCost": 247
+          "quantity": 3
         },
         {
           "name": "Polar Bear Pelt",
-          "quantity": 10,
-          "unitCost": 220.8
+          "quantity": 10
         },
         {
           "name": "Arcane Starstone",
-          "quantity": 2,
-          "unitCost": 3872.8
+          "quantity": 2
         }
       ],
       "currentPrice": 0
@@ -14967,18 +13856,15 @@
       "materials": [
         {
           "name": "Lions Teeth",
-          "quantity": 3,
-          "unitCost": 251
+          "quantity": 3
         },
         {
           "name": "Golem Core Fragment",
-          "quantity": 8,
-          "unitCost": 19.9
+          "quantity": 8
         },
         {
           "name": "Petrifying Gaze Crystal",
-          "quantity": 2,
-          "unitCost": 6833.7
+          "quantity": 2
         }
       ],
       "currentPrice": 0
@@ -14989,18 +13875,15 @@
       "materials": [
         {
           "name": "Fire Elemental Essence",
-          "quantity": 13,
-          "unitCost": 151.8
+          "quantity": 13
         },
         {
           "name": "Goblin Crown",
-          "quantity": 13,
-          "unitCost": 1743.2
+          "quantity": 13
         },
         {
           "name": "Arcane Crystal",
-          "quantity": 1,
-          "unitCost": 2500
+          "quantity": 1
         }
       ],
       "currentPrice": 125000
@@ -15011,18 +13894,15 @@
       "materials": [
         {
           "name": "Void Essence",
-          "quantity": 12,
-          "unitCost": 250.2
+          "quantity": 12
         },
         {
           "name": "Goblin Crown",
-          "quantity": 15,
-          "unitCost": 1743.2
+          "quantity": 15
         },
         {
           "name": "Arcane Crystal",
-          "quantity": 1,
-          "unitCost": 2500
+          "quantity": 1
         }
       ],
       "currentPrice": 45000
@@ -15033,18 +13913,15 @@
       "materials": [
         {
           "name": "Vial of Wraith Ectoplasm",
-          "quantity": 30,
-          "unitCost": 79.5
+          "quantity": 30
         },
         {
           "name": "Ivory",
-          "quantity": 45,
-          "unitCost": 327.9
+          "quantity": 45
         },
         {
           "name": "Arcane Vial",
-          "quantity": 1,
-          "unitCost": 2500
+          "quantity": 1
         }
       ],
       "currentPrice": 80000
@@ -15055,23 +13932,19 @@
       "materials": [
         {
           "name": "Stoneheart Core",
-          "quantity": 6,
-          "unitCost": 247
+          "quantity": 6
         },
         {
           "name": "Elk Antler",
-          "quantity": 15,
-          "unitCost": 346.3
+          "quantity": 15
         },
         {
           "name": "Moonblood Tincture",
-          "quantity": 1,
-          "unitCost": 43310.1
+          "quantity": 1
         },
         {
           "name": "Arcane Crystal",
-          "quantity": 1,
-          "unitCost": 2500
+          "quantity": 1
         }
       ],
       "currentPrice": 69898.8
@@ -15082,18 +13955,15 @@
       "materials": [
         {
           "name": "Void Essence",
-          "quantity": 8,
-          "unitCost": 250.2
+          "quantity": 8
         },
         {
           "name": "Boar Tusk",
-          "quantity": 30,
-          "unitCost": 404.9
+          "quantity": 30
         },
         {
           "name": "Arcane Crystal",
-          "quantity": 1,
-          "unitCost": 2500
+          "quantity": 1
         }
       ],
       "currentPrice": 67299.2
@@ -15104,18 +13974,15 @@
       "materials": [
         {
           "name": "Void Essence",
-          "quantity": 4,
-          "unitCost": 250.2
+          "quantity": 4
         },
         {
           "name": "Raccoon Fur",
-          "quantity": 10,
-          "unitCost": 75.6
+          "quantity": 10
         },
         {
           "name": "Grimoire of Shadows",
-          "quantity": 2,
-          "unitCost": 4959.6
+          "quantity": 2
         }
       ],
       "currentPrice": 0

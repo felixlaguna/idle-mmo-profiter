@@ -16,6 +16,7 @@ export interface UseProfitRankingOptions {
   resourceGathering: ComputedRef<ResourceGather[]> | ResourceGather[]
   magicFind: ComputedRef<MagicFindSettings> | MagicFindSettings
   taxRate: ComputedRef<number> | number
+  materialPriceMap: ComputedRef<Map<string, number>> | Map<string, number>
   includeNegative?: ComputedRef<boolean> | boolean
 }
 
@@ -41,6 +42,7 @@ export function useProfitRanking(options: UseProfitRankingOptions): UseProfitRan
     resourceGathering,
     magicFind,
     taxRate,
+    materialPriceMap,
     includeNegative = false,
   } = options
 
@@ -61,6 +63,7 @@ export function useProfitRanking(options: UseProfitRankingOptions): UseProfitRan
     const currentResourceGathering = unwrap(resourceGathering)
     const currentMagicFind = unwrap(magicFind)
     const currentTaxRate = unwrap(taxRate)
+    const currentMaterialPriceMap = unwrap(materialPriceMap)
     const currentIncludeNegative = unwrap(includeNegative)
 
     // Calculate profits for each category
@@ -72,6 +75,7 @@ export function useProfitRanking(options: UseProfitRankingOptions): UseProfitRan
     const craftableResults = calculateCraftableProfits(
       currentCraftableRecipes,
       currentTaxRate,
+      currentMaterialPriceMap,
       currentRecipes
     )
     const resourceResults = calculateResourceProfits(currentResourceGathering, currentTaxRate)
