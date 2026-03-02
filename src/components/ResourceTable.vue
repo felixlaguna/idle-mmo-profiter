@@ -363,6 +363,7 @@ const handleMarketPriceUpdate = (resourceName: string, value: number) => {
 .profit-hr {
   font-weight: 700;
   font-size: 0.9375rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 /* Responsive */

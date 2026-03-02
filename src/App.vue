@@ -911,6 +911,10 @@ onUnmounted(() => {
 
   .app-title {
     font-size: 0.875rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
   }
 
   .last-update {
