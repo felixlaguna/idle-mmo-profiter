@@ -377,3 +377,13 @@ Files modified:
 All tests passing (389/389). TypeScript clean.
 
 **Remaining:** Low-impact items L1-L4 (optional flourishes)
+
+**2026-03-02T10:15:00Z**
+
+Low-impact items L1-L4 deferred (not planned this round):
+- L1: Revenue Breakdown min bar width
+- L2: Craft tab mobile spacing
+- L3: Footer disclaimer styling
+- L4: Market tab empty gap
+
+Ticket closed. High and medium impact items complete.
