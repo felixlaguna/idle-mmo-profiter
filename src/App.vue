@@ -545,9 +545,9 @@ onUnmounted(() => {
 
 .last-update {
   font-size: 0.6875rem;
-  color: #fbbf24;
-  background: rgba(250, 204, 21, 0.1);
-  border: 1px solid rgba(250, 204, 21, 0.2);
+  color: var(--text-secondary);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
   padding: 0.25rem 0.625rem;
   border-radius: 0.75rem;
   font-weight: 500;

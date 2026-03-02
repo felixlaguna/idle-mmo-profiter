@@ -396,9 +396,10 @@ const profitRange = computed(() => {
   align-items: center;
   gap: 0.75rem;
   padding: 1rem;
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 0.5rem;
+  background: linear-gradient(180deg, #1e2436 0%, var(--bg-secondary) 100%);
+  border: 1px solid rgba(55, 65, 81, 0.7);
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .filter-label {
@@ -436,47 +437,42 @@ const profitRange = computed(() => {
 }
 
 .filter-button.active.badge-dungeon {
-  background-color: rgba(168, 85, 247, 0.2);
+  background-color: rgba(168, 85, 247, 0.15);
   color: #c084fc;
-  border-color: rgba(168, 85, 247, 0.4);
-  box-shadow: 0 2px 8px rgba(168, 85, 247, 0.3);
+  border-color: rgba(168, 85, 247, 0.3);
 }
 
 .filter-button.active.badge-dungeon:hover {
-  background-color: rgba(168, 85, 247, 0.3);
-  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.4);
+  background-color: rgba(168, 85, 247, 0.2);
 }
 
 .filter-button.active.badge-craftable {
-  background-color: rgba(34, 197, 94, 0.2);
+  background-color: rgba(34, 197, 94, 0.15);
   color: #4ade80;
-  border-color: rgba(34, 197, 94, 0.4);
-  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
+  border-color: rgba(34, 197, 94, 0.3);
 }
 
 .filter-button.active.badge-craftable:hover {
-  background-color: rgba(34, 197, 94, 0.3);
-  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+  background-color: rgba(34, 197, 94, 0.2);
 }
 
 .filter-button.active.badge-resource {
-  background-color: rgba(59, 130, 246, 0.2);
+  background-color: rgba(59, 130, 246, 0.15);
   color: #60a5fa;
-  border-color: rgba(59, 130, 246, 0.4);
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+  border-color: rgba(59, 130, 246, 0.3);
 }
 
 .filter-button.active.badge-resource:hover {
-  background-color: rgba(59, 130, 246, 0.3);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+  background-color: rgba(59, 130, 246, 0.2);
 }
 
 /* Table Container */
 .table-container {
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 0.5rem;
+  background: linear-gradient(180deg, #1e2436 0%, var(--bg-secondary) 100%);
+  border: 1px solid rgba(55, 65, 81, 0.7);
+  border-radius: 0.75rem;
   overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .ranking-table {

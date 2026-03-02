@@ -269,25 +269,24 @@ watch(showAll, () => {
 
 .btn-toggle {
   padding: 0.5rem 1.25rem;
-  background: var(--accent-primary);
-  color: #fff;
-  border: none;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+  color: var(--accent-primary);
+  border: 1px solid rgba(59, 130, 246, 0.3);
   border-radius: 0.5rem;
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
-  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
 }
 
 .btn-toggle:hover {
-  background: var(--accent-hover);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%);
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
 }
 
 .btn-toggle:active {
   transform: scale(0.97);
-  box-shadow: 0 1px 4px rgba(59, 130, 246, 0.3);
 }
 
 .chart-container {
