@@ -445,7 +445,7 @@ hr {
     font-weight: 600;
     font-size: 0.875rem;
     color: var(--text-primary);
-    width: 58%;
+    width: 50%;
     display: inline-flex;
   }
 
@@ -460,9 +460,17 @@ hr {
     font-weight: 700;
     font-size: 0.875rem;
     color: var(--success);
-    width: 42%;
+    width: 50%;
     display: inline-flex;
     justify-content: flex-end;
+  }
+
+  /* Shrink label on profit/hr cell to prevent truncation at 375px */
+  .mobile-card-layout td.profit-hr::before,
+  .mobile-card-layout td[data-label='Profit/hr']::before {
+    font-size: 0.625rem;
+    letter-spacing: 0;
+    margin-right: 0.25rem;
   }
 
   /* Hide rank row on mobile — cards are in rank order, badge visible */
