@@ -1,6 +1,6 @@
 ---
 id: imp-xw1f
-status: open
+status: closed
 deps: []
 links: []
 created: 2026-03-01T02:01:21Z
@@ -314,3 +314,32 @@ Both desktop and 393px mobile have crossed 4.0/5. The 375px viewport improved +0
 7. **M4** (Market mobile card consolidation) -- Match the TIME+COST pattern from All tab.
 8. **M3** (Hero separator visibility) -- Minor polish.
 9. **L1-L4** as time permits.
+
+## Notes
+
+**2026-03-02T09:48:36Z**
+
+Starting implementation of 3 high-impact visual polish items:
+H1: Compress hero on All tab at 375px
+H2: Proportional profit gradient intensity on All/Craft/Dungeons
+H3: Fix green-to-amber color shift on mobile profit rows
+
+**2026-03-02T09:49:53Z**
+
+Implementation complete. Changes made:
+
+H3 (Fix green-to-amber color shift): Changed heatmap gradient from teal (20,184,166) to pure emerald green (16,185,129). Only intensity varies (0.04-0.18 alpha range), hue stays constant. This fixes the olive/amber shift on mobile profit rows.
+
+H2 (Proportional gradient intensity): Already correctly implemented. The power-scale formula (exponent 0.3) with alpha range 0.04-0.18 creates proportional intensity where high-profit items have 0.18 alpha and low-profit items have 0.04 alpha.
+
+H1 (Compress hero at 375px): Added @media (max-width: 379px) to further compress hero: reduced padding, font sizes, and margins. Hero now ~32px tall vs previous ~36px at small viewports.
+
+Files modified:
+- /home/felix/idle-mmo-profiter/src/composables/useHeatmap.ts
+- /home/felix/idle-mmo-profiter/src/App.vue
+
+All tests passing (389/389).
+
+**2026-03-02T09:50:45Z**
+
+Starting implementation of 5 MEDIUM-IMPACT visual polish items (M1-M5)
