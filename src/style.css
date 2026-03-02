@@ -558,8 +558,8 @@ hr {
     order: -2;
   }
 
-  /* Market tab: Spread in top-right (mirrors Profit/hr position in other tabs) */
-  .mobile-card-layout td[data-label='Spread'] {
+  /* Market tab: Profit in top-right (mirrors Profit/hr position in other tabs) */
+  .mobile-card-layout td[data-label='Profit'] {
     order: -1;
     display: inline-flex;
     width: 50%;
@@ -569,14 +569,24 @@ hr {
     justify-content: flex-end;
   }
 
-  /* Hide Spread label — mirrors Profit/hr treatment, position conveys meaning */
-  .mobile-card-layout td[data-label='Spread']::before {
+  /* Hide label on Profit cell — green color conveys meaning */
+  .mobile-card-layout td[data-label='Profit']::before {
     display: none;
   }
 
-  /* Market tab: place Vendor Value and Market Value side-by-side on second row */
-  .mobile-card-layout td[data-label='Vendor Value'],
-  .mobile-card-layout td[data-label='Market Value'] {
+  /* Market tab: Spread shown as secondary data alongside Vendor Value */
+  .mobile-card-layout td[data-label='Spread'] {
+    display: inline-flex;
+    width: 50%;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    padding: 0.125rem 0.375rem;
+    justify-content: flex-end;
+    order: 1;
+  }
+
+  /* Market tab: place Vendor Value on second row */
+  .mobile-card-layout td[data-label='Vendor Value'] {
     display: inline-flex;
     width: 50%;
     max-width: 50%;
@@ -585,6 +595,12 @@ hr {
     font-size: 0.8125rem;
     color: var(--text-secondary);
     padding: 0.125rem 0.375rem;
+    order: 0;
+  }
+
+  /* Hide Market Value on mobile — Profit and Spread tell the story */
+  .mobile-card-layout td[data-label='Market Value'] {
+    display: none;
   }
 
   /* Market tab: hide less essential columns on mobile */

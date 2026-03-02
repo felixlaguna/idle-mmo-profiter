@@ -57,7 +57,7 @@ const sectionsExpanded = ref({
 })
 
 // Sort state
-type SortField = 'name' | 'vendor' | 'market' | 'spread'
+type SortField = 'name' | 'vendor' | 'market' | 'spread' | 'profit'
 type SortDir = 'asc' | 'desc'
 const sortField = ref<SortField>('spread')
 const sortDir = ref<SortDir>('desc')
@@ -100,6 +100,23 @@ const getSpreadColorClass = (marketPrice: number, vendorValue?: number): string 
   return 'spread-low'
 }
 
+// Gold profit: absolute difference between market price and vendor value
+const getGoldProfit = (marketPrice: number, vendorValue?: number): number => {
+  if (!vendorValue || vendorValue <= 0 || marketPrice <= 0) return 0
+  return marketPrice - vendorValue
+}
+
+const formatGoldProfit = (marketPrice: number, vendorValue?: number): string => {
+  const profit = getGoldProfit(marketPrice, vendorValue)
+  if (profit === 0) return '—'
+  return profit.toLocaleString()
+}
+
+const getProfitColorClass = (marketPrice: number, vendorValue?: number): string => {
+  const profit = getGoldProfit(marketPrice, vendorValue)
+  return profit >= 0 ? 'profit-positive' : 'profit-negative'
+}
+
 // Generic sort function for market items
 function sortItems<T>(items: T[], getVendor: (i: T) => number | undefined, getMarket: (i: T) => number, getName: (i: T) => string): T[] {
   return [...items].sort((a, b) => {
@@ -116,6 +133,9 @@ function sortItems<T>(items: T[], getVendor: (i: T) => number | undefined, getMa
         break
       case 'spread':
         cmp = getSpreadPercent(getMarket(a), getVendor(a)) - getSpreadPercent(getMarket(b), getVendor(b))
+        break
+      case 'profit':
+        cmp = getGoldProfit(getMarket(a), getVendor(a)) - getGoldProfit(getMarket(b), getVendor(b))
         break
     }
     return sortDir.value === 'asc' ? cmp : -cmp
@@ -1162,6 +1182,7 @@ const refreshItemData = async () => {
               <th class="col-name sortable" @click="toggleSort('name')">Name <span class="sort-icon">{{ getSortIcon('name') }}</span></th>
               <th class="col-vendor sortable" @click="toggleSort('vendor')">Vendor <span class="sort-icon">{{ getSortIcon('vendor') }}</span></th>
               <th class="col-market sortable" @click="toggleSort('market')">Market <span class="sort-icon">{{ getSortIcon('market') }}</span></th>
+              <th class="col-profit sortable" @click="toggleSort('profit')">Profit <span class="sort-icon">{{ getSortIcon('profit') }}</span></th>
               <th class="col-spread sortable" @click="toggleSort('spread')">Spread <span class="sort-icon">{{ getSortIcon('spread') }}</span></th>
               <th v-if="!isStaticMode" class="col-actions">Actions</th>
             </tr>
@@ -1197,6 +1218,9 @@ const refreshItemData = async () => {
                   suffix=" gold"
                   @update:model-value="(value) => updateMaterialPrice(material.id, value)"
                 />
+              </td>
+              <td class="col-profit" :class="getProfitColorClass(material.price, material.vendorValue)" data-label="Profit">
+                {{ formatGoldProfit(material.price, material.vendorValue) }}
               </td>
               <td class="col-spread" :class="getSpreadColorClass(material.price, material.vendorValue)" data-label="Spread">
                 {{ formatSpread(material.price, material.vendorValue) }}
@@ -1322,6 +1346,7 @@ const refreshItemData = async () => {
               <th class="col-name sortable" @click="toggleSort('name')">Name <span class="sort-icon">{{ getSortIcon('name') }}</span></th>
               <th class="col-vendor sortable" @click="toggleSort('vendor')">Vendor <span class="sort-icon">{{ getSortIcon('vendor') }}</span></th>
               <th class="col-market sortable" @click="toggleSort('market')">Market <span class="sort-icon">{{ getSortIcon('market') }}</span></th>
+              <th class="col-profit sortable" @click="toggleSort('profit')">Profit <span class="sort-icon">{{ getSortIcon('profit') }}</span></th>
               <th class="col-spread sortable" @click="toggleSort('spread')">Spread <span class="sort-icon">{{ getSortIcon('spread') }}</span></th>
               <th v-if="!isStaticMode" class="col-actions">Actions</th>
             </tr>
@@ -1357,6 +1382,9 @@ const refreshItemData = async () => {
                   suffix=" gold"
                   @update:model-value="(value) => updateCraftablePrice(craftable.id, value)"
                 />
+              </td>
+              <td class="col-profit" :class="getProfitColorClass(craftable.price, craftable.vendorValue)" data-label="Profit">
+                {{ formatGoldProfit(craftable.price, craftable.vendorValue) }}
               </td>
               <td class="col-spread" :class="getSpreadColorClass(craftable.price, craftable.vendorValue)" data-label="Spread">
                 {{ formatSpread(craftable.price, craftable.vendorValue) }}
@@ -1480,6 +1508,7 @@ const refreshItemData = async () => {
               <th class="col-name sortable" @click="toggleSort('name')">Name <span class="sort-icon">{{ getSortIcon('name') }}</span></th>
               <th class="col-vendor sortable" @click="toggleSort('vendor')">Vendor <span class="sort-icon">{{ getSortIcon('vendor') }}</span></th>
               <th class="col-market sortable" @click="toggleSort('market')">Market <span class="sort-icon">{{ getSortIcon('market') }}</span></th>
+              <th class="col-profit sortable" @click="toggleSort('profit')">Profit <span class="sort-icon">{{ getSortIcon('profit') }}</span></th>
               <th class="col-spread sortable" @click="toggleSort('spread')">Spread <span class="sort-icon">{{ getSortIcon('spread') }}</span></th>
               <th v-if="!isStaticMode" class="col-actions">Actions</th>
             </tr>
@@ -1513,6 +1542,9 @@ const refreshItemData = async () => {
                   suffix=" gold"
                   @update:model-value="(value) => updateResourcePrice(resource.id, value)"
                 />
+              </td>
+              <td class="col-profit" :class="getProfitColorClass(resource.marketPrice, resource.vendorValue)" data-label="Profit">
+                {{ formatGoldProfit(resource.marketPrice, resource.vendorValue) }}
               </td>
               <td class="col-spread" :class="getSpreadColorClass(resource.marketPrice, resource.vendorValue)" data-label="Spread">
                 {{ formatSpread(resource.marketPrice, resource.vendorValue) }}
@@ -1657,6 +1689,7 @@ const refreshItemData = async () => {
               <th class="col-name sortable" @click="toggleSort('name')">Name <span class="sort-icon">{{ getSortIcon('name') }}</span></th>
               <th class="col-vendor sortable" @click="toggleSort('vendor')">Vendor <span class="sort-icon">{{ getSortIcon('vendor') }}</span></th>
               <th class="col-market sortable" @click="toggleSort('market')">Market <span class="sort-icon">{{ getSortIcon('market') }}</span></th>
+              <th class="col-profit sortable" @click="toggleSort('profit')">Profit <span class="sort-icon">{{ getSortIcon('profit') }}</span></th>
               <th class="col-spread sortable" @click="toggleSort('spread')">Spread <span class="sort-icon">{{ getSortIcon('spread') }}</span></th>
               <th v-if="!isStaticMode" class="col-actions">Actions</th>
             </tr>
@@ -1701,6 +1734,9 @@ const refreshItemData = async () => {
                   suffix=" gold"
                   @update:model-value="(value) => updateRecipePrice(recipe.id, value)"
                 />
+              </td>
+              <td class="col-profit" :class="getProfitColorClass(recipe.price, recipe.vendorValue)" data-label="Profit">
+                {{ formatGoldProfit(recipe.price, recipe.vendorValue) }}
               </td>
               <td class="col-spread" :class="getSpreadColorClass(recipe.price, recipe.vendorValue)" data-label="Spread">
                 {{ formatSpread(recipe.price, recipe.vendorValue) }}
@@ -2470,22 +2506,27 @@ const refreshItemData = async () => {
 /* Desktop-only column widths — must not apply on mobile where card layout controls sizing */
 @media (min-width: 768px) {
   .col-name {
-    width: 30%;
+    width: 25%;
   }
 
   .col-vendor {
-    width: 20%;
+    width: 15%;
     text-align: right;
   }
 
   .col-market {
-    width: 20%;
-    min-width: 160px;
+    width: 18%;
+    min-width: 140px;
+    text-align: right;
+  }
+
+  .col-profit {
+    width: 15%;
     text-align: right;
   }
 
   .col-spread {
-    width: 12%;
+    width: 10%;
   }
 
   .col-actions {
@@ -2705,6 +2746,22 @@ const refreshItemData = async () => {
   color: rgba(96, 165, 250, 1);
 }
 
+/* Profit column — absolute gold values like other tabs */
+.col-profit {
+  font-weight: 700;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.profit-positive {
+  color: var(--success);
+}
+
+.profit-negative {
+  color: var(--danger);
+}
+
 /* Spread column */
 .col-spread {
   font-weight: 700;
@@ -2785,9 +2842,9 @@ const refreshItemData = async () => {
     line-height: 1.35;
   }
 
-  /* Spread mirrors Profit/hr position — top-right of card */
-  .market-items-table.mobile-card-layout .col-spread {
-    font-size: 0.875rem;
+  /* Profit takes top-right position on mobile — matches other tabs */
+  .market-items-table.mobile-card-layout .col-profit {
+    font-size: 1rem;
     font-weight: 700;
   }
 }
