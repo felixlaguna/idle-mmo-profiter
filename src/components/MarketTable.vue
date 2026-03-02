@@ -1117,7 +1117,7 @@ const refreshItemData = async () => {
     >
       <div class="section-header" @click="toggleSection('materials')">
         <div class="section-title">
-          <svg class="expand-icon" :class="{ expanded: sectionsExpanded.materials }" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
+          <svg class="expand-icon" :class="{ expanded: sectionsExpanded.materials }" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
           <h2>Materials</h2>
           <span class="item-count">{{ filteredMaterials.length }} items</span>
           <span v-if="overrideStats.materials > 0 && !isStaticMode" class="override-badge">
@@ -1275,7 +1275,7 @@ const refreshItemData = async () => {
     >
       <div class="section-header" @click="toggleSection('craftables')">
         <div class="section-title">
-          <svg class="expand-icon" :class="{ expanded: sectionsExpanded.craftables }" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
+          <svg class="expand-icon" :class="{ expanded: sectionsExpanded.craftables }" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
           <h2>Craftables</h2>
           <span class="item-count">{{ filteredCraftables.length }} items</span>
           <span v-if="overrideStats.craftables > 0 && !isStaticMode" class="override-badge">
@@ -1435,7 +1435,7 @@ const refreshItemData = async () => {
     >
       <div class="section-header" @click="toggleSection('resources')">
         <div class="section-title">
-          <svg class="expand-icon" :class="{ expanded: sectionsExpanded.resources }" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
+          <svg class="expand-icon" :class="{ expanded: sectionsExpanded.resources }" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
           <h2>Resources</h2>
           <span class="item-count">{{ filteredResources.length }} items</span>
           <span v-if="overrideStats.resources > 0 && !isStaticMode" class="override-badge">
@@ -1591,7 +1591,7 @@ const refreshItemData = async () => {
     >
       <div class="section-header" @click="toggleSection('recipes')">
         <div class="section-title">
-          <svg class="expand-icon" :class="{ expanded: sectionsExpanded.recipes }" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
+          <svg class="expand-icon" :class="{ expanded: sectionsExpanded.recipes }" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
           <h2>Recipes</h2>
           <span class="item-count">{{ filteredRecipes.length }} items</span>
           <span v-if="overrideStats.recipes > 0 && !isStaticMode" class="override-badge">
