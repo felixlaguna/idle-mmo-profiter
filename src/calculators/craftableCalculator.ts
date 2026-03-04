@@ -17,13 +17,13 @@ export interface CraftableMaterialResult {
  *    NOTE: Vendor-sold materials (with vendorValue > 0) are excluded from this check
  *
  * @param craftableLastSaleAt - The last sale timestamp of the crafted item
- * @param recipeLastSaleAt - The last sale timestamp of the tradable recipe (if any)
+ * @param recipeLastSaleAt - The last sale timestamp of the tradable recipe: undefined = no recipe, null = recipe exists but no sales
  * @param materialLastSaleAts - Array of last sale timestamps for each material. If not provided, materials are not checked.
  * @param materialVendorValues - Array of vendor values for each material. Materials with vendorValue > 0 are excluded from confidence check.
  */
 function isCraftableLowConfidence(
   craftableLastSaleAt?: string,
-  recipeLastSaleAt?: string,
+  recipeLastSaleAt?: string | null,
   materialLastSaleAts?: (string | undefined)[],
   materialVendorValues?: (number | undefined)[]
 ): boolean {
@@ -33,7 +33,9 @@ function isCraftableLowConfidence(
   }
 
   // Check the tradable recipe (if provided)
-  if (recipeLastSaleAt !== undefined && isLowConfidence(recipeLastSaleAt)) {
+  // undefined = no tradable recipe exists (skip check)
+  // null or string = tradable recipe exists, check its sales data
+  if (recipeLastSaleAt !== undefined && isLowConfidence(recipeLastSaleAt ?? undefined)) {
     return true
   }
 
@@ -253,7 +255,7 @@ export function calculateCraftableProfits(
       skill: craftable.skill || inferSkillFromMaterials(craftable.materials),
       isLowConfidence: isCraftableLowConfidence(
         craftable.lastSaleAt,
-        tradableRecipe?.lastSaleAt,
+        tradableRecipe ? (tradableRecipe.lastSaleAt ?? null) : undefined,
         materialLastSaleAts,
         materialVendorValues
       ),

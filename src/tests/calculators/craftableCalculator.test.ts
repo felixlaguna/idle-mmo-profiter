@@ -573,8 +573,8 @@ describe('calculateCraftableProfits', () => {
       const results = calculateCraftableProfits([craftableRecipe], mockTaxRate, materialPriceMap, recipes)
 
       expect(results).toHaveLength(1)
-      // Craftable has recent sales = high confidence
-      expect(results[0].isLowConfidence).toBe(false)
+      // Recipe has no sales data = entire craftable is low confidence
+      expect(results[0].isLowConfidence).toBe(true)
       // Recipe has no sales data = isRecipeLowConfidence = true
       expect(results[0].isRecipeLowConfidence).toBe(true)
     })
