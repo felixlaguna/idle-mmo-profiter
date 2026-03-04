@@ -467,8 +467,17 @@ watch(
       </div>
     </div>
 
-    <div v-if="!tracker.activeCharacter.value" class="empty-state">
-      <p>No active character. Create a character to get started.</p>
+    <div v-if="!tracker.activeCharacter.value" class="empty-state empty-state-hero">
+      <div class="empty-state-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <line x1="19" y1="8" x2="19" y2="14" />
+          <line x1="22" y1="11" x2="16" y2="11" />
+        </svg>
+      </div>
+      <p class="empty-state-title">No characters yet</p>
+      <p class="empty-state-desc">Create a character to start tracking gold, inventory, and total value over time.</p>
     </div>
 
     <template v-if="tracker.activeCharacter.value">
@@ -488,7 +497,7 @@ watch(
       <div class="inventory-section">
         <h3 class="section-title">Inventory</h3>
         <div v-if="tracker.getEffectiveInventory.value.length === 0" class="empty-state">
-          <p>No items in inventory. Search for items below to add them.</p>
+          <p>No items in inventory. Search below to add items.</p>
         </div>
         <table v-else class="inventory-table">
           <thead>
@@ -732,7 +741,7 @@ watch(
 .gold-label {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--warning);
 }
 
 .gold-input {
@@ -771,7 +780,7 @@ watch(
   padding: 0.75rem;
   background: var(--bg-secondary);
   color: var(--text-secondary);
-  font-size: 0.875rem;
+  font-size: var(--text-base);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -990,6 +999,7 @@ watch(
   font-size: 1.125rem;
   color: var(--text-primary);
   font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }
 
 .value-item.value-total .value-amount {
@@ -1017,6 +1027,32 @@ watch(
   text-align: center;
   color: var(--text-secondary);
   font-size: 0.875rem;
+}
+
+.empty-state-hero {
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.empty-state-icon {
+  color: var(--accent-primary);
+  opacity: 0.6;
+}
+
+.empty-state-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.empty-state-desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  max-width: 360px;
+  line-height: 1.5;
 }
 
 /* Mobile responsiveness */
