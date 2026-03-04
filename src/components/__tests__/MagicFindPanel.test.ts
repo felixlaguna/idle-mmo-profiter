@@ -206,14 +206,14 @@ describe('MagicFindPanel', () => {
   })
 
   describe('editable inputs', () => {
-    it('should render input fields when expanded', async () => {
+    it('should render EditableValue components when expanded', async () => {
       const wrapper = mount(MagicFindPanel)
 
       const summaryRow = wrapper.find('.summary-row')
       await summaryRow.trigger('click')
       await nextTick()
 
-      const inputs = wrapper.findAll('.mf-input')
+      const inputs = wrapper.findAllComponents({ name: 'EditableValue' })
       expect(inputs.length).toBe(3)
     })
 

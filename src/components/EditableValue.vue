@@ -7,6 +7,7 @@ const props = defineProps<{
   defaultValue: number
   label?: string
   suffix?: string
+  alwaysEditable?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -78,7 +79,7 @@ const handleKeydown = (e: KeyboardEvent) => {
 
 <template>
   <!-- Static mode: plain read-only display -->
-  <div v-if="isStaticMode" class="static-value">
+  <div v-if="isStaticMode && !alwaysEditable" class="static-value">
     <span v-if="label" class="label">{{ label }}:</span>
     <span class="value">{{ baseDisplayValue }}</span><span v-if="suffix" class="value-suffix">{{ suffix }}</span>
   </div>
