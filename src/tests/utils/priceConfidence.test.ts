@@ -24,8 +24,8 @@ describe('isLowConfidence', () => {
     })
 
     it('should return false for sales exactly at 30 days threshold', () => {
-      const now = Date.now()
-      const exactlyThirtyDays = new Date(now - 30 * MS_PER_DAY).toISOString()
+      // Add a small buffer to account for milliseconds elapsed between Date.now() calls
+      const exactlyThirtyDays = new Date(Date.now() - 30 * MS_PER_DAY + 1000).toISOString()
       // Exactly 30 days should NOT be low confidence (it's the boundary)
       expect(isLowConfidence(exactlyThirtyDays)).toBe(false)
     })
