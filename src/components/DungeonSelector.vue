@@ -22,12 +22,12 @@ let previousFocus: HTMLElement | null = null
 
 // Separate dungeons into profit and MF-only categories
 const profitDungeons = computed(() => {
-  const mfOnlySet = new Set(MF_ONLY_DUNGEONS)
+  const mfOnlySet: Set<string> = new Set(MF_ONLY_DUNGEONS)
   return allSelectableDungeons.value.filter((name) => !mfOnlySet.has(name))
 })
 
 const mfOnlyDungeons = computed(() => {
-  const mfOnlySet = new Set(MF_ONLY_DUNGEONS)
+  const mfOnlySet: Set<string> = new Set(MF_ONLY_DUNGEONS)
   return allSelectableDungeons.value.filter((name) => mfOnlySet.has(name))
 })
 
