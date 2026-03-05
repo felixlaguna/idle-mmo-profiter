@@ -777,6 +777,22 @@ const handleDeleteRecipe = (baseName: string) => {
   .skill-badge-short {
     display: inline;
   }
+
+  /* Hide vendor/market profit — Best Profit/hr covers it */
+  .main-table td[data-label='Vendor Profit/hr'],
+  .main-table td[data-label='Market Profit/hr'] {
+    display: none;
+  }
+
+  /* Compact Items/hr + Cost inline at 50% width */
+  .main-table td[data-label='Items/hr'],
+  .main-table td[data-label='Cost'] {
+    display: inline-flex;
+    width: 50%;
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    padding: 0.125rem 0.375rem;
+  }
 }
 
 @media (max-width: 767px) {
