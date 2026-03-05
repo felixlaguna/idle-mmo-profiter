@@ -231,6 +231,19 @@ const getSkillBadgeClass = (skill?: string): string => {
   return `skill-${skill}`
 }
 
+// Short skill labels for mobile
+const formatSkillShort = (skill?: string): string => {
+  if (!skill) return '?'
+  const shortNames: Record<string, string> = {
+    smelting: 'Smelt',
+    cooking: 'Cook',
+    woodcutting: 'WC',
+    mining: 'Mine',
+    fishing: 'Fish',
+  }
+  return shortNames[skill] || skill
+}
+
 // Handle delete recipe
 const handleDeleteRecipe = (baseName: string) => {
   emit('delete:recipe', baseName)
@@ -300,9 +313,10 @@ const handleDeleteRecipe = (baseName: string) => {
                 </button>
               </td>
               <td class="name-cell" data-label="Resource">
-                {{ group.baseName }}
+                <span class="resource-name">{{ group.baseName }}</span>
                 <span v-if="group.skill" class="skill-badge" :class="getSkillBadgeClass(group.skill)">
-                  {{ group.skill }}
+                  <span class="skill-badge-full">{{ group.skill }}</span>
+                  <span class="skill-badge-short">{{ formatSkillShort(group.skill) }}</span>
                 </span>
                 <button
                   v-if="group.isRecipe"
@@ -598,6 +612,13 @@ const handleDeleteRecipe = (baseName: string) => {
   gap: 0.5rem;
 }
 
+.resource-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
 /* Delete Button */
 .btn-delete-recipe {
   margin-left: auto;
@@ -632,6 +653,17 @@ const handleDeleteRecipe = (baseName: string) => {
   background-color: rgba(139, 92, 246, 0.15);
   color: #a78bfa;
   border: 1px solid rgba(139, 92, 246, 0.3);
+  flex-shrink: 0;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+.skill-badge-full {
+  display: inline;
+}
+
+.skill-badge-short {
+  display: none;
 }
 
 .skill-smelting {
@@ -736,6 +768,14 @@ const handleDeleteRecipe = (baseName: string) => {
   .main-table {
     min-width: 0 !important;
     width: 100%;
+  }
+
+  .skill-badge-full {
+    display: none;
+  }
+
+  .skill-badge-short {
+    display: inline;
   }
 }
 

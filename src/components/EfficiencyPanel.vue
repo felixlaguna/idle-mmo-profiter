@@ -87,7 +87,7 @@ const totalEfficiencyBonus = computed(() => {
     >
       <div class="summary-left">
         <span class="summary-label">Efficiency:</span>
-        <span class="summary-value">{{ efficiencySummary }}</span>
+        <span class="summary-value" :class="{ empty: equippedItems.length === 0 }">{{ efficiencySummary }}</span>
       </div>
 
       <div class="summary-right">
@@ -213,6 +213,11 @@ const totalEfficiencyBonus = computed(() => {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.summary-value.empty {
+  color: var(--text-tertiary);
+  font-weight: 400;
 }
 
 .summary-right {
