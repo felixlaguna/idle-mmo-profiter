@@ -1,6 +1,7 @@
 name: CI
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
@@ -8,9 +9,13 @@ on:
     branches:
       - master
 
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   ci:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout code
@@ -18,7 +23,11 @@ jobs:
 
       # Build the Docker image (ensures all dependencies are installed)
       - name: Build Docker image
-        run: docker compose build app
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: docker compose build app
 
       # Run all CI checks inside Docker containers using Make targets
       # The 'make ci' target runs: lint -> typecheck -> test-run -> build-app

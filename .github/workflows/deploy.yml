@@ -1,6 +1,7 @@
 name: Deploy to GitHub Pages
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
@@ -16,7 +17,7 @@ concurrency:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -27,7 +28,11 @@ jobs:
 
       # Build Docker image (caches layers for faster builds)
       - name: Build Docker image
-        run: docker compose build app
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: docker compose build app
 
       # Build application inside Docker container
       # VITE_STATIC_MODE=true removes all API/edit/settings UI for static deployment
