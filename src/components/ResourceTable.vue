@@ -784,11 +784,25 @@ const handleDeleteRecipe = (baseName: string) => {
     display: none;
   }
 
-  /* Compact Items/hr + Cost inline at 50% width */
+  /* Row 1: Name + badge takes full width */
+  .main-table td.name-cell {
+    width: 100%;
+    order: -3;
+  }
+
+  /* Row 2: Profit/hr hero value, full width with heatmap */
+  .main-table td.profit-hr {
+    width: 100%;
+    order: -2;
+    justify-content: space-between;
+  }
+
+  /* Row 3: Items/hr + Cost compact inline at 50% width */
   .main-table td[data-label='Items/hr'],
   .main-table td[data-label='Cost'] {
     display: inline-flex;
     width: 50%;
+    order: -1;
     font-size: 0.8125rem;
     color: var(--text-secondary);
     padding: 0.125rem 0.375rem;
