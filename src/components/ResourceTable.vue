@@ -617,6 +617,8 @@ const handleDeleteRecipe = (baseName: string) => {
   text-overflow: ellipsis;
   white-space: nowrap;
   min-width: 0;
+  flex: 1;
+  text-align: left;
 }
 
 /* Delete Button */
