@@ -38,10 +38,15 @@ const openSkillSelector = (skill: ResourceSkill, event: Event) => {
   emit('open-skill-selector', skill)
 }
 
-// Get list of skills that have resource recipes
+// Get list of skills that have efficiency items available
 const activeSkills = computed(() => {
-  const skillMap = dataProvider.resourceSkillMap.value
-  return Object.keys(skillMap) as ResourceSkill[]
+  const skills = new Set<ResourceSkill>()
+  dataProvider.efficiencyItems.value.forEach((item) => {
+    item.effects.forEach((effect) => {
+      skills.add(effect.skill)
+    })
+  })
+  return [...skills]
 })
 
 // Computed summary for collapse row

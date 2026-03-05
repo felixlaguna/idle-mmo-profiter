@@ -71,8 +71,10 @@ const groupedResources = computed(() => {
 
     // Find the resource recipe for this base name
     const recipe = dataProvider.resourceRecipes.value.find((r) => r.name === baseName)
-    const skill = recipe?.skill
     const isRecipe = recipe !== undefined
+
+    // Get skill from recipe or from the resource skill map (for raw resources)
+    const skill = recipe?.skill || dataProvider.resourceSkillMap.value.get(baseName)
 
     if (!groups.has(baseName)) {
       groups.set(baseName, {
@@ -270,11 +272,16 @@ const handleDeleteRecipe = (baseName: string) => {
               <td class="expand-col" data-label="">
                 <button
                   class="expand-button"
-                  :class="{ expanded: isExpanded(group.baseName) }"
+                  :class="{
+                    expanded: isExpanded(group.baseName),
+                    'expand-hidden': group.modes.length <= 1,
+                  }"
                   :title="isExpanded(group.baseName) ? 'Collapse' : 'Expand'"
                   :aria-label="`${isExpanded(group.baseName) ? 'Collapse' : 'Expand'} ${group.baseName} modes`"
                   :aria-expanded="isExpanded(group.baseName)"
-                  @click="toggleRow(group.baseName)"
+                  :aria-hidden="group.modes.length <= 1"
+                  :tabindex="group.modes.length <= 1 ? -1 : 0"
+                  @click="group.modes.length > 1 && toggleRow(group.baseName)"
                 >
                   <svg
                     class="expand-icon"
@@ -354,8 +361,8 @@ const handleDeleteRecipe = (baseName: string) => {
               </td>
             </tr>
 
-            <!-- Child Rows: Show all 3 modes when expanded -->
-            <template v-if="isExpanded(group.baseName)">
+            <!-- Child Rows: Show all modes when expanded (only for multi-mode groups) -->
+            <template v-if="group.modes.length > 1 && isExpanded(group.baseName)">
               <tr
                 v-for="modeData in group.modes"
                 :key="`${group.baseName}-${modeData.mode}`"
@@ -506,6 +513,11 @@ const handleDeleteRecipe = (baseName: string) => {
 .expand-button:hover {
   background-color: rgba(96, 165, 250, 0.1);
   color: var(--accent-primary);
+}
+
+.expand-button.expand-hidden {
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .expand-icon {

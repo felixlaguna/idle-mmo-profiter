@@ -162,6 +162,8 @@ export interface ResourceGather {
   marketPrice: number
   /** Computed cost (baseCost + sum of input costs) - calculated dynamically */
   cost?: number
+  /** Gathering skill (mining, fishing, woodcutting) for efficiency application */
+  skill?: ResourceSkill
 }
 
 // Settings and configuration

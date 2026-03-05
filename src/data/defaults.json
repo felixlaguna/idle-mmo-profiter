@@ -15777,7 +15777,8 @@
       "baseCost": 0,
       "vendorValue": 1,
       "marketPrice": 5.7,
-      "hashedId": "7eA59WrBQRXJYzb62qKv"
+      "hashedId": "7eA59WrBQRXJYzb62qKv",
+      "skill": "mining"
     },
     {
       "name": "Tin Ore",
@@ -15785,7 +15786,8 @@
       "baseCost": 0,
       "vendorValue": 1,
       "marketPrice": 4.8,
-      "hashedId": "oZwey82VNA6YD0dXM3gO"
+      "hashedId": "oZwey82VNA6YD0dXM3gO",
+      "skill": "mining"
     },
     {
       "name": "Copper Ore",
@@ -15793,7 +15795,8 @@
       "baseCost": 0,
       "vendorValue": 2,
       "marketPrice": 5.1,
-      "hashedId": "JZdg5V3PQoKQEyWq0zlB"
+      "hashedId": "JZdg5V3PQoKQEyWq0zlB",
+      "skill": "mining"
     },
     {
       "name": "Iron Ore",
@@ -15801,7 +15804,8 @@
       "baseCost": 0,
       "vendorValue": 3,
       "marketPrice": 8.9,
-      "hashedId": "JVM29l7kQZAL80q6WDGp"
+      "hashedId": "JVM29l7kQZAL80q6WDGp",
+      "skill": "mining"
     },
     {
       "name": "Lead Ore",
@@ -15809,7 +15813,8 @@
       "baseCost": 0,
       "vendorValue": 5,
       "marketPrice": 9.3,
-      "hashedId": "93R0qXalLljNAbn8DBgr"
+      "hashedId": "93R0qXalLljNAbn8DBgr",
+      "skill": "mining"
     },
     {
       "name": "Steel Ore",
@@ -15817,7 +15822,8 @@
       "baseCost": 0,
       "vendorValue": 7,
       "marketPrice": 9.7,
-      "hashedId": "1rZXlwg5Yv8Qk9joDmGe"
+      "hashedId": "1rZXlwg5Yv8Qk9joDmGe",
+      "skill": "mining"
     },
     {
       "name": "Mercury Ore",
@@ -15825,7 +15831,8 @@
       "baseCost": 0,
       "vendorValue": 9,
       "marketPrice": 11.5,
-      "hashedId": "q9pwa0kxLBJLgVj136l4"
+      "hashedId": "q9pwa0kxLBJLgVj136l4",
+      "skill": "mining"
     },
     {
       "name": "Chromite Ore",
@@ -15833,7 +15840,8 @@
       "baseCost": 0,
       "vendorValue": 11,
       "marketPrice": 14.5,
-      "hashedId": "zvjoJW96Y85L3RaAylwE"
+      "hashedId": "zvjoJW96Y85L3RaAylwE",
+      "skill": "mining"
     },
     {
       "name": "Uranium Ore",
@@ -15841,7 +15849,8 @@
       "baseCost": 0,
       "vendorValue": 13,
       "marketPrice": 16.4,
-      "hashedId": "PjVDJez3LDvNKWO08Gaq"
+      "hashedId": "PjVDJez3LDvNKWO08Gaq",
+      "skill": "mining"
     },
     {
       "name": "Mystic Ore",
@@ -15849,7 +15858,8 @@
       "baseCost": 0,
       "vendorValue": 17,
       "marketPrice": 22.6,
-      "hashedId": "0kK49j1VN9yNq6B2doap"
+      "hashedId": "0kK49j1VN9yNq6B2doap",
+      "skill": "mining"
     },
     {
       "name": "Cod",
@@ -15857,7 +15867,8 @@
       "baseCost": 2,
       "vendorValue": 2,
       "marketPrice": 6.4,
-      "hashedId": "27gw0k38L4xLWevJxyKR"
+      "hashedId": "27gw0k38L4xLWevJxyKR",
+      "skill": "fishing"
     },
     {
       "name": "Salmon",
@@ -15865,7 +15876,8 @@
       "baseCost": 2,
       "vendorValue": 3,
       "marketPrice": 7.9,
-      "hashedId": "O2xMjGdBN5MN9P1nyrvR"
+      "hashedId": "O2xMjGdBN5MN9P1nyrvR",
+      "skill": "fishing"
     },
     {
       "name": "Tuna",
@@ -15873,7 +15885,8 @@
       "baseCost": 2,
       "vendorValue": 4,
       "marketPrice": 7.4,
-      "hashedId": "lrx463VdQgOQ5w1zWKP8"
+      "hashedId": "lrx463VdQgOQ5w1zWKP8",
+      "skill": "fishing"
     },
     {
       "name": "Trout",
@@ -15881,7 +15894,8 @@
       "baseCost": 4,
       "vendorValue": 5,
       "marketPrice": 14,
-      "hashedId": "y7Do6jgkY0zQ8BAdKX0E"
+      "hashedId": "y7Do6jgkY0zQ8BAdKX0E",
+      "skill": "fishing"
     },
     {
       "name": "Perch",
@@ -15889,7 +15903,8 @@
       "baseCost": 4,
       "vendorValue": 6,
       "marketPrice": 10.4,
-      "hashedId": "3yE1A84kYOwYl6XeVKpD"
+      "hashedId": "3yE1A84kYOwYl6XeVKpD",
+      "skill": "fishing"
     },
     {
       "name": "Herring",
@@ -15897,7 +15912,8 @@
       "baseCost": 7,
       "vendorValue": 7,
       "marketPrice": 14.4,
-      "hashedId": "DBngxedVYJPQX64wW8oa"
+      "hashedId": "DBngxedVYJPQX64wW8oa",
+      "skill": "fishing"
     },
     {
       "name": "Sardines",
@@ -15905,7 +15921,8 @@
       "baseCost": 7,
       "vendorValue": 8,
       "marketPrice": 19.7,
-      "hashedId": "jGXBy7a4LbMY0Pw6Vdgl"
+      "hashedId": "jGXBy7a4LbMY0Pw6Vdgl",
+      "skill": "fishing"
     },
     {
       "name": "Lobster",
@@ -15913,7 +15930,8 @@
       "baseCost": 12,
       "vendorValue": 14,
       "marketPrice": 20.6,
-      "hashedId": "BRn3x72JQ2DYzOMok418"
+      "hashedId": "BRn3x72JQ2DYzOMok418",
+      "skill": "fishing"
     },
     {
       "name": "Crab",
@@ -15921,7 +15939,8 @@
       "baseCost": 12,
       "vendorValue": 16,
       "marketPrice": 26.2,
-      "hashedId": "gGZ2J71yYK9QMmjbown5"
+      "hashedId": "gGZ2J71yYK9QMmjbown5",
+      "skill": "fishing"
     },
     {
       "name": "Turtle",
@@ -15929,7 +15948,8 @@
       "baseCost": 16,
       "vendorValue": 20,
       "marketPrice": 35.4,
-      "hashedId": "yav4OK1wNE5NZP7rzJbe"
+      "hashedId": "yav4OK1wNE5NZP7rzJbe",
+      "skill": "fishing"
     },
     {
       "name": "Stingray",
@@ -15937,7 +15957,8 @@
       "baseCost": 16,
       "vendorValue": 22,
       "marketPrice": 35.8,
-      "hashedId": "oaJydnOmQW2LbgRe5ME6"
+      "hashedId": "oaJydnOmQW2LbgRe5ME6",
+      "skill": "fishing"
     },
     {
       "name": "Lantern Fish",
@@ -15945,7 +15966,8 @@
       "baseCost": 25,
       "vendorValue": 32,
       "marketPrice": 48.4,
-      "hashedId": "ZqEegBydNw7NkA59J61b"
+      "hashedId": "ZqEegBydNw7NkA59J61b",
+      "skill": "fishing"
     },
     {
       "name": "Great White Shark",
@@ -15953,7 +15975,8 @@
       "baseCost": 25,
       "vendorValue": 41,
       "marketPrice": 54.8,
-      "hashedId": "3Zbym56qLxRNBRp7Eekd"
+      "hashedId": "3Zbym56qLxRNBRp7Eekd",
+      "skill": "fishing"
     },
     {
       "name": "Oak Log",
@@ -15961,7 +15984,8 @@
       "baseCost": 0,
       "vendorValue": 1,
       "marketPrice": 4.8,
-      "hashedId": "7eA59WrBQRpYzb62qKvp"
+      "hashedId": "7eA59WrBQRpYzb62qKvp",
+      "skill": "woodcutting"
     },
     {
       "name": "Yew Log",
@@ -15969,7 +15993,8 @@
       "baseCost": 0,
       "vendorValue": 2,
       "marketPrice": 4.5,
-      "hashedId": "ElzPeorXNVjNaW0kv53J"
+      "hashedId": "ElzPeorXNVjNaW0kv53J",
+      "skill": "woodcutting"
     },
     {
       "name": "Spruce Log",
@@ -15977,7 +16002,8 @@
       "baseCost": 0,
       "vendorValue": 3,
       "marketPrice": 10.9,
-      "hashedId": "XyeZRGx9YjKLB80gWlPa"
+      "hashedId": "XyeZRGx9YjKLB80gWlPa",
+      "skill": "woodcutting"
     },
     {
       "name": "Birch Log",
@@ -15985,7 +16011,8 @@
       "baseCost": 0,
       "vendorValue": 5,
       "marketPrice": 8.2,
-      "hashedId": "Ro31P7kZL6AYveGxXOy5"
+      "hashedId": "Ro31P7kZL6AYveGxXOy5",
+      "skill": "woodcutting"
     },
     {
       "name": "Banyan Log",
@@ -15993,7 +16020,8 @@
       "baseCost": 0,
       "vendorValue": 7,
       "marketPrice": 12.7,
-      "hashedId": "brz9RZnWN7aLKAp0Mdle"
+      "hashedId": "brz9RZnWN7aLKAp0Mdle",
+      "skill": "woodcutting"
     },
     {
       "name": "Maple Log",
@@ -16001,7 +16029,8 @@
       "baseCost": 0,
       "vendorValue": 9,
       "marketPrice": 13.4,
-      "hashedId": "bAB1E9poQqkYnakeJj56"
+      "hashedId": "bAB1E9poQqkYnakeJj56",
+      "skill": "woodcutting"
     },
     {
       "name": "Willow Log",
@@ -16009,7 +16038,8 @@
       "baseCost": 0,
       "vendorValue": 11,
       "marketPrice": 16,
-      "hashedId": "ZjlPA8v9NMXQEyMe2OaW"
+      "hashedId": "ZjlPA8v9NMXQEyMe2OaW",
+      "skill": "woodcutting"
     },
     {
       "name": "Mahogany Log",
@@ -16017,7 +16047,8 @@
       "baseCost": 0,
       "vendorValue": 13,
       "marketPrice": 17.3,
-      "hashedId": "P1vlVrzjLrRLao8mGKM2"
+      "hashedId": "P1vlVrzjLrRLao8mGKM2",
+      "skill": "woodcutting"
     },
     {
       "name": "Mystical Log",
@@ -16025,7 +16056,8 @@
       "baseCost": 0,
       "vendorValue": 17,
       "marketPrice": 27,
-      "hashedId": "Z6aDoyRnLykNpV5AGXmk"
+      "hashedId": "Z6aDoyRnLykNpV5AGXmk",
+      "skill": "woodcutting"
     }
   ],
   "magicFindDefaults": {
@@ -16479,182 +16511,12 @@
   ],
   "efficiencyItems": [
     {
-      "name": "Chefs Essence Crystal",
-      "hashedId": "Z6aDoyRnLy6kQpV5AGXm",
-      "effects": [
-        {
-          "skill": "cooking",
-          "efficiencyPercent": 2
-        }
-      ]
-    },
-    {
-      "name": "Flavorburst Essence Crystal",
-      "hashedId": "yav4OK1wNEV5YZP7rzJb",
-      "effects": [
-        {
-          "skill": "cooking",
-          "efficiencyPercent": 4
-        }
-      ]
-    },
-    {
-      "name": "Spicefinder Essence Crystal",
-      "hashedId": "0kK49j1VN9JyYq6B2doa",
-      "effects": [
-        {
-          "skill": "cooking",
-          "efficiencyPercent": 12
-        }
-      ]
-    },
-    {
-      "name": "Spicefinder Essence Crystal (Untradable)",
-      "hashedId": "XyeZRGx9Yjl1QB80gWlP",
-      "effects": [
-        {
-          "skill": "cooking",
-          "efficiencyPercent": 12
-        }
-      ]
-    },
-    {
-      "name": "Gourmet Essence Crystal",
-      "hashedId": "bAB1E9poQqrkNnakeJj5",
-      "effects": [
-        {
-          "skill": "cooking",
-          "efficiencyPercent": 16
-        }
-      ]
-    },
-    {
-      "name": "Eternal Feast Essence Crystal",
-      "hashedId": "y7Do6jgkY0wzN8BAdKX0",
-      "effects": [
-        {
-          "skill": "cooking",
-          "efficiencyPercent": 50
-        }
-      ]
-    },
-    {
-      "name": "Eternal Feast Essence Crystal (Untradable)",
-      "hashedId": "BPjze3x2Q3b5LR85vgZV",
-      "effects": [
-        {
-          "skill": "cooking",
-          "efficiencyPercent": 50
-        }
-      ]
-    },
-    {
-      "name": "Dungeon Potion",
-      "hashedId": "27gw0k38L44xLWevJxyK",
-      "effects": [
-        {
-          "skill": "dungeon",
-          "efficiencyPercent": 5
-        }
-      ]
-    },
-    {
-      "name": "Dungeon Potion (Untradable)",
-      "hashedId": "oZwey82VNAZPYD0dXM3g",
-      "effects": [
-        {
-          "skill": "dungeon",
-          "efficiencyPercent": 5
-        }
-      ]
-    },
-    {
-      "name": "Dungeon Master's Tonic",
-      "hashedId": "j98bO5w1QP0jQ3xkREVJ",
-      "effects": [
-        {
-          "skill": "dungeon",
-          "efficiencyPercent": 10
-        }
-      ]
-    },
-    {
-      "name": "Wraithbane Essence",
-      "hashedId": "P1vlVrzjLryRYao8mGKM",
-      "effects": [
-        {
-          "skill": "dungeon",
-          "efficiencyPercent": 20
-        }
-      ]
-    },
-    {
-      "name": "Wraithbane Essence (Untradable)",
-      "hashedId": "1rZXlwg5YvzkYk9joDmG",
-      "effects": [
-        {
-          "skill": "dungeon",
-          "efficiencyPercent": 20
-        }
-      ]
-    },
-    {
-      "name": "Fallen Star Essence",
-      "hashedId": "DBngxedVYJwPLX64wW8o",
-      "effects": [
-        {
-          "skill": "dungeon",
-          "efficiencyPercent": 120
-        }
-      ]
-    },
-    {
-      "name": "Fallen Star Essence (Untradable)",
-      "hashedId": "XjEaOeBkLaxKYlGwxVPq",
-      "effects": [
-        {
-          "skill": "dungeon",
-          "efficiencyPercent": 120
-        }
-      ]
-    },
-    {
-      "name": "Anglers Essence Crystal",
-      "hashedId": "ZjlPA8v9NM4XQEyMe2Oa",
-      "effects": [
-        {
-          "skill": "fishing",
-          "efficiencyPercent": 2
-        }
-      ]
-    },
-    {
-      "name": "Deepsea Essence Crystal",
-      "hashedId": "y7Do6jgkY0qzL8BAdKX0",
-      "effects": [
-        {
-          "skill": "fishing",
-          "efficiencyPercent": 4
-        }
-      ]
-    },
-    {
       "name": "Improved Fishing Rod",
       "hashedId": "Rv5g4z1dQnjlQqy32jpG",
       "effects": [
         {
           "skill": "fishing",
           "efficiencyPercent": 5
-        }
-      ]
-    },
-    {
-      "name": "Merfolk Essence Crystal",
-      "hashedId": "q9pwa0kxLBoJQgVj136l",
-      "effects": [
-        {
-          "skill": "fishing",
-          "efficiencyPercent": 10
         }
       ]
     },
@@ -16675,26 +16537,6 @@
         {
           "skill": "fishing",
           "efficiencyPercent": 15
-        }
-      ]
-    },
-    {
-      "name": "Riverbend Essence Crystal",
-      "hashedId": "mK5jqPopYG6ONrOzDRGV",
-      "effects": [
-        {
-          "skill": "fishing",
-          "efficiencyPercent": 16
-        }
-      ]
-    },
-    {
-      "name": "Riverbend Essence Crystal (Untradable)",
-      "hashedId": "DBngxedVYJnEYX64wW8o",
-      "effects": [
-        {
-          "skill": "fishing",
-          "efficiencyPercent": 16
         }
       ]
     },
@@ -16769,132 +16611,12 @@
       ]
     },
     {
-      "name": "Battle Potion",
-      "hashedId": "Ro31P7kZL6gAQveGxXOy",
-      "effects": [
-        {
-          "skill": "hunt",
-          "efficiencyPercent": 4
-        }
-      ]
-    },
-    {
-      "name": "Battle Potion (Untradable)",
-      "hashedId": "JZdg5V3PQo9yYEyWq0zl",
-      "effects": [
-        {
-          "skill": "hunt",
-          "efficiencyPercent": 4
-        }
-      ]
-    },
-    {
-      "name": "Strike Essence",
-      "hashedId": "doyA279pNz70YKRDEWm8",
-      "effects": [
-        {
-          "skill": "hunt",
-          "efficiencyPercent": 8
-        }
-      ]
-    },
-    {
-      "name": "Sunseeker",
-      "hashedId": "yav4OK1wNEXRQZP7rzJb",
-      "effects": [
-        {
-          "skill": "hunt",
-          "efficiencyPercent": 8
-        }
-      ]
-    },
-    {
-      "name": "Dragonblood Tonic",
-      "hashedId": "ZjlPA8v9NMoXLEyMe2Oa",
-      "effects": [
-        {
-          "skill": "hunt",
-          "efficiencyPercent": 10
-        }
-      ]
-    },
-    {
-      "name": "Dawnbreaker Bow",
-      "hashedId": "3Zbym56qLxmGQBRp7Eek",
-      "effects": [
-        {
-          "skill": "hunt",
-          "efficiencyPercent": 11
-        }
-      ]
-    },
-    {
-      "name": "Potion of the Hunter",
-      "hashedId": "O2xMjGdBN5eMN9P1nyrv",
-      "effects": [
-        {
-          "skill": "hunt",
-          "efficiencyPercent": 80
-        }
-      ]
-    },
-    {
-      "name": "Potion of the Hunter (Untradable)",
-      "hashedId": "q9pwa0kxLBlVNgVj136l",
-      "effects": [
-        {
-          "skill": "hunt",
-          "efficiencyPercent": 80
-        }
-      ]
-    },
-    {
-      "name": "Miners Essence Crystal",
-      "hashedId": "bAB1E9poQqwkYnakeJj5",
-      "effects": [
-        {
-          "skill": "mining",
-          "efficiencyPercent": 2
-        }
-      ]
-    },
-    {
-      "name": "Rocksplitter Essence Crystal",
-      "hashedId": "lrx463VdQg5OY5w1zWKP",
-      "effects": [
-        {
-          "skill": "mining",
-          "efficiencyPercent": 4
-        }
-      ]
-    },
-    {
       "name": "Improved Pickaxe",
       "hashedId": "ZjlPA8v9NMlnQEyMe2Oa",
       "effects": [
         {
           "skill": "mining",
           "efficiencyPercent": 5
-        }
-      ]
-    },
-    {
-      "name": "Oreseeker Essence Crystal",
-      "hashedId": "3Zbym56qLxjRNBRp7Eek",
-      "effects": [
-        {
-          "skill": "mining",
-          "efficiencyPercent": 10
-        }
-      ]
-    },
-    {
-      "name": "Oreseeker Essence Crystal (Untradable)",
-      "hashedId": "O2xMjGdBN5nnY9P1nyrv",
-      "effects": [
-        {
-          "skill": "mining",
-          "efficiencyPercent": 10
         }
       ]
     },
@@ -16915,26 +16637,6 @@
         {
           "skill": "mining",
           "efficiencyPercent": 15
-        }
-      ]
-    },
-    {
-      "name": "Earthcore Essence Crystal",
-      "hashedId": "Rv5g4z1dQnK9Nqy32jpG",
-      "effects": [
-        {
-          "skill": "mining",
-          "efficiencyPercent": 16
-        }
-      ]
-    },
-    {
-      "name": "Earthcore Essence Crystal (Untradable)",
-      "hashedId": "3yE1A84kYOVxNl6XeVKp",
-      "effects": [
-        {
-          "skill": "mining",
-          "efficiencyPercent": 16
         }
       ]
     },
@@ -16999,96 +16701,6 @@
       ]
     },
     {
-      "name": "Smelting Essence Crystal",
-      "hashedId": "P1vlVrzjLrxRNao8mGKM",
-      "effects": [
-        {
-          "skill": "smelting",
-          "efficiencyPercent": 2
-        }
-      ]
-    },
-    {
-      "name": "Hammerfell Essence Crystal",
-      "hashedId": "3yE1A84kYOgwYl6XeVKp",
-      "effects": [
-        {
-          "skill": "smelting",
-          "efficiencyPercent": 4
-        }
-      ]
-    },
-    {
-      "name": "Molten Core Essence Crystal",
-      "hashedId": "zvjoJW96Y8O5N3RaAylw",
-      "effects": [
-        {
-          "skill": "smelting",
-          "efficiencyPercent": 12
-        }
-      ]
-    },
-    {
-      "name": "Molten Core Essence Crystal (Untradable)",
-      "hashedId": "y7Do6jgkY0npQ8BAdKX0",
-      "effects": [
-        {
-          "skill": "smelting",
-          "efficiencyPercent": 12
-        }
-      ]
-    },
-    {
-      "name": "Tampering Essence Crystal",
-      "hashedId": "3ZvrGV8RQpWyL2wgA5jD",
-      "effects": [
-        {
-          "skill": "smelting",
-          "efficiencyPercent": 16
-        }
-      ]
-    },
-    {
-      "name": "Mjolnir's Essence Crystal",
-      "hashedId": "ZqEegBydNwO7NkA59J61",
-      "effects": [
-        {
-          "skill": "smelting",
-          "efficiencyPercent": 50
-        }
-      ]
-    },
-    {
-      "name": "Mjolnir's Essence Crystal (Untradable)",
-      "hashedId": "q9pwa0kxLBj6LgVj136l",
-      "effects": [
-        {
-          "skill": "smelting",
-          "efficiencyPercent": 50
-        }
-      ]
-    },
-    {
-      "name": "Lumberjack Essence Crystal",
-      "hashedId": "brz9RZnWN70aYKAp0Mdl",
-      "effects": [
-        {
-          "skill": "woodcutting",
-          "efficiencyPercent": 2
-        }
-      ]
-    },
-    {
-      "name": "Timberfall Essence Crystal",
-      "hashedId": "O2xMjGdBN55MN9P1nyrv",
-      "effects": [
-        {
-          "skill": "woodcutting",
-          "efficiencyPercent": 4
-        }
-      ]
-    },
-    {
       "name": "Improved Felling axe",
       "hashedId": "BRn3x72JQ2v7QzOMok41",
       "effects": [
@@ -17099,42 +16711,12 @@
       ]
     },
     {
-      "name": "Felling Essence Crystal",
-      "hashedId": "ZqEegBydNwV7QkA59J61",
-      "effects": [
-        {
-          "skill": "woodcutting",
-          "efficiencyPercent": 10
-        }
-      ]
-    },
-    {
       "name": "Timberfall Talon",
       "hashedId": "gGZ2J71yYKo3YMmjbown",
       "effects": [
         {
           "skill": "woodcutting",
           "efficiencyPercent": 10
-        }
-      ]
-    },
-    {
-      "name": "Yggdrasil Essence Crystal",
-      "hashedId": "EWGwnXPlY1MyYJqekZ2R",
-      "effects": [
-        {
-          "skill": "woodcutting",
-          "efficiencyPercent": 12
-        }
-      ]
-    },
-    {
-      "name": "Yggdrasil Essence Crystal (Untradable)",
-      "hashedId": "jGXBy7a4LbK1Q0Pw6Vdg",
-      "effects": [
-        {
-          "skill": "woodcutting",
-          "efficiencyPercent": 12
         }
       ]
     },
@@ -17195,26 +16777,6 @@
         {
           "skill": "woodcutting",
           "efficiencyPercent": 40
-        }
-      ]
-    },
-    {
-      "name": "Titanwood Crystal",
-      "hashedId": "PjVDJez3LDJvNKWO08Ga",
-      "effects": [
-        {
-          "skill": "woodcutting",
-          "efficiencyPercent": 50
-        }
-      ]
-    },
-    {
-      "name": "Titanwood Crystal (Untradable)",
-      "hashedId": "ZqEegBydNwPoYkA59J61",
-      "effects": [
-        {
-          "skill": "woodcutting",
-          "efficiencyPercent": 50
         }
       ]
     },

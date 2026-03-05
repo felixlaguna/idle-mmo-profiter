@@ -1275,6 +1275,7 @@ function createDataProvider() {
   /**
    * Map of resource names to their skills (for efficiency application)
    * This includes all 3 gather modes (Buy All, Gather Except Coal, Gather All)
+   * and raw gathering entries (ores, fish, logs)
    */
   const resourceSkillMap = computed(() => {
     const map = new Map<string, ResourceRecipe['skill']>()
@@ -1284,6 +1285,13 @@ function createDataProvider() {
       map.set(recipe.name, recipe.skill)
       map.set(`${recipe.name} (gather)`, recipe.skill)
       map.set(`${recipe.name} (gather all)`, recipe.skill)
+    }
+
+    // Include raw gathering entries (ores, fish, logs) with their skill
+    for (const gather of defaults.value.resourceGathering) {
+      if (gather.skill) {
+        map.set(gather.name, gather.skill)
+      }
     }
 
     return map
