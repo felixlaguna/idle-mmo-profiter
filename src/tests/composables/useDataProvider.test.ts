@@ -687,7 +687,10 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
       })
     })
 
-    it('should preserve resourceGathering inputs when they exist', () => {
+    // Skip: This test checked that inputs are preserved, but after the refactor to auto-generate
+    // resource gathering entries from resourceRecipes, we no longer use the inputs field.
+    // Auto-generated entries calculate costs directly using baseCost instead of inputs.
+    it.skip('should preserve resourceGathering inputs when they exist', () => {
       const dataProvider = useDataProvider()
 
       const jsonString = dataProvider.exportAsDefaultsJson()
@@ -839,6 +842,95 @@ describe('useDataProvider - Refresh Exclusion Methods', () => {
           exportedWithoutValue?.value === undefined || !('value' in exportedWithoutValue)
         ).toBe(true)
       }
+    })
+
+    it('should use rawResourcePriceMap for material cost lookups in resourceGatheringFromRecipes', () => {
+      const dataProvider = useDataProvider()
+
+      // Find a resource recipe (e.g., "Cooked Stingray" or similar)
+      const resourceRecipes = dataProvider.resourceRecipes.value
+      if (resourceRecipes.length === 0) {
+        // Skip test if no resource recipes
+        return
+      }
+
+      // Find the corresponding auto-generated entries in resourceGathering
+      const firstRecipe = resourceRecipes[0]
+      const buyAllEntry = dataProvider.resourceGathering.value.find(
+        (g) => g.name === firstRecipe.name
+      )
+
+      expect(buyAllEntry).toBeDefined()
+      expect(buyAllEntry?.baseCost).toBeGreaterThan(0)
+
+      // Verify that baseCost is not zero (which would indicate the bug)
+      // The baseCost should equal the sum of material prices
+      // We can't calculate the exact value without knowing the materials,
+      // but we can verify it's non-zero if the recipe has materials
+
+      if (firstRecipe.materials && firstRecipe.materials.length > 0) {
+        // Calculate expected cost manually using resourceGathering data
+        let expectedCost = 0
+        for (const mat of firstRecipe.materials) {
+          const gatherEntry = (defaultData as DefaultData).resourceGathering.find(
+            (g) => g.name === mat.name
+          )
+          if (gatherEntry) {
+            expectedCost += gatherEntry.marketPrice * mat.quantity
+          }
+        }
+
+        // buyAllEntry.baseCost should match our calculated expectedCost
+        expect(buyAllEntry?.baseCost).toBeCloseTo(expectedCost, 2)
+      }
+    })
+
+    it('should update rawResourcePriceMap when resource price override is applied', () => {
+      const dataProvider = useDataProvider()
+
+      // Find a raw resource that's used in recipes (e.g., Coal, ores, fish)
+      const coalResource = (defaultData as DefaultData).resourceGathering.find(
+        (r) => r.name === 'Coal'
+      )
+
+      if (!coalResource) {
+        // Skip if Coal not found
+        return
+      }
+
+      // Find a resource recipe that uses Coal
+      const recipeWithCoal = dataProvider.resourceRecipes.value.find((recipe) =>
+        recipe.materials.some((mat) => mat.name === 'Coal')
+      )
+
+      if (!recipeWithCoal) {
+        // Skip if no recipe uses Coal
+        return
+      }
+
+      // Get the original cost
+      const buyAllEntryBefore = dataProvider.resourceGathering.value.find(
+        (g) => g.name === recipeWithCoal.name
+      )
+      const originalCost = buyAllEntryBefore?.baseCost || 0
+
+      // Override Coal price
+      const newCoalPrice = 999.99
+      dataProvider.updateResourcePrice('Coal', newCoalPrice)
+
+      // Get the updated cost
+      const buyAllEntryAfter = dataProvider.resourceGathering.value.find(
+        (g) => g.name === recipeWithCoal.name
+      )
+      const updatedCost = buyAllEntryAfter?.baseCost || 0
+
+      // The cost should have increased by (999.99 - originalCoalPrice) * coalQuantity
+      const coalMat = recipeWithCoal.materials.find((mat) => mat.name === 'Coal')
+      const coalQuantity = coalMat?.quantity || 0
+      const originalCoalPrice = coalResource.marketPrice
+
+      const expectedCostIncrease = (newCoalPrice - originalCoalPrice) * coalQuantity
+      expect(updatedCost).toBeCloseTo(originalCost + expectedCostIncrease, 2)
     })
   })
 })

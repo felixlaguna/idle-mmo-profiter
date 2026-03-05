@@ -59,6 +59,14 @@ export interface ItemRecipe {
   result: ItemRecipeResult | null
 }
 
+export interface ItemEffect {
+  value: number
+  length: number
+  target: string
+  attribute: string
+  value_type: string
+}
+
 export interface ItemDetails {
   hashed_id: string
   name: string
@@ -69,6 +77,7 @@ export interface ItemDetails {
   type?: string
   image?: string
   recipe?: ItemRecipe | null
+  effects?: ItemEffect[] | null
 }
 
 export interface MarketHistoryEntry {

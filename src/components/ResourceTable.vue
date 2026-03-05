@@ -1,77 +1,140 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import type { ResourceProfitResult } from '../calculators/resourceCalculator'
-import EditableValue from './EditableValue.vue'
 import { useHeatmap } from '../composables/useHeatmap'
+import { useDataProvider } from '../composables/useDataProvider'
 
-const { getHeatmapStyle } = useHeatmap()
+const { getHeatmapStyle, getSubduedHeatmapStyle } = useHeatmap()
+const dataProvider = useDataProvider()
 
 const props = defineProps<{
   resources: ResourceProfitResult[]
 }>()
 
-// Emit events for editing values
+// Emit events for recipe management
 const emit = defineEmits<{
-  (e: 'update:cost', resourceName: string, value: number): void
-  (e: 'update:timeSeconds', resourceName: string, value: number): void
-  (e: 'update:vendorValue', resourceName: string, value: number): void
-  (e: 'update:marketPrice', resourceName: string, value: number): void
+  (e: 'delete:recipe', recipeName: string): void
 }>()
 
+// Expanded rows tracking
+const expandedRows = ref<Set<string>>(new Set())
+
+// Toggle row expansion
+const toggleRow = (baseName: string) => {
+  // Create a new Set to trigger reactivity
+  const newSet = new Set(expandedRows.value)
+
+  if (newSet.has(baseName)) {
+    newSet.delete(baseName)
+  } else {
+    newSet.add(baseName)
+  }
+
+  // Replace the entire Set to ensure Vue's reactivity system detects the change
+  expandedRows.value = newSet
+}
+
+// Check if row is expanded
+const isExpanded = (baseName: string): boolean => {
+  return expandedRows.value.has(baseName)
+}
+
+// Group resources by base name
+// Extract base name by removing " (gather)" or " (gather all)" suffixes
+interface ResourceGroup {
+  baseName: string
+  modes: Array<{
+    mode: 'buy' | 'gather' | 'gather-all'
+    modeName: string
+    resource: ResourceProfitResult
+  }>
+  skill?: string
+  bestMode: ResourceProfitResult
+  isRecipe: boolean
+}
+
+const groupedResources = computed(() => {
+  const groups = new Map<string, ResourceGroup>()
+
+  props.resources.forEach((resource) => {
+    let baseName = resource.name
+    let mode: 'buy' | 'gather' | 'gather-all' = 'buy'
+
+    // Determine mode based on name suffix
+    if (resource.name.endsWith(' (gather all)')) {
+      baseName = resource.name.replace(' (gather all)', '')
+      mode = 'gather-all'
+    } else if (resource.name.endsWith(' (gather)')) {
+      baseName = resource.name.replace(' (gather)', '')
+      mode = 'gather'
+    }
+
+    // Find the resource recipe for this base name
+    const recipe = dataProvider.resourceRecipes.value.find((r) => r.name === baseName)
+    const skill = recipe?.skill
+    const isRecipe = recipe !== undefined
+
+    if (!groups.has(baseName)) {
+      groups.set(baseName, {
+        baseName,
+        modes: [],
+        skill,
+        bestMode: resource, // Initially set to first resource
+        isRecipe,
+      })
+    }
+
+    const group = groups.get(baseName)!
+    group.modes.push({
+      mode,
+      modeName: mode === 'buy' ? 'Buy All' : mode === 'gather' ? 'Gather' : 'Gather All',
+      resource,
+    })
+
+    // Update best mode if this mode has better profit
+    if (resource.bestProfitPerHour > group.bestMode.bestProfitPerHour) {
+      group.bestMode = resource
+    }
+  })
+
+  return Array.from(groups.values())
+})
+
 // Sort configuration
-type SortKey =
-  | 'name'
-  | 'timeSeconds'
-  | 'cost'
-  | 'vendorValue'
-  | 'marketPrice'
-  | 'bestMethod'
-  | 'bestProfitPerHour'
+type SortKey = 'name' | 'itemsPerHour' | 'cost' | 'bestProfitPerHour'
 type SortOrder = 'asc' | 'desc'
 
 const sortKey = ref<SortKey>('bestProfitPerHour')
 const sortOrder = ref<SortOrder>('desc')
 
-// Computed sorted resources
-const sortedResources = computed(() => {
-  const resources = [...props.resources]
+// Computed sorted resource groups
+const sortedGroups = computed(() => {
+  const groups = [...groupedResources.value]
 
-  resources.sort((a, b) => {
+  groups.sort((a, b) => {
     let aValue: number | string
     let bValue: number | string
 
     switch (sortKey.value) {
       case 'name':
-        aValue = a.name
-        bValue = b.name
+        aValue = a.baseName
+        bValue = b.baseName
         break
-      case 'timeSeconds':
-        aValue = a.timeSeconds
-        bValue = b.timeSeconds
+      case 'itemsPerHour':
+        aValue = 3600 / a.bestMode.timeSeconds
+        bValue = 3600 / b.bestMode.timeSeconds
         break
       case 'cost':
-        aValue = a.cost
-        bValue = b.cost
-        break
-      case 'vendorValue':
-        aValue = a.vendorValue
-        bValue = b.vendorValue
-        break
-      case 'marketPrice':
-        aValue = a.marketPrice
-        bValue = b.marketPrice
-        break
-      case 'bestMethod':
-        aValue = a.bestMethod
-        bValue = b.bestMethod
+        aValue = a.bestMode.cost
+        bValue = b.bestMode.cost
         break
       case 'bestProfitPerHour':
-        aValue = a.bestProfitPerHour
-        bValue = b.bestProfitPerHour
+        aValue = a.bestMode.bestProfitPerHour
+        bValue = b.bestMode.bestProfitPerHour
         break
       default:
-        aValue = a.bestProfitPerHour
-        bValue = b.bestProfitPerHour
+        aValue = a.bestMode.bestProfitPerHour
+        bValue = b.bestMode.bestProfitPerHour
     }
 
     if (typeof aValue === 'string' && typeof bValue === 'string') {
@@ -83,7 +146,7 @@ const sortedResources = computed(() => {
       : (bValue as number) - (aValue as number)
   })
 
-  return resources
+  return groups
 })
 
 // Toggle sort
@@ -101,6 +164,12 @@ const formatNumber = (num: number): string => {
   return Math.round(num).toLocaleString()
 }
 
+// Format items per hour
+const formatItemsPerHour = (timeSeconds: number): string => {
+  const itemsPerHour = 3600 / timeSeconds
+  return itemsPerHour.toFixed(1)
+}
+
 // Get sort icon
 const getSortIcon = (key: SortKey): string => {
   if (sortKey.value !== key) return '↕'
@@ -109,41 +178,62 @@ const getSortIcon = (key: SortKey): string => {
 
 // Calculate profit range for heatmap
 const profitRange = computed(() => {
-  const profitHours = props.resources.map((r) => r.bestProfitPerHour)
-  const vendorProfits = props.resources.map((r) => r.vendorProfit)
-  const marketProfits = props.resources.map((r) => r.marketProfit)
+  const allResources = props.resources
+  if (allResources.length === 0) {
+    return {
+      profitPerHour: { min: 0, max: 0 },
+      profit: { min: 0, max: 0 },
+    }
+  }
+
+  const profitHours = allResources.map((r) => r.bestProfitPerHour)
+  const vendorProfits = allResources.map((r) => r.vendorProfit)
+  const marketProfits = allResources.map((r) => r.marketProfit)
+  const allProfits = [...vendorProfits, ...marketProfits]
+
   return {
     profitPerHour: {
       min: Math.min(...profitHours),
       max: Math.max(...profitHours),
     },
-    vendorProfit: {
-      min: Math.min(...vendorProfits),
-      max: Math.max(...vendorProfits),
-    },
-    marketProfit: {
-      min: Math.min(...marketProfits),
-      max: Math.max(...marketProfits),
+    profit: {
+      min: Math.min(...allProfits),
+      max: Math.max(...allProfits),
     },
   }
 })
 
-// Handle inline editing
-const handleCostUpdate = (resourceName: string, value: number) => {
-  emit('update:cost', resourceName, value)
+// Handle inline editing (for future use with time editing)
+// Currently resource recipe time is shared across all 3 modes
+// const handleTimeUpdate = (baseName: string, value: number) => {
+//   dataProvider.updateResourceRecipeTime(baseName, value)
+// }
+
+// Get mode badge class
+const getModeBadgeClass = (mode: 'buy' | 'gather' | 'gather-all'): string => {
+  switch (mode) {
+    case 'buy':
+      return 'mode-buy'
+    case 'gather':
+      return 'mode-gather'
+    case 'gather-all':
+      return 'mode-gather-all'
+    default:
+      return ''
+  }
 }
 
-const handleTimeUpdate = (resourceName: string, value: number) => {
-  emit('update:timeSeconds', resourceName, value)
+// Get skill badge class
+const getSkillBadgeClass = (skill?: string): string => {
+  if (!skill) return 'skill-unknown'
+  return `skill-${skill}`
 }
 
-const handleVendorValueUpdate = (resourceName: string, value: number) => {
-  emit('update:vendorValue', resourceName, value)
+// Handle delete recipe
+const handleDeleteRecipe = (baseName: string) => {
+  emit('delete:recipe', baseName)
 }
 
-const handleMarketPriceUpdate = (resourceName: string, value: number) => {
-  emit('update:marketPrice', resourceName, value)
-}
 </script>
 
 <template>
@@ -156,84 +246,176 @@ const handleMarketPriceUpdate = (resourceName: string, value: number) => {
       >
         <thead>
           <tr>
-            <th class="sortable" @click="toggleSort('name')">Resource <span class="sort-icon">{{ getSortIcon('name') }}</span></th>
-            <th class="sortable text-right" @click="toggleSort('timeSeconds')">
-              Time <span class="sort-icon">{{ getSortIcon('timeSeconds') }}</span>
+            <th class="expand-col"></th>
+            <th class="sortable" @click="toggleSort('name')">
+              Resource <span class="sort-icon">{{ getSortIcon('name') }}</span>
+            </th>
+            <th class="sortable text-right" @click="toggleSort('itemsPerHour')">
+              Items/hr <span class="sort-icon">{{ getSortIcon('itemsPerHour') }}</span>
             </th>
             <th class="sortable text-right" @click="toggleSort('cost')">
               Cost <span class="sort-icon">{{ getSortIcon('cost') }}</span>
             </th>
-            <th class="sortable text-right" @click="toggleSort('vendorValue')">
-              Vendor Price <span class="sort-icon">{{ getSortIcon('vendorValue') }}</span>
-            </th>
-            <th class="sortable text-right" @click="toggleSort('marketPrice')">
-              Market Price <span class="sort-icon">{{ getSortIcon('marketPrice') }}</span>
-            </th>
-            <th class="sortable" @click="toggleSort('bestMethod')">
-              Best Method <span class="sort-icon">{{ getSortIcon('bestMethod') }}</span>
-            </th>
+            <th class="text-right">Vendor Profit/hr</th>
+            <th class="text-right">Market Profit/hr</th>
             <th class="sortable text-right" @click="toggleSort('bestProfitPerHour')">
-              Profit/hr <span class="sort-icon">{{ getSortIcon('bestProfitPerHour') }}</span>
+              Best Profit/hr <span class="sort-icon">{{ getSortIcon('bestProfitPerHour') }}</span>
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="resource in sortedResources" :key="resource.name">
-            <td class="name-cell" data-label="Resource">{{ resource.name }}</td>
-            <td class="text-right" data-label="Time">
-              <EditableValue
-                :model-value="resource.timeSeconds"
-                :default-value="resource.timeSeconds"
-                suffix="s"
-                @update:model-value="(value) => handleTimeUpdate(resource.name, value)"
-              />
-            </td>
-            <td class="text-right" data-label="Cost">
-              <EditableValue
-                :model-value="resource.cost"
-                :default-value="resource.cost"
-                @update:model-value="(value) => handleCostUpdate(resource.name, value)"
-              />
-            </td>
-            <td class="text-right" data-label="Vendor Price">
-              <EditableValue
-                :model-value="resource.vendorValue"
-                :default-value="resource.vendorValue"
-                @update:model-value="(value) => handleVendorValueUpdate(resource.name, value)"
-              />
-            </td>
-            <td class="text-right" data-label="Market Price">
-              <EditableValue
-                :model-value="resource.marketPrice"
-                :default-value="resource.marketPrice"
-                @update:model-value="(value) => handleMarketPriceUpdate(resource.name, value)"
-              />
-            </td>
-            <td data-label="Best">
-              <span
-                class="method-badge"
-                :class="{
-                  'method-vendor': resource.bestMethod === 'vendor',
-                  'method-market': resource.bestMethod === 'market',
-                }"
+          <template v-for="group in sortedGroups" :key="group.baseName">
+            <!-- Parent Row: Shows best mode -->
+            <tr class="main-row parent-row" :class="{ expanded: isExpanded(group.baseName) }">
+              <td class="expand-col" data-label="">
+                <button
+                  class="expand-button"
+                  :class="{ expanded: isExpanded(group.baseName) }"
+                  :title="isExpanded(group.baseName) ? 'Collapse' : 'Expand'"
+                  :aria-label="`${isExpanded(group.baseName) ? 'Collapse' : 'Expand'} ${group.baseName} modes`"
+                  :aria-expanded="isExpanded(group.baseName)"
+                  @click="toggleRow(group.baseName)"
+                >
+                  <svg
+                    class="expand-icon"
+                    :class="{ expanded: isExpanded(group.baseName) }"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    width="18"
+                    height="18"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </button>
+              </td>
+              <td class="name-cell" data-label="Resource">
+                {{ group.baseName }}
+                <span v-if="group.skill" class="skill-badge" :class="getSkillBadgeClass(group.skill)">
+                  {{ group.skill }}
+                </span>
+                <button
+                  v-if="group.isRecipe"
+                  class="btn-delete-recipe"
+                  title="Remove resource recipe"
+                  :aria-label="'Remove ' + group.baseName + ' recipe'"
+                  @click.stop="handleDeleteRecipe(group.baseName)"
+                >
+                  ✕
+                </button>
+              </td>
+              <td class="text-right" data-label="Items/hr">
+                {{ formatItemsPerHour(group.bestMode.timeSeconds) }}
+              </td>
+              <td class="text-right" data-label="Cost">
+                {{ formatNumber(group.bestMode.cost) }}
+              </td>
+              <td
+                class="text-right"
+                data-label="Vendor Profit/hr"
+                :style="
+                  getSubduedHeatmapStyle(
+                    group.bestMode.vendorProfitPerHour,
+                    profitRange.profitPerHour.min,
+                    profitRange.profitPerHour.max
+                  )
+                "
               >
-                {{ resource.bestMethod === 'vendor' ? 'Vendor' : 'Market' }}
-              </span>
-            </td>
-            <td
-              class="text-right profit-hr"
-              data-label="Profit/hr"
-              :style="
-                getHeatmapStyle(
-                  resource.bestProfitPerHour,
-                  profitRange.profitPerHour.min,
-                  profitRange.profitPerHour.max
-                )
-              "
-            >
-              {{ formatNumber(resource.bestProfitPerHour) }}
-            </td>
-          </tr>
+                {{ formatNumber(group.bestMode.vendorProfitPerHour) }}
+              </td>
+              <td
+                class="text-right"
+                data-label="Market Profit/hr"
+                :style="
+                  getSubduedHeatmapStyle(
+                    group.bestMode.marketProfitPerHour,
+                    profitRange.profitPerHour.min,
+                    profitRange.profitPerHour.max
+                  )
+                "
+              >
+                {{ formatNumber(group.bestMode.marketProfitPerHour) }}
+              </td>
+              <td
+                class="text-right profit-hr"
+                data-label="Best Profit/hr"
+                :style="
+                  getHeatmapStyle(
+                    group.bestMode.bestProfitPerHour,
+                    profitRange.profitPerHour.min,
+                    profitRange.profitPerHour.max
+                  )
+                "
+              >
+                {{ formatNumber(group.bestMode.bestProfitPerHour) }}
+              </td>
+            </tr>
+
+            <!-- Child Rows: Show all 3 modes when expanded -->
+            <template v-if="isExpanded(group.baseName)">
+              <tr
+                v-for="modeData in group.modes"
+                :key="`${group.baseName}-${modeData.mode}`"
+                class="child-row"
+              >
+                <td class="expand-col"></td>
+                <td class="name-cell mode-name-cell" data-label="Mode">
+                  <span class="mode-indent">↳</span>
+                  <span class="mode-badge" :class="getModeBadgeClass(modeData.mode)">
+                    {{ modeData.modeName }}
+                  </span>
+                </td>
+                <td class="text-right" data-label="Items/hr">
+                  {{ formatItemsPerHour(modeData.resource.timeSeconds) }}
+                </td>
+                <td class="text-right" data-label="Cost">
+                  {{ formatNumber(modeData.resource.cost) }}
+                </td>
+                <td
+                  class="text-right"
+                  data-label="Vendor Profit/hr"
+                  :style="
+                    getSubduedHeatmapStyle(
+                      modeData.resource.vendorProfitPerHour,
+                      profitRange.profitPerHour.min,
+                      profitRange.profitPerHour.max
+                    )
+                  "
+                >
+                  {{ formatNumber(modeData.resource.vendorProfitPerHour) }}
+                </td>
+                <td
+                  class="text-right"
+                  data-label="Market Profit/hr"
+                  :style="
+                    getSubduedHeatmapStyle(
+                      modeData.resource.marketProfitPerHour,
+                      profitRange.profitPerHour.min,
+                      profitRange.profitPerHour.max
+                    )
+                  "
+                >
+                  {{ formatNumber(modeData.resource.marketProfitPerHour) }}
+                </td>
+                <td
+                  class="text-right"
+                  data-label="Best Profit/hr"
+                  :style="
+                    getSubduedHeatmapStyle(
+                      modeData.resource.bestProfitPerHour,
+                      profitRange.profitPerHour.min,
+                      profitRange.profitPerHour.max
+                    )
+                  "
+                >
+                  {{ formatNumber(modeData.resource.bestProfitPerHour) }}
+                </td>
+              </tr>
+            </template>
+          </template>
         </tbody>
       </table>
     </div>
@@ -301,6 +483,81 @@ const handleMarketPriceUpdate = (resourceName: string, value: number) => {
   text-align: right;
 }
 
+/* Expand Column */
+.expand-col {
+  width: 2.5rem;
+  padding-left: 0.5rem !important;
+  padding-right: 0.25rem !important;
+}
+
+.expand-button {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  transition: all 0.2s;
+}
+
+.expand-button:hover {
+  background-color: rgba(96, 165, 250, 0.1);
+  color: var(--accent-primary);
+}
+
+.expand-icon {
+  transition: transform 0.2s;
+}
+
+.expand-icon.expanded {
+  transform: rotate(180deg);
+}
+
+/* Parent Row */
+.parent-row {
+  background-color: rgba(255, 255, 255, 0.02);
+  font-weight: 500;
+}
+
+.parent-row:hover {
+  background-color: var(--bg-tertiary);
+  transform: translateX(4px);
+  box-shadow: -4px 0 0 0 var(--accent-primary);
+}
+
+.parent-row.expanded {
+  border-bottom: 1px solid rgba(96, 165, 250, 0.2);
+}
+
+/* Child Row */
+.child-row {
+  background-color: rgba(255, 255, 255, 0.01);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.child-row:hover {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.child-row:last-child {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.mode-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mode-indent {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-left: 0.5rem;
+}
+
 .main-table tbody tr {
   border-bottom: 1px solid var(--border-color);
   transition: all 0.2s ease-in-out;
@@ -310,16 +567,11 @@ const handleMarketPriceUpdate = (resourceName: string, value: number) => {
   background-color: rgba(255, 255, 255, 0.04);
 }
 
-.main-table tbody tr:hover {
-  background-color: var(--bg-tertiary);
-  transform: translateX(4px);
-  box-shadow: -4px 0 0 0 var(--accent-primary);
-}
-
 .main-table td {
   padding: 0.625rem 0.75rem;
   color: var(--text-primary);
   font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
 }
 
 .text-right {
@@ -329,10 +581,79 @@ const handleMarketPriceUpdate = (resourceName: string, value: number) => {
 /* Name Cell */
 .name-cell {
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-/* Method Badge */
-.method-badge {
+/* Delete Button */
+.btn-delete-recipe {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  transition: all 0.2s;
+  opacity: 0;
+}
+
+.parent-row:hover .btn-delete-recipe {
+  opacity: 1;
+}
+
+.btn-delete-recipe:hover {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+/* Skill Badge */
+.skill-badge {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  background-color: rgba(139, 92, 246, 0.15);
+  color: #a78bfa;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.skill-smelting {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.skill-cooking {
+  background-color: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.skill-woodcutting {
+  background-color: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+.skill-mining {
+  background-color: rgba(148, 163, 184, 0.15);
+  color: #cbd5e1;
+  border-color: rgba(148, 163, 184, 0.3);
+}
+
+.skill-fishing {
+  background-color: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+/* Mode Badge */
+.mode-badge {
   display: inline-block;
   padding: 0.25rem 0.75rem;
   border-radius: 0.25rem;
@@ -341,16 +662,22 @@ const handleMarketPriceUpdate = (resourceName: string, value: number) => {
   text-transform: capitalize;
 }
 
-.method-vendor {
-  background-color: rgba(245, 158, 11, 0.2);
-  color: #fbbf24;
-  border: 1px solid rgba(245, 158, 11, 0.4);
-}
-
-.method-market {
+.mode-buy {
   background-color: rgba(59, 130, 246, 0.2);
   color: #60a5fa;
   border: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+.mode-gather {
+  background-color: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.4);
+}
+
+.mode-gather-all {
+  background-color: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.4);
 }
 
 /* Profit Cells */
@@ -385,12 +712,6 @@ const handleMarketPriceUpdate = (resourceName: string, value: number) => {
 @media (max-width: 767px) {
   .resource-table {
     gap: 0.375rem;
-  }
-
-  /* Hide less important rows on mobile — show COST + TIME to match other tabs */
-  .resource-table :deep(.mobile-card-layout td[data-label='Vendor Price']),
-  .resource-table :deep(.mobile-card-layout td[data-label='Best']) {
-    display: none;
   }
 
   .table-container {

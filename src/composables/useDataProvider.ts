@@ -10,13 +10,14 @@
  */
 
 import { ref, computed } from 'vue'
-import type { DefaultData, Recipe, CraftableRecipe } from '../types'
+import type { DefaultData, Recipe, CraftableRecipe, ResourceRecipe } from '../types'
 import defaultData from '../data/defaults.json'
 
 // Storage keys
 const STORAGE_PREFIX = 'idlemmo:'
 const USER_OVERRIDES_KEY = `${STORAGE_PREFIX}user-overrides`
 const CRAFTABLE_RECIPES_KEY = `${STORAGE_PREFIX}craftable-recipes`
+const RESOURCE_RECIPES_KEY = `${STORAGE_PREFIX}resource-recipes`
 
 /**
  * User overrides structure
@@ -142,6 +143,57 @@ function loadCraftableRecipes(
   }
 }
 
+/**
+ * Save resourceRecipes to localStorage
+ */
+function saveResourceRecipes(resourceRecipes: DefaultData['resourceRecipes']): void {
+  try {
+    localStorage.setItem(RESOURCE_RECIPES_KEY, JSON.stringify(resourceRecipes))
+  } catch (error) {
+    console.error('Failed to save resource recipes:', error)
+  }
+}
+
+/**
+ * Load resourceRecipes from localStorage, merging with defaults
+ */
+function loadResourceRecipes(
+  defaultRecipes: DefaultData['resourceRecipes']
+): DefaultData['resourceRecipes'] {
+  try {
+    const stored = localStorage.getItem(RESOURCE_RECIPES_KEY)
+    if (!stored) return defaultRecipes || []
+
+    const savedRecipes = JSON.parse(stored) as DefaultData['resourceRecipes']
+    if (!savedRecipes) return defaultRecipes || []
+
+    // Use saved recipes as the source of truth (includes additions, removals, time edits)
+    // But merge lastSaleAt and weeklySalesVolume from defaults for low-confidence detection
+    const defaultLastSaleAt = new Map<string, string>()
+    const defaultWeeklySalesVolume = new Map<string, number>()
+    ;(defaultRecipes || []).forEach((recipe) => {
+      if (recipe.lastSaleAt) {
+        defaultLastSaleAt.set(recipe.name, recipe.lastSaleAt)
+      }
+      if (recipe.weeklySalesVolume !== undefined) {
+        defaultWeeklySalesVolume.set(recipe.name, recipe.weeklySalesVolume)
+      }
+    })
+
+    return savedRecipes.map((recipe) => {
+      const lastSaleAt = defaultLastSaleAt.get(recipe.name)
+      const weeklySalesVolume = defaultWeeklySalesVolume.get(recipe.name)
+      const updates: Partial<ResourceRecipe> = {}
+      if (lastSaleAt) updates.lastSaleAt = lastSaleAt
+      if (weeklySalesVolume !== undefined) updates.weeklySalesVolume = weeklySalesVolume
+      return Object.keys(updates).length > 0 ? { ...recipe, ...updates } : recipe
+    })
+  } catch (error) {
+    console.error('Failed to load resource recipes:', error)
+    return defaultRecipes || []
+  }
+}
+
 // Singleton instance - created once and shared across all calls
 let dataProviderInstance: ReturnType<typeof createDataProvider> | null = null
 
@@ -206,6 +258,8 @@ function createDataProvider() {
   const loadedDefaults = defaultData as DefaultData
   // Restore persisted craftableRecipes (includes user additions/removals/edits)
   loadedDefaults.craftableRecipes = loadCraftableRecipes(loadedDefaults.craftableRecipes)
+  // Restore persisted resourceRecipes (includes user additions/removals/edits)
+  loadedDefaults.resourceRecipes = loadResourceRecipes(loadedDefaults.resourceRecipes)
 
   // CRITICAL: Sync materials and craftables from craftableRecipes
   // This ensures that all ingredients and outputs referenced by craftableRecipes
@@ -313,6 +367,12 @@ function createDataProvider() {
   const allItems = computed(() => defaults.value.allItems || [])
 
   /**
+   * Efficiency items array from defaults.json
+   * Contains items with efficiency effects for resource skills
+   */
+  const efficiencyItems = computed(() => defaults.value.efficiencyItems || [])
+
+  /**
    * Create lookup maps for material, craftable, and resource prices
    * These allow us to apply overrides to activity data
    */
@@ -369,6 +429,28 @@ function createDataProvider() {
   })
 
   /**
+   * Map of raw resource/material names to their market prices
+   * Built from resourceGathering with user overrides applied
+   * Used for recipe material cost lookups (e.g., Lantern Fish, Coal, ores, logs)
+   */
+  const rawResourcePriceMap = computed(() => {
+    const map = new Map<string, number>()
+    // Get base data from defaults.json
+    defaults.value.resourceGathering.forEach((gather) => {
+      map.set(gather.name, gather.marketPrice)
+    })
+    // Apply user overrides for resource prices
+    if (userOverrides.value.resources) {
+      for (const [name, override] of Object.entries(userOverrides.value.resources)) {
+        if (override.marketPrice !== undefined) {
+          map.set(name, override.marketPrice)
+        }
+      }
+    }
+    return map
+  })
+
+  /**
    * CraftableRecipes with craftable prices updated from overrides
    * Material prices are resolved via materialPriceMap by the calculator
    */
@@ -385,22 +467,137 @@ function createDataProvider() {
   })
 
   /**
+   * ResourceRecipes with prices updated from overrides
+   * Material prices are resolved via materialPriceMap
+   */
+  const resourceRecipes = computed(() => {
+    return (defaults.value.resourceRecipes || []).map((recipe) => {
+      // Update current price from resource price overrides
+      const updatedPrice = resourcePriceMap.value.get(recipe.name) ?? recipe.currentPrice
+
+      return {
+        ...recipe,
+        currentPrice: updatedPrice,
+      }
+    })
+  })
+
+  /**
+   * Auto-generate 3 ResourceGather entries per ResourceRecipe
+   * 1. Buy All mode: All materials at market price, craft time only
+   * 2. Gather Except Coal mode: Gather all non-coal materials (includes gather times + bait costs)
+   * 3. Gather All mode: Gather ALL materials (includes all gather times + bait costs)
+   *
+   * Fishing materials include bait costs:
+   * - Cheap Bait (2g): Cod, Salmon, Tuna
+   * - Tarnished Bait (4g): Trout, Perch
+   * - Gleaming Bait (7g): Herring, Sardines
+   * - Elemental Bait (12g): Lobster, Crab
+   * - Eldritch Bait (16g): Turtle, Stingray
+   * - Arcane Bait (25g): Lantern Fish, Great White Shark
+   */
+  const resourceGatheringFromRecipes = computed(() => {
+    const gatherEntries: typeof defaults.value.resourceGathering = []
+
+    // Create lookup maps for gathering time and base cost (bait cost for fish)
+    const gatherTimeMap = new Map<string, number>()
+    const baseCostMap = new Map<string, number>()
+    defaults.value.resourceGathering.forEach((gather) => {
+      gatherTimeMap.set(gather.name, gather.timeSeconds)
+      baseCostMap.set(gather.name, gather.baseCost)
+    })
+
+    for (const recipe of resourceRecipes.value) {
+      // Mode 1: Buy All - All materials at market price, craft time only
+      const buyAllCost = recipe.materials.reduce((sum, mat) => {
+        // Look up price in rawResourcePriceMap (raw resources like fish, ores, logs)
+        const matPrice = rawResourcePriceMap.value.get(mat.name) ?? 0
+        return sum + matPrice * mat.quantity
+      }, 0)
+
+      gatherEntries.push({
+        name: recipe.name,
+        timeSeconds: recipe.timeSeconds,
+        baseCost: buyAllCost,
+        inputs: [],
+        vendorValue: recipe.vendorValue,
+        marketPrice: recipe.currentPrice,
+        cost: buyAllCost,
+      })
+
+      // Mode 2: Gather Except Coal - Gather all materials except coal
+      const coalMat = recipe.materials.find((mat) => mat.name.toLowerCase() === 'coal')
+      const coalCost = coalMat ? (rawResourcePriceMap.value.get(coalMat.name) ?? 0) * coalMat.quantity : 0
+
+      // Calculate gather time for non-coal materials
+      let gatherExceptCoalTime = recipe.timeSeconds
+      let gatherExceptCoalBaseCost = coalCost
+
+      for (const mat of recipe.materials) {
+        if (mat.name.toLowerCase() !== 'coal') {
+          const matGatherTime = gatherTimeMap.get(mat.name) ?? 0
+          const matBaseCost = baseCostMap.get(mat.name) ?? 0
+          gatherExceptCoalTime += matGatherTime * mat.quantity
+          gatherExceptCoalBaseCost += matBaseCost * mat.quantity
+        }
+      }
+
+      gatherEntries.push({
+        name: `${recipe.name} (gather)`,
+        timeSeconds: gatherExceptCoalTime,
+        baseCost: gatherExceptCoalBaseCost,
+        inputs: [],
+        vendorValue: recipe.vendorValue,
+        marketPrice: recipe.currentPrice,
+        cost: gatherExceptCoalBaseCost,
+      })
+
+      // Mode 3: Gather All - Gather ALL materials including coal
+      let gatherAllTime = recipe.timeSeconds
+      let gatherAllBaseCost = 0
+
+      for (const mat of recipe.materials) {
+        const matGatherTime = gatherTimeMap.get(mat.name) ?? 0
+        const matBaseCost = baseCostMap.get(mat.name) ?? 0
+        gatherAllTime += matGatherTime * mat.quantity
+        gatherAllBaseCost += matBaseCost * mat.quantity
+      }
+
+      gatherEntries.push({
+        name: `${recipe.name} (gather all)`,
+        timeSeconds: gatherAllTime,
+        baseCost: gatherAllBaseCost,
+        inputs: [],
+        vendorValue: recipe.vendorValue,
+        marketPrice: recipe.currentPrice,
+        cost: gatherAllBaseCost,
+      })
+    }
+
+    return gatherEntries
+  })
+
+  /**
    * ResourceGathering with market prices and costs updated from overrides
    * This ensures that when a user edits a resource price in the Market tab,
    * it flows through to the resource gathering calculations.
    *
    * Cost is computed as: baseCost + sum of input costs
    * where input cost = quantity * (useMarketPrice ? marketPrice : baseCost)
+   *
+   * This now merges:
+   * 1. Manual entries from defaults.json
+   * 2. Auto-generated entries from resourceRecipes (3 modes per recipe)
    */
   const resourceGathering = computed(() => {
-    // First pass: create a map to store all resources
+    // First pass: create a map to store all resources (manual entries from defaults.json)
     const resourceMap = new Map<string, (typeof defaults.value.resourceGathering)[0]>()
     defaults.value.resourceGathering.forEach((gather) => {
       resourceMap.set(gather.name, gather)
     })
 
-    // Second pass: compute costs with resolved dependencies
-    return defaults.value.resourceGathering.map((gather) => {
+    // Process manual entries from defaults.json
+    const manualEntries = defaults.value.resourceGathering.map((gather) => {
       // Update market price from resource price overrides
       const updatedPrice = resourcePriceMap.value.get(gather.name) ?? gather.marketPrice
 
@@ -436,6 +633,9 @@ function createDataProvider() {
         cost: computedCost,
       }
     })
+
+    // Merge manual entries with auto-generated entries from resourceRecipes
+    return [...manualEntries, ...resourceGatheringFromRecipes.value]
   })
 
   /**
@@ -897,6 +1097,51 @@ function createDataProvider() {
   }
 
   /**
+   * Add a new ResourceRecipe entry to the defaults
+   */
+  function addResourceRecipe(resourceRecipe: {
+    name: string
+    timeSeconds: number
+    skill: ResourceRecipe['skill']
+    materials: Array<{ name: string; quantity: number }>
+    currentPrice: number
+    vendorValue: number
+    hashedId?: string
+  }): void {
+    if (!defaults.value.resourceRecipes) {
+      defaults.value.resourceRecipes = []
+    }
+    defaults.value.resourceRecipes.push(resourceRecipe)
+    defaults.value = { ...defaults.value }
+    saveResourceRecipes(defaults.value.resourceRecipes)
+  }
+
+  /**
+   * Update a ResourceRecipe's craft time by name
+   */
+  function updateResourceRecipeTime(name: string, timeSeconds: number): void {
+    if (!defaults.value.resourceRecipes) return
+    const recipe = defaults.value.resourceRecipes.find((r) => r.name === name)
+    if (recipe) {
+      recipe.timeSeconds = timeSeconds
+      defaults.value = { ...defaults.value }
+      saveResourceRecipes(defaults.value.resourceRecipes)
+    }
+  }
+
+  /**
+   * Remove a ResourceRecipe entry by name
+   */
+  function removeResourceRecipe(name: string): void {
+    if (!defaults.value.resourceRecipes) return
+    defaults.value.resourceRecipes = defaults.value.resourceRecipes.filter(
+      (recipe) => recipe.name !== name
+    )
+    defaults.value = { ...defaults.value }
+    saveResourceRecipes(defaults.value.resourceRecipes)
+  }
+
+  /**
    * Update a recipe's structural fields in defaults (uses, producesItemName, etc.)
    * Persisted to localStorage via user overrides so they survive refresh.
    */
@@ -1001,11 +1246,48 @@ function createDataProvider() {
       }),
       magicFindDefaults: magicFindDefaults.value,
       marketTaxRate: marketTaxRate.value,
+      resourceRecipes: resourceRecipes.value.map((recipe) => ({
+        name: recipe.name,
+        timeSeconds: recipe.timeSeconds,
+        skill: recipe.skill,
+        materials: recipe.materials.map((mat) => ({
+          name: mat.name,
+          quantity: mat.quantity,
+        })),
+        currentPrice: recipe.currentPrice,
+        vendorValue: recipe.vendorValue,
+        hashedId: recipe.hashedId,
+      })),
+      efficiencyItems: efficiencyItems.value.map((item) => ({
+        name: item.name,
+        hashedId: item.hashedId,
+        effects: item.effects.map((effect) => ({
+          skill: effect.skill,
+          efficiencyPercent: effect.efficiencyPercent,
+        })),
+      })),
     }
 
     // Return pretty-printed JSON with 2-space indentation
     return JSON.stringify(exportData, null, 2)
   }
+
+  /**
+   * Map of resource names to their skills (for efficiency application)
+   * This includes all 3 gather modes (Buy All, Gather Except Coal, Gather All)
+   */
+  const resourceSkillMap = computed(() => {
+    const map = new Map<string, ResourceRecipe['skill']>()
+
+    for (const recipe of resourceRecipes.value) {
+      // All 3 modes use the same skill
+      map.set(recipe.name, recipe.skill)
+      map.set(`${recipe.name} (gather)`, recipe.skill)
+      map.set(`${recipe.name} (gather all)`, recipe.skill)
+    }
+
+    return map
+  })
 
   return {
     // Reactive data
@@ -1015,10 +1297,12 @@ function createDataProvider() {
     recipes,
     dungeons,
     craftableRecipes,
+    resourceRecipes,
     resourceGathering,
     magicFindDefaults,
     marketTaxRate,
     allItems,
+    efficiencyItems,
 
     // Price lookup maps
     materialPriceMap,
@@ -1026,6 +1310,7 @@ function createDataProvider() {
     resourcePriceMap,
     materialLastSaleAtMap,
     materialVendorValueMap,
+    resourceSkillMap,
 
     // Update methods
     updateMaterialPrice,
@@ -1062,6 +1347,11 @@ function createDataProvider() {
     addMaterial,
     addCraftable,
     updateRecipeDefaults,
+
+    // Resource recipe methods
+    addResourceRecipe,
+    updateResourceRecipeTime,
+    removeResourceRecipe,
   }
 }
 

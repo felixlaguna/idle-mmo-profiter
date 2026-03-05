@@ -1,6 +1,14 @@
 import { computed, type ComputedRef } from 'vue'
-import type { Dungeon, Recipe, CraftableRecipe, ResourceGather, MagicFindSettings } from '../types'
+import type {
+  Dungeon,
+  Recipe,
+  CraftableRecipe,
+  ResourceGather,
+  MagicFindSettings,
+  ResourceSkill,
+} from '../types'
 import type { RankedActivity } from '../calculators/profitRanker'
+import type { EfficiencyModifierFn } from '../calculators/resourceCalculator'
 import {
   calculateDungeonProfits,
   calculateCraftableProfits,
@@ -20,6 +28,8 @@ export interface UseProfitRankingOptions {
   materialLastSaleAtMap?: ComputedRef<Map<string, string>> | Map<string, string>
   materialVendorValueMap?: ComputedRef<Map<string, number>> | Map<string, number>
   includeNegative?: ComputedRef<boolean> | boolean
+  resourceSkillMap?: ComputedRef<Map<string, ResourceSkill>> | Map<string, ResourceSkill>
+  efficiencyModifier?: EfficiencyModifierFn
 }
 
 export interface UseProfitRankingReturn {
@@ -48,6 +58,8 @@ export function useProfitRanking(options: UseProfitRankingOptions): UseProfitRan
     materialLastSaleAtMap,
     materialVendorValueMap,
     includeNegative = false,
+    resourceSkillMap,
+    efficiencyModifier,
   } = options
 
   // Helper to unwrap ref or value
@@ -71,6 +83,7 @@ export function useProfitRanking(options: UseProfitRankingOptions): UseProfitRan
     const currentMaterialLastSaleAtMap = unwrap(materialLastSaleAtMap)
     const currentMaterialVendorValueMap = unwrap(materialVendorValueMap)
     const currentIncludeNegative = unwrap(includeNegative)
+    const currentResourceSkillMap = unwrap(resourceSkillMap)
 
     // Calculate profits for each category
     const dungeonResults = calculateDungeonProfits(
@@ -86,7 +99,12 @@ export function useProfitRanking(options: UseProfitRankingOptions): UseProfitRan
       currentMaterialLastSaleAtMap,
       currentMaterialVendorValueMap
     )
-    const resourceResults = calculateResourceProfits(currentResourceGathering, currentTaxRate)
+    const resourceResults = calculateResourceProfits(
+      currentResourceGathering,
+      currentTaxRate,
+      currentResourceSkillMap,
+      efficiencyModifier
+    )
 
     // Rank all activities
     return rankAllActivities(

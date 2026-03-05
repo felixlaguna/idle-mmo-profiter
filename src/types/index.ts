@@ -94,6 +94,54 @@ export interface CraftableRecipe {
   weeklySalesVolume?: number
 }
 
+// Resource crafting types (for non-alchemy/forging skills)
+
+export type ResourceSkill = 'smelting' | 'cooking' | 'woodcutting' | 'mining' | 'fishing' | 'hunt' | 'dungeon'
+
+export interface ResourceRecipe {
+  /** Output item name (e.g., 'Uranium Bar') */
+  name: string
+  /** Base craft time in seconds (before efficiency) */
+  timeSeconds: number
+  /** Skill required for this recipe */
+  skill: ResourceSkill
+  /** Materials required (uses same structure as CraftableRecipe) */
+  materials: CraftableMaterial[]
+  /** Market price of the output item */
+  currentPrice: number
+  /** Vendor sell price of the output item */
+  vendorValue: number
+  /** Item hashed ID */
+  hashedId?: string
+  /** ISO timestamp of most recent sale from market history */
+  lastSaleAt?: string
+  /** Weekly sales volume (units sold in last 7 days) from market history */
+  weeklySalesVolume?: number
+}
+
+// Efficiency system types
+
+export interface EfficiencyEffect {
+  /** Skill this efficiency bonus applies to */
+  skill: ResourceSkill
+  /** Efficiency bonus percentage (e.g., 5 for 5% efficiency) */
+  efficiencyPercent: number
+}
+
+export interface EfficiencyItem {
+  /** Item name */
+  name: string
+  /** Item hashed ID */
+  hashedId: string
+  /** Efficiency effects this item provides */
+  effects: EfficiencyEffect[]
+}
+
+export interface EfficiencySettings {
+  /** Maps skill name to selected item name (only 1 item per skill) */
+  [skill: string]: string | null
+}
+
 export interface ResourceInput {
   /** Resource name from the Market tab */
   resourceName: string
@@ -176,6 +224,8 @@ export interface DefaultData {
   dungeons: Dungeon[]
   craftableRecipes: CraftableRecipe[]
   resourceGathering: ResourceGather[]
+  resourceRecipes?: ResourceRecipe[]
+  efficiencyItems?: EfficiencyItem[]
   magicFindDefaults: MagicFindSettings
   marketTaxRate: number
   allItems?: Array<{

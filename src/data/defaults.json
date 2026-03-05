@@ -6,7 +6,7 @@
       "price": 137.2,
       "hashedId": "dgBq1boWYek4QkJ3rXaD",
       "vendorValue": 35,
-      "lastUpdated": "2026-03-05T07:41:10.630Z",
+      "lastUpdated": "2026-03-05T07:42:12.272Z",
       "suggestedRefreshMinutes": 119,
       "lastSaleAt": "2026-03-05T04:18:26+00:00",
       "weeklySalesVolume": 17002
@@ -39,7 +39,7 @@
       "price": 85.9,
       "hashedId": "ElzPeorXNVvxNaW0kv53",
       "vendorValue": 25,
-      "lastUpdated": "2026-03-05T08:05:09.330Z",
+      "lastUpdated": "2026-03-05T08:06:10.809Z",
       "suggestedRefreshMinutes": 63,
       "lastSaleAt": "2026-03-05T06:03:04+00:00",
       "weeklySalesVolume": 29768
@@ -72,7 +72,7 @@
       "price": 251.1,
       "hashedId": "Ro31P7kZL6r6LveGxXOy",
       "vendorValue": 27,
-      "lastUpdated": "2026-03-04T21:04:29.194Z",
+      "lastUpdated": "2026-03-04T21:08:44.159Z",
       "suggestedRefreshMinutes": 1040,
       "lastSaleAt": "2026-03-04T20:51:11+00:00",
       "weeklySalesVolume": 18663
@@ -83,7 +83,7 @@
       "price": 138.8,
       "hashedId": "ZjlPA8v9NMybNEyMe2Oa",
       "vendorValue": 37,
-      "lastUpdated": "2026-03-05T06:51:29.863Z",
+      "lastUpdated": "2026-03-05T06:53:31.452Z",
       "suggestedRefreshMinutes": 89,
       "lastSaleAt": "2026-03-05T05:54:24+00:00",
       "weeklySalesVolume": 15347
@@ -94,7 +94,7 @@
       "price": 35.9,
       "hashedId": "P1vlVrzjLrgwQao8mGKM",
       "vendorValue": 5,
-      "lastUpdated": "2026-03-05T08:05:09.414Z",
+      "lastUpdated": "2026-03-05T08:05:09.680Z",
       "suggestedRefreshMinutes": 138,
       "lastSaleAt": "2026-03-05T05:46:16+00:00",
       "weeklySalesVolume": 104353
@@ -105,7 +105,7 @@
       "price": 10.4,
       "hashedId": "3ZvrGV8RQpGwL2wgA5jD",
       "vendorValue": 5,
-      "lastUpdated": "2026-03-05T05:47:09.045Z",
+      "lastUpdated": "2026-03-05T05:47:09.122Z",
       "suggestedRefreshMinutes": 150,
       "lastSaleAt": "2026-03-04T22:24:26+00:00",
       "weeklySalesVolume": 24282
@@ -116,7 +116,7 @@
       "price": 286,
       "hashedId": "Ro31P7kZL6m6YveGxXOy",
       "vendorValue": 115,
-      "lastUpdated": "2026-03-05T07:41:10.971Z",
+      "lastUpdated": "2026-03-05T07:41:11.035Z",
       "suggestedRefreshMinutes": 269,
       "lastSaleAt": "2026-03-05T01:57:26+00:00",
       "weeklySalesVolume": 6439
@@ -1057,7 +1057,7 @@
     {
       "id": "res-1",
       "name": "Coal",
-      "marketPrice": 5.9,
+      "marketPrice": 5.7,
       "vendorValue": 1,
       "hashedId": "7eA59WrBQRXJYzb62qKv",
       "lastUpdated": "2026-03-05T07:43:12.435Z",
@@ -1068,7 +1068,7 @@
     {
       "id": "res-2",
       "name": "Stingray",
-      "marketPrice": 36.3,
+      "marketPrice": 35.8,
       "vendorValue": 22,
       "hashedId": "oaJydnOmQW2LbgRe5ME6",
       "lastUpdated": "2026-03-05T08:06:11.029Z",
@@ -1090,7 +1090,7 @@
     {
       "id": "res-4",
       "name": "Great White Shark",
-      "marketPrice": 54.3,
+      "marketPrice": 54.8,
       "vendorValue": 41,
       "hashedId": "3Zbym56qLxRNBRp7Eekd",
       "lastUpdated": "2026-03-05T08:06:11.176Z",
@@ -1101,7 +1101,7 @@
     {
       "id": "res-5",
       "name": "Cooked Great White Shark",
-      "marketPrice": 105,
+      "marketPrice": 104.7,
       "vendorValue": 92,
       "hashedId": "Rv5g4z1dQnk9Nqy32jpG",
       "lastUpdated": "2026-03-05T07:43:12.992Z",
@@ -1112,7 +1112,7 @@
     {
       "id": "res-6",
       "name": "Mystic Ore",
-      "marketPrice": 23.2,
+      "marketPrice": 22.6,
       "vendorValue": 17,
       "hashedId": "0kK49j1VN9yNq6B2doap",
       "lastUpdated": "2026-03-05T08:06:11.242Z",
@@ -7857,9 +7857,10 @@
         }
       ],
       "currentPrice": 49486.3,
-      "lastSaleAt": "2026-02-27T23:51:12+00:00",
-      "lastUpdated": "2026-03-04T14:13:03.665Z",
-      "suggestedRefreshMinutes": 4091
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Improved Fishing Rod",
@@ -7879,10 +7880,10 @@
         }
       ],
       "currentPrice": 430.2,
-      "lastSaleAt": "2026-03-05T01:46:18+00:00",
-      "lastUpdated": "2026-03-05T03:14:52.708Z",
-      "suggestedRefreshMinutes": 508,
-      "weeklySalesVolume": 35
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Improved Pickaxe",
@@ -7898,10 +7899,10 @@
         }
       ],
       "currentPrice": 2131.1,
-      "lastSaleAt": "2026-03-05T00:31:52+00:00",
-      "lastUpdated": "2026-03-05T07:45:14.414Z",
-      "suggestedRefreshMinutes": 266,
-      "weeklySalesVolume": 70
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Improved Felling axe",
@@ -7917,10 +7918,10 @@
         }
       ],
       "currentPrice": 1323.9,
-      "lastSaleAt": "2026-03-04T23:02:56+00:00",
-      "lastUpdated": "2026-03-05T03:14:52.831Z",
-      "suggestedRefreshMinutes": 563,
-      "weeklySalesVolume": 48
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Herculean Strength Elixir",
@@ -7936,9 +7937,10 @@
         }
       ],
       "currentPrice": 456.8,
-      "lastSaleAt": "2026-03-02T20:44:28+00:00",
-      "lastUpdated": "2026-03-04T14:13:04.026Z",
-      "suggestedRefreshMinutes": 15284
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Bastion Elixir",
@@ -7954,9 +7956,10 @@
         }
       ],
       "currentPrice": 119.1,
-      "lastSaleAt": "2026-02-27T09:44:31+00:00",
-      "lastUpdated": "2026-03-04T14:13:04.102Z",
-      "suggestedRefreshMinutes": 10711
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Galeforce Speed Elixir",
@@ -7972,9 +7975,10 @@
         }
       ],
       "currentPrice": 139.9,
-      "lastSaleAt": "2026-03-04T12:08:21+00:00",
-      "lastUpdated": "2026-03-04T14:13:04.181Z",
-      "suggestedRefreshMinutes": 5884
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Falcon's Grace Elixir",
@@ -7990,9 +7994,10 @@
         }
       ],
       "currentPrice": 123.6,
-      "lastSaleAt": "2026-03-03T04:59:03+00:00",
-      "lastUpdated": "2026-03-04T14:13:04.257Z",
-      "suggestedRefreshMinutes": 14812
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Rivertamer",
@@ -8004,10 +8009,10 @@
         }
       ],
       "currentPrice": 1958.8,
-      "lastSaleAt": "2026-03-05T05:50:45+00:00",
-      "lastUpdated": "2026-03-05T07:45:14.506Z",
-      "suggestedRefreshMinutes": 467,
-      "weeklySalesVolume": 52
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Veinseeker",
@@ -8019,10 +8024,10 @@
         }
       ],
       "currentPrice": 9589.6,
-      "lastSaleAt": "2026-03-05T03:47:20+00:00",
-      "lastUpdated": "2026-03-05T05:00:01.640Z",
-      "suggestedRefreshMinutes": 547,
-      "weeklySalesVolume": 61
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Timberfall Talon",
@@ -8034,10 +8039,10 @@
         }
       ],
       "currentPrice": 3958.5,
-      "lastSaleAt": "2026-03-04T19:19:59+00:00",
-      "lastUpdated": "2026-03-05T05:51:12.619Z",
-      "suggestedRefreshMinutes": 817,
-      "weeklySalesVolume": 27
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Protection Potion",
@@ -8053,9 +8058,10 @@
         }
       ],
       "currentPrice": 354.7,
-      "lastSaleAt": "2026-03-03T22:31:45+00:00",
-      "lastUpdated": "2026-03-04T14:13:04.615Z",
-      "suggestedRefreshMinutes": 1297
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Felling Essence",
@@ -8071,9 +8077,10 @@
         }
       ],
       "currentPrice": 2861.7,
-      "lastSaleAt": "2026-03-03T00:57:46+00:00",
-      "lastUpdated": "2026-03-04T14:13:04.710Z",
-      "suggestedRefreshMinutes": 1491
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Oreseeker Essence Crystal",
@@ -8089,10 +8096,10 @@
         }
       ],
       "currentPrice": 2031.6,
-      "lastSaleAt": "2026-03-05T00:41:05+00:00",
-      "lastUpdated": "2026-03-05T05:00:01.722Z",
-      "suggestedRefreshMinutes": 263,
-      "weeklySalesVolume": 450
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Attack Power Potion",
@@ -8112,10 +8119,10 @@
         }
       ],
       "currentPrice": 344,
-      "lastSaleAt": "2026-03-05T00:49:42+00:00",
-      "lastUpdated": "2026-03-05T05:00:01.847Z",
-      "suggestedRefreshMinutes": 306,
-      "weeklySalesVolume": 118
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Titan Power Brew",
@@ -8131,9 +8138,10 @@
         }
       ],
       "currentPrice": 313.5,
-      "lastSaleAt": "2026-03-03T07:19:14+00:00",
-      "lastUpdated": "2026-03-04T14:14:03.241Z",
-      "suggestedRefreshMinutes": 2492
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Vortex Brew",
@@ -8153,10 +8161,10 @@
         }
       ],
       "currentPrice": 1119.2,
-      "lastSaleAt": "2026-03-04T16:49:27+00:00",
-      "lastUpdated": "2026-03-04T23:48:18.661Z",
-      "suggestedRefreshMinutes": 3094,
-      "weeklySalesVolume": 109
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Seasong's Lure",
@@ -8176,9 +8184,10 @@
         }
       ],
       "currentPrice": 7612.4,
-      "lastSaleAt": "2026-03-04T07:53:04+00:00",
-      "lastUpdated": "2026-03-04T14:14:04.426Z",
-      "suggestedRefreshMinutes": 2628
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Ironbite",
@@ -8198,9 +8207,10 @@
         }
       ],
       "currentPrice": 23527.3,
-      "lastSaleAt": "2026-03-04T00:53:55+00:00",
-      "lastUpdated": "2026-03-04T14:14:04.514Z",
-      "suggestedRefreshMinutes": 1335
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Wildwood Chopper",
@@ -8220,10 +8230,10 @@
         }
       ],
       "currentPrice": 6623.9,
-      "lastSaleAt": "2026-03-05T04:42:58+00:00",
-      "lastUpdated": "2026-03-05T08:08:12.800Z",
-      "suggestedRefreshMinutes": 558,
-      "weeklySalesVolume": 41
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Fortified Protection",
@@ -8239,9 +8249,10 @@
         }
       ],
       "currentPrice": 324.3,
-      "lastSaleAt": "2026-03-03T11:15:41+00:00",
-      "lastUpdated": "2026-03-04T14:14:04.678Z",
-      "suggestedRefreshMinutes": 3113
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Quickstep Essence",
@@ -8261,9 +8272,10 @@
         }
       ],
       "currentPrice": 460.4,
-      "lastSaleAt": "2026-03-02T22:02:55+00:00",
-      "lastUpdated": "2026-03-04T14:14:04.771Z",
-      "suggestedRefreshMinutes": 5121
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Precision Essence",
@@ -8279,9 +8291,10 @@
         }
       ],
       "currentPrice": 331.9,
-      "lastSaleAt": "2026-03-03T22:46:52+00:00",
-      "lastUpdated": "2026-03-04T14:14:04.861Z",
-      "suggestedRefreshMinutes": 2874
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Merfolk Essence",
@@ -8297,10 +8310,10 @@
         }
       ],
       "currentPrice": 3382,
-      "lastSaleAt": "2026-03-05T04:44:15+00:00",
-      "lastUpdated": "2026-03-05T07:45:14.621Z",
-      "suggestedRefreshMinutes": 96,
-      "weeklySalesVolume": 826
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Molten Core Tonic",
@@ -8316,10 +8329,10 @@
         }
       ],
       "currentPrice": 823.5,
-      "lastSaleAt": "2026-03-05T02:21:42+00:00",
-      "lastUpdated": "2026-03-05T03:14:53.089Z",
-      "suggestedRefreshMinutes": 866,
-      "weeklySalesVolume": 1120
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Spicefinder Essence Crystal",
@@ -8335,10 +8348,10 @@
         }
       ],
       "currentPrice": 2909.8,
-      "lastSaleAt": "2026-03-05T03:14:23+00:00",
-      "lastUpdated": "2026-03-05T03:14:53.199Z",
-      "suggestedRefreshMinutes": 336,
-      "weeklySalesVolume": 989
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Bulwark Brew",
@@ -8358,10 +8371,10 @@
         }
       ],
       "currentPrice": 848.3,
-      "lastSaleAt": "2026-03-05T00:49:11+00:00",
-      "lastUpdated": "2026-03-05T03:14:53.279Z",
-      "suggestedRefreshMinutes": 321,
-      "weeklySalesVolume": 149
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Bladeburst Elixir",
@@ -8381,9 +8394,10 @@
         }
       ],
       "currentPrice": 2679.6,
-      "lastSaleAt": "2026-03-03T08:24:58+00:00",
-      "lastUpdated": "2026-03-04T14:14:05.326Z",
-      "suggestedRefreshMinutes": 2114
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Ironclad Tonic",
@@ -8403,9 +8417,10 @@
         }
       ],
       "currentPrice": 1470,
-      "lastSaleAt": "2026-03-04T10:51:07+00:00",
-      "lastUpdated": "2026-03-04T14:14:05.398Z",
-      "suggestedRefreshMinutes": 13128
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Moonshimmer Hook",
@@ -8425,10 +8440,10 @@
         }
       ],
       "currentPrice": 13094.7,
-      "lastSaleAt": "2026-03-04T22:52:34+00:00",
-      "lastUpdated": "2026-03-04T23:07:14.340Z",
-      "suggestedRefreshMinutes": 845,
-      "weeklySalesVolume": 53
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Boulder Breaker",
@@ -8448,9 +8463,10 @@
         }
       ],
       "currentPrice": 41913.8,
-      "lastSaleAt": "2026-03-04T13:04:12+00:00",
-      "lastUpdated": "2026-03-04T14:14:05.571Z",
-      "suggestedRefreshMinutes": 1968
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Leafblade",
@@ -8470,10 +8486,10 @@
         }
       ],
       "currentPrice": 10078.1,
-      "lastSaleAt": "2026-03-04T17:35:14+00:00",
-      "lastUpdated": "2026-03-04T20:34:00.555Z",
-      "suggestedRefreshMinutes": 2640,
-      "weeklySalesVolume": 54
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Impenetrable Essence",
@@ -8493,9 +8509,10 @@
         }
       ],
       "currentPrice": 664.2,
-      "lastSaleAt": "2026-03-04T03:25:32+00:00",
-      "lastUpdated": "2026-03-04T14:14:05.738Z",
-      "suggestedRefreshMinutes": 15278
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Windrider Essence",
@@ -8511,9 +8528,10 @@
         }
       ],
       "currentPrice": 1718.5,
-      "lastSaleAt": "2026-03-04T03:23:25+00:00",
-      "lastUpdated": "2026-03-04T14:14:06.832Z",
-      "suggestedRefreshMinutes": 2557
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Acrobatic's Essence",
@@ -8529,9 +8547,10 @@
         }
       ],
       "currentPrice": 764.8,
-      "lastSaleAt": "2026-03-04T03:25:04+00:00",
-      "lastUpdated": "2026-03-04T14:15:04.140Z",
-      "suggestedRefreshMinutes": 5294
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Strike Essence",
@@ -8547,10 +8566,10 @@
         }
       ],
       "currentPrice": 1212,
-      "lastSaleAt": "2026-03-05T06:26:10+00:00",
-      "lastUpdated": "2026-03-05T07:45:14.738Z",
-      "suggestedRefreshMinutes": 28,
-      "weeklySalesVolume": 928
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Yggdrasil Nectar",
@@ -8570,10 +8589,10 @@
         }
       ],
       "currentPrice": 3477,
-      "lastSaleAt": "2026-03-05T06:22:42+00:00",
-      "lastUpdated": "2026-03-05T06:56:33.473Z",
-      "suggestedRefreshMinutes": 88,
-      "weeklySalesVolume": 826
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Earthcore Infusion",
@@ -8593,10 +8612,10 @@
         }
       ],
       "currentPrice": 8518.6,
-      "lastSaleAt": "2026-03-05T06:57:12+00:00",
-      "lastUpdated": "2026-03-05T07:45:14.851Z",
-      "suggestedRefreshMinutes": 725,
-      "weeklySalesVolume": 402
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Shadowbane",
@@ -8616,9 +8635,10 @@
         }
       ],
       "currentPrice": 19959.4,
-      "lastSaleAt": "2026-03-02T16:33:36+00:00",
-      "lastUpdated": "2026-03-04T14:15:05.552Z",
-      "suggestedRefreshMinutes": 1773
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Soulrender",
@@ -8642,9 +8662,10 @@
         }
       ],
       "currentPrice": 14930.2,
-      "lastSaleAt": "2026-03-03T17:50:24+00:00",
-      "lastUpdated": "2026-03-04T14:15:05.650Z",
-      "suggestedRefreshMinutes": 1599
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Shadowstrike",
@@ -8664,9 +8685,10 @@
         }
       ],
       "currentPrice": 7339.8,
-      "lastSaleAt": "2026-02-28T16:47:50+00:00",
-      "lastUpdated": "2026-03-04T14:15:05.730Z",
-      "suggestedRefreshMinutes": 2893
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Venomfang",
@@ -8686,9 +8708,10 @@
         }
       ],
       "currentPrice": 13449.1,
-      "lastSaleAt": "2026-02-24T04:29:51+00:00",
-      "lastUpdated": "2026-03-04T14:15:05.808Z",
-      "suggestedRefreshMinutes": 10344
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Whisperwind Bow",
@@ -8716,9 +8739,10 @@
         }
       ],
       "currentPrice": 12859.6,
-      "lastSaleAt": "2026-03-03T20:22:47+00:00",
-      "lastUpdated": "2026-03-04T14:15:05.877Z",
-      "suggestedRefreshMinutes": 2786
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Stormcaster",
@@ -8746,9 +8770,10 @@
         }
       ],
       "currentPrice": 2440,
-      "lastSaleAt": "2026-03-04T12:48:59+00:00",
-      "lastUpdated": "2026-03-04T14:15:05.962Z",
-      "suggestedRefreshMinutes": 5788
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Radiant Crest",
@@ -8768,9 +8793,10 @@
         }
       ],
       "currentPrice": 7119.4,
-      "lastSaleAt": "2026-03-04T12:59:09+00:00",
-      "lastUpdated": "2026-03-04T14:15:06.045Z",
-      "suggestedRefreshMinutes": 1644
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Shadow Helm",
@@ -8790,9 +8816,10 @@
         }
       ],
       "currentPrice": 8779.7,
-      "lastSaleAt": "2026-03-04T10:09:44+00:00",
-      "lastUpdated": "2026-03-04T14:15:06.123Z",
-      "suggestedRefreshMinutes": 2466
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Ironclad Gauntlets",
@@ -8812,9 +8839,10 @@
         }
       ],
       "currentPrice": 6654.8,
-      "lastSaleAt": "2026-03-04T05:25:46+00:00",
-      "lastUpdated": "2026-03-04T14:15:06.201Z",
-      "suggestedRefreshMinutes": 2792
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Stormguard Plate",
@@ -8834,9 +8862,10 @@
         }
       ],
       "currentPrice": 1291.8,
-      "lastSaleAt": "2026-03-04T10:17:37+00:00",
-      "lastUpdated": "2026-03-04T14:15:06.289Z",
-      "suggestedRefreshMinutes": 3034
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Dragonheart Plate",
@@ -8864,9 +8893,10 @@
         }
       ],
       "currentPrice": 5190,
-      "lastSaleAt": "2026-03-03T10:43:37+00:00",
-      "lastUpdated": "2026-03-04T14:15:06.371Z",
-      "suggestedRefreshMinutes": 3147
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Stormstrider Greaves",
@@ -8886,9 +8916,10 @@
         }
       ],
       "currentPrice": 1958.7,
-      "lastSaleAt": "2026-03-04T12:58:37+00:00",
-      "lastUpdated": "2026-03-04T14:15:06.450Z",
-      "suggestedRefreshMinutes": 2990
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Shadowstep Greaves",
@@ -8904,9 +8935,10 @@
         }
       ],
       "currentPrice": 2410.3,
-      "lastSaleAt": "2026-03-02T17:00:58+00:00",
-      "lastUpdated": "2026-03-04T14:15:06.518Z",
-      "suggestedRefreshMinutes": 3210
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Swiftwind Boots",
@@ -8922,9 +8954,10 @@
         }
       ],
       "currentPrice": 2229.8,
-      "lastSaleAt": "2026-03-04T12:56:15+00:00",
-      "lastUpdated": "2026-03-04T14:15:06.606Z",
-      "suggestedRefreshMinutes": 2189
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Aegis of the Seraph",
@@ -8944,9 +8977,10 @@
         }
       ],
       "currentPrice": 1786.3,
-      "lastSaleAt": "2026-03-02T17:02:56+00:00",
-      "lastUpdated": "2026-03-04T14:15:06.684Z",
-      "suggestedRefreshMinutes": 1458
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Stormguard Shield",
@@ -8966,9 +9000,10 @@
         }
       ],
       "currentPrice": 17464.8,
-      "lastSaleAt": "2026-03-02T14:30:59+00:00",
-      "lastUpdated": "2026-03-04T14:15:07.764Z",
-      "suggestedRefreshMinutes": 7795
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Riverbend Essence Crystal",
@@ -8988,10 +9023,10 @@
         }
       ],
       "currentPrice": 9448,
-      "lastSaleAt": "2026-03-05T07:06:29+00:00",
-      "lastUpdated": "2026-03-05T08:08:12.893Z",
-      "suggestedRefreshMinutes": 106,
-      "weeklySalesVolume": 633
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Tampering Essence Crystal",
@@ -9011,10 +9046,10 @@
         }
       ],
       "currentPrice": 5947.1,
-      "lastSaleAt": "2026-03-05T04:11:45+00:00",
-      "lastUpdated": "2026-03-05T05:00:02.018Z",
-      "suggestedRefreshMinutes": 449,
-      "weeklySalesVolume": 442
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Frostbite",
@@ -9034,9 +9069,10 @@
         }
       ],
       "currentPrice": 8333.9,
-      "lastSaleAt": "2026-03-04T12:54:42+00:00",
-      "lastUpdated": "2026-03-04T14:16:06.373Z",
-      "suggestedRefreshMinutes": 2606
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Stormbringer",
@@ -9056,9 +9092,10 @@
         }
       ],
       "currentPrice": 10465.6,
-      "lastSaleAt": "2026-03-03T21:34:27+00:00",
-      "lastUpdated": "2026-03-04T14:16:06.459Z",
-      "suggestedRefreshMinutes": 6410
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Bloodletter",
@@ -9078,9 +9115,10 @@
         }
       ],
       "currentPrice": 4094.7,
-      "lastSaleAt": "2026-02-28T05:44:56+00:00",
-      "lastUpdated": "2026-03-04T14:16:06.552Z",
-      "suggestedRefreshMinutes": 1916
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Whisperblade",
@@ -9100,9 +9138,10 @@
         }
       ],
       "currentPrice": 14338.3,
-      "lastSaleAt": "2026-03-04T04:54:28+00:00",
-      "lastUpdated": "2026-03-04T14:16:06.647Z",
-      "suggestedRefreshMinutes": 3634
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Shadow Shot",
@@ -9134,9 +9173,10 @@
         }
       ],
       "currentPrice": 3619.6,
-      "lastSaleAt": "2026-03-01T06:04:28+00:00",
-      "lastUpdated": "2026-03-04T14:16:06.725Z",
-      "suggestedRefreshMinutes": 2561
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Frostbite Shot",
@@ -9168,9 +9208,10 @@
         }
       ],
       "currentPrice": 3833.7,
-      "lastSaleAt": "2026-03-02T14:08:15+00:00",
-      "lastUpdated": "2026-03-04T14:16:06.809Z",
-      "suggestedRefreshMinutes": 2167
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Frostguard Visage",
@@ -9190,9 +9231,10 @@
         }
       ],
       "currentPrice": 20449.8,
-      "lastSaleAt": "2026-03-02T13:23:54+00:00",
-      "lastUpdated": "2026-03-04T14:16:06.892Z",
-      "suggestedRefreshMinutes": 3271
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Sentinel's Gaze",
@@ -9212,9 +9254,10 @@
         }
       ],
       "currentPrice": 28716.6,
-      "lastSaleAt": "2026-03-02T14:10:34+00:00",
-      "lastUpdated": "2026-03-04T14:16:06.957Z",
-      "suggestedRefreshMinutes": 3680
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Dragonfire Grasp",
@@ -9234,9 +9277,10 @@
         }
       ],
       "currentPrice": 2509,
-      "lastSaleAt": "2026-03-02T17:03:11+00:00",
-      "lastUpdated": "2026-03-04T14:16:07.040Z",
-      "suggestedRefreshMinutes": 1136
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Shadowstrike Grips",
@@ -9264,9 +9308,10 @@
         }
       ],
       "currentPrice": 3588,
-      "lastSaleAt": "2026-03-03T17:53:04+00:00",
-      "lastUpdated": "2026-03-04T14:16:07.176Z",
-      "suggestedRefreshMinutes": 1456
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Frostbite Gauntlets",
@@ -9286,9 +9331,10 @@
         }
       ],
       "currentPrice": 18199.4,
-      "lastSaleAt": "2026-03-04T12:57:57+00:00",
-      "lastUpdated": "2026-03-04T14:16:07.255Z",
-      "suggestedRefreshMinutes": 6569
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Shadowcloak Vestments",
@@ -9308,9 +9354,10 @@
         }
       ],
       "currentPrice": 6533.1,
-      "lastSaleAt": "2026-03-02T02:40:23+00:00",
-      "lastUpdated": "2026-03-04T14:16:07.331Z",
-      "suggestedRefreshMinutes": 1574
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Frostbite Plate",
@@ -9338,9 +9385,10 @@
         }
       ],
       "currentPrice": 2696.7,
-      "lastSaleAt": "2026-03-04T12:57:29+00:00",
-      "lastUpdated": "2026-03-04T14:16:07.408Z",
-      "suggestedRefreshMinutes": 1598
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Frostbite Legguards",
@@ -9360,9 +9408,10 @@
         }
       ],
       "currentPrice": 12194.9,
-      "lastSaleAt": "2026-03-04T10:09:02+00:00",
-      "lastUpdated": "2026-03-04T14:16:07.485Z",
-      "suggestedRefreshMinutes": 3108
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Sentinel's Resolve",
@@ -9386,9 +9435,10 @@
         }
       ],
       "currentPrice": 17135,
-      "lastSaleAt": "2026-03-04T11:47:30+00:00",
-      "lastUpdated": "2026-03-04T14:16:07.565Z",
-      "suggestedRefreshMinutes": 1490
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Shadowstep Footwear",
@@ -9404,9 +9454,10 @@
         }
       ],
       "currentPrice": 18104.9,
-      "lastSaleAt": "2026-03-02T02:45:03+00:00",
-      "lastUpdated": "2026-03-04T14:16:07.638Z",
-      "suggestedRefreshMinutes": 2477
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Soulward Barrier",
@@ -9426,9 +9477,10 @@
         }
       ],
       "currentPrice": 8739.9,
-      "lastSaleAt": "2026-03-04T13:00:07+00:00",
-      "lastUpdated": "2026-03-04T14:16:07.725Z",
-      "suggestedRefreshMinutes": 2140
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Hydra's Coil",
@@ -9452,10 +9504,10 @@
         }
       ],
       "currentPrice": 85233.9,
-      "lastSaleAt": "2026-03-05T02:35:42+00:00",
-      "lastUpdated": "2026-03-05T03:15:52.138Z",
-      "suggestedRefreshMinutes": 499,
-      "weeklySalesVolume": 37
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Earthshaker",
@@ -9475,9 +9527,10 @@
         }
       ],
       "currentPrice": 131329.1,
-      "lastSaleAt": "2026-03-04T13:46:29+00:00",
-      "lastUpdated": "2026-03-04T14:17:06.141Z",
-      "suggestedRefreshMinutes": 1242
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Grove Cleaver",
@@ -9497,10 +9550,10 @@
         }
       ],
       "currentPrice": 45849.9,
-      "lastSaleAt": "2026-03-04T18:55:09+00:00",
-      "lastUpdated": "2026-03-05T03:15:52.298Z",
-      "suggestedRefreshMinutes": 4236,
-      "weeklySalesVolume": 25
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Shieldbearer's Infusion",
@@ -9520,10 +9573,10 @@
         }
       ],
       "currentPrice": 3199.7,
-      "lastSaleAt": "2026-03-05T04:28:15+00:00",
-      "lastUpdated": "2026-03-05T05:00:02.115Z",
-      "suggestedRefreshMinutes": 1005,
-      "weeklySalesVolume": 29
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Unyielding Fortitude",
@@ -9543,9 +9596,10 @@
         }
       ],
       "currentPrice": 3199.1,
-      "lastSaleAt": "2026-03-03T08:42:42+00:00",
-      "lastUpdated": "2026-03-04T14:17:07.487Z",
-      "suggestedRefreshMinutes": 1113
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Doomblade",
@@ -9569,9 +9623,10 @@
         }
       ],
       "currentPrice": 52584,
-      "lastSaleAt": "2026-03-03T04:56:05+00:00",
-      "lastUpdated": "2026-03-04T14:17:07.567Z",
-      "suggestedRefreshMinutes": 4894
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Serpentstrike",
@@ -9595,9 +9650,10 @@
         }
       ],
       "currentPrice": 63989.3,
-      "lastSaleAt": "2026-03-04T00:03:14+00:00",
-      "lastUpdated": "2026-03-04T14:17:07.651Z",
-      "suggestedRefreshMinutes": 2709
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Serpent's Kiss",
@@ -9617,9 +9673,10 @@
         }
       ],
       "currentPrice": 14734.9,
-      "lastSaleAt": "2026-02-16T14:33:59+00:00",
-      "lastUpdated": "2026-03-04T14:17:07.723Z",
-      "suggestedRefreshMinutes": 7952
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Moonshadow",
@@ -9643,9 +9700,10 @@
         }
       ],
       "currentPrice": 10480.9,
-      "lastSaleAt": "2026-03-04T10:06:10+00:00",
-      "lastUpdated": "2026-03-04T14:17:07.798Z",
-      "suggestedRefreshMinutes": 8598
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Serpent's Arrow",
@@ -9673,9 +9731,10 @@
         }
       ],
       "currentPrice": 31619.3,
-      "lastSaleAt": "2026-03-01T06:04:56+00:00",
-      "lastUpdated": "2026-03-04T14:17:07.876Z",
-      "suggestedRefreshMinutes": 5498
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Viper",
@@ -9711,9 +9770,10 @@
         }
       ],
       "currentPrice": 48444.3,
-      "lastSaleAt": "2026-02-24T01:24:48+00:00",
-      "lastUpdated": "2026-03-04T14:17:07.961Z",
-      "suggestedRefreshMinutes": 3997
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Celestial Crown",
@@ -9737,9 +9797,10 @@
         }
       ],
       "currentPrice": 35478.2,
-      "lastSaleAt": "2026-03-03T17:55:10+00:00",
-      "lastUpdated": "2026-03-04T14:17:08.042Z",
-      "suggestedRefreshMinutes": 4972
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Emberfire Helm",
@@ -9759,9 +9820,10 @@
         }
       ],
       "currentPrice": 26949.7,
-      "lastSaleAt": "2026-03-01T08:07:17+00:00",
-      "lastUpdated": "2026-03-04T14:17:08.126Z",
-      "suggestedRefreshMinutes": 8263
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Titan's Embrace",
@@ -9777,9 +9839,10 @@
         }
       ],
       "currentPrice": 13984.7,
-      "lastSaleAt": "2026-03-01T14:15:50+00:00",
-      "lastUpdated": "2026-03-04T14:17:08.219Z",
-      "suggestedRefreshMinutes": 22051
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Celestial Touch Gloves",
@@ -9803,9 +9866,10 @@
         }
       ],
       "currentPrice": 41155.2,
-      "lastSaleAt": "2026-03-02T12:23:02+00:00",
-      "lastUpdated": "2026-03-04T14:17:08.306Z",
-      "suggestedRefreshMinutes": 7584
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Sentinel's Embrace",
@@ -9829,9 +9893,10 @@
         }
       ],
       "currentPrice": 11394.9,
-      "lastSaleAt": "2026-03-02T01:20:13+00:00",
-      "lastUpdated": "2026-03-04T14:17:08.394Z",
-      "suggestedRefreshMinutes": 3760
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Celestial Striders",
@@ -9851,9 +9916,10 @@
         }
       ],
       "currentPrice": 19342.8,
-      "lastSaleAt": "2026-03-02T14:14:26+00:00",
-      "lastUpdated": "2026-03-04T14:17:08.473Z",
-      "suggestedRefreshMinutes": 4893
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Frostbite Walkers",
@@ -9873,9 +9939,10 @@
         }
       ],
       "currentPrice": 6825.4,
-      "lastSaleAt": "2026-03-02T17:01:44+00:00",
-      "lastUpdated": "2026-03-04T14:17:08.537Z",
-      "suggestedRefreshMinutes": 1206
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Guardian's Stride",
@@ -9899,9 +9966,10 @@
         }
       ],
       "currentPrice": 11826.6,
-      "lastSaleAt": "2026-03-02T14:17:04+00:00",
-      "lastUpdated": "2026-03-04T14:17:08.605Z",
-      "suggestedRefreshMinutes": 1806
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Flamebreaker Buckler",
@@ -9921,9 +9989,10 @@
         }
       ],
       "currentPrice": 21124.2,
-      "lastSaleAt": "2026-03-03T03:29:08+00:00",
-      "lastUpdated": "2026-03-04T14:17:08.685Z",
-      "suggestedRefreshMinutes": 6129
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Shadowbound Ward",
@@ -9943,9 +10012,10 @@
         }
       ],
       "currentPrice": 11777.4,
-      "lastSaleAt": "2026-03-03T04:57:19+00:00",
-      "lastUpdated": "2026-03-04T14:17:09.763Z",
-      "suggestedRefreshMinutes": 5835
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Stoneheart Solution",
@@ -9965,9 +10035,10 @@
         }
       ],
       "currentPrice": 3131.9,
-      "lastSaleAt": "2026-03-03T06:35:36+00:00",
-      "lastUpdated": "2026-03-04T14:18:07.158Z",
-      "suggestedRefreshMinutes": 2835
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Lightning Sprint",
@@ -9987,10 +10058,10 @@
         }
       ],
       "currentPrice": 4839,
-      "lastSaleAt": "2026-03-03T09:36:38+00:00",
-      "lastUpdated": "2026-03-05T03:15:52.389Z",
-      "suggestedRefreshMinutes": 734,
-      "weeklySalesVolume": 13
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Celestial Edge",
@@ -10010,9 +10081,10 @@
         }
       ],
       "currentPrice": 25690,
-      "lastSaleAt": "2026-03-03T09:04:47+00:00",
-      "lastUpdated": "2026-03-04T14:18:08.418Z",
-      "suggestedRefreshMinutes": 7356
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Bloodmoon Sword",
@@ -10032,9 +10104,10 @@
         }
       ],
       "currentPrice": 22450.5,
-      "lastSaleAt": "2026-03-02T20:46:49+00:00",
-      "lastUpdated": "2026-03-04T14:18:08.503Z",
-      "suggestedRefreshMinutes": 2965
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Quickstrike",
@@ -10054,9 +10127,10 @@
         }
       ],
       "currentPrice": 10812.7,
-      "lastSaleAt": "2026-02-18T07:30:39+00:00",
-      "lastUpdated": "2026-03-04T14:18:08.576Z",
-      "suggestedRefreshMinutes": 3325
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Runeblade Dagger",
@@ -10076,9 +10150,10 @@
         }
       ],
       "currentPrice": 47486.9,
-      "lastSaleAt": "2026-02-24T04:30:02+00:00",
-      "lastUpdated": "2026-03-04T14:18:08.656Z",
-      "suggestedRefreshMinutes": 10815
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Moonshot",
@@ -10106,9 +10181,10 @@
         }
       ],
       "currentPrice": 2740.6,
-      "lastSaleAt": "2026-03-02T11:32:19+00:00",
-      "lastUpdated": "2026-03-04T14:18:08.732Z",
-      "suggestedRefreshMinutes": 8301
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Stormsong",
@@ -10140,9 +10216,10 @@
         }
       ],
       "currentPrice": 8794.9,
-      "lastSaleAt": "2026-02-24T12:50:03+00:00",
-      "lastUpdated": "2026-03-04T14:18:08.811Z",
-      "suggestedRefreshMinutes": 5742
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Thunder Helm",
@@ -10162,9 +10239,10 @@
         }
       ],
       "currentPrice": 12479.7,
-      "lastSaleAt": "2026-03-03T18:23:59+00:00",
-      "lastUpdated": "2026-03-04T14:18:08.900Z",
-      "suggestedRefreshMinutes": 3139
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Emberfist",
@@ -10200,9 +10278,10 @@
         }
       ],
       "currentPrice": 27399.5,
-      "lastSaleAt": "2026-02-27T14:59:40+00:00",
-      "lastUpdated": "2026-03-04T14:18:08.970Z",
-      "suggestedRefreshMinutes": 1669
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Celestial Radiance",
@@ -10226,9 +10305,10 @@
         }
       ],
       "currentPrice": 71675.3,
-      "lastSaleAt": "2026-03-02T13:09:29+00:00",
-      "lastUpdated": "2026-03-04T14:18:09.046Z",
-      "suggestedRefreshMinutes": 2769
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Ironbark Cuirass",
@@ -10256,9 +10336,10 @@
         }
       ],
       "currentPrice": 12589.7,
-      "lastSaleAt": "2026-02-28T23:54:28+00:00",
-      "lastUpdated": "2026-03-04T14:18:09.125Z",
-      "suggestedRefreshMinutes": 1430
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Emberfoot Greaves",
@@ -10278,9 +10359,10 @@
         }
       ],
       "currentPrice": 38834.6,
-      "lastSaleAt": "2026-03-02T12:29:10+00:00",
-      "lastUpdated": "2026-03-04T14:18:09.217Z",
-      "suggestedRefreshMinutes": 4753
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Thunderclash Greaves",
@@ -10296,9 +10378,10 @@
         }
       ],
       "currentPrice": 7062.4,
-      "lastSaleAt": "2026-02-27T18:13:58+00:00",
-      "lastUpdated": "2026-03-04T14:18:09.286Z",
-      "suggestedRefreshMinutes": 3001
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Celestial Ascenders",
@@ -10318,9 +10401,10 @@
         }
       ],
       "currentPrice": 20216.3,
-      "lastSaleAt": "2026-03-03T17:54:38+00:00",
-      "lastUpdated": "2026-03-04T14:18:09.355Z",
-      "suggestedRefreshMinutes": 3700
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Emberfoot Boots",
@@ -10340,9 +10424,10 @@
         }
       ],
       "currentPrice": 15337.6,
-      "lastSaleAt": "2026-03-04T10:09:30+00:00",
-      "lastUpdated": "2026-03-04T14:18:09.442Z",
-      "suggestedRefreshMinutes": 3443
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Frostbite Guard",
@@ -10362,9 +10447,10 @@
         }
       ],
       "currentPrice": 26475.4,
-      "lastSaleAt": "2026-03-04T10:08:35+00:00",
-      "lastUpdated": "2026-03-04T14:18:09.524Z",
-      "suggestedRefreshMinutes": 2202
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Sentinel's Bulwark",
@@ -10384,9 +10470,10 @@
         }
       ],
       "currentPrice": 21624.9,
-      "lastSaleAt": "2026-02-27T18:12:15+00:00",
-      "lastUpdated": "2026-03-04T14:18:09.593Z",
-      "suggestedRefreshMinutes": 1784
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Ocean's Whisper",
@@ -10410,9 +10497,10 @@
         }
       ],
       "currentPrice": 625875.4,
-      "lastSaleAt": "2026-03-04T00:06:05+00:00",
-      "lastUpdated": "2026-03-04T14:18:09.673Z",
-      "suggestedRefreshMinutes": 2371
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Stone Splinter",
@@ -10436,9 +10524,10 @@
         }
       ],
       "currentPrice": 639499.9,
-      "lastSaleAt": "2026-03-03T08:48:07+00:00",
-      "lastUpdated": "2026-03-04T14:18:10.749Z",
-      "suggestedRefreshMinutes": 4179
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Branchbane Hatchet",
@@ -10458,9 +10547,10 @@
         }
       ],
       "currentPrice": 436175,
-      "lastSaleAt": "2026-03-02T22:41:41+00:00",
-      "lastUpdated": "2026-03-04T14:19:08.169Z",
-      "suggestedRefreshMinutes": 2136
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Twinstrike Elixir",
@@ -10480,9 +10570,10 @@
         }
       ],
       "currentPrice": 3136.5,
-      "lastSaleAt": "2026-03-03T06:35:42+00:00",
-      "lastUpdated": "2026-03-04T14:19:08.268Z",
-      "suggestedRefreshMinutes": 3733
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Frenzy Potion",
@@ -10502,10 +10593,10 @@
         }
       ],
       "currentPrice": 3109.4,
-      "lastSaleAt": "2026-03-04T22:18:34+00:00",
-      "lastUpdated": "2026-03-05T03:15:52.482Z",
-      "suggestedRefreshMinutes": 857,
-      "weeklySalesVolume": 94
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Whisperwind Sword",
@@ -10525,9 +10616,10 @@
         }
       ],
       "currentPrice": 37761.1,
-      "lastSaleAt": "2026-03-04T06:05:02+00:00",
-      "lastUpdated": "2026-03-04T14:19:09.439Z",
-      "suggestedRefreshMinutes": 13275
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Voidslayer",
@@ -10551,9 +10643,10 @@
         }
       ],
       "currentPrice": 45237.9,
-      "lastSaleAt": "2026-02-24T23:51:05+00:00",
-      "lastUpdated": "2026-03-04T14:19:09.524Z",
-      "suggestedRefreshMinutes": 10625
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Shadowfang",
@@ -10577,9 +10670,10 @@
         }
       ],
       "currentPrice": 39408.2,
-      "lastSaleAt": "2026-02-09T10:52:27+00:00",
-      "lastUpdated": "2026-03-04T14:19:09.596Z",
-      "suggestedRefreshMinutes": 43200
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Emberheart",
@@ -10611,9 +10705,10 @@
         }
       ],
       "currentPrice": 48239.9,
-      "lastSaleAt": "2026-02-05T22:11:28+00:00",
-      "lastUpdated": "2026-03-04T14:19:09.671Z",
-      "suggestedRefreshMinutes": 12545
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Otto's Mask",
@@ -10633,9 +10728,10 @@
         }
       ],
       "currentPrice": 45916.7,
-      "lastSaleAt": "2026-03-04T13:11:54+00:00",
-      "lastUpdated": "2026-03-04T14:19:09.768Z",
-      "suggestedRefreshMinutes": 4041
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Shadowbane Visor",
@@ -10655,9 +10751,10 @@
         }
       ],
       "currentPrice": 112282.9,
-      "lastSaleAt": "2026-02-15T09:44:31+00:00",
-      "lastUpdated": "2026-03-04T14:19:09.840Z",
-      "suggestedRefreshMinutes": 13810
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Thunderclap",
@@ -10681,9 +10778,10 @@
         }
       ],
       "currentPrice": 27529.7,
-      "lastSaleAt": "2026-03-04T13:12:16+00:00",
-      "lastUpdated": "2026-03-04T14:19:09.921Z",
-      "suggestedRefreshMinutes": 7924
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Soulgrasp",
@@ -10707,9 +10805,10 @@
         }
       ],
       "currentPrice": 80869,
-      "lastSaleAt": "2026-02-27T09:42:24+00:00",
-      "lastUpdated": "2026-03-04T14:19:10.002Z",
-      "suggestedRefreshMinutes": 4237
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Flameguard Plate",
@@ -10733,9 +10832,10 @@
         }
       ],
       "currentPrice": 32927.5,
-      "lastSaleAt": "2026-03-02T16:55:29+00:00",
-      "lastUpdated": "2026-03-04T14:19:10.090Z",
-      "suggestedRefreshMinutes": 7617
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Stormbreaker Mail",
@@ -10759,9 +10859,10 @@
         }
       ],
       "currentPrice": 99923.8,
-      "lastSaleAt": "2026-02-15T13:05:15+00:00",
-      "lastUpdated": "2026-03-04T14:19:10.171Z",
-      "suggestedRefreshMinutes": 2405
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Soulforge Legplates",
@@ -10777,9 +10878,10 @@
         }
       ],
       "currentPrice": 20671.9,
-      "lastSaleAt": "2026-03-01T20:35:55+00:00",
-      "lastUpdated": "2026-03-04T14:19:10.290Z",
-      "suggestedRefreshMinutes": 9382
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Shadowbane Greaves",
@@ -10803,9 +10905,10 @@
         }
       ],
       "currentPrice": 26867.2,
-      "lastSaleAt": "2026-02-27T15:12:06+00:00",
-      "lastUpdated": "2026-03-04T14:19:10.367Z",
-      "suggestedRefreshMinutes": 11414
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Thunderstrike Steps",
@@ -10825,9 +10928,10 @@
         }
       ],
       "currentPrice": 41246.6,
-      "lastSaleAt": "2026-03-03T20:07:02+00:00",
-      "lastUpdated": "2026-03-04T14:19:10.523Z",
-      "suggestedRefreshMinutes": 7579
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Soulwalkers",
@@ -10847,9 +10951,10 @@
         }
       ],
       "currentPrice": 42212.8,
-      "lastSaleAt": "2026-03-01T14:19:40+00:00",
-      "lastUpdated": "2026-03-04T14:19:10.608Z",
-      "suggestedRefreshMinutes": 9114
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Celestial Aegis",
@@ -10869,9 +10974,10 @@
         }
       ],
       "currentPrice": 26903,
-      "lastSaleAt": "2026-03-04T06:06:04+00:00",
-      "lastUpdated": "2026-03-04T14:19:10.685Z",
-      "suggestedRefreshMinutes": 12351
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Thunderstrike Barrier",
@@ -10891,9 +10997,10 @@
         }
       ],
       "currentPrice": 6626.7,
-      "lastSaleAt": "2026-03-03T18:23:49+00:00",
-      "lastUpdated": "2026-03-04T14:19:10.756Z",
-      "suggestedRefreshMinutes": 8583
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Dragonblood Tonic",
@@ -10913,10 +11020,10 @@
         }
       ],
       "currentPrice": 5295.6,
-      "lastSaleAt": "2026-03-05T05:15:38+00:00",
-      "lastUpdated": "2026-03-05T06:56:33.540Z",
-      "suggestedRefreshMinutes": 196,
-      "weeklySalesVolume": 402
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Gourmet Essence Crystal",
@@ -10936,10 +11043,10 @@
         }
       ],
       "currentPrice": 7647.9,
-      "lastSaleAt": "2026-03-05T06:37:02+00:00",
-      "lastUpdated": "2026-03-05T06:56:33.615Z",
-      "suggestedRefreshMinutes": 120,
-      "weeklySalesVolume": 627
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Sunfire",
@@ -10963,9 +11070,10 @@
         }
       ],
       "currentPrice": 60500.9,
-      "lastSaleAt": "2026-02-26T23:47:30+00:00",
-      "lastUpdated": "2026-03-04T14:20:09.217Z",
-      "suggestedRefreshMinutes": 10117
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Flamebrand",
@@ -10985,9 +11093,10 @@
         }
       ],
       "currentPrice": 22027.7,
-      "lastSaleAt": "2026-02-16T08:12:35+00:00",
-      "lastUpdated": "2026-03-04T14:20:10.300Z",
-      "suggestedRefreshMinutes": 29302
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Soulshard",
@@ -11007,9 +11116,10 @@
         }
       ],
       "currentPrice": 38715,
-      "lastSaleAt": "2026-02-23T14:53:38+00:00",
-      "lastUpdated": "2026-03-04T14:20:10.713Z",
-      "suggestedRefreshMinutes": 15683
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Piercer",
@@ -11045,9 +11155,10 @@
         }
       ],
       "currentPrice": 22047.4,
-      "lastSaleAt": "2026-03-01T06:05:53+00:00",
-      "lastUpdated": "2026-03-04T14:20:10.783Z",
-      "suggestedRefreshMinutes": 4574
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Sunseeker",
@@ -11075,9 +11186,10 @@
         }
       ],
       "currentPrice": 55130,
-      "lastSaleAt": "2026-03-01T06:04:42+00:00",
-      "lastUpdated": "2026-03-04T14:20:10.858Z",
-      "suggestedRefreshMinutes": 9689
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Windborne Casque",
@@ -11097,9 +11209,10 @@
         }
       ],
       "currentPrice": 64744.1,
-      "lastSaleAt": "2026-03-02T04:53:15+00:00",
-      "lastUpdated": "2026-03-04T14:20:10.946Z",
-      "suggestedRefreshMinutes": 16865
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Stormbreaker Helm",
@@ -11115,9 +11228,10 @@
         }
       ],
       "currentPrice": 49419.4,
-      "lastSaleAt": "2026-03-04T00:55:25+00:00",
-      "lastUpdated": "2026-03-04T14:20:11.028Z",
-      "suggestedRefreshMinutes": 16247
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Shadowstep Gauntlets",
@@ -11137,9 +11251,10 @@
         }
       ],
       "currentPrice": 33295.7,
-      "lastSaleAt": "2026-03-01T00:02:07+00:00",
-      "lastUpdated": "2026-03-04T14:20:11.096Z",
-      "suggestedRefreshMinutes": 4909
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Sentinel's Gauntlets",
@@ -11163,9 +11278,10 @@
         }
       ],
       "currentPrice": 43343.1,
-      "lastSaleAt": "2026-03-04T00:56:06+00:00",
-      "lastUpdated": "2026-03-04T14:20:11.181Z",
-      "suggestedRefreshMinutes": 8750
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Shadeweave Raiment",
@@ -11193,9 +11309,10 @@
         }
       ],
       "currentPrice": 54276.8,
-      "lastSaleAt": "2026-02-24T17:55:24+00:00",
-      "lastUpdated": "2026-03-04T14:20:11.275Z",
-      "suggestedRefreshMinutes": 9451
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Crystalheart Plate",
@@ -11219,9 +11336,10 @@
         }
       ],
       "currentPrice": 71578.1,
-      "lastSaleAt": "2026-03-04T14:10:29+00:00",
-      "lastUpdated": "2026-03-04T14:20:11.424Z",
-      "suggestedRefreshMinutes": 5811
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Windrider Greaves",
@@ -11245,9 +11363,10 @@
         }
       ],
       "currentPrice": 29585.5,
-      "lastSaleAt": "2026-03-03T15:03:17+00:00",
-      "lastUpdated": "2026-03-04T14:20:11.504Z",
-      "suggestedRefreshMinutes": 9619
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Stormbreaker Treads",
@@ -11279,9 +11398,10 @@
         }
       ],
       "currentPrice": 56522,
-      "lastSaleAt": "2026-02-26T23:50:16+00:00",
-      "lastUpdated": "2026-03-04T14:20:11.589Z",
-      "suggestedRefreshMinutes": 7540
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Shadowbane Footguards",
@@ -11301,9 +11421,10 @@
         }
       ],
       "currentPrice": 34986.6,
-      "lastSaleAt": "2026-02-24T18:52:14+00:00",
-      "lastUpdated": "2026-03-04T14:20:11.663Z",
-      "suggestedRefreshMinutes": 3812
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Windrider Striders",
@@ -11327,9 +11448,10 @@
         }
       ],
       "currentPrice": 72288,
-      "lastSaleAt": "2026-03-01T06:12:32+00:00",
-      "lastUpdated": "2026-03-04T14:20:11.743Z",
-      "suggestedRefreshMinutes": 5941
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Essenceweave Shield",
@@ -11349,9 +11471,10 @@
         }
       ],
       "currentPrice": 32377.5,
-      "lastSaleAt": "2026-02-26T07:37:42+00:00",
-      "lastUpdated": "2026-03-04T14:20:11.832Z",
-      "suggestedRefreshMinutes": 10114
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Wraithbane Essence",
@@ -11371,10 +11494,10 @@
         }
       ],
       "currentPrice": 11860,
-      "lastSaleAt": "2026-03-05T07:06:24+00:00",
-      "lastUpdated": "2026-03-05T08:08:12.956Z",
-      "suggestedRefreshMinutes": 19,
-      "weeklySalesVolume": 823
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Thunderfury Brew",
@@ -11394,10 +11517,10 @@
         }
       ],
       "currentPrice": 5240,
-      "lastSaleAt": "2026-03-05T07:09:16+00:00",
-      "lastUpdated": "2026-03-05T08:08:13.011Z",
-      "suggestedRefreshMinutes": 85,
-      "weeklySalesVolume": 617
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Thunderstrike",
@@ -11421,9 +11544,10 @@
         }
       ],
       "currentPrice": 111583.7,
-      "lastSaleAt": "2026-03-02T00:46:41+00:00",
-      "lastUpdated": "2026-03-04T14:20:12.178Z",
-      "suggestedRefreshMinutes": 2297
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Nightfall Sword",
@@ -11443,9 +11567,10 @@
         }
       ],
       "currentPrice": 86241.9,
-      "lastSaleAt": "2026-03-02T13:22:40+00:00",
-      "lastUpdated": "2026-03-04T14:21:10.141Z",
-      "suggestedRefreshMinutes": 20515
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Night's Whisper",
@@ -11469,9 +11594,10 @@
         }
       ],
       "currentPrice": 56188,
-      "lastSaleAt": "2026-02-18T20:04:28+00:00",
-      "lastUpdated": "2026-03-04T14:21:10.233Z",
-      "suggestedRefreshMinutes": 24470
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Eclipse",
@@ -11499,9 +11625,10 @@
         }
       ],
       "currentPrice": 120399.9,
-      "lastSaleAt": "2026-03-03T10:56:51+00:00",
-      "lastUpdated": "2026-03-04T14:21:11.320Z",
-      "suggestedRefreshMinutes": 22529
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Thundershot",
@@ -11529,9 +11656,10 @@
         }
       ],
       "currentPrice": 90303.8,
-      "lastSaleAt": "2026-03-02T09:15:54+00:00",
-      "lastUpdated": "2026-03-04T14:21:11.394Z",
-      "suggestedRefreshMinutes": 18331
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Nightshade Bow",
@@ -11563,9 +11691,10 @@
         }
       ],
       "currentPrice": 67845.7,
-      "lastSaleAt": "2026-03-01T06:06:41+00:00",
-      "lastUpdated": "2026-03-04T14:21:11.465Z",
-      "suggestedRefreshMinutes": 5230
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Voidwalker Cowl",
@@ -11585,9 +11714,10 @@
         }
       ],
       "currentPrice": 82073.4,
-      "lastSaleAt": "2026-02-28T19:31:47+00:00",
-      "lastUpdated": "2026-03-04T14:21:11.541Z",
-      "suggestedRefreshMinutes": 5034
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Lunar Radiance",
@@ -11611,9 +11741,10 @@
         }
       ],
       "currentPrice": 86069.9,
-      "lastSaleAt": "2026-02-22T15:10:01+00:00",
-      "lastUpdated": "2026-03-04T14:21:11.618Z",
-      "suggestedRefreshMinutes": 11669
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Flameguard Gauntlets",
@@ -11637,9 +11768,10 @@
         }
       ],
       "currentPrice": 100131.5,
-      "lastSaleAt": "2026-03-03T08:05:15+00:00",
-      "lastUpdated": "2026-03-04T14:21:11.699Z",
-      "suggestedRefreshMinutes": 5020
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Stormbreaker Gauntlets",
@@ -11667,9 +11799,10 @@
         }
       ],
       "currentPrice": 182533.8,
-      "lastSaleAt": "2026-02-22T15:12:08+00:00",
-      "lastUpdated": "2026-03-04T14:21:11.774Z",
-      "suggestedRefreshMinutes": 20411
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Serpent Scale",
@@ -11697,9 +11830,10 @@
         }
       ],
       "currentPrice": 128316.2,
-      "lastSaleAt": "2026-03-02T12:09:41+00:00",
-      "lastUpdated": "2026-03-04T14:21:11.848Z",
-      "suggestedRefreshMinutes": 7070
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Phoenix Soulplate",
@@ -11723,9 +11857,10 @@
         }
       ],
       "currentPrice": 252922.5,
-      "lastSaleAt": "2026-02-14T06:32:05+00:00",
-      "lastUpdated": "2026-03-04T14:21:11.921Z",
-      "suggestedRefreshMinutes": 37996
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Voidwalker Striders",
@@ -11745,9 +11880,10 @@
         }
       ],
       "currentPrice": 82280.4,
-      "lastSaleAt": "2026-03-03T12:21:06+00:00",
-      "lastUpdated": "2026-03-04T14:21:11.997Z",
-      "suggestedRefreshMinutes": 3554
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Stormbreaker Boots",
@@ -11775,9 +11911,10 @@
         }
       ],
       "currentPrice": 53686.9,
-      "lastSaleAt": "2026-02-26T16:13:36+00:00",
-      "lastUpdated": "2026-03-04T14:21:12.076Z",
-      "suggestedRefreshMinutes": 13301
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Moonshadow Guard",
@@ -11805,9 +11942,10 @@
         }
       ],
       "currentPrice": 13724.2,
-      "lastSaleAt": "2026-03-02T08:03:50+00:00",
-      "lastUpdated": "2026-03-04T14:21:12.153Z",
-      "suggestedRefreshMinutes": 14187
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Ashenfire Ward",
@@ -11827,9 +11965,10 @@
         }
       ],
       "currentPrice": 41614.9,
-      "lastSaleAt": "2026-03-04T08:27:57+00:00",
-      "lastUpdated": "2026-03-04T14:21:12.235Z",
-      "suggestedRefreshMinutes": 6595
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Potion of the Hunter",
@@ -11849,9 +11988,10 @@
         }
       ],
       "currentPrice": 262000,
-      "lastSaleAt": "2026-03-01T09:09:55+00:00",
-      "lastUpdated": "2026-03-04T14:21:12.317Z",
-      "suggestedRefreshMinutes": 27361
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Dawnbreaker Sword",
@@ -11879,9 +12019,10 @@
         }
       ],
       "currentPrice": 75049.2,
-      "lastSaleAt": "2026-03-03T02:05:52+00:00",
-      "lastUpdated": "2026-03-04T14:21:12.384Z",
-      "suggestedRefreshMinutes": 8981
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Runeblade Sword",
@@ -11905,9 +12046,10 @@
         }
       ],
       "currentPrice": 1140555.5,
-      "lastSaleAt": "2026-02-19T15:06:33+00:00",
-      "lastUpdated": "2026-03-04T14:21:12.461Z",
-      "suggestedRefreshMinutes": 15634
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Duskblade",
@@ -11931,9 +12073,10 @@
         }
       ],
       "currentPrice": 69694.4,
-      "lastSaleAt": "2026-02-24T04:29:24+00:00",
-      "lastUpdated": "2026-03-04T14:21:12.529Z",
-      "suggestedRefreshMinutes": 24797
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Silent Reaper",
@@ -11953,9 +12096,10 @@
         }
       ],
       "currentPrice": 703555.3,
-      "lastSaleAt": "2026-02-02T13:18:10+00:00",
-      "lastUpdated": "2026-03-04T14:21:12.605Z",
-      "suggestedRefreshMinutes": 43200
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Dawnbreaker Bow",
@@ -11979,9 +12123,10 @@
         }
       ],
       "currentPrice": 98700,
-      "lastSaleAt": "2026-03-04T00:53:32+00:00",
-      "lastUpdated": "2026-03-04T14:22:11.159Z",
-      "suggestedRefreshMinutes": 6945
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Silverthorn Bow",
@@ -12005,9 +12150,10 @@
         }
       ],
       "currentPrice": 1291999.9,
-      "lastSaleAt": "2026-02-20T15:13:19+00:00",
-      "lastUpdated": "2026-03-04T14:22:11.235Z",
-      "suggestedRefreshMinutes": 21022
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Ashenfire Crown",
@@ -12031,9 +12177,10 @@
         }
       ],
       "currentPrice": 97159,
-      "lastSaleAt": "2026-02-27T14:17:23+00:00",
-      "lastUpdated": "2026-03-04T14:22:12.321Z",
-      "suggestedRefreshMinutes": 15864
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Nightshade Mask",
@@ -12053,9 +12200,10 @@
         }
       ],
       "currentPrice": 697900,
-      "lastSaleAt": "2026-03-01T18:03:10+00:00",
-      "lastUpdated": "2026-03-04T14:22:12.388Z",
-      "suggestedRefreshMinutes": 12806
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Voidrend Gauntlets",
@@ -12083,9 +12231,10 @@
         }
       ],
       "currentPrice": 123736.1,
-      "lastSaleAt": "2026-02-27T14:21:34+00:00",
-      "lastUpdated": "2026-03-04T14:22:12.468Z",
-      "suggestedRefreshMinutes": 5956
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Windrider",
@@ -12113,9 +12262,10 @@
         }
       ],
       "currentPrice": 1071949.8,
-      "lastSaleAt": "2026-02-26T22:43:08+00:00",
-      "lastUpdated": "2026-03-04T14:22:12.543Z",
-      "suggestedRefreshMinutes": 14585
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Echosteel Breastplate",
@@ -12135,9 +12285,10 @@
         }
       ],
       "currentPrice": 1135399.9,
-      "lastSaleAt": "2026-02-26T22:42:33+00:00",
-      "lastUpdated": "2026-03-04T14:22:12.625Z",
-      "suggestedRefreshMinutes": 18622
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Lunarweave Leggings",
@@ -12157,9 +12308,10 @@
         }
       ],
       "currentPrice": 112287.5,
-      "lastSaleAt": "2026-03-02T14:19:11+00:00",
-      "lastUpdated": "2026-03-04T14:22:12.708Z",
-      "suggestedRefreshMinutes": 7337
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Nightshade Greaves",
@@ -12191,9 +12343,10 @@
         }
       ],
       "currentPrice": 989900,
-      "lastSaleAt": "2026-02-26T22:43:31+00:00",
-      "lastUpdated": "2026-03-04T14:22:12.798Z",
-      "suggestedRefreshMinutes": 35284
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Voidstep Boots",
@@ -12217,9 +12370,10 @@
         }
       ],
       "currentPrice": 71328.7,
-      "lastSaleAt": "2026-03-01T17:21:48+00:00",
-      "lastUpdated": "2026-03-04T14:22:12.887Z",
-      "suggestedRefreshMinutes": 6477
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Nightshade Boots",
@@ -12251,9 +12405,10 @@
         }
       ],
       "currentPrice": 1695000,
-      "lastSaleAt": "2026-02-26T22:44:10+00:00",
-      "lastUpdated": "2026-03-04T14:22:12.961Z",
-      "suggestedRefreshMinutes": 29403
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Runebound Bulwark",
@@ -12273,9 +12428,10 @@
         }
       ],
       "currentPrice": 30358.8,
-      "lastSaleAt": "2026-03-02T12:05:59+00:00",
-      "lastUpdated": "2026-03-04T14:22:13.034Z",
-      "suggestedRefreshMinutes": 4010
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Shadewalker Bulwark",
@@ -12299,9 +12455,10 @@
         }
       ],
       "currentPrice": 626499.5,
-      "lastSaleAt": "2026-02-20T23:41:48+00:00",
-      "lastUpdated": "2026-03-04T14:22:13.104Z",
-      "suggestedRefreshMinutes": 43200
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Rune-etched Reeler",
@@ -12325,9 +12482,10 @@
         }
       ],
       "currentPrice": 2660799.9,
-      "lastSaleAt": "2026-03-01T23:46:44+00:00",
-      "lastUpdated": "2026-03-04T14:22:13.183Z",
-      "suggestedRefreshMinutes": 5286
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Corestrike",
@@ -12351,9 +12509,10 @@
         }
       ],
       "currentPrice": 2274900,
-      "lastSaleAt": "2026-03-01T10:48:18+00:00",
-      "lastUpdated": "2026-03-04T14:22:13.267Z",
-      "suggestedRefreshMinutes": 9529
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Silvan Splitter",
@@ -12373,9 +12532,10 @@
         }
       ],
       "currentPrice": 968996.8,
-      "lastSaleAt": "2026-03-04T11:06:39+00:00",
-      "lastUpdated": "2026-03-04T14:22:13.362Z",
-      "suggestedRefreshMinutes": 43200
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Potion of the Gods",
@@ -12395,9 +12555,10 @@
         }
       ],
       "currentPrice": 178938.7,
-      "lastSaleAt": "2026-03-04T07:16:58+00:00",
-      "lastUpdated": "2026-03-04T14:22:13.445Z",
-      "suggestedRefreshMinutes": 5509
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Eternal Feast Essence Crystal",
@@ -12417,9 +12578,10 @@
         }
       ],
       "currentPrice": 31832.8,
-      "lastSaleAt": "2026-03-04T11:45:52+00:00",
-      "lastUpdated": "2026-03-04T14:22:13.542Z",
-      "suggestedRefreshMinutes": 4987
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Starshard",
@@ -12439,9 +12601,10 @@
         }
       ],
       "currentPrice": 189730.8,
-      "lastSaleAt": "2026-03-01T11:12:32+00:00",
-      "lastUpdated": "2026-03-04T14:22:13.620Z",
-      "suggestedRefreshMinutes": 7161
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Phoenix Requiem",
@@ -12469,9 +12632,10 @@
         }
       ],
       "currentPrice": 2148400,
-      "lastSaleAt": "2026-02-11T12:20:21+00:00",
-      "lastUpdated": "2026-03-04T14:22:13.705Z",
-      "suggestedRefreshMinutes": 29861
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Ghostwalker",
@@ -12499,9 +12663,10 @@
         }
       ],
       "currentPrice": 79284.6,
-      "lastSaleAt": "2026-02-24T05:16:20+00:00",
-      "lastUpdated": "2026-03-04T14:23:12.162Z",
-      "suggestedRefreshMinutes": 29249
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Silvermist",
@@ -12533,9 +12698,10 @@
         }
       ],
       "currentPrice": 750000,
-      "lastSaleAt": "2025-09-09T21:23:53+00:00",
-      "lastUpdated": "2026-03-04T14:23:12.229Z",
-      "suggestedRefreshMinutes": 1440
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Starshower",
@@ -12563,9 +12729,10 @@
         }
       ],
       "currentPrice": 285800,
-      "lastSaleAt": "2026-02-23T19:51:21+00:00",
-      "lastUpdated": "2026-03-04T14:23:13.308Z",
-      "suggestedRefreshMinutes": 8336
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Bloodmoon Bow",
@@ -12593,9 +12760,10 @@
         }
       ],
       "currentPrice": 2950000,
-      "lastSaleAt": "2026-02-12T22:50:53+00:00",
-      "lastUpdated": "2026-03-04T14:23:13.377Z",
-      "suggestedRefreshMinutes": 43200
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Verdant Guardian Helm",
@@ -12619,9 +12787,10 @@
         }
       ],
       "currentPrice": 314750,
-      "lastSaleAt": "2026-02-24T10:17:12+00:00",
-      "lastUpdated": "2026-03-04T14:23:13.445Z",
-      "suggestedRefreshMinutes": 10954
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Glimmersteel Helm",
@@ -12641,9 +12810,10 @@
         }
       ],
       "currentPrice": 1180833.3333333333,
-      "lastSaleAt": "2026-02-27T06:53:13+00:00",
-      "lastUpdated": "2026-03-04T14:23:13.512Z",
-      "suggestedRefreshMinutes": 43200
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Lunarweave Gloves",
@@ -12671,9 +12841,10 @@
         }
       ],
       "currentPrice": 251734.1,
-      "lastSaleAt": "2026-02-20T16:33:13+00:00",
-      "lastUpdated": "2026-03-04T14:23:13.573Z",
-      "suggestedRefreshMinutes": 12335
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Bloodforged Gauntlets",
@@ -12693,9 +12864,10 @@
         }
       ],
       "currentPrice": 329379.6,
-      "lastSaleAt": "2026-02-13T23:25:29+00:00",
-      "lastUpdated": "2026-03-04T14:23:13.634Z",
-      "suggestedRefreshMinutes": 16318
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Grasps of Protection",
@@ -12715,9 +12887,10 @@
         }
       ],
       "currentPrice": 1140000,
-      "lastSaleAt": "2026-02-27T00:35:47+00:00",
-      "lastUpdated": "2026-03-04T14:23:13.701Z",
-      "suggestedRefreshMinutes": 43200
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Guardian's Valor",
@@ -12737,9 +12910,10 @@
         }
       ],
       "currentPrice": 386999.9,
-      "lastSaleAt": "2026-03-01T18:57:03+00:00",
-      "lastUpdated": "2026-03-04T14:23:13.762Z",
-      "suggestedRefreshMinutes": 12258
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Verdant Chainmail",
@@ -12767,9 +12941,10 @@
         }
       ],
       "currentPrice": 1231166.6666666667,
-      "lastSaleAt": "2026-03-01T17:59:25+00:00",
-      "lastUpdated": "2026-03-04T14:23:13.860Z",
-      "suggestedRefreshMinutes": 43200
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Runebound Shinplates",
@@ -12789,9 +12964,10 @@
         }
       ],
       "currentPrice": 205171.7,
-      "lastSaleAt": "2026-02-16T04:59:02+00:00",
-      "lastUpdated": "2026-03-04T14:23:13.928Z",
-      "suggestedRefreshMinutes": 11799
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Glimmersteel Pathguards",
@@ -12819,9 +12995,10 @@
         }
       ],
       "currentPrice": 1355833.25,
-      "lastSaleAt": "2026-03-03T08:48:01+00:00",
-      "lastUpdated": "2026-03-04T14:23:14.003Z",
-      "suggestedRefreshMinutes": 40158
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Ashenfire Boots",
@@ -12841,9 +13018,10 @@
         }
       ],
       "currentPrice": 107135.9,
-      "lastSaleAt": "2026-03-02T12:11:10+00:00",
-      "lastUpdated": "2026-03-04T14:23:14.086Z",
-      "suggestedRefreshMinutes": 9813
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Glimmersteel Boots",
@@ -12871,9 +13049,10 @@
         }
       ],
       "currentPrice": 2303703.3333333335,
-      "lastSaleAt": "2026-02-27T14:11:48+00:00",
-      "lastUpdated": "2026-03-04T14:23:14.161Z",
-      "suggestedRefreshMinutes": 43200
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Bloodbane Barrier",
@@ -12901,9 +13080,10 @@
         }
       ],
       "currentPrice": 60649.9,
-      "lastSaleAt": "2026-03-03T09:34:56+00:00",
-      "lastUpdated": "2026-03-04T14:23:14.227Z",
-      "suggestedRefreshMinutes": 7560
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Stormbringer Buckler",
@@ -12927,9 +13107,10 @@
         }
       ],
       "currentPrice": 700000,
-      "lastSaleAt": "2025-12-19T00:23:42+00:00",
-      "lastUpdated": "2026-03-04T14:23:14.286Z",
-      "suggestedRefreshMinutes": 43200
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Divine Essence Crystal",
@@ -12949,9 +13130,10 @@
         }
       ],
       "currentPrice": 34799.6,
-      "lastSaleAt": "2026-03-03T02:19:37+00:00",
-      "lastUpdated": "2026-03-04T14:23:14.352Z",
-      "suggestedRefreshMinutes": 4896
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Fallen Star Essence",
@@ -12971,9 +13153,10 @@
         }
       ],
       "currentPrice": 277100,
-      "lastSaleAt": "2026-03-03T11:49:44+00:00",
-      "lastUpdated": "2026-03-04T14:23:14.434Z",
-      "suggestedRefreshMinutes": 7603
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Grimslayer",
@@ -12993,9 +13176,10 @@
         }
       ],
       "currentPrice": 1007735.3,
-      "lastSaleAt": "2026-03-03T22:37:22+00:00",
-      "lastUpdated": "2026-03-04T14:23:14.505Z",
-      "suggestedRefreshMinutes": 7894
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Death's Embrace",
@@ -13023,9 +13207,10 @@
         }
       ],
       "currentPrice": 3277500,
-      "lastSaleAt": "2026-02-04T19:07:43+00:00",
-      "lastUpdated": "2026-03-04T14:24:13.167Z",
-      "suggestedRefreshMinutes": 43200
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Nightfall Dagger",
@@ -13053,9 +13238,10 @@
         }
       ],
       "currentPrice": 1019400,
-      "lastSaleAt": "2026-02-13T20:19:02+00:00",
-      "lastUpdated": "2026-03-04T14:24:13.298Z",
-      "suggestedRefreshMinutes": 25881
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Fury",
@@ -13083,9 +13269,10 @@
         }
       ],
       "currentPrice": 557498,
-      "lastSaleAt": "2026-02-28T11:34:58+00:00",
-      "lastUpdated": "2026-03-04T14:24:14.382Z",
-      "suggestedRefreshMinutes": 8911
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Death's Touch",
@@ -13117,9 +13304,10 @@
         }
       ],
       "currentPrice": 4064999.8,
-      "lastSaleAt": "2026-02-23T15:41:39+00:00",
-      "lastUpdated": "2026-03-04T14:24:14.469Z",
-      "suggestedRefreshMinutes": 43200
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Bloodforged Helm",
@@ -13139,9 +13327,10 @@
         }
       ],
       "currentPrice": 445195,
-      "lastSaleAt": "2026-03-03T18:22:47+00:00",
-      "lastUpdated": "2026-03-04T14:24:14.554Z",
-      "suggestedRefreshMinutes": 17730
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Soul",
@@ -13161,9 +13350,10 @@
         }
       ],
       "currentPrice": 2383542,
-      "lastSaleAt": "2025-10-20T22:43:34+00:00",
-      "lastUpdated": "2026-03-04T14:24:14.628Z",
-      "suggestedRefreshMinutes": 43200
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Phoenixclaw Gauntlets",
@@ -13179,9 +13369,10 @@
         }
       ],
       "currentPrice": 520999.9,
-      "lastSaleAt": "2026-02-27T12:52:08+00:00",
-      "lastUpdated": "2026-03-04T14:24:14.716Z",
-      "suggestedRefreshMinutes": 14668
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Gloves of the Protector",
@@ -13209,9 +13400,10 @@
         }
       ],
       "currentPrice": 1480185,
-      "lastSaleAt": "2026-03-02T19:49:53+00:00",
-      "lastUpdated": "2026-03-04T14:24:14.785Z",
-      "suggestedRefreshMinutes": 43200
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Dreadbane Armor",
@@ -13243,9 +13435,10 @@
         }
       ],
       "currentPrice": 908901.5,
-      "lastSaleAt": "2026-02-28T22:04:34+00:00",
-      "lastUpdated": "2026-03-04T14:24:14.865Z",
-      "suggestedRefreshMinutes": 12521
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Ashenplate Cuirass",
@@ -13269,9 +13462,10 @@
         }
       ],
       "currentPrice": 2037000,
-      "lastSaleAt": "2026-02-11T12:21:14+00:00",
-      "lastUpdated": "2026-03-04T14:24:14.934Z",
-      "suggestedRefreshMinutes": 43200
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Phoenix Greaves",
@@ -13303,9 +13497,10 @@
         }
       ],
       "currentPrice": 1306696.9,
-      "lastSaleAt": "2026-02-23T03:05:15+00:00",
-      "lastUpdated": "2026-03-04T14:24:15.005Z",
-      "suggestedRefreshMinutes": 39400
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Soulshield Legplates",
@@ -13337,9 +13532,10 @@
         }
       ],
       "currentPrice": 1900000,
-      "lastSaleAt": "2026-01-13T05:49:25+00:00",
-      "lastUpdated": "2026-03-04T14:24:15.085Z",
-      "suggestedRefreshMinutes": 43200
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Verdant Boots",
@@ -13359,9 +13555,10 @@
         }
       ],
       "currentPrice": 228029.9,
-      "lastSaleAt": "2026-02-22T00:05:04+00:00",
-      "lastUpdated": "2026-03-04T14:24:15.151Z",
-      "suggestedRefreshMinutes": 6207
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Soulshield Treads",
@@ -13389,9 +13586,10 @@
         }
       ],
       "currentPrice": 2234710,
-      "lastSaleAt": "2026-02-21T04:59:38+00:00",
-      "lastUpdated": "2026-03-04T14:24:15.216Z",
-      "suggestedRefreshMinutes": 43200
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Phoenixguard Shield",
@@ -13411,9 +13609,10 @@
         }
       ],
       "currentPrice": 187901.4,
-      "lastSaleAt": "2026-02-25T22:33:51+00:00",
-      "lastUpdated": "2026-03-04T14:24:15.272Z",
-      "suggestedRefreshMinutes": 7257
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Ironbark Protector",
@@ -13441,9 +13640,10 @@
         }
       ],
       "currentPrice": 920799.9,
-      "lastSaleAt": "2026-03-01T23:22:07+00:00",
-      "lastUpdated": "2026-03-04T14:24:15.343Z",
-      "suggestedRefreshMinutes": 43200
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Arboreal Ender",
@@ -13463,9 +13663,10 @@
         }
       ],
       "currentPrice": 4527400,
-      "lastSaleAt": "2026-02-13T17:57:02+00:00",
-      "lastUpdated": "2026-03-04T14:24:15.413Z",
-      "suggestedRefreshMinutes": 43200
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Guardian's Soul",
@@ -13485,9 +13686,10 @@
         }
       ],
       "currentPrice": 119623.7,
-      "lastSaleAt": "2026-03-03T10:58:04+00:00",
-      "lastUpdated": "2026-03-04T14:24:15.484Z",
-      "suggestedRefreshMinutes": 8172
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Silverthorn Sword",
@@ -13519,9 +13721,10 @@
         }
       ],
       "currentPrice": 4445000,
-      "lastSaleAt": "2025-10-28T01:15:11+00:00",
-      "lastUpdated": "2026-03-04T14:24:15.555Z",
-      "suggestedRefreshMinutes": 43200
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Starglitter",
@@ -13545,9 +13748,10 @@
         }
       ],
       "currentPrice": 392799.9,
-      "lastSaleAt": "2026-02-21T12:49:01+00:00",
-      "lastUpdated": "2026-03-04T14:24:15.622Z",
-      "suggestedRefreshMinutes": 22649
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Widow's Kiss",
@@ -13571,9 +13775,10 @@
         }
       ],
       "currentPrice": 2543785.4444444445,
-      "lastSaleAt": "2026-02-11T07:54:01+00:00",
-      "lastUpdated": "2026-03-04T14:25:14.232Z",
-      "suggestedRefreshMinutes": 43200
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Grimwood",
@@ -13601,9 +13806,10 @@
         }
       ],
       "currentPrice": 1243896.6,
-      "lastSaleAt": "2026-03-02T13:42:21+00:00",
-      "lastUpdated": "2026-03-04T14:25:14.322Z",
-      "suggestedRefreshMinutes": 43154
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Soulstring",
@@ -13627,9 +13833,10 @@
         }
       ],
       "currentPrice": 1500000,
-      "lastSaleAt": "2025-08-08T13:53:58+00:00",
-      "lastUpdated": "2026-03-04T14:25:15.426Z",
-      "suggestedRefreshMinutes": 1440
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Phoenix Crown",
@@ -13649,9 +13856,10 @@
         }
       ],
       "currentPrice": 1568274.2,
-      "lastSaleAt": "2026-03-03T12:31:31+00:00",
-      "lastUpdated": "2026-03-04T14:25:15.511Z",
-      "suggestedRefreshMinutes": 43200
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Whispersong",
@@ -13671,9 +13879,10 @@
         }
       ],
       "currentPrice": 3133333.3333333335,
-      "lastSaleAt": "2025-11-11T02:10:42+00:00",
-      "lastUpdated": "2026-03-04T14:25:15.612Z",
-      "suggestedRefreshMinutes": 25842
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Nightshade Grips",
@@ -13701,9 +13910,10 @@
         }
       ],
       "currentPrice": 1165288.8,
-      "lastSaleAt": "2026-01-30T09:12:36+00:00",
-      "lastUpdated": "2026-03-04T14:25:15.702Z",
-      "suggestedRefreshMinutes": 21111
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Sacred Grasp",
@@ -13727,9 +13937,10 @@
         }
       ],
       "currentPrice": 3700000,
-      "lastSaleAt": "2025-12-29T12:03:24+00:00",
-      "lastUpdated": "2026-03-04T14:25:15.794Z",
-      "suggestedRefreshMinutes": 1440
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Soulguard Armor",
@@ -13765,9 +13976,10 @@
         }
       ],
       "currentPrice": 3000000,
-      "lastSaleAt": "2025-06-29T18:14:15+00:00",
-      "lastUpdated": "2026-03-04T14:25:15.895Z",
-      "suggestedRefreshMinutes": 1440
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Whisperstep Greaves",
@@ -13790,7 +14002,11 @@
           "quantity": 10000
         }
       ],
-      "currentPrice": 0
+      "currentPrice": 0,
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "weeklySalesVolume": 222
     },
     {
       "name": "Whisperwind Boots",
@@ -13809,7 +14025,11 @@
           "quantity": 10000
         }
       ],
-      "currentPrice": 0
+      "currentPrice": 0,
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "weeklySalesVolume": 222
     },
     {
       "name": "Soulshield of Redemption",
@@ -13837,9 +14057,10 @@
         }
       ],
       "currentPrice": 2000000,
-      "lastSaleAt": "2026-01-20T07:39:16+00:00",
-      "lastUpdated": "2026-03-04T14:25:16.145Z",
-      "suggestedRefreshMinutes": 1440
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Kraken's Grasp",
@@ -13863,9 +14084,10 @@
         }
       ],
       "currentPrice": 6333333.333333333,
-      "lastSaleAt": "2026-01-27T09:19:50+00:00",
-      "lastUpdated": "2026-03-04T14:25:16.236Z",
-      "suggestedRefreshMinutes": 43200
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Phoenix Ashes",
@@ -13885,9 +14107,10 @@
         }
       ],
       "currentPrice": 74963.7,
-      "lastSaleAt": "2026-03-04T05:40:37+00:00",
-      "lastUpdated": "2026-03-04T14:25:16.325Z",
-      "suggestedRefreshMinutes": 1701
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Omnipotent Might Essence",
@@ -13907,9 +14130,10 @@
         }
       ],
       "currentPrice": 32000,
-      "lastSaleAt": "2026-02-28T20:59:54+00:00",
-      "lastUpdated": "2026-03-04T14:25:16.412Z",
-      "suggestedRefreshMinutes": 41324
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Emberfang",
@@ -13937,9 +14161,10 @@
         }
       ],
       "currentPrice": 158088.6,
-      "lastSaleAt": "2026-02-13T23:56:46+00:00",
-      "lastUpdated": "2026-03-04T14:25:16.503Z",
-      "suggestedRefreshMinutes": 17626
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Bloodthirst",
@@ -13958,7 +14183,11 @@
           "quantity": 10000
         }
       ],
-      "currentPrice": 0
+      "currentPrice": 0,
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "weeklySalesVolume": 222
     },
     {
       "name": "Bloodthorn",
@@ -13982,9 +14211,10 @@
         }
       ],
       "currentPrice": 52349.9,
-      "lastSaleAt": "2026-02-02T13:13:34+00:00",
-      "lastUpdated": "2026-03-04T14:25:16.667Z",
-      "suggestedRefreshMinutes": 25174
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Fatebreaker",
@@ -14012,9 +14242,10 @@
         }
       ],
       "currentPrice": 4299999,
-      "lastSaleAt": "2025-11-18T12:35:28+00:00",
-      "lastUpdated": "2026-03-04T14:25:16.735Z",
-      "suggestedRefreshMinutes": 1440
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Ashenwind",
@@ -14038,9 +14269,10 @@
         }
       ],
       "currentPrice": 187708.9,
-      "lastSaleAt": "2026-02-20T20:34:24+00:00",
-      "lastUpdated": "2026-03-04T14:25:16.822Z",
-      "suggestedRefreshMinutes": 10402
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Archdemon",
@@ -14063,7 +14295,11 @@
           "quantity": 10000
         }
       ],
-      "currentPrice": 0
+      "currentPrice": 0,
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "weeklySalesVolume": 222
     },
     {
       "name": "Runebound Helm",
@@ -14083,9 +14319,10 @@
         }
       ],
       "currentPrice": 264937,
-      "lastSaleAt": "2026-03-01T19:02:23+00:00",
-      "lastUpdated": "2026-03-04T14:26:15.137Z",
-      "suggestedRefreshMinutes": 17996
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Balthazar's Head",
@@ -14104,7 +14341,11 @@
           "quantity": 10000
         }
       ],
-      "currentPrice": 0
+      "currentPrice": 0,
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "weeklySalesVolume": 222
     },
     {
       "name": "Warfists",
@@ -14132,9 +14373,10 @@
         }
       ],
       "currentPrice": 5500000,
-      "lastSaleAt": "2025-12-13T22:17:54+00:00",
-      "lastUpdated": "2026-03-04T14:26:16.300Z",
-      "suggestedRefreshMinutes": 1440
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Bloodforged Harness",
@@ -14150,9 +14392,10 @@
         }
       ],
       "currentPrice": 434899.4,
-      "lastSaleAt": "2026-01-27T10:26:52+00:00",
-      "lastUpdated": "2026-03-04T14:26:16.384Z",
-      "suggestedRefreshMinutes": 19447
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Windrider Harness",
@@ -14179,7 +14422,11 @@
           "quantity": 10000
         }
       ],
-      "currentPrice": 0
+      "currentPrice": 0,
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "weeklySalesVolume": 222
     },
     {
       "name": "Ashenfire Greaves",
@@ -14207,9 +14454,10 @@
         }
       ],
       "currentPrice": 154764.7,
-      "lastSaleAt": "2026-03-03T09:36:27+00:00",
-      "lastUpdated": "2026-03-04T14:26:16.537Z",
-      "suggestedRefreshMinutes": 10478
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Twilight Veilguards",
@@ -14232,7 +14480,11 @@
           "quantity": 10000
         }
       ],
-      "currentPrice": 0
+      "currentPrice": 0,
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "weeklySalesVolume": 222
     },
     {
       "name": "Lunarweave Boots",
@@ -14260,9 +14512,10 @@
         }
       ],
       "currentPrice": 184287.9,
-      "lastSaleAt": "2026-01-22T09:03:34+00:00",
-      "lastUpdated": "2026-03-04T14:26:16.668Z",
-      "suggestedRefreshMinutes": 34871
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Twilight Veilwalkers",
@@ -14286,9 +14539,10 @@
         }
       ],
       "currentPrice": 3200000,
-      "lastSaleAt": "2025-08-18T23:01:18+00:00",
-      "lastUpdated": "2026-03-04T14:26:16.732Z",
-      "suggestedRefreshMinutes": 1440
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Verdant Sentinel",
@@ -14308,9 +14562,10 @@
         }
       ],
       "currentPrice": 80218.6,
-      "lastSaleAt": "2026-01-10T09:35:46+00:00",
-      "lastUpdated": "2026-03-04T14:26:16.803Z",
-      "suggestedRefreshMinutes": 20561
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Deathgate",
@@ -14330,9 +14585,10 @@
         }
       ],
       "currentPrice": 4200000,
-      "lastSaleAt": "2025-09-30T07:25:59+00:00",
-      "lastUpdated": "2026-03-04T14:26:16.872Z",
-      "suggestedRefreshMinutes": 1440
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Boulder's Bane",
@@ -14356,9 +14612,10 @@
         }
       ],
       "currentPrice": 6275000,
-      "lastSaleAt": "2026-01-29T20:59:08+00:00",
-      "lastUpdated": "2026-03-04T14:26:16.953Z",
-      "suggestedRefreshMinutes": 43200
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Sun's Light",
@@ -14378,9 +14635,10 @@
         }
       ],
       "currentPrice": 144170,
-      "lastSaleAt": "2026-03-04T07:07:05+00:00",
-      "lastUpdated": "2026-03-04T14:26:17.038Z",
-      "suggestedRefreshMinutes": 7946
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Essence of a Kraken",
@@ -14400,9 +14658,10 @@
         }
       ],
       "currentPrice": 44899.8,
-      "lastSaleAt": "2026-03-02T11:54:54+00:00",
-      "lastUpdated": "2026-03-04T14:26:17.113Z",
-      "suggestedRefreshMinutes": 5820
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Cosmic Barrier",
@@ -14422,9 +14681,10 @@
         }
       ],
       "currentPrice": 34506.9,
-      "lastSaleAt": "2026-03-02T22:29:31+00:00",
-      "lastUpdated": "2026-03-04T14:26:17.198Z",
-      "suggestedRefreshMinutes": 43200
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Flash Velocity Essence",
@@ -14444,9 +14704,10 @@
         }
       ],
       "currentPrice": 39189.6,
-      "lastSaleAt": "2026-03-02T17:39:20+00:00",
-      "lastUpdated": "2026-03-04T14:26:17.275Z",
-      "suggestedRefreshMinutes": 22145
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Tempest's Fury",
@@ -14466,9 +14727,10 @@
         }
       ],
       "currentPrice": 486060.1,
-      "lastSaleAt": "2026-02-28T14:22:29+00:00",
-      "lastUpdated": "2026-03-04T14:26:17.354Z",
-      "suggestedRefreshMinutes": 15806
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Everflame",
@@ -14491,7 +14753,11 @@
           "quantity": 10000
         }
       ],
-      "currentPrice": 0
+      "currentPrice": 0,
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "weeklySalesVolume": 222
     },
     {
       "name": "Emberstrike",
@@ -14515,9 +14781,10 @@
         }
       ],
       "currentPrice": 162149.9,
-      "lastSaleAt": "2026-03-04T10:34:59+00:00",
-      "lastUpdated": "2026-03-04T14:26:17.494Z",
-      "suggestedRefreshMinutes": 8288
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Dreadspike",
@@ -14544,7 +14811,11 @@
           "quantity": 10000
         }
       ],
-      "currentPrice": 0
+      "currentPrice": 0,
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "weeklySalesVolume": 222
     },
     {
       "name": "Sting",
@@ -14571,7 +14842,11 @@
           "quantity": 10000
         }
       ],
-      "currentPrice": 0
+      "currentPrice": 0,
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "weeklySalesVolume": 222
     },
     {
       "name": "Thunder",
@@ -14590,7 +14865,11 @@
           "quantity": 10000
         }
       ],
-      "currentPrice": 0
+      "currentPrice": 0,
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "weeklySalesVolume": 222
     },
     {
       "name": "Nature's Grip",
@@ -14613,7 +14892,11 @@
           "quantity": 10000
         }
       ],
-      "currentPrice": 0
+      "currentPrice": 0,
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "weeklySalesVolume": 222
     },
     {
       "name": "Starfire Plate",
@@ -14641,9 +14924,10 @@
         }
       ],
       "currentPrice": 480111,
-      "lastSaleAt": "2026-02-27T04:49:29+00:00",
-      "lastUpdated": "2026-03-04T14:27:17.354Z",
-      "suggestedRefreshMinutes": 12315
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Twilight",
@@ -14670,7 +14954,11 @@
           "quantity": 10000
         }
       ],
-      "currentPrice": 0
+      "currentPrice": 0,
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "weeklySalesVolume": 222
     },
     {
       "name": "Verdant Greaves",
@@ -14686,9 +14974,10 @@
         }
       ],
       "currentPrice": 357500,
-      "lastSaleAt": "2026-02-10T14:52:51+00:00",
-      "lastUpdated": "2026-03-04T14:27:17.495Z",
-      "suggestedRefreshMinutes": 23449
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Stormbringer Greaves",
@@ -14715,7 +15004,11 @@
           "quantity": 10000
         }
       ],
-      "currentPrice": 0
+      "currentPrice": 0,
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "weeklySalesVolume": 222
     },
     {
       "name": "Runebound Footwraps",
@@ -14735,9 +15028,10 @@
         }
       ],
       "currentPrice": 207291,
-      "lastSaleAt": "2026-03-04T08:26:33+00:00",
-      "lastUpdated": "2026-03-04T14:27:17.658Z",
-      "suggestedRefreshMinutes": 10894
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Stormbringer Striders",
@@ -14765,9 +15059,10 @@
         }
       ],
       "currentPrice": 9000000,
-      "lastSaleAt": "2025-06-24T11:20:56+00:00",
-      "lastUpdated": "2026-03-04T14:27:17.809Z",
-      "suggestedRefreshMinutes": 1440
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Twilight Sanctum",
@@ -14791,9 +15086,10 @@
         }
       ],
       "currentPrice": 108280.9,
-      "lastSaleAt": "2026-03-04T08:30:20+00:00",
-      "lastUpdated": "2026-03-04T14:27:17.900Z",
-      "suggestedRefreshMinutes": 10502
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Brute",
@@ -14817,9 +15113,10 @@
         }
       ],
       "currentPrice": 3250000,
-      "lastSaleAt": "2025-10-11T17:32:43+00:00",
-      "lastUpdated": "2026-03-04T14:27:17.979Z",
-      "suggestedRefreshMinutes": 43200
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Neptune's Soul",
@@ -14839,10 +15136,10 @@
         }
       ],
       "currentPrice": 66000,
-      "lastSaleAt": "2026-03-02T06:31:16+00:00",
-      "lastUpdated": "2026-03-04T23:49:19.631Z",
-      "suggestedRefreshMinutes": 547,
-      "weeklySalesVolume": 32
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Magma Vein Infusion",
@@ -14862,9 +15159,10 @@
         }
       ],
       "currentPrice": 48666.666666666664,
-      "lastSaleAt": "2026-03-01T23:06:27+00:00",
-      "lastUpdated": "2026-03-04T14:27:18.141Z",
-      "suggestedRefreshMinutes": 21585
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Cosmic Finesse Essence",
@@ -14884,9 +15182,10 @@
         }
       ],
       "currentPrice": 32438.777777777777,
-      "lastSaleAt": "2026-02-24T06:01:19+00:00",
-      "lastUpdated": "2026-03-04T14:27:18.217Z",
-      "suggestedRefreshMinutes": 43200
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Excalibur",
@@ -14913,7 +15212,11 @@
           "quantity": 10000
         }
       ],
-      "currentPrice": 0
+      "currentPrice": 0,
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "weeklySalesVolume": 222
     },
     {
       "name": "Moonlance",
@@ -14936,7 +15239,11 @@
           "quantity": 10000
         }
       ],
-      "currentPrice": 0
+      "currentPrice": 0,
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "weeklySalesVolume": 222
     },
     {
       "name": "Divinity",
@@ -14951,7 +15258,11 @@
           "quantity": 10000
         }
       ],
-      "currentPrice": 0
+      "currentPrice": 0,
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "weeklySalesVolume": 222
     },
     {
       "name": "Fortune",
@@ -14974,7 +15285,11 @@
           "quantity": 10000
         }
       ],
-      "currentPrice": 0
+      "currentPrice": 0,
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "weeklySalesVolume": 222
     },
     {
       "name": "Fists of Fury",
@@ -14993,7 +15308,11 @@
           "quantity": 10000
         }
       ],
-      "currentPrice": 0
+      "currentPrice": 0,
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "weeklySalesVolume": 222
     },
     {
       "name": "Moonshadow Vestment",
@@ -15025,9 +15344,10 @@
         }
       ],
       "currentPrice": 1388399.9,
-      "lastSaleAt": "2026-02-22T08:29:48+00:00",
-      "lastUpdated": "2026-03-04T14:27:18.645Z",
-      "suggestedRefreshMinutes": 19336
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Corruption",
@@ -15054,7 +15374,11 @@
           "quantity": 10000
         }
       ],
-      "currentPrice": 0
+      "currentPrice": 0,
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "weeklySalesVolume": 222
     },
     {
       "name": "Bloodforged Legguards",
@@ -15074,9 +15398,10 @@
         }
       ],
       "currentPrice": 563399.8,
-      "lastSaleAt": "2026-03-01T23:22:38+00:00",
-      "lastUpdated": "2026-03-04T14:28:17.180Z",
-      "suggestedRefreshMinutes": 7450
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Dirella's Protection",
@@ -15099,7 +15424,11 @@
           "quantity": 10000
         }
       ],
-      "currentPrice": 0
+      "currentPrice": 0,
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "weeklySalesVolume": 222
     },
     {
       "name": "Bloodforged Boots",
@@ -15127,9 +15456,10 @@
         }
       ],
       "currentPrice": 311912.9,
-      "lastSaleAt": "2026-02-28T22:05:36+00:00",
-      "lastUpdated": "2026-03-04T14:28:18.321Z",
-      "suggestedRefreshMinutes": 4738
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Phoenix Boots",
@@ -15149,9 +15479,10 @@
         }
       ],
       "currentPrice": 940099.8,
-      "lastSaleAt": "2026-02-23T03:03:43+00:00",
-      "lastUpdated": "2026-03-04T14:28:18.389Z",
-      "suggestedRefreshMinutes": 22129
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Fatebreaker Footguards",
@@ -15182,7 +15513,11 @@
           "quantity": 10000
         }
       ],
-      "currentPrice": 0
+      "currentPrice": 0,
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "weeklySalesVolume": 222
     },
     {
       "name": "Glimmersteel Ward",
@@ -15210,9 +15545,10 @@
         }
       ],
       "currentPrice": 351215.2,
-      "lastSaleAt": "2026-02-22T08:28:37+00:00",
-      "lastUpdated": "2026-03-04T14:28:18.546Z",
-      "suggestedRefreshMinutes": 9506
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Colossus",
@@ -15239,7 +15575,11 @@
           "quantity": 10000
         }
       ],
-      "currentPrice": 0
+      "currentPrice": 0,
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "weeklySalesVolume": 222
     },
     {
       "name": "Earth Destroyer",
@@ -15258,7 +15598,11 @@
           "quantity": 2
         }
       ],
-      "currentPrice": 0
+      "currentPrice": 0,
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "weeklySalesVolume": 222
     },
     {
       "name": "Forest Reaver",
@@ -15277,7 +15621,11 @@
           "quantity": 2
         }
       ],
-      "currentPrice": 0
+      "currentPrice": 0,
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "weeklySalesVolume": 222
     },
     {
       "name": "Titans Essence",
@@ -15297,10 +15645,10 @@
         }
       ],
       "currentPrice": 125000,
-      "lastSaleAt": "2026-03-05T00:26:40+00:00",
-      "lastUpdated": "2026-03-05T06:57:35.049Z",
-      "suggestedRefreshMinutes": 868,
-      "weeklySalesVolume": 27
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Mjolnir's Essence Crystal",
@@ -15320,9 +15668,10 @@
         }
       ],
       "currentPrice": 45000,
-      "lastSaleAt": "2025-12-10T03:16:52+00:00",
-      "lastUpdated": "2026-03-04T14:28:18.883Z",
-      "suggestedRefreshMinutes": 1440
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Dragon's Essence",
@@ -15342,9 +15691,10 @@
         }
       ],
       "currentPrice": 80000,
-      "lastSaleAt": "2025-12-15T15:58:11+00:00",
-      "lastUpdated": "2026-03-04T14:28:18.962Z",
-      "suggestedRefreshMinutes": 4801
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Titanwood Crystal",
@@ -15368,9 +15718,10 @@
         }
       ],
       "currentPrice": 69898.8,
-      "lastSaleAt": "2026-03-01T17:50:20+00:00",
-      "lastUpdated": "2026-03-04T14:28:19.035Z",
-      "suggestedRefreshMinutes": 22895
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Primordial Timber Crystal",
@@ -15390,9 +15741,10 @@
         }
       ],
       "currentPrice": 67299.2,
-      "lastSaleAt": "2026-03-02T09:38:23+00:00",
-      "lastUpdated": "2026-03-04T14:28:19.104Z",
-      "suggestedRefreshMinutes": 2024
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "weeklySalesVolume": 222
     },
     {
       "name": "Aqua Reaper",
@@ -15411,150 +15763,269 @@
           "quantity": 2
         }
       ],
-      "currentPrice": 0
+      "currentPrice": 0,
+      "lastUpdated": "2026-03-05T08:08:12.734Z",
+      "suggestedRefreshMinutes": 129,
+      "lastSaleAt": "2026-03-05T07:16:17+00:00",
+      "weeklySalesVolume": 222
     }
   ],
   "resourceGathering": [
     {
       "name": "Coal",
-      "timeSeconds": 8.3,
+      "timeSeconds": 10.9,
       "baseCost": 0,
       "vendorValue": 1,
-      "marketPrice": 5.9
+      "marketPrice": 5.7,
+      "hashedId": "7eA59WrBQRXJYzb62qKv"
     },
     {
-      "name": "Stingray",
-      "timeSeconds": 28.6,
-      "baseCost": 16,
-      "vendorValue": 26,
-      "marketPrice": 36.3
-    },
-    {
-      "name": "Cooked Stingray",
-      "timeSeconds": 33.3,
+      "name": "Tin Ore",
+      "timeSeconds": 10.9,
       "baseCost": 0,
-      "vendorValue": 65,
-      "marketPrice": 67.2,
-      "inputs": [
-        {
-          "resourceName": "Stingray",
-          "quantity": 1,
-          "useMarketPrice": true
-        },
-        {
-          "resourceName": "Coal",
-          "quantity": 1,
-          "useMarketPrice": true
-        }
-      ]
+      "vendorValue": 1,
+      "marketPrice": 4.8,
+      "hashedId": "oZwey82VNA6YD0dXM3gO"
     },
     {
-      "name": "Cooked Stingray full",
-      "timeSeconds": 61.9,
-      "baseCost": 16,
-      "vendorValue": 65,
-      "marketPrice": 67,
-      "inputs": [
-        {
-          "resourceName": "Coal",
-          "quantity": 1,
-          "useMarketPrice": true
-        }
-      ]
-    },
-    {
-      "name": "Great White Shark",
-      "timeSeconds": 32.1,
-      "baseCost": 25,
-      "vendorValue": 41,
-      "marketPrice": 54.3
-    },
-    {
-      "name": "Cooked Great White Shark",
-      "timeSeconds": 45.8,
+      "name": "Copper Ore",
+      "timeSeconds": 13.9,
       "baseCost": 0,
-      "vendorValue": 92,
-      "marketPrice": 105,
-      "inputs": [
-        {
-          "resourceName": "Great White Shark",
-          "quantity": 1,
-          "useMarketPrice": true
-        },
-        {
-          "resourceName": "Coal",
-          "quantity": 1,
-          "useMarketPrice": true
-        }
-      ]
+      "vendorValue": 2,
+      "marketPrice": 5.1,
+      "hashedId": "JZdg5V3PQoKQEyWq0zlB"
     },
     {
-      "name": "Cooked Great White Shark full",
-      "timeSeconds": 77.9,
-      "baseCost": 25,
-      "vendorValue": 92,
-      "marketPrice": 105,
-      "inputs": [
-        {
-          "resourceName": "Coal",
-          "quantity": 1,
-          "useMarketPrice": true
-        }
-      ]
+      "name": "Iron Ore",
+      "timeSeconds": 20.9,
+      "baseCost": 0,
+      "vendorValue": 3,
+      "marketPrice": 8.9,
+      "hashedId": "JVM29l7kQZAL80q6WDGp"
     },
     {
-      "name": "Cooked Great White Shark full + coal",
-      "timeSeconds": 86.2,
-      "baseCost": 25,
-      "vendorValue": 92,
-      "marketPrice": 105
+      "name": "Lead Ore",
+      "timeSeconds": 24.5,
+      "baseCost": 0,
+      "vendorValue": 5,
+      "marketPrice": 9.3,
+      "hashedId": "93R0qXalLljNAbn8DBgr"
+    },
+    {
+      "name": "Steel Ore",
+      "timeSeconds": 28.2,
+      "baseCost": 0,
+      "vendorValue": 7,
+      "marketPrice": 9.7,
+      "hashedId": "1rZXlwg5Yv8Qk9joDmGe"
+    },
+    {
+      "name": "Mercury Ore",
+      "timeSeconds": 32.7,
+      "baseCost": 0,
+      "vendorValue": 9,
+      "marketPrice": 11.5,
+      "hashedId": "q9pwa0kxLBJLgVj136l4"
+    },
+    {
+      "name": "Chromite Ore",
+      "timeSeconds": 36.4,
+      "baseCost": 0,
+      "vendorValue": 11,
+      "marketPrice": 14.5,
+      "hashedId": "zvjoJW96Y85L3RaAylwE"
+    },
+    {
+      "name": "Uranium Ore",
+      "timeSeconds": 40,
+      "baseCost": 0,
+      "vendorValue": 13,
+      "marketPrice": 16.4,
+      "hashedId": "PjVDJez3LDvNKWO08Gaq"
     },
     {
       "name": "Mystic Ore",
-      "timeSeconds": 37.9,
-      "baseCost": 0,
-      "vendorValue": 20,
-      "marketPrice": 23.2
-    },
-    {
-      "name": "Mystic Bar",
       "timeSeconds": 50,
       "baseCost": 0,
-      "vendorValue": 59,
-      "marketPrice": 64,
-      "inputs": [
-        {
-          "resourceName": "Mystic Ore",
-          "quantity": 1,
-          "useMarketPrice": true
-        },
-        {
-          "resourceName": "Coal",
-          "quantity": 1,
-          "useMarketPrice": true
-        }
-      ]
+      "vendorValue": 17,
+      "marketPrice": 22.6,
+      "hashedId": "0kK49j1VN9yNq6B2doap"
     },
     {
-      "name": "Mystic Bar full",
-      "timeSeconds": 87.9,
-      "baseCost": 0,
-      "vendorValue": 59,
-      "marketPrice": 67,
-      "inputs": [
-        {
-          "resourceName": "Coal",
-          "quantity": 1,
-          "useMarketPrice": true
-        }
-      ]
+      "name": "Cod",
+      "timeSeconds": 6.4,
+      "baseCost": 2,
+      "vendorValue": 2,
+      "marketPrice": 6.4,
+      "hashedId": "27gw0k38L4xLWevJxyKR"
     },
     {
-      "name": "Mystic Bar full + coal",
-      "timeSeconds": 96.2,
+      "name": "Salmon",
+      "timeSeconds": 9.1,
+      "baseCost": 2,
+      "vendorValue": 3,
+      "marketPrice": 7.9,
+      "hashedId": "O2xMjGdBN5MN9P1nyrvR"
+    },
+    {
+      "name": "Tuna",
+      "timeSeconds": 10.9,
+      "baseCost": 2,
+      "vendorValue": 4,
+      "marketPrice": 7.4,
+      "hashedId": "lrx463VdQgOQ5w1zWKP8"
+    },
+    {
+      "name": "Trout",
+      "timeSeconds": 12.7,
+      "baseCost": 4,
+      "vendorValue": 5,
+      "marketPrice": 14,
+      "hashedId": "y7Do6jgkY0zQ8BAdKX0E"
+    },
+    {
+      "name": "Perch",
+      "timeSeconds": 14.5,
+      "baseCost": 4,
+      "vendorValue": 6,
+      "marketPrice": 10.4,
+      "hashedId": "3yE1A84kYOwYl6XeVKpD"
+    },
+    {
+      "name": "Herring",
+      "timeSeconds": 16.4,
+      "baseCost": 7,
+      "vendorValue": 7,
+      "marketPrice": 14.4,
+      "hashedId": "DBngxedVYJPQX64wW8oa"
+    },
+    {
+      "name": "Sardines",
+      "timeSeconds": 19.1,
+      "baseCost": 7,
+      "vendorValue": 8,
+      "marketPrice": 19.7,
+      "hashedId": "jGXBy7a4LbMY0Pw6Vdgl"
+    },
+    {
+      "name": "Lobster",
+      "timeSeconds": 21.8,
+      "baseCost": 12,
+      "vendorValue": 14,
+      "marketPrice": 20.6,
+      "hashedId": "BRn3x72JQ2DYzOMok418"
+    },
+    {
+      "name": "Crab",
+      "timeSeconds": 24.5,
+      "baseCost": 12,
+      "vendorValue": 16,
+      "marketPrice": 26.2,
+      "hashedId": "gGZ2J71yYK9QMmjbown5"
+    },
+    {
+      "name": "Turtle",
+      "timeSeconds": 29.1,
+      "baseCost": 16,
+      "vendorValue": 20,
+      "marketPrice": 35.4,
+      "hashedId": "yav4OK1wNE5NZP7rzJbe"
+    },
+    {
+      "name": "Stingray",
+      "timeSeconds": 36.4,
+      "baseCost": 16,
+      "vendorValue": 22,
+      "marketPrice": 35.8,
+      "hashedId": "oaJydnOmQW2LbgRe5ME6"
+    },
+    {
+      "name": "Lantern Fish",
+      "timeSeconds": 37.3,
+      "baseCost": 25,
+      "vendorValue": 32,
+      "marketPrice": 48.4,
+      "hashedId": "ZqEegBydNw7NkA59J61b"
+    },
+    {
+      "name": "Great White Shark",
+      "timeSeconds": 40.9,
+      "baseCost": 25,
+      "vendorValue": 41,
+      "marketPrice": 54.8,
+      "hashedId": "3Zbym56qLxRNBRp7Eekd"
+    },
+    {
+      "name": "Oak Log",
+      "timeSeconds": 10.9,
       "baseCost": 0,
-      "vendorValue": 59,
-      "marketPrice": 67
+      "vendorValue": 1,
+      "marketPrice": 4.8,
+      "hashedId": "7eA59WrBQRpYzb62qKvp"
+    },
+    {
+      "name": "Yew Log",
+      "timeSeconds": 13.6,
+      "baseCost": 0,
+      "vendorValue": 2,
+      "marketPrice": 4.5,
+      "hashedId": "ElzPeorXNVjNaW0kv53J"
+    },
+    {
+      "name": "Spruce Log",
+      "timeSeconds": 20.9,
+      "baseCost": 0,
+      "vendorValue": 3,
+      "marketPrice": 10.9,
+      "hashedId": "XyeZRGx9YjKLB80gWlPa"
+    },
+    {
+      "name": "Birch Log",
+      "timeSeconds": 24.5,
+      "baseCost": 0,
+      "vendorValue": 5,
+      "marketPrice": 8.2,
+      "hashedId": "Ro31P7kZL6AYveGxXOy5"
+    },
+    {
+      "name": "Banyan Log",
+      "timeSeconds": 28.2,
+      "baseCost": 0,
+      "vendorValue": 7,
+      "marketPrice": 12.7,
+      "hashedId": "brz9RZnWN7aLKAp0Mdle"
+    },
+    {
+      "name": "Maple Log",
+      "timeSeconds": 32.7,
+      "baseCost": 0,
+      "vendorValue": 9,
+      "marketPrice": 13.4,
+      "hashedId": "bAB1E9poQqkYnakeJj56"
+    },
+    {
+      "name": "Willow Log",
+      "timeSeconds": 36.4,
+      "baseCost": 0,
+      "vendorValue": 11,
+      "marketPrice": 16,
+      "hashedId": "ZjlPA8v9NMXQEyMe2OaW"
+    },
+    {
+      "name": "Mahogany Log",
+      "timeSeconds": 40,
+      "baseCost": 0,
+      "vendorValue": 13,
+      "marketPrice": 17.3,
+      "hashedId": "P1vlVrzjLrRLao8mGKM2"
+    },
+    {
+      "name": "Mystical Log",
+      "timeSeconds": 50,
+      "baseCost": 0,
+      "vendorValue": 17,
+      "marketPrice": 27,
+      "hashedId": "Z6aDoyRnLykNpV5AGXmk"
     }
   ],
   "magicFindDefaults": {
@@ -15564,6 +16035,1200 @@
     "bonus": 10
   },
   "marketTaxRate": 0.12,
+  "resourceRecipes": [
+    {
+      "name": "Tin Bar",
+      "timeSeconds": 10.9,
+      "skill": "smelting",
+      "materials": [
+        {
+          "name": "Tin Ore",
+          "quantity": 1,
+          "hashedId": "oZwey82VNA6YD0dXM3gO"
+        },
+        {
+          "name": "Coal",
+          "quantity": 1,
+          "hashedId": "7eA59WrBQRXJYzb62qKv"
+        }
+      ],
+      "currentPrice": 7.4,
+      "vendorValue": 5,
+      "hashedId": "Ro31P7kZL6A5YveGxXOy"
+    },
+    {
+      "name": "Copper Bar",
+      "timeSeconds": 13.9,
+      "skill": "smelting",
+      "materials": [
+        {
+          "name": "Copper Ore",
+          "quantity": 1,
+          "hashedId": "JZdg5V3PQoKQEyWq0zlB"
+        },
+        {
+          "name": "Coal",
+          "quantity": 1,
+          "hashedId": "7eA59WrBQRXJYzb62qKv"
+        }
+      ],
+      "currentPrice": 13.7,
+      "vendorValue": 6,
+      "hashedId": "brz9RZnWN7WDNKAp0Mdl"
+    },
+    {
+      "name": "Iron Bar",
+      "timeSeconds": 20.9,
+      "skill": "smelting",
+      "materials": [
+        {
+          "name": "Iron Ore",
+          "quantity": 1,
+          "hashedId": "JVM29l7kQZAL80q6WDGp"
+        },
+        {
+          "name": "Coal",
+          "quantity": 1,
+          "hashedId": "7eA59WrBQRXJYzb62qKv"
+        }
+      ],
+      "currentPrice": 28,
+      "vendorValue": 8,
+      "hashedId": "bAB1E9poQqPVLnakeJj5"
+    },
+    {
+      "name": "Lead Bar",
+      "timeSeconds": 24.5,
+      "skill": "smelting",
+      "materials": [
+        {
+          "name": "Lead Ore",
+          "quantity": 1,
+          "hashedId": "93R0qXalLljNAbn8DBgr"
+        },
+        {
+          "name": "Coal",
+          "quantity": 1,
+          "hashedId": "7eA59WrBQRXJYzb62qKv"
+        }
+      ],
+      "currentPrice": 17.1,
+      "vendorValue": 9,
+      "hashedId": "ZjlPA8v9NMgnLEyMe2Oa"
+    },
+    {
+      "name": "Steel Bar",
+      "timeSeconds": 28.2,
+      "skill": "smelting",
+      "materials": [
+        {
+          "name": "Steel Ore",
+          "quantity": 1,
+          "hashedId": "1rZXlwg5Yv8Qk9joDmGe"
+        },
+        {
+          "name": "Coal",
+          "quantity": 1,
+          "hashedId": "7eA59WrBQRXJYzb62qKv"
+        }
+      ],
+      "currentPrice": 19.7,
+      "vendorValue": 15,
+      "hashedId": "P1vlVrzjLrZ9Lao8mGKM"
+    },
+    {
+      "name": "Mercury Bar",
+      "timeSeconds": 32.7,
+      "skill": "smelting",
+      "materials": [
+        {
+          "name": "Mercury Ore",
+          "quantity": 1,
+          "hashedId": "q9pwa0kxLBJLgVj136l4"
+        },
+        {
+          "name": "Coal",
+          "quantity": 1,
+          "hashedId": "7eA59WrBQRXJYzb62qKv"
+        }
+      ],
+      "currentPrice": 25.1,
+      "vendorValue": 20,
+      "hashedId": "Z6aDoyRnLyDMYpV5AGXm"
+    },
+    {
+      "name": "Chromite Bar",
+      "timeSeconds": 36.4,
+      "skill": "smelting",
+      "materials": [
+        {
+          "name": "Chromite Ore",
+          "quantity": 1,
+          "hashedId": "zvjoJW96Y85L3RaAylwE"
+        },
+        {
+          "name": "Coal",
+          "quantity": 1,
+          "hashedId": "7eA59WrBQRXJYzb62qKv"
+        }
+      ],
+      "currentPrice": 32.6,
+      "vendorValue": 25,
+      "hashedId": "27gw0k38L4pwLWevJxyK"
+    },
+    {
+      "name": "Uranium Bar",
+      "timeSeconds": 40,
+      "skill": "smelting",
+      "materials": [
+        {
+          "name": "Uranium Ore",
+          "quantity": 1,
+          "hashedId": "PjVDJez3LDvNKWO08Gaq"
+        },
+        {
+          "name": "Coal",
+          "quantity": 1,
+          "hashedId": "7eA59WrBQRXJYzb62qKv"
+        }
+      ],
+      "currentPrice": 45,
+      "vendorValue": 35,
+      "hashedId": "O2xMjGdBN51PN9P1nyrv"
+    },
+    {
+      "name": "Mystic Bar",
+      "timeSeconds": 50,
+      "skill": "smelting",
+      "materials": [
+        {
+          "name": "Mystic Ore",
+          "quantity": 1,
+          "hashedId": "0kK49j1VN9yNq6B2doap"
+        },
+        {
+          "name": "Coal",
+          "quantity": 1,
+          "hashedId": "7eA59WrBQRXJYzb62qKv"
+        }
+      ],
+      "currentPrice": 64,
+      "vendorValue": 50,
+      "hashedId": "dgBq1boWYegrQkJ3rXaD"
+    },
+    {
+      "name": "Cooked Cod",
+      "timeSeconds": 7.3,
+      "skill": "cooking",
+      "materials": [
+        {
+          "name": "Cod",
+          "quantity": 1,
+          "hashedId": "27gw0k38L4xLWevJxyKR"
+        },
+        {
+          "name": "Coal",
+          "quantity": 1,
+          "hashedId": "7eA59WrBQRXJYzb62qKv"
+        }
+      ],
+      "currentPrice": 5.2,
+      "vendorValue": 2,
+      "hashedId": "BRn3x72JQ2XDYzOMok41"
+    },
+    {
+      "name": "Cooked Salmon",
+      "timeSeconds": 10.9,
+      "skill": "cooking",
+      "materials": [
+        {
+          "name": "Salmon",
+          "quantity": 1,
+          "hashedId": "O2xMjGdBN5MN9P1nyrvR"
+        },
+        {
+          "name": "Coal",
+          "quantity": 1,
+          "hashedId": "7eA59WrBQRXJYzb62qKv"
+        }
+      ],
+      "currentPrice": 8.9,
+      "vendorValue": 4,
+      "hashedId": "yav4OK1wNE05QZP7rzJb"
+    },
+    {
+      "name": "Cooked Tuna",
+      "timeSeconds": 12.7,
+      "skill": "cooking",
+      "materials": [
+        {
+          "name": "Tuna",
+          "quantity": 1,
+          "hashedId": "lrx463VdQgOQ5w1zWKP8"
+        },
+        {
+          "name": "Coal",
+          "quantity": 1,
+          "hashedId": "7eA59WrBQRXJYzb62qKv"
+        }
+      ],
+      "currentPrice": 9,
+      "vendorValue": 6,
+      "hashedId": "ZqEegBydNw57LkA59J61"
+    },
+    {
+      "name": "Cooked Trout",
+      "timeSeconds": 15.5,
+      "skill": "cooking",
+      "materials": [
+        {
+          "name": "Trout",
+          "quantity": 1,
+          "hashedId": "y7Do6jgkY0zQ8BAdKX0E"
+        },
+        {
+          "name": "Coal",
+          "quantity": 1,
+          "hashedId": "7eA59WrBQRXJYzb62qKv"
+        }
+      ],
+      "currentPrice": 14.8,
+      "vendorValue": 11,
+      "hashedId": "oZwey82VNAw6LD0dXM3g"
+    },
+    {
+      "name": "Cooked Perch",
+      "timeSeconds": 17.3,
+      "skill": "cooking",
+      "materials": [
+        {
+          "name": "Perch",
+          "quantity": 1,
+          "hashedId": "3yE1A84kYOwYl6XeVKpD"
+        },
+        {
+          "name": "Coal",
+          "quantity": 1,
+          "hashedId": "7eA59WrBQRXJYzb62qKv"
+        }
+      ],
+      "currentPrice": 18,
+      "vendorValue": 13,
+      "hashedId": "JVM29l7kQZ8AY80q6WDG"
+    },
+    {
+      "name": "Cooked Herring",
+      "timeSeconds": 20,
+      "skill": "cooking",
+      "materials": [
+        {
+          "name": "Herring",
+          "quantity": 1,
+          "hashedId": "DBngxedVYJPQX64wW8oa"
+        },
+        {
+          "name": "Coal",
+          "quantity": 1,
+          "hashedId": "7eA59WrBQRXJYzb62qKv"
+        }
+      ],
+      "currentPrice": 18.3,
+      "vendorValue": 15,
+      "hashedId": "1rZXlwg5Yv48Qk9joDmG"
+    },
+    {
+      "name": "Cooked Sardines",
+      "timeSeconds": 22.7,
+      "skill": "cooking",
+      "materials": [
+        {
+          "name": "Sardines",
+          "quantity": 1,
+          "hashedId": "jGXBy7a4LbMY0Pw6Vdgl"
+        },
+        {
+          "name": "Coal",
+          "quantity": 1,
+          "hashedId": "7eA59WrBQRXJYzb62qKv"
+        }
+      ],
+      "currentPrice": 27.9,
+      "vendorValue": 20,
+      "hashedId": "zvjoJW96Y8W5N3RaAylw"
+    },
+    {
+      "name": "Cooked Lobster",
+      "timeSeconds": 25.5,
+      "skill": "cooking",
+      "materials": [
+        {
+          "name": "Lobster",
+          "quantity": 1,
+          "hashedId": "BRn3x72JQ2DYzOMok418"
+        },
+        {
+          "name": "Coal",
+          "quantity": 1,
+          "hashedId": "7eA59WrBQRXJYzb62qKv"
+        }
+      ],
+      "currentPrice": 30.3,
+      "vendorValue": 25,
+      "hashedId": "0kK49j1VN9WyLq6B2doa"
+    },
+    {
+      "name": "Cooked Crab",
+      "timeSeconds": 27.3,
+      "skill": "cooking",
+      "materials": [
+        {
+          "name": "Crab",
+          "quantity": 1,
+          "hashedId": "gGZ2J71yYK9QMmjbown5"
+        },
+        {
+          "name": "Coal",
+          "quantity": 1,
+          "hashedId": "7eA59WrBQRXJYzb62qKv"
+        }
+      ],
+      "currentPrice": 39,
+      "vendorValue": 32,
+      "hashedId": "XjEaOeBkLaJMQlGwxVPq"
+    },
+    {
+      "name": "Cooked Turtle",
+      "timeSeconds": 31.8,
+      "skill": "cooking",
+      "materials": [
+        {
+          "name": "Turtle",
+          "quantity": 1,
+          "hashedId": "yav4OK1wNE5NZP7rzJbe"
+        },
+        {
+          "name": "Coal",
+          "quantity": 1,
+          "hashedId": "7eA59WrBQRXJYzb62qKv"
+        }
+      ],
+      "currentPrice": 56.1,
+      "vendorValue": 45,
+      "hashedId": "B2WEpv54NmZxYj1xJrXk"
+    },
+    {
+      "name": "Cooked Stingray",
+      "timeSeconds": 36.4,
+      "skill": "cooking",
+      "materials": [
+        {
+          "name": "Stingray",
+          "quantity": 1,
+          "hashedId": "oaJydnOmQW2LbgRe5ME6"
+        },
+        {
+          "name": "Coal",
+          "quantity": 1,
+          "hashedId": "7eA59WrBQRXJYzb62qKv"
+        }
+      ],
+      "currentPrice": 67.2,
+      "vendorValue": 55,
+      "hashedId": "6leApVoENk1RL7nRPy2D"
+    },
+    {
+      "name": "Cooked Lantern Fish",
+      "timeSeconds": 38.2,
+      "skill": "cooking",
+      "materials": [
+        {
+          "name": "Lantern Fish",
+          "quantity": 1,
+          "hashedId": "ZqEegBydNw7NkA59J61b"
+        },
+        {
+          "name": "Coal",
+          "quantity": 1,
+          "hashedId": "7eA59WrBQRXJYzb62qKv"
+        }
+      ],
+      "currentPrice": 80.4,
+      "vendorValue": 65,
+      "hashedId": "j98bO5w1QP8jQ3xkREVJ"
+    },
+    {
+      "name": "Cooked Great White Shark",
+      "timeSeconds": 50,
+      "skill": "cooking",
+      "materials": [
+        {
+          "name": "Great White Shark",
+          "quantity": 1,
+          "hashedId": "3Zbym56qLxRNBRp7Eekd"
+        },
+        {
+          "name": "Coal",
+          "quantity": 1,
+          "hashedId": "7eA59WrBQRXJYzb62qKv"
+        }
+      ],
+      "currentPrice": 104.7,
+      "vendorValue": 92,
+      "hashedId": "Rv5g4z1dQnk9Nqy32jpG"
+    }
+  ],
+  "efficiencyItems": [
+    {
+      "name": "Chefs Essence Crystal",
+      "hashedId": "Z6aDoyRnLy6kQpV5AGXm",
+      "effects": [
+        {
+          "skill": "cooking",
+          "efficiencyPercent": 2
+        }
+      ]
+    },
+    {
+      "name": "Flavorburst Essence Crystal",
+      "hashedId": "yav4OK1wNEV5YZP7rzJb",
+      "effects": [
+        {
+          "skill": "cooking",
+          "efficiencyPercent": 4
+        }
+      ]
+    },
+    {
+      "name": "Spicefinder Essence Crystal",
+      "hashedId": "0kK49j1VN9JyYq6B2doa",
+      "effects": [
+        {
+          "skill": "cooking",
+          "efficiencyPercent": 12
+        }
+      ]
+    },
+    {
+      "name": "Spicefinder Essence Crystal (Untradable)",
+      "hashedId": "XyeZRGx9Yjl1QB80gWlP",
+      "effects": [
+        {
+          "skill": "cooking",
+          "efficiencyPercent": 12
+        }
+      ]
+    },
+    {
+      "name": "Gourmet Essence Crystal",
+      "hashedId": "bAB1E9poQqrkNnakeJj5",
+      "effects": [
+        {
+          "skill": "cooking",
+          "efficiencyPercent": 16
+        }
+      ]
+    },
+    {
+      "name": "Eternal Feast Essence Crystal",
+      "hashedId": "y7Do6jgkY0wzN8BAdKX0",
+      "effects": [
+        {
+          "skill": "cooking",
+          "efficiencyPercent": 50
+        }
+      ]
+    },
+    {
+      "name": "Eternal Feast Essence Crystal (Untradable)",
+      "hashedId": "BPjze3x2Q3b5LR85vgZV",
+      "effects": [
+        {
+          "skill": "cooking",
+          "efficiencyPercent": 50
+        }
+      ]
+    },
+    {
+      "name": "Dungeon Potion",
+      "hashedId": "27gw0k38L44xLWevJxyK",
+      "effects": [
+        {
+          "skill": "dungeon",
+          "efficiencyPercent": 5
+        }
+      ]
+    },
+    {
+      "name": "Dungeon Potion (Untradable)",
+      "hashedId": "oZwey82VNAZPYD0dXM3g",
+      "effects": [
+        {
+          "skill": "dungeon",
+          "efficiencyPercent": 5
+        }
+      ]
+    },
+    {
+      "name": "Dungeon Master's Tonic",
+      "hashedId": "j98bO5w1QP0jQ3xkREVJ",
+      "effects": [
+        {
+          "skill": "dungeon",
+          "efficiencyPercent": 10
+        }
+      ]
+    },
+    {
+      "name": "Wraithbane Essence",
+      "hashedId": "P1vlVrzjLryRYao8mGKM",
+      "effects": [
+        {
+          "skill": "dungeon",
+          "efficiencyPercent": 20
+        }
+      ]
+    },
+    {
+      "name": "Wraithbane Essence (Untradable)",
+      "hashedId": "1rZXlwg5YvzkYk9joDmG",
+      "effects": [
+        {
+          "skill": "dungeon",
+          "efficiencyPercent": 20
+        }
+      ]
+    },
+    {
+      "name": "Fallen Star Essence",
+      "hashedId": "DBngxedVYJwPLX64wW8o",
+      "effects": [
+        {
+          "skill": "dungeon",
+          "efficiencyPercent": 120
+        }
+      ]
+    },
+    {
+      "name": "Fallen Star Essence (Untradable)",
+      "hashedId": "XjEaOeBkLaxKYlGwxVPq",
+      "effects": [
+        {
+          "skill": "dungeon",
+          "efficiencyPercent": 120
+        }
+      ]
+    },
+    {
+      "name": "Anglers Essence Crystal",
+      "hashedId": "ZjlPA8v9NM4XQEyMe2Oa",
+      "effects": [
+        {
+          "skill": "fishing",
+          "efficiencyPercent": 2
+        }
+      ]
+    },
+    {
+      "name": "Deepsea Essence Crystal",
+      "hashedId": "y7Do6jgkY0qzL8BAdKX0",
+      "effects": [
+        {
+          "skill": "fishing",
+          "efficiencyPercent": 4
+        }
+      ]
+    },
+    {
+      "name": "Improved Fishing Rod",
+      "hashedId": "Rv5g4z1dQnjlQqy32jpG",
+      "effects": [
+        {
+          "skill": "fishing",
+          "efficiencyPercent": 5
+        }
+      ]
+    },
+    {
+      "name": "Merfolk Essence Crystal",
+      "hashedId": "q9pwa0kxLBoJQgVj136l",
+      "effects": [
+        {
+          "skill": "fishing",
+          "efficiencyPercent": 10
+        }
+      ]
+    },
+    {
+      "name": "Rivertamer",
+      "hashedId": "mK5jqPopYGWDYrOzDRGV",
+      "effects": [
+        {
+          "skill": "fishing",
+          "efficiencyPercent": 10
+        }
+      ]
+    },
+    {
+      "name": "Seasong's Lure",
+      "hashedId": "3ZvrGV8RQp7dL2wgA5jD",
+      "effects": [
+        {
+          "skill": "fishing",
+          "efficiencyPercent": 15
+        }
+      ]
+    },
+    {
+      "name": "Riverbend Essence Crystal",
+      "hashedId": "mK5jqPopYG6ONrOzDRGV",
+      "effects": [
+        {
+          "skill": "fishing",
+          "efficiencyPercent": 16
+        }
+      ]
+    },
+    {
+      "name": "Riverbend Essence Crystal (Untradable)",
+      "hashedId": "DBngxedVYJnEYX64wW8o",
+      "effects": [
+        {
+          "skill": "fishing",
+          "efficiencyPercent": 16
+        }
+      ]
+    },
+    {
+      "name": "Moonshimmer Hook",
+      "hashedId": "dgBq1boWYe9mYkJ3rXaD",
+      "effects": [
+        {
+          "skill": "fishing",
+          "efficiencyPercent": 20
+        }
+      ]
+    },
+    {
+      "name": "Hydra's Coil",
+      "hashedId": "7eA59WrBQR9yLzb62qKv",
+      "effects": [
+        {
+          "skill": "fishing",
+          "efficiencyPercent": 25
+        }
+      ]
+    },
+    {
+      "name": "Ocean's Whisper",
+      "hashedId": "ElzPeorXNV9pQaW0kv53",
+      "effects": [
+        {
+          "skill": "fishing",
+          "efficiencyPercent": 30
+        }
+      ]
+    },
+    {
+      "name": "Kraken's Grasp",
+      "hashedId": "Ro31P7kZL6j5LveGxXOy",
+      "effects": [
+        {
+          "skill": "fishing",
+          "efficiencyPercent": 40
+        }
+      ]
+    },
+    {
+      "name": "Essence of a Kraken",
+      "hashedId": "BRn3x72JQ2ADLzOMok41",
+      "effects": [
+        {
+          "skill": "fishing",
+          "efficiencyPercent": 50
+        }
+      ]
+    },
+    {
+      "name": "Essence of a Kraken (Untradable)",
+      "hashedId": "yav4OK1wNE8xQZP7rzJb",
+      "effects": [
+        {
+          "skill": "fishing",
+          "efficiencyPercent": 50
+        }
+      ]
+    },
+    {
+      "name": "Aqua Reaper",
+      "hashedId": "brz9RZnWN76DQKAp0Mdl",
+      "effects": [
+        {
+          "skill": "fishing",
+          "efficiencyPercent": 50
+        }
+      ]
+    },
+    {
+      "name": "Battle Potion",
+      "hashedId": "Ro31P7kZL6gAQveGxXOy",
+      "effects": [
+        {
+          "skill": "hunt",
+          "efficiencyPercent": 4
+        }
+      ]
+    },
+    {
+      "name": "Battle Potion (Untradable)",
+      "hashedId": "JZdg5V3PQo9yYEyWq0zl",
+      "effects": [
+        {
+          "skill": "hunt",
+          "efficiencyPercent": 4
+        }
+      ]
+    },
+    {
+      "name": "Strike Essence",
+      "hashedId": "doyA279pNz70YKRDEWm8",
+      "effects": [
+        {
+          "skill": "hunt",
+          "efficiencyPercent": 8
+        }
+      ]
+    },
+    {
+      "name": "Sunseeker",
+      "hashedId": "yav4OK1wNEXRQZP7rzJb",
+      "effects": [
+        {
+          "skill": "hunt",
+          "efficiencyPercent": 8
+        }
+      ]
+    },
+    {
+      "name": "Dragonblood Tonic",
+      "hashedId": "ZjlPA8v9NMoXLEyMe2Oa",
+      "effects": [
+        {
+          "skill": "hunt",
+          "efficiencyPercent": 10
+        }
+      ]
+    },
+    {
+      "name": "Dawnbreaker Bow",
+      "hashedId": "3Zbym56qLxmGQBRp7Eek",
+      "effects": [
+        {
+          "skill": "hunt",
+          "efficiencyPercent": 11
+        }
+      ]
+    },
+    {
+      "name": "Potion of the Hunter",
+      "hashedId": "O2xMjGdBN5eMN9P1nyrv",
+      "effects": [
+        {
+          "skill": "hunt",
+          "efficiencyPercent": 80
+        }
+      ]
+    },
+    {
+      "name": "Potion of the Hunter (Untradable)",
+      "hashedId": "q9pwa0kxLBlVNgVj136l",
+      "effects": [
+        {
+          "skill": "hunt",
+          "efficiencyPercent": 80
+        }
+      ]
+    },
+    {
+      "name": "Miners Essence Crystal",
+      "hashedId": "bAB1E9poQqwkYnakeJj5",
+      "effects": [
+        {
+          "skill": "mining",
+          "efficiencyPercent": 2
+        }
+      ]
+    },
+    {
+      "name": "Rocksplitter Essence Crystal",
+      "hashedId": "lrx463VdQg5OY5w1zWKP",
+      "effects": [
+        {
+          "skill": "mining",
+          "efficiencyPercent": 4
+        }
+      ]
+    },
+    {
+      "name": "Improved Pickaxe",
+      "hashedId": "ZjlPA8v9NMlnQEyMe2Oa",
+      "effects": [
+        {
+          "skill": "mining",
+          "efficiencyPercent": 5
+        }
+      ]
+    },
+    {
+      "name": "Oreseeker Essence Crystal",
+      "hashedId": "3Zbym56qLxjRNBRp7Eek",
+      "effects": [
+        {
+          "skill": "mining",
+          "efficiencyPercent": 10
+        }
+      ]
+    },
+    {
+      "name": "Oreseeker Essence Crystal (Untradable)",
+      "hashedId": "O2xMjGdBN5nnY9P1nyrv",
+      "effects": [
+        {
+          "skill": "mining",
+          "efficiencyPercent": 10
+        }
+      ]
+    },
+    {
+      "name": "Veinseeker",
+      "hashedId": "P1vlVrzjLrM9Yao8mGKM",
+      "effects": [
+        {
+          "skill": "mining",
+          "efficiencyPercent": 10
+        }
+      ]
+    },
+    {
+      "name": "Ironbite",
+      "hashedId": "Z6aDoyRnLyOMNpV5AGXm",
+      "effects": [
+        {
+          "skill": "mining",
+          "efficiencyPercent": 15
+        }
+      ]
+    },
+    {
+      "name": "Earthcore Essence Crystal",
+      "hashedId": "Rv5g4z1dQnK9Nqy32jpG",
+      "effects": [
+        {
+          "skill": "mining",
+          "efficiencyPercent": 16
+        }
+      ]
+    },
+    {
+      "name": "Earthcore Essence Crystal (Untradable)",
+      "hashedId": "3yE1A84kYOVxNl6XeVKp",
+      "effects": [
+        {
+          "skill": "mining",
+          "efficiencyPercent": 16
+        }
+      ]
+    },
+    {
+      "name": "Boulder Breaker",
+      "hashedId": "27gw0k38L4RwNWevJxyK",
+      "effects": [
+        {
+          "skill": "mining",
+          "efficiencyPercent": 20
+        }
+      ]
+    },
+    {
+      "name": "Earthshaker",
+      "hashedId": "O2xMjGdBN5VPY9P1nyrv",
+      "effects": [
+        {
+          "skill": "mining",
+          "efficiencyPercent": 25
+        }
+      ]
+    },
+    {
+      "name": "Stone Splinter",
+      "hashedId": "lrx463VdQg94Y5w1zWKP",
+      "effects": [
+        {
+          "skill": "mining",
+          "efficiencyPercent": 30
+        }
+      ]
+    },
+    {
+      "name": "Corestrike",
+      "hashedId": "y7Do6jgkY0ZqQ8BAdKX0",
+      "effects": [
+        {
+          "skill": "mining",
+          "efficiencyPercent": 35
+        }
+      ]
+    },
+    {
+      "name": "Boulder's Bane",
+      "hashedId": "3yE1A84kYO9BQl6XeVKp",
+      "effects": [
+        {
+          "skill": "mining",
+          "efficiencyPercent": 40
+        }
+      ]
+    },
+    {
+      "name": "Earth Destroyer",
+      "hashedId": "DBngxedVYJAZNX64wW8o",
+      "effects": [
+        {
+          "skill": "mining",
+          "efficiencyPercent": 50
+        }
+      ]
+    },
+    {
+      "name": "Smelting Essence Crystal",
+      "hashedId": "P1vlVrzjLrxRNao8mGKM",
+      "effects": [
+        {
+          "skill": "smelting",
+          "efficiencyPercent": 2
+        }
+      ]
+    },
+    {
+      "name": "Hammerfell Essence Crystal",
+      "hashedId": "3yE1A84kYOgwYl6XeVKp",
+      "effects": [
+        {
+          "skill": "smelting",
+          "efficiencyPercent": 4
+        }
+      ]
+    },
+    {
+      "name": "Molten Core Essence Crystal",
+      "hashedId": "zvjoJW96Y8O5N3RaAylw",
+      "effects": [
+        {
+          "skill": "smelting",
+          "efficiencyPercent": 12
+        }
+      ]
+    },
+    {
+      "name": "Molten Core Essence Crystal (Untradable)",
+      "hashedId": "y7Do6jgkY0npQ8BAdKX0",
+      "effects": [
+        {
+          "skill": "smelting",
+          "efficiencyPercent": 12
+        }
+      ]
+    },
+    {
+      "name": "Tampering Essence Crystal",
+      "hashedId": "3ZvrGV8RQpWyL2wgA5jD",
+      "effects": [
+        {
+          "skill": "smelting",
+          "efficiencyPercent": 16
+        }
+      ]
+    },
+    {
+      "name": "Mjolnir's Essence Crystal",
+      "hashedId": "ZqEegBydNwO7NkA59J61",
+      "effects": [
+        {
+          "skill": "smelting",
+          "efficiencyPercent": 50
+        }
+      ]
+    },
+    {
+      "name": "Mjolnir's Essence Crystal (Untradable)",
+      "hashedId": "q9pwa0kxLBj6LgVj136l",
+      "effects": [
+        {
+          "skill": "smelting",
+          "efficiencyPercent": 50
+        }
+      ]
+    },
+    {
+      "name": "Lumberjack Essence Crystal",
+      "hashedId": "brz9RZnWN70aYKAp0Mdl",
+      "effects": [
+        {
+          "skill": "woodcutting",
+          "efficiencyPercent": 2
+        }
+      ]
+    },
+    {
+      "name": "Timberfall Essence Crystal",
+      "hashedId": "O2xMjGdBN55MN9P1nyrv",
+      "effects": [
+        {
+          "skill": "woodcutting",
+          "efficiencyPercent": 4
+        }
+      ]
+    },
+    {
+      "name": "Improved Felling axe",
+      "hashedId": "BRn3x72JQ2v7QzOMok41",
+      "effects": [
+        {
+          "skill": "woodcutting",
+          "efficiencyPercent": 5
+        }
+      ]
+    },
+    {
+      "name": "Felling Essence Crystal",
+      "hashedId": "ZqEegBydNwV7QkA59J61",
+      "effects": [
+        {
+          "skill": "woodcutting",
+          "efficiencyPercent": 10
+        }
+      ]
+    },
+    {
+      "name": "Timberfall Talon",
+      "hashedId": "gGZ2J71yYKo3YMmjbown",
+      "effects": [
+        {
+          "skill": "woodcutting",
+          "efficiencyPercent": 10
+        }
+      ]
+    },
+    {
+      "name": "Yggdrasil Essence Crystal",
+      "hashedId": "EWGwnXPlY1MyYJqekZ2R",
+      "effects": [
+        {
+          "skill": "woodcutting",
+          "efficiencyPercent": 12
+        }
+      ]
+    },
+    {
+      "name": "Yggdrasil Essence Crystal (Untradable)",
+      "hashedId": "jGXBy7a4LbK1Q0Pw6Vdg",
+      "effects": [
+        {
+          "skill": "woodcutting",
+          "efficiencyPercent": 12
+        }
+      ]
+    },
+    {
+      "name": "Wildwood Chopper",
+      "hashedId": "yav4OK1wNEKwLZP7rzJb",
+      "effects": [
+        {
+          "skill": "woodcutting",
+          "efficiencyPercent": 15
+        }
+      ]
+    },
+    {
+      "name": "Leafblade",
+      "hashedId": "oaJydnOmQW9zYbgRe5ME",
+      "effects": [
+        {
+          "skill": "woodcutting",
+          "efficiencyPercent": 20
+        }
+      ]
+    },
+    {
+      "name": "Grove Cleaver",
+      "hashedId": "ZqEegBydNwg8NkA59J61",
+      "effects": [
+        {
+          "skill": "woodcutting",
+          "efficiencyPercent": 25
+        }
+      ]
+    },
+    {
+      "name": "Branchbane Hatchet",
+      "hashedId": "3Zbym56qLx0WLBRp7Eek",
+      "effects": [
+        {
+          "skill": "woodcutting",
+          "efficiencyPercent": 30
+        }
+      ]
+    },
+    {
+      "name": "Silvan Splitter",
+      "hashedId": "oZwey82VNAO0LD0dXM3g",
+      "effects": [
+        {
+          "skill": "woodcutting",
+          "efficiencyPercent": 35
+        }
+      ]
+    },
+    {
+      "name": "Arboreal Ender",
+      "hashedId": "JZdg5V3PQo60LEyWq0zl",
+      "effects": [
+        {
+          "skill": "woodcutting",
+          "efficiencyPercent": 40
+        }
+      ]
+    },
+    {
+      "name": "Titanwood Crystal",
+      "hashedId": "PjVDJez3LDJvNKWO08Ga",
+      "effects": [
+        {
+          "skill": "woodcutting",
+          "efficiencyPercent": 50
+        }
+      ]
+    },
+    {
+      "name": "Titanwood Crystal (Untradable)",
+      "hashedId": "ZqEegBydNwPoYkA59J61",
+      "effects": [
+        {
+          "skill": "woodcutting",
+          "efficiencyPercent": 50
+        }
+      ]
+    },
+    {
+      "name": "Forest Reaver",
+      "hashedId": "JVM29l7kQZ9wL80q6WDG",
+      "effects": [
+        {
+          "skill": "woodcutting",
+          "efficiencyPercent": 50
+        }
+      ]
+    }
+  ],
   "allItems": [
     {
       "hashedId": "leApVoENk101L7nRPy2D",

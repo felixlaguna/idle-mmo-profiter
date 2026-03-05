@@ -6,6 +6,7 @@ import { useProfitRanking } from './composables/useProfitRanking'
 import { useStorage } from './composables/useStorage'
 import { useActivityFilters } from './composables/useActivityFilters'
 import { useStaticMode } from './composables/useStaticMode'
+import { useEfficiencyConfig } from './composables/useEfficiencyConfig'
 import { calculateDungeonProfits } from './calculators/dungeonCalculator'
 import { calculateCraftableProfits } from './calculators/craftableCalculator'
 import { calculateResourceProfits } from './calculators/resourceCalculator'
@@ -16,12 +17,14 @@ import DungeonTable from './components/DungeonTable.vue'
 import CraftableTable from './components/CraftableTable.vue'
 import ResourceTable from './components/ResourceTable.vue'
 import MarketTable from './components/MarketTable.vue'
+import EfficiencyPanel from './components/EfficiencyPanel.vue'
+import EfficiencyItemSelector from './components/EfficiencyItemSelector.vue'
 import Toast from './components/Toast.vue'
 import ErrorBoundary from './components/ErrorBoundary.vue'
 import LoadingSpinner from './components/LoadingSpinner.vue'
 import AppFooter from './components/AppFooter.vue'
 import { useToast } from './composables/useToast'
-import type { MagicFindSettings } from './types'
+import type { MagicFindSettings, ResourceSkill } from './types'
 
 const { isStaticMode } = useStaticMode()
 
@@ -42,8 +45,12 @@ const currentTab = ref<Tab>('all')
 const showSettings = ref(false)
 // eslint-disable-next-line no-undef
 const modalCloseButtonRef = ref<HTMLButtonElement | null>(null)
- 
+
 const modalContentRef = ref<HTMLElement | null>(null)
+
+// Efficiency item selector modal state
+const showEfficiencySelector = ref(false)
+const selectedEfficiencySkill = ref<ResourceSkill | null>(null)
 
 // Toast notifications
 const { toasts, dismissToast } = useToast()
@@ -72,6 +79,9 @@ const closeSettings = () => {
 
 // Get data from data provider
 const dataProvider = useDataProvider()
+
+// Get efficiency config
+const efficiencyConfig = useEfficiencyConfig(dataProvider.efficiencyItems)
 
 // Get override stats for Market tab badge
 const overrideStats = computed(() => dataProvider.getOverrideStats())
@@ -104,6 +114,8 @@ const { rankedActivities } = useProfitRanking({
   materialPriceMap: dataProvider.materialPriceMap,
   materialLastSaleAtMap: dataProvider.materialLastSaleAtMap,
   materialVendorValueMap: dataProvider.materialVendorValueMap,
+  resourceSkillMap: dataProvider.resourceSkillMap,
+  efficiencyModifier: efficiencyConfig.applyEfficiency,
 })
 
 // Use shared filter state to get filtered best action
@@ -146,12 +158,28 @@ const craftableProfits = computed(() => {
 
 // Calculate resource profits for resource table
 const resourceProfits = computed(() => {
-  return calculateResourceProfits(dataProvider.resourceGathering.value, marketTaxRate.value)
+  return calculateResourceProfits(
+    dataProvider.resourceGathering.value,
+    marketTaxRate.value,
+    dataProvider.resourceSkillMap.value,
+    efficiencyConfig.applyEfficiency
+  )
 })
 
 // Remove a craftable recipe entry
 const removeCraftableRecipe = (craftableName: string) => {
   dataProvider.removeCraftableRecipe(craftableName)
+}
+
+// Remove a resource recipe entry
+const removeResourceRecipe = (recipeName: string) => {
+  dataProvider.removeResourceRecipe(recipeName)
+}
+
+// Open efficiency selector for a specific skill
+const openEfficiencySelector = (skill: ResourceSkill) => {
+  selectedEfficiencySkill.value = skill
+  showEfficiencySelector.value = true
 }
 
 // Update a craftable recipe time
@@ -471,7 +499,8 @@ onUnmounted(() => {
               />
             </div>
             <div v-if="currentTab === 'resources'">
-              <ResourceTable :resources="resourceProfits" />
+              <EfficiencyPanel @open-skill-selector="openEfficiencySelector" />
+              <ResourceTable :resources="resourceProfits" @delete:recipe="removeResourceRecipe" />
             </div>
             <div v-if="currentTab === 'market'">
               <MarketTable />
@@ -581,6 +610,12 @@ onUnmounted(() => {
 
     <!-- Toast Notifications -->
     <Toast :messages="toasts" @dismiss="dismissToast" />
+
+    <!-- Efficiency Item Selector Modal -->
+    <EfficiencyItemSelector
+      v-model="showEfficiencySelector"
+      :skill="selectedEfficiencySkill"
+    />
   </div>
 </template>
 

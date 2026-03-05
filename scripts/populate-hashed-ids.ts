@@ -78,6 +78,7 @@ interface InspectRecipe {
   recipe_id: number
   recipe_hashed_id: string
   name: string
+  skill?: string
   uses?: number
   max_uses?: number
   ingredients?: Array<{
@@ -85,6 +86,14 @@ interface InspectRecipe {
     name: string
     quantity: number
   }>
+}
+
+interface InspectEffect {
+  value: number
+  length: number
+  target: string
+  attribute: string
+  value_type: string
 }
 
 interface InspectResponse {
@@ -95,6 +104,7 @@ interface InspectResponse {
     is_tradeable: boolean
     max_tier: number
     recipes?: InspectRecipe[]
+    effects?: InspectEffect[] | null
   }
   endpoint_updates_at: string
 }
