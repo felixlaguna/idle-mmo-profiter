@@ -1,4 +1,4 @@
-.PHONY: help up down restart logs build ps url clean dev install lint typecheck build-app test test-run format ci ci-lint ci-typecheck ci-test-run ci-build-app
+.PHONY: help up down restart logs build ps url clean dev install lint typecheck build-app test test-run format ci
 
 # Default target
 help:
@@ -23,12 +23,6 @@ help:
 	@echo "    make format      - Format code with Prettier"
 	@echo "    make build-app   - Build production bundle"
 	@echo "    make ci          - Run all CI checks (lint + typecheck + test + build)"
-	@echo ""
-	@echo "  CI (Docker-in-Docker compatible):"
-	@echo "    make ci-lint     - Run ESLint (using docker run)"
-	@echo "    make ci-typecheck - Run TypeScript type checking (using docker run)"
-	@echo "    make ci-test-run  - Run tests once (using docker run)"
-	@echo "    make ci-build-app - Build production bundle (using docker run)"
 
 # Start services (builds first if needed)
 up:
@@ -99,8 +93,6 @@ clean:
 	@echo "✅ Cleaned node_modules and dist"
 
 # Code Quality & CI targets
-
-# Local development targets (use docker compose with volume mounts)
 lint:
 	docker compose run --rm app npm run lint
 
@@ -119,20 +111,6 @@ format:
 build-app:
 	docker compose run --rm app npm run build
 
-# CI targets (use docker run - works with Docker-in-Docker)
-# These targets use the built image directly without volume mounts
-ci-lint:
-	docker run --rm idle-mmo-profiter-app npm run lint
-
-ci-typecheck:
-	docker run --rm idle-mmo-profiter-app npx vue-tsc --noEmit
-
-ci-test-run:
-	docker run --rm idle-mmo-profiter-app npm run test:run
-
-ci-build-app:
-	docker run --rm idle-mmo-profiter-app npm run build
-
 # Run all CI checks (fails fast)
-ci: ci-lint ci-typecheck ci-test-run ci-build-app
+ci: lint typecheck test-run build-app
 	@echo "✅ All CI checks passed!"
