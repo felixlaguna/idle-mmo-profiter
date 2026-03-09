@@ -31,7 +31,7 @@ describe('MockProvider', () => {
     expect(status.isUsingApi).toBe(false)
     expect(status.apiConfigured).toBe(false)
     expect(status.lastApiUpdate).toBe(null)
-    expect(status.message).toContain('Using default data')
+    expect(status.message).toContain('Offline data')
   })
 
   it('should return default data for getCurrentPrices', async () => {
@@ -130,7 +130,7 @@ describe('ApiProvider', () => {
     expect(status.isUsingApi).toBe(false)
     expect(status.apiConfigured).toBe(false)
     expect(status.lastApiUpdate).toBe(null)
-    expect(status.message).toContain('Using default data')
+    expect(status.message).toContain('Offline data')
   })
 
   it('should fall back to defaults when no API key configured', async () => {
@@ -215,7 +215,7 @@ describe('getDataProviderStatus', () => {
     const status = getDataProviderStatus()
     expect(status.isUsingApi).toBe(false)
     expect(status.apiConfigured).toBe(false)
-    expect(status.message).toContain('Using default data')
+    expect(status.message).toContain('Offline data')
   })
 
   it('should return correct status with API key', () => {

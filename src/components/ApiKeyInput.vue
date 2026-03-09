@@ -153,7 +153,7 @@ if (hasApiKey.value) {
     <!-- Warning banner when no API key is set -->
     <div v-if="!hasApiKey" class="warning-banner">
       <span class="warning-icon">⚠️</span>
-      <span class="warning-text"> Using default data. Enter your API key to get live prices. </span>
+      <span class="warning-text"> Enter your API key for live prices. </span>
     </div>
 
     <div class="input-row">

@@ -28,7 +28,7 @@ describe('DataProviderStatus', () => {
     const wrapper = mount(DataProviderStatus)
 
     expect(wrapper.find('.status-default').exists()).toBe(true)
-    expect(wrapper.text()).toContain('Using default data')
+    expect(wrapper.text()).toContain('Offline data')
   })
 
   it('should display API data status when API key is configured', () => {

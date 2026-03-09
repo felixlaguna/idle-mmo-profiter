@@ -42,7 +42,7 @@ describe('ApiKeyInput', () => {
 
     expect(wrapper.find('.warning-banner').exists()).toBe(true)
     expect(wrapper.find('.warning-banner').text()).toContain(
-      'Using default data. Enter your API key to get live prices.'
+      'Enter your API key for live prices.'
     )
     expect(wrapper.find('.status').text()).toBe('No API key')
   })

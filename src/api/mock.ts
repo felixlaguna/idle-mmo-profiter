@@ -113,7 +113,7 @@ export class MockProvider implements DataProvider {
       isUsingApi: false,
       apiConfigured: false,
       lastApiUpdate: null,
-      message: 'Using default data - no API key configured',
+      message: 'Offline data',
     }
   }
 
@@ -263,7 +263,7 @@ export class ApiProvider implements DataProvider {
         isUsingApi: false,
         apiConfigured: false,
         lastApiUpdate: null,
-        message: 'Using default data - no API key configured',
+        message: 'Offline data',
       }
     }
 

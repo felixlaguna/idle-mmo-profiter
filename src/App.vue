@@ -25,6 +25,7 @@ import LoadingSpinner from './components/LoadingSpinner.vue'
 import AppFooter from './components/AppFooter.vue'
 import { useToast } from './composables/useToast'
 import type { MagicFindSettings, ResourceSkill } from './types'
+import defaultData from './data/defaults.json'
 
 const { isStaticMode } = useStaticMode()
 
@@ -187,20 +188,73 @@ const updateCraftableRecipeTime = (craftableName: string, value: number) => {
   dataProvider.updateCraftableRecipeTime(craftableName, value)
 }
 
-// Last update time (placeholder - will be updated when API is integrated)
-const lastUpdateTime = ref<Date | null>(null)
+// Compute the most recent lastUpdated from defaults.json
+const dataLastUpdated = computed(() => {
+  const allArrays = [
+    ...(defaultData.materials || []),
+    ...(defaultData.craftables || []),
+    ...(defaultData.resources || []),
+    ...(defaultData.recipes || []),
+  ]
+  let maxDate = ''
+  for (const item of allArrays) {
+    if (item.lastUpdated && item.lastUpdated > maxDate) {
+      maxDate = item.lastUpdated
+    }
+  }
+  return maxDate ? new Date(maxDate) : null
+})
 
 // Format numbers with commas
 const formatNumber = (num: number): string => {
   return Math.round(num).toLocaleString()
 }
 
-// Get last update text
+// Get last update text for desktop
 const lastUpdateText = computed(() => {
-  if (!lastUpdateTime.value) {
+  if (!dataLastUpdated.value) {
     return 'Using default data'
   }
-  return `Last updated: ${lastUpdateTime.value.toLocaleTimeString()}`
+  const now = new Date()
+  const isToday =
+    dataLastUpdated.value.getDate() === now.getDate() &&
+    dataLastUpdated.value.getMonth() === now.getMonth() &&
+    dataLastUpdated.value.getFullYear() === now.getFullYear()
+
+  const time = dataLastUpdated.value.toLocaleTimeString(undefined, {
+    hour: 'numeric',
+    minute: '2-digit',
+  })
+
+  if (isToday) {
+    return `Data from ${time}`
+  }
+  const date = dataLastUpdated.value.toLocaleDateString(undefined, {
+    month: 'short',
+    day: 'numeric',
+  })
+  return `Data from ${date}, ${time}`
+})
+
+// Get last update short text for mobile
+const lastUpdateShortText = computed(() => {
+  if (!dataLastUpdated.value) return 'Default'
+  const now = new Date()
+  const isToday =
+    dataLastUpdated.value.getDate() === now.getDate() &&
+    dataLastUpdated.value.getMonth() === now.getMonth() &&
+    dataLastUpdated.value.getFullYear() === now.getFullYear()
+
+  if (isToday) {
+    return dataLastUpdated.value.toLocaleTimeString(undefined, {
+      hour: 'numeric',
+      minute: '2-digit',
+    })
+  }
+  return dataLastUpdated.value.toLocaleDateString(undefined, {
+    month: 'short',
+    day: 'numeric',
+  })
 })
 
 // Get type badge color
@@ -331,7 +385,7 @@ onUnmounted(() => {
           <span class="title-short">Profit Calc</span>
         </h1>
         <div class="header-actions">
-          <span class="last-update"><svg class="info-icon" viewBox="0 0 20 20" fill="currentColor" width="12" height="12"><circle cx="10" cy="10" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 9v5M10 6.5v.01"/></svg><span class="update-text-full">{{ lastUpdateText }}</span><span class="update-text-short">Default</span></span>
+          <span class="last-update"><svg class="info-icon" viewBox="0 0 20 20" fill="currentColor" width="12" height="12"><circle cx="10" cy="10" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 9v5M10 6.5v.01"/></svg><span class="update-text-full">{{ lastUpdateText }}</span><span class="update-text-short">{{ lastUpdateShortText }}</span></span>
           <button
             v-if="!isStaticMode"
             class="btn-settings"
