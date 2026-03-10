@@ -23,6 +23,9 @@ const { getHeatmapStyle } = useHeatmap()
 // Get item uses
 const itemUses = computed(() => getItemUses(props.itemName))
 
+// Active tab state
+const activeTab = ref<'alchemy' | 'forging' | 'other'>('other')
+
 // Add profit/hr to uses by matching with ranked activities
 const usesWithProfit = computed(() => {
   const activityMap = new Map(props.rankedActivities.map((a) => [a.name, a]))
@@ -50,22 +53,79 @@ const usesWithProfit = computed(() => {
   })
 })
 
-// Group uses by category
+// Tabs with their uses
+const tabs = computed(() => {
+  const all = usesWithProfit.value
+  const tabList = [
+    { key: 'alchemy' as const, label: 'Alchemy', uses: all.filter(u => u.skill === 'alchemy') },
+    { key: 'forging' as const, label: 'Forging', uses: all.filter(u => u.skill === 'forging') },
+    { key: 'other' as const, label: 'Other', uses: all.filter(u => u.skill !== 'alchemy' && u.skill !== 'forging') },
+  ].filter(tab => tab.uses.length > 0)
+
+  return tabList
+})
+
+// Auto-select first non-empty tab when item changes or tabs change
+watch([() => props.itemName, tabs], () => {
+  const firstTab = tabs.value[0]
+  if (firstTab) {
+    // If current tab no longer exists, reset to first tab
+    const currentTabExists = tabs.value.some(t => t.key === activeTab.value)
+    if (!currentTabExists) {
+      activeTab.value = firstTab.key
+    }
+  }
+}, { immediate: true })
+
+// Handle tab keyboard navigation
+const handleTabKeydown = (e: KeyboardEvent) => {
+  if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) return
+
+  e.preventDefault()
+  const tabKeys = tabs.value.map(t => t.key)
+  const currentIndex = tabKeys.indexOf(activeTab.value)
+
+  if (e.key === 'ArrowLeft') {
+    activeTab.value = tabKeys[currentIndex > 0 ? currentIndex - 1 : tabKeys.length - 1]
+  } else if (e.key === 'ArrowRight') {
+    activeTab.value = tabKeys[currentIndex < tabKeys.length - 1 ? currentIndex + 1 : 0]
+  } else if (e.key === 'Home') {
+    activeTab.value = tabKeys[0]
+  } else if (e.key === 'End') {
+    activeTab.value = tabKeys[tabKeys.length - 1]
+  }
+
+  // Focus the newly selected tab
+  setTimeout(() => {
+    const activeTabButton = document.querySelector('.popover-tabs .tab-btn.active') as HTMLElement
+    activeTabButton?.focus()
+  }, 0)
+}
+
+// Currently displayed uses based on active tab
+const activeTabUses = computed(() => {
+  return tabs.value.find(t => t.key === activeTab.value)?.uses || []
+})
+
+// Group uses by category (within the active tab)
 const groupedUses = computed(() => {
   const groups = {
-    craftable: usesWithProfit.value.filter((u) => u.type === 'craftable-material'),
-    resource: usesWithProfit.value.filter((u) => u.type === 'resource-material'),
-    dungeon: usesWithProfit.value.filter((u) => u.type === 'dungeon-drop'),
-    gathering: usesWithProfit.value.filter((u) => u.type === 'gathering-source'),
-    product: usesWithProfit.value.filter((u) => u.type === 'recipe-product'),
+    craftable: activeTabUses.value.filter((u) => u.type === 'craftable-material'),
+    resource: activeTabUses.value.filter((u) => u.type === 'resource-material'),
+    dungeon: activeTabUses.value.filter((u) => u.type === 'dungeon-drop'),
+    gathering: activeTabUses.value.filter((u) => u.type === 'gathering-source'),
+    product: activeTabUses.value.filter((u) => u.type === 'recipe-product'),
   }
 
   return groups
 })
 
-// Category keys for iteration
+// Category keys for iteration — only non-empty categories
 type CategoryKey = 'craftable' | 'resource' | 'dungeon' | 'gathering' | 'product'
-const categoryKeys: CategoryKey[] = ['craftable', 'resource', 'dungeon', 'gathering', 'product']
+const allCategoryKeys: CategoryKey[] = ['craftable', 'resource', 'dungeon', 'gathering', 'product']
+const visibleCategoryKeys = computed(() =>
+  allCategoryKeys.filter((key) => groupedUses.value[key].length > 0)
+)
 
 // Check if mobile
 const isMobile = ref(false)
@@ -195,16 +255,16 @@ onUnmounted(() => {
   document.removeEventListener('scroll', handleScroll, true)
 })
 
-// Heatmap for profit values
+// Heatmap for profit values (within active tab)
 const maxProfit = computed(() => {
-  const profits = usesWithProfit.value
+  const profits = activeTabUses.value
     .map((u) => u.profitPerHour || 0)
     .filter((p) => p > 0)
   return profits.length > 0 ? Math.max(...profits) : 0
 })
 
 const minProfit = computed(() => {
-  const profits = usesWithProfit.value
+  const profits = activeTabUses.value
     .map((u) => u.profitPerHour || 0)
     .filter((p) => p > 0)
   return profits.length > 0 ? Math.min(...profits) : 0
@@ -262,6 +322,24 @@ const getCategoryLabel = (category: string, count: number) => {
           </button>
         </div>
 
+        <!-- Tabs (only show if more than 1 tab) -->
+        <div v-if="tabs.length > 1" class="popover-tabs" role="tablist" aria-label="Uses by skill">
+          <button
+            v-for="tab in tabs"
+            :key="tab.key"
+            class="tab-btn"
+            :class="{ active: activeTab === tab.key }"
+            role="tab"
+            :aria-selected="activeTab === tab.key"
+            :tabindex="activeTab === tab.key ? 0 : -1"
+            @click="activeTab = tab.key"
+            @keydown="handleTabKeydown"
+          >
+            {{ tab.label }}
+            <span class="tab-count">({{ tab.uses.length }})</span>
+          </button>
+        </div>
+
         <!-- Content -->
         <div class="popover-content">
           <!-- No uses found -->
@@ -272,8 +350,7 @@ const getCategoryLabel = (category: string, count: number) => {
           <!-- Uses grouped by category -->
           <div v-else class="uses-list">
             <div
-              v-for="category in categoryKeys"
-              v-show="groupedUses[category].length > 0"
+              v-for="category in visibleCategoryKeys"
               :key="category"
               class="use-category"
             >
@@ -391,6 +468,7 @@ const getCategoryLabel = (category: string, count: number) => {
   padding: 1rem 1.25rem;
   border-bottom: 1px solid var(--border-color);
   background-color: var(--bg-secondary);
+  flex-shrink: 0;
 }
 
 .popover-title {
@@ -559,5 +637,55 @@ const getCategoryLabel = (category: string, count: number) => {
     background-color: var(--border-color);
     border-radius: 0.125rem;
   }
+}
+
+/* Tabs */
+.popover-tabs {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+  gap: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  flex-shrink: 0;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s var(--ease-out);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.tab-btn:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-tertiary);
+}
+
+.tab-btn.active {
+  color: var(--text-primary);
+  border-bottom-color: var(--accent-primary);
+}
+
+.tab-count {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.tab-btn.active .tab-count {
+  color: var(--accent-primary);
+  opacity: 1;
 }
 </style>

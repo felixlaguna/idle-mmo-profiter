@@ -14,7 +14,20 @@
 
 import { computed } from 'vue'
 import { useDataProvider } from './useDataProvider'
-import type { CraftableRecipe, ResourceRecipe, Dungeon, ResourceGather } from '../types'
+import type { CraftableRecipe, CraftableMaterial, ResourceRecipe, Dungeon, ResourceGather, ResourceSkill } from '../types'
+
+/**
+ * Infer crafting skill from material names.
+ * Alchemy recipes use Vial or Crystal containers; everything else is forging.
+ */
+function inferSkillFromMaterials(materials: CraftableMaterial[]): 'alchemy' | 'forging' {
+  for (const material of materials) {
+    if (material.name.endsWith('Vial') || material.name.endsWith('Crystal')) {
+      return 'alchemy'
+    }
+  }
+  return 'forging'
+}
 
 export interface ItemUse {
   type:
@@ -26,6 +39,7 @@ export interface ItemUse {
   context: string // e.g., 'Radiant Crest (alchemy)' or 'Millstone Mines'
   detail: string // e.g., '500x needed' or 'Cooking: Trout -> Cooked Trout'
   profitPerHour?: number // If available, to show profitability context
+  skill?: 'alchemy' | 'forging' | ResourceSkill // For tab grouping (alchemy, forging, or resource skills)
 }
 
 export interface ItemUsesResult {
@@ -153,12 +167,14 @@ function createItemUses() {
     for (const recipe of craftableRecipes) {
       const material = recipe.materials.find((m) => m.name === itemName)
       const quantityText = material ? `${material.quantity}x needed` : ''
-      const skillText = recipe.skill ? ` (${recipe.skill})` : ''
+      const skill = recipe.skill || inferSkillFromMaterials(recipe.materials)
+      const skillText = ` (${skill})`
 
       uses.push({
         type: 'craftable-material',
         context: `${recipe.name}${skillText}`,
         detail: quantityText,
+        skill,
         // profitPerHour will be added by the UI component if available
       })
     }
@@ -173,6 +189,7 @@ function createItemUses() {
         type: 'resource-material',
         context: `${recipe.name} (${recipe.skill})`,
         detail: quantityText,
+        skill: recipe.skill,
       })
     }
 
@@ -201,6 +218,7 @@ function createItemUses() {
         type: 'gathering-source',
         context: `${skillText.charAt(0).toUpperCase() + skillText.slice(1)}`,
         detail: timeText,
+        skill: gatheringSource.skill,
       })
     }
 
