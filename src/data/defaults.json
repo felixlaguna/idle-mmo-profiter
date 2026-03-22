@@ -6,7 +6,7 @@
       "price": 179.3,
       "hashedId": "dgBq1boWYek4QkJ3rXaD",
       "vendorValue": 35,
-      "lastUpdated": "2026-03-22T09:47:50.372Z",
+      "lastUpdated": "2026-03-22T10:26:35.044Z",
       "suggestedRefreshMinutes": 29,
       "lastSaleAt": "2026-03-22T09:11:39+00:00",
       "weeklySalesVolume": 18243
@@ -25,13 +25,13 @@
     {
       "id": "mat-3",
       "name": "Black Bear Pelt",
-      "price": 99,
+      "price": 99.1,
       "hashedId": "ElzPeorXNVlxLaW0kv53",
       "vendorValue": 36,
-      "lastUpdated": "2026-03-22T09:04:15.974Z",
-      "suggestedRefreshMinutes": 81,
-      "lastSaleAt": "2026-03-22T08:55:59+00:00",
-      "weeklySalesVolume": 19730
+      "lastUpdated": "2026-03-22T10:26:35.233Z",
+      "suggestedRefreshMinutes": 84,
+      "lastSaleAt": "2026-03-22T09:13:05+00:00",
+      "weeklySalesVolume": 19770
     },
     {
       "id": "mat-4",
@@ -94,7 +94,7 @@
       "price": 27.1,
       "hashedId": "P1vlVrzjLrgwQao8mGKM",
       "vendorValue": 5,
-      "lastUpdated": "2026-03-22T09:47:50.711Z",
+      "lastUpdated": "2026-03-22T10:26:35.316Z",
       "suggestedRefreshMinutes": 19,
       "lastSaleAt": "2026-03-22T09:27:14+00:00",
       "weeklySalesVolume": 57193
@@ -164,13 +164,13 @@
     {
       "id": "mat-auto-1772226753831-sqhk",
       "name": "Venom Extract",
-      "price": 61.7,
+      "price": 76.6,
       "hashedId": "oZwey82VNAKnLD0dXM3g",
       "vendorValue": 35,
-      "lastUpdated": "2026-03-22T08:39:48.707Z",
-      "suggestedRefreshMinutes": 78,
-      "lastSaleAt": "2026-03-22T07:48:43+00:00",
-      "weeklySalesVolume": 3562
+      "lastUpdated": "2026-03-22T10:26:35.477Z",
+      "suggestedRefreshMinutes": 10,
+      "lastSaleAt": "2026-03-22T09:57:38+00:00",
+      "weeklySalesVolume": 3658
     },
     {
       "id": "mat-auto-1772226753831-7x2d",
@@ -196,7 +196,7 @@
       "price": 27.1,
       "hashedId": "P1vlVrzjLrgwQao8mGKM",
       "vendorValue": 5,
-      "lastUpdated": "2026-03-22T09:47:51.043Z",
+      "lastUpdated": "2026-03-22T10:26:35.617Z",
       "suggestedRefreshMinutes": 19,
       "lastSaleAt": "2026-03-22T09:27:14+00:00",
       "weeklySalesVolume": 57193
@@ -269,7 +269,7 @@
       "price": 46.5,
       "hashedId": "JVM29l7kQZW5N80q6WDG",
       "vendorValue": 24,
-      "lastUpdated": "2026-03-22T05:38:48.966Z",
+      "lastUpdated": "2026-03-22T10:26:35.782Z",
       "suggestedRefreshMinutes": 277,
       "lastSaleAt": "2026-03-22T02:34:28+00:00",
       "weeklySalesVolume": 2381
@@ -349,10 +349,10 @@
       "price": 7.9,
       "hashedId": "BRn3x72JQ26lQzOMok41",
       "vendorValue": 5,
-      "lastUpdated": "2026-03-22T06:33:27.120Z",
-      "suggestedRefreshMinutes": 209,
-      "lastSaleAt": "2026-03-22T06:00:21+00:00",
-      "weeklySalesVolume": 23063
+      "lastUpdated": "2026-03-22T10:26:35.992Z",
+      "suggestedRefreshMinutes": 299,
+      "lastSaleAt": "2026-03-22T09:28:46+00:00",
+      "weeklySalesVolume": 23169
     },
     {
       "id": "mat-auto-1772226753831-7m1c",
@@ -386,13 +386,13 @@
     {
       "id": "mat-auto-1772226753831-i7hd",
       "name": "Buffalo Horn",
-      "price": 38.9,
+      "price": 38.2,
       "hashedId": "7eA59WrBQRlKYzb62qKv",
       "vendorValue": 25,
-      "lastUpdated": "2026-03-22T09:04:17.445Z",
-      "suggestedRefreshMinutes": 65,
-      "lastSaleAt": "2026-03-22T07:06:45+00:00",
-      "weeklySalesVolume": 4479
+      "lastUpdated": "2026-03-22T10:26:36.182Z",
+      "suggestedRefreshMinutes": 308,
+      "lastSaleAt": "2026-03-22T09:23:32+00:00",
+      "weeklySalesVolume": 4588
     },
     {
       "id": "mat-auto-1772226753831-wzc4",
@@ -411,7 +411,7 @@
       "price": 165.8,
       "hashedId": "3yE1A84kYOl3Ll6XeVKp",
       "vendorValue": 15,
-      "lastUpdated": "2026-03-22T09:48:51.245Z",
+      "lastUpdated": "2026-03-22T10:26:36.238Z",
       "suggestedRefreshMinutes": 14,
       "lastSaleAt": "2026-03-22T09:10:07+00:00",
       "weeklySalesVolume": 8901
@@ -419,24 +419,24 @@
     {
       "id": "mat-auto-1772226753831-ivkr",
       "name": "Bone Fragment",
-      "price": 35.3,
+      "price": 31.6,
       "hashedId": "DBngxedVYJqlNX64wW8o",
       "vendorValue": 5,
-      "lastUpdated": "2026-03-22T07:57:07.224Z",
-      "suggestedRefreshMinutes": 139,
-      "lastSaleAt": "2026-03-22T07:45:59+00:00",
-      "weeklySalesVolume": 28711
+      "lastUpdated": "2026-03-22T10:26:36.374Z",
+      "suggestedRefreshMinutes": 157,
+      "lastSaleAt": "2026-03-22T09:31:05+00:00",
+      "weeklySalesVolume": 28885
     },
     {
       "id": "mat-auto-1772226753831-eg8e",
       "name": "Long Forgotten Necklace",
-      "price": 15.3,
+      "price": 15.5,
       "hashedId": "jGXBy7a4LbWzQ0Pw6Vdg",
       "vendorValue": 5,
-      "lastUpdated": "2026-03-22T09:04:17.592Z",
-      "suggestedRefreshMinutes": 67,
-      "lastSaleAt": "2026-03-22T06:00:38+00:00",
-      "weeklySalesVolume": 67638
+      "lastUpdated": "2026-03-22T10:26:36.522Z",
+      "suggestedRefreshMinutes": 95,
+      "lastSaleAt": "2026-03-22T09:31:43+00:00",
+      "weeklySalesVolume": 67639
     },
     {
       "id": "mat-auto-1772226753831-3x7p",
@@ -459,13 +459,13 @@
     {
       "id": "mat-auto-1772226753831-9yqu",
       "name": "Goblin Scraps",
-      "price": 168.1,
+      "price": 160.7,
       "hashedId": "27gw0k38L4qZQWevJxyK",
       "vendorValue": 25,
-      "lastUpdated": "2026-03-22T09:04:17.803Z",
-      "suggestedRefreshMinutes": 48,
-      "lastSaleAt": "2026-03-22T08:56:26+00:00",
-      "weeklySalesVolume": 13765
+      "lastUpdated": "2026-03-22T10:27:35.203Z",
+      "suggestedRefreshMinutes": 44,
+      "lastSaleAt": "2026-03-22T09:30:34+00:00",
+      "weeklySalesVolume": 13854
     },
     {
       "id": "mat-auto-1772226753831-kh93",
@@ -495,7 +495,7 @@
       "price": 179.3,
       "hashedId": "dgBq1boWYek4QkJ3rXaD",
       "vendorValue": 35,
-      "lastUpdated": "2026-03-22T09:48:51.458Z",
+      "lastUpdated": "2026-03-22T10:27:35.284Z",
       "suggestedRefreshMinutes": 29,
       "lastSaleAt": "2026-03-22T09:11:39+00:00",
       "weeklySalesVolume": 18243
@@ -576,13 +576,13 @@
     {
       "id": "mat-auto-1772226753831-v5c6",
       "name": "Perch",
-      "price": 17.9,
+      "price": 14,
       "hashedId": "3yE1A84kYOwYl6XeVKpD",
       "vendorValue": 6,
-      "lastUpdated": "2026-03-22T02:09:36.935Z",
-      "suggestedRefreshMinutes": 482,
-      "lastSaleAt": "2026-03-21T22:28:14+00:00",
-      "weeklySalesVolume": 52627
+      "lastUpdated": "2026-03-22T10:27:35.448Z",
+      "suggestedRefreshMinutes": 330,
+      "lastSaleAt": "2026-03-22T09:10:08+00:00",
+      "weeklySalesVolume": 56461
     },
     {
       "id": "mat-auto-1772226753831-q6ox",
@@ -653,13 +653,13 @@
     {
       "id": "mat-auto-1772226753832-giok",
       "name": "Birch Log",
-      "price": 10.6,
+      "price": 12.6,
       "hashedId": "Ro31P7kZL6AYveGxXOy5",
       "vendorValue": 5,
-      "lastUpdated": "2026-03-22T08:40:49.966Z",
-      "suggestedRefreshMinutes": 87,
-      "lastSaleAt": "2026-03-22T08:37:28+00:00",
-      "weeklySalesVolume": 859588
+      "lastUpdated": "2026-03-22T10:27:35.528Z",
+      "suggestedRefreshMinutes": 67,
+      "lastSaleAt": "2026-03-22T09:59:23+00:00",
+      "weeklySalesVolume": 870788
     },
     {
       "id": "mat-auto-1772226753832-eg81",
@@ -700,10 +700,10 @@
       "price": 17.6,
       "hashedId": "DBngxedVYJPQX64wW8oa",
       "vendorValue": 7,
-      "lastUpdated": "2026-03-22T07:28:18.554Z",
-      "suggestedRefreshMinutes": 166,
-      "lastSaleAt": "2026-03-22T06:05:23+00:00",
-      "weeklySalesVolume": 42115
+      "lastUpdated": "2026-03-22T10:27:35.608Z",
+      "suggestedRefreshMinutes": 412,
+      "lastSaleAt": "2026-03-22T09:26:11+00:00",
+      "weeklySalesVolume": 42635
     },
     {
       "id": "mat-auto-1772226753832-0dnf",
@@ -763,13 +763,13 @@
     {
       "id": "mat-auto-1772226753832-ruvv",
       "name": "Coal Ore",
-      "price": 5.5,
+      "price": 5,
       "hashedId": "7eA59WrBQRXJYzb62qKv",
       "vendorValue": 1,
-      "lastUpdated": "2026-03-22T09:48:51.782Z",
-      "suggestedRefreshMinutes": 20,
-      "lastSaleAt": "2026-03-22T09:24:01+00:00",
-      "weeklySalesVolume": 13570037
+      "lastUpdated": "2026-03-22T10:27:35.683Z",
+      "suggestedRefreshMinutes": 5,
+      "lastSaleAt": "2026-03-22T09:54:46+00:00",
+      "weeklySalesVolume": 14138755
     },
     {
       "id": "mat-auto-1772226753832-gt7c",
@@ -851,13 +851,13 @@
     {
       "id": "mat-auto-1772226753832-jf7s",
       "name": "Banyan Log",
-      "price": 35.6,
+      "price": 35.2,
       "hashedId": "brz9RZnWN7aLKAp0Mdle",
       "vendorValue": 7,
-      "lastUpdated": "2026-03-22T09:48:52.038Z",
-      "suggestedRefreshMinutes": 20,
-      "lastSaleAt": "2026-03-22T09:47:21+00:00",
-      "weeklySalesVolume": 1265122
+      "lastUpdated": "2026-03-22T10:27:35.832Z",
+      "suggestedRefreshMinutes": 26,
+      "lastSaleAt": "2026-03-22T10:10:30+00:00",
+      "weeklySalesVolume": 1265920
     },
     {
       "id": "mat-auto-1772226753833-3dlv",
@@ -895,13 +895,13 @@
     {
       "id": "mat-auto-1772226753833-jdh1",
       "name": "Maple Log",
-      "price": 24.9,
+      "price": 28,
       "hashedId": "bAB1E9poQqkYnakeJj56",
       "vendorValue": 9,
-      "lastUpdated": "2026-03-22T09:48:52.168Z",
-      "suggestedRefreshMinutes": 27,
-      "lastSaleAt": "2026-03-22T09:44:07+00:00",
-      "weeklySalesVolume": 985309
+      "lastUpdated": "2026-03-22T10:27:35.969Z",
+      "suggestedRefreshMinutes": 48,
+      "lastSaleAt": "2026-03-22T10:23:45+00:00",
+      "weeklySalesVolume": 996040
     },
     {
       "id": "mat-auto-1772226753833-4f8d",
@@ -1059,24 +1059,24 @@
     {
       "id": "res-1",
       "name": "Coal",
-      "marketPrice": 5.5,
+      "marketPrice": 5,
       "vendorValue": 1,
       "hashedId": "7eA59WrBQRXJYzb62qKv",
-      "lastUpdated": "2026-03-22T09:48:52.452Z",
-      "suggestedRefreshMinutes": 20,
-      "lastSaleAt": "2026-03-22T09:24:01+00:00",
-      "weeklySalesVolume": 13570037
+      "lastUpdated": "2026-03-22T10:27:36.120Z",
+      "suggestedRefreshMinutes": 5,
+      "lastSaleAt": "2026-03-22T09:54:46+00:00",
+      "weeklySalesVolume": 14138755
     },
     {
       "id": "res-2",
       "name": "Stingray",
-      "marketPrice": 34.1,
+      "marketPrice": 34.3,
       "vendorValue": 22,
       "hashedId": "oaJydnOmQW2LbgRe5ME6",
-      "lastUpdated": "2026-03-22T08:41:48.761Z",
-      "suggestedRefreshMinutes": 75,
-      "lastSaleAt": "2026-03-22T08:33:42+00:00",
-      "weeklySalesVolume": 486639
+      "lastUpdated": "2026-03-22T10:27:36.195Z",
+      "suggestedRefreshMinutes": 104,
+      "lastSaleAt": "2026-03-22T09:14:26+00:00",
+      "weeklySalesVolume": 495177
     },
     {
       "id": "res-3",
@@ -1095,7 +1095,7 @@
       "marketPrice": 53.3,
       "vendorValue": 41,
       "hashedId": "3Zbym56qLxRNBRp7Eekd",
-      "lastUpdated": "2026-03-22T09:49:51.128Z",
+      "lastUpdated": "2026-03-22T10:27:36.268Z",
       "suggestedRefreshMinutes": 18,
       "lastSaleAt": "2026-03-22T09:21:32+00:00",
       "weeklySalesVolume": 1717279
@@ -1106,7 +1106,7 @@
       "marketPrice": 103,
       "vendorValue": 92,
       "hashedId": "Rv5g4z1dQnk9Nqy32jpG",
-      "lastUpdated": "2026-03-22T09:49:51.294Z",
+      "lastUpdated": "2026-03-22T10:27:36.462Z",
       "suggestedRefreshMinutes": 29,
       "lastSaleAt": "2026-03-22T09:45:41+00:00",
       "weeklySalesVolume": 274013
@@ -1202,7 +1202,7 @@
     {
       "id": "rec-5",
       "name": "Bastion Elixir Recipe",
-      "price": 12.3,
+      "price": 28.3,
       "chance": 0.05,
       "hashedId": "XjEaOeBkLakMNlGwxVPq",
       "vendorValue": 10,
@@ -1210,10 +1210,10 @@
       "producesItemName": "Bastion Elixir",
       "producesItemHashedId": "jGXBy7a4LbqMY0Pw6Vdg",
       "producesItemVendorValue": 100,
-      "lastUpdated": "2026-03-21T13:43:28.840Z",
-      "suggestedRefreshMinutes": 1224,
-      "lastSaleAt": "2026-03-21T07:29:28+00:00",
-      "weeklySalesVolume": 17
+      "lastUpdated": "2026-03-22T10:27:36.541Z",
+      "suggestedRefreshMinutes": 5,
+      "lastSaleAt": "2026-03-22T06:32:51+00:00",
+      "weeklySalesVolume": 51
     },
     {
       "id": "rec-6",
@@ -1618,7 +1618,7 @@
     {
       "id": "rec-31",
       "name": "Leafblade Recipe",
-      "price": 5000,
+      "price": 4974.3,
       "chance": 0.05,
       "hashedId": "7eA59WrBQR3JNzb62qKv",
       "vendorValue": 35,
@@ -1626,10 +1626,10 @@
       "producesItemName": "Leafblade",
       "producesItemHashedId": "oaJydnOmQW9zYbgRe5ME",
       "producesItemVendorValue": 25,
-      "lastUpdated": "2026-03-22T02:11:37.617Z",
-      "suggestedRefreshMinutes": 485,
-      "lastSaleAt": "2026-03-21T08:14:44+00:00",
-      "weeklySalesVolume": 41
+      "lastUpdated": "2026-03-22T10:27:36.612Z",
+      "suggestedRefreshMinutes": 1082,
+      "lastSaleAt": "2026-03-22T09:27:52+00:00",
+      "weeklySalesVolume": 45
     },
     {
       "id": "rec-32",
@@ -1914,7 +1914,7 @@
       "producesItemName": "Stormstrider Greaves",
       "producesItemHashedId": "Z6aDoyRnLykyNpV5AGXm",
       "producesItemVendorValue": 250,
-      "lastUpdated": "2026-03-22T09:49:51.599Z",
+      "lastUpdated": "2026-03-22T10:27:36.688Z",
       "suggestedRefreshMinutes": 5,
       "lastSaleAt": "2026-03-12T12:23:07+00:00",
       "weeklySalesVolume": 0
@@ -2134,7 +2134,7 @@
       "producesItemName": "Frostbite Shot",
       "producesItemHashedId": "lrx463VdQgKmQ5w1zWKP",
       "producesItemVendorValue": 400,
-      "lastUpdated": "2026-03-22T09:49:51.729Z",
+      "lastUpdated": "2026-03-22T10:27:36.778Z",
       "suggestedRefreshMinutes": 5,
       "lastSaleAt": "2026-03-19T14:51:21+00:00",
       "weeklySalesVolume": 18
@@ -2166,7 +2166,7 @@
       "producesItemName": "Sentinel's Gaze",
       "producesItemHashedId": "zvjoJW96Y8w3N3RaAylw",
       "producesItemVendorValue": 400,
-      "lastUpdated": "2026-03-22T09:49:51.851Z",
+      "lastUpdated": "2026-03-22T10:28:35.142Z",
       "suggestedRefreshMinutes": 5,
       "lastSaleAt": "2026-03-19T14:27:29+00:00",
       "weeklySalesVolume": 20
@@ -2465,7 +2465,7 @@
       "producesItemName": "Serpent's Kiss",
       "producesItemHashedId": "njoPWKDkLXAVQ06ZOX79",
       "producesItemVendorValue": 450,
-      "lastUpdated": "2026-03-22T09:49:51.910Z",
+      "lastUpdated": "2026-03-22T10:28:35.235Z",
       "suggestedRefreshMinutes": 5,
       "lastSaleAt": "2026-03-19T14:19:56+00:00",
       "weeklySalesVolume": 18
@@ -2545,7 +2545,7 @@
       "producesItemName": "Emberfire Helm",
       "producesItemHashedId": "0kK49j1VN9w7Lq6B2doa",
       "producesItemVendorValue": 500,
-      "lastUpdated": "2026-03-22T09:49:52.044Z",
+      "lastUpdated": "2026-03-22T10:28:35.319Z",
       "suggestedRefreshMinutes": 5,
       "lastSaleAt": "2026-03-19T14:24:51+00:00",
       "weeklySalesVolume": 24
@@ -2657,7 +2657,7 @@
       "producesItemName": "Flamebreaker Buckler",
       "producesItemHashedId": "3ZvrGV8RQpvZY2wgA5jD",
       "producesItemVendorValue": 400,
-      "lastUpdated": "2026-03-22T09:49:52.110Z",
+      "lastUpdated": "2026-03-22T10:28:35.399Z",
       "suggestedRefreshMinutes": 5,
       "lastSaleAt": "2026-03-19T16:44:09+00:00",
       "weeklySalesVolume": 17
@@ -2813,7 +2813,7 @@
       "producesItemName": "Moonshot",
       "producesItemHashedId": "DBngxedVYJ11NX64wW8o",
       "producesItemVendorValue": 550,
-      "lastUpdated": "2026-03-22T09:49:52.172Z",
+      "lastUpdated": "2026-03-22T10:28:35.475Z",
       "suggestedRefreshMinutes": 5,
       "lastSaleAt": "2026-03-19T20:40:51+00:00",
       "weeklySalesVolume": 13
@@ -2845,7 +2845,7 @@
       "producesItemName": "Thunder Helm",
       "producesItemHashedId": "BPjze3x2Q3wZQR85vgZV",
       "producesItemVendorValue": 550,
-      "lastUpdated": "2026-03-22T09:49:52.244Z",
+      "lastUpdated": "2026-03-22T10:28:35.560Z",
       "suggestedRefreshMinutes": 5,
       "lastSaleAt": "2026-03-19T14:39:23+00:00",
       "weeklySalesVolume": 20
@@ -2861,7 +2861,7 @@
       "producesItemName": "Emberfist",
       "producesItemHashedId": "ZqEegBydNwqMLkA59J61",
       "producesItemVendorValue": 550,
-      "lastUpdated": "2026-03-22T09:49:52.315Z",
+      "lastUpdated": "2026-03-22T10:28:35.649Z",
       "suggestedRefreshMinutes": 5,
       "lastSaleAt": "2026-03-19T14:26:05+00:00",
       "weeklySalesVolume": 15
@@ -2893,7 +2893,7 @@
       "producesItemName": "Ironbark Cuirass",
       "producesItemHashedId": "EWGwnXPlY1o4QJqekZ2R",
       "producesItemVendorValue": 550,
-      "lastUpdated": "2026-03-22T09:49:53.443Z",
+      "lastUpdated": "2026-03-22T10:28:35.736Z",
       "suggestedRefreshMinutes": 11,
       "lastSaleAt": "2026-03-19T14:50:17+00:00",
       "weeklySalesVolume": 24
@@ -2925,7 +2925,7 @@
       "producesItemName": "Thunderclash Greaves",
       "producesItemHashedId": "DBngxedVYJobLX64wW8o",
       "producesItemVendorValue": 550,
-      "lastUpdated": "2026-03-22T09:49:53.510Z",
+      "lastUpdated": "2026-03-22T10:28:35.826Z",
       "suggestedRefreshMinutes": 5,
       "lastSaleAt": "2026-03-19T15:16:29+00:00",
       "weeklySalesVolume": 17
@@ -2957,7 +2957,7 @@
       "producesItemName": "Emberfoot Boots",
       "producesItemHashedId": "j98bO5w1QPV9Y3xkREVJ",
       "producesItemVendorValue": 500,
-      "lastUpdated": "2026-03-22T09:49:53.568Z",
+      "lastUpdated": "2026-03-22T10:28:36.907Z",
       "suggestedRefreshMinutes": 22,
       "lastSaleAt": "2026-03-19T14:48:24+00:00",
       "weeklySalesVolume": 17
@@ -3289,7 +3289,7 @@
       "producesItemName": "Shadowbane Greaves",
       "producesItemHashedId": "BRn3x72JQ2ZWQzOMok41",
       "producesItemVendorValue": 650,
-      "lastUpdated": "2026-03-22T09:50:52.181Z",
+      "lastUpdated": "2026-03-22T10:28:36.998Z",
       "suggestedRefreshMinutes": 6,
       "lastSaleAt": "2026-03-19T14:35:30+00:00",
       "weeklySalesVolume": 10
@@ -3337,7 +3337,7 @@
       "producesItemName": "Celestial Aegis",
       "producesItemHashedId": "XyeZRGx9YjA8NB80gWlP",
       "producesItemVendorValue": 600,
-      "lastUpdated": "2026-03-22T09:50:52.250Z",
+      "lastUpdated": "2026-03-22T10:28:37.081Z",
       "suggestedRefreshMinutes": 5,
       "lastSaleAt": "2026-03-19T16:47:29+00:00",
       "weeklySalesVolume": 17
@@ -3540,7 +3540,7 @@
       "producesItemName": "Shadowstep Gauntlets",
       "producesItemHashedId": "JZdg5V3PQoyAYEyWq0zl",
       "producesItemVendorValue": 700,
-      "lastUpdated": "2026-03-22T09:50:52.315Z",
+      "lastUpdated": "2026-03-22T10:28:37.160Z",
       "suggestedRefreshMinutes": 5,
       "lastSaleAt": "2026-03-19T14:30:07+00:00",
       "weeklySalesVolume": 13
@@ -3820,7 +3820,7 @@
       "producesItemName": "Nightshade Bow",
       "producesItemHashedId": "ZqEegBydNwXMYkA59J61",
       "producesItemVendorValue": 850,
-      "lastUpdated": "2026-03-22T09:50:52.378Z",
+      "lastUpdated": "2026-03-22T10:28:37.256Z",
       "suggestedRefreshMinutes": 5,
       "lastSaleAt": "2026-03-19T14:45:11+00:00",
       "weeklySalesVolume": 14
@@ -4115,7 +4115,7 @@
       "producesItemName": "Dawnbreaker Bow",
       "producesItemHashedId": "3Zbym56qLxmGQBRp7Eek",
       "producesItemVendorValue": 900,
-      "lastUpdated": "2026-03-22T04:33:16.469Z",
+      "lastUpdated": "2026-03-22T10:28:37.331Z",
       "suggestedRefreshMinutes": 326,
       "lastSaleAt": "2026-03-20T17:27:22+00:00",
       "weeklySalesVolume": 23
@@ -4257,7 +4257,7 @@
       "producesItemName": "Voidstep Boots",
       "producesItemHashedId": "7eA59WrBQRReQzb62qKv",
       "producesItemVendorValue": 800,
-      "lastUpdated": "2026-03-22T09:50:52.595Z",
+      "lastUpdated": "2026-03-22T10:28:37.418Z",
       "suggestedRefreshMinutes": 5,
       "lastSaleAt": "2026-03-19T14:40:54+00:00",
       "weeklySalesVolume": 16
@@ -5379,7 +5379,7 @@
       "producesItemName": "Emberfang",
       "producesItemHashedId": "yav4OK1wNEZyYZP7rzJb",
       "producesItemVendorValue": 950,
-      "lastUpdated": "2026-03-22T09:50:52.935Z",
+      "lastUpdated": "2026-03-22T10:29:36.208Z",
       "suggestedRefreshMinutes": 5,
       "lastSaleAt": "2026-03-19T14:32:01+00:00",
       "weeklySalesVolume": 11
@@ -8243,11 +8243,11 @@
           "quantity": 1
         }
       ],
-      "currentPrice": 2884.6,
-      "lastSaleAt": "2026-03-22T02:47:12+00:00",
-      "lastUpdated": "2026-03-22T05:43:52.949Z",
-      "suggestedRefreshMinutes": 268,
-      "weeklySalesVolume": 110
+      "currentPrice": 2913.3,
+      "lastSaleAt": "2026-03-22T08:15:37+00:00",
+      "lastUpdated": "2026-03-22T10:30:37.532Z",
+      "suggestedRefreshMinutes": 330,
+      "weeklySalesVolume": 114
     },
     {
       "name": "Oreseeker Essence Crystal",
@@ -8477,10 +8477,10 @@
         }
       ],
       "currentPrice": 3399.8,
-      "lastSaleAt": "2026-03-22T06:12:59+00:00",
-      "lastUpdated": "2026-03-22T08:00:09.233Z",
-      "suggestedRefreshMinutes": 132,
-      "weeklySalesVolume": 416
+      "lastSaleAt": "2026-03-22T10:01:25+00:00",
+      "lastUpdated": "2026-03-22T10:30:37.654Z",
+      "suggestedRefreshMinutes": 99,
+      "weeklySalesVolume": 425
     },
     {
       "name": "Molten Core Tonic",
@@ -8778,11 +8778,11 @@
           "quantity": 1
         }
       ],
-      "currentPrice": 7144.8,
-      "lastSaleAt": "2026-03-22T07:04:18+00:00",
-      "lastUpdated": "2026-03-22T07:31:21.563Z",
+      "currentPrice": 7145.6,
+      "lastSaleAt": "2026-03-22T09:18:45+00:00",
+      "lastUpdated": "2026-03-22T10:30:37.735Z",
       "suggestedRefreshMinutes": 167,
-      "weeklySalesVolume": 509
+      "weeklySalesVolume": 519
     },
     {
       "name": "Shadowbane",
@@ -9145,9 +9145,9 @@
       ],
       "currentPrice": 6250,
       "lastSaleAt": "2026-03-17T09:42:21+00:00",
-      "lastUpdated": "2026-03-21T05:16:21.020Z",
+      "lastUpdated": "2026-03-22T10:30:37.810Z",
       "suggestedRefreshMinutes": 1741,
-      "weeklySalesVolume": 6
+      "weeklySalesVolume": 4
     },
     {
       "name": "Stormguard Shield",
@@ -10007,7 +10007,7 @@
       ],
       "currentPrice": 18000,
       "lastSaleAt": "2026-03-19T14:45:04+00:00",
-      "lastUpdated": "2026-03-22T08:44:50.747Z",
+      "lastUpdated": "2026-03-22T10:30:37.892Z",
       "suggestedRefreshMinutes": 105,
       "weeklySalesVolume": 41
     },
@@ -10349,7 +10349,7 @@
       ],
       "currentPrice": 9600,
       "lastSaleAt": "2026-03-19T14:07:16+00:00",
-      "lastUpdated": "2026-03-22T09:52:52.838Z",
+      "lastUpdated": "2026-03-22T10:30:37.970Z",
       "suggestedRefreshMinutes": 5,
       "weeklySalesVolume": 23
     },
@@ -11209,11 +11209,11 @@
           "quantity": 1
         }
       ],
-      "currentPrice": 7532.5,
-      "lastSaleAt": "2026-03-22T04:09:23+00:00",
-      "lastUpdated": "2026-03-22T08:00:09.707Z",
-      "suggestedRefreshMinutes": 117,
-      "weeklySalesVolume": 386
+      "currentPrice": 7536.1,
+      "lastSaleAt": "2026-03-22T09:04:11+00:00",
+      "lastUpdated": "2026-03-22T10:30:38.152Z",
+      "suggestedRefreshMinutes": 171,
+      "weeklySalesVolume": 396
     },
     {
       "name": "Sunfire",
@@ -11589,7 +11589,7 @@
       ],
       "currentPrice": 50000,
       "lastSaleAt": "2026-03-19T14:34:45+00:00",
-      "lastUpdated": "2026-03-22T08:44:51.120Z",
+      "lastUpdated": "2026-03-22T10:30:38.223Z",
       "suggestedRefreshMinutes": 94,
       "weeklySalesVolume": 19
     },
@@ -15943,7 +15943,7 @@
       "timeSeconds": 10.9,
       "baseCost": 0,
       "vendorValue": 1,
-      "marketPrice": 5.5,
+      "marketPrice": 5,
       "hashedId": "7eA59WrBQRXJYzb62qKv",
       "skill": "mining"
     },
@@ -16123,7 +16123,7 @@
       "timeSeconds": 36.4,
       "baseCost": 16,
       "vendorValue": 22,
-      "marketPrice": 34.1,
+      "marketPrice": 34.3,
       "hashedId": "oaJydnOmQW2LbgRe5ME6",
       "skill": "fishing"
     },
