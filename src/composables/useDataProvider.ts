@@ -517,7 +517,7 @@ function createDataProvider() {
     })
 
     // Build lookup map for sub-recipes (intermediate crafted materials)
-    const recipeMap = new Map<string, (typeof defaults.value.resourceRecipes)[0]>()
+    const recipeMap = new Map<string, NonNullable<typeof defaults.value.resourceRecipes>[0]>()
     ;(defaults.value.resourceRecipes || []).forEach((recipe) => {
       recipeMap.set(recipe.name, recipe)
     })
