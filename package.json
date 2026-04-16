@@ -12,7 +12,9 @@
     "test:run": "vitest run",
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
-    "refresh-prices": "tsx scripts/refresh-market-prices.ts"
+    "refresh-prices": "tsx scripts/refresh-market-prices.ts",
+    "generate-sprite-hashes": "tsx scripts/generate-sprite-hashes-browser.ts",
+    "generate-sprite-hashes-docker": "docker run --rm -v $(pwd):/app -v /tmp:/tmp --network host mcr.microsoft.com/playwright:v1.52.0-noble bash -c 'cd /app && npm install --include=dev && node --loader ts-node/esm scripts/generate-sprite-hashes-browser.ts'"
   },
   "keywords": [
     "idlemmo",
@@ -29,6 +31,7 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/node": "^25.3.0",
+    "@types/sharp": "^0.31.1",
     "@typescript-eslint/eslint-plugin": "^8.56.1",
     "@typescript-eslint/parser": "^8.56.1",
     "@vitejs/plugin-vue": "^6.0.4",
@@ -42,6 +45,7 @@
     "jsdom": "^28.1.0",
     "postcss": "^8.5.6",
     "prettier": "^3.8.1",
+    "sharp": "^0.34.5",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "vite": "^7.3.1",

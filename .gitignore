@@ -29,6 +29,9 @@ dist-ssr
 *.sln
 *.sw?
 
+# Sprite cache from generate-sprite-hashes.ts script
+.sprite-cache/
+
 # Development artifacts
 RESPONSIVE_IMPROVEMENTS.md
 mobile-improvements.patch

@@ -48,6 +48,23 @@ export default [
         KeyboardEvent: 'readonly',
         MouseEvent: 'readonly',
         Event: 'readonly',
+        // Base64 encoding/decoding (standard browser globals)
+        atob: 'readonly',
+        btoa: 'readonly',
+        // Canvas / image processing globals
+        ImageData: 'readonly',
+        CanvasRenderingContext2D: 'readonly',
+        CanvasImageSource: 'readonly',
+        OffscreenCanvas: 'readonly',
+        Image: 'readonly',
+        HTMLImageElement: 'readonly',
+        createImageBitmap: 'readonly',
+        // Event types
+        DragEvent: 'readonly',
+        ClipboardEvent: 'readonly',
+        DataTransfer: 'readonly',
+        // Element types
+        HTMLSelectElement: 'readonly',
         // Node globals (for vite.config.ts)
         process: 'readonly',
       },
@@ -59,6 +76,7 @@ export default [
       ...pluginTypeScript.configs.recommended.rules,
       'vue/multi-word-component-names': 'off',
       'preserve-caught-error': 'off',
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     },
   },
   {
@@ -76,6 +94,11 @@ export default [
         // Node/DOM globals
         global: 'readonly',
         Storage: 'readonly',
+        // Browser/DOM types used in test mocks
+        PredefinedColorSpace: 'readonly',
+        performance: 'readonly',
+        HTMLButtonElement: 'readonly',
+        atob: 'readonly',
       },
     },
     rules: {

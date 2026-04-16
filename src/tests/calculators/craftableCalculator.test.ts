@@ -381,8 +381,11 @@ describe('calculateCraftableProfits', () => {
     })
 
     it('should NOT mark craftable as low-confidence at exactly 30 days boundary', () => {
-      const boundaryDate = new Date()
-      boundaryDate.setDate(boundaryDate.getDate() - 30) // Exactly 30 days
+      // Use 30 days minus 60 seconds to give the test a margin against timing
+      // jitter. setDate() subtracts calendar days but Date.now() inside
+      // isLowConfidence runs a few ms later, which can push the gap just past
+      // 30 days and cause spurious failures.
+      const boundaryDate = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000 + 60_000)
 
       const craftableRecipe: CraftableRecipe = {
         name: 'Boundary Item',
@@ -397,7 +400,7 @@ describe('calculateCraftableProfits', () => {
       const results = calculateCraftableProfits([craftableRecipe], mockTaxRate, materialPriceMap, [])
 
       expect(results).toHaveLength(1)
-      // Exactly 30 days is NOT low confidence (threshold is > 30)
+      // Boundary is NOT low confidence (threshold is > 30 days)
       expect(results[0].isLowConfidence).toBe(false)
     })
   })

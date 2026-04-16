@@ -2,9 +2,11 @@
 import { ref, computed, onMounted, onBeforeUnmount, watch, nextTick } from 'vue'
 import { Chart, registerables } from 'chart.js'
 Chart.register(...registerables)
+import type { MasterItem } from '../types'
 import { useCharacterTracker } from '../composables/useCharacterTracker'
 import { useDataProvider } from '../composables/useDataProvider'
 import { useToast } from '../composables/useToast'
+import ScreenshotImport from './ScreenshotImport.vue'
 
 const tracker = useCharacterTracker()
 const dataProvider = useDataProvider()
@@ -18,6 +20,9 @@ const newCharacterName = ref('')
 const searchQuery = ref('')
 const searchDebounceTimeout = ref<number | null>(null)
 const debouncedSearchQuery = ref('')
+
+// Screenshot import modal
+const showScreenshotImport = ref(false)
 
 // Constants
 const MAX_SEARCH_RESULTS = 20
@@ -144,12 +149,12 @@ const allItems = computed(() => {
   })
 
   // Add allItems from defaults.json (items not in any category)
-  dataProvider.allItems.value.forEach((item) => {
+  ;(dataProvider.allItems.value as MasterItem[]).forEach((item) => {
     if (item.hashedId && !seen.has(item.hashedId)) {
       items.push({
         hashId: item.hashedId,
         name: item.name,
-        price: item.vendorPrice ?? 0,
+        price: item.vendorValue ?? 0,
       })
     }
   })
@@ -537,7 +542,19 @@ watch(
 
       <!-- 4. Add item section -->
       <div class="add-item-section">
-        <h3 class="section-title">Add Item</h3>
+        <div class="add-item-header">
+          <h3 class="section-title">Add Item</h3>
+          <button class="screenshot-import-btn" @click="showScreenshotImport = true">
+            <svg
+width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+              <circle cx="8.5" cy="8.5" r="1.5" />
+              <polyline points="21 15 16 10 5 21" />
+            </svg>
+            Import from Screenshot
+          </button>
+        </div>
         <input
           v-model="searchQuery"
           type="text"
@@ -612,6 +629,15 @@ watch(
         </div>
       </div>
     </template>
+
+    <!-- Screenshot import modal (teleported to body for z-index stacking) -->
+    <Teleport to="body">
+      <ScreenshotImport
+        v-if="showScreenshotImport"
+        @close="showScreenshotImport = false"
+        @imported="showScreenshotImport = false"
+      />
+    </Teleport>
   </div>
 </template>
 
@@ -833,6 +859,46 @@ watch(
   border-radius: var(--surface-radius);
   padding: 1.5rem;
   box-shadow: var(--surface-shadow);
+}
+
+.add-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.add-item-header .section-title {
+  margin: 0;
+}
+
+.screenshot-import-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.875rem;
+  min-height: unset;
+  height: 36px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s var(--ease-in-out);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.screenshot-import-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  transform: none;
+  box-shadow: none;
 }
 
 .item-search-input {
