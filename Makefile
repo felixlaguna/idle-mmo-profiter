@@ -1,4 +1,4 @@
-.PHONY: help up down restart logs build ps url clean dev install lint typecheck build-app test test-run format ci generate-sprite-hashes patch-manifest-quality preresize-sprites
+.PHONY: help up down restart logs build ps url clean dev install lint typecheck build-app test test-run format ci test-screenshot-pipeline generate-sprite-hashes patch-manifest-quality preresize-sprites
 
 # Default target
 help:
@@ -117,8 +117,24 @@ build-app:
 	docker compose run --rm app npm run build
 
 # Run all CI checks (fails fast)
-ci: lint typecheck test-run build-app
+ci: lint typecheck test-run build-app test-screenshot-pipeline
 	@echo "✅ All CI checks passed!"
+
+# E2E screenshot pipeline test via Playwright — uses production code in a real
+# browser by importing modules from the running Vite dev server.
+# Requires: app running (`make up`).  Skipped gracefully if app is not up.
+test-screenshot-pipeline:
+	@if docker compose ps app --format '{{.State}}' 2>/dev/null | grep -q running; then \
+		echo "Running screenshot pipeline E2E tests (Playwright)…"; \
+		docker run --rm \
+			-v $(PWD):/app \
+			--network container:idle_mmo_profiter_app \
+			mcr.microsoft.com/playwright:v1.52.0-noble \
+			bash -c 'npm install --no-save playwright@1.52.0 2>/dev/null; node /app/scripts/test-screenshot-pipeline.cjs' \
+		|| exit 1; \
+	else \
+		echo "⚠️  Skipping screenshot E2E tests — app not running (run 'make up' first)"; \
+	fi
 
 # Generate browser-rendered sprite hash database using the Playwright Docker image.
 # Reads src/data/sprites/*.png, renders each in a browser slot, computes dHash,

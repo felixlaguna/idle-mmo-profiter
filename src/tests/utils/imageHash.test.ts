@@ -32,6 +32,8 @@ import {
   MASK_TL_COLS,
   MASK_BR_ROWS,
   MASK_BR_COLS,
+  SPRITE_WIDTH_FRAC,
+  SPRITE_HEIGHT_FRAC,
   detectSpriteBBox,
   sampleCornerColors,
 } from '../../utils/imageHash'
@@ -303,6 +305,40 @@ describe('exported constants', () => {
 
   it('grid produces 64 bits per channel (DHASH_GRID_W-1) * DHASH_GRID_H', () => {
     expect((DHASH_GRID_W - 1) * DHASH_GRID_H).toBe(64)
+  })
+
+  // Proportional crop fractions
+  it('SPRITE_WIDTH_FRAC equals 48/84', () => {
+    expect(SPRITE_WIDTH_FRAC).toBeCloseTo(48 / 84)
+  })
+  it('SPRITE_HEIGHT_FRAC equals 48/64', () => {
+    expect(SPRITE_HEIGHT_FRAC).toBeCloseTo(48 / 64)
+  })
+  it('desktop slot (84×64) proportional crop equals CANONICAL_SPRITE_SIZE', () => {
+    // For the canonical DB slot the crop must be exactly 48×48.
+    const cropW = Math.max(CANONICAL_SPRITE_SIZE, Math.round(CANONICAL_W  * SPRITE_WIDTH_FRAC))
+    const cropH = Math.max(CANONICAL_SPRITE_SIZE, Math.round(CANONICAL_H * SPRITE_HEIGHT_FRAC))
+    expect(cropW).toBe(CANONICAL_SPRITE_SIZE)
+    expect(cropH).toBe(CANONICAL_SPRITE_SIZE)
+  })
+  it('phone cell (300×260) square crop is larger than CANONICAL_SPRITE_SIZE', () => {
+    const phoneW = 300
+    const phoneH = 260
+    const cropW = Math.max(CANONICAL_SPRITE_SIZE, Math.round(phoneW * SPRITE_WIDTH_FRAC))
+    const cropH = Math.max(CANONICAL_SPRITE_SIZE, Math.round(phoneH * SPRITE_HEIGHT_FRAC))
+    const cropSize = Math.min(cropW, cropH)
+    expect(cropSize).toBeGreaterThan(CANONICAL_SPRITE_SIZE)
+  })
+
+  it('narrow phone cell (78×246) square crop equals CANONICAL_SPRITE_SIZE (old behaviour preserved)', () => {
+    // When cell width is at or below the canonical slot width, cropW gets clamped
+    // to 48 and cropSize = min(48, cropH) = 48 — same as the old fixed 48×48 crop.
+    const narrowW = 78
+    const tallH = 246
+    const cropW = Math.max(CANONICAL_SPRITE_SIZE, Math.round(narrowW * SPRITE_WIDTH_FRAC))
+    const cropH = Math.max(CANONICAL_SPRITE_SIZE, Math.round(tallH  * SPRITE_HEIGHT_FRAC))
+    const cropSize = Math.min(cropW, cropH)
+    expect(cropSize).toBe(CANONICAL_SPRITE_SIZE)
   })
 })
 

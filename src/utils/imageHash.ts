@@ -45,6 +45,26 @@
 // ---------------------------------------------------------------------------
 
 /**
+ * Proportional sprite crop fractions.
+ *
+ * The game renders a 48×48 sprite image centred inside an 84×64 slot.
+ * To extract the sprite region from a cell of any size we crop a proportional
+ * rectangle whose dimensions are (width × SPRITE_WIDTH_FRAC) × (height ×
+ * SPRITE_HEIGHT_FRAC), then downscale that crop to CANONICAL_SPRITE_SIZE before
+ * hashing.  Using fractions instead of a fixed 48-pixel crop means large
+ * phone-scale cells (~300×260 px) get the full sprite area rather than just a
+ * tiny 48×48 centre patch.
+ *
+ * SPRITE_WIDTH_FRAC  = 48 / 84  ≈ 0.571  (sprite : slot width)
+ * SPRITE_HEIGHT_FRAC = 48 / 64  = 0.75   (sprite : slot height)
+ *
+ * Both fractions MUST match the values used in
+ * scripts/generate-sprite-hashes-browser.ts.
+ */
+export const SPRITE_WIDTH_FRAC  = 48 / 84   // ~0.5714
+export const SPRITE_HEIGHT_FRAC = 48 / 64   // 0.75
+
+/**
  * Canonical sprite size. After bounding-box detection and cropping, the sprite
  * is resized to this square before hashing. Matches the game's w-12 h-12 (48×48).
  *
@@ -97,6 +117,36 @@ const SLOT_BG = { r: 22, g: 29, b: 42 } // rgb(22,29,42)
 // ---------------------------------------------------------------------------
 
 /**
+ * Detect the dark left margin in a cell ImageData.
+ *
+ * Phone screenshots can have a persistent dark UI strip on the left side of
+ * the leftmost column (e.g. ~51 px of rgb(19,23,35) background before the
+ * actual inventory slot starts).  This helper scans the cell's horizontal
+ * centre row and returns the number of leading dark pixels.
+ *
+ * The detected margin is used by computeDHash to centre the crop within the
+ * actual slot content area rather than the full cell width.
+ *
+ * @param cellImageData - Raw RGBA ImageData for one inventory cell.
+ * @param effectiveH    - Effective slot height (refH for merged-row cells).
+ * @returns Number of leading dark pixels (0 if no dark margin detected).
+ */
+export function detectLeftMargin(cellImageData: ImageData, effectiveH: number): number {
+  const { width } = cellImageData
+  const DARK_LUMA_THRESHOLD = 30
+  const sampleY = Math.round(effectiveH / 2)
+  const rawData = cellImageData.data
+  let leftMargin = 0
+  for (let x = 0; x < Math.min(width, 200); x++) {
+    const idx = (sampleY * width + x) * 4
+    const luma = (rawData[idx] * 299 + rawData[idx + 1] * 587 + rawData[idx + 2] * 114) / 1000
+    if (luma >= DARK_LUMA_THRESHOLD) break
+    leftMargin = x + 1
+  }
+  return leftMargin
+}
+
+/**
  * Compute a 128-bit dHash fingerprint from a raw inventory cell ImageData.
  *
  * The input should be the inset cell image (borders/gap pixels already removed)
@@ -113,6 +163,7 @@ const SLOT_BG = { r: 22, g: 29, b: 42 } // rgb(22,29,42)
 export function computeDHash(
   cellImageData: ImageData,
   quality?: string,
+  referenceHeight?: number,
 ): string | null {
   const { width, height } = cellImageData
 
@@ -126,31 +177,73 @@ export function computeDHash(
   if (!tmpCtx) return null
   tmpCtx.putImageData(cellImageData, 0, 0)
 
-  // Step 2: Center-crop to CANONICAL_SPRITE_SIZE × CANONICAL_SPRITE_SIZE.
+  // Step 2: Proportional square center-crop → resize to CANONICAL_SPRITE_SIZE × CANONICAL_SPRITE_SIZE.
   //
-  // The sprite is always centered in the slot (game CSS: flexbox center).
-  // Cropping the center 48×48 region gives the same sprite content on both
-  // sides: DB renders (84×64 slot) and screenshot inset cells (~78×57).
-  // This is more robust than bbox detection for JPEG-compressed screenshots.
+  // Problem with a fixed 48×48 crop:
+  //   Desktop cells are ~84×64 px — a 48×48 crop covers most of the sprite.
+  //   Phone cells are ~300×260 px — a 48×48 crop captures only a tiny central
+  //   patch of the much larger sprite, so all items look alike ("Water Bucket").
   //
-  // Row-1 short-cell fix:
-  // Row 1 cells adjacent to the header are detected ~10 px shorter than
-  // normal rows (~71 px vs ~81 px). After 9T+8B insets the available height
-  // is only ~54 px. Center-cropping gives cropY=(54-48)/2=3, but the sprite
-  // sits at the top of the inset region, so cropY=0 gives a better match.
+  // Solution: compute proportional crop extents from the sprite-to-slot fractions
+  // (SPRITE_WIDTH_FRAC = 48/84, SPRITE_HEIGHT_FRAC = 48/64), take the minimum
+  // of the two to produce a square region, then resize that square to
+  // CANONICAL_SPRITE_SIZE × CANONICAL_SPRITE_SIZE before hashing.
   //
-  // Normal-height rows (insetH ≈ 63–64 px) use center-crop (cropY ≈ 7–8),
-  // which matches the DB's crop from the canonical 64 px slot.
+  // cropW    = max(48, round(width  × SPRITE_WIDTH_FRAC))   e.g. 84→48,  300→171
+  // cropH    = max(48, round(height × SPRITE_HEIGHT_FRAC))  e.g. 64→48,  260→195
+  // cropSize = min(cropW, cropH)  →  square crop            e.g.   →48, 300×260→171
   //
-  // Threshold: only apply cropY=0 when inset height is significantly below
-  // CANONICAL_H (specifically < CANONICAL_H - 5 = 59 px).  This keeps
-  // normal rows with insetH=63 on center-crop (cropY=7).
-  const cropX = Math.round((width  - CANONICAL_SPRITE_SIZE) / 2)
-  const cropY = height < CANONICAL_H - 5
-    ? 0  // very short row: sprite starts at top of inset region
-    : Math.round((height - CANONICAL_SPRITE_SIZE) / 2)
-  const safeCropX = Math.max(0, Math.min(cropX, width  - CANONICAL_SPRITE_SIZE))
-  const safeCropY = Math.max(0, Math.min(cropY, height - CANONICAL_SPRITE_SIZE))
+  // Using min() keeps the crop square on all cell sizes, which avoids distorting
+  // the sprite's aspect ratio during the resize to 48×48.  For cells where
+  // cropW is clamped to 48 (narrow cells at or below the canonical width),
+  // cropSize = min(48, cropH) = 48 — identical to the old fixed-48 behaviour.
+  // When the grid detector merged two half-slots (merged-row case), the cell height
+  // is ~2× refH.  The sprite lives in the TOP refH pixels of the merged cell, so
+  // we use refH as the "effective" slot height for crop sizing and vertical placement.
+  // detectGrid signals this by passing referenceHeight = rowRef (the pre-merge half-height).
+  const refH = referenceHeight ?? CANONICAL_H
+  const effectiveH = (height > refH * 1.5) ? refH : height
+
+  const cropW = Math.max(CANONICAL_SPRITE_SIZE, Math.round(width     * SPRITE_WIDTH_FRAC))
+  const cropH = Math.max(CANONICAL_SPRITE_SIZE, Math.round(effectiveH * SPRITE_HEIGHT_FRAC))
+  const cropSize = Math.min(cropW, cropH)
+
+  // Detect any dark left margin (e.g. phone screenshot col 0 has ~51 px of
+  // dark UI strip before the actual inventory slot).  Centre the crop within
+  // the content area (cell width minus the dark margin).
+  const leftMargin = detectLeftMargin(cellImageData, effectiveH)
+  const contentWidth = width - leftMargin
+  const cropX = leftMargin + Math.round((contentWidth - cropSize) / 2)
+
+  // cropY strategy expressed relative to effectiveH:
+  //   • Very short cells (effectiveH < refH*0.6): sprite is top-aligned → 0
+  //   • cropSize ≥ effectiveH: crop fills the slot — centre in full cell
+  //   • Tall cells (height > refH+5, non-merged): skip separator, then centre
+  //   • Normal/merged: centre within effectiveH window at top of cell
+  let cropY: number
+  if (effectiveH < refH * 0.6) {
+    // Very short row (e.g. partial trailing row on desktop): sprite at top.
+    cropY = 0
+  } else if (cropSize >= effectiveH) {
+    // crop covers the whole slot — centre in the full cell height.
+    cropY = Math.round((height - cropSize) / 2)
+  } else if (height > refH + 5 && effectiveH === height) {
+    // Tall cell (non-merged): skip the separator border, then centre within refH.
+    // Guard: when cropSize >= refH the offset formula (refH - cropSize)/2 goes
+    // negative, cropping the bottom border instead of the sprite centre.
+    // In that case just centre the crop within the full cell height.
+    if (cropSize >= refH) {
+      cropY = Math.round((height - cropSize) / 2)
+    } else {
+      cropY = (height - refH) + Math.round((refH - cropSize) / 2) + 1
+    }
+  } else {
+    // Normal cell or merged-row: centre cropSize within the top effectiveH pixels.
+    cropY = Math.round((effectiveH - cropSize) / 2)
+  }
+
+  const safeCropX = Math.max(0, Math.min(cropX, width  - cropSize))
+  const safeCropY = Math.max(0, Math.min(cropY, height - cropSize))
 
   const canonicalCanvas = createOffscreen(CANONICAL_SPRITE_SIZE, CANONICAL_SPRITE_SIZE)
   const canonicalCtx = canonicalCanvas.getContext('2d') as CanvasRenderingContext2D | null
@@ -160,9 +253,10 @@ export function computeDHash(
   canonicalCtx.fillStyle = `rgb(${bg.r},${bg.g},${bg.b})`
   canonicalCtx.fillRect(0, 0, CANONICAL_SPRITE_SIZE, CANONICAL_SPRITE_SIZE)
 
+  // Resize the proportional square crop to CANONICAL_SPRITE_SIZE × CANONICAL_SPRITE_SIZE.
   canonicalCtx.drawImage(
     tmpCanvas as unknown as CanvasImageSource,
-    safeCropX, safeCropY, CANONICAL_SPRITE_SIZE, CANONICAL_SPRITE_SIZE,
+    safeCropX, safeCropY, cropSize, cropSize,
     0, 0, CANONICAL_SPRITE_SIZE, CANONICAL_SPRITE_SIZE,
   )
 
@@ -249,6 +343,78 @@ export function hammingDistance(hashA: string, hashB: string): number {
     dist += popcount16(a ^ b)
   }
   return dist
+}
+
+// ---------------------------------------------------------------------------
+// Color fingerprint (phone matching)
+// ---------------------------------------------------------------------------
+
+/**
+ * Compute the average [R, G, B] color over the same crop region that
+ * `computeDHash` uses.  This is JPEG-robust at large phone cell sizes where
+ * dHash bit-flip rates are too high for reliable matching.
+ *
+ * Returns null if the canvas API is unavailable.
+ *
+ * @param cellImageData   - Source ImageData (the full cell image).
+ * @param referenceHeight - Reference slot height for merged-row cells.
+ * @param leftMargin      - Dark left-margin pixels (from detectLeftMargin).
+ * @returns Average [R, G, B] over the proportional crop region, or null.
+ */
+export function computeCellColor(
+  cellImageData: ImageData,
+  referenceHeight?: number,
+  leftMargin = 0,
+): [number, number, number] | null {
+  const { width, height } = cellImageData
+  if (width <= 0 || height <= 0) return null
+
+  const refH = referenceHeight ?? CANONICAL_H
+  const effectiveH = (height > refH * 1.5) ? refH : height
+
+  const cropW = Math.max(CANONICAL_SPRITE_SIZE, Math.round(width     * SPRITE_WIDTH_FRAC))
+  const cropH = Math.max(CANONICAL_SPRITE_SIZE, Math.round(effectiveH * SPRITE_HEIGHT_FRAC))
+  const cropSize = Math.min(cropW, cropH)
+
+  const contentWidth = width - leftMargin
+  const cropX = leftMargin + Math.round((contentWidth - cropSize) / 2)
+
+  let cropY: number
+  if (effectiveH < refH * 0.6) {
+    cropY = 0
+  } else if (cropSize >= effectiveH) {
+    cropY = Math.round((height - cropSize) / 2)
+  } else if (height > refH + 5 && effectiveH === height) {
+    // Guard: when cropSize >= refH the offset goes negative — centre in full cell instead.
+    if (cropSize >= refH) {
+      cropY = Math.round((height - cropSize) / 2)
+    } else {
+      cropY = (height - refH) + Math.round((refH - cropSize) / 2) + 1
+    }
+  } else {
+    cropY = Math.round((effectiveH - cropSize) / 2)
+  }
+
+  const safeCropX = Math.max(0, Math.min(cropX, width  - cropSize))
+  const safeCropY = Math.max(0, Math.min(cropY, height - cropSize))
+
+  // Sum RGB values over the crop region directly from cellImageData (no canvas needed).
+  const data = cellImageData.data
+  let sumR = 0, sumG = 0, sumB = 0
+  let count = 0
+
+  for (let row = safeCropY; row < safeCropY + cropSize; row++) {
+    for (let col = safeCropX; col < safeCropX + cropSize; col++) {
+      const i = (row * width + col) * 4
+      sumR += data[i]
+      sumG += data[i + 1]
+      sumB += data[i + 2]
+      count++
+    }
+  }
+
+  if (count === 0) return null
+  return [Math.round(sumR / count), Math.round(sumG / count), Math.round(sumB / count)]
 }
 
 // ---------------------------------------------------------------------------

@@ -33,6 +33,12 @@ export interface GridCell {
   width: number
   /** Cell height in pixels */
   height: number
+  /**
+   * Modal (reference) row height in pixels as detected by normalizeIntervals.
+   * Passed to computeDHash so it can correctly align the center-crop for
+   * tall cells that include extra separator pixels at the top.
+   */
+  referenceHeight: number
   /** Raw pixel data for the cell */
   imageData: ImageData
   /** Offscreen canvas element containing only this cell */
@@ -49,10 +55,14 @@ export interface GridDetectorOptions {
    * Minimum fraction of rows (for vertical lines) or columns (for
    * horizontal lines) that must have a detectable edge for a position
    * to be considered a grid border. Expressed as a fraction of the
-   * column/row length (0–1). Default: 0.5 (50 %).
+   * column/row length (0–1). Default: 1.0 (100 %).
    *
-   * Lower values detect more lines (may include noise). Higher values
-   * require lines to span a larger fraction of the image.
+   * Higher values require stronger/wider borders — this rejects spurious
+   * inner-cell edges that occur at sprite boundaries inside inventory cells.
+   * Lower values detect more lines but may include sprite edges as false
+   * grid lines. For IdleMMO inventory screenshots, 1.0 selects only the
+   * true cell-border peaks (projX/projY ≈ 1.3) while discarding the
+   * weaker sprite edges (≈ 0.7).
    */
   lineThreshold?: number
   /**
@@ -73,7 +83,10 @@ export interface GridDetectorOptions {
   minCellSize?: number
   /**
    * Maximum cell dimension (px). Cells larger than this are discarded.
-   * Default: 300.
+   * Default: 2000.  The previous default of 300 was too small for high-DPI
+   * phone screenshots where cells can reach 300–350 px per axis.
+   * `normalizeIntervals` handles noise filtering, so a generous upper bound
+   * is safe here.
    */
   maxCellSize?: number
   /**
@@ -180,16 +193,24 @@ function projectEdgeFractions(
 
 /**
  * Find the indices at which `projection` exceeds `threshold`.
- * Consecutive indices are merged into bands; the midpoint of each band
- * is returned as the grid-line position.
+ * Near-consecutive indices separated by a gap of at most `maxBandGap`
+ * pixels are merged into a single band; the midpoint of each band is
+ * returned as the grid-line position.
+ *
+ * The gap tolerance handles phone/high-DPI screenshots where a 4–6 px
+ * wide grid border can produce two sub-peaks with a 1–2 px dip between
+ * them (caused by the border's center channel being slightly below
+ * threshold due to JPEG compression).  A gap of 2 is safe because real
+ * inventory cell widths are always >> 20 px.
  *
  * Works with both the old dark-fraction projections and the new
  * edge-fraction projections — in both cases a high value means a border.
  */
-function findGridLines(projection: Float32Array, threshold: number): number[] {
+function findGridLines(projection: Float32Array, threshold: number, maxBandGap: number = 2): number[] {
   const lines: number[] = []
   let inBand = false
   let bandStart = 0
+  let gapRun = 0
 
   for (let i = 0; i < projection.length; i++) {
     if (projection[i] >= threshold) {
@@ -197,16 +218,22 @@ function findGridLines(projection: Float32Array, threshold: number): number[] {
         inBand = true
         bandStart = i
       }
+      gapRun = 0
     } else {
       if (inBand) {
-        inBand = false
-        lines.push(Math.round((bandStart + i - 1) / 2))
+        gapRun++
+        if (gapRun > maxBandGap) {
+          // Band ended — record midpoint of the band (excluding the gap tail)
+          inBand = false
+          lines.push(Math.round((bandStart + i - 1 - gapRun) / 2))
+          gapRun = 0
+        }
       }
     }
   }
   // Handle a band that runs to the very end
   if (inBand) {
-    lines.push(Math.round((bandStart + projection.length - 1) / 2))
+    lines.push(Math.round((bandStart + projection.length - 1 - gapRun) / 2))
   }
 
   return lines
@@ -249,47 +276,142 @@ function linesToIntervals(
  *
  * @param intervals - Array of [start, end] pixel intervals.
  * @param toleranceFraction - How much deviation from median is allowed (default 35 %).
+ * @returns Object with normalized intervals and the computed reference cell size.
  */
 function normalizeIntervals(
   intervals: Array<[number, number]>,
   toleranceFraction: number = 0.35,
-): Array<[number, number]> {
-  if (intervals.length === 0) return intervals
+): { intervals: Array<[number, number]>; reference: number } {
+  if (intervals.length === 0) return { intervals, reference: 0 }
 
-  // Compute sizes
+  // Use a modal-like reference: refine median toward the cluster of largest
+  // sizes. This avoids undersized slivers (caused by spurious internal edges)
+  // dragging the reference down.
   const sizes = intervals.map(([s, e]) => e - s)
-
-  // Median size as the reference
   const sorted = [...sizes].sort((a, b) => a - b)
-  const median = sorted[Math.floor(sorted.length / 2)]
+  let reference = sorted[Math.floor(sorted.length / 2)]
+  for (let iter = 0; iter < 3; iter++) {
+    const above = sorted.filter((s) => s >= reference * 0.75)
+    if (above.length === 0) break
+    const newRef = above[Math.floor(above.length / 2)]
+    if (newRef === reference) break
+    reference = newRef
+  }
 
-  const tolerance = median * toleranceFraction
+  // Guard: if the reference is dragged down by a partial trailing row (e.g. the
+  // last row is only 50 % of a full row), ignore all sizes below reference * 0.5
+  // and recompute the median from the full-size rows only.
+  const maxSize = sorted[sorted.length - 1]
+  if (reference < maxSize * 0.5) {
+    const upperHalf = sorted.filter((s) => s >= maxSize * 0.5)
+    if (upperHalf.length > 0) {
+      reference = upperHalf[Math.floor(upperHalf.length / 2)]
+    }
+  }
+
+  const tolerance = reference * toleranceFraction
   const result: Array<[number, number]> = []
+  let pendingMerge: [number, number] | null = null
 
   for (const [start, end] of intervals) {
     const size = end - start
 
-    if (Math.abs(size - median) <= tolerance) {
-      // Normal-sized cell — keep as-is.
-      result.push([start, end])
-    } else if (size > median + tolerance) {
-      // Oversized: check if it is approximately N× the median (N ≥ 2).
-      // If so, split it evenly into N cells.
-      const n = Math.round(size / median)
+    if (Math.abs(size - reference) <= tolerance) {
+      if (pendingMerge !== null) {
+        // A sliver was pending. Prefer absorbing it: combine sliver + this
+        // interval and check if the merged span is closer to reference.
+        const mergedStart = pendingMerge[0]
+        const mergedSize = end - mergedStart
+        if (Math.abs(mergedSize - reference) <= tolerance || mergedSize > reference + tolerance) {
+          // Merged is acceptable — absorb the sliver into this interval.
+          result.push([mergedStart, end])
+        } else {
+          // Merging would produce something too large; drop the sliver and
+          // accept the current interval at face value.
+          result.push([start, end])
+        }
+        pendingMerge = null
+      } else {
+        result.push([start, end])
+      }
+    } else if (size > reference + tolerance) {
+      // If there is a pending sliver, try merging it with this oversized interval
+      // before splitting, in case the combined span is an exact multiple of reference.
+      const oversizedStart = pendingMerge ? pendingMerge[0] : start
+      const oversizedSize = end - oversizedStart
+      pendingMerge = null
+      const n = Math.round(oversizedSize / reference)
       if (n >= 2) {
-        const cellSize = size / n
+        const cellSize = oversizedSize / n
         for (let i = 0; i < n; i++) {
-          const s = Math.round(start + i * cellSize)
-          const e = i === n - 1 ? end : Math.round(start + (i + 1) * cellSize)
+          const s = Math.round(oversizedStart + i * cellSize)
+          const e = i === n - 1 ? end : Math.round(oversizedStart + (i + 1) * cellSize)
           result.push([s, e])
         }
+      } else if (n === 1 && Math.abs(oversizedSize - reference) <= tolerance) {
+        // After absorbing the sliver the interval is now within tolerance.
+        result.push([oversizedStart, end])
       }
-      // If n < 2 (some intermediate size), drop the interval as noise.
+      // n === 1 but still oversized: drop (no clean split).
+    } else {
+      // Undersized sliver: accumulate with any pending merge and check if the
+      // merged span reaches reference size.
+      const mergedStart: number = pendingMerge ? pendingMerge[0] : start
+      const mergedEnd: number = end
+      const mergedSize = mergedEnd - mergedStart
+
+      if (Math.abs(mergedSize - reference) <= tolerance) {
+        result.push([mergedStart, mergedEnd])
+        pendingMerge = null
+      } else if (mergedSize > reference + tolerance) {
+        result.push([mergedStart, mergedEnd])
+        pendingMerge = null
+      } else {
+        pendingMerge = [mergedStart, mergedEnd]
+      }
     }
-    // Below-median slivers are dropped (implicit else).
   }
 
-  return result
+  return { intervals: result, reference }
+}
+
+/**
+ * Remove leading and trailing intervals that are edge-padding cells —
+ * significantly smaller than the modal reference cell size.
+ *
+ * In inventory screenshots the inventory frame often adds a non-item
+ * column or row at each edge that is slightly narrower than the actual
+ * cells. Removing these avoids counting the frame border as an extra
+ * inventory slot.
+ *
+ * @param intervals  - Already-normalised intervals (output of normalizeIntervals).
+ * @param reference  - Modal cell size computed by normalizeIntervals.
+ * @param minFraction - Minimum size as a fraction of reference (default 0.90).
+ *                     Intervals smaller than `reference × minFraction` at the
+ *                     edges are trimmed.
+ */
+function trimEdgePadding(
+  intervals: Array<[number, number]>,
+  reference: number,
+  minFraction: number = 0.90,
+): Array<[number, number]> {
+  if (intervals.length === 0 || reference <= 0) return intervals
+
+  const minSize = reference * minFraction
+
+  // Trim leading padding cells
+  let start = 0
+  while (start < intervals.length && intervals[start][1] - intervals[start][0] < minSize) {
+    start++
+  }
+
+  // Trim trailing padding cells
+  let end = intervals.length - 1
+  while (end > start && intervals[end][1] - intervals[end][0] < minSize) {
+    end--
+  }
+
+  return intervals.slice(start, end + 1)
 }
 
 /**
@@ -386,7 +508,7 @@ export function detectGrid(
     lineThreshold = 0.5,
     darkPixelThreshold = 5,
     minCellSize = 20,
-    maxCellSize = 300,
+    maxCellSize = 2000,
     emptyStdDevThreshold = 18,
     cellInset = 0,
   } = options
@@ -410,20 +532,82 @@ export function detectGrid(
   // darkPixelThreshold is now used as the minimum edge magnitude per pixel.
   const { projX, projY } = projectEdgeFractions(gray, width, height, darkPixelThreshold)
 
-  const vertLines = findGridLines(projX, lineThreshold) // column separators
-  const horizLines = findGridLines(projY, lineThreshold) // row separators
+  // Adaptive threshold: each axis independently finds the best threshold.
+  //
+  // Different screenshots have different peak projection magnitudes:
+  //   - Desktop: projX peaks ≈ 1.1–1.3  → lineThreshold=0.95 works well.
+  //   - Phone:   projX peaks ≈ 0.65–0.68 → 0.95 gives zero lines; must fall back.
+  //
+  // We try the caller-supplied threshold first (handles desktop), then descend
+  // through a fallback ladder until lines are detected on each axis separately.
+  // Using separate per-axis thresholds ensures we always get the clearest lines
+  // (highest threshold that still yields ≥1 line), even when one axis has
+  // stronger edges than the other (common on phone screenshots where cell
+  // borders differ in the horizontal vs vertical direction).
+  const buildFallbackThresholds = (requested: number): number[] =>
+    requested > 0.7
+      ? [requested, 0.7, 0.5]
+      : requested > 0.5
+        ? [requested, 0.5]
+        : [requested]
+
+  const findLinesAdaptive = (proj: Float32Array): number[] => {
+    for (const t of buildFallbackThresholds(lineThreshold)) {
+      const lines = findGridLines(proj, t)
+      if (lines.length > 0) return lines
+    }
+    return []
+  }
+
+  const vertLines = findLinesAdaptive(projX) // column separators
+  const horizLines = findLinesAdaptive(projY) // row separators
 
   // A valid grid requires at least one detected line in each axis.
   // Without any lines there is no grid structure — just a plain image.
   if (vertLines.length === 0 || horizLines.length === 0) return []
 
   // --- Step 3: convert lines to cell intervals -----------------------------
-  let colIntervals = linesToIntervals(vertLines, width, minCellSize, maxCellSize)
-  let rowIntervals = linesToIntervals(horizLines, height, minCellSize, maxCellSize)
+  const rawColIntervals = linesToIntervals(vertLines, width, minCellSize, maxCellSize)
+  const rawRowIntervals = linesToIntervals(horizLines, height, minCellSize, maxCellSize)
 
-  // Normalise to remove slivers / noise
-  colIntervals = normalizeIntervals(colIntervals)
-  rowIntervals = normalizeIntervals(rowIntervals)
+  // Normalise to remove slivers / noise.
+  // Columns: also trim outer padding cells (frame border regions at image edges).
+  // Rows: do NOT trim edges — empty rows at the bottom are valid inventory slots.
+  const { intervals: normCols, reference: colRef } = normalizeIntervals(rawColIntervals)
+  const { intervals: normRows, reference: rowRef } = normalizeIntervals(rawRowIntervals)
+
+  const colIntervals = trimEdgePadding(normCols, colRef)
+
+  // If the detected row reference is implausibly small compared to the column
+  // reference (< 60 % of colRef), the row normalisation has converged on a
+  // half-cell artefact caused by strong interior sprite edges.  In that case,
+  // attempt to merge adjacent row-pairs whose combined height is close to
+  // 2 × rowRef, effectively recovering the true cell height.
+  let rowIntervals = normRows
+  if (colRef > 0 && rowRef > 0 && rowRef < colRef * 0.6) {
+    const doubleRef = rowRef * 2
+    const doubleToler = doubleRef * 0.35
+    const merged: Array<[number, number]> = []
+    let i = 0
+    while (i < normRows.length) {
+      const [s1, e1] = normRows[i]
+      if (i + 1 < normRows.length) {
+        const [, e2] = normRows[i + 1]
+        const combinedSize = e2 - s1
+        if (Math.abs(combinedSize - doubleRef) <= doubleToler) {
+          // Merge the pair into one cell
+          merged.push([s1, e2])
+          i += 2
+          continue
+        }
+      }
+      merged.push([s1, e1])
+      i++
+    }
+    if (merged.length < normRows.length) {
+      rowIntervals = merged
+    }
+  }
 
   if (colIntervals.length === 0 || rowIntervals.length === 0) return []
 
@@ -469,6 +653,11 @@ export function detectGrid(
         y: cellY,
         width: cellW,
         height: cellH,
+        // When the merge step fires, pass the ORIGINAL half-height as referenceHeight
+        // rather than the doubled value.  computeDHash uses referenceHeight to determine
+        // effectiveH; the merged cells have their sprite in the TOP refH pixels, so
+        // passing refH lets computeDHash crop correctly from the top of the merged cell.
+        referenceHeight: rowRef,
         imageData: cellData,
         canvas: cellCanvas,
         isEmpty,

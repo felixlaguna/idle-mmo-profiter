@@ -324,6 +324,11 @@ function isDigitCandidate(blob: BlobBounds, regionHeight: number, regionWidth: n
   // border — the widest single digit (e.g. "0", "8") is well below that limit.
   if (w > regionWidth * 0.45) return false
 
+  // Blobs that start in the lower half of the region AND the right 35% are
+  // quality-badge corner decorations (triangular ribbon at bottom-right of
+  // item slots).  Quantity digits are always in the top portion of the cell.
+  if (blob.minY > regionHeight * 0.50 && blob.minX > regionWidth * 0.65) return false
+
   return true
 }
 
