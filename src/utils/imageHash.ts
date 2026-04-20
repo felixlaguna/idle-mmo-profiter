@@ -119,13 +119,9 @@ const SLOT_BG = { r: 22, g: 29, b: 42 } // rgb(22,29,42)
 /**
  * Detect the dark left margin in a cell ImageData.
  *
- * Phone screenshots can have a persistent dark UI strip on the left side of
- * the leftmost column (e.g. ~51 px of rgb(19,23,35) background before the
- * actual inventory slot starts).  This helper scans the cell's horizontal
- * centre row and returns the number of leading dark pixels.
- *
- * The detected margin is used by computeDHash to centre the crop within the
- * actual slot content area rather than the full cell width.
+ * Scans the cell's horizontal centre row and returns the number of leading
+ * dark pixels.  Used by computeDHash to centre the crop within the actual
+ * slot content area rather than the full cell width.
  *
  * @param cellImageData - Raw RGBA ImageData for one inventory cell.
  * @param effectiveH    - Effective slot height (refH for merged-row cells).
@@ -133,7 +129,16 @@ const SLOT_BG = { r: 22, g: 29, b: 42 } // rgb(22,29,42)
  */
 export function detectLeftMargin(cellImageData: ImageData, effectiveH: number): number {
   const { width } = cellImageData
-  const DARK_LUMA_THRESHOLD = 30
+
+  // Threshold chosen to distinguish UI chrome from slot background:
+  //   UI chrome (device status bar / page bg): rgb(19,23,35) → luma ≈ 23
+  //   Standard slot background:                rgb(22,29,42) → luma ≈ 28
+  //   Refined slot background:                 rgb(21,41,81) → luma ≈ 40
+  //
+  // 26 accepts standard slot bg (28 ≥ 26) while rejecting UI chrome (23 < 26).
+  // The previous value of 30 caused the entire standard-quality slot background
+  // to register as "dark margin" because 28 < 30, shifting all phone cell crops.
+  const DARK_LUMA_THRESHOLD = 26
   const sampleY = Math.round(effectiveH / 2)
   const rawData = cellImageData.data
   let leftMargin = 0
@@ -165,11 +170,38 @@ export function computeDHash(
   quality?: string,
   referenceHeight?: number,
 ): string | null {
-  const { width, height } = cellImageData
+  let { width, height } = cellImageData
 
   if (width <= 0 || height <= 0) return null
 
   const bg = quality ? qualityBackground(quality) : SLOT_BG
+
+  // Step 0: Normalize cell to canonical slot size so hashes match the DB.
+  //
+  // Desktop cells larger than 1.5× the canonical slot (84×64) are resized
+  // to 84×64 before hashing.  Cells already at or below canonical size
+  // need no resize.
+  //
+  // Phone support is not implemented — phone screenshots produce cells that
+  // are much wider than CANONICAL_W and would require a separate DB hash set.
+  if (width > CANONICAL_W * 1.5 || height > CANONICAL_H * 1.5) {
+    // Desktop-oversized cell — resize to canonical desktop slot 84×64.
+    const resizeCanvas = createOffscreen(width, height)
+    const resizeCtx = resizeCanvas.getContext('2d') as CanvasRenderingContext2D | null
+    if (!resizeCtx) return null
+    resizeCtx.putImageData(cellImageData, 0, 0)
+
+    const canonSlotCanvas = createOffscreen(CANONICAL_W, CANONICAL_H)
+    const canonSlotCtx = canonSlotCanvas.getContext('2d') as CanvasRenderingContext2D | null
+    if (!canonSlotCtx) return null
+    canonSlotCtx.drawImage(
+      resizeCanvas as unknown as CanvasImageSource,
+      0, 0, CANONICAL_W, CANONICAL_H,
+    )
+    cellImageData = canonSlotCtx.getImageData(0, 0, CANONICAL_W, CANONICAL_H)
+    width = CANONICAL_W
+    height = CANONICAL_H
+  }
 
   // Step 1: Put the cell on a temp canvas.
   const tmpCanvas = createOffscreen(width, height)
@@ -179,28 +211,10 @@ export function computeDHash(
 
   // Step 2: Proportional square center-crop → resize to CANONICAL_SPRITE_SIZE × CANONICAL_SPRITE_SIZE.
   //
-  // Problem with a fixed 48×48 crop:
-  //   Desktop cells are ~84×64 px — a 48×48 crop covers most of the sprite.
-  //   Phone cells are ~300×260 px — a 48×48 crop captures only a tiny central
-  //   patch of the much larger sprite, so all items look alike ("Water Bucket").
-  //
-  // Solution: compute proportional crop extents from the sprite-to-slot fractions
-  // (SPRITE_WIDTH_FRAC = 48/84, SPRITE_HEIGHT_FRAC = 48/64), take the minimum
-  // of the two to produce a square region, then resize that square to
-  // CANONICAL_SPRITE_SIZE × CANONICAL_SPRITE_SIZE before hashing.
-  //
-  // cropW    = max(48, round(width  × SPRITE_WIDTH_FRAC))   e.g. 84→48,  300→171
-  // cropH    = max(48, round(height × SPRITE_HEIGHT_FRAC))  e.g. 64→48,  260→195
-  // cropSize = min(cropW, cropH)  →  square crop            e.g.   →48, 300×260→171
-  //
-  // Using min() keeps the crop square on all cell sizes, which avoids distorting
-  // the sprite's aspect ratio during the resize to 48×48.  For cells where
-  // cropW is clamped to 48 (narrow cells at or below the canonical width),
-  // cropSize = min(48, cropH) = 48 — identical to the old fixed-48 behaviour.
-  // When the grid detector merged two half-slots (merged-row case), the cell height
-  // is ~2× refH.  The sprite lives in the TOP refH pixels of the merged cell, so
-  // we use refH as the "effective" slot height for crop sizing and vertical placement.
-  // detectGrid signals this by passing referenceHeight = rowRef (the pre-merge half-height).
+  // After the Step 0 resize, all cells are at most 84×64, so the proportional
+  // crop always reduces to the canonical 48×48 region (SPRITE_WIDTH_FRAC×84=48,
+  // SPRITE_HEIGHT_FRAC×64=48).  The referenceHeight logic is preserved for the
+  // merged-row case where height may be ~2× refH even after resize.
   const refH = referenceHeight ?? CANONICAL_H
   const effectiveH = (height > refH * 1.5) ? refH : height
 
@@ -208,9 +222,8 @@ export function computeDHash(
   const cropH = Math.max(CANONICAL_SPRITE_SIZE, Math.round(effectiveH * SPRITE_HEIGHT_FRAC))
   const cropSize = Math.min(cropW, cropH)
 
-  // Detect any dark left margin (e.g. phone screenshot col 0 has ~51 px of
-  // dark UI strip before the actual inventory slot).  Centre the crop within
-  // the content area (cell width minus the dark margin).
+  // Detect any dark left margin and centre the crop within the content area
+  // (cell width minus the dark margin).
   const leftMargin = detectLeftMargin(cellImageData, effectiveH)
   const contentWidth = width - leftMargin
   const cropX = leftMargin + Math.round((contentWidth - cropSize) / 2)

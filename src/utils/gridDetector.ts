@@ -322,12 +322,24 @@ function normalizeIntervals(
         // interval and check if the merged span is closer to reference.
         const mergedStart = pendingMerge[0]
         const mergedSize = end - mergedStart
-        if (Math.abs(mergedSize - reference) <= tolerance || mergedSize > reference + tolerance) {
-          // Merged is acceptable — absorb the sliver into this interval.
+        if (Math.abs(mergedSize - reference) <= tolerance) {
+          // Merged is within tolerance — absorb the sliver.
           result.push([mergedStart, end])
+        } else if (mergedSize > reference + tolerance) {
+          // Merged is oversized — split it.
+          const n = Math.round(mergedSize / reference)
+          if (n >= 2) {
+            const cellSize = mergedSize / n
+            for (let j = 0; j < n; j++) {
+              const s = Math.round(mergedStart + j * cellSize)
+              const e = j === n - 1 ? end : Math.round(mergedStart + (j + 1) * cellSize)
+              result.push([s, e])
+            }
+          } else {
+            result.push([start, end])
+          }
         } else {
-          // Merging would produce something too large; drop the sliver and
-          // accept the current interval at face value.
+          // Drop the sliver, keep current interval.
           result.push([start, end])
         }
         pendingMerge = null
@@ -606,6 +618,56 @@ export function detectGrid(
     }
     if (merged.length < normRows.length) {
       rowIntervals = merged
+    }
+  }
+
+  // --- Step 3b: split an oversized first row (phone header + items merged) --
+  // On phone screenshots the top row (y≈0) sometimes spans both the Date/Sort
+  // header band AND the first item row because no strong grid line separates
+  // them.  normalizeIntervals won't split it because 285/260 ≈ 1.10 — within
+  // the 35 % tolerance.  We detect this case and re-use the existing projY
+  // data to find the internal border.
+  if (rowIntervals.length >= 2) {
+    const [firstStart, firstEnd] = rowIntervals[0]
+    const firstSize = firstEnd - firstStart
+    const secondSize = rowIntervals[1][1] - rowIntervals[1][0]
+
+    if (firstStart <= 5 && firstSize > secondSize * 1.15) {
+      // Scan projY within the first row for the strongest internal peak.
+      // Skip the first and last 10 px to avoid the cell borders themselves.
+      const ySlice = projY.slice(firstStart, firstEnd)
+      let bestPeak = 0
+      let bestY = -1
+      for (let i = 10; i < ySlice.length - 10; i++) {
+        if (ySlice[i] > bestPeak) {
+          bestPeak = ySlice[i]
+          bestY = firstStart + i
+        }
+      }
+      // Only split if the peak is meaningful and far enough from the top edge.
+      if (bestPeak > 0.3 && bestY > firstStart + 20) {
+        const headerPart: [number, number] = [firstStart, bestY]
+        const itemPart: [number, number] = [bestY, firstEnd]
+        const itemPartSize = firstEnd - bestY
+
+        // If the item part is too small (< 50% of the next row), merge it
+        // with the next row — the false grid line at y=firstEnd cut through
+        // the first item row.
+        if (rowIntervals.length >= 2 && itemPartSize < secondSize * 0.5) {
+          const [, nextEnd] = rowIntervals[1]
+          rowIntervals = [
+            headerPart,
+            [bestY, nextEnd] as [number, number],
+            ...rowIntervals.slice(2),
+          ]
+        } else {
+          rowIntervals = [
+            headerPart,
+            itemPart,
+            ...rowIntervals.slice(1),
+          ]
+        }
+      }
     }
   }
 

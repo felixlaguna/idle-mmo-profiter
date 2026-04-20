@@ -321,25 +321,6 @@ describe('exported constants', () => {
     expect(cropW).toBe(CANONICAL_SPRITE_SIZE)
     expect(cropH).toBe(CANONICAL_SPRITE_SIZE)
   })
-  it('phone cell (300×260) square crop is larger than CANONICAL_SPRITE_SIZE', () => {
-    const phoneW = 300
-    const phoneH = 260
-    const cropW = Math.max(CANONICAL_SPRITE_SIZE, Math.round(phoneW * SPRITE_WIDTH_FRAC))
-    const cropH = Math.max(CANONICAL_SPRITE_SIZE, Math.round(phoneH * SPRITE_HEIGHT_FRAC))
-    const cropSize = Math.min(cropW, cropH)
-    expect(cropSize).toBeGreaterThan(CANONICAL_SPRITE_SIZE)
-  })
-
-  it('narrow phone cell (78×246) square crop equals CANONICAL_SPRITE_SIZE (old behaviour preserved)', () => {
-    // When cell width is at or below the canonical slot width, cropW gets clamped
-    // to 48 and cropSize = min(48, cropH) = 48 — same as the old fixed 48×48 crop.
-    const narrowW = 78
-    const tallH = 246
-    const cropW = Math.max(CANONICAL_SPRITE_SIZE, Math.round(narrowW * SPRITE_WIDTH_FRAC))
-    const cropH = Math.max(CANONICAL_SPRITE_SIZE, Math.round(tallH  * SPRITE_HEIGHT_FRAC))
-    const cropSize = Math.min(cropW, cropH)
-    expect(cropSize).toBe(CANONICAL_SPRITE_SIZE)
-  })
 })
 
 // ---------------------------------------------------------------------------

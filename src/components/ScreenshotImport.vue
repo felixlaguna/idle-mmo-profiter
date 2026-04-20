@@ -31,6 +31,7 @@ const {
   resolveAmbiguousItem,
   applyToInventory,
   clearResults,
+  imageSize,
 } = useScreenshotImport()
 
 // -------------------------------------------------------------------------
@@ -129,6 +130,17 @@ function cellBorderClass(result: ImportResult): string {
   if (result.status === 'ambiguous') return 'cell-amber'
   if (result.confidence >= 0.8) return 'cell-green'
   return 'cell-yellow'
+}
+
+function cellOverlayStyle(rect: { x: number; y: number; w: number; h: number }): Record<string, string> {
+  const img = imageSize.value
+  if (!img || img.width === 0 || img.height === 0) return {}
+  return {
+    left: `${(rect.x / img.width) * 100}%`,
+    top: `${(rect.y / img.height) * 100}%`,
+    width: `${(rect.w / img.width) * 100}%`,
+    height: `${(rect.h / img.height) * 100}%`,
+  }
 }
 
 // -------------------------------------------------------------------------
@@ -348,20 +360,14 @@ width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                   :key="rowKey(result)"
                   class="si-cell-overlay"
                   :class="cellBorderClass(result)"
-                  :style="{
-                    '--row': result.gridPosition.row,
-                    '--col': result.gridPosition.col,
-                  }"
+                  :style="cellOverlayStyle(result.cellRect)"
                   :title="result.name"
                 />
                 <div
                   v-for="err in errors.filter(e => e.reason === 'no_match')"
                   :key="`err-${err.gridPosition.row}-${err.gridPosition.col}`"
                   class="si-cell-overlay si-cell-overlay--error"
-                  :style="{
-                    '--row': err.gridPosition.row,
-                    '--col': err.gridPosition.col,
-                  }"
+                  :style="cellOverlayStyle(err.cellRect)"
                   title="Unrecognized item"
                 />
               </div>
@@ -898,6 +904,7 @@ v-if="err.cellPreview" :src="err.cellPreview"
 
 .si-preview-frame {
   position: relative;
+  position: relative;
   border: 1px solid var(--surface-border);
   border-radius: 8px;
   overflow: hidden;
@@ -913,10 +920,9 @@ v-if="err.cellPreview" :src="err.cellPreview"
 /* Cell overlay markers (positioned as approximate % based on row/col) */
 .si-cell-overlay {
   position: absolute;
-  width: calc(100% / 8);
-  height: calc(100% / 8);
   border: 2px solid transparent;
   border-radius: 3px;
+  box-sizing: border-box;
   pointer-events: none;
   left: calc(var(--col, 0) * (100% / 8));
   top: calc(var(--row, 0) * (100% / 8));

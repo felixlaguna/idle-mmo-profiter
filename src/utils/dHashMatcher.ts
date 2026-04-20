@@ -70,7 +70,7 @@ export interface DHashMatchResult {
 // ---------------------------------------------------------------------------
 
 interface LoadedDatabase {
-  /** O(1) exact-match map. */
+  /** O(1) exact-match map (desktop `d` hashes). */
   exactMap: Map<string, HashEntry>
   /** All entries for linear scan fallback. */
   entries: HashEntry[]
@@ -99,12 +99,7 @@ export async function loadDHashDatabase(): Promise<LoadedDatabase> {
   const duplicateGroupMap = new Map<string, string[]>()
 
   for (const entry of db.hashes) {
-    // Index by desktop hash.
     exactMap.set(entry.d, entry)
-    // Also index by phone hash so exact-match fast path works for phone screenshots.
-    if (entry.dp) {
-      exactMap.set(entry.dp, entry)
-    }
     if (entry.a) {
       ambiguousIds.add(entry.h)
     }
@@ -151,12 +146,7 @@ export async function getTopCandidates(
   const topN: Array<{ entry: HashEntry; distance: number }> = []
 
   for (const entry of db.entries) {
-    // Use whichever pre-computed hash (desktop or phone) is closer.
-    let dist = hammingDistance(queryHash, entry.d)
-    if (entry.dp) {
-      const distDp = hammingDistance(queryHash, entry.dp)
-      if (distDp < dist) dist = distDp
-    }
+    const dist = hammingDistance(queryHash, entry.d)
 
     if (topN.length < n) {
       topN.push({ entry, distance: dist })
@@ -171,91 +161,11 @@ export async function getTopCandidates(
 }
 
 /**
- * Return the top-N candidates from the pre-computed DB sorted by ascending
- * RGB color distance.  Requires that the DB includes the `cp` (phone colour
- * fingerprint) field — returns an empty array if the DB has no `cp` data.
- *
- * Used as a replacement for the dHash-based `getTopCandidates` for phone
- * screenshots, where JPEG compression at large cell sizes makes dHash
- * unreliable but the average crop color remains stable.
- *
- * @param queryColor - Average [R, G, B] of the screenshot cell's crop region.
- * @param n          - Number of candidates to return (default: 20).
- * @returns Array of at most n candidates sorted by ascending colorDistance.
- */
-export async function getTopCandidatesByColor(
-  queryColor: [number, number, number],
-  n = 20,
-): Promise<Array<{ entry: HashEntry; colorDistance: number }>> {
-  const db = await loadDHashDatabase()
-
-  // Check whether any entry has `cp` — if not, color DB is not available.
-  const hasColorData = db.entries.some((e) => e.cp !== undefined)
-  if (!hasColorData) return []
-
-  // Score all entries that have a `cp` field, keep top-N via insertion sort.
-  const topN: Array<{ entry: HashEntry; colorDistance: number }> = []
-
-  for (const entry of db.entries) {
-    if (!entry.cp) continue
-    const dist = colorDistance(queryColor, entry.cp)
-
-    if (topN.length < n) {
-      topN.push({ entry, colorDistance: dist })
-      topN.sort((a, b) => a.colorDistance - b.colorDistance)
-    } else if (dist < topN[topN.length - 1].colorDistance) {
-      topN[topN.length - 1] = { entry, colorDistance: dist }
-      topN.sort((a, b) => a.colorDistance - b.colorDistance)
-    }
-  }
-
-  return topN
-}
-
-/**
- * Find the best matching item by RGB color fingerprint.
- *
- * Scans all DB entries that have a `cp` field and returns the one with the
- * smallest Euclidean RGB distance.  Returns null if no entry has `cp` data
- * or if the best distance exceeds `threshold`.
- *
- * @param queryColor  - Average [R, G, B] of the screenshot cell's crop region.
- * @param threshold   - Max Euclidean color distance to accept (default: 30).
- * @returns Best match by color, or null if DB has no color data / no match within threshold.
- */
-export async function findBestColorMatch(
-  queryColor: [number, number, number],
-  threshold = 30,
-): Promise<DHashMatchResult | null> {
-  const db = await loadDHashDatabase()
-
-  let bestEntry: HashEntry | null = null
-  let bestDist = threshold + 1
-
-  for (const entry of db.entries) {
-    if (!entry.cp) continue
-    const dist = colorDistance(queryColor, entry.cp)
-    if (dist < bestDist) {
-      bestDist = dist
-      bestEntry = entry
-      if (dist === 0) break // exact match
-    }
-  }
-
-  if (!bestEntry) return null
-
-  return {
-    hashedId: bestEntry.h,
-    name: bestEntry.n,
-    quality: bestEntry.q,
-    distance: Math.round(bestDist),
-    ambiguous: !!bestEntry.a,
-    groupId: bestEntry.g,
-  }
-}
-
-/**
  * Find the best matching item for a given dHash fingerprint.
+ *
+ * Two-stage lookup:
+ *   1. O(1) exact-match via Map<hash, entry>.
+ *   2. Linear Hamming scan for near-matches within threshold.
  *
  * @param queryHash  - 48-char hex dHash string from computeDHash().
  * @param threshold  - Maximum Hamming distance to accept (default: DEFAULT_HAMMING_THRESHOLD).
@@ -280,26 +190,16 @@ export async function findBestDHashMatch(
     }
   }
 
-  // Stage 2: Linear Hamming scan — check both desktop hash (d) and phone hash (dp).
+  // Stage 2: Linear Hamming scan.
   let bestEntry: HashEntry | null = null
   let bestDist = threshold + 1
 
   for (const entry of db.entries) {
-    // Check desktop hash.
-    const distD = hammingDistance(queryHash, entry.d)
-    if (distD < bestDist) {
-      bestDist = distD
+    const dist = hammingDistance(queryHash, entry.d)
+    if (dist < bestDist) {
+      bestDist = dist
       bestEntry = entry
-      if (distD === 0) break // can't do better
-    }
-    // Check phone hash (if present) — picks the better of the two.
-    if (entry.dp) {
-      const distDp = hammingDistance(queryHash, entry.dp)
-      if (distDp < bestDist) {
-        bestDist = distDp
-        bestEntry = entry
-        if (distDp === 0) break // can't do better
-      }
+      if (dist === 0) break // can't do better
     }
   }
 

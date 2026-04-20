@@ -62,23 +62,8 @@ export interface HashEntry {
   n: string
   /** 48-character hex dHash string (192 bits) — computed from desktop slot (84×64). */
   d: string
-  /**
-   * 48-character hex dHash string (192 bits) — computed from phone slot (300×260).
-   * Used to match phone screenshots where the cell is ~300×260px and the sprite
-   * is rendered at a proportionally larger size (~171px) before being downscaled.
-   * The proportional crop + resize pipeline applied to this larger render produces
-   * different anti-aliasing patterns than the desktop 48px→48px identity case.
-   */
-  dp?: string
   /** Item quality string, e.g. "standard", "epic". */
   q: string
-  /**
-   * Average [R, G, B] colour of the proportional crop region, computed from
-   * the phone-slot render (315×140, imgSize=105).  Used for colour-based
-   * pre-filtering on phone JPEG screenshots where dHash is unreliable.
-   * Values are 0–255 rounded to integers.
-   */
-  cp?: [number, number, number]
   /** True when this item shares a dHash with at least one other item. */
   a?: true
   /** Group identifier shared by all items with the same dHash (if `a` is true). */
@@ -95,15 +80,6 @@ export interface SpriteHashDatabase {
   generatedAt: string
   method: 'browser-rendered'
   hashSize: 48
-  /**
-   * True when the database includes the `dp` (phone-resolution) hash for each entry.
-   * Absent (or false) in older v4 databases.
-   */
-  hasPhoneHashes: true
-  /**
-   * True when the database includes the `cp` (phone colour fingerprint) for each entry.
-   */
-  hasPhoneColors?: true
   totalItems: number
   ambiguousCount: number
   hashes: HashEntry[]
@@ -163,46 +139,6 @@ const SLOT_HEIGHT = 64
  * Image size inside the desktop slot — matches the game's w-12 h-12 (48×48px).
  */
 const IMG_SIZE = 48
-
-// ---------------------------------------------------------------------------
-// Phone slot constants
-// ---------------------------------------------------------------------------
-
-/**
- * Phone slot dimensions.  Measured from actual phone screenshots at
- * devicePixelRatio 3 (e.g. Pixel 6 at 393 CSS-px viewport):
- *
- *   - Each inventory slot is approximately 315 × 140 px in the screenshot.
- *   - The grid detector converges on rowRef ≈ 140 px (one slot height) because
- *     interior sprite edges create many ~140 px sub-intervals.
- *   - normalizeIntervals splits larger intervals (~270 px) into pairs of ~135 px,
- *     then the merge step re-combines adjacent pairs into ~270 px cells.
- *   - detectGrid passes referenceHeight = rowRef = 140 to computeDHash,
- *     which uses effectiveH = 140 (since height 270 > 140*1.5) for the crop.
- *
- * To produce a `dp` hash that matches what computeDHash extracts from the
- * actual screenshot, we render at PHONE_SLOT_WIDTH × PHONE_SLOT_HEIGHT = 315 × 140
- * with the sprite centred vertically (imgY = round((140-105)/2) = 17).
- *
- * Crop parameters for 315 × 140:
- *   imgSize = round(140 × 48/64) = 105   (height-proportional)
- *   imgY = round((140 - 105) / 2) = 17   (centred within 140 px slot)
- *   cropW = max(48, round(315 × 48/84)) = 180
- *   cropH = max(48, round(140 × 48/64)) = 105
- *   cropSize = min(180, 105) = 105
- *   cropX = round((315 - 105) / 2) = 105
- *   cropY = round((140 - 105) / 2) = 17
- */
-const PHONE_SLOT_WIDTH  = 315
-const PHONE_SLOT_HEIGHT = 140
-
-/**
- * Sprite image size inside the phone slot.
- * Proportional to the slot HEIGHT: round(140 × (48/64)) = 105.
- * The game renders the sprite at IMG_SIZE (48) within SLOT_HEIGHT (64); scaling
- * that ratio to the phone slot height gives the true display size.
- */
-const PHONE_IMG_SIZE = Math.round(PHONE_SLOT_HEIGHT * (IMG_SIZE / SLOT_HEIGHT)) // 105
 
 /**
  * Canonical sprite size — the final square dimension used for hashing.
@@ -484,79 +420,6 @@ async function computeSlotDHash(
 // Average colour extraction (for phone colour-fingerprint matching)
 // ---------------------------------------------------------------------------
 
-/**
- * Compute the average [R, G, B] colour of the proportional crop region from
- * the rendered slot.  Uses the same crop geometry as computeSlotDHash so the
- * two are perfectly aligned.
- *
- * Returns null if the page context cannot render the canvas.
- */
-async function computeSlotColor(
-  page: Page,
-  opts: DHHashOptions,
-): Promise<[number, number, number] | null> {
-  // Page content is already set by the preceding computeSlotDHash call for the
-  // same opts, so we only need to re-run the pixel extraction.
-  const color = await page.evaluate(
-    ({
-      slotWidth,
-      slotHeight,
-      imgSize,
-      canonicalSpriteSize,
-      spriteWidthFrac,
-      spriteHeightFrac,
-    }: {
-      slotWidth: number
-      slotHeight: number
-      imgSize: number
-      canonicalSpriteSize: number
-      spriteWidthFrac: number
-      spriteHeightFrac: number
-    }) => {
-      const canvas = document.createElement('canvas')
-      canvas.width = slotWidth
-      canvas.height = slotHeight
-      const ctx = canvas.getContext('2d')
-      if (!ctx) return null
-
-      const slotEl = document.getElementById('slot') as HTMLElement
-      const bg = window.getComputedStyle(slotEl).backgroundColor
-      ctx.fillStyle = bg || 'rgb(22,29,42)'
-      ctx.fillRect(0, 0, slotWidth, slotHeight)
-
-      const img = document.getElementById('sprite') as HTMLImageElement
-      const imgX = Math.round((slotWidth - imgSize) / 2)
-      const imgY = Math.round((slotHeight - imgSize) / 2)
-      ctx.drawImage(img, imgX, imgY, imgSize, imgSize)
-
-      // Same proportional crop geometry as computeSlotDHash
-      const cropW = Math.max(canonicalSpriteSize, Math.round(slotWidth * spriteWidthFrac))
-      const cropH = Math.max(canonicalSpriteSize, Math.round(slotHeight * spriteHeightFrac))
-      const cropSize = Math.min(cropW, cropH)
-      const cropX = Math.round((slotWidth - cropSize) / 2)
-      const cropY = Math.round((slotHeight - cropSize) / 2)
-
-      const pix = ctx.getImageData(cropX, cropY, cropSize, cropSize).data
-      let r = 0, g = 0, b = 0
-      const n = cropSize * cropSize
-      for (let i = 0; i < pix.length; i += 4) {
-        r += pix[i]; g += pix[i + 1]; b += pix[i + 2]
-      }
-      return [Math.round(r / n), Math.round(g / n), Math.round(b / n)] as [number, number, number]
-    },
-    {
-      slotWidth: opts.slotWidth,
-      slotHeight: opts.slotHeight,
-      imgSize: opts.imgSize,
-      canonicalSpriteSize: CANONICAL_SPRITE_SIZE,
-      spriteWidthFrac: SPRITE_WIDTH_FRAC,
-      spriteHeightFrac: SPRITE_HEIGHT_FRAC,
-    },
-  )
-
-  return color
-}
-
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
@@ -714,42 +577,16 @@ async function main(): Promise<void> {
       continue
     }
 
-    // --- Phone hash (300×260 slot, 171px sprite) ---
-    const phoneOpts: DHHashOptions = {
-      slotWidth: PHONE_SLOT_WIDTH,
-      slotHeight: PHONE_SLOT_HEIGHT,
-      imgSize: PHONE_IMG_SIZE,
-      imgSrc,
-      quality,
-      qualityBackground: style.background,
-      qualityBorder: style.border,
-      gridW: HASH_GRID_W,
-      gridH: HASH_GRID_H,
-    }
-
-    const phoneHash = await computeSlotDHash(page, phoneOpts)
-
-    // --- Phone colour fingerprint (average crop colour at phone slot dimensions) ---
-    // computeSlotColor reuses the same page content already set by computeSlotDHash.
-    const phoneColor = await computeSlotColor(page, phoneOpts)
-
-    if (!phoneHash) {
-      console.warn(`${progress} PHONE-FAIL  ${name} (desktop hash saved)`)
-      entries.push({ h: hashedId, n: name, d: desktopHash, q: quality })
-    } else {
-      const entry: HashEntry = { h: hashedId, n: name, d: desktopHash, dp: phoneHash, q: quality }
-      if (phoneColor) entry.cp = phoneColor
-      entries.push(entry)
-    }
+    const entry: HashEntry = { h: hashedId, n: name, d: desktopHash, q: quality }
+    entries.push(entry)
     successCount++
 
     // Progress every 50 items
     if ((i + 1) % 50 === 0 || i === itemsToProcess.length - 1) {
       const elapsed = ((Date.now() - startTime) / 1000).toFixed(1)
       const rate = (successCount / (Date.now() - startTime) * 1000).toFixed(1)
-      const phoneStatus = phoneHash ? '' : ' (no phone hash)'
       console.log(
-        `${progress} ${name}  d=${desktopHash}${phoneStatus}  (${elapsed}s, ${rate} items/s)`,
+        `${progress} ${name}  d=${desktopHash}  (${elapsed}s, ${rate} items/s)`,
       )
     }
   }
@@ -790,23 +627,16 @@ async function main(): Promise<void> {
   // Build output
   // -------------------------------------------------------------------------
 
-  const phoneHashCount = entries.filter((e) => e.dp !== undefined).length
-  const phoneColorCount = entries.filter((e) => e.cp !== undefined).length
   const db: SpriteHashDatabase = {
     version: 5,
     generatedAt: new Date().toISOString(),
     method: 'browser-rendered',
     hashSize: 48,
-    hasPhoneHashes: true,
-    hasPhoneColors: true,
     totalItems: entries.length,
     ambiguousCount,
     hashes: entries,
     duplicateGroups,
   }
-
-  console.log(`  Phone hashes: ${phoneHashCount}/${entries.length}`)
-  console.log(`  Phone colors: ${phoneColorCount}/${entries.length}`)
 
   // -------------------------------------------------------------------------
   // Report

@@ -17,9 +17,8 @@
 
 import { ref, computed } from 'vue'
 import { detectGridFromFile } from '../utils/gridDetector'
-import { computeDHash, detectLeftMargin, computeCellColor } from '../utils/imageHash'
-import { loadDHashDatabase, findBestDHashMatch, getTopCandidates, findBestColorMatch } from '../utils/dHashMatcher'
-import { refineWithRuntimeHashes, type RuntimeCandidate } from '../utils/runtimeHashGenerator'
+import { computeDHash } from '../utils/imageHash'
+import { loadDHashDatabase, findBestDHashMatch } from '../utils/dHashMatcher'
 import { extractQuantity } from '../utils/quantityReader'
 import { useCharacterTracker } from './useCharacterTracker'
 import { useToast } from './useToast'
@@ -67,6 +66,8 @@ export interface ImportResult {
   cellPreview?: string
   /** Original position in the detected grid. */
   gridPosition: { row: number; col: number }
+  /** Pixel coordinates of the cell in the source image. */
+  cellRect: { x: number; y: number; w: number; h: number }
 }
 
 /** A cell that could not be matched to any item. */
@@ -75,6 +76,8 @@ export interface ImportError {
   reason: 'no_match' | 'empty_cell' | 'quantity_unreadable'
   /** Data-URL of the cropped cell image, for the review UI. */
   cellPreview?: string
+  /** Pixel coordinates of the cell in the source image. */
+  cellRect: { x: number; y: number; w: number; h: number }
 }
 
 /** Progress state during processing. */
@@ -94,27 +97,6 @@ export interface ImportProgress {
 /** Number of cells to process before yielding to the event loop. */
 const BATCH_SIZE = 5
 
-/**
- * Minimum cell width (px) that triggers runtime hash refinement.
- *
- * Desktop cells are ~84 px wide (inset ≈ 70 px).  Phone cells are ≥ 150 px
- * wide in the raw screenshot (devicePixelRatio ≥ 2 with a 78 px logical slot).
- * We use 150 px as the split point: cells wider than this are treated as
- * phone-scale and get runtime hash refinement.
- */
-const PHONE_CELL_THRESHOLD = 150
-
-/** Number of candidates to runtime-render per phone cell (dHash fallback path). */
-const RUNTIME_CANDIDATES = 20
-
-/**
- * Maximum Euclidean RGB distance for a color-based match to be accepted.
- *
- * Calibrated by experiment: correct items typically score < 20, while the
- * second-best color candidate is usually > 30.  A threshold of 30 gives
- * good separation.  Raise to 50 if needed for items with muted colors.
- */
-const COLOR_MATCH_THRESHOLD = 30
 
 // ---------------------------------------------------------------------------
 // Composable
@@ -127,6 +109,7 @@ export function useScreenshotImport() {
   const results = ref<ImportResult[]>([])
   const errors = ref<ImportError[]>([])
   const previewImage = ref<string | null>(null)
+  const imageSize = ref<{ width: number; height: number } | null>(null)
 
   // Derived helpers
   const hasResults = computed(() => results.value.length > 0 || errors.value.length > 0)
@@ -184,7 +167,13 @@ export function useScreenshotImport() {
       // for synthetic test images which produce projections of only 0.83–0.94.
       // computeDHash handles tall cells (h > CANONICAL_H+10) automatically.
       const cells = await detectGridFromFile(file, { lineThreshold: 0.95 })
-      console.log(`Grid detection: ${cells.length} cells`)
+      // Compute source image size from the furthest cell edge.
+      if (cells.length > 0) {
+        const maxX = Math.max(...cells.map((c) => c.x + c.width))
+        const maxY = Math.max(...cells.map((c) => c.y + c.height))
+        imageSize.value = { width: maxX, height: maxY }
+      }
+      console.log(`Grid detection: ${cells.length} cells, imageSize=${JSON.stringify(imageSize.value)}`)
       console.log(JSON.stringify(cells.map((c) => ({ row: c.row, col: c.col, x: c.x, y: c.y, w: c.width, h: c.height, empty: c.isEmpty }))))
 
       // Build a preview of the full screenshot from the first cell's canvas parent
@@ -230,12 +219,12 @@ export function useScreenshotImport() {
         const cell = nonEmpty[i]
         const cellPreview = canvasToDataUrl(cell.canvas)
 
-        // 3a: Compute 192-bit dHash fingerprint from cell image data
-        // Log actual imageData dimensions (post-inset, differs from cell.width/height)
-        console.log(`[${cell.row},${cell.col}] imageData=${cell.imageData.width}x${cell.imageData.height} (cell=${cell.width}x${cell.height} refH=${cell.referenceHeight})`)
-        const refH = cell.referenceHeight
-        const effectiveH = (cell.imageData.height > refH * 1.5) ? refH : cell.imageData.height
-        const leftMargin = detectLeftMargin(cell.imageData, effectiveH)
+        // 3a: Compute 192-bit dHash fingerprint from cell image data.
+        // computeDHash normalises cells to 84×64 before cropping, so desktop
+        // and phone cells both produce hashes that match the pre-computed DB.
+        const _px = cell.imageData.data
+        const _mid = Math.floor(_px.length / 2)
+        console.log(`[${cell.row},${cell.col}] imageData=${cell.imageData.width}x${cell.imageData.height} (cell=${cell.width}x${cell.height} refH=${cell.referenceHeight}) px[0]=${_px[0]},${_px[1]},${_px[2]} px[mid]=${_px[_mid]},${_px[_mid+1]},${_px[_mid+2]} len=${_px.length}`)
         const queryHash = computeDHash(cell.imageData, undefined, cell.referenceHeight)
 
         if (!queryHash) {
@@ -244,87 +233,20 @@ export function useScreenshotImport() {
             gridPosition: { row: cell.row, col: cell.col },
             reason: 'no_match',
             cellPreview,
+            cellRect: { x: cell.x, y: cell.y, w: cell.width, h: cell.height },
           })
           continue
         }
 
-        // 3b: Match against sprite hash database.
-        //
-        // Phone path (cell.width > PHONE_CELL_THRESHOLD):
-        //   The pre-computed DB has both desktop and phone hashes, but those
-        //   phone hashes were rendered by Playwright/Chromium and may differ
-        //   from the user's actual browser (Safari iOS, Chrome Android).
-        //   Solution: get the top-20 candidates from the pre-computed DB
-        //   (cheap Hamming scan), then runtime-render those 20 sprites in the
-        //   user's actual browser at the detected cell size and re-compare.
-        //   This guarantees reference and query hashes use the same engine.
-        //
-        // Desktop path (cell.width ≤ PHONE_CELL_THRESHOLD):
-        //   Use the pre-computed DB directly — fast and accurate because
-        //   Playwright's rendering matches desktop Chromium closely.
-        const isPhoneCell = cell.width > PHONE_CELL_THRESHOLD
-        let match: Awaited<ReturnType<typeof findBestDHashMatch>> = null
-
-        if (isPhoneCell) {
-          // Phone path: color fingerprint matching.
-          //
-          // For phone screenshots, JPEG compression at large cell sizes causes
-          // dHash bit-flip rates that exceed the matching threshold (60+ bits),
-          // making dHash-based matching unreliable.
-          //
-          // Primary path (when DB has `cp` field): match by average crop RGB.
-          // Color is JPEG-robust at the ~300×140 crop scale because JPEG
-          // artifacts average out over hundreds of pixels.
-          //
-          // Fallback path (old DB without `cp`): use dHash-based runtime
-          // refinement (same as before, for backwards compatibility).
-          const cellColor = computeCellColor(cell.imageData, cell.referenceHeight, leftMargin)
-          if (cellColor) {
-            match = await findBestColorMatch(cellColor, COLOR_MATCH_THRESHOLD)
-          }
-
-          // Fallback: dHash-based runtime refinement (DB missing cp data).
-          if (!match) {
-            const topCandidates = await getTopCandidates(queryHash, RUNTIME_CANDIDATES)
-            const runtimeCandidates: RuntimeCandidate[] = topCandidates.map(({ entry, distance }) => ({
-              hashedId: entry.h,
-              name: entry.n,
-              quality: entry.q,
-              precomputedDistance: distance,
-              ambiguous: !!entry.a,
-              groupId: entry.g,
-            }))
-            const runtimeMatch = await refineWithRuntimeHashes(
-              queryHash,
-              runtimeCandidates,
-              cell.width,
-              cell.height,
-              cell.referenceHeight,
-              50,
-              leftMargin,
-            )
-            if (runtimeMatch) {
-              match = {
-                hashedId: runtimeMatch.hashedId,
-                name: runtimeMatch.name,
-                quality: runtimeMatch.quality,
-                distance: runtimeMatch.distance,
-                ambiguous: runtimeMatch.ambiguous,
-                groupId: runtimeMatch.groupId,
-              }
-            }
-          }
-        } else {
-          // Desktop path: pre-computed DB.
-          match = await findBestDHashMatch(queryHash)
-        }
+        // 3b: Match against sprite hash database using pre-computed dHash.
+        const match = await findBestDHashMatch(queryHash)
 
         // 3c: Extract quantity
         const qResult = extractQuantity(cell.imageData, cell.width, cell.height)
         const quantity = qResult.quantity ?? 1
 
         console.log(
-          `[${cell.row},${cell.col}] ${cell.width}x${cell.height} ${isPhoneCell ? '[phone→runtime]' : '[desktop]'} hash=${queryHash} match=${match ? `${match.name} d=${match.distance}${match.ambiguous ? ' [amb]' : ''}` : 'NO MATCH'} qty=${quantity} (qConf=${qResult.confidence.toFixed(2)})`
+          `[${cell.row},${cell.col}] ${cell.width}x${cell.height} hash=${queryHash} match=${match ? `${match.name} d=${match.distance}${match.ambiguous ? ' [amb]' : ''}` : 'NO MATCH'} qty=${quantity} (qConf=${qResult.confidence.toFixed(2)})`
         )
 
         if (!match) {
@@ -332,6 +254,7 @@ export function useScreenshotImport() {
             gridPosition: { row: cell.row, col: cell.col },
             reason: 'no_match',
             cellPreview,
+            cellRect: { x: cell.x, y: cell.y, w: cell.width, h: cell.height },
           })
           continue
         }
@@ -349,6 +272,7 @@ export function useScreenshotImport() {
           status: match.ambiguous ? 'ambiguous' : 'matched',
           cellPreview,
           gridPosition: { row: cell.row, col: cell.col },
+          cellRect: { x: cell.x, y: cell.y, w: cell.width, h: cell.height },
         }
 
         if (match.ambiguous && match.groupId) {
@@ -372,6 +296,7 @@ export function useScreenshotImport() {
         gridPosition: { row: -1, col: -1 },
         reason: 'no_match',
         cellPreview: undefined,
+        cellRect: { x: 0, y: 0, w: 0, h: 0 },
       })
       progress.value = { step: `Error: ${message}`, current: 0, total: 0 }
       throw err
@@ -541,6 +466,7 @@ export function useScreenshotImport() {
     results,
     errors,
     previewImage,
+    imageSize,
 
     // Derived
     hasResults,

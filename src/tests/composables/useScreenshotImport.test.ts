@@ -24,23 +24,11 @@ vi.mock('../../utils/gridDetector', () => ({
 
 vi.mock('../../utils/imageHash', () => ({
   computeDHash: vi.fn(() => '000038d8790300000000c8d8f81f00000000c8d8e81f0000'),
-  detectLeftMargin: vi.fn(() => 0),
-  // Return null by default so the color path is skipped and dHash candidates are used.
-  computeCellColor: vi.fn(() => null),
 }))
 
 vi.mock('../../utils/dHashMatcher', () => ({
   loadDHashDatabase: vi.fn(),
   findBestDHashMatch: vi.fn(),
-  getTopCandidates: vi.fn(),
-  // Return empty array by default — no color DB data, falls back to dHash candidates.
-  getTopCandidatesByColor: vi.fn(async () => []),
-  // Return null by default — falls back to dHash runtime refinement.
-  findBestColorMatch: vi.fn(async () => null),
-}))
-
-vi.mock('../../utils/runtimeHashGenerator', () => ({
-  refineWithRuntimeHashes: vi.fn(),
 }))
 
 vi.mock('../../utils/quantityReader', () => ({
@@ -61,8 +49,7 @@ vi.mock('../../composables/useToast', () => ({
 
 import { detectGridFromFile } from '../../utils/gridDetector'
 import { computeDHash } from '../../utils/imageHash'
-import { loadDHashDatabase, findBestDHashMatch, getTopCandidates } from '../../utils/dHashMatcher'
-import { refineWithRuntimeHashes } from '../../utils/runtimeHashGenerator'
+import { loadDHashDatabase, findBestDHashMatch } from '../../utils/dHashMatcher'
 import { extractQuantity } from '../../utils/quantityReader'
 import { useCharacterTracker } from '../../composables/useCharacterTracker'
 import { useToast } from '../../composables/useToast'
@@ -95,33 +82,6 @@ function makeCell(row: number, col: number, isEmpty = false): GridCell {
     width: 64,
     height: 64,
     referenceHeight: 64,
-    imageData,
-    canvas,
-    isEmpty,
-  }
-}
-
-/** Build a phone-sized fake GridCell (width > 150 triggers runtime hashing). */
-function makePhoneCell(row: number, col: number, isEmpty = false): GridCell {
-  const imageData = {
-    data: new Uint8ClampedArray(200 * 180 * 4),
-    width: 200,
-    height: 180,
-    colorSpace: 'srgb' as PredefinedColorSpace,
-  } as ImageData
-
-  const canvas = {
-    toDataURL: () => `data:image/png;base64,mock${row}${col}`,
-  } as unknown as HTMLCanvasElement
-
-  return {
-    row,
-    col,
-    x: col * 200,
-    y: (row + 1) * 200,
-    width: 200,
-    height: 180,
-    referenceHeight: 180,
     imageData,
     canvas,
     isEmpty,
@@ -164,8 +124,6 @@ const mockedDetectGridFromFile = detectGridFromFile as MockedFunction<typeof det
 const mockedComputeDHash = computeDHash as MockedFunction<typeof computeDHash>
 const mockedLoadDHashDatabase = loadDHashDatabase as MockedFunction<typeof loadDHashDatabase>
 const mockedFindBestDHashMatch = findBestDHashMatch as MockedFunction<typeof findBestDHashMatch>
-const mockedGetTopCandidates = getTopCandidates as MockedFunction<typeof getTopCandidates>
-const mockedRefineWithRuntimeHashes = refineWithRuntimeHashes as MockedFunction<typeof refineWithRuntimeHashes>
 const mockedExtractQuantity = extractQuantity as MockedFunction<typeof extractQuantity>
 const mockedUseCharacterTracker = useCharacterTracker as MockedFunction<typeof useCharacterTracker>
 const mockedUseToast = useToast as MockedFunction<typeof useToast>
@@ -178,8 +136,6 @@ beforeEach(() => {
   mockedComputeDHash.mockReturnValue('000038d8790300000000c8d8f81f00000000c8d8e81f0000')
   mockedLoadDHashDatabase.mockResolvedValue(mockHashDb as any)
   mockedFindBestDHashMatch.mockResolvedValue(null)
-  mockedGetTopCandidates.mockResolvedValue([])
-  mockedRefineWithRuntimeHashes.mockResolvedValue(null)
   mockedExtractQuantity.mockReturnValue({
     quantity: 1,
     confidence: 0.9,
@@ -909,41 +865,11 @@ describe('isProcessing guard', () => {
 })
 
 // ---------------------------------------------------------------------------
-// Phone cell runtime hashing path
+// dHash matching path
 // ---------------------------------------------------------------------------
 
-describe('phone cell runtime hashing', () => {
-  it('calls getTopCandidates and refineWithRuntimeHashes for phone-sized cells', async () => {
-    const phoneCell = makePhoneCell(0, 0)
-    mockedDetectGridFromFile.mockResolvedValue([phoneCell])
-
-    const fakeTopCandidates = [
-      { entry: { h: 'hashid1', n: 'Iron Ore', q: 'refined', d: 'aaa', a: undefined, g: undefined }, distance: 10 },
-    ] as any[]
-    mockedGetTopCandidates.mockResolvedValue(fakeTopCandidates)
-    mockedRefineWithRuntimeHashes.mockResolvedValue({
-      hashedId: 'hashid1',
-      name: 'Iron Ore',
-      quality: 'refined',
-      distance: 5,
-      ambiguous: false,
-    })
-
-    const { processImage, results } = useScreenshotImport()
-    await processImage(new File([], 'phone.jpg', { type: 'image/jpeg' }))
-
-    expect(mockedGetTopCandidates).toHaveBeenCalledWith(
-      '000038d8790300000000c8d8f81f00000000c8d8e81f0000',
-      20,
-    )
-    expect(mockedRefineWithRuntimeHashes).toHaveBeenCalled()
-    expect(mockedFindBestDHashMatch).not.toHaveBeenCalled()
-    expect(results.value).toHaveLength(1)
-    expect(results.value[0].name).toBe('Iron Ore')
-    expect(results.value[0].status).toBe('matched')
-  })
-
-  it('does NOT call runtime hashing for desktop-sized cells (width <= 150)', async () => {
+describe('dHash matching path', () => {
+  it('calls findBestDHashMatch for desktop-sized cells', async () => {
     const desktopCell = makeCell(0, 0)
     mockedDetectGridFromFile.mockResolvedValue([desktopCell])
     mockedFindBestDHashMatch.mockResolvedValue({
@@ -954,47 +880,14 @@ describe('phone cell runtime hashing', () => {
       ambiguous: false,
     } satisfies DHashMatchResult)
 
-    const { processImage } = useScreenshotImport()
+    const { processImage, results } = useScreenshotImport()
     await processImage(new File([], 'desktop.png', { type: 'image/png' }))
 
-    expect(mockedFindBestDHashMatch).toHaveBeenCalled()
-    expect(mockedGetTopCandidates).not.toHaveBeenCalled()
-    expect(mockedRefineWithRuntimeHashes).not.toHaveBeenCalled()
-  })
-
-  it('pushes an error when runtime hashing returns null (no match found)', async () => {
-    const phoneCell = makePhoneCell(0, 0)
-    mockedDetectGridFromFile.mockResolvedValue([phoneCell])
-    mockedGetTopCandidates.mockResolvedValue([])
-    mockedRefineWithRuntimeHashes.mockResolvedValue(null)
-
-    const { processImage, results, errors } = useScreenshotImport()
-    await processImage(new File([], 'phone.jpg', { type: 'image/jpeg' }))
-
-    expect(results.value).toHaveLength(0)
-    expect(errors.value).toHaveLength(1)
-    expect(errors.value[0].reason).toBe('no_match')
-  })
-
-  it('sets status to ambiguous when runtime match is ambiguous', async () => {
-    const phoneCell = makePhoneCell(0, 0)
-    mockedDetectGridFromFile.mockResolvedValue([phoneCell])
-    mockedGetTopCandidates.mockResolvedValue([
-      { entry: { h: 'hashid3', n: 'Sword', q: 'epic', d: 'bbb', a: true, g: 'grp1' }, distance: 3 },
-    ] as any[])
-    mockedRefineWithRuntimeHashes.mockResolvedValue({
-      hashedId: 'hashid3',
-      name: 'Sword',
-      quality: 'epic',
-      distance: 3,
-      ambiguous: true,
-      groupId: 'grp1',
-    })
-
-    const { processImage, results } = useScreenshotImport()
-    await processImage(new File([], 'phone.jpg', { type: 'image/jpeg' }))
-
+    expect(mockedFindBestDHashMatch).toHaveBeenCalledWith(
+      '000038d8790300000000c8d8f81f00000000c8d8e81f0000',
+    )
     expect(results.value).toHaveLength(1)
-    expect(results.value[0].status).toBe('ambiguous')
+    expect(results.value[0].name).toBe('Gold Ore')
+    expect(results.value[0].status).toBe('matched')
   })
 })

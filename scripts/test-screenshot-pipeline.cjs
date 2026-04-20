@@ -30,7 +30,9 @@ const path = require('path')
 const FIXTURES_DIR = path.resolve(__dirname, '../src/tests/fixtures')
 const DEFAULT_SCREENSHOTS = [
   path.join(FIXTURES_DIR, 'screenshot-desktop.png'),
-  path.join(FIXTURES_DIR, 'screenshot-phone.jpg'),
+  // NOTE: phone screenshot matching is a known limitation and not yet supported.
+  // The phone DB hashes (dp field) have been removed from sprite-hashes.json.
+  // Keep screenshot-phone.jpg as a fixture for future work.
 ]
 
 const VITE_BASE = 'http://localhost:5173/idle-mmo-profiter/'
@@ -55,15 +57,18 @@ async function runPipeline(screenshotPath) {
   const context = await browser.newContext({ bypassCSP: true })
   const page = await context.newPage()
 
+  page.on('console', msg => {
+    const text = msg.text()
+    if (text.startsWith('[TEST')) process.stdout.write(text + '\n')
+  })
   await page.goto(VITE_BASE, { waitUntil: 'networkidle', timeout: 30000 })
 
   const result = await page.evaluate(async ({ screenshotDataUrl, mime }) => {
     // Import production modules directly from Vite dev server.
     const { detectGridFromFile } = await import('/idle-mmo-profiter/src/utils/gridDetector.ts')
-    const { computeDHash, detectLeftMargin, computeCellColor } = await import('/idle-mmo-profiter/src/utils/imageHash.ts')
+    const { computeDHash } = await import('/idle-mmo-profiter/src/utils/imageHash.ts')
     const { extractQuantity } = await import('/idle-mmo-profiter/src/utils/quantityReader.ts')
-    const { findBestDHashMatch, loadDHashDatabase, getTopCandidates, getTopCandidatesByColor, findBestColorMatch } = await import('/idle-mmo-profiter/src/utils/dHashMatcher.ts')
-    const { refineWithRuntimeHashes } = await import('/idle-mmo-profiter/src/utils/runtimeHashGenerator.ts')
+    const { findBestDHashMatch, loadDHashDatabase } = await import('/idle-mmo-profiter/src/utils/dHashMatcher.ts')
 
     const db = await loadDHashDatabase()
     const dbMeta = {
@@ -84,61 +89,18 @@ async function runPipeline(screenshotPath) {
 
     const cellResults = await Promise.all(
       cells.map(async (cell) => {
-        const refH = cell.referenceHeight
-        const effectiveH = (cell.imageData.height > refH * 1.5) ? refH : cell.imageData.height
-        const leftMargin = detectLeftMargin(cell.imageData, effectiveH)
+        // computeDHash normalises cells to 84×64 before cropping so desktop
+        // and phone cells both produce hashes that match the pre-computed DB.
+        const _px = cell.imageData.data
+        const _mid = Math.floor(_px.length / 2)
+        console.log(`[TEST ${cell.row},${cell.col}] imageData=${cell.imageData.width}x${cell.imageData.height} refH=${cell.referenceHeight} px[0]=${_px[0]},${_px[1]},${_px[2]} px[mid]=${_px[_mid]},${_px[_mid+1]},${_px[_mid+2]} len=${_px.length}`)
         const hash = computeDHash(cell.imageData, undefined, cell.referenceHeight)
+        console.log(`[TEST ${cell.row},${cell.col}] hash=${hash}`)
         const qResult = extractQuantity(cell.imageData, cell.width, cell.height)
-
-        const PHONE_CELL_THRESHOLD = 150
-        const RUNTIME_CANDIDATES = 20
 
         let match = null
         if (hash && !cell.isEmpty) {
-          const isPhoneCell = cell.width > PHONE_CELL_THRESHOLD
-          if (isPhoneCell) {
-            // Phone path: color fingerprint matching (JPEG-robust).
-            const COLOR_MATCH_THRESHOLD = 30
-            const cellColor = computeCellColor(cell.imageData, cell.referenceHeight, leftMargin)
-            if (cellColor) {
-              match = await findBestColorMatch(cellColor, COLOR_MATCH_THRESHOLD)
-            }
-
-            // Fallback: dHash-based runtime refinement (DB missing cp data).
-            if (!match) {
-              const topCandidates = await getTopCandidates(hash, RUNTIME_CANDIDATES)
-              const runtimeCandidates = topCandidates.map(({ entry, distance }) => ({
-                hashedId: entry.h,
-                name: entry.n,
-                quality: entry.q,
-                precomputedDistance: distance,
-                ambiguous: !!entry.a,
-                groupId: entry.g,
-              }))
-              const runtimeMatch = await refineWithRuntimeHashes(
-                hash,
-                runtimeCandidates,
-                cell.width,
-                cell.height,
-                cell.referenceHeight,
-                50,
-                leftMargin,
-              )
-              if (runtimeMatch) {
-                match = {
-                  hashedId: runtimeMatch.hashedId,
-                  name: runtimeMatch.name,
-                  quality: runtimeMatch.quality,
-                  distance: runtimeMatch.distance,
-                  ambiguous: runtimeMatch.ambiguous,
-                  groupId: runtimeMatch.groupId,
-                }
-              }
-            }
-          } else {
-            // Desktop path: pre-computed DB — fast and accurate.
-            match = await findBestDHashMatch(hash)
-          }
+          match = await findBestDHashMatch(hash)
         }
 
         return {
@@ -239,8 +201,9 @@ async function processScreenshot(screenshotPath) {
 
   for (const cell of cells) {
     const loc = `[${cell.row},${cell.col}]`
+    const rect = `${cell.width}x${cell.height}@(${cell.x},${cell.y})[ref=${cell.referenceHeight}]`
     if (cell.isEmpty) {
-      console.log(`${loc.padEnd(10)} | ----- | (empty)                                         | ---- | ---`)
+      console.log(`${loc.padEnd(10)} | ${rect.padEnd(24)} | (empty)`)
       continue
     }
 
@@ -253,7 +216,7 @@ async function processScreenshot(screenshotPath) {
     const status = cell.match ? statusLabel(dist) : 'MISS'
 
     console.log(
-      `${loc.padEnd(10)} | ${(qty + conf).padEnd(6)} | ${(name + qual + amb).padEnd(47)} | ${String(dist).padStart(4)} | ${status}`,
+      `${loc.padEnd(10)} | ${rect.padEnd(20)} | ${(qty + conf).padEnd(6)} | ${(name + qual + amb).padEnd(47)} | ${String(dist).padStart(4)} | ${status}`,
     )
   }
 
