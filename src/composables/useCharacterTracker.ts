@@ -47,7 +47,7 @@ function createCharacterTracker() {
     dataProvider.recipes.value.forEach((r) => {
       if (r.hashedId) map.set(r.hashedId, r.name)
     })
-    dataProvider.masterItems.value.forEach((item) => {
+    dataProvider.allItems.value.forEach((item: { hashedId?: string; name: string }) => {
       if (item.hashedId && !map.has(item.hashedId)) {
         map.set(item.hashedId, item.name)
       }
@@ -71,7 +71,7 @@ function createCharacterTracker() {
     dataProvider.recipes.value.forEach((r) => {
       if (r.hashedId) map.set(r.hashedId, r.price)
     })
-    dataProvider.masterItems.value.forEach((item) => {
+    dataProvider.allItems.value.forEach((item: { hashedId?: string; vendorValue?: number }) => {
       if (item.hashedId && !map.has(item.hashedId)) {
         map.set(item.hashedId, item.vendorValue ?? 0)
       }

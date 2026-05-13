@@ -190,7 +190,12 @@ const updateCraftableRecipeTime = (craftableName: string, value: number) => {
 
 // Compute the most recent lastUpdated from defaults.json
 const dataLastUpdated = computed(() => {
-  const allArrays = [...(defaultData.masterItems || [])]
+  const allArrays = [
+    ...(defaultData.materials || []),
+    ...(defaultData.craftables || []),
+    ...(defaultData.dungeons || []),
+    ...(defaultData.resources || []),
+  ] as { lastUpdated?: string }[]
   let maxDate = ''
   for (const item of allArrays) {
     if (item.lastUpdated && item.lastUpdated > maxDate) {

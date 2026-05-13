@@ -2,7 +2,7 @@
 import { ref, computed, onMounted, onBeforeUnmount, watch, nextTick } from 'vue'
 import { Chart, registerables } from 'chart.js'
 Chart.register(...registerables)
-import type { MasterItem } from '../types'
+// MasterItem type removed - using allItems directly
 import { useCharacterTracker } from '../composables/useCharacterTracker'
 import { useDataProvider } from '../composables/useDataProvider'
 import { useToast } from '../composables/useToast'
@@ -149,7 +149,7 @@ const allItems = computed(() => {
   })
 
   // Add allItems from defaults.json (items not in any category)
-  ;(dataProvider.allItems.value as MasterItem[]).forEach((item) => {
+  ;dataProvider.allItems.value.forEach((item: { hashedId?: string; name: string; vendorValue?: number }) => {
     if (item.hashedId && !seen.has(item.hashedId)) {
       items.push({
         hashId: item.hashedId,
