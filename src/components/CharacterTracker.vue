@@ -2,11 +2,10 @@
 import { ref, computed, onMounted, onBeforeUnmount, watch, nextTick } from 'vue'
 import { Chart, registerables } from 'chart.js'
 Chart.register(...registerables)
-// MasterItem type removed - using allItems directly
 import { useCharacterTracker } from '../composables/useCharacterTracker'
 import { useDataProvider } from '../composables/useDataProvider'
 import { useToast } from '../composables/useToast'
-import ScreenshotImport from './ScreenshotImport.vue'
+import HtmlImport from './HtmlImport.vue'
 
 const tracker = useCharacterTracker()
 const dataProvider = useDataProvider()
@@ -21,19 +20,25 @@ const searchQuery = ref('')
 const searchDebounceTimeout = ref<number | null>(null)
 const debouncedSearchQuery = ref('')
 
-// Screenshot import modal
-const showScreenshotImport = ref(false)
+// HTML import modal
+const showHtmlImport = ref(false)
 
 // Constants
 const MAX_SEARCH_RESULTS = 20
 
 // Gold input for active character
 const goldInput = ref(0)
+const goldInputFocused = ref(false)
 
 // Chart refs
-const chartContainer = ref<HTMLElement | null>(null)
-const chartCanvas = ref<HTMLCanvasElement | null>(null)
-let chartInstance: Chart | null = null
+const charChartContainer = ref<HTMLElement | null>(null)
+const charChartCanvas = ref<HTMLCanvasElement | null>(null)
+let charChartInstance: Chart | null = null
+
+const allChartContainer = ref<HTMLElement | null>(null)
+const allChartCanvas = ref<HTMLCanvasElement | null>(null)
+let allChartInstance: Chart | null = null
+
 // eslint-disable-next-line no-undef
 let resizeObserver: ResizeObserver | null = null
 
@@ -96,6 +101,20 @@ const handleRenameCharacter = () => {
 const handleGoldChange = () => {
   tracker.updateGold(goldInput.value)
 }
+
+const handleGoldFocus = () => {
+  goldInputFocused.value = true
+}
+
+const handleGoldBlur = () => {
+  goldInputFocused.value = false
+  handleGoldChange()
+}
+
+// Formatted gold display
+const formattedGold = computed(() => {
+  return goldInput.value.toLocaleString()
+})
 
 // Item search with debounce
 watch(searchQuery, () => {
@@ -227,9 +246,11 @@ const handleSaveSnapshot = () => {
   tracker.saveSnapshot()
   showToast('Snapshot saved', 'success')
 
-  // Recreate chart after save
+  // Recreate charts after save
   nextTick(() => {
-    setTimeout(() => createChart(), 150)
+    setTimeout(() => {
+      createCharts()
+    }, 150)
   })
 }
 
@@ -240,14 +261,15 @@ const handleDiscardChanges = () => {
 }
 
 // Current inventory value
-const currentValue = computed(() => {
-  if (!tracker.activeCharacter.value) return 0
-
-  const inventoryValue = tracker.getEffectiveInventory.value.reduce((sum, item) => {
+const inventoryValue = computed(() => {
+  return tracker.getEffectiveInventory.value.reduce((sum, item) => {
     return sum + item.quantity * item.priceAtTime
   }, 0)
+})
 
-  return goldInput.value + inventoryValue
+const currentValue = computed(() => {
+  if (!tracker.activeCharacter.value) return 0
+  return goldInput.value + inventoryValue.value
 })
 
 // Check if item is in pending changes
@@ -255,35 +277,90 @@ const isPendingChange = (hashId: string): boolean => {
   return tracker.pendingChanges.value.has(hashId)
 }
 
-// Chart data
-const chartData = computed(() => {
-  if (!tracker.activeCharacter.value || tracker.activeCharacter.value.history.length === 0) {
-    return { labels: [], datasets: [] }
-  }
+// Active character total value chart data
+const charChartData = computed(() => {
+  const char = tracker.activeCharacter.value
+  if (!char || char.history.length === 0) return { labels: [], datasets: [] }
 
-  const history = tracker.activeCharacter.value.history
-  const labels = history.map((snapshot) => {
-    const date = new Date(snapshot.timestamp)
-    return date.toLocaleDateString()
+  const labels = char.history.map((snap) => {
+    const date = new Date(snap.timestamp)
+    return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
   })
-
-  const data = history.map((snapshot) => {
-    return tracker.calculateSnapshotValue(snapshot)
-  })
+  const data = char.history.map((snap) => tracker.calculateSnapshotValue(snap))
 
   return {
     labels,
     datasets: [
       {
-        label: 'Total Value (gold)',
+        label: char.name,
+        data,
+        borderColor: 'rgba(129, 140, 248, 1)',
+        backgroundColor: 'rgba(129, 140, 248, 0.1)',
+        borderWidth: 2,
+        fill: true,
+        tension: 0.3,
+        pointRadius: 3,
+        pointHoverRadius: 5,
+        pointBackgroundColor: 'rgba(129, 140, 248, 1)',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+      },
+    ],
+  }
+})
+
+// All characters combined total value chart data
+const allChartData = computed(() => {
+  const allChars = tracker.characters.value
+  if (allChars.length === 0) return { labels: [], datasets: [] }
+
+  const timestampSet = new Set<string>()
+  for (const char of allChars) {
+    for (const snap of char.history) {
+      timestampSet.add(snap.timestamp)
+    }
+  }
+  if (timestampSet.size === 0) return { labels: [], datasets: [] }
+
+  const timestamps = [...timestampSet].sort()
+
+  const charValueLists = allChars.map((char) =>
+    char.history
+      .slice()
+      .sort((a, b) => a.timestamp.localeCompare(b.timestamp))
+      .map((snap) => ({ ts: snap.timestamp, val: tracker.calculateSnapshotValue(snap) }))
+  )
+
+  const charLastValues = new Array<number>(allChars.length).fill(0)
+  const charIndices = new Array<number>(allChars.length).fill(0)
+  const data: number[] = []
+  const labels: string[] = []
+
+  for (const ts of timestamps) {
+    for (let ci = 0; ci < allChars.length; ci++) {
+      const list = charValueLists[ci]
+      while (charIndices[ci] < list.length && list[charIndices[ci]].ts <= ts) {
+        charLastValues[ci] = list[charIndices[ci]].val
+        charIndices[ci]++
+      }
+    }
+    data.push(charLastValues.reduce((sum, v) => sum + v, 0))
+    labels.push(new Date(ts).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }))
+  }
+
+  return {
+    labels,
+    datasets: [
+      {
+        label: 'All Characters',
         data,
         borderColor: 'rgba(56, 189, 248, 1)',
         backgroundColor: 'rgba(56, 189, 248, 0.1)',
         borderWidth: 2,
         fill: true,
         tension: 0.3,
-        pointRadius: 4,
-        pointHoverRadius: 6,
+        pointRadius: 3,
+        pointHoverRadius: 5,
         pointBackgroundColor: 'rgba(56, 189, 248, 1)',
         pointBorderColor: '#fff',
         pointBorderWidth: 2,
@@ -292,141 +369,106 @@ const chartData = computed(() => {
   }
 })
 
-const hasChartData = computed(() => {
-  return (
-    tracker.activeCharacter.value &&
-    tracker.activeCharacter.value.history.length > 0
-  )
-})
+const hasCharChartData = computed(() => charChartData.value.labels.length > 0)
+const hasAllChartData = computed(() => allChartData.value.labels.length > 0)
 
-const createChart = () => {
-  if (!chartCanvas.value || !hasChartData.value) return
-
-  // Destroy existing chart
-  if (chartInstance) {
-    chartInstance.destroy()
-  }
-
-  const ctx = chartCanvas.value.getContext('2d')
-  if (!ctx) return
-
-  // Detect mobile viewport
-  const isMobile = window.innerWidth <= 767
-
-  chartInstance = new Chart(ctx, {
-    type: 'line',
-    data: chartData.value,
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: false,
-        },
-        tooltip: {
-          backgroundColor: 'rgba(17, 23, 34, 0.95)',
-          titleColor: '#e5e7eb',
-          bodyColor: '#e5e7eb',
-          borderColor: '#374151',
-          borderWidth: 1,
-          padding: 12,
-          displayColors: true,
-          callbacks: {
-            label: function (context) {
-              const value = context.parsed.y
-              if (value === null) return ''
-              return `Total Value: ${Math.round(value).toLocaleString()} gold`
-            },
-          },
-        },
-      },
-      scales: {
-        x: {
-          grid: {
-            color: '#374151',
-          },
-          border: {
-            display: false,
-          },
-          ticks: {
-            color: '#9ca3af',
-            font: {
-              size: isMobile ? 10 : 11,
-            },
-          },
-        },
-        y: {
-          beginAtZero: true,
-          grid: {
-            color: '#374151',
-          },
-          border: {
-            display: false,
-          },
-          ticks: {
-            color: '#9ca3af',
-            font: {
-              size: isMobile ? 10 : 11,
-            },
-            callback: function (value) {
-              if (typeof value === 'number') {
-                return Math.round(value).toLocaleString()
-              }
-              return value !== null ? String(value) : ''
-            },
-          },
+const chartOptions = (isMobile: boolean): Record<string, unknown> => ({
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: { display: false },
+    tooltip: {
+      backgroundColor: 'rgba(17, 23, 34, 0.95)',
+      titleColor: '#e5e7eb',
+      bodyColor: '#e5e7eb',
+      borderColor: '#374151',
+      borderWidth: 1,
+      padding: 12,
+      displayColors: true,
+      callbacks: {
+        label: function (context: { parsed: { y: number | null } }) {
+          const value = context.parsed.y
+          if (value === null) return ''
+          return `${Math.round(value).toLocaleString()} gold`
         },
       },
     },
-  })
+  },
+  scales: {
+    x: {
+      grid: { color: '#374151' },
+      border: { display: false },
+      ticks: { color: '#9ca3af', font: { size: isMobile ? 10 : 11 } },
+    },
+    y: {
+      beginAtZero: true,
+      grid: { color: '#374151' },
+      border: { display: false },
+      ticks: {
+        color: '#9ca3af',
+        font: { size: isMobile ? 10 : 11 },
+        callback: function (value: string | number) {
+          return typeof value === 'number' ? Math.round(value).toLocaleString() : ''
+        },
+      },
+    },
+  },
+})
+
+const createCharts = () => {
+  if (charChartInstance) { charChartInstance.destroy(); charChartInstance = null }
+  if (allChartInstance) { allChartInstance.destroy(); allChartInstance = null }
+
+  const isMobile = window.innerWidth <= 767
+
+  if (hasCharChartData.value && charChartCanvas.value) {
+    const ctx = charChartCanvas.value.getContext('2d')
+    if (ctx) {
+      charChartInstance = new Chart(ctx, { type: 'line', data: charChartData.value, options: chartOptions(isMobile) })
+    }
+  }
+
+  if (hasAllChartData.value && allChartCanvas.value) {
+    const ctx = allChartCanvas.value.getContext('2d')
+    if (ctx) {
+      allChartInstance = new Chart(ctx, { type: 'line', data: allChartData.value, options: chartOptions(isMobile) })
+    }
+  }
 }
 
-const updateChart = () => {
-  if (!chartInstance) return
-
-  chartInstance.data = chartData.value
-  chartInstance.update()
+const updateCharts = () => {
+  if (charChartInstance) { charChartInstance.data = charChartData.value; charChartInstance.update() }
+  if (allChartInstance) { allChartInstance.data = allChartData.value; allChartInstance.update() }
 }
 
-// Initialize chart on mount
 onMounted(() => {
-  nextTick(() => {
-    setTimeout(() => createChart(), 150)
-  })
+  nextTick(() => setTimeout(() => createCharts(), 150))
 
-  if (chartContainer.value && typeof window !== 'undefined') {
+  const containers = [charChartContainer.value, allChartContainer.value].filter(Boolean) as HTMLElement[]
+  if (containers.length > 0 && typeof window !== 'undefined') {
     // eslint-disable-next-line no-undef
     resizeObserver = new ResizeObserver(() => {
-      if (chartInstance) {
-        chartInstance.resize()
-      }
+      if (charChartInstance) charChartInstance.resize()
+      if (allChartInstance) allChartInstance.resize()
     })
-    resizeObserver.observe(chartContainer.value)
+    containers.forEach((el) => resizeObserver!.observe(el))
   }
 })
 
 onBeforeUnmount(() => {
-  if (searchDebounceTimeout.value) {
-    clearTimeout(searchDebounceTimeout.value)
-  }
-  if (chartInstance) {
-    chartInstance.destroy()
-    chartInstance = null
-  }
-  if (resizeObserver) {
-    resizeObserver.disconnect()
-    resizeObserver = null
-  }
+  if (searchDebounceTimeout.value) clearTimeout(searchDebounceTimeout.value)
+  if (charChartInstance) { charChartInstance.destroy(); charChartInstance = null }
+  if (allChartInstance) { allChartInstance.destroy(); allChartInstance = null }
+  if (resizeObserver) { resizeObserver.disconnect(); resizeObserver = null }
 })
 
-// Watch for chart data changes
 watch(
-  chartData,
+  [charChartData, allChartData],
   () => {
-    if (chartInstance) {
-      updateChart()
-    } else if (hasChartData.value) {
-      nextTick(() => setTimeout(() => createChart(), 150))
+    if (charChartInstance || allChartInstance) {
+      updateCharts()
+    } else if (hasCharChartData.value || hasAllChartData.value) {
+      nextTick(() => setTimeout(() => createCharts(), 150))
     }
   },
   { deep: true }
@@ -435,40 +477,66 @@ watch(
 
 <template>
   <div class="character-tracker">
-    <!-- 1. Character selector bar -->
-    <div class="character-selector">
-      <div class="character-pills">
-        <button
-          v-for="char in tracker.characters.value"
-          :key="char.id"
-          :class="['character-pill', { active: tracker.activeCharacter.value?.id === char.id }]"
-          @click="tracker.setActiveCharacter(char.id)"
-        >
-          {{ char.name }}
-        </button>
-        <button
-          v-if="!showAddCharacter"
-          class="add-character-btn"
-          @click="showAddCharacter = true"
-        >
-          + Add Character
-        </button>
-        <div v-if="showAddCharacter" class="add-character-inline">
-          <input
-            v-model="newCharacterName"
-            type="text"
-            placeholder="Character name"
-            class="character-name-input"
-            @keyup.enter="handleAddCharacter"
-            @keyup.escape="showAddCharacter = false"
-          />
-          <button class="btn-save" @click="handleAddCharacter">Create</button>
-          <button class="btn-cancel" @click="showAddCharacter = false">Cancel</button>
+    <!-- Top bar: character selector + actions -->
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <div class="character-pills">
+          <button
+            v-for="char in tracker.characters.value"
+            :key="char.id"
+            :class="['character-pill', { active: tracker.activeCharacter.value?.id === char.id }]"
+            @click="tracker.setActiveCharacter(char.id)"
+          >
+            {{ char.name }}
+          </button>
+          <button
+            v-if="!showAddCharacter"
+            class="add-character-btn"
+            @click="showAddCharacter = true"
+          >
+            + Add
+          </button>
+          <div v-if="showAddCharacter" class="add-character-inline">
+            <input
+              v-model="newCharacterName"
+              type="text"
+              placeholder="Name"
+              class="character-name-input"
+              @keyup.enter="handleAddCharacter"
+              @keyup.escape="showAddCharacter = false"
+            />
+            <button class="btn-save" @click="handleAddCharacter">Create</button>
+            <button class="btn-cancel" @click="showAddCharacter = false">✕</button>
+          </div>
         </div>
       </div>
-      <div v-if="tracker.activeCharacter.value" class="character-actions">
-        <button class="btn-action" @click="handleRenameCharacter">Rename</button>
-        <button class="btn-action btn-danger" @click="handleDeleteCharacter">Delete</button>
+      <div v-if="tracker.activeCharacter.value" class="top-bar-right">
+        <div class="top-bar-actions">
+          <button class="btn-action" @click="handleRenameCharacter" title="Rename character">Rename</button>
+          <button class="btn-action btn-danger" @click="handleDeleteCharacter" title="Delete character">Delete</button>
+          <button class="html-import-btn" @click="showHtmlImport = true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6" />
+              <polyline points="8 6 2 12 8 18" />
+            </svg>
+            Import Inventory
+          </button>
+        </div>
+        <div v-if="tracker.hasPendingChanges.value" class="top-bar-save">
+          <button
+            class="tracker-btn-primary pulse-glow"
+            @click="handleSaveSnapshot"
+          >
+            Save Snapshot
+          </button>
+          <button
+            class="tracker-btn-secondary"
+            @click="handleDiscardChanges"
+          >
+            Discard
+          </button>
+        </div>
       </div>
     </div>
 
@@ -486,156 +554,146 @@ watch(
     </div>
 
     <template v-if="tracker.activeCharacter.value">
-      <!-- 2. Gold input -->
-      <div class="gold-section">
-        <label class="gold-label">Gold:</label>
-        <input
-          v-model.number="goldInput"
-          type="number"
-          min="0"
-          class="gold-input"
-          @change="handleGoldChange"
-        />
-      </div>
+      <!-- 2-column dashboard -->
+      <div class="dashboard-grid">
+        <!-- Left column -->
+        <div class="dashboard-left">
+          <!-- Gold + Value summary (compact row) -->
+          <div class="gold-value-row">
+            <div class="gold-input-group">
+              <label class="gold-label">Gold</label>
+              <div class="gold-input-wrapper">
+                <input
+                  v-if="goldInputFocused"
+                  ref="goldInputRef"
+                  v-model.number="goldInput"
+                  type="number"
+                  min="0"
+                  class="gold-input"
+                  @blur="handleGoldBlur"
+                  @focus="handleGoldFocus"
+                />
+                <input
+                  v-else
+                  class="gold-input gold-input-display"
+                  :value="formattedGold"
+                  readonly
+                  @focus="handleGoldFocus"
+                />
+              </div>
+            </div>
+            <div class="value-badges">
+              <div class="value-badge">
+                <span class="value-badge-label">Inventory</span>
+                <span class="value-badge-amount">{{ inventoryValue.toLocaleString() }}</span>
+              </div>
+              <div class="value-badge value-badge-total">
+                <span class="value-badge-label">Total</span>
+                <span class="value-badge-amount">{{ currentValue.toLocaleString() }}</span>
+              </div>
+            </div>
+          </div>
 
-      <!-- 3. Inventory table -->
-      <div class="inventory-section">
-        <h3 class="section-title">Inventory</h3>
-        <div v-if="tracker.getEffectiveInventory.value.length === 0" class="empty-state">
-          <p>No items in inventory. Search below to add items.</p>
-        </div>
-        <table v-else class="inventory-table mobile-card-layout">
-          <thead>
-            <tr>
-              <th>Item Name</th>
-              <th>Quantity</th>
-              <th>Price (at time)</th>
-              <th>Total Value</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              v-for="item in tracker.getEffectiveInventory.value"
-              :key="item.hashId"
-              :class="{ 'pending-change': isPendingChange(item.hashId) }"
-            >
-              <td data-label="Item" class="name-cell">{{ tracker.resolveItemName(item.hashId) }}</td>
-              <td data-label="Qty">{{ item.quantity }}</td>
-              <td data-label="Price">{{ item.priceAtTime.toLocaleString() }}</td>
-              <td data-label="Value">{{ (item.quantity * item.priceAtTime).toLocaleString() }}</td>
-              <td data-label="" class="actions-cell">
-                <button class="btn-small" @click="editQuantity(item.hashId, item.priceAtTime)">
-                  Edit
-                </button>
-                <button
-                  class="btn-small btn-danger"
-                  @click="removeFromInventory(item.hashId)"
+          <!-- Inventory section with integrated search -->
+          <div class="inventory-section">
+            <div class="inventory-header">
+              <h3 class="section-title">Inventory</h3>
+              <div class="search-wrapper">
+                <input
+                  v-model="searchQuery"
+                  type="text"
+                  placeholder="Search items to add..."
+                  class="item-search-input"
+                />
+                <div v-if="debouncedSearchQuery && filteredItems.length === 0" class="search-no-results">
+                  No items found
+                </div>
+                <div v-else-if="filteredItems.length > 0" class="search-results-dropdown">
+                  <button
+                    v-for="item in filteredItems"
+                    :key="item.hashId"
+                    class="search-result-item"
+                    @click="addItemToInventory(item.hashId, item.price, item.name)"
+                  >
+                    <span class="item-name">{{ item.name }}</span>
+                    <span class="item-price">{{ item.price.toLocaleString() }} gold</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div v-if="tracker.getEffectiveInventory.value.length === 0" class="empty-state empty-inventory">
+              <p>No items in inventory. Use the search above to add items.</p>
+            </div>
+            <table v-else class="inventory-table mobile-card-layout">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Qty</th>
+                  <th>Price</th>
+                  <th>Value</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="item in tracker.getEffectiveInventory.value"
+                  :key="item.hashId"
+                  :class="{ 'pending-change': isPendingChange(item.hashId) }"
                 >
-                  Remove
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- 4. Add item section -->
-      <div class="add-item-section">
-        <div class="add-item-header">
-          <h3 class="section-title">Add Item</h3>
-          <button class="screenshot-import-btn" @click="showScreenshotImport = true">
-            <svg
-width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-              <circle cx="8.5" cy="8.5" r="1.5" />
-              <polyline points="21 15 16 10 5 21" />
-            </svg>
-            Import from Screenshot
-          </button>
-        </div>
-        <input
-          v-model="searchQuery"
-          type="text"
-          placeholder="Search for items..."
-          class="item-search-input"
-        />
-        <div v-if="debouncedSearchQuery && filteredItems.length === 0" class="search-no-results">
-          No items found
-        </div>
-        <div v-else-if="filteredItems.length > 0" class="search-results">
-          <button
-            v-for="item in filteredItems"
-            :key="item.hashId"
-            class="search-result-item"
-            @click="addItemToInventory(item.hashId, item.price, item.name)"
-          >
-            <span class="item-name">{{ item.name }}</span>
-            <span class="item-price">{{ item.price.toLocaleString() }} gold</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- 5. Action bar -->
-      <div class="action-bar">
-        <button
-          class="tracker-btn-primary"
-          :disabled="!tracker.hasPendingChanges.value"
-          @click="handleSaveSnapshot"
-        >
-          Save Snapshot
-        </button>
-        <button
-          class="tracker-btn-secondary"
-          :disabled="!tracker.hasPendingChanges.value"
-          @click="handleDiscardChanges"
-        >
-          Discard Changes
-        </button>
-      </div>
-
-      <!-- 6. Value summary card -->
-      <div class="value-summary">
-        <h3 class="section-title">Current Value</h3>
-        <div class="value-grid">
-          <div class="value-item">
-            <span class="value-label">Gold:</span>
-            <span class="value-amount">{{ goldInput.toLocaleString() }}</span>
-          </div>
-          <div class="value-item">
-            <span class="value-label">Inventory:</span>
-            <span class="value-amount">{{
-              tracker.getEffectiveInventory.value
-                .reduce((sum, item) => sum + item.quantity * item.priceAtTime, 0)
-                .toLocaleString()
-            }}</span>
-          </div>
-          <div class="value-item value-total">
-            <span class="value-label">Total:</span>
-            <span class="value-amount">{{ currentValue.toLocaleString() }}</span>
+                  <td data-label="Item" class="name-cell">{{ tracker.resolveItemName(item.hashId) }}</td>
+                  <td data-label="Qty">{{ item.quantity }}</td>
+                  <td data-label="Price">{{ item.priceAtTime.toLocaleString() }}</td>
+                  <td data-label="Value">{{ (item.quantity * item.priceAtTime).toLocaleString() }}</td>
+                  <td data-label="" class="actions-cell">
+                    <button class="btn-small" @click="editQuantity(item.hashId, item.priceAtTime)">
+                      Edit
+                    </button>
+                    <button
+                      class="btn-small btn-danger"
+                      @click="removeFromInventory(item.hashId)"
+                    >
+                      ✕
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-      </div>
 
-      <!-- 7. Value history chart -->
-      <div class="chart-section">
-        <h3 class="section-title">Value History</h3>
-        <div v-if="hasChartData" ref="chartContainer" class="chart-container">
-          <canvas ref="chartCanvas"></canvas>
-        </div>
-        <div v-else class="empty-state">
-          <p>No history yet. Save a snapshot to start tracking value over time.</p>
+        <!-- Right column -->
+        <div class="dashboard-right">
+          <!-- Active character value chart -->
+          <div class="chart-card">
+            <h4 class="chart-title">{{ tracker.activeCharacter.value?.name ?? 'Character' }}</h4>
+            <div v-if="hasCharChartData" ref="charChartContainer" class="chart-container chart-container-md">
+              <canvas ref="charChartCanvas"></canvas>
+            </div>
+            <div v-else class="empty-state empty-chart">
+              <p>No snapshots yet.</p>
+            </div>
+          </div>
+
+          <!-- All characters combined value chart -->
+          <div class="chart-card">
+            <h4 class="chart-title">All Characters</h4>
+            <div v-if="hasAllChartData" ref="allChartContainer" class="chart-container chart-container-md">
+              <canvas ref="allChartCanvas"></canvas>
+            </div>
+            <div v-else class="empty-state empty-chart">
+              <p>Save a snapshot to start tracking.</p>
+            </div>
+          </div>
         </div>
       </div>
     </template>
 
-    <!-- Screenshot import modal (teleported to body for z-index stacking) -->
+    <!-- HTML import modal (teleported to body for z-index stacking) -->
     <Teleport to="body">
-      <ScreenshotImport
-        v-if="showScreenshotImport"
-        @close="showScreenshotImport = false"
-        @imported="showScreenshotImport = false"
+      <HtmlImport
+        v-if="showHtmlImport"
+        @close="showHtmlImport = false"
+        @imported="showHtmlImport = false"
       />
     </Teleport>
   </div>
@@ -645,38 +703,61 @@ width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
 .character-tracker {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 0.75rem;
 }
 
-/* Character selector */
-.character-selector {
+/* ===== Top bar ===== */
+.top-bar {
   background: var(--surface-bg);
   border: 1px solid var(--surface-border);
   border-radius: var(--surface-radius);
-  padding: 1rem;
+  padding: 0.75rem 1rem;
   box-shadow: var(--surface-shadow);
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.75rem;
+}
+
+.top-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.top-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.top-bar-actions {
+  display: flex;
+  gap: 0.375rem;
+}
+
+.top-bar-save {
+  display: flex;
+  gap: 0.375rem;
 }
 
 .character-pills {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.375rem;
   flex-wrap: wrap;
   align-items: center;
 }
 
 .character-pill {
-  padding: 0.5rem 1rem;
+  padding: 0.375rem 0.75rem;
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: 6px;
   color: var(--text-primary);
   cursor: pointer;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   transition: all 0.2s;
 }
 
@@ -692,13 +773,13 @@ width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
 }
 
 .add-character-btn {
-  padding: 0.5rem 1rem;
+  padding: 0.375rem 0.75rem;
   background: var(--accent-primary);
   border: none;
   border-radius: 6px;
   color: white;
   cursor: pointer;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   transition: opacity 0.2s;
 }
@@ -709,33 +790,28 @@ width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
 
 .add-character-inline {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.375rem;
   align-items: center;
 }
 
 .character-name-input {
-  padding: 0.5rem;
+  padding: 0.375rem 0.5rem;
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: 6px;
   color: var(--text-primary);
-  font-size: 0.875rem;
-  width: 150px;
-}
-
-.character-actions {
-  display: flex;
-  gap: 0.5rem;
+  font-size: 0.8125rem;
+  width: 120px;
 }
 
 .btn-action {
-  padding: 0.5rem 1rem;
+  padding: 0.375rem 0.625rem;
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: 6px;
   color: var(--text-primary);
   cursor: pointer;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   transition: all 0.2s;
 }
 
@@ -752,48 +828,320 @@ width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
   background: rgba(239, 68, 68, 0.1);
 }
 
-/* Gold section */
-.gold-section {
+.html-import-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.375rem 0.625rem;
+  min-height: unset;
+  height: 30px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s var(--ease-in-out);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.html-import-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+/* Action buttons */
+.tracker-btn-primary,
+.tracker-btn-secondary {
+  padding: 0.375rem 0.875rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+
+.tracker-btn-primary {
+  background: var(--accent-primary);
+  color: white;
+}
+
+.tracker-btn-secondary {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.tracker-btn-primary:not(:disabled):hover,
+.tracker-btn-secondary:not(:disabled):hover {
+  opacity: 0.9;
+}
+
+/* Pulse/glow animation for pending changes */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 4px 1px rgba(99, 102, 241, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 12px 4px rgba(99, 102, 241, 0.5);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.btn-save,
+.btn-cancel {
+  padding: 0.375rem 0.75rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-save {
+  background: var(--accent-primary);
+  color: white;
+}
+
+.btn-cancel {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+/* ===== Dashboard grid ===== */
+.dashboard-grid {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.dashboard-left {
+  flex: 3;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.dashboard-right {
+  flex: 2;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* ===== Gold + Value summary row ===== */
+.gold-value-row {
+  background: var(--surface-bg);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--surface-radius);
+  padding: 0.75rem 1rem;
+  box-shadow: var(--surface-shadow);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.gold-input-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.gold-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--warning);
+  white-space: nowrap;
+}
+
+.gold-input-wrapper {
+  position: relative;
+}
+
+.gold-input {
+  padding: 0.375rem 0.625rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  width: 140px;
+  font-variant-numeric: tabular-nums;
+}
+
+.gold-input-display {
+  cursor: text;
+}
+
+.gold-input-display:hover {
+  border-color: var(--accent-primary);
+}
+
+.value-badges {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.value-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0.375rem 0.75rem;
+  background: var(--bg-secondary);
+  border-radius: 6px;
+}
+
+.value-badge-total {
+  background: var(--accent-primary);
+}
+
+.value-badge-label {
+  font-size: 0.625rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.value-badge-total .value-badge-label {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.value-badge-amount {
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.value-badge-total .value-badge-amount {
+  color: white;
+}
+
+/* ===== Inventory section ===== */
+.inventory-section {
   background: var(--surface-bg);
   border: 1px solid var(--surface-border);
   border-radius: var(--surface-radius);
   padding: 1rem;
   box-shadow: var(--surface-shadow);
+}
+
+.inventory-header {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
 }
 
-.gold-label {
+.section-title {
   font-size: 1rem;
-  font-weight: 600;
-  color: var(--warning);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  white-space: nowrap;
 }
 
-.gold-input {
-  padding: 0.5rem 1rem;
+.search-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 180px;
+}
+
+.item-search-input {
+  width: 100%;
+  padding: 0.4375rem 0.75rem;
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: 6px;
   color: var(--text-primary);
-  font-size: 1rem;
-  width: 200px;
+  font-size: 0.8125rem;
 }
 
-/* Inventory section */
-.inventory-section {
+.item-search-input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+}
+
+.search-results-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  margin-top: 4px;
   background: var(--surface-bg);
   border: 1px solid var(--surface-border);
-  border-radius: var(--surface-radius);
-  padding: 1.5rem;
-  box-shadow: var(--surface-shadow);
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  max-height: 240px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
-.section-title {
-  font-size: 1.125rem;
-  font-weight: 700;
+.search-result-item {
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.15s;
+  border: none;
+  background: none;
+  text-align: left;
+  width: 100%;
+}
+
+.search-result-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.search-result-item + .search-result-item {
+  border-top: 1px solid var(--border-color);
+}
+
+.item-name {
   color: var(--text-primary);
-  margin: 0 0 1rem 0;
+  font-size: 0.8125rem;
+}
+
+.item-price {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  white-space: nowrap;
+  margin-left: 1rem;
+}
+
+.search-no-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  margin-top: 4px;
+  padding: 0.75rem;
+  background: var(--surface-bg);
+  border: 1px solid var(--surface-border);
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  text-align: center;
 }
 
 .inventory-table {
@@ -803,10 +1151,10 @@ width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
 
 .inventory-table th {
   text-align: left;
-  padding: 0.75rem;
+  padding: 0.5rem;
   background: var(--bg-secondary);
   color: var(--text-secondary);
-  font-size: var(--text-base);
+  font-size: 0.6875rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -814,8 +1162,9 @@ width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
 }
 
 .inventory-table td {
-  padding: 0.75rem;
+  padding: 0.5rem;
   color: var(--text-primary);
+  font-size: 0.8125rem;
   border-bottom: 1px solid var(--border-color);
 }
 
@@ -827,18 +1176,29 @@ width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
   border-left: 3px solid rgba(251, 191, 36, 0.8);
 }
 
+.name-cell {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.actions-cell {
+  white-space: nowrap;
+}
+
 .btn-small {
-  padding: 0.25rem 0.5rem;
+  padding: 0.1875rem 0.375rem;
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: 4px;
   color: var(--text-primary);
   cursor: pointer;
-  font-size: 0.75rem;
-  margin-right: 0.5rem;
+  font-size: 0.6875rem;
+  margin-right: 0.25rem;
   transition: all 0.2s;
-  min-height: 32px;
-  min-width: 32px;
+  min-height: 26px;
+  min-width: 26px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -857,247 +1217,43 @@ width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
   background: rgba(239, 68, 68, 0.1);
 }
 
-/* Add item section */
-.add-item-section {
+/* ===== Chart cards ===== */
+.chart-card {
   background: var(--surface-bg);
   border: 1px solid var(--surface-border);
   border-radius: var(--surface-radius);
-  padding: 1.5rem;
+  padding: 0.75rem 1rem;
   box-shadow: var(--surface-shadow);
 }
 
-.add-item-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
-
-.add-item-header .section-title {
-  margin: 0;
-}
-
-.screenshot-import-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  padding: 0.5rem 0.875rem;
-  min-height: unset;
-  height: 36px;
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  color: var(--text-secondary);
+.chart-title {
   font-size: 0.8125rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s var(--ease-in-out);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.screenshot-import-btn:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: var(--accent-primary);
-  color: var(--accent-primary);
-  transform: none;
-  box-shadow: none;
-}
-
-.item-search-input {
-  width: 100%;
-  padding: 0.75rem;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  color: var(--text-primary);
-  font-size: 0.875rem;
-}
-
-.search-results {
-  margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-.search-result-item {
-  padding: 0.75rem;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.search-result-item:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: var(--accent-primary);
-}
-
-.item-name {
-  color: var(--text-primary);
-  font-size: 0.875rem;
-}
-
-.item-price {
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-}
-
-.search-no-results {
-  margin-top: 1rem;
-  padding: 1rem;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-  text-align: center;
-}
-
-/* Action bar */
-.action-bar {
-  display: flex;
-  gap: 1rem;
-}
-
-.tracker-btn-primary,
-.tracker-btn-secondary {
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 6px;
-  font-size: 0.875rem;
   font-weight: 600;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.tracker-btn-primary {
-  background: var(--accent-primary);
-  color: white;
-}
-
-.tracker-btn-primary:disabled {
-  background: var(--bg-secondary);
   color: var(--text-secondary);
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
-.tracker-btn-secondary {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-}
-
-.tracker-btn-secondary:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.tracker-btn-primary:not(:disabled):hover,
-.tracker-btn-secondary:not(:disabled):hover {
-  opacity: 0.9;
-}
-
-.btn-save,
-.btn-cancel {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 6px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.btn-save {
-  background: var(--accent-primary);
-  color: white;
-}
-
-.btn-cancel {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-}
-
-/* Value summary */
-.value-summary {
-  background: var(--surface-bg);
-  border: 1px solid var(--surface-border);
-  border-radius: var(--surface-radius);
-  padding: 1.5rem;
-  box-shadow: var(--surface-shadow);
-}
-
-.value-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-}
-
-.value-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem;
-  background: var(--bg-secondary);
-  border-radius: 6px;
-}
-
-.value-item.value-total {
-  background: var(--accent-primary);
-}
-
-.value-label {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  font-weight: 600;
-}
-
-.value-item.value-total .value-label {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.value-amount {
-  font-size: 1.125rem;
-  color: var(--text-primary);
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-}
-
-.value-item.value-total .value-amount {
-  color: white;
-}
-
-/* Chart section */
-.chart-section {
-  background: var(--surface-bg);
-  border: 1px solid var(--surface-border);
-  border-radius: var(--surface-radius);
-  padding: 1.5rem;
-  box-shadow: var(--surface-shadow);
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .chart-container {
   position: relative;
-  height: 400px;
   width: 100%;
 }
 
-/* Empty state */
+.chart-container-md {
+  height: 220px;
+}
+
+.empty-chart {
+  padding: 1.5rem 1rem;
+}
+
+/* ===== Empty state ===== */
 .empty-state {
-  padding: 2rem;
+  padding: 1.5rem;
   text-align: center;
   color: var(--text-secondary);
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
 }
 
 .empty-state-hero {
@@ -1106,6 +1262,9 @@ width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  background: var(--surface-bg);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--surface-radius);
 }
 
 .empty-state-icon {
@@ -1117,6 +1276,7 @@ width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
   font-size: 1.125rem;
   font-weight: 600;
   color: var(--text-primary);
+  margin: 0;
 }
 
 .empty-state-desc {
@@ -1124,30 +1284,73 @@ width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
   color: var(--text-secondary);
   max-width: 360px;
   line-height: 1.5;
+  margin: 0;
 }
 
-/* Mobile responsiveness */
+.empty-inventory {
+  padding: 1rem;
+}
+
+.empty-inventory p {
+  margin: 0;
+}
+
+/* ===== Mobile responsiveness ===== */
 @media (max-width: 767px) {
-  .character-selector {
+  .top-bar {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .top-bar-left,
+  .top-bar-right {
+    width: 100%;
+  }
+
+  .top-bar-right {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .top-bar-actions {
+    justify-content: center;
+  }
+
+  .top-bar-save {
+    justify-content: center;
   }
 
   .character-pills {
     justify-content: center;
   }
 
-  .character-actions {
-    justify-content: center;
+  .dashboard-grid {
+    flex-direction: column;
   }
 
-  .gold-section {
+  .gold-value-row {
     flex-direction: column;
     align-items: stretch;
   }
 
+  .value-badges {
+    margin-left: 0;
+    justify-content: stretch;
+  }
+
+  .value-badge {
+    flex: 1;
+    align-items: center;
+  }
+
   .gold-input {
     width: 100%;
+  }
+
+  .inventory-header {
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .inventory-table {
@@ -1159,16 +1362,8 @@ width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
     padding: 0.5rem;
   }
 
-  .action-bar {
-    flex-direction: column;
-  }
-
-  .value-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .chart-container {
-    height: 300px;
+  .chart-container-md {
+    height: 200px;
   }
 
   .btn-small {
