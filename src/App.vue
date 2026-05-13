@@ -914,7 +914,7 @@ onUnmounted(() => {
 @keyframes profit-glow {
   0%, 100% { text-shadow: 0 0 8px rgba(251, 191, 36, 0.3); }
   50% { text-shadow: 0 0 16px rgba(251, 191, 36, 0.5); }
-
+}
 
 /* Tab Navigation */
 .tab-navigation-wrapper {
