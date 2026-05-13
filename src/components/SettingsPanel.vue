@@ -294,7 +294,7 @@ const handleResetAll = () => {
   gap: 0.375rem;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 767px) {
   .settings-panel {
     padding: 1.5rem;
   }

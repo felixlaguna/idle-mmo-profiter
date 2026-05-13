@@ -179,11 +179,16 @@ onMounted(() => {
     setTimeout(() => createChart(), 150)
   })
 
-  // Use ResizeObserver to recreate chart when container resizes
+  // Use ResizeObserver to recreate chart when container resizes across breakpoint
   if (chartContainer.value && typeof window !== 'undefined') {
+    let lastIsMobile = window.innerWidth <= 767
     // eslint-disable-next-line no-undef
     resizeObserver = new ResizeObserver(() => {
-      if (chartInstance) {
+      const nowMobile = window.innerWidth <= 767
+      if (nowMobile !== lastIsMobile) {
+        lastIsMobile = nowMobile
+        nextTick(() => createChart())
+      } else if (chartInstance) {
         chartInstance.resize()
       }
     })

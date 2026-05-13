@@ -71,6 +71,9 @@ onUnmounted(() => {
 
 .status-text {
   white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 200px;
 }
 
 .status-api {
@@ -81,5 +84,16 @@ onUnmounted(() => {
 .status-default {
   background-color: var(--text-secondary);
   color: white;
+}
+@media (max-width: 767px) {
+  .status-text {
+    max-width: 120px;
+  }
+  .data-provider-status {
+    padding: 0.35rem 0.6rem;
+  }
+  .status-badge {
+    font-size: 0.65rem;
+  }
 }
 </style>

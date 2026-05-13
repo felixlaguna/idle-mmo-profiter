@@ -504,7 +504,7 @@ watch(
         <div v-if="tracker.getEffectiveInventory.value.length === 0" class="empty-state">
           <p>No items in inventory. Search below to add items.</p>
         </div>
-        <table v-else class="inventory-table">
+        <table v-else class="inventory-table mobile-card-layout">
           <thead>
             <tr>
               <th>Item Name</th>
@@ -520,11 +520,11 @@ watch(
               :key="item.hashId"
               :class="{ 'pending-change': isPendingChange(item.hashId) }"
             >
-              <td>{{ tracker.resolveItemName(item.hashId) }}</td>
-              <td>{{ item.quantity }}</td>
-              <td>{{ item.priceAtTime.toLocaleString() }}</td>
-              <td>{{ (item.quantity * item.priceAtTime).toLocaleString() }}</td>
-              <td>
+              <td data-label="Item" class="name-cell">{{ tracker.resolveItemName(item.hashId) }}</td>
+              <td data-label="Qty">{{ item.quantity }}</td>
+              <td data-label="Price">{{ item.priceAtTime.toLocaleString() }}</td>
+              <td data-label="Value">{{ (item.quantity * item.priceAtTime).toLocaleString() }}</td>
+              <td data-label="" class="actions-cell">
                 <button class="btn-small" @click="editQuantity(item.hashId, item.priceAtTime)">
                   Edit
                 </button>
@@ -837,6 +837,11 @@ width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
   font-size: 0.75rem;
   margin-right: 0.5rem;
   transition: all 0.2s;
+  min-height: 32px;
+  min-width: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-small:hover {
@@ -1164,6 +1169,28 @@ width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
 
   .chart-container {
     height: 300px;
+  }
+
+  .btn-small {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Inventory mobile card overrides */
+  .inventory-table.mobile-card-layout td[data-label='Value'] {
+    font-weight: 700;
+    color: var(--success);
+    font-size: 1rem;
+  }
+
+  .inventory-table.mobile-card-layout td.actions-cell {
+    order: 99;
+    justify-content: flex-end;
+    padding-top: 0.25rem;
+  }
+
+  .inventory-table.mobile-card-layout td.actions-cell::before {
+    display: none;
   }
 }
 </style>

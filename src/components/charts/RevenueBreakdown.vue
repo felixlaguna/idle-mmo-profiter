@@ -170,7 +170,7 @@ const categories = computed(() => {
   flex: 1;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--surface-shadow);
 }
 
 .chart-header {

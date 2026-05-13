@@ -682,7 +682,9 @@ onUnmounted(() => {
 
 /* Header */
 .app-header {
-  background-color: var(--bg-secondary);
+  background-color: rgba(26, 31, 46, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-color);
   padding: 0.75rem 2rem;
   position: sticky;
@@ -901,7 +903,12 @@ onUnmounted(() => {
   font-size: 1rem;
   margin-left: auto;
   text-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
+  animation: profit-glow 3s ease-in-out infinite;
 }
+
+@keyframes profit-glow {
+  0%, 100% { text-shadow: 0 0 8px rgba(251, 191, 36, 0.3); }
+  50% { text-shadow: 0 0 16px rgba(251, 191, 36, 0.5); }
 
 
 /* Tab Navigation */
@@ -1145,7 +1152,7 @@ onUnmounted(() => {
 
 .charts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(500px, 100%), 1fr));
   gap: 1.5rem;
   align-items: stretch;
 }

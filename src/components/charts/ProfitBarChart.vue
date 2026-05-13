@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, watch, nextTick } from 'vue'
+import { computed, ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import { Chart, registerables } from 'chart.js'
 import type { RankedActivity } from '../../calculators/profitRanker'
 
@@ -208,11 +208,26 @@ const updateChart = () => {
   chartInstance.update()
 }
 
+// Responsive: recreate chart when crossing mobile breakpoint
+let lastIsMobile = typeof window !== 'undefined' ? window.innerWidth <= 767 : false
+const onResize = () => {
+  const nowMobile = window.innerWidth <= 767
+  if (nowMobile !== lastIsMobile) {
+    lastIsMobile = nowMobile
+    nextTick(() => createChart())
+  }
+}
+
 // Initialize chart on mount
 onMounted(() => {
   nextTick(() => {
     createChart()
   })
+  window.addEventListener('resize', onResize)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', onResize)
 })
 
 // Watch for data changes and update chart
@@ -285,6 +300,7 @@ watch(showAll, () => {
   display: flex;
   gap: 1rem;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .legend-item {
