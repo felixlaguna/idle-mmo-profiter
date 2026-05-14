@@ -17,12 +17,19 @@ import { useDataProvider } from './useDataProvider'
 import type { CraftableRecipe, CraftableMaterial, ResourceRecipe, Dungeon, ResourceGather, ResourceSkill } from '../types'
 
 /**
- * Infer crafting skill from material names.
- * Alchemy recipes use Vial or Crystal containers; everything else is forging.
+ * Vendor-sold alchemy containers. See craftableCalculator.ts for rationale.
+ */
+const ALCHEMY_CONTAINERS = new Set([
+  'Cheap Vial', 'Tarnished Vial', 'Gleaming Vial', 'Elemental Vial', 'Arcane Vial', 'Eldritch Vial',
+  'Cheap Crystal', 'Tarnished Crystal', 'Gleaming Crystal', 'Elemental Crystal', 'Arcane Crystal', 'Eldritch Crystal',
+])
+
+/**
+ * Infer crafting skill from material names using known vendor containers.
  */
 function inferSkillFromMaterials(materials: CraftableMaterial[]): 'alchemy' | 'forging' {
   for (const material of materials) {
-    if (material.name.endsWith('Vial') || material.name.endsWith('Crystal')) {
+    if (ALCHEMY_CONTAINERS.has(material.name)) {
       return 'alchemy'
     }
   }

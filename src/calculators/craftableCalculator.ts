@@ -72,18 +72,26 @@ function isRecipeLowConfidence(recipeLastSaleAt?: string): boolean {
 }
 
 /**
- * Infer crafting skill from material names using a heuristic.
- *
- * Game crafting recipes use vendor-sold containers:
- * - Alchemy: Cheap Vial, Tarnished Vial, Gleaming Vial, Cheap Crystal, Tarnished Crystal, Gleaming Crystal, etc.
- * - Forging: Everything else (no Vial or Crystal ingredients)
+ * Vendor-sold alchemy containers. These are the only materials purchased from NPCs
+ * (infinite supply, no market data). Alchemy recipes always include one of these;
+ * forging recipes never do. Loot-drop materials like "Basilisk Venom Vial" or
+ * "Petrifying Gaze Crystal" must NOT match — they happen to share a suffix but are
+ * tradeable drops, not vendor containers.
+ */
+const ALCHEMY_CONTAINERS = new Set([
+  'Cheap Vial', 'Tarnished Vial', 'Gleaming Vial', 'Elemental Vial', 'Arcane Vial', 'Eldritch Vial',
+  'Cheap Crystal', 'Tarnished Crystal', 'Gleaming Crystal', 'Elemental Crystal', 'Arcane Crystal', 'Eldritch Crystal',
+])
+
+/**
+ * Infer crafting skill from material names using known vendor containers.
  *
  * @param materials - Array of craftable materials
- * @returns 'alchemy' if any material ends with 'Vial' or 'Crystal', 'forging' otherwise
+ * @returns 'alchemy' if any material is a vendor container, 'forging' otherwise
  */
 function inferSkillFromMaterials(materials: CraftableMaterial[]): 'alchemy' | 'forging' {
   for (const material of materials) {
-    if (material.name.endsWith('Vial') || material.name.endsWith('Crystal')) {
+    if (ALCHEMY_CONTAINERS.has(material.name)) {
       return 'alchemy'
     }
   }
