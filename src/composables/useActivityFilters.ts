@@ -1,7 +1,7 @@
 import { computed, type Ref } from 'vue'
 import { useStorage } from './useStorage'
 import { useLowConfidenceFilter } from './useLowConfidenceFilter'
-import { useMinSalesFilter } from './useMinSalesFilter'
+import { useContinuousProductionFilter } from './useContinuousProductionFilter'
 import type { RankedActivity } from '../calculators/profitRanker'
 
 export interface ActivityFilters {
@@ -61,9 +61,9 @@ const filters = useStorage<ActivityFilters>('active-filters', {
 // for the filtering functions
 const lowConfidenceFilter = useLowConfidenceFilter()
 
-// Access min sales filter state (also a singleton) at module level
+// Access continuous production filter state (also a singleton) at module level
 // for the filtering functions
-const minSalesFilter = useMinSalesFilter()
+const continuousProductionFilter = useContinuousProductionFilter()
 
 /**
  * Composable for managing activity type filters.
@@ -127,7 +127,7 @@ export function useActivityFilters(): UseActivityFiltersReturn {
       // Filter by low-confidence status using the composable's state
       // This delegates to the centralized low-confidence filter logic
       // Only reject items here (return false) - don't accept them (return true)
-      // This ensures items continue through to the min-sales filter
+      // This ensures items continue through to the continuous production filter
       if (activity.activityType === 'dungeon' && activity.isLowConfidence) {
         if (!lowConfidenceFilter.showLowConfidenceDungeons.value) return false
       }
@@ -135,10 +135,11 @@ export function useActivityFilters(): UseActivityFiltersReturn {
         if (!lowConfidenceFilter.showLowConfidenceCraftables.value) return false
       }
 
-      // Filter by min sales volume
+      // Filter by continuous production capacity
+      // When enabled, only show items whose market can absorb 24/7 production
       // Items with undefined weeklySalesVolume (resources) pass through
-      if (activity.weeklySalesVolume !== undefined) {
-        if (activity.weeklySalesVolume < minSalesFilter.minSalesThreshold.value) {
+      if (continuousProductionFilter.continuousProductionEnabled.value) {
+        if (!continuousProductionFilter.canHandleContinuousProduction(activity)) {
           return false
         }
       }

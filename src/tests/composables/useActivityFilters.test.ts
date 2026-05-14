@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { nextTick } from 'vue'
 import { useActivityFilters } from '../../composables/useActivityFilters'
 import { useLowConfidenceFilter } from '../../composables/useLowConfidenceFilter'
-import { useMinSalesFilter } from '../../composables/useMinSalesFilter'
+import { useContinuousProductionFilter } from '../../composables/useContinuousProductionFilter'
 import type { RankedActivity } from '../../calculators/profitRanker'
 
 describe('useActivityFilters', () => {
@@ -648,19 +648,20 @@ describe('useActivityFilters', () => {
     })
   })
 
-  describe('min sales volume filter', () => {
-    it('should filter activities by min sales volume', async () => {
+  describe('continuous production filter', () => {
+    it('should filter activities that cannot handle 24/7 production when enabled', async () => {
       const { getFilteredActivities } = useActivityFilters()
-      const { setMinSalesThreshold } = useMinSalesFilter()
+      const { setContinuousProductionEnabled } = useContinuousProductionFilter()
       const { setShowLowConfidenceCraftables, setShowLowConfidenceDungeons } =
         useLowConfidenceFilter()
 
       // Enable all low-confidence items so they don't interfere
       setShowLowConfidenceCraftables(true)
       setShowLowConfidenceDungeons(true)
-      setMinSalesThreshold(10)
+      setContinuousProductionEnabled(true)
       await nextTick()
 
+      // 604,800 / 360 = 1,680 items/week needed for 24/7
       const activities: RankedActivity[] = [
         {
           rank: 1,
@@ -672,7 +673,7 @@ describe('useActivityFilters', () => {
           cost: 50,
           details: 'Test',
           isRecommended: true,
-          weeklySalesVolume: 50,
+          weeklySalesVolume: 2000, // > 1,680 → passes
         },
         {
           rank: 2,
@@ -684,7 +685,7 @@ describe('useActivityFilters', () => {
           cost: 45,
           details: 'Test',
           isRecommended: false,
-          weeklySalesVolume: 5,
+          weeklySalesVolume: 500, // < 1,680 → fails
         },
         {
           rank: 3,
@@ -697,7 +698,7 @@ describe('useActivityFilters', () => {
           details: 'Test',
           isRecommended: false,
           skill: 'alchemy',
-          weeklySalesVolume: 100,
+          weeklySalesVolume: 3000, // > 1,680 → passes
         },
         {
           rank: 4,
@@ -709,7 +710,7 @@ describe('useActivityFilters', () => {
           cost: 35,
           details: 'Test',
           isRecommended: false,
-          // Resources have undefined weeklySalesVolume
+          // Resources have undefined weeklySalesVolume → always passes
         },
       ]
 
@@ -722,11 +723,11 @@ describe('useActivityFilters', () => {
       ])
     })
 
-    it('should pass through resources with undefined weeklySalesVolume', async () => {
+    it('should not filter when toggle is off', async () => {
       const { getFilteredActivities } = useActivityFilters()
-      const { setMinSalesThreshold } = useMinSalesFilter()
+      const { setContinuousProductionEnabled } = useContinuousProductionFilter()
 
-      setMinSalesThreshold(1000)
+      setContinuousProductionEnabled(false)
       await nextTick()
 
       const activities: RankedActivity[] = [
@@ -752,7 +753,44 @@ describe('useActivityFilters', () => {
           cost: 45,
           details: 'Test',
           isRecommended: false,
-          // undefined weeklySalesVolume
+        },
+      ]
+
+      const filtered = getFilteredActivities(activities)
+      expect(filtered).toHaveLength(2)
+    })
+
+    it('should pass through resources with undefined weeklySalesVolume when enabled', async () => {
+      const { getFilteredActivities } = useActivityFilters()
+      const { setContinuousProductionEnabled } = useContinuousProductionFilter()
+
+      setContinuousProductionEnabled(true)
+      await nextTick()
+
+      const activities: RankedActivity[] = [
+        {
+          rank: 1,
+          activityType: 'dungeon',
+          name: 'Low Volume Dungeon',
+          profitPerHour: 1000,
+          profitPerAction: 100,
+          timePerAction: 360,
+          cost: 50,
+          details: 'Test',
+          isRecommended: true,
+          weeklySalesVolume: 5, // way below 1,680 → fails
+        },
+        {
+          rank: 2,
+          activityType: 'resource',
+          name: 'Resource',
+          profitPerHour: 900,
+          profitPerAction: 90,
+          timePerAction: 360,
+          cost: 45,
+          details: 'Test',
+          isRecommended: false,
+          // undefined → always passes
         },
       ]
 
@@ -761,62 +799,63 @@ describe('useActivityFilters', () => {
       expect(filtered[0].name).toBe('Resource')
     })
 
-    it('should include items at exactly the threshold', async () => {
+    it('should pass items at exact production boundary', async () => {
       const { getFilteredActivities } = useActivityFilters()
-      const { setMinSalesThreshold } = useMinSalesFilter()
+      const { setContinuousProductionEnabled } = useContinuousProductionFilter()
       const { setShowLowConfidenceDungeons } = useLowConfidenceFilter()
 
       setShowLowConfidenceDungeons(true)
-      setMinSalesThreshold(10)
+      setContinuousProductionEnabled(true)
       await nextTick()
 
+      // 604,800 / 360 = 1,680 exactly
       const activities: RankedActivity[] = [
         {
           rank: 1,
           activityType: 'dungeon',
-          name: 'Below Threshold',
+          name: 'Below Boundary',
           profitPerHour: 1000,
           profitPerAction: 100,
           timePerAction: 360,
           cost: 50,
           details: 'Test',
           isRecommended: true,
-          weeklySalesVolume: 9,
+          weeklySalesVolume: 1_679,
         },
         {
           rank: 2,
           activityType: 'dungeon',
-          name: 'At Threshold',
+          name: 'At Boundary',
           profitPerHour: 900,
           profitPerAction: 90,
           timePerAction: 360,
           cost: 45,
           details: 'Test',
           isRecommended: false,
-          weeklySalesVolume: 10,
+          weeklySalesVolume: 1_680,
         },
         {
           rank: 3,
           activityType: 'dungeon',
-          name: 'Above Threshold',
+          name: 'Above Boundary',
           profitPerHour: 800,
           profitPerAction: 80,
           timePerAction: 360,
           cost: 40,
           details: 'Test',
           isRecommended: false,
-          weeklySalesVolume: 11,
+          weeklySalesVolume: 1_681,
         },
       ]
 
       const filtered = getFilteredActivities(activities)
       expect(filtered).toHaveLength(2)
-      expect(filtered.map((a) => a.name)).toEqual(['At Threshold', 'Above Threshold'])
+      expect(filtered.map((a) => a.name)).toEqual(['At Boundary', 'Above Boundary'])
     })
 
-    it('should combine min sales filter with activity type filters', async () => {
+    it('should combine continuous production filter with activity type filters', async () => {
       const { filterDungeons, filterAlchemy, getFilteredActivities } = useActivityFilters()
-      const { setMinSalesThreshold } = useMinSalesFilter()
+      const { setContinuousProductionEnabled } = useContinuousProductionFilter()
       const { setShowLowConfidenceCraftables, setShowLowConfidenceDungeons } =
         useLowConfidenceFilter()
 
@@ -824,9 +863,10 @@ describe('useActivityFilters', () => {
       filterAlchemy.value = true
       setShowLowConfidenceCraftables(true)
       setShowLowConfidenceDungeons(true)
-      setMinSalesThreshold(10)
+      setContinuousProductionEnabled(true)
       await nextTick()
 
+      // 604,800 / 360 = 1,680 needed
       const activities: RankedActivity[] = [
         {
           rank: 1,
@@ -838,7 +878,7 @@ describe('useActivityFilters', () => {
           cost: 50,
           details: 'Test',
           isRecommended: true,
-          weeklySalesVolume: 50,
+          weeklySalesVolume: 2000,
         },
         {
           rank: 2,
@@ -851,7 +891,7 @@ describe('useActivityFilters', () => {
           details: 'Test',
           isRecommended: false,
           skill: 'alchemy',
-          weeklySalesVolume: 20,
+          weeklySalesVolume: 2000, // > 1,680 → passes
         },
         {
           rank: 3,
@@ -864,25 +904,26 @@ describe('useActivityFilters', () => {
           details: 'Test',
           isRecommended: false,
           skill: 'alchemy',
-          weeklySalesVolume: 5,
+          weeklySalesVolume: 500, // < 1,680 → fails
         },
       ]
 
       const filtered = getFilteredActivities(activities)
-      // Dungeon filtered by type, low volume craftable filtered by sales volume
+      // Dungeon filtered by type, low volume craftable filtered by production
       expect(filtered).toHaveLength(1)
       expect(filtered[0].name).toBe('High Volume Craftable')
     })
 
-    it('should combine min sales filter with low-confidence filter', async () => {
+    it('should combine continuous production filter with low-confidence filter', async () => {
       const { getFilteredActivities } = useActivityFilters()
-      const { setMinSalesThreshold } = useMinSalesFilter()
+      const { setContinuousProductionEnabled } = useContinuousProductionFilter()
       const { setShowLowConfidenceCraftables } = useLowConfidenceFilter()
 
       setShowLowConfidenceCraftables(false)
-      setMinSalesThreshold(10)
+      setContinuousProductionEnabled(true)
       await nextTick()
 
+      // 604,800 / 360 = 1,680 needed
       const activities: RankedActivity[] = [
         {
           rank: 1,
@@ -896,7 +937,7 @@ describe('useActivityFilters', () => {
           isRecommended: true,
           skill: 'alchemy',
           isLowConfidence: true,
-          weeklySalesVolume: 50,
+          weeklySalesVolume: 2000,
         },
         {
           rank: 2,
@@ -910,7 +951,7 @@ describe('useActivityFilters', () => {
           isRecommended: false,
           skill: 'alchemy',
           isLowConfidence: false,
-          weeklySalesVolume: 5,
+          weeklySalesVolume: 500,
         },
         {
           rank: 3,
@@ -924,7 +965,7 @@ describe('useActivityFilters', () => {
           isRecommended: false,
           skill: 'alchemy',
           isLowConfidence: false,
-          weeklySalesVolume: 20,
+          weeklySalesVolume: 2000,
         },
       ]
 
@@ -937,7 +978,7 @@ describe('useActivityFilters', () => {
     it('should exclude low-confidence items with low sales volume even when low-confidence toggle is ON', async () => {
       const { filterDungeons, filterAlchemy, filterForging, getFilteredActivities } =
         useActivityFilters()
-      const { setMinSalesThreshold } = useMinSalesFilter()
+      const { setContinuousProductionEnabled } = useContinuousProductionFilter()
       const { setShowLowConfidenceCraftables, setShowLowConfidenceDungeons } =
         useLowConfidenceFilter()
 
@@ -945,12 +986,13 @@ describe('useActivityFilters', () => {
       filterDungeons.value = true
       filterAlchemy.value = true
       filterForging.value = true
-      // Enable low-confidence items AND set a min sales threshold
+      // Enable low-confidence items AND continuous production filter
       setShowLowConfidenceCraftables(true)
       setShowLowConfidenceDungeons(true)
-      setMinSalesThreshold(100)
+      setContinuousProductionEnabled(true)
       await nextTick()
 
+      // 604,800 / 360 = 1,680 needed
       const activities: RankedActivity[] = [
         {
           rank: 1,
@@ -990,7 +1032,7 @@ describe('useActivityFilters', () => {
           details: 'Test',
           isRecommended: false,
           isLowConfidence: true,
-          weeklySalesVolume: 150,
+          weeklySalesVolume: 2000, // > 1,680 → passes
         },
         {
           rank: 4,
@@ -1010,8 +1052,6 @@ describe('useActivityFilters', () => {
 
       const filtered = getFilteredActivities(activities)
       // Only the low-confidence high-volume dungeon should pass
-      // The low-confidence low-volume items should be excluded by min-sales filter
-      // The high-confidence low-volume item should also be excluded by min-sales filter
       expect(filtered).toHaveLength(1)
       expect(filtered[0].name).toBe('Low Confidence High Volume Dungeon')
     })

@@ -4,15 +4,14 @@ import type { RankedActivity } from '../calculators/profitRanker'
 import type { ActivityType } from '../types'
 import { useHeatmap } from '../composables/useHeatmap'
 import { useActivityFilters } from '../composables/useActivityFilters'
-import { useMinSalesFilter } from '../composables/useMinSalesFilter'
+import { useContinuousProductionFilter } from '../composables/useContinuousProductionFilter'
 import { usePopover } from '../composables/usePopover'
 import EmptyState from './EmptyState.vue'
 import ItemUsesPopover from './ItemUsesPopover.vue'
-import MinSalesThreshold from './MinSalesThreshold.vue'
 
 const { getHeatmapStyle } = useHeatmap()
 const { popoverItemName, popoverX, popoverY, openItemUses, closeItemUses } = usePopover()
-const { minSalesThreshold } = useMinSalesFilter()
+const { continuousProductionEnabled } = useContinuousProductionFilter()
 
 const props = defineProps<{
   activities: RankedActivity[]
@@ -192,7 +191,15 @@ const profitRange = computed(() => {
       >
         Resources
       </button>
-      <MinSalesThreshold v-model="minSalesThreshold" />
+      <button
+        class="filter-button"
+        :class="{ active: continuousProductionEnabled, 'badge-production': continuousProductionEnabled }"
+        :aria-pressed="continuousProductionEnabled"
+        aria-label="Toggle continuous production filter"
+        @click="continuousProductionEnabled = !continuousProductionEnabled"
+      >
+        24/7
+      </button>
       <span v-if="hasMore && !showAll" class="pagination-info">
         {{ DEFAULT_DISPLAY_LIMIT }}/{{ filteredAndSortedActivities.length }}
         <button class="btn-show-all-inline" @click="showAll = true">all</button>
@@ -545,6 +552,17 @@ const profitRange = computed(() => {
 .filter-button.active.badge-resource::before {
   width: 100%;
   background-color: #60a5fa;
+}
+
+.filter-button.active.badge-production {
+  color: #fbbf24;
+  border-bottom-color: #fbbf24;
+  background-color: rgba(251, 191, 36, 0.1);
+}
+
+.filter-button.active.badge-production::before {
+  width: 100%;
+  background-color: #fbbf24;
 }
 
 /* Table Container — uses shared surface tokens */

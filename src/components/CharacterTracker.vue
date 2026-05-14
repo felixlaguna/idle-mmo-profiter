@@ -512,10 +512,11 @@ watch(
       </div>
       <div v-if="tracker.activeCharacter.value" class="top-bar-right">
         <div class="top-bar-actions">
-          <button class="btn-action" @click="handleRenameCharacter" title="Rename character">Rename</button>
-          <button class="btn-action btn-danger" @click="handleDeleteCharacter" title="Delete character">Delete</button>
+          <button class="btn-action" title="Rename character" @click="handleRenameCharacter">Rename</button>
+          <button class="btn-action btn-danger" title="Delete character" @click="handleDeleteCharacter">Delete</button>
           <button class="html-import-btn" @click="showHtmlImport = true">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            <svg
+width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="16 18 22 12 16 6" />
               <polyline points="8 6 2 12 8 18" />
