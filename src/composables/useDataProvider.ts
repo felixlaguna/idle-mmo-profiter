@@ -434,11 +434,17 @@ function createDataProvider() {
    */
   const resourceWeeklySalesVolumeMap = computed(() => {
     const map = new Map<string, number>()
-    resources.value.forEach((res) => {
+    for (const res of resources.value) {
       if (res.weeklySalesVolume !== undefined) {
         map.set(res.name, res.weeklySalesVolume)
       }
-    })
+    }
+    // Fall back to materials for gathered resources not in resources array (fish, ores, logs)
+    for (const mat of materials.value) {
+      if (mat.weeklySalesVolume !== undefined && !map.has(mat.name)) {
+        map.set(mat.name, mat.weeklySalesVolume)
+      }
+    }
     return map
   })
 
