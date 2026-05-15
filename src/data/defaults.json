@@ -1264,6 +1264,202 @@
       "suggestedRefreshMinutes": 466,
       "lastSaleAt": "2026-05-14T22:33:45+00:00",
       "weeklySalesVolume": 16180
+    },
+    {
+      "id": "res-auto-IzJMUrTSSUN718lFRTxc",
+      "name": "Tin Ore",
+      "marketPrice": 4.8,
+      "vendorValue": 1,
+      "hashedId": "oZwey82VNA6YD0dXM3gO"
+    },
+    {
+      "id": "res-auto-dDoAo1DviZC9tTHMupKo",
+      "name": "Copper Ore",
+      "marketPrice": 5.1,
+      "vendorValue": 2,
+      "hashedId": "JZdg5V3PQoKQEyWq0zlB"
+    },
+    {
+      "id": "res-auto-VIwKio43W8UqECsXXoKK",
+      "name": "Iron Ore",
+      "marketPrice": 8.9,
+      "vendorValue": 3,
+      "hashedId": "JVM29l7kQZAL80q6WDGp"
+    },
+    {
+      "id": "res-auto-Cbmd2wUJHYAArtzK1YyY",
+      "name": "Lead Ore",
+      "marketPrice": 9.3,
+      "vendorValue": 5,
+      "hashedId": "93R0qXalLljNAbn8DBgr"
+    },
+    {
+      "id": "res-auto-h6h6RvyCQySoRDqqymm5",
+      "name": "Steel Ore",
+      "marketPrice": 9.7,
+      "vendorValue": 7,
+      "hashedId": "1rZXlwg5Yv8Qk9joDmGe"
+    },
+    {
+      "id": "res-auto-7s9qIcefhMpW6tQZk16E",
+      "name": "Mercury Ore",
+      "marketPrice": 11.5,
+      "vendorValue": 9,
+      "hashedId": "q9pwa0kxLBJLgVj136l4"
+    },
+    {
+      "id": "res-auto-CwmyWrEz2c5zv0oEdlzu",
+      "name": "Chromite Ore",
+      "marketPrice": 14.5,
+      "vendorValue": 11,
+      "hashedId": "zvjoJW96Y85L3RaAylwE"
+    },
+    {
+      "id": "res-auto-lDsGsKfCU5AokmCxVF1E",
+      "name": "Uranium Ore",
+      "marketPrice": 16.4,
+      "vendorValue": 13,
+      "hashedId": "PjVDJez3LDvNKWO08Gaq"
+    },
+    {
+      "id": "res-auto-8SaIMn72VIpFKHC5POIh",
+      "name": "Cod",
+      "marketPrice": 6.4,
+      "vendorValue": 2,
+      "hashedId": "27gw0k38L4xLWevJxyKR"
+    },
+    {
+      "id": "res-auto-5o5C7ASOUvTdH6V4wX1k",
+      "name": "Salmon",
+      "marketPrice": 7.9,
+      "vendorValue": 3,
+      "hashedId": "O2xMjGdBN5MN9P1nyrvR"
+    },
+    {
+      "id": "res-auto-w0MT9NrlJVPIifXzBLJC",
+      "name": "Tuna",
+      "marketPrice": 7.4,
+      "vendorValue": 4,
+      "hashedId": "lrx463VdQgOQ5w1zWKP8"
+    },
+    {
+      "id": "res-auto-QhETbtQKug7203hf9aj3",
+      "name": "Trout",
+      "marketPrice": 14,
+      "vendorValue": 5,
+      "hashedId": "y7Do6jgkY0zQ8BAdKX0E"
+    },
+    {
+      "id": "res-auto-z6nQx954BdVPj2gIMGif",
+      "name": "Perch",
+      "marketPrice": 10.4,
+      "vendorValue": 6,
+      "hashedId": "3yE1A84kYOwYl6XeVKpD"
+    },
+    {
+      "id": "res-auto-BsNkGrIXmsxQrHSOP8JG",
+      "name": "Herring",
+      "marketPrice": 14.4,
+      "vendorValue": 7,
+      "hashedId": "DBngxedVYJPQX64wW8oa"
+    },
+    {
+      "id": "res-auto-meqMIo0U3qA3YcsGGfH7",
+      "name": "Sardines",
+      "marketPrice": 19.7,
+      "vendorValue": 8,
+      "hashedId": "jGXBy7a4LbMY0Pw6Vdgl"
+    },
+    {
+      "id": "res-auto-xyaZhqOUJeZbti74P029",
+      "name": "Lobster",
+      "marketPrice": 20.6,
+      "vendorValue": 14,
+      "hashedId": "BRn3x72JQ2DYzOMok418"
+    },
+    {
+      "id": "res-auto-0K3BPb8qFZ77jQTJXV85",
+      "name": "Crab",
+      "marketPrice": 26.2,
+      "vendorValue": 16,
+      "hashedId": "gGZ2J71yYK9QMmjbown5"
+    },
+    {
+      "id": "res-auto-HZQb1Vg2kyZXgkGy6MsZ",
+      "name": "Turtle",
+      "marketPrice": 35.4,
+      "vendorValue": 20,
+      "hashedId": "yav4OK1wNE5NZP7rzJbe"
+    },
+    {
+      "id": "res-auto-PNaEtAPXjWX3Pgd8N7DM",
+      "name": "Lantern Fish",
+      "marketPrice": 48.4,
+      "vendorValue": 32,
+      "hashedId": "ZqEegBydNw7NkA59J61b"
+    },
+    {
+      "id": "res-auto-BOMHwxIS5BmlkZ6wrGLg",
+      "name": "Oak Log",
+      "marketPrice": 4.8,
+      "vendorValue": 1,
+      "hashedId": "7eA59WrBQRpYzb62qKvp"
+    },
+    {
+      "id": "res-auto-uobWOf3SXBGZDZDGqYWp",
+      "name": "Yew Log",
+      "marketPrice": 4.5,
+      "vendorValue": 2,
+      "hashedId": "ElzPeorXNVjNaW0kv53J"
+    },
+    {
+      "id": "res-auto-wyoR0jteh4asqbcblmp5",
+      "name": "Spruce Log",
+      "marketPrice": 10.9,
+      "vendorValue": 3,
+      "hashedId": "XyeZRGx9YjKLB80gWlPa"
+    },
+    {
+      "id": "res-auto-ttr4pX2jeiwmbZczhweR",
+      "name": "Birch Log",
+      "marketPrice": 8.2,
+      "vendorValue": 5,
+      "hashedId": "Ro31P7kZL6AYveGxXOy5"
+    },
+    {
+      "id": "res-auto-7kpxnFvaKt60ZArUGyJN",
+      "name": "Banyan Log",
+      "marketPrice": 12.7,
+      "vendorValue": 7,
+      "hashedId": "brz9RZnWN7aLKAp0Mdle"
+    },
+    {
+      "id": "res-auto-DN9j6rcc05ZbEvcCb3bI",
+      "name": "Maple Log",
+      "marketPrice": 13.4,
+      "vendorValue": 9,
+      "hashedId": "bAB1E9poQqkYnakeJj56"
+    },
+    {
+      "id": "res-auto-Ryw1rRihPKWJ6tGNaqGz",
+      "name": "Willow Log",
+      "marketPrice": 16,
+      "vendorValue": 11,
+      "hashedId": "ZjlPA8v9NMXQEyMe2OaW"
+    },
+    {
+      "id": "res-auto-GKoR5P6PPkHkE694TWSO",
+      "name": "Mahogany Log",
+      "marketPrice": 17.3,
+      "vendorValue": 13,
+      "hashedId": "P1vlVrzjLrRLao8mGKM2"
+    },
+    {
+      "id": "res-auto-GN9yA8rVCLjVgdFxkTg9",
+      "name": "Mystical Log",
+      "marketPrice": 27,
+      "vendorValue": 17,
+      "hashedId": "Z6aDoyRnLykNpV5AGXmk"
     }
   ],
   "recipes": [

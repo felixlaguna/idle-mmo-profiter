@@ -18,7 +18,7 @@ export interface RankedActivity {
   skill?: 'alchemy' | 'forging'
   /** True if the activity has low-confidence price data */
   isLowConfidence?: boolean
-  /** Weekly sales volume for market-traded activities (undefined for resources) */
+  /** Weekly sales volume for market-traded activities */
   weeklySalesVolume?: number
 }
 
@@ -81,6 +81,7 @@ export function rankAllActivities(
       cost: resource.cost,
       details: `Best: ${resource.bestMethod}, ${Math.round(resource.timeSeconds)} sec`,
       saleMethod: resource.bestMethod,
+      weeklySalesVolume: resource.weeklySalesVolume,
     })
   })
 
