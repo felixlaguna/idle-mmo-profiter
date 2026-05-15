@@ -180,6 +180,19 @@ width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                       </svg>
                     </button>
                   </div>
+                  <div class="hi-snippet-row hi-snippet-row--bookmarklet">
+                    <a
+                      :href="'javascript:' + CONSOLE_SNIPPET"
+                      class="hi-bookmarklet-link"
+                      title="Drag me to your bookmarks bar"
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+                      </svg>
+                      Drag to bookmarks
+                    </a>
+                    <span class="hi-bookmarklet-hint">or click on inventory page</span>
+                  </div>
                 </div>
               </div>
               <div class="hi-step">
@@ -568,6 +581,40 @@ width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
 .hi-copy-btn--copied {
   background: rgba(16, 185, 129, 0.9);
   border-color: rgba(16, 185, 129, 0.9);
+}
+
+.hi-snippet-row--bookmarklet {
+  margin-top: 0.375rem;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.hi-bookmarklet-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  background: var(--accent-primary);
+  color: white;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: grab;
+  transition: opacity 0.2s;
+}
+
+.hi-bookmarklet-link:hover {
+  opacity: 0.9;
+}
+
+.hi-bookmarklet-link:active {
+  cursor: grabbing;
+}
+
+.hi-bookmarklet-hint {
+  font-size: 0.6875rem;
+  color: var(--text-tertiary, #6b7280);
 }
 
 .hi-json-textarea {

@@ -277,23 +277,57 @@ const isPendingChange = (hashId: string): boolean => {
   return tracker.pendingChanges.value.has(hashId)
 }
 
+// 15-minute aggregation helper for chart data
+function aggregateTo15MinBuckets(
+  entries: { timestamp: string; value: number }[]
+): { label: string; value: number }[] {
+  if (entries.length === 0) return []
+
+  const buckets = new Map<number, number>() // bucketKey (ms) → highest value
+
+  for (const entry of entries) {
+    const date = new Date(entry.timestamp)
+    const ms = date.getTime()
+    // Floor to nearest 15-minute boundary
+    const bucketKey = ms - (ms % (15 * 60 * 1000))
+    const existing = buckets.get(bucketKey)
+    if (existing === undefined || entry.value > existing) {
+      buckets.set(bucketKey, entry.value)
+    }
+  }
+
+  const sorted = [...buckets.entries()].sort((a, b) => a[0] - b[0])
+  return sorted.map(([bucketMs, value]) => {
+    const date = new Date(bucketMs)
+    return {
+      label: date.toLocaleDateString(undefined, {
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      }),
+      value,
+    }
+  })
+}
+
 // Active character total value chart data
 const charChartData = computed(() => {
   const char = tracker.activeCharacter.value
   if (!char || char.history.length === 0) return { labels: [], datasets: [] }
 
-  const labels = char.history.map((snap) => {
-    const date = new Date(snap.timestamp)
-    return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
-  })
-  const data = char.history.map((snap) => tracker.calculateSnapshotValue(snap))
+  const entries = char.history.map((snap) => ({
+    timestamp: snap.timestamp,
+    value: tracker.calculateSnapshotValue(snap),
+  }))
+  const aggregated = aggregateTo15MinBuckets(entries)
 
   return {
-    labels,
+    labels: aggregated.map((e) => e.label),
     datasets: [
       {
         label: char.name,
-        data,
+        data: aggregated.map((e) => e.value),
         borderColor: 'rgba(129, 140, 248, 1)',
         backgroundColor: 'rgba(129, 140, 248, 0.1)',
         borderWidth: 2,
@@ -333,8 +367,7 @@ const allChartData = computed(() => {
 
   const charLastValues = new Array<number>(allChars.length).fill(0)
   const charIndices = new Array<number>(allChars.length).fill(0)
-  const data: number[] = []
-  const labels: string[] = []
+  const rawEntries: { timestamp: string; value: number }[] = []
 
   for (const ts of timestamps) {
     for (let ci = 0; ci < allChars.length; ci++) {
@@ -344,16 +377,20 @@ const allChartData = computed(() => {
         charIndices[ci]++
       }
     }
-    data.push(charLastValues.reduce((sum, v) => sum + v, 0))
-    labels.push(new Date(ts).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }))
+    rawEntries.push({
+      timestamp: ts,
+      value: charLastValues.reduce((sum, v) => sum + v, 0),
+    })
   }
 
+  const aggregated = aggregateTo15MinBuckets(rawEntries)
+
   return {
-    labels,
+    labels: aggregated.map((e) => e.label),
     datasets: [
       {
         label: 'All Characters',
-        data,
+        data: aggregated.map((e) => e.value),
         borderColor: 'rgba(56, 189, 248, 1)',
         backgroundColor: 'rgba(56, 189, 248, 0.1)',
         borderWidth: 2,

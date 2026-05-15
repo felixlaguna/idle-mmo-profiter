@@ -29,6 +29,10 @@
 - `src/App.vue` — Main app shell, tab navigation, global styles
 - `src/data/defaults.json` — Master data (891 items, 27K+ lines)
 - `src/composables/useScreenshotImport.ts` — Screenshot-based inventory import (dHash pipeline)
+- `src/composables/useHtmlImport.ts` — Console JSON inventory import (Alpine.js snippet approach, deterministic)
 - `src/composables/useCharacterTracker.ts` — Inventory tracking, import integration point
+- `src/calculators/craftableCalculator.ts` — Craftable profit calculator with ALCHEMY_CONTAINERS allowlist (12 vendor-sold containers for skill classification)
+- `src/composables/useItemUses.ts` — Item usage lookup (also uses ALCHEMY_CONTAINERS)
 - `src/components/CharacterTracker.vue` — Inventory UI with mobile card layout
+- `src/components/HtmlImport.vue` — JSON paste import UI component
 - `src/style.css` — Global styles, animations, responsive overrides
