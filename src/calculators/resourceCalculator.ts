@@ -15,6 +15,8 @@ export interface ResourceProfitResult {
   bestMethod: SaleMethod
   bestProfit: number
   bestProfitPerHour: number
+  /** Weekly sales volume (units sold in last 7 days) from market history */
+  weeklySalesVolume?: number
 }
 
 /**
@@ -89,6 +91,7 @@ export function calculateResourceProfits(
       bestMethod,
       bestProfit,
       bestProfitPerHour,
+      weeklySalesVolume: resource.weeklySalesVolume,
     }
   })
 

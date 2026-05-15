@@ -36,6 +36,8 @@ export interface Resource {
   hashedId?: string
   lastUpdated?: string
   suggestedRefreshMinutes?: number
+  /** Weekly sales volume (units sold in last 7 days) from market history */
+  weeklySalesVolume?: number
 }
 
 export interface Recipe {
@@ -164,6 +166,8 @@ export interface ResourceGather {
   cost?: number
   /** Gathering skill (mining, fishing, woodcutting) for efficiency application */
   skill?: ResourceSkill
+  /** Weekly sales volume (units sold in last 7 days) from market history */
+  weeklySalesVolume?: number
 }
 
 // Settings and configuration

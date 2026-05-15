@@ -429,6 +429,20 @@ function createDataProvider() {
   })
 
   /**
+   * Map of resource names to their weeklySalesVolume
+   * Used to display volume badges in the Resources tab
+   */
+  const resourceWeeklySalesVolumeMap = computed(() => {
+    const map = new Map<string, number>()
+    resources.value.forEach((res) => {
+      if (res.weeklySalesVolume !== undefined) {
+        map.set(res.name, res.weeklySalesVolume)
+      }
+    })
+    return map
+  })
+
+  /**
    * Map of raw resource/material names to their market prices
    * Built from resourceGathering with user overrides applied.
    * Also seeds from resourceRecipes outputs so that recipe outputs used as
@@ -586,6 +600,7 @@ function createDataProvider() {
         vendorValue: recipe.vendorValue,
         marketPrice: recipe.currentPrice,
         cost: buyAllCost,
+        weeklySalesVolume: resourceWeeklySalesVolumeMap.value.get(recipe.name),
       })
 
       // Mode 2: Gather Except Coal - Gather all raw materials, buy coal at market price
@@ -606,6 +621,7 @@ function createDataProvider() {
         vendorValue: recipe.vendorValue,
         marketPrice: recipe.currentPrice,
         cost: gatherExceptCoalBaseCost,
+        weeklySalesVolume: resourceWeeklySalesVolumeMap.value.get(recipe.name),
       })
 
       // Mode 3: Gather All - Gather ALL materials including coal
@@ -626,6 +642,7 @@ function createDataProvider() {
         vendorValue: recipe.vendorValue,
         marketPrice: recipe.currentPrice,
         cost: gatherAllBaseCost,
+        weeklySalesVolume: resourceWeeklySalesVolumeMap.value.get(recipe.name),
       })
     }
 
@@ -686,6 +703,7 @@ function createDataProvider() {
         ...gather,
         marketPrice: updatedPrice,
         cost: computedCost,
+        weeklySalesVolume: resourceWeeklySalesVolumeMap.value.get(gather.name),
       }
     })
 

@@ -5,6 +5,7 @@ import type { RankedActivity } from '../calculators/profitRanker'
 import { useHeatmap } from '../composables/useHeatmap'
 import { useDataProvider } from '../composables/useDataProvider'
 import { usePopover } from '../composables/usePopover'
+import { getVolumeTierInfo } from '../utils/salesVolume'
 import ItemUsesPopover from './ItemUsesPopover.vue'
 
 const { getHeatmapStyle, getSubduedHeatmapStyle } = useHeatmap()
@@ -326,6 +327,12 @@ const handleDeleteRecipe = (baseName: string) => {
                 >
                   {{ group.baseName }}
                 </span>
+                <span
+                  v-if="group.bestMode.weeklySalesVolume !== undefined"
+                  class="volume-badge"
+                  :class="'volume-' + getVolumeTierInfo(group.bestMode.weeklySalesVolume).tier"
+                  :title="getVolumeTierInfo(group.bestMode.weeklySalesVolume).tooltip"
+                >{{ getVolumeTierInfo(group.bestMode.weeklySalesVolume).icon }}</span>
                 <span v-if="group.skill" class="skill-badge" :class="getSkillBadgeClass(group.skill)">
                   <span class="skill-badge-full">{{ group.skill }}</span>
                   <span class="skill-badge-short">{{ formatSkillShort(group.skill) }}</span>
@@ -656,6 +663,42 @@ const handleDeleteRecipe = (baseName: string) => {
   border-radius: 0.25rem;
   transition: all 0.2s;
   opacity: 0;
+}
+
+/* Volume badge */
+.volume-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.375rem;
+  font-size: 0.75rem;
+  cursor: help;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+
+.volume-badge:hover {
+  opacity: 1;
+}
+
+.volume-dead {
+  opacity: 0.3;
+}
+
+.volume-trickle {
+  color: var(--text-secondary, #9ca3af);
+}
+
+.volume-moderate {
+  color: var(--text-primary, #e5e7eb);
+}
+
+.volume-active {
+  color: #fbbf24;
+}
+
+.volume-hot {
+  color: #f97316;
 }
 
 .parent-row:hover .btn-delete-recipe {
