@@ -134,6 +134,32 @@ const getTypeBadgeClass = (type: ActivityType): string => {
   }
 }
 
+// Resource recipe mode helpers
+function getActivityMode(activity: { name: string }): string | null {
+  if (activity.name.endsWith(' (gather all)')) return 'gather-all'
+  if (activity.name.endsWith(' (gather)')) return 'gather'
+  return null
+}
+
+function getActivityDisplayName(activity: { name: string }): string {
+  const mode = getActivityMode(activity)
+  if (mode === 'gather') return activity.name.replace(/ \(gather\)$/, '')
+  if (mode === 'gather-all') return activity.name.replace(/ \(gather all\)$/, '')
+  return activity.name
+}
+
+function getActivityModeLabel(mode: string | null): string {
+  if (mode === 'gather-all') return 'Gather All'
+  if (mode === 'gather') return 'Gather'
+  return ''
+}
+
+function getModeBadgeClass(mode: string | null): string {
+  if (mode === 'gather-all') return 'mode-gather-all'
+  if (mode === 'gather') return 'mode-gather'
+  return 'mode-buy'
+}
+
 // Get sort icon
 const getSortIcon = (key: SortKey): string => {
   if (sortKey.value !== key) return '↕'
@@ -312,7 +338,10 @@ const profitRange = computed(() => {
               data-label="Activity"
               @contextmenu.prevent="openItemUses($event, activity.name)"
             >
-              {{ activity.name }}
+              <span class="activity-name-text">{{ getActivityDisplayName(activity) }}</span>
+              <span v-if="getActivityMode(activity)" class="mode-badge" :class="getModeBadgeClass(getActivityMode(activity))">
+                {{ getActivityModeLabel(getActivityMode(activity)) }}
+              </span>
             </td>
             <td data-label="Type">
               <span class="type-badge" :class="getTypeBadgeClass(activity.activityType)">
@@ -727,6 +756,45 @@ const profitRange = computed(() => {
   font-weight: 500;
 }
 
+/* Activity name text — ellipsis on desktop */
+.activity-name-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Mode badge — colored pill for resource recipe variants */
+.mode-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+  font-size: 0.625rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: 0.375rem;
+  vertical-align: middle;
+}
+
+.mode-gather-all {
+  background: rgba(251, 191, 36, 0.15);
+  color: #fbbf24;
+}
+
+.mode-gather {
+  background: rgba(74, 222, 128, 0.15);
+  color: #4ade80;
+}
+
+.mode-buy {
+  background: rgba(96, 165, 250, 0.15);
+  color: #60a5fa;
+}
+
 /* Type Badge */
 .type-badge {
   display: inline-block;
@@ -824,6 +892,22 @@ const profitRange = computed(() => {
   .ranking-table th,
   .ranking-table td {
     padding: 0.25rem 0.5rem;
+  }
+
+  /* Override global name-cell truncation for profit table on mobile */
+  .ranking-table.mobile-card-layout td.name-cell {
+    width: 100%;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  .activity-name-text {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
   }
 }
 </style>
